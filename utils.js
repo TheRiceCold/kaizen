@@ -2,8 +2,6 @@ import { Utils } from './imports.js'
 import cairo from 'cairo'
 import icons from './icons.js'
 
-const { GLib } = imports.gi
-
 export const range = (length, start = 1) => 
   Array.from({ length }, (_, i) => i + start)
 
@@ -49,6 +47,7 @@ export function dependencies(bins) {
   return deps.every(has => has)
 }
 
+const { GLib } = imports.gi
 export function blurImg(img) {
   const cache = Utils.CACHE_DIR + '/media'
   return new Promise(resolve => {

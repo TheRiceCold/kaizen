@@ -140,7 +140,7 @@ export default {
   desktop: {
     wallpaper: {
       fg: option('#fff', { 'sass': 'wallpaper-fg' }),
-      // img: Option(themes[0].options['desktop.wallpaper.img'], { 'sassFormat': v => `"${v}"`, 'type': 'img' }),
+      // img: option(themes[0].options['desktop.wallpaper.img'], { 'sassFormat': v => `"${v}"`, 'type': 'img' }),
     },
     avatar: option(`/var/lib/AccountsService/icons/${Utils.USER}`, {
       'sassFormat': v => `"${v}"`,
@@ -189,9 +189,6 @@ export default {
       'title': 'List of blacklisted mpris players',
       'note': 'filters for bus-name, name, identity, entry',
     }),
-    preferred: option('spotify', {
-      'category': 'Bar',
-      'title': 'Preferred player',
-    }),
+    preferred: option('spotify', { 'category': 'Bar', 'title': 'Preferred player' }),
   }
 }
