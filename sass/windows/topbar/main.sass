@@ -1,5 +1,6 @@
-@import 'battery'
 @import 'music'
+@import 'battery'
+@import 'workspaces'
 
 $bar-spacing: $spacing / 2
 $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $radii)
@@ -63,7 +64,7 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
     @include panel-button
 
   .tray-item, .color-picker
-    @include panel-button($flat: true)
+    @include panel-button $flat: true
 
   separator
     min-width: 5px

@@ -81,11 +81,11 @@ export default () => PanelButton({
   setup: self => self.hook(App, (_, win, visible) => {
      self.toggleClassName('active', win === 'quicksettings' && visible)
   }),
-  on_scroll_up: () => {
+  onScrollUp: () => {
     Audio.speaker.volume += 0.02
     Indicator.speaker()
   },
-  on_scroll_down: () => {
+  onScrollDown: () => {
     Audio.speaker.volume -= 0.02
     Indicator.speaker()
   },

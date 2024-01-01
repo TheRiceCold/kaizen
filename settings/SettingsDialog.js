@@ -146,12 +146,12 @@ const sidebar = Widget.Revealer({
           Widget.Button({
             hexpand: true,
             label: icons.dialog.Search + ' Search',
-            on_clicked: () => showSearch.value = !showSearch.value,
+            onClicked: () => showSearch.value = !showSearch.value,
           }),
           Widget.Button({
             hpack: 'end',
             child: Widget.Icon(icons.ui.info),
-            on_clicked: () => App.toggleWindow('about'),
+            onClicked: () => App.toggleWindow('about'),
           }),
         ]
       }),

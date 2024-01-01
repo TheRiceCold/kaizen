@@ -9,10 +9,10 @@ export default {
   radii: option(8),
 
   popover_padding_multiplier: option(1.4, {
+    'unit': '',
+    'type': 'float',
     'category': 'General',
     'note': 'popover-padding: padding × this',
-    'type': 'float',
-    'unit': '',
   }),
 
   color: {

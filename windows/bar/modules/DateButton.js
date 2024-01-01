@@ -8,4 +8,5 @@ export default () => PanelButton({
   content: Clock({ format: '%I:%M • %A %d' }),
   className: 'dashboard panel-button',
   onClicked: () => App.toggleWindow('dashboard'),
+  onSecondaryClick: () => App.toggleWindow('sideright'),
 })

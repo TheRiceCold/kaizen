@@ -11,7 +11,7 @@ const LIGHTDARK_FILE_LOCATION = '~/.cache/ags/user/colormode.txt'
 const lightDark = Utils.readFile(expandTilde(LIGHTDARK_FILE_LOCATION)).trim()
 const COVER_COLORSCHEME_SUFFIX = '_colorscheme.css'
 const PREFERRED_PLAYER = 'plasma-browser-integration'
-var lastCoverPath = ''
+let lastCoverPath = ''
 
 const isRealPlayer = player => (
   !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') &&

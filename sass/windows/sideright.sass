@@ -1,0 +1,564 @@
+@mixin group-padding
+  padding: 0.341rem
+
+.sidebar-right
+  padding: 1rem
+  min-width: 25rem
+  background: $bg-color
+  border-radius: $radii
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+  margin: 4px
+  box-shadow: 0 2px 3px black
+
+.sidebar-left
+  margin: 4px
+  padding: 1rem
+  min-width: 25rem
+  background: $bg-color
+  border-radius: $radii
+  box-shadow: 0 2px 3px black
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sideleft-show
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sideleft-hide
+  transition: 160ms cubic-bezier(0.38, 0.04, 1, 0.07)
+  margin-left: -30.682rem
+
+.sidebar-group
+  background: $bg-color
+  @include group-padding
+  @include normal-rounding
+
+.sidebar-group-nopad
+  background: $bg-color
+  @include normal-rounding
+
+.sidebar-group-invisible
+  @include group-padding
+
+.sidebar-group-invisible-morehorizpad
+  padding: 0.341rem 0.682rem
+
+.sidebar-togglesbox
+  @include full-rounding
+  @include group-padding
+  background: $bg-color
+
+.sidebar-iconbutton
+  color: $fg-color
+  min-width: 2.727rem
+  min-height: 2.727rem
+  @include full-rounding
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-iconbutton:hover, .sidebar-iconbutton:focus
+  background: $hover
+
+.sidebar-iconbutton:active
+  background: $accent
+
+.sidebar-button
+  padding: 0 2px
+  color: $fg-color
+  background: $bg-color
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-button-nopad
+  color: $fg-color
+  background: $bg-color
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-button:hover, .sidebar-button:focus
+  background: $hover
+
+.sidebar-button:active
+  background: $accent
+
+.sidebar-button-nopad:hover, .sidebar-button-nopad:focus
+  background: $hover
+
+.sidebar-button-nopad:active
+  background: $accent
+
+.sidebar-button-left
+  border-top-left-radius: 4px
+  border-bottom-left-radius: 4px
+
+.sidebar-button-right
+  border-top-right-radius: 4px
+  border-bottom-right-radius: 4px
+
+.sidebar-button-alone
+  @include small-rounding
+
+.sidebar-button-alone-normal
+  @include small-rounding
+
+.sidebar-button-active
+  background: $accent
+  color: $fg-color
+
+.sidebar-button-active:hover, .sidebar-button-active:focus
+  background: $accent
+
+.sidebar-button-active:active
+  background: $accent
+
+.sidebar-buttons-separator
+  min-width: 0.068rem
+  min-height: 0.068rem
+  background: $bg-color
+
+.sidebar-navrail
+  padding: 0 8px
+
+.sidebar-navrail-btn>box>label
+  @include full-rounding
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-navrail-btn:hover>box>label:first-child, .sidebar-navrail-btn:focus>box>label:first-child
+  background: $hover
+
+.sidebar-navrail-btn:active>box>label:first-child
+  background: $accent
+
+.sidebar-navrail-btn-active>box>label:first-child
+  color: $fg-color
+  background: $bg-color
+
+.sidebar-navrail-btn-active:hover>box>label:first-child, .sidebar-navrail-btn-active:focus>box>label:first-child
+  color: $fg-color
+  background: $bg-color
+
+.sidebar-sysinfo-grouppad
+  padding: 1.159rem
+
+.sidebar-memory-ram-circprog
+  font-size: 0
+  min-width: 2px
+  padding: 0.409rem
+  min-height: 4.091rem
+  color: $fg-color
+  background: $bg-color
+  transition: 1000ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-memory-swap-circprog
+  transition: 1000ms cubic-bezier(0.1, 1, 0, 1)
+  min-width: 2px
+  min-height: 2.255rem
+  padding: 0.409rem
+  margin: 0.918rem
+  color: $fg-color
+  background: $bg-color
+  font-size: 0
+
+.sidebar-cpu-circprog
+  font-size: 0
+  color: $fg-color
+  padding: 0.409rem
+  min-height: 3.409rem
+  background: $bg-color
+  min-width: 2px
+  transition: 1000ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-scrollbar
+  trough
+    min-width: 0.545rem
+    background: transparent
+    @include full-rounding
+
+  slider
+    @include full-rounding
+    min-width: 0.273rem
+    min-height: 2.045rem
+    background: $bg-color
+
+  slider:hover, slider:focus
+    background: $bg-color
+
+  slider:active
+    background: $bg-color
+
+.sidebar-calendar-btn
+  @include full-rounding
+  color: $fg-color
+  min-width: 2.523rem
+  min-height: 2.523rem
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-calendar-btn:hover, .sidebar-calendar-btn:focus
+  background: $hover
+
+.sidebar-calendar-btn:active
+  background: $accent
+
+.sidebar-calendar-btn-txt
+  margin-left: -10.341rem
+  margin-right: -10.341rem
+
+.sidebar-calendar-btn-today
+  color: $fg-color
+  background: $bg-color
+
+.sidebar-calendar-btn-today:hover, .sidebar-calendar-btn-today:focus
+  background: $hover
+
+.sidebar-calendar-btn-today:active
+  background: $accent
+
+.sidebar-calendar-btn-othermonth
+  color: $fg-color
+
+.sidebar-calendar-header
+  margin: 0.341rem
+
+.sidebar-calendar-monthyear-btn
+  @include full-rounding
+  padding: 0rem 0.682rem
+  color: $fg-color
+  background: $bg-color
+
+.sidebar-calendar-monthyear-btn:hover, .sidebar-calendar-monthyear-btn:focus
+  color: $hover
+  background: $bg-color
+
+.sidebar-calendar-monthyear-btn:active
+  color: $accent
+  background: $bg-color
+
+.sidebar-calendar-monthshift-btn
+  color: $fg-color
+  background: $bg-color
+  min-width: 2.045rem
+  min-height: 2.045rem
+  @include full-rounding
+
+.sidebar-calendar-monthshift-btn:hover
+  color: $hover
+  background: $bg-color
+
+.sidebar-calendar-monthshift-btn:active
+  color: $accent
+  background: $bg-color
+
+.sidebar-selector-tab
+  @include small-rounding
+  color: $fg-color
+  min-height: 2.5rem
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-selector-tab:hover, .sidebar-selector-tab:focus
+  background: $hover
+
+.sidebar-selector-tab:active
+  background: $accent
+
+.sidebar-selector-tab-active>box>label
+  color: $accent
+
+.sidebar-selector-highlight-offset
+  margin-top: -0.205rem
+  margin-bottom: 0.205rem
+
+.sidebar-selector-highlight
+  color: $accent
+  min-height: 0.205rem
+  transition: 180ms ease-in-out
+
+.sidebar-todo-item
+  padding-right: 0.545rem
+
+.sidebar-todo-item-even
+  background: $bg-color
+
+.sidebar-todo-item-action
+  min-width: 1.705rem
+  min-height: 1.705rem
+  border-radius: 9999px
+
+.sidebar-todo-item-action:hover, .sidebar-todo-item-action:focus
+  background: $hover
+
+.sidebar-todo-item-action:active
+  background: $accent
+
+.sidebar-todo-crosser
+  min-width: 0
+  transition: margin 200ms cubic-bezier(0.1, 1, 0, 1), background-color 0ms
+
+.sidebar-todo-crosser-crossed
+  background: $bg-color
+
+.sidebar-todo-crosser-removed
+  background: $red
+
+.sidebar-clipboard-item
+  padding: 0.341rem
+  border-radius: 2px
+  min-height: 2.045rem
+  color: $fg-color
+  background: $bg-color
+
+.sidebar-clipboard-item:hover, .sidebar-clipboard-item:focus 
+  background: $hover
+
+.sidebar-clipboard-item:active
+  background: $accent
+
+.sidebar-todo-new
+  @include full-rounding
+  color: $fg-color
+  margin: 0.341rem
+  padding: 0.205rem 0.545rem
+  border: 0.068rem solid $_border-color
+
+.sidebar-todo-new:hover, .sidebar-todo-new:focus
+  background: $hover
+
+.sidebar-todo-new:active
+  background: $accent
+
+.sidebar-todo-add
+  @include full-rounding
+  color: $fg-color
+  min-width: 1.705rem
+  min-height: 1.705rem
+  border: 0.068rem solid $_border-color
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-todo-add:hover, .sidebar-todo-add:focus
+  background: $hover
+
+.sidebar-todo-add:active
+  background: $accent
+
+.sidebar-todo-add-available
+  color: $fg-color
+  min-width: 1.705rem
+  min-height: 1.705rem
+  background: $bg-color
+  @include full-rounding
+  border: 0.068rem solid $_border-color
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-todo-add-available:hover, .sidebar-todo-add-available:focus
+  background: $bg-color
+
+.sidebar-todo-add-available:active
+  background: $bg-color
+
+.sidebar-todo-entry
+  @include small-rounding
+  min-width: 0
+  color: $fg-color
+  caret-color: $accent
+  background: $bg-color
+  min-height: 1.773rem
+  margin: 0rem 0.341rem
+  padding: 0.205rem 0.682rem
+  border: 0.068rem solid $_border-color
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-todo-entry:focus
+  border: 0.068rem solid $_border-color
+
+.sidebar-module
+  @include group-padding
+  @include normal-rounding
+  background: $bg-color
+
+.sidebar-module-btn-arrow
+  @include full-rounding
+  // @include icon-material
+  min-width: 1.705rem
+  min-height: 1.705rem
+  background: $bg-color
+
+.sidebar-chat-apiswitcher
+  @include full-rounding
+  @include group-padding
+  background: $bg-color
+
+.sidebar-chat-apiswitcher-icon
+  @include full-rounding
+  color: $fg-color
+  min-width:  2.182rem
+  min-height: 2.182rem
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-chat-apiswitcher-icon-enabled
+  color: $fg-color
+  background: $bg-color
+
+.sidebar-chat-viewport
+  padding: 0.682rem 0
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-chat-textarea
+  @include normal-rounding
+  padding: 0.682rem
+  border: 0.068rem solid $fg-color
+
+.sidebar-chat-entry
+  color: $fg-color
+  caret-color: $bg-color
+  min-height: 1.773rem
+  min-width: 0
+
+.sidebar-chat-send
+  min-width: 1.705rem
+  min-height: 1.705rem
+  background: $bg-color
+  border-radius: $radii
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-chat-send:hover, .sidebar-chat-send:focus
+  background: $hover
+
+.sidebar-chat-send:active
+  background: $accent
+
+.sidebar-chat-send-available
+  background: $accent
+  color: $accent
+
+.sidebar-chat-send-available:hover, .sidebar-chat-send-available:focus
+  background: $hover
+
+.sidebar-chat-send-available:active
+  background: $accent
+
+.sidebar-chat-message
+  margin: 0.682rem
+
+.sidebar-chat-indicator
+  min-width: 0.136rem
+  @include full-rounding
+
+.sidebar-chat-indicator-user
+  background: $bg-color
+
+.sidebar-chat-indicator-bot
+  background: $bg-color
+
+.sidebar-chat-indicator-System
+  background: $bg-color
+
+.sidebar-chat-name
+  // @include titlefont
+  padding: 0.341rem
+  margin-left: -0.136rem
+  padding: 0.341rem
+  padding-left: 0.818rem
+
+.sidebar-chat-txtblock
+  padding: 0.341rem
+  padding-left: 0.818rem
+  margin-left: -0.136rem
+
+.sidebar-chat-txt
+  // @include readingfont
+
+.sidebar-chat-codeblock
+  @include normal-rounding
+  color: $fg-color
+  background: $bg-color
+  margin: 0rem 0.682rem
+  border: 0.068rem solid $_border-color
+
+.sidebar-chat-codeblock-topbar
+  // @include mainfont
+  margin: 0.273rem
+  margin-bottom: 0
+  color: $fg-color
+  background: $bg-color
+  border-radius: $radii
+  padding: 0.341rem 0.477rem
+  border: 0.068rem solid $_border-color
+
+.sidebar-chat-codeblock-topbar-txt
+  padding: 0.273rem
+  @include full-rounding
+
+.sidebar-chat-codeblock-topbar-btn
+  padding: 0.273rem
+  @include full-rounding
+
+.sidebar-chat-codeblock-topbar-btn:hover, .sidebar-chat-codeblock-topbar-btn:focus
+  background: $hover
+
+.sidebar-chat-codeblock-topbar-btn:active
+  background: $accent
+
+.sidebar-chat-codeblock-code
+  // @include techfont
+  padding: 0.682rem
+
+.sidebar-chat-divider
+  min-height: 1px
+  margin: 0 0.545rem
+  background: $fg-color
+
+.sidebar-chat-welcome-txt
+  margin: 0 3.409rem
+
+.sidebar-chat-settings-toggles
+  margin: 0 5.455rem
+
+.sidebar-chat-welcome-icon
+  font-size: 4rem
+  @include full-rounding
+
+.sidebar-chat-welcome-logo
+  @include full-rounding
+  color: black
+  font-size: 4rem
+  background: white
+  min-width: 4.773rem
+  min-height: 4.773rem
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-chat-chip
+  @include small-rounding
+  padding: 0.341rem 0.477rem
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-chat-chip-action
+  border: 0.068rem solid $fg-color
+
+.sidebar-chat-chip-action:hover, .sidebar-chat-chip-action:focus
+  background: $bg-color
+
+.sidebar-chat-chip-action:active
+  color: $fg-color
+  background: $bg-color
+
+.sidebar-chat-chip-action-active
+  color: $fg-color
+  border: 0.068rem solid $bg-color
+
+.sidebar-pin
+  @include small-rounding
+  color: $fg-color
+  min-width: 2.386rem
+  min-height: 2.386rem
+  transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+
+.sidebar-pin:hover, .sidebar-pin:focus
+  background: $hover
+
+.sidebar-pin:active
+  background: $accent
+
+.sidebar-pin-enabled
+  background: $bg-color
+  label
+    color: $fg-color
+
+.sidebar-pin-enabled:hover, .sidebar-pin-enabled:focus
+  background: $hover
+
+.sidebar-pin-enabled:active
+  background: $accent
