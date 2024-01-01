@@ -1,0 +1,51 @@
+.corner-bar-group
+  border-radius: 1.5rem
+  background: rgb(17, 17, 27)
+
+.workspaces
+  font-size: 14px
+  margin-top: 4px
+  padding: 4px 8px
+  background: $bg-color
+  border-radius: 0.75rem
+
+  .workspace-button
+    color: $hover
+    transition: all 0.3s ease-in-out
+
+    &:hover
+      border-radius: 1rem
+      color: rgb(17, 17, 27)
+      background: #f5f5f5
+
+    &.occupied
+      background: #CBA6F7
+      color: rgb(17, 17, 27)
+
+      &:hover
+        border-radius: 1rem
+        background: #f5f5f5
+
+      &.occupied-left
+        border-top-left-radius: 1rem
+        border-bottom-left-radius: 1rem
+        border-right: 0 solid transparent
+
+      &.occupied-right
+        border-top-right-radius: 1rem
+        border-bottom-right-radius: 1rem
+        border-left: 0 solid transparent
+      
+    &:not(.occupied)
+      border-radius: 1.5rem
+      
+    &.active
+      .button-label
+        font-weight: bold
+        border-radius: 1rem
+        color: rgb(17, 17, 27)
+        background-color: #89b4fa
+        transition: all 0.3s ease-in-out
+
+    .button-label
+      min-width: 1.75rem

@@ -1,0 +1,13 @@
+@import './button'
+
+@mixin switch
+  @include button
+
+  slider
+    min-width: 24px
+    min-height: 24px
+    border-radius: $radii
+    background-color: $accent-fg
+
+  image 
+    color: transparent

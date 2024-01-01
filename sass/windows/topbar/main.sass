@@ -1,0 +1,108 @@
+@import 'battery'
+@import 'music'
+
+$bar-spacing: $spacing / 2
+$button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $radii)
+
+@mixin panel-button($flat: $bar-flat-buttons, $reactive: true)
+  @if $bar-style == 'separated'
+    transition: $transition
+    > *
+      border-radius: $radii
+      transition: $transition
+      @include floating-widget
+      margin: $wm-gaps $bar-spacing
+      &:hover > *
+        color: $hover-fg
+        @if $drop-shadow
+          box-shadow: 0 0 min(6px, $spacing/2) 0 $shadow, inset 0 0 0 99px $hover;
+        @else
+          box-shadow: inset 0 0 0 99px $hover;
+
+      &:active > *, &.active > *
+        background-color: $accent
+        background-image: $active-gradient
+        label, image 
+          color: $accent-fg
+  @else
+    @include accs-button($flat, $reactive)
+    > *
+      margin: $bar-spacing
+      border-radius: $button-radius
+  label, image
+    font-weight: bold
+  > *
+    padding: $padding * 0.4 $padding * 0.8
+
+.topbar
+  min-height: 2.75rem
+
+  @if $bar-style == 'normal'
+    // background: $bg-color
+
+  @if not $screen-corners and $bar-style == 'normal'
+    @if $bar-position == 'bottom'
+      border-top: $border
+    @else
+      border-bottom: $border
+
+  @if $bar-style == 'floating'
+    @include floating-widget
+    border-radius: $radii
+    margin: $wm-gaps
+    padding: 0
+
+  @if $bar-style == 'separated'
+    > .end > button:last-child > *
+      margin-right: $wm-gaps
+
+    > .start > button:first-child > *
+      margin-left: $wm-gaps
+
+  .panel-button
+    @include panel-button
+
+  .tray-item, .color-picker
+    @include panel-button($flat: true)
+
+  separator
+    min-width: 5px
+    min-height: 5px
+    border-radius: $radii
+    background-color: transparentize($fg-color, 0.86)
+
+  @include battery 
+
+  .quicksettings > box > box
+    @include spacing(1)
+
+  .quicksettings:not(.active):not(:active)
+    .bluetooth 
+      color: $blue
+    .battery
+      &.low 
+        color: $red
+      &.charged, &.charging 
+        color: $green
+
+  .media
+    &.spotify image 
+      color: $green
+    &.firefox image 
+      color: $orange
+    &.mpv image 
+      color: $magenta
+    label
+      margin-right: 4px
+
+  .notifications
+    image 
+      color: $yellow
+
+  .recorder
+    image 
+      color: transparentize($red, 0.3)
+    &:hover image 
+      color: transparentize($red, 0.15)
+    &:active image 
+      color: $red

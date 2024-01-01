@@ -1,0 +1,15 @@
+{
+  "version": "1.6.3",
+  "description": "My config files for AGS",
+  "main": "config.js",
+  "scripts": { },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaizen-dw/Flakes.git"
+  },
+  "author": "Dale Walter Hicban",
+  "bugs": {
+    "url": "https://github.com/kaizen-dw/Flakes/issues"
+  },
+  "devDependencies": { }
+}

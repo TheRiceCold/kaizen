@@ -1,0 +1,34 @@
+@import 'variables.sass'
+
+* 
+  all: unset
+
+$hover: transparentize($_widget-bg, ($widget-opacity * 0.9) / 100)
+$widget-bg: transparentize($_widget-bg, $widget-opacity / 100)
+$active-gradient: linear-gradient($accent-gradient)
+
+$hover-fg: if($color-scheme == 'dark', lighten($fg-color, 10%), darken($fg-color, 8%))
+
+$border-color: transparentize($_border-color, $border-opacity / 100)
+$border: $border-width solid $border-color
+
+$text-shadow: 2px 2px 2px $shadow
+
+$popover-border-color: transparentize($_border-color, max(($border-opacity - 1) / 100, 0))
+$popover-padding: $padding * $popover-padding-multiplier
+$popover-radius: if($radii == 0, 0, $radii + $popover-padding)
+
+$wm-gaps: floor($spacing * $wm-gaps-multiplier)
+$shader-fg: #fff
+
+@import 'classes'
+@import 'common/main'
+@import 'windows/main'
+
+.corner
+  @include large-rounding
+  background: rgba(37, 37, 58, 0.75)
+
+.corner-black
+  background: black
+  @include large-rounding

@@ -1,0 +1,126 @@
+@import 'media'
+
+window#quicksettings .window-content
+  @include spacing
+  @include floating-widget
+
+  .avatar
+    opacity: 0.9
+    @include widget
+
+  .header
+    @include spacing($rec: true)
+
+    button, .uptime, .battery
+      @include button
+      min-width: 20px
+      min-height: 20px
+      font-weight: bold
+      padding: $padding
+
+      image
+        font-size: 1.2em
+
+      .battery
+          @include spacing($multiplier: 0.5)
+
+  .battery-progress
+    label
+      color: $accent-fg
+      font-weight: bold
+
+    &.charging label
+      font-size: $padding*2
+
+    &.half label 
+      color: $fg-color
+
+    progressbar
+        @include slider($width: $padding*3.6)
+
+    &.low progressbar
+        @include slider($width: $padding*3.6, $gradient: linear-gradient(to right, $red, $red))
+
+  .sliders-box
+    padding: $padding
+    @include widget
+    @include spacing(0)
+    @include spacing($rec: true)
+
+    button
+      padding: $padding / 2
+      @include button($flat: true)
+
+    scale
+      @include slider
+      margin-left: $spacing * -0.5
+
+    .menu
+      margin: $spacing 0
+      background-color: $bg-color
+      border: $border-width solid $popover-border-color
+      border-radius: $radii
+
+  .mixer-item
+    scale 
+      @include slider($width: 7px)
+    image 
+      font-size: 1.2em
+
+  .row
+    @include spacing($rec: true)
+
+  .menu
+    all: unset
+    @include widget
+    @include spacing($rec: true)
+    padding: $padding
+    margin-top: $spacing
+
+    .title
+      @include spacing(.5)
+
+    separator
+      margin: 0 $radii / 2
+
+    button
+      padding: $padding / 2
+      @include button($flat: true)
+
+    switch
+      @include switch
+
+  .toggle-button
+    @include button
+    font-weight: bold
+
+    .label-box
+      @include spacing(0.5)
+
+    button
+      padding: $padding
+      @include button($flat: true)
+
+      &:first-child
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+
+      &:last-child
+        border-top-left-radius: 0
+        border-bottom-left-radius: 0
+
+    &.active
+      background-color: $accent
+
+      label, image
+        color: $accent-fg
+
+  .simple-toggle
+    @include button
+    padding: $padding $padding * 1.1
+
+  .media
+    @include spacing
+
+    .player
+      @include media

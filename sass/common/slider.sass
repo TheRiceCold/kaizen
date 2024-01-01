@@ -1,0 +1,53 @@
+@mixin slider ($width: 0.7em, $slider-width: .5em, $gradient: $active-gradient, $slider: true, $focusable: true, $radii: $radii)
+  all: unset
+  * 
+    all: unset
+
+  trough
+    border: $border
+    min-height: $width
+    min-width:  $width
+    border-radius: $radii
+    transition: $transition
+    background-color: $widget-bg
+
+    highlight, progress
+      min-height: $width
+      min-width:  $width
+      background-image: $gradient
+      border-radius: max($radii - $border-width, 0)
+
+  slider
+    box-shadow: none
+    min-height: $width
+    min-width:  $width
+    border-radius: $radii
+    margin: -$slider-width
+    transition: $transition
+    background-color: transparent
+    border: $border-width solid transparent
+
+  &:hover
+    trough
+      background-color: $hover
+    slider
+      @if $slider
+        background-color: $fg-color
+        border-color: $border-color
+        @if $drop-shadow
+          box-shadow: 0 0 3px 0 $shadow
+
+  &:disabled
+    highlight, progress
+      background-image: none
+      background-color: transparentize($fg-color, 0.4)
+
+  @if $focusable
+    trough:focus
+      background-color: $hover
+      box-shadow: inset 0 0 0 $border-width $accent
+
+      slider
+        @if $slider
+          background-color: $fg-color
+          box-shadow: inset 0 0 0 $border-width $accent

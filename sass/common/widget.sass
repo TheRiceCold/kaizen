@@ -1,0 +1,17 @@
+@mixin widget
+  border: $border
+  color: $fg-color
+  border-radius: $radii
+  transition: $transition
+  background-color: $widget-bg
+
+@mixin floating-widget
+  @if $drop-shadow
+    box-shadow: 0 0 5px 0 $shadow
+
+  color: $fg-color
+  padding: $popover-padding
+  margin: max($spacing, 8px)
+  background: $bg-color
+  border-radius: $popover-radius
+  border: $border-width solid $popover-border-color
