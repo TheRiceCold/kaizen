@@ -11,8 +11,8 @@ export default () => Widget.Window({
   anchor: ['top', 'left', 'right'],
   child: Widget.CenterBox({
     className: 'topbar',
-    startWidget: StartWidget(),
-    centerWidget: Workspaces(),
-    endWidget: EndWidget(),
+    startWidget: StartWidget,
+    centerWidget: Workspaces,
+    endWidget: EndWidget,
   })
 })

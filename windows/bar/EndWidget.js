@@ -17,13 +17,13 @@ SystemTray.connect('changed', () => {
   submenuItems.setValue(Tray.items.length + 1)
 })
 
-export default () => Widget.Box({
+export default Widget.Box({
   hpack: 'end',
   className: 'end',
   children: [
     SubMenu({
       items: submenuItems,
-      children: [ Tray(), Utilities() ],
+      children: [ Tray, Utilities ],
     }),
     ScreenRecord(),
     SeparatorDot(ScreenRecorder, r => r.recording),

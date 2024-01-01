@@ -29,5 +29,8 @@ const SysTrayItem = item => PanelButton({
   ),
 })
 
-export default () => Widget.Box()
-  .bind('children', SystemTray, 'items', i => i.map(SysTrayItem))
+export default Widget.Box().bind(
+  'children', 
+  SystemTray, 
+  'items', i => i.map(SysTrayItem)
+)

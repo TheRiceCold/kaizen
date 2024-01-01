@@ -5,7 +5,7 @@ import PanelButton from './PanelButton.js'
 import options from '../../../options.js'
 import { distroIcon } from '../../../variables.js'
 
-export default () => PanelButton({
+export default PanelButton({
   class_name: 'overview',
   window: 'overview',
   onClicked: () => App.toggleWindow('overview'),

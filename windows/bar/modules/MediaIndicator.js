@@ -33,11 +33,11 @@ const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
   }]],
 })
 
-export default ({ direction = 'right' } = {}) => {
+export default () => {
   let current = null
+  const player = getPlayer()
 
   const update = box => {
-    const player = getPlayer()
     box.visible = !!player
 
     if (!player) {

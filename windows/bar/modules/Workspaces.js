@@ -10,7 +10,7 @@ const WorkspaceButton = i => Widget.EventBox({
   btn.toggleClassName('active', Hyprland.active.workspace.id === i)
 })
 
-export default () => Widget.EventBox({
+export default Widget.EventBox({
   className: 'workspaces-background',
   child: Widget.Box({
     className: 'workspaces',

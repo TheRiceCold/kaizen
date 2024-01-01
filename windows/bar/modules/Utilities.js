@@ -6,7 +6,7 @@ import PanelButton from './PanelButton.js'
 
 const { Gdk } = imports.gi
 
-const ColorPickerButton = () => PanelButton({
+const ColorPickerButton = PanelButton({
   className: 'color-picker',
   content: FontIcon(''),
   binds: [[
@@ -30,14 +30,14 @@ const ColorPickerButton = () => PanelButton({
   },
 })
 
-const ScreenShotButton = () => PanelButton({
+const ScreenShotButton = PanelButton({
   content: FontIcon(''),
   onClicked: () => ScreenRecorder.screenshot()
 })
 
-export default () => Widget.Box({
+export default Widget.Box({
   children: [
-    ColorPickerButton(),
-    ScreenShotButton(),
+    ColorPickerButton,
+    ScreenShotButton,
   ]
 })
