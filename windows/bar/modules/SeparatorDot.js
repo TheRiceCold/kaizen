@@ -13,7 +13,7 @@ export default (service, condition) => {
 
   const conn = service ? [[service, visibility]] : []
   return Widget.Separator({
-    connections: [['draw', visibility], ...conn],
+      connections: [['draw', visibility], ...conn],
     binds: [['visible', options.bar.separators]],
     vpack: 'center',
   })

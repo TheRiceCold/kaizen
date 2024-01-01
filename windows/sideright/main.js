@@ -1,4 +1,4 @@
-import { Utils, Widget } from '../../imports.js'
+import { Widget } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
 import { uptime } from '../../variables.js'
 import { 

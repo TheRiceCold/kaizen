@@ -6,7 +6,7 @@ export const uptime = Variable('', {
   poll: [60_000, 'cat /proc/uptime', line => {
     const uptime = Number.parseInt(line.split('.')[0]) / 60
     if (uptime > 18 * 60)
-        return 'Go Sleep'
+      return 'Go Sleep'
 
     const h = Math.floor(uptime / 60)
     const s = Math.floor(uptime % 60)
@@ -46,8 +46,8 @@ export const ram = Variable(0, {
 
 export const temp = Variable(0, {
   poll: [
-    intval, 
-    'cat ' + '/sys/class/thermal/thermal_zone0/temp', 
+    intval,
+    'cat ' + '/sys/class/thermal/thermal_zone0/temp',
     n => Number.parseInt(n) / 100_000
   ],
 })

@@ -1,7 +1,7 @@
 function checkLeapYear(year) {
   return (
-      year % 400 == 0 ||
-      (year % 4 == 0 && year % 100 != 0));
+    year % 400 == 0 ||
+    (year % 4 == 0 && year % 100 != 0))
 }
 
 function getMonthDays(month, year) {
@@ -44,40 +44,40 @@ export function getCalendarLayout(dateObject, highlight) {
   // Fill
   var monthDiff = (weekdayOfMonthFirst == 0 ? 0 : -1);
   var toFill, dim;
-  if(weekdayOfMonthFirst == 0) {
-      toFill = 1;
-      dim = daysInMonth;
+  if (weekdayOfMonthFirst == 0) {
+    toFill = 1;
+    dim = daysInMonth;
   }
   else {
-      toFill = (daysInPrevMonth - (weekdayOfMonthFirst - 1));
-      dim = daysInPrevMonth;
+    toFill = (daysInPrevMonth - (weekdayOfMonthFirst - 1));
+    dim = daysInPrevMonth;
   }
   var calendar = [...Array(6)].map(() => Array(7));
   var i = 0, j = 0;
   while (i < 6 && j < 7) {
-      calendar[i][j] = {
-          "day": toFill,
-          "today": ((toFill == day && monthDiff == 0 && highlight) ? 1 : (
-              monthDiff == 0 ? 0 :
-                  -1
-          ))
-      };
-      // Increment
-      toFill++;
-      if (toFill > dim) { // Next month?
-          monthDiff++;
-          if (monthDiff == 0)
-              dim = daysInMonth;
-          else if (monthDiff == 1)
-              dim = daysInNextMonth;
-          toFill = 1;
-      }
-      // Next tile
-      j++;
-      if (j == 7) {
-          j = 0;
-          i++;
-      }
+    calendar[i][j] = {
+      "day": toFill,
+      "today": ((toFill == day && monthDiff == 0 && highlight) ? 1 : (
+        monthDiff == 0 ? 0 :
+          -1
+      ))
+    };
+    // Increment
+    toFill++;
+    if (toFill > dim) { // Next month?
+      monthDiff++;
+      if (monthDiff == 0)
+        dim = daysInMonth;
+      else if (monthDiff == 1)
+        dim = daysInNextMonth;
+      toFill = 1;
+    }
+    // Next tile
+    j++;
+    if (j == 7) {
+      j = 0;
+      i++;
+    }
 
   }
   return calendar

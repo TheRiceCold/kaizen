@@ -3,10 +3,10 @@ import { Clock } from '../../../misc/main.js'
 
 import PanelButton from './PanelButton.js'
 
-export default () => PanelButton({
+export default props => PanelButton({
+  ...props,
   window: 'dashboard',
-  content: Clock({ format: '%I:%M • %A %d' }),
   className: 'dashboard panel-button',
-  onClicked: () => App.toggleWindow('dashboard'),
-  onSecondaryClick: () => App.toggleWindow('sideright'),
+  content: Clock({ format: '%I:%M • %A %d' }),
+  onSecondaryClick: () => App.toggleWindow('dashboard'),
 })
