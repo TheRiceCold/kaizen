@@ -1,3 +1,5 @@
+import { App } from './imports.js'
+
 export default {
   lock: '',
   fallback: {
@@ -50,6 +52,7 @@ export default {
     recording: 'media-record-symbolic',
   },
   notifications: {
+    bell: '󰂚',
     silent: 'notifications-disabled-symbolic',
     noisy: 'preferences-system-notifications-symbolic',
     chat: 'notification-symbolic',
@@ -106,6 +109,9 @@ export default {
     Miscellaneous: '󰠱',
     Theme: '󰃟',
     Notifications: '󰂚 ',
+  },
+  ai: {
+    chatgpt: `${App.configDir}/assets/chatgpt.svg`,
   },
   weather: {
     day: {

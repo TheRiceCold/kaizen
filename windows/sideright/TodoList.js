@@ -1,6 +1,6 @@
 import { Widget, Utils } from '../../imports.js'
 import { Todo } from '../../services/main.js'
-// import { NavigationIndicator } from '../../misc/main.js'
+import { NavigationIndicator } from '../../misc/main.js'
 import { setupCursorHover } from '../../misc/CursorHover.js'
 
 const { Gtk } = imports.gi
@@ -220,10 +220,10 @@ export const TodoWidget = () => {
       // Fancy highlighter line width
       const buttonWidth = btn.get_allocated_width()
       const highlightWidth = btn.get_children()[0].get_allocated_width()
-      // navIndicator.css = `
-      //   font-size: ${navIndex}px; 
-      //   padding: 0px ${(buttonWidth - highlightWidth) / 2}px;
-      // `
+      navIndicator.css = `
+        font-size: ${navIndex}px; 
+        padding: 0px ${(buttonWidth - highlightWidth) / 2}px;
+      `
     },
     child: Widget.Box({
       hpack: 'center',
@@ -242,10 +242,10 @@ export const TodoWidget = () => {
   
   const undoneButton = TodoTabButton(false, 0)
   const doneButton = TodoTabButton(true, 1)
-  // const navIndicator = NavigationIndicator(2, false, { // The line thing
-  //   className: 'sidebar-selector-highlight',
-  //   css: 'font-size: 0px; padding: 0rem 1.636rem;', // Shush
-  // })
+  const navIndicator = NavigationIndicator(2, false, { // The line thing
+    className: 'sidebar-selector-highlight',
+    css: 'font-size: 0px; padding: 0rem 1.636rem;', // Shush
+  })
 
   return Widget.Box({
     hexpand: true,
@@ -263,11 +263,11 @@ export const TodoWidget = () => {
               box.pack_start(doneButton, false, true, 0)
             }
           }),
-          // Widget.Box({
-          //   homogeneous: true,
-          //   children: [navIndicator],
-          //   className: 'sidebar-selector-highlight-offset',
-          // })
+          Widget.Box({
+            homogeneous: true,
+            children: [navIndicator],
+            className: 'sidebar-selector-highlight-offset',
+          })
         ]
       }), false, false, 0)
       box.pack_end(todoItemsBox, true, true, 0)

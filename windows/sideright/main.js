@@ -1,33 +1,15 @@
 import { Widget } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
 import {
-  WifiToggle,
+  LockButton,
   PowerButton,
   ReloadButton,
   SettingsButton,
-  BluetoothToggle,
-  NightLightToggle,
-  IdleInhibitorToggle,
-  LockButton,
 } from './buttons/main.js'
 // import Weather from './Weather.js'
-import QuickSettings from './QuickSettings.js'
+import TabSettings from './TabSettings.js'
 
 import { uptime } from '../../variables.js'
-
-const ToggleButtons = Widget.Box({
-  hpack: 'center',
-  className: 'sidebar-togglesbox spacing-h-10',
-  children: [
-    WifiToggle,
-    BluetoothToggle,
-    NightLightToggle,
-    IdleInhibitorToggle,
-    // ModuleInvertColors(),
-    // HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', {}),
-    // HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', {}),
-  ]
-})
 
 const Header = Widget.Box({
   className: 'spacing-h-5 sidebar-group-invisible-morehorizpad',
@@ -56,13 +38,8 @@ const Sidebar = Widget.Box({
       children: [
         Widget.Box({
           vertical: true,
-          children: [
-            Header,
-            ToggleButtons,
-            QuickSettings, 
-          ]
+          children: [ Header, TabSettings() ]
         }),
-        // ModuleNotificationList({ vexpand: true, }),
         // ModuleCalendar(),
       ]
     }),
