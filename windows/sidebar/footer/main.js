@@ -1,10 +1,10 @@
-import { Widget, Utils } from '../../imports.js'
+import { Widget, Utils } from '../../../imports.js'
 
-import { getCalendarLayout } from '../../misc/CalendarLayout.js'
-import { setupCursorHover } from '../../misc/CursorHover.js'
-import { FontIcon } from '../../misc/main.js'
+import { getCalendarLayout } from '../../../misc/CalendarLayout.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
+import { FontIcon } from '../../../misc/main.js'
 
-import { TodoWidget } from './TodoList.js'
+// import { TodoWidget } from './TodoList.js'
 
 let calendarJson = getCalendarLayout(undefined, true)
 function getDateInXMonthsTime(x) {
@@ -47,7 +47,7 @@ const CalendarDay = (day, today) => Widget.Button({
 
 const CalendarWidget = () => {
   const calendarMonthYear = Widget.Button({
-    className: 'txt txt-large sidebar-calendar-monthyear-btn',
+    className: 'sidebar-calendar-monthyear-btn',
     onClicked: () => shiftCalendarXMonths(0),
     setup: button => {
       button.label = `${new Date().toLocaleString('default', { month: 'long' })} ${new Date().getFullYear()}`
@@ -135,7 +135,7 @@ const contentStack = Widget.Stack({
   hexpand: true,
   items: [
     ['calendar', CalendarWidget()],
-    ['todo', TodoWidget()],
+    // ['todo', TodoWidget()],
     // ['stars', Widget.Label({ label: 'GitHub feed will be here' })],
   ],
   transition: 'slide_up_down',
@@ -168,7 +168,7 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
   })
 })
 
-export const ModuleCalendar = () => Widget.Box({
+export default Widget.Box({
   className: 'sidebar-group spacing-h-5',
   setup: box => {
     box.pack_start(Widget.Box({
@@ -178,7 +178,7 @@ export const ModuleCalendar = () => Widget.Box({
       className: 'sidebar-navrail spacing-v-10',
       children: [
         StackButton('calendar', '', 'Calendar'),
-        StackButton('todo', '󰏪', 'To Do'),
+        // StackButton('todo', '󰏪', 'To Do'),
         // StackButton(box, 'stars', 'star', 'GitHub'),
       ]
     }), false, false, 0)

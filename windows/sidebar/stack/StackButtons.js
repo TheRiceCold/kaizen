@@ -1,5 +1,5 @@
-import { Widget } from '../../imports.js'
-import { FontIcon } from '../../misc/main.js'
+import { Widget } from '../../../imports.js'
+import { FontIcon } from '../../../misc/main.js'
 
 export default (state, items) => 
   items.map(({ icon, title, ...props }) => Widget.Button({
