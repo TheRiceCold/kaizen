@@ -6,7 +6,7 @@ import icons from '../../../icons.js'
 import { getAudioTypeIcon } from '../../../utils.js'
 
 const VolumeIndicator = (type = 'speaker') => Widget.Button({
-  on_clicked: () => Audio[type].is_muted = !Audio[type].is_muted,
+  onClicked: () => Audio[type].is_muted = !Audio[type].is_muted,
   child: FontIcon({
     connections: [[Audio, icon => {
       if (!Audio[type]) return
@@ -23,7 +23,7 @@ const VolumeIndicator = (type = 'speaker') => Widget.Button({
 const VolumeSlider = (type = 'speaker') => Widget.Slider({
   hexpand: true,
   draw_value: false,
-  on_change: ({ value }) => Audio[type].volume = value,
+  onChange: ({ value }) => Audio[type].volume = value,
   connections: [[Audio, slider => {
     slider.value = Audio[type]?.volume
   }, `${type}-changed`]],
@@ -73,7 +73,7 @@ const MixerItem = stream => Widget.Box({
           hexpand: true,
           draw_value: false,
           binds: [['value', stream, 'volume']],
-          on_change: ({ value }) => stream.volume = value,
+          onChange: ({ value }) => stream.volume = value,
         }),
       ],
     }),
@@ -88,7 +88,7 @@ const MixerItem = stream => Widget.Box({
 
 const SinkItem = stream => Widget.Button({
   hexpand: true,
-  on_clicked: () => Audio.speaker = stream,
+  onClicked: () => Audio.speaker = stream,
   child: Widget.Box({
     children: [
       FontIcon({
@@ -107,7 +107,7 @@ const SinkItem = stream => Widget.Button({
 })
 
 const SettingsButton = () => Widget.Button({
-  on_clicked: () => Utils.execAsync('pavucontrol'),
+  onClicked: () => Utils.execAsync('pavucontrol'),
   hexpand: true,
   child: Widget.Box({
     children: [

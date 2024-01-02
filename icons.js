@@ -30,7 +30,7 @@ export default {
     search: 'folder-saved-search-symbolic',
   },
   battery: {
-    charging: '',
+    charging: ' ',
     warning: 'battery-empty-symbolic',
   },
   bluetooth: {

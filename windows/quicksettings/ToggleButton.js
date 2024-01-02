@@ -93,5 +93,5 @@ export const SimpleToggleButton = ({
     box.toggleClassName('active', condition())
   }]],
   child: icon,
-  on_clicked: toggle,
+  onClicked: toggle,
 })

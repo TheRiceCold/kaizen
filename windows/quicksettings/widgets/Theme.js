@@ -23,7 +23,7 @@ export const ThemeSelector = () => Menu({
   title: Widget.Label('Theme Selector'),
   content: [
     ...themes.map(({ name, icon }) => Widget.Button({
-      on_clicked: () => setTheme(name),
+      onClicked: () => setTheme(name),
       child: Widget.Box({
         children: [
           Widget.Label(icon),

@@ -1,9 +1,8 @@
 import {
   App, 
   Widget, 
-  SystemTray, 
   Variable, 
-  Battery 
+  SystemTray, 
 } from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
 import {
@@ -14,7 +13,6 @@ import {
   Utilities,
   ScreenRecord,
   SeparatorDot,
-  SystemIndicator,
 } from './modules/exports.js'
 import { ScreenRecorder } from '../../services/main.js'
 
@@ -33,10 +31,7 @@ export default Widget.Box({
     }),
     ScreenRecord,
     SeparatorDot(ScreenRecorder, r => r.recording),
-    SeparatorDot(Battery, b => b.available),
     BatteryBar,
-    SeparatorDot(),
-    SystemIndicator,
     SeparatorDot(),
     DateButton({ onClicked: () => App.toggleWindow('sideright') }),
     RoundedCorner('topright', 'corner-black')

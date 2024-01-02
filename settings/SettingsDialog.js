@@ -211,7 +211,7 @@ const searchEntry = Widget.Revealer({
     class_name: 'search',
     placeholder_text: 'Search Options',
     secondary_icon_name: icons.apps.search,
-    on_change: ({ text }) => search.value = text || '',
+    onChange: ({ text }) => search.value = text || '',
   }),
 })
 
