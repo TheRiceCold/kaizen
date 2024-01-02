@@ -1,5 +1,5 @@
 import { Utils, Service, Audio } from '../imports.js'
-import Brightness from './brightness.js'
+import Brightness from './Brightness.js'
 import { getAudioTypeIcon } from '../utils.js'
 import icons from '../icons.js'
 

@@ -1,13 +1,6 @@
 import { Widget, Network, Utils } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
-
-const SimpleNetworkIndicator = () => Widget.Icon({
-  setup: self => self.hook(Network, self => {
-    const icon = Network[Network.primary || 'wifi']?.iconName
-    self.icon = icon || '󰖩'
-    self.visible = icon
-  }),
-})
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const NetworkWifiIndicator = () => Widget.Stack({
   transition: 'slide_up_down',
@@ -33,7 +26,7 @@ const NetworkWifiIndicator = () => Widget.Stack({
 const NetworkWiredIndicator = () => Widget.Stack({
   transition: 'slide_up_down',
   items: [
-    ['fallback', SimpleNetworkIndicator()],
+    ['fallback', FontIcon('󰤨')],
     ['unknown', FontIcon('󰈂')],
     ['disconnected', FontIcon('󰈂')],
     ['connected', FontIcon('󰈁')],
@@ -54,11 +47,11 @@ const NetworkWiredIndicator = () => Widget.Stack({
 const NetworkIndicator = () => Widget.Stack({
   transition: 'slide_up_down',
   items: [
-    ['fallback', SimpleNetworkIndicator()],
+    ['fallback', FontIcon('󰤨')],
     ['wifi', NetworkWifiIndicator()],
     ['wired', NetworkWiredIndicator()],
   ],
-  setup: (self) => self.hook(Network, stack => {
+  setup: self => self.hook(Network, stack => {
     if (!Network.primary) {
       stack.shown = 'wifi'
       return
@@ -68,7 +61,7 @@ const NetworkIndicator = () => Widget.Stack({
   }),
 })
 
-export default (props = {}) => Widget.Button({
+export default Widget.Button({
   onClicked: Network.toggleWifi,
   className: 'sidebar-iconbutton',
   tooltipText: 'Wifi | Right-click to configure',
@@ -79,7 +72,7 @@ export default (props = {}) => Widget.Button({
   connections: [
     [Network, btn => {
       btn.toggleClassName(
-        'sidebar-button-active', 
+        'sidebar-button-active',
         Network.wifi?.internet == 'connected' || Network.wired?.internet == 'connected'
       )
     }],
@@ -87,5 +80,4 @@ export default (props = {}) => Widget.Button({
       btn.tooltipText = (`${Network.wifi?.ssid} | Right-click to configure` || 'Unknown')
     }],
   ], setup: setupCursorHover,
-  ...props,
 })

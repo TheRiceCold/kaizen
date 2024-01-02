@@ -58,7 +58,7 @@ const PlayerBox = player => Widget.Box({
   }),
 })
 
-export default () => Widget.Box({
+export default Widget.Box({
   vertical: true,
   className: 'media vertical',
   connections: [['draw', self => {

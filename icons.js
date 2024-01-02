@@ -1,21 +1,20 @@
 export default {
-  lock: 'system-lock-screen-symbolic',
+  lock: '',
   fallback: {
     executable: 'application-x-executable-symbolic',
   },
   audio: {
     mic: {
-      muted: 'microphone-disabled-symbolic',
+      muted: '',
       low: 'microphone-sensitivity-low-symbolic',
       medium: 'microphone-sensitivity-medium-symbolic',
-      high: 'microphone-sensitivity-high-symbolic',
+      high: '',
     },
     volume: {
-      muted: 'audio-volume-muted-symbolic',
-      low: 'audio-volume-low-symbolic',
-      medium: 'audio-volume-medium-symbolic',
-      high: 'audio-volume-high-symbolic',
-      overamplified: 'audio-volume-overamplified-symbolic',
+      muted: '󰝟',
+      low: '󰕿',
+      medium: '󰖀',
+      high: '󰕾',
     },
     type: {
       headset: 'audio-headphones-symbolic',
@@ -29,12 +28,12 @@ export default {
     search: 'folder-saved-search-symbolic',
   },
   battery: {
-    charging: '󱐋',
+    charging: '',
     warning: 'battery-empty-symbolic',
   },
   bluetooth: {
-    enabled: 'bluetooth-active-symbolic',
-    disabled: 'bluetooth-disabled-symbolic',
+    enabled: '󰂯',
+    disabled: '󰂲',
   },
   brightness: {
     indicator: 'display-brightness-symbolic',
@@ -53,6 +52,7 @@ export default {
   notifications: {
     silent: 'notifications-disabled-symbolic',
     noisy: 'preferences-system-notifications-symbolic',
+    chat: "notification-symbolic",
   },
   trash: {
     empty: 'user-trash-symbolic',
@@ -107,4 +107,61 @@ export default {
     Theme: '󰃟',
     Notifications: '󰂚 ',
   },
+  weather: {
+    day: {
+      "113": "\uf00d", //"Sunny",
+      "116": "\uf002", //"PartlyCloudy",
+      "119": "\uf041", //"Cloudy",
+      "122": "\uf013", //"VeryCloudy",
+      "143": "\uf003", //"Fog",
+      "176": "\uf01a", //"LightShowers",
+      "179": "\uf017", //"LightSleetShowers",
+      "182": "\uf0b5", //"LightSleet",
+      "185": "\uf0b5", //"LightSleet",
+      "200": "\uf01d", //"ThunderyShowers",
+      "227": "\uf01b", //"LightSnow",
+      "230": "\uf01b", //"HeavySnow",
+      "248": "\uf014", //"Fog",
+      "260": "\uf014", //"Fog",
+      "263": "\uf01a", //"LightShowers",
+      "266": "\uf01a", //"LightRain",
+      "281": "\uf0b5", //"LightSleet",
+      "284": "\uf0b5", //"LightSleet",
+      "293": "\uf01a", //"LightRain",
+      "296": "\uf01a", //"LightRain",
+      "299": "\uf019", //"HeavyShowers",
+      "302": "\uf019", //"HeavyRain",
+      "305": "\uf019", //"HeavyShowers",
+      "308": "\uf019", //"HeavyRain",
+      "311": "\uf0b5", //"LightSleet",
+      "314": "\uf0b5", //"LightSleet",
+      "317": "\uf0b5", //"LightSleet",
+      "320": "\uf01b", //"LightSnow",
+      "323": "\uf017", //"LightSnowShowers",
+      "326": "\uf017", //"LightSnowShowers",
+      "329": "\uf01b", //"HeavySnow",
+      "332": "\uf01b", //"HeavySnow",
+      "335": "\uf01b", //"HeavySnowShowers",
+      "338": "\uf01b", //"HeavySnow",
+      "350": "\uf0b5", //"LightSleet",
+      "353": "\uf01a", //"LightShowers",
+      "356": "\uf019", //"HeavyShowers",
+      "359": "\uf019", //"HeavyRain",
+      "362": "\uf017", //"LightSleetShowers",
+      "365": "\uf017", //"LightSleetShowers",
+      "368": "\uf017", //"LightSnowShowers",
+      "371": "\uf017", //"HeavySnowShowers",
+      "374": "\uf0b5", //"LightSleetShowers",
+      "377": "\uf0b5", //"LightSleet",
+      "386": "\uf01e", //"ThunderyShowers",
+      "389": "\uf01e", //"ThunderyHeavyRain",
+      "392": "\uf01e", //"ThunderySnowShowers",
+      "395": "\uf01b", //"HeavySnowShowers",
+    },
+    night: {
+      "113": "\uf02e", // Night
+      "116": "\uf086", // Partly cloudy, night
+      "119": "\uf086", // Partly cloudy, night
+    }
+  }
 }

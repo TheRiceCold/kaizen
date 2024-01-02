@@ -15,6 +15,15 @@ rules:
   quotes:
     - error
     - single
+    - avoidEscape: true
   semi:
     - error
     - never
+globals:
+  pkg: readonly
+  ags: readonly
+  ARGV: readonly
+  imports: readonly
+  print: readonly
+  console: readonly
+  logError: readonly

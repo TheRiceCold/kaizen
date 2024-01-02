@@ -2,7 +2,7 @@ import { Widget, Notifications } from '../../imports.js'
 import { setupCursorHover } from '../../misc/CursorHover.js'
 import { Notification, FontIcon } from '../../misc/main.js'
 
-const { Gtk } = imports.gi;
+const { PolicyType } = imports.gi.Gtk
 const NotificationList = Widget.Box({
   vertical: true,
   vpack: 'start',
@@ -77,7 +77,8 @@ export default (props) => {
       children: [NotificationList],
     })
   })
-  listContents.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+
+  listContents.set_policy(PolicyType.NEVER, PolicyType.AUTOMATIC)
   const vScrollbar = listContents.get_vscrollbar()
   vScrollbar.get_style_context().add_class('sidebar-scrollbar')
 

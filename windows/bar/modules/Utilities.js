@@ -1,10 +1,9 @@
 import { Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
-
 import { ColorPicker, ScreenRecorder } from '../../../services/main.js'
 import PanelButton from './PanelButton.js'
 
-const { Gdk } = imports.gi
+const { NORTH, SOUTH } = imports.gi.Gdk
 
 const ColorPickerButton = PanelButton({
   className: 'color-picker',
@@ -18,15 +17,15 @@ const ColorPickerButton = PanelButton({
   onClicked: () => ColorPicker.pick(),
 
   onSecondaryClick: btn => {
-    if (Colors.colors.length === 0) return
+    if (ColorPicker.colors.length === 0) return
     Widget.Menu({
       className: 'colorpicker',
-      children: Colors.colors.map(color => Widget.MenuItem({
+      children: ColorPicker.colors.map(color => Widget.MenuItem({
         child: Widget.Label(color),
-        css: `background-color: ${color}`,
-        onActivate: () => Colors.wlCopy(color),
+        css: `background-color: ${color};`,
+        onActivate: () => ColorPicker.wlCopy(color),
       })),
-    }).popup_at_widget(btn, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
+    }).popup_at_widget(btn, SOUTH, NORTH, null)
   },
 })
 
@@ -35,9 +34,4 @@ const ScreenShotButton = PanelButton({
   onClicked: () => ScreenRecorder.screenshot()
 })
 
-export default Widget.Box({
-  children: [
-    ColorPickerButton,
-    ScreenShotButton,
-  ]
-})
+export default Widget.Box({ children: [ ColorPickerButton, ScreenShotButton ] })

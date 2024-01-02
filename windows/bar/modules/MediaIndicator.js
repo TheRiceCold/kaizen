@@ -48,7 +48,7 @@ export default () => {
     if (current === player) return
 
     current = player
-    box.children = [Indicator({ player, direction })]
+    box.children = [Indicator({ player, direction: 'right' })]
   }
 
   return Widget.Box({

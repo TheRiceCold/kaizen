@@ -4,7 +4,6 @@ import options from '../../../options.js'
 
 const Arrow = (revealer, direction, items) => {
   let deg = 0
-
   const icon = Widget.Icon({ icon: icons.ui.arrow[direction] })
 
   const animate = () => {
@@ -19,6 +18,7 @@ const Arrow = (revealer, direction, items) => {
   }
 
   return Widget.Button({
+    child: icon,
     className: 'panel-button sub-menu',
     connections: [[items, btn => {
       btn.tooltip_text = `${items.value} Items`
@@ -27,7 +27,6 @@ const Arrow = (revealer, direction, items) => {
       animate()
       revealer.reveal_child = !revealer.reveal_child
     },
-    child: icon,
   })
 }
 

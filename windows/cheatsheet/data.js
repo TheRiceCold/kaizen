@@ -4,13 +4,13 @@ const column1 = [
     icon: '',
     name: 'Workspaces: navigation',
     binds: [
-      { keys: ['⌘', "+", "#"], action: "Go to workspace #" },
-      { keys: ['⌘', "+", "S"], action: "Toggle special workspace" },
+      { keys: ['⌘', '+', '#'], action: 'Go to workspace #' },
+      { keys: ['⌘', '+', 'S'], action: 'Toggle special workspace' },
       // { keys: ["⌘", "+", "(Scroll ↑↓)"], action: "Go to workspace -1/+1" },
-      { keys: ['Ctrl', "⌘", "+", "←"], action: "Go to workspace on the left" },
-      { keys: ['Ctrl', "⌘", "+", "→"], action: "Go to workspace on the right" },
-      { keys: ['⌘', "+", "PageUp"], action: "Go to workspace on the left" },
-      { keys: ['⌘', "+", "PageDown"], action: "Go to workspace on the right" }
+      { keys: ['Ctrl', '⌘', '+', '←'], action: 'Go to workspace on the left' },
+      { keys: ['Ctrl', '⌘', '+', '→'], action: 'Go to workspace on the right' },
+      { keys: ['⌘', '+', 'PageUp'], action: 'Go to workspace on the left' },
+      { keys: ['⌘', '+', 'PageDown'], action: 'Go to workspace on the right' }
     ],
     appeartick: 1
   },
@@ -18,27 +18,27 @@ const column1 = [
     icon: '󰆾',
     name: 'Workspaces: management',
     binds: [
-      { keys: ['⌘', 'Shift', "+", "#"], action: "Move window to workspace #" },
-      { keys: ['⌘', "Alt", "+", "S"], action: "Move window to special workspace" },
-      { keys: ['⌘', "Alt", "+", "PageUp"], action: "Move window to workspace on the left" },
-      { keys: ['⌘', "Alt", "+", "PageDown"], action: "Move window to workspace on the right" }
+      { keys: ['⌘', 'Shift', '+', '#'], action: 'Move window to workspace #' },
+      { keys: ['⌘', 'Alt', '+', 'S'], action: 'Move window to special workspace' },
+      { keys: ['⌘', 'Alt', '+', 'PageUp'], action: 'Move window to workspace on the left' },
+      { keys: ['⌘', 'Alt', '+', 'PageDown'], action: 'Move window to workspace on the right' }
     ],
     appeartick: 1
   },
   {
     icon: '',
-    name: "Windows",
+    name: 'Windows',
     binds: [
-      { keys: ['⌘', "+", "←↑→↓"], action: "Focus window in direction" },
-      { keys: ['⌘', "Shift", "+", "←↑→↓"], action: "Swap window in direction" },
-      { keys: ['⌘', "+", ";"], action: "Split ratio -" },
-      { keys: ['⌘', "+", "'"], action: "Split ratio +" },
-      { keys: ['⌘', "+", "Lmb"], action: "Move window" },
-      { keys: ['⌘', "+", "Mmb"], action: "Move window" },
-      { keys: ['⌘', "+", "Rmb"], action: "Resize window" },
-      { keys: ['⌘', "+", "F"], action: 'Maximize' },
-      { keys: ['⌘', 'Shift', '+', "F"], action: "Fullscreen" },
-      { keys: ['⌘', "Alt", '+', "F"], action: "Fake fullscreen" }
+      { keys: ['⌘', '+', "←↑→↓"], action: "Focus window in direction" },
+      { keys: ['⌘', 'Shift', '+', '←↑→↓'], action: "Swap window in direction" },
+      { keys: ['⌘', '+', ';'], action: "Split ratio -" },
+      { keys: ['⌘', '+', "'"], action: "Split ratio +" },
+      { keys: ['⌘', '+', "Lmb"], action: "Move window" },
+      { keys: ['⌘', '+', "Mmb"], action: "Move window" },
+      { keys: ['⌘', '+', "Rmb"], action: "Resize window" },
+      { keys: ['⌘', '+', 'F'], action: 'Maximize' },
+      { keys: ['⌘', 'Shift', '+', 'F'], action: "Fullscreen" },
+      { keys: ['⌘', 'Alt', '+', 'F'], action: "Fake fullscreen" }
     ],
     appeartick: 1
   }
@@ -47,8 +47,8 @@ const column1 = [
 // COLUMN2
 const column2 = [
   {
-    icon: "󰜬",
-    name: "Widgets (AGS)",
+    icon: '󰜬',
+    name: 'Widgets (AGS)',
     binds: [
       { keys: ["⌘", "OR", "⌘", "+", "Tab"], "action": "Toggle overview/launcher" },
       { keys: ["Ctrl", "⌘", "+", "R"], "action": "Restart AGS" },
@@ -69,13 +69,13 @@ const column2 = [
     icon: '',
     name: 'Utilities',
     binds: [
-      { keys: ["PrtSc"], action: "Screenshot  >>  clipboard" },
-      { keys: ["⌘", "Shift", "+", "S"], action: "Screen snip  >>  clipboard" },
-      { keys: ["⌘", "Shift", "+", "T"], action: "Image to text  >>  clipboard" },
-      { keys: ["⌘", "Shift", "+", "C"], action: "Color picker" },
-      { keys: ["⌘", "Alt", "+", "R"], action: "Record region" },
-      { keys: ["Ctrl", "Alt", "+", "R"], action: "Record region with sound" },
-      { keys: ["⌘", "Shift", "Alt", "+", "R"], action: "Record screen with sound" }
+      { keys: ['PrtSc'], action: 'Screenshot  >>  clipboard' },
+      { keys: ['⌘', 'Shift', '+', 'S'], action: 'Screen snip  >>  clipboard' },
+      { keys: ['⌘', 'Shift', '+', 'T'], action: 'Image to text  >>  clipboard' },
+      { keys: ['⌘', 'Shift', '+', 'C'], action: 'Color picker' },
+      { keys: ['⌘', 'Alt', '+', 'R'], action: 'Record region' },
+      { keys: ['Ctrl', 'Alt', '+', 'R'], action: 'Record region with sound' },
+      { keys: ['⌘', 'Shift', 'Alt', '+', 'R'], action: 'Record screen with sound' }
     ],
     appeartick: 2
   },
@@ -87,11 +87,11 @@ const column3 = [
     icon: '󱓞',
     name: 'Apps',
     binds: [
-      { keys: ["⌘", "+", "Return"], action: "Launch terminal: Foot" },
-      { keys: ["⌘", "+", "B"], action: "Launch browser: Firefox" },
-      { keys: ["⌘", "+", "E"], action: "Launch file manager: joshuto" },
-      { keys: ["⌘", "+", "X"], action: "Launch editor: GNOME Text Editor" },
-      { keys: ["⌘", "+", "I"], action: "Launch settings: GNOME Control center" }
+      { keys: ['⌘', '+', 'Return'], action: 'Launch terminal: Foot' },
+      { keys: ['⌘', '+', 'B'], action: 'Launch browser: Firefox' },
+      { keys: ['⌘', '+', 'E'], action: 'Launch file manager: joshuto' },
+      { keys: ['⌘', '+', 'X'], action: 'Launch editor: GNOME Text Editor' },
+      { keys: ['⌘', '+', 'I'], action: 'Launch settings: GNOME Control center' }
     ],
     appeartick: 3
   },
@@ -99,8 +99,8 @@ const column3 = [
     icon: '󰥻',
     name: 'Typing',
     binds: [
-      { keys: ["⌘", "+", "V"], action: "Clipboard history  >>  clipboard" },
-      { keys: ["⌘", "+", "."], action: "Emoji picker  >>  clipboard" },
+      { keys: ['⌘', '+', 'V'], action: 'Clipboard history  >>  clipboard' },
+      { keys: ['⌘', '+', '.'], action: 'Emoji picker  >>  clipboard' },
     ],
     appeartick: 3
   },
@@ -108,16 +108,16 @@ const column3 = [
     icon: '',
     name: 'Launcher actions',
     binds: [
-      { keys: [">raw"], action: "Toggle mouse acceleration" },
-      { keys: [">img"], action: "Select wallpaper and generate colorscheme" },
-      { keys: [">light"], action: "Switch to light theme" },
-      { keys: [">dark"], action: "Switch to dark theme" },
-      { keys: [">badapple"], action: "Apply black n' white colorscheme" },
-      { keys: [">color"], action: "Pick acccent color" },
-      { keys: [">todo"], action: "Type something after that to add a To-do item" },
+      { keys: ['>raw'], action: 'Toggle mouse acceleration' },
+      { keys: ['>img'], action: 'Select wallpaper and generate colorscheme' },
+      { keys: ['>light'], action: 'Switch to light theme' },
+      { keys: ['>dark'], action: 'Switch to dark theme' },
+      { keys: ['>badapple'], action: 'Apply black & white colorscheme' },
+      { keys: ['>color'], action: 'Pick acccent color' },
+      { keys: ['>todo'], action: 'Type something after that to add a To-do item' },
     ],
     appeartick: 3
   }
 ]
 
-export default [ column1, column2, column3, ]
+export default [column1, column2, column3,]

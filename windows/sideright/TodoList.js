@@ -47,9 +47,9 @@ const todoListItem = (task, id, isDone) => {
           className: 'icon-material txt-norm',
         }),
         onClicked: () => {
-          const contentWidth = todoContent.get_allocated_width();
-          crosser.toggleClassName('sidebar-todo-crosser-removed', true);
-          crosser.css = `margin-left: -${contentWidth}px;`;
+          const contentWidth = todoContent.get_allocated_width()
+          crosser.toggleClassName('sidebar-todo-crosser-removed', true)
+          crosser.css = `margin-left: -${contentWidth}px;`
           Utils.timeout(200, () => widgetRevealer.revealChild = false)
           Utils.timeout(350, () => Todo.remove(id))
         },
@@ -77,7 +77,7 @@ const todoItems = isDone => Widget.Scrollable({
           return todoListItem(task, i, isDone)
         })
         if (self.children.length == 0) {
-          self.homogeneous = true;
+          self.homogeneous = true
           self.children = [
             Widget.Box({
               hexpand: true,
@@ -94,7 +94,7 @@ const todoItems = isDone => Widget.Scrollable({
             })
           ]
         }
-        else self.homogeneous = false;
+        else self.homogeneous = false
       }, 'updated'
     ]]
   }),
@@ -136,26 +136,26 @@ const UndoneTodoList = () => {
       label: 'close',
       setup: setupCursorHover,
       onClicked: () => {
-        newTaskEntryRevealer.revealChild = false;
-        confirmAddTask.revealChild = false;
-        cancelAddTask.revealChild = false;
-        newTaskButton.revealChild = true;
-        newTaskEntry.text = '';
+        newTaskEntryRevealer.revealChild = false
+        confirmAddTask.revealChild = false
+        cancelAddTask.revealChild = false
+        newTaskButton.revealChild = true
+        newTaskEntry.text = ''
       }
     })
   })
   const newTaskEntry = Widget.Entry({
-      // hexpand: true,
-      vpack: 'center',
-      className: 'txt-small sidebar-todo-entry',
-      placeholderText: 'Add a task...',
-      onAccept: ({ text }) => {
-        if (text == '') return
-        Todo.add(text)
-        newTaskEntry.text = ''
-      },
-      onChange: ({ text }) => confirmAddTask.child.toggleClassName('sidebar-todo-add-available', text != ''),
-  });
+    // hexpand: true,
+    vpack: 'center',
+    className: 'txt-small sidebar-todo-entry',
+    placeholderText: 'Add a task...',
+    onAccept: ({ text }) => {
+      if (text == '') return
+      Todo.add(text)
+      newTaskEntry.text = ''
+    },
+    onChange: ({ text }) => confirmAddTask.child.toggleClassName('sidebar-todo-add-available', text != ''),
+  })
   const newTaskEntryRevealer = Widget.Revealer({
     transition: 'slide_right',
     transitionDuration: 200,
@@ -184,13 +184,13 @@ const UndoneTodoList = () => {
     vertical: true,
     className: 'spacing-v-5',
     setup: (box) => {
-      box.pack_start(todoItems(false), true, true, 0);
+      box.pack_start(todoItems(false), true, true, 0)
       box.pack_start(Widget.Box({
         setup: self => {
-          self.pack_start(cancelAddTask, false, false, 0);
-          self.pack_start(newTaskEntryRevealer, true, true, 0);
-          self.pack_start(confirmAddTask, false, false, 0);
-          self.pack_start(newTaskButton, false, false, 0);
+          self.pack_start(cancelAddTask, false, false, 0)
+          self.pack_start(newTaskEntryRevealer, true, true, 0)
+          self.pack_start(confirmAddTask, false, false, 0)
+          self.pack_start(newTaskButton, false, false, 0)
         }
       }), false, false, 0)
     },
@@ -204,26 +204,26 @@ const todoItemsBox = Widget.Stack({
     ['undone', UndoneTodoList()],
     ['done', todoItems(true)],
   ],
-});
+})
 
 export const TodoWidget = () => {
   const TodoTabButton = (isDone, navIndex) => Widget.Button({
     hexpand: true,
     className: 'sidebar-selector-tab',
     onClicked: button => {
-      todoItemsBox.shown = `${isDone ? 'done' : 'undone'}`;
-      const kids = button.get_parent().get_children();
+      todoItemsBox.shown = `${isDone ? 'done' : 'undone'}`
+      const kids = button.get_parent().get_children()
       for (let i = 0; i < kids.length; i++) {
-          if (kids[i] != button) kids[i].toggleClassName('sidebar-selector-tab-active', false);
-          else button.toggleClassName('sidebar-selector-tab-active', true);
+          if (kids[i] != button) kids[i].toggleClassName('sidebar-selector-tab-active', false)
+          else button.toggleClassName('sidebar-selector-tab-active', true)
       }
       // Fancy highlighter line width
-      const buttonWidth = button.get_allocated_width();
-      const highlightWidth = button.get_children()[0].get_allocated_width();
+      const buttonWidth = button.get_allocated_width()
+      const highlightWidth = button.get_children()[0].get_allocated_width()
       // navIndicator.css = `
       //   font-size: ${navIndex}px; 
       //   padding: 0px ${(buttonWidth - highlightWidth) / 2}px;
-      // `;
+      // `
     },
     child: Widget.Box({
       hpack: 'center',
@@ -237,8 +237,8 @@ export const TodoWidget = () => {
       ]
     }),
     setup: btn => Utils.timeout(1, () => {
-      setupCursorHover(btn);
-      btn.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`);
+      setupCursorHover(btn)
+      btn.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`)
     }),
   })
   

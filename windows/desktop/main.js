@@ -1,7 +1,7 @@
 import { Widget } from '../../imports.js'
 import { Clock } from '../../misc/main.js'
 
-const TimeDate = () => Widget.Box({
+const TimeDate = Widget.Box({
   hpack: 'end',
   vpack: 'end',
   vertical: true,
@@ -20,10 +20,10 @@ const TimeDate = () => Widget.Box({
   ],
 })
 
-export default() => Widget.Window({
+export default Widget.Window({
   name: 'desktop',
+  child: TimeDate,
   layer: 'background',
   className: 'desktop',
   anchor: ['top', 'bottom', 'left', 'right'],
-  child: TimeDate(),
 })

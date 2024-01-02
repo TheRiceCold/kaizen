@@ -27,7 +27,7 @@ const Homogeneous = toggles => Widget.Box({
   children: toggles,
 })
 
-export default () => PopupWindow({
+export default PopupWindow({
   name: 'quicksettings',
   connections: [[options.bar.position, self => {
     self.anchor = ['right', options.bar.position.value]
@@ -62,7 +62,7 @@ export default () => PopupWindow({
         // ProfileSelector(), 
         ThemeSelector()
       ]),
-      Media(),
+      Media,
     ],
   }),
 })

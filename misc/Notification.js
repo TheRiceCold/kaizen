@@ -1,4 +1,5 @@
 import { Widget, Utils } from '../imports.js'
+import FontIcon from './FontIcon.js'
 
 const NotificationIcon = ({ app_entry, app_icon, image }) => {
   if (image) {
@@ -29,14 +30,14 @@ const NotificationIcon = ({ app_entry, app_icon, image }) => {
       min-width: 78px;
       min-height: 78px;
     `,
-    child: Widget.Icon({
-      icon,
-      size: 58,
-      hexpand: true,
-      vexpand: true,
-      hpack: 'center', 
-      vpack: 'center', 
-    }),
+    // child: FontIcon({
+    //   icon,
+    //   size: 58,
+    //   hexpand: true,
+    //   vexpand: true,
+    //   hpack: 'center', 
+    //   vpack: 'center', 
+    // }),
   })
 }
 
@@ -70,7 +71,7 @@ export default notification => {
               Widget.Button({
                 className: 'close-button',
                 vpack: 'start',
-                child: Widget.Icon('window-close-symbolic'),
+                child: FontIcon('window-close-symbolic'),
                 onClicked: () => notification.close(),
               }),
             ],

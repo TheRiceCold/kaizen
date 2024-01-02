@@ -5,7 +5,7 @@ import DateColumn from './DateColumn.js'
 import NotificationColumn from './NotificationColumn.js'
 import options from '../../options.js'
 
-export default () => PopupWindow({
+export default  PopupWindow({
   name: 'dashboard',
   connections: [[options.bar.position, self => {
     self.anchor = ['top', 'right']
@@ -19,4 +19,4 @@ export default () => PopupWindow({
       DateColumn(),
     ],
   }),
-});
+})

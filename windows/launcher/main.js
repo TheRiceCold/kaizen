@@ -1,4 +1,4 @@
-import { Widget, App, Applications } from '../../imports.js'
+import { Widget, Utils, App, Applications } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
 import AppItem from './AppItem.js'
 
@@ -66,4 +66,4 @@ const Launcher = () => {
   })
 }
 
-export default () => PopupWindow({ name: WINDOW_NAME, child: Launcher() })
+export default PopupWindow({ name: WINDOW_NAME, child: Launcher() })

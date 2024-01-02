@@ -1,10 +1,12 @@
 import { Bluetooth, Widget } from '../../../imports.js'
 import { Menu, ArrowToggleButton } from '../ToggleButton.js'
+import { FontIcon } from '../../../misc/main.js'
+
 import icons from '../../../icons.js'
 
 export const BluetoothToggle = () => ArrowToggleButton({
   name: 'bluetooth',
-  icon: Widget.Icon({
+  icon: FontIcon({
     connections: [[Bluetooth, icon => {
       icon.icon = Bluetooth.enabled ? icons.bluetooth.enabled : icons.bluetooth.disabled
     }]],
@@ -31,7 +33,7 @@ export const BluetoothToggle = () => ArrowToggleButton({
 
 const DeviceItem = device => Widget.Box({
   children: [
-    Widget.Icon(device.icon_name + '-symbolic'),
+    FontIcon(device.icon_name + '-symbolic'),
     Widget.Label(device.name),
     Widget.Label({
       label: `${device.battery_percentage}%`,
@@ -56,7 +58,7 @@ const DeviceItem = device => Widget.Box({
 
 export const BluetoothDevices = () => Menu({
   name: 'bluetooth',
-  icon: Widget.Icon(icons.bluetooth.disabled),
+  icon: FontIcon(icons.bluetooth.disabled),
   title: Widget.Label('Bluetooth'),
   content: [
     Widget.Box({

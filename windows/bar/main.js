@@ -4,7 +4,7 @@ import StartWidget from './StartWidget.js'
 import Workspaces from './modules/Workspaces.js'
 import EndWidget from './EndWidget.js'
 
-export default () => Widget.Window({
+export default Widget.Window({
   name: 'bar',
   layer: 'overlay',
   exclusivity: 'ignore',

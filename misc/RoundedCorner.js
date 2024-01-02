@@ -1,18 +1,18 @@
 import { Widget, Utils } from '../imports.js'
 
-const { Gtk } = imports.gi
 const Lang = imports.lang
+const { NORMAL } = imports.gi.Gtk.StateFlags
 
-export default (place, props) => Widget.DrawingArea({
-  ...props,
+export default (place, className) => Widget.DrawingArea({
+  className,
   hpack: place.includes('left') ? 'start' : 'end',
   vpack: place.includes('top') ? 'start' : 'end',
   setup: (widget) => Utils.timeout(1, () => {
-    const r = widget.get_style_context().get_property('border-radius', Gtk.StateFlags.NORMAL)
+    const r = widget.get_style_context().get_property('border-radius', NORMAL)
     widget.set_size_request(r, r)
     widget.connect('draw', Lang.bind(widget, (widget, cr) => {
-      const c = widget.get_style_context().get_property('background-color', Gtk.StateFlags.NORMAL)
-      const r = widget.get_style_context().get_property('border-radius', Gtk.StateFlags.NORMAL)
+      const c = widget.get_style_context().get_property('background-color', NORMAL)
+      const r = widget.get_style_context().get_property('border-radius', NORMAL)
       widget.set_size_request(r, r)
 
       switch (place) {

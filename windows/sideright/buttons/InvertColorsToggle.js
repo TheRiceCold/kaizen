@@ -7,7 +7,7 @@ export default (props = {}) => Widget.Button({
   className: 'txt-small sidebar-iconbutton',
   onClicked: button => {
     const shaderPath = JSON.parse(Utils.exec('hyprctl -j getoption decoration:screen_shader')).str
-    if (shaderPath != "[[EMPTY]]" && shaderPath != "") {
+    if (shaderPath != '[[EMPTY]]' && shaderPath != '') {
       Utils.execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader ''`]).catch(print)
       button.toggleClassName('sidebar-button-active', false)
     }

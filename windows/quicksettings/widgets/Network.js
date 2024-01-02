@@ -1,10 +1,12 @@
 import { Widget, Network, Utils, Applications } from '../../../imports.js'
 import { Menu, ArrowToggleButton } from '../ToggleButton.js'
+import { FontIcon } from '../../../misc/main.js'
+
 import icons from '../../../icons.js'
 
 export const NetworkToggle = () => ArrowToggleButton({
   name: 'network',
-  icon: Widget.Icon({
+  icon: FontIcon({
     connections: [[Network, icon => {
       icon.icon = Network.wifi.icon_name || ''
     }]],
@@ -25,7 +27,7 @@ export const NetworkToggle = () => ArrowToggleButton({
 
 export const WifiSelection = () => Menu({
   name: 'network',
-  icon: Widget.Icon({
+  icon: FontIcon({
     connections: [[Network, icon => {
       icon.icon = Network.wifi.icon_name
     }]],
@@ -39,9 +41,9 @@ export const WifiSelection = () => Menu({
           on_clicked: () => Utils.execAsync(`nmcli device wifi connect ${ap.bssid}`),
           child: Widget.Box({
             children: [
-              Widget.Icon(ap.iconName),
+              FontIcon(ap.iconName),
               Widget.Label(ap.ssid || ''),
-              ap.active && Widget.Icon({ icon: icons.ui.tick, hexpand: true, hpack: 'end' }),
+              ap.active && FontIcon({ icon: icons.ui.tick, hexpand: true, hpack: 'end' }),
             ],
           }),
         })),
@@ -51,7 +53,7 @@ export const WifiSelection = () => Menu({
     Widget.Button({
       onClicked: () => Applications.query('gnome-control-center')?.[0].launch(),
       child: Widget.Box({
-        children: [ Widget.Icon(icons.ui.settings), Widget.Label('Network') ],
+        children: [ FontIcon(icons.ui.settings), Widget.Label('Network') ],
       }),
     }),
   ],

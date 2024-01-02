@@ -1,4 +1,5 @@
 import { App, Widget, Variable, Utils } from '../../imports.js'
+import { FontIcon } from '../../misc/main.js'
 import icons from '../../icons.js'
 
 export const opened = Variable('')
@@ -11,7 +12,7 @@ export const Arrow = (name, activate) => {
   let deg = 0
   let iconOpened = false
   return Widget.Button({
-    child: Widget.Icon({
+    child: FontIcon({
       icon: icons.ui.arrow.right,
       connections: [[opened, icon => {
         if (opened.value === name && !iconOpened || opened.value !== name && iconOpened) {

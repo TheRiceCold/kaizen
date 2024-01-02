@@ -31,7 +31,10 @@ export const ArtistLabel = (player, props) => Widget.Label({
   binds: [['label', player, 'track-artists', a => a.join(', ') || '']],
 })
 
-export const PlayerIcon = (player, { symbolic = true, ...props } = {}) => Widget.Icon({
+export const PlayerIcon = (
+  player, 
+  { symbolic = true, ...props } = {}
+) => Widget.Icon({
   ...props,
   className: 'player-icon',
   tooltip_text: player.identity || '',

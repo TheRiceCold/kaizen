@@ -7,7 +7,7 @@ export default async () => {
     globalThis.app = App.default
     globalThis.audio = Audio.default
     globalThis.recorder = (await import('../services/ScreenRecorder.js')).default
-    globalThis.brightness = (await import('../services/brightness.js')).default
+    globalThis.brightness = (await import('../services/Brightness.js')).default
     globalThis.indicator = (await import('../services/onscreenindicator.js')).default
 
     Mpris.players.forEach(player => {

@@ -2,7 +2,7 @@ import { Widget, Utils } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 
-export const ModuleIdleInhibitor = (props = {}) => Widget.Button({ // TODO: Make this work
+export default Widget.Button({
   properties: [
     ['enabled', false],
     ['inhibitor', undefined],
@@ -24,5 +24,4 @@ export const ModuleIdleInhibitor = (props = {}) => Widget.Button({ // TODO: Make
   },
   child: FontIcon(''),
   setup: setupCursorHover,
-  ...props,
 })

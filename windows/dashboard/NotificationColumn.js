@@ -3,8 +3,8 @@ import {
   Widget, 
   Notifications, 
 } from '../../imports.js'
-import icons from '../../icons.js';
-import { Notification } from '../../misc/main.js'
+import icons from '../../icons.js'
+import { FontIcon, Notification } from '../../misc/main.js'
 
 const ClearButton = () => Widget.Button({
   onClicked: () => {
@@ -15,13 +15,13 @@ const ClearButton = () => Widget.Button({
   child: Widget.Box({
     children: [
       Widget.Label('Clear '),
-      Widget.Icon({
+      FontIcon({
         binds: [['icon', Notifications, 'notifications', n =>
           n.length > 0 ? icons.trash.full : icons.trash.empty]],
       }),
     ]
   }),
-});
+})
 
 const Header = () => Widget.Box({
   className: 'header',
@@ -48,7 +48,7 @@ const Placeholder = () => Widget.Box({
   vexpand: true,
   hexpand: true,
   children: [
-    Widget.Icon(icons.notifications.silent),
+    FontIcon(icons.notifications.silent),
     Widget.Label('Your inbox is empty'),
   ],
   binds: [['visible', Notifications, 'notifications', n => n.length === 0]],

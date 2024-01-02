@@ -2,7 +2,7 @@ import { App, Utils, Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 
-export default () => Widget.Button({
+export default Widget.Button({
   hpack: 'end',
   tooltipText: 'Reload Hyprland',
   className: 'sidebar-iconbutton',

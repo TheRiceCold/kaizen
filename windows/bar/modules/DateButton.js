@@ -7,6 +7,6 @@ export default props => PanelButton({
   ...props,
   window: 'dashboard',
   className: 'dashboard panel-button',
-  content: Clock({ format: '%I:%M • %A %d' }),
+  content: Clock({ format: '%I:%M %p • %A %d' }),
   onSecondaryClick: () => App.toggleWindow('dashboard'),
 })

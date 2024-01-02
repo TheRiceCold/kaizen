@@ -42,7 +42,7 @@ const NotificationIcon = notifObject => {
     className: `notif-icon notif-icon-material-${notifObject.urgency}`,
     homogeneous: true,
     children: [(icon != 'NO_ICON' ?
-      Widget.Icon({
+      FontIcon({
         vpack: 'center',
         icon: icon,
         setup: (self) => Utils.timeout(1, () => {
@@ -68,8 +68,8 @@ export default ({
 } = {}) => {
   const command = (isPopup ? () => notifObject.dismiss() : () => notifObject.close())
   const destroyWithAnims = () => {
-    widget.sensitive = false;
-    notificationBox.setCss(middleClickClose);
+    widget.sensitive = false
+    notificationBox.setCss(middleClickClose)
     Utils.timeout(200, () => wholeThing.revealChild = false)
     Utils.timeout(400, () => {
       command()

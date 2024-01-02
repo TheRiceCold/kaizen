@@ -1,20 +1,18 @@
 import { Widget, Utils } from '../../../imports.js'
+import { FontIcon } from '../../../misc/main.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
-export default (props = {}) => Widget.Button({ // TODO: Make this wok
+export default Widget.Button({
   properties: [
     ['enabled', false],
     ['yellowlight', undefined],
   ],
-  className: 'txt-small sidebar-iconbutton',
+  className: 'sidebar-iconbutton',
   tooltipText: 'Night Light',
   onClicked: (self) => {
     self._enabled = !self._enabled
     self.toggleClassName('sidebar-button-active', self._enabled)
-    // if (self._enabled) Utils.execAsync(['bash', '-c', 'wlsunset & disown'])
-    if (self._enabled) 
-      Utils.execAsync('wlsunset')
-    else 
-      Utils.execAsync('pkill wlsunset')
+    Utils.execAsync(self._enabled ? 'wlsunset' : 'pkill wlsunset')
   },
   child: FontIcon(''),
   setup: (self) => {
@@ -22,6 +20,5 @@ export default (props = {}) => Widget.Button({ // TODO: Make this wok
     self._enabled = !!Utils.exec('pidof wlsunset')
     self.toggleClassName('sidebar-button-active', self._enabled)
   },
-  ...props,
 })
 

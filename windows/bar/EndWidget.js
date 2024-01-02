@@ -1,4 +1,10 @@
-import { App, Widget, SystemTray, Variable, Battery } from '../../imports.js'
+import {
+  App, 
+  Widget, 
+  SystemTray, 
+  Variable, 
+  Battery 
+} from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
 import {
   Tray,
@@ -25,14 +31,14 @@ export default Widget.Box({
       items: submenuItems,
       children: [ Tray, Utilities ],
     }),
-    ScreenRecord(),
+    ScreenRecord,
     SeparatorDot(ScreenRecorder, r => r.recording),
     SeparatorDot(Battery, b => b.available),
-    BatteryBar(),
+    BatteryBar,
     SeparatorDot(),
-    SystemIndicator(),
+    SystemIndicator,
     SeparatorDot(),
     DateButton({ onClicked: () => App.toggleWindow('sideright') }),
-    RoundedCorner('topright', { className: 'corner-black' })
+    RoundedCorner('topright', 'corner-black')
   ],
 })

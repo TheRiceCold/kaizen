@@ -1,4 +1,5 @@
 import { Widget } from '../../../imports.js'
+import { FontIcon } from '../../../misc/main.js'
 import { ArrowToggleButton, Menu, opened } from '../ToggleButton.js'
 
 import icons from '../../../icons.js'
@@ -27,7 +28,7 @@ export const ThemeSelector = () => Menu({
         children: [
           Widget.Label(icon),
           Widget.Label(name),
-          Widget.Icon({
+          FontIcon({
             icon: icons.ui.tick,
             hexpand: true,
             hpack: 'end',
@@ -40,7 +41,7 @@ export const ThemeSelector = () => Menu({
     Widget.Button({
       onClicked: openSettings,
       child: Widget.Box({
-        children: [ Widget.Icon(icons.ui.settings), Widget.Label('Theme Settings') ],
+        children: [ FontIcon(icons.ui.settings), Widget.Label('Theme Settings') ],
       }),
     }),
   ],

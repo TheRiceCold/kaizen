@@ -1,5 +1,5 @@
 import { Widget, Battery } from '../../../imports.js'
-import PowerMenu from '../../../services/powermenu.js'
+import { PowerMenu } from '../../../services/main.js'
 import { Avatar } from '../../../misc/main.js'
 
 import icons from '../../../icons.js'
@@ -17,7 +17,7 @@ export default () => Widget.Box({
         Widget.Box({
           className: 'battery horizontal',
           children: [
-            Widget.Icon({ binds: [['icon', Battery, 'icon-name']] }),
+            FontIcon({ binds: [['icon', Battery, 'icon-name']] }),
             Widget.Label({ binds: [['label', Battery, 'percent', p => `${p}%`]] }),
           ],
         }),
@@ -27,7 +27,7 @@ export default () => Widget.Box({
         }),
         Widget.Button({
           onClicked: () => PowerMenu.action('shutdown'),
-          child: Widget.Icon(icons.powermenu.shutdown),
+          child: FontIcon(icons.powermenu.shutdown),
         }),
       ],
     }),

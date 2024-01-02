@@ -9,7 +9,7 @@ const notifPopupList = Widget.Box({
 
     ['dismiss', (box, id, force = false) => {
       if (!id || !box._map.has(id) || box._map.get(id)._hovered && !force)
-          return
+        return
 
       const notif = box._map.get(id)
       notif.revealChild = false
@@ -24,10 +24,7 @@ const notifPopupList = Widget.Box({
       box._map.delete(id)
 
       const notif = Notifications.getNotification(id)
-      const newNotif = Notification({
-          notifObject: notif,
-          isPopup: true,
-      })
+      const newNotif = Notification({ notifObject: notif, isPopup: true })
       box._map.set(id, newNotif)
       box.pack_end(box._map.get(id), false, false, 0)
       box.show_all()

@@ -1,7 +1,7 @@
 import { Widget, SystemTray } from '../../../imports.js'
 import PanelButton from './PanelButton.js'
 
-const { Gdk } = imports.gi
+const { NORTH, SOUTH } = imports.gi.Gdk.Gravity
 
 const SysTrayItem = item => PanelButton({
   className: 'tray-item',
@@ -9,7 +9,7 @@ const SysTrayItem = item => PanelButton({
   tooltip_markup: item.bind('tooltip_markup'),
   setup: self => {
     const id = item.menu?.connect('popped-up', menu => {
-      self.toggleClassName('active');
+      self.toggleClassName('active')
       menu.connect('notify::visible', menu => {
         self.toggleClassName('active', menu.visible)
       })
@@ -20,17 +20,8 @@ const SysTrayItem = item => PanelButton({
       self.connect('destroy', () => item.menu?.disconnect(id))
   },
 
-  onPrimaryClick: btn => item.menu?.popup_at_widget(
-    btn, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null
-  ),
-
-  onSecondaryClick: btn => item.menu?.popup_at_widget(
-    btn, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null
-  ),
+  onPrimaryClick: btn => item.menu?.popup_at_widget(btn, SOUTH, NORTH, null),
+  onSecondaryClick: btn => item.menu?.popup_at_widget(btn, SOUTH, NORTH, null),
 })
 
-export default Widget.Box().bind(
-  'children', 
-  SystemTray, 
-  'items', i => i.map(SysTrayItem)
-)
+export default Widget.Box().bind('children', SystemTray, 'items', i => i.map(SysTrayItem))

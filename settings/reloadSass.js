@@ -23,6 +23,6 @@ export default async () => {
     if (err instanceof Error)
       console.error(err.message)
     if (typeof err === 'string') 
-      console.error(err);
+      console.error(err)
   }
 }

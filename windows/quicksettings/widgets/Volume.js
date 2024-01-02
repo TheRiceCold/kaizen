@@ -7,7 +7,7 @@ import { getAudioTypeIcon } from '../../../utils.js'
 
 const VolumeIndicator = (type = 'speaker') => Widget.Button({
   on_clicked: () => Audio[type].is_muted = !Audio[type].is_muted,
-  child: Widget.Icon({
+  child: FontIcon({
     connections: [[Audio, icon => {
       if (!Audio[type]) return
 
@@ -37,9 +37,7 @@ export const Volume = () => Widget.Box({
     Widget.Box({
       vpack: 'center',
       child: Arrow('app-mixer'),
-      connections: [[Audio, box => {
-          box.visible = Audio.apps.length > 0
-      }]],
+      connections: [[Audio, box => box.visible = Audio.apps.length > 0 ]],
     }),
   ],
 })
@@ -57,7 +55,7 @@ const MixerItem = stream => Widget.Box({
   hexpand: true,
   class_name: 'mixer-item horizontal',
   children: [
-    Widget.Icon({
+    FontIcon({
       binds: [['tooltipText', stream, 'name']],
       connections: [[stream, icon => {
         icon.icon = Utils.lookUpIcon(stream.name || '') ? (stream.name || '') : icons.mpris.fallback
@@ -93,12 +91,12 @@ const SinkItem = stream => Widget.Button({
   on_clicked: () => Audio.speaker = stream,
   child: Widget.Box({
     children: [
-      Widget.Icon({
+      FontIcon({
         icon: getAudioTypeIcon(stream.icon_name || ''),
         tooltip_text: stream.icon_name,
       }),
       Widget.Label((stream.description || '').split(' ').slice(0, 4).join(' ')),
-      Widget.Icon({
+      FontIcon({
         icon: icons.ui.tick,
         hexpand: true,
         hpack: 'end',
@@ -113,7 +111,7 @@ const SettingsButton = () => Widget.Button({
   hexpand: true,
   child: Widget.Box({
     children: [
-      Widget.Icon(icons.ui.settings),
+      FontIcon(icons.ui.settings),
       Widget.Label('Settings'),
     ],
   }),
@@ -135,7 +133,7 @@ export const AppMixer = () => Menu({
 
 export const SinkSelector = () => Menu({
   name: 'sink-selector',
-  icon: Widget.Icon(icons.audio.type.headset),
+  icon: FontIcon(icons.audio.type.headset),
   title: Widget.Label('Sink Selector'),
   content: [
     Widget.Box({ vertical: true, binds: [['children', Audio, 'speakers', s => s.map(SinkItem)]] }),

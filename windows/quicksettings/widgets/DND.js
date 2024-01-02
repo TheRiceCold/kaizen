@@ -1,9 +1,10 @@
-import { Widget, Notifications } from '../../../imports.js'
+import { Notifications } from '../../../imports.js'
+import { FontIcon } from '../../../misc/main.js'
 import { SimpleToggleButton } from '../ToggleButton.js'
 import icons from '../../../icons.js'
 
 export default () => SimpleToggleButton({
-  icon: Widget.Icon({
+  icon: FontIcon({
     connections: [[Notifications, icon => {
       icon.icon = Notifications.dnd ? icons.notifications.silent : icons.notifications.noisy
     }, 'notify::dnd']],

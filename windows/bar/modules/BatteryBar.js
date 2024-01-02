@@ -2,12 +2,13 @@ import { Widget, Battery } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import PanelButton from './PanelButton.js'
 
+import icons from '../../../icons.js'
 import options from '../../../options.js'
 
-const Indicator = () => Widget.Stack({
+const Indicator = Widget.Stack({
   items: [
     ['false', FontIcon('󱊣')],
-    ['true', Widget.Label({ label: ' ' })],
+    ['true', FontIcon(icons.battery.charging)],
   ],
   binds: [['visible', options.battery.bar.showIcon]],
   connections: [[Battery, stack => {
@@ -32,20 +33,23 @@ const LevelBar = () => Widget.LevelBar({
   binds: [['value', Battery, 'percent', p => p / 100]],
 })
 
-const WholeButton = () => Widget.Overlay({
+const WholeButton = Widget.Overlay({
   child: LevelBar(),
   pass_through: true,
   className: 'whole-button',
   overlays: [Widget.Box({
     hpack: 'center',
     children: [
-      FontIcon({ icon: ' ', binds: [['visible', Battery, 'charging']] }),
+      FontIcon({ 
+        icon: icons.battery.charging, 
+        binds: [['visible', Battery, 'charging']] 
+      }),
       Widget.Box({ hpack: 'center', vpack: 'center', child: PercentLabel() }),
     ],
   })],
 })
 
-export default () => PanelButton({
+export default PanelButton({
   className: 'battery-bar',
   onClicked: () => {
     const v = options.battery.showPercentage.value
@@ -62,11 +66,10 @@ export default () => PanelButton({
     ],
     binds: [
       ['visible', Battery, 'available'],
-      ['children', options.battery.bar.full, 'value', full => full
-        ? [ WholeButton() ] : [ 
-          Indicator(), 
-          PercentLabel(), 
-          LevelBar() 
+      ['children', options.battery.bar.full, 'value', full => full ? [ WholeButton ] : [ 
+        Indicator,
+        PercentLabel(), 
+        LevelBar()
       ]],
     ],
   }),

@@ -1,5 +1,5 @@
 import { Utils, App, Widget, Variable } from '../imports.js'
-import { RegularWindow } from '../misc/main.js'
+import { FontIcon, RegularWindow } from '../misc/main.js'
 
 import icons from '../icons.js';
 import options from '../options.js'
@@ -27,11 +27,11 @@ const EnumSetter = opt => {
       true)
   }
   const next = Widget.Button({
-    child: Widget.Icon(icons.ui.arrow.right),
+    child: FontIcon(icons.ui.arrow.right),
     onClicked: () => step(+1),
   });
   const prev = Widget.Button({
-    child: Widget.Icon(icons.ui.arrow.left),
+    child: FontIcon(icons.ui.arrow.left),
     onClicked: () => step(-1),
   });
   return Widget.Box({
@@ -150,7 +150,7 @@ const sidebar = Widget.Revealer({
           }),
           Widget.Button({
             hpack: 'end',
-            child: Widget.Icon(icons.ui.info),
+            child: FontIcon(icons.ui.info),
             onClicked: () => App.toggleWindow('about'),
           }),
         ]
