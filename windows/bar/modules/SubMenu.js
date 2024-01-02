@@ -1,4 +1,6 @@
 import { Widget, Utils, Variable } from '../../../imports.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
+
 import icons from '../../../icons.js'
 import options from '../../../options.js'
 
@@ -19,6 +21,7 @@ function Arrow(revealer, direction, items) {
   return Widget.Button({
     child: icon,
     className: 'panel-button sub-menu',
+    setup: btn => setupCursorHover(btn),
     connections: [[items, btn => btn.tooltip_text = `${items.value} Items` ]],
     onClicked: () => {
       animate()

@@ -1,14 +1,12 @@
-import { Widget, App, Utils } from '../../../../imports.js'
-import { ChatGPT } from '../../../../services/main.js'
-import icons from '../icons/index.js'
-import Keys from '../../../../keys.js'
-import { state as QSState } from '../main.js'
+import { Widget, App, Utils } from '../../../../../imports.js'
+// import { ChatGPT } from '../../../../../services/main.js'
+import icons from '../../../../../icons.js'
+import Keys from '../../../../../keys.js'
+import { state as QSState } from '../../main.js'
 
-// @ts-ignore
 import WebKit2 from 'gi://WebKit2?version=4.1'
-import { Marked } from '../../node_modules/marked/lib/marked.esm.js'
-// @ts-ignore
-import { markedHighlight } from 'marked-highlight'
+import { Marked } from '../../../../../node_modules/marked/lib/marked.esm.js'
+import { markedHighlight } from '../../../../../node_modules/marked-highlight/src/index.js'
 //highlightjs requires some modifications to work with gjs, mainly just how it's exported
 import hljs from './highlightjs/lib/index.js'
 

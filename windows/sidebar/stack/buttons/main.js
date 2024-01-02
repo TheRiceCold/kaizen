@@ -1,5 +1,6 @@
 import { Widget } from '../../../../imports.js'
 import { FontIcon } from '../../../../misc/main.js'
+import { setupCursorHover } from '../../../../misc/CursorHover.js'
 import icons from '../../../../icons.js'
 
 const items = [
@@ -40,9 +41,11 @@ export default (state) =>
     ...props,
     css: 'font-size: 16px;',
     className: 'sidebar-iconbutton',
+    setup: btn => setupCursorHover(btn),
     onClicked: () => state.value = title,
     child: (typeof icon === 'string') ? FontIcon(icon) : Widget.Icon(icon.img),
   }).hook(
     state, 
     btn => btn.toggleClassName('active', title === state.value)
   ))
+

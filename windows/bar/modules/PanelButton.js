@@ -1,4 +1,5 @@
 import { Widget, App } from '../../../imports.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 export default ({
   className,
@@ -25,6 +26,7 @@ export default ({
 
   return Widget.Button({
     ...props,
+    setup: btn => setupCursorHover(btn),
     className: `panel-button ${className}`,
     child: Widget.Box({ children: [content] }),
     connections: connections.concat([connection]),

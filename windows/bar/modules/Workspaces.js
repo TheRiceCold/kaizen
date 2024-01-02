@@ -1,9 +1,11 @@
 import { Widget, Hyprland } from '../../../imports.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const NUM_OF_WORKSPACES = 10
 
 const WorkspaceButton = i => Widget.EventBox({
   className: 'workspace-button',
+  setup: btn => setupCursorHover(btn),
   child: Widget.Label({ label: `${i}`, className: 'button-label' }),
   onPrimaryClickRelease: () => Hyprland.sendMessage(`dispatch workspace ${i}`),
 }).hook(Hyprland.active.workspace, btn => {
@@ -17,7 +19,7 @@ export default Widget.EventBox({
     children: Array.from(
       { length: NUM_OF_WORKSPACES },
       (_, i) => i + 1
-    ).map(i => WorkspaceButton(i)), 
+    ).map(i => WorkspaceButton(i)),
   }).hook(Hyprland, ({ children }) => {
     children.forEach((item, i) => {
       const ws = Hyprland.getWorkspace(i + 1)
