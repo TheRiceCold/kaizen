@@ -9,7 +9,7 @@ function launchApp(app) {
   app.frequency += 1
 }
 
-const Launcher = () => {
+function Launcher() {
   const mkItems = () => [
     Widget.Separator({ hexpand: true }),
     ...Applications.query('').flatMap(app => Widget.Revealer({

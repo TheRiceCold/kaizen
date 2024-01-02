@@ -14,7 +14,6 @@ const Content = ({
       children: [
         Widget.Box({
           className: 'qs-title',
-          spacing: 5,
           children: [
             FontIcon(icon),
             Widget.Label(title),
@@ -30,7 +29,7 @@ const Content = ({
       ],
     })
   ],
-});
+})
 
 export default content => Widget.Scrollable({
   vexpand: true,

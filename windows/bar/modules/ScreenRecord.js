@@ -13,11 +13,13 @@ export default PanelButton({
     children: [
       FontIcon(icons.recorder.recording),
       Widget.Label({
-        binds: [['label', ScreenRecorder, 'timer', time => {
-          const sec = time % 60
-          const min = Math.floor(time / 60)
-          return `${min}:${sec < 10 ? '0' + sec : sec}`
-        }]],
+        binds: [[
+          'label', ScreenRecorder, 'timer', time => {
+            const sec = time % 60
+            const min = Math.floor(time / 60)
+            return `${min}:${sec < 10 ? '0' + sec : sec}`
+          }
+        ]],
       }),
     ],
   }),

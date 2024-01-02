@@ -60,7 +60,7 @@ const Columns = group => Widget.Box({
   }))
 })
 
-export default () => Widget.Box({
+export default Widget.Box({
   vertical: false,
   homogeneous: true,
   className: 'spacing-h-15',

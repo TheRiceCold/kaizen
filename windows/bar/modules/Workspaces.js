@@ -4,8 +4,8 @@ const NUM_OF_WORKSPACES = 10
 
 const WorkspaceButton = i => Widget.EventBox({
   className: 'workspace-button',
+  child: Widget.Label({ label: `${i}`, className: 'button-label' }),
   onPrimaryClickRelease: () => Hyprland.sendMessage(`dispatch workspace ${i}`),
-  child: Widget.Label({ label: `${i}`, className: 'button-label' })
 }).hook(Hyprland.active.workspace, btn => {
   btn.toggleClassName('active', Hyprland.active.workspace.id === i)
 })

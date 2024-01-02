@@ -4,24 +4,21 @@ import { PopupWindow } from '../../misc/main.js'
 import Footer from './footer/main.js'
 import Header from './header/main.js'
 import StackContent from './stack/main.js'
+const { Box } = Widget
 
-const Sidebar = Widget.Box({
+const Sidebar = Box({
   vexpand: true,
   hexpand: true,
   children: [
-    Widget.Box({
+    Box({
       vexpand: true,
       vertical: true,
       className: 'sidebar-right',
       children: [
-        Widget.Box({
+        Box({
           vertical: true,
-          children: [ 
-            Header, 
-            StackContent() 
-          ]
-        }),
-        Footer,
+          children: [ Header, StackContent() ]
+        }), Footer,
       ]
     }),
   ]

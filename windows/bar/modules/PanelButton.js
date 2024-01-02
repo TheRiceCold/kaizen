@@ -5,7 +5,7 @@ export default ({
   content,
   window = '',
   connections = [],
-  ...rest
+  ...props
 }) => {
   let open = false
 
@@ -24,9 +24,9 @@ export default ({
   }]
 
   return Widget.Button({
+    ...props,
     className: `panel-button ${className}`,
     child: Widget.Box({ children: [content] }),
     connections: connections.concat([connection]),
-    ...rest,
   })
 }

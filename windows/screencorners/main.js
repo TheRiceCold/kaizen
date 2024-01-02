@@ -1,8 +1,9 @@
 import { Widget } from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
+const { Window } = Widget
 
 export default [ 
-  Widget.Window({
+  Window({
     layer: 'top',
     visible: true,
     name: 'cornertl',
@@ -10,7 +11,7 @@ export default [
     exclusivity: 'normal',
     child: RoundedCorner('topleft', 'corner'),
   }),
-  Widget.Window({
+  Window({
     layer: 'top',
     visible: true,
     name: 'cornertr',
@@ -18,7 +19,7 @@ export default [
     anchor: ['top', 'right'],
     child: RoundedCorner('topright', 'corner'),
   }),
-  Widget.Window({
+  Window({
     layer: 'top',
     visible: true,
     name: 'cornerbl',
@@ -26,7 +27,7 @@ export default [
     anchor: ['bottom', 'left'],
     child: RoundedCorner('bottomleft', 'corner-black'),
   }),
-  Widget.Window({
+  Window({
     layer: 'top',
     visible: true,
     name: 'cornerbr',

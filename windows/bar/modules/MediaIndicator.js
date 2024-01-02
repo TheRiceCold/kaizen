@@ -7,8 +7,8 @@ export const getPlayer = (name = options.mpris.preferred.value) =>
   Mpris.getPlayer(name) || Mpris.players[0] || null
 
 const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
-  className: `media panel-button ${player.name}`,
   direction,
+  className: `media panel-button ${player.name}`,
   onPrimaryClick: () => player.playPause(),
   onScrollUp: () => player.next(),
   onScrollDown: () => player.previous(),
@@ -27,9 +27,7 @@ const Indicator = ({ player, direction = 'right' }) => HoverRevealer({
 
     revealer._current = player.track_title
     revealer.reveal_child = true
-    Utils.timeout(3000, () => {
-      revealer.reveal_child = false
-    })
+    Utils.timeout(3000, () => revealer.reveal_child = false)
   }]],
 })
 

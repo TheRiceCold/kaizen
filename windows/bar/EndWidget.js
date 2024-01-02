@@ -1,9 +1,4 @@
-import {
-  App, 
-  Widget, 
-  Variable, 
-  SystemTray, 
-} from '../../imports.js'
+import { App, Widget, Variable, SystemTray } from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
 import {
   Tray,
@@ -21,19 +16,17 @@ SystemTray.connect('changed', () => {
   submenuItems.setValue(Tray.items.length + 1)
 })
 
-export default Widget.Box({
-  hpack: 'end',
-  className: 'end',
-  children: [
-    SubMenu({
-      items: submenuItems,
-      children: [ Tray, Utilities ],
-    }),
-    ScreenRecord,
-    SeparatorDot(ScreenRecorder, r => r.recording),
-    BatteryBar,
-    SeparatorDot(),
-    DateButton({ onClicked: () => App.toggleWindow('sideright') }),
-    RoundedCorner('topright', 'corner-black')
-  ],
-})
+const Modules = [
+  SubMenu({
+    items: submenuItems,
+    children: [ Tray, Utilities ],
+  }),
+  ScreenRecord,
+  SeparatorDot(ScreenRecorder, r => r.recording),
+  BatteryBar,
+  SeparatorDot(),
+  DateButton({ onClicked: () => App.toggleWindow('sideright') }),
+  RoundedCorner('topright', 'corner-black')
+]
+
+export default Widget.Box({ hpack: 'end', className: 'end', children: Modules })

@@ -1,11 +1,7 @@
 import { Widget } from '../../../imports.js'
 import { StackState } from '../../../services/main.js'
 import StackButtons from './buttons/main.js'
-import { 
-  NotificationStack 
-} from './contents/main.js'
-
-import icons from '../../../icons.js'
+import { NotificationStack } from './contents/main.js'
 
 const state = new StackState('notifications')
 
@@ -16,7 +12,7 @@ const Header = Widget.Box({
   className: 'sidebar-togglesbox spacing-h-10',
 })
 
-const Stack = Widget.Stack({
+const Content = Widget.Stack({
   transition: 'slide_left_right',
   visible_child_name: state.bind(),
   items: [
@@ -25,11 +21,11 @@ const Stack = Widget.Stack({
 })
 
 export default () => {
-  state.items = Stack.items.map(item => item[0])
+  state.items = Content.items.map(item => item[0])
   return Widget.EventBox({
     child: Widget.Box({
       vertical: true,
-      children: [ Header, Stack ]
+      children: [Header, Content]
     })
   })
 }

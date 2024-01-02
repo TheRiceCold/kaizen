@@ -14,21 +14,6 @@ export const uptime = Variable('', {
   }],
 })
 
-export const distro = imports.gi.GLib.get_os_info('ID')
-
-export const distroIcon = (() => {
-  switch (distro) {
-    case 'fedora': return ''
-    case 'arch': return ''
-    case 'nixos': return ''
-    case 'debian': return ''
-    case 'opensuse-tumbleweed': return ''
-    case 'ubuntu': return ''
-    case 'endeavouros': return ''
-    default: return ''
-  }
-})()
-
 const intval = 5000
 const divide = ([total, free]) => Number.parseInt(free) / Number.parseInt(total)
 

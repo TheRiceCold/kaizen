@@ -1,8 +1,7 @@
 import { Widget } from '../../imports.js'
-
 const { Box, Label } = Widget
 
-export default () => Box({
+export default Box({
   hpack: 'center',
   className: 'spacing-h-15',
   children: [
