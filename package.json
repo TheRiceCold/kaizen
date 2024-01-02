@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "eslint": "^8.56.0"
+  },
+  "dependencies": {
+    "marked-highlight": "^2.1.0"
   }
 }

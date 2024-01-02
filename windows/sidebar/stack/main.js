@@ -3,7 +3,7 @@ import { StackState } from '../../../services/main.js'
 import StackButtons from './buttons/main.js'
 import { NotificationStack } from './contents/main.js'
 
-const state = new StackState('notifications')
+export const state = new StackState('notifications')
 
 const Header = Widget.Box({
   hpack: 'center',
@@ -12,7 +12,7 @@ const Header = Widget.Box({
   className: 'sidebar-togglesbox spacing-h-10',
 })
 
-const Content = Widget.Stack({
+const Contents = Widget.Stack({
   transition: 'slide_left_right',
   visible_child_name: state.bind(),
   items: [
@@ -20,12 +20,5 @@ const Content = Widget.Stack({
   ]
 })
 
-export default () => {
-  state.items = Content.items.map(item => item[0])
-  return Widget.EventBox({
-    child: Widget.Box({
-      vertical: true,
-      children: [Header, Content]
-    })
-  })
-}
+state.items = Contents.items.map(item => item[0])
+export default Widget.Box({ vertical: true, children: [Header, Contents] })
