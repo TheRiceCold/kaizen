@@ -42,23 +42,22 @@ function getTrackfont(player) {
 
 const TrackProgress = ({ player, ...rest }) => {
   const _updateProgress = (circprog) => {
-      const player = Mpris.getPlayer()
-      if (!player) return
-      // Set circular progress (see definition of AnimatedCircProg for explanation)
-      circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
+    if (!player) return
+    // Set circular progress (see definition of AnimatedCircProg for explanation)
+    circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
   }
   return AnimatedCircularProgress({
-      ...rest,
-      className: 'osd-music-circprog',
-      vpack: 'center',
-      connections: [ // Update on change/once every 3 seconds
-          [Mpris, _updateProgress],
-          [3000, _updateProgress]
-      ],
+    ...rest,
+    className: 'osd-music-circprog',
+    vpack: 'center',
+    connections: [
+      [Mpris, _updateProgress],
+      [3000, _updateProgress]
+    ],
   })
 }
 
-const TrackTitle = ({ player, ...rest }) => Label({
+const TrackTitle = ({ player, ...rest }) => Widget.Label({
   ...rest,
   label: 'No music playing',
   xalign: 0,
@@ -66,22 +65,24 @@ const TrackTitle = ({ player, ...rest }) => Label({
   // wrap: true,
   className: 'osd-music-title',
   connections: [[player, (self) => {
-      // Player name
-      self.label = player.trackTitle.length > 0 ? player.trackTitle : 'No media'
-      // Font based on track/artist
-      const fontForThisTrack = getTrackfont(player)
-      self.css = `font-family: ${fontForThisTrack}, ${DEFAULT_MUSIC_FONT}`
+    // Player name
+    self.label = player.trackTitle.length > 0 ? player.trackTitle : 'No media'
+    // Font based on track/artist
+    const fontForThisTrack = getTrackfont(player)
+    self.css = `font-family: ${fontForThisTrack}, ${DEFAULT_MUSIC_FONT}`
   }, 'notify::track-title']]
 })
 
-const TrackArtists = ({ player, ...rest }) => Label({
+const TrackArtists = ({ player, ...rest }) => Widget.Label({
   ...rest,
   xalign: 0,
-  className: 'osd-music-artists',
   truncate: 'end',
-  connections: [[player, (self) => {
+  className: 'osd-music-artists',
+  connections: [[
+    player, self => {
       self.label = player.trackArtists.length > 0 ? player.trackArtists.join(', ') : ''
-  }, 'notify::track-artists']]
+    }, 'notify::track-artists'
+  ]]
 })
 
 const CoverArt = ({ player, ...rest }) => Widget.Box({
@@ -99,13 +100,13 @@ const CoverArt = ({ player, ...rest }) => Widget.Box({
       }),
       overlays: [ // Real
         Widget.Box({
-          properties: [['updateCover', (self) => {
+          properties: [['updateCover', self => {
             const player = Mpris.getPlayer()
 
-              // Player closed
-              // Note that cover path still remains, so we're checking title
-            if (!player || player.trackTitle == "") {
-              self.css = `background-image: none;`
+            // Player closed
+            // Note that cover path still remains, so we're checking title
+            if (!player || player.trackTitle == '') {
+              self.css = 'background-image: none;'
               App.applyCss(`${App.configDir}/style.css`)
               return
             }
@@ -124,18 +125,18 @@ const CoverArt = ({ player, ...rest }) => Widget.Box({
               return
             }
 
-              // Generate colors
-              Utils.execAsync(['bash', '-c',
-                `${App.configDir}/scripts/color_generation/generate_colors_material.py --path '${coverPath}' > ${App.configDir}/sass/_musicmaterial.sass ${lightDark}`
-              ]).then(() => {
-                Utils.exec(`wal -i "${player.coverPath}" -n -t -s -e -q ${lightDark}`)
-                Utils.exec(`bash -c "cp ~/.cache/wal/colors.sass ${App.configDir}/sass/_musicwal.sass"`)
-                Utils.exec(`sassc ${App.configDir}/sass/_music.sass ${stylePath}`)
-                self.css = `background-image: url('${coverPath}');`
-                App.applyCss(`${stylePath}`)
-              }).catch(print)
-            }
-          ]],
+            // Generate colors
+            Utils.execAsync(['bash', '-c', 
+              `${App.configDir}/scripts/color_generation/generate_colors_material.py --path \
+              '${coverPath}' > ${App.configDir}/sass/_musicmaterial.sass ${lightDark}`
+            ]).then(() => {
+              Utils.exec(`wal -i "${player.coverPath}" -n -t -s -e -q ${lightDark}`)
+              Utils.exec(`bash -c "cp ~/.cache/wal/colors.sass ${App.configDir}/sass/_musicwal.sass"`)
+              Utils.exec(`sassc ${App.configDir}/sass/_music.sass ${stylePath}`)
+              self.css = `background-image: url('${coverPath}');`
+              App.applyCss(`${stylePath}`)
+            }).catch(print)
+          }]],
           className: 'osd-music-cover-art',
           connections: [[ player, self => self._updateCover(self), 'notify::cover-path' ]],
         })
@@ -153,24 +154,24 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
     vpack: 'center',
     className: 'osd-music-controls spacing-h-3',
     children: [
-      Button({
+      Widget.Button({
         className: 'osd-music-controlbtn',
-        child: Label({
+        child: Widget.Label({
           className: 'icon-material osd-music-controlbtn-txt',
           label: 'skip_previous',
         })
       }),
-      Button({
+      Widget.Button({
         className: 'osd-music-controlbtn',
-        child: Label({
+        child: Widget.Label({
           className: 'icon-material osd-music-controlbtn-txt',
           label: 'skip_next',
         })
       }),
     ],
   }),
-  connections: [[Mpris, (self) => {
-    self.revealChild = !Mpris.getPlayer()
+  connections: [[Mpris, self => {
+    self.revealChild = !player
   }, 'notify::play-back-status']]
 })
 
@@ -183,14 +184,14 @@ const TrackTime = ({ player, ...rest }) => Widget.Revealer({
     vpack: 'center',
     className: 'osd-music-pill spacing-h-5',
     children: [
-      Label({
+      Widget.Label({
         connections: [[1000, self => {
-          if (!Mpris.getPlayer()) return;
-          self.label = lengthStr(player.position);
+          if (!Mpris.getPlayer()) return
+          self.label = lengthStr(player.position)
         }]]
       }),
-      Label({ label: '/' }),
-      Label({
+      Widget.Label({ label: '/' }),
+      Widget.Label({
         connections: [[Mpris, self => {
           if (!Mpris.getPlayer()) return
           self.label = lengthStr(player.length)
@@ -199,7 +200,7 @@ const TrackTime = ({ player, ...rest }) => Widget.Revealer({
     ],
   }),
   connections: [[Mpris, (self) => {
-    self.revealChild = !player;
+    self.revealChild = !player
   }]]
 })
 

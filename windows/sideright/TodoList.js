@@ -85,10 +85,8 @@ const todoItems = isDone => Widget.Scrollable({
               vpack: 'center',
               className: 'txt',
               children: [
-                Widget.Label({
-                  className: `icon-material txt-badonkers`,
-                  label:`${isDone ? 'checklist' : 'check_circle'}`, 
-                }),
+                // eslint-disable-next-line 
+                FontIcon(`${isDone ? 'checklist' : 'check_circle'}`),
                 Widget.Label({ label: `${isDone ? 'Finished tasks will go here' : 'Nothing here!'}` })
               ]
             })
@@ -210,16 +208,18 @@ export const TodoWidget = () => {
   const TodoTabButton = (isDone, navIndex) => Widget.Button({
     hexpand: true,
     className: 'sidebar-selector-tab',
-    onClicked: button => {
+    onClicked: btn => {
       todoItemsBox.shown = `${isDone ? 'done' : 'undone'}`
-      const kids = button.get_parent().get_children()
-      for (let i = 0; i < kids.length; i++) {
-          if (kids[i] != button) kids[i].toggleClassName('sidebar-selector-tab-active', false)
-          else button.toggleClassName('sidebar-selector-tab-active', true)
-      }
+      const kids = btn.get_parent().get_children()
+      kids.forEach(kid => {
+        if (kid != btn) 
+          kid.toggleClassName('sidebar-selector-tab-active', false)
+        else 
+          btn.toggleClassName('sidebar-selector-tab-active', true)
+      })
       // Fancy highlighter line width
-      const buttonWidth = button.get_allocated_width()
-      const highlightWidth = button.get_children()[0].get_allocated_width()
+      const buttonWidth = btn.get_allocated_width()
+      const highlightWidth = btn.get_children()[0].get_allocated_width()
       // navIndicator.css = `
       //   font-size: ${navIndex}px; 
       //   padding: 0px ${(buttonWidth - highlightWidth) / 2}px;
@@ -229,10 +229,8 @@ export const TodoWidget = () => {
       hpack: 'center',
       className: 'spacing-h-5',
       children: [
-        Widget.Label({
-          className: `icon-material txt-larger`,
-          label: `${isDone ? 'task_alt' : 'format_list_bulleted'}`
-        }),
+        // eslint-disable-next-line 
+        FontIcon(`${isDone ? 'task_alt' : 'format_list_bulleted'}`),
         Widget.Label({ className: 'txt txt-smallie', label: `${isDone ? 'Done' : 'Unfinished'}` })
       ]
     }),

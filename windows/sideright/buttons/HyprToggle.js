@@ -1,5 +1,6 @@
 import { Widget, Utils } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 export default (
   icon, 
@@ -10,11 +11,11 @@ export default (
   className: 'txt-small sidebar-iconbutton',
   tooltipText: `${name}`,
   onClicked: btn => {
-    Utils.execAsync(`hyprctl -j getoption ${hyprlandConfigValue}`).then((result) => {
+    Utils.execAsync(`hyprctl -j getoption ${hyprConfig}`).then((result) => {
       const currentOption = JSON.parse(result).int
       Utils.execAsync([
         'bash', '-c', 
-        `hyprctl keyword ${hyprlandConfigValue} ${1 - currentOption} &`
+        `hyprctl keyword ${hyprConfig} ${1 - currentOption} &`
       ]).catch(print)
       btn.toggleClassName('sidebar-button-active', currentOption == 0)
     }).catch(print)

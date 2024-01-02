@@ -30,14 +30,14 @@ const NotificationIcon = ({ app_entry, app_icon, image }) => {
       min-width: 78px;
       min-height: 78px;
     `,
-    // child: FontIcon({
-    //   icon,
-    //   size: 58,
-    //   hexpand: true,
-    //   vexpand: true,
-    //   hpack: 'center', 
-    //   vpack: 'center', 
-    // }),
+    child: Widget.Icon({
+      icon,
+      size: 58,
+      hexpand: true,
+      vexpand: true,
+      hpack: 'center', 
+      vpack: 'center', 
+    }),
   })
 }
 

@@ -7,7 +7,7 @@ export default Widget.Box({
   children: [
     Widget.Label({
       className: 'weather-icon',
-      label: Weather.bind("icon")
+      label: Weather.bind('icon')
     }),
     Widget.Label({
       className: 'weather-temp',

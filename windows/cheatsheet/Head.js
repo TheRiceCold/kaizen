@@ -14,7 +14,7 @@ export default () => Box({
     }),
     Label({
       vpack: 'center',
-      className: "cheatsheet-key txt-small",
+      className: 'cheatsheet-key txt-small',
       label: '⌘',
     }),
     Label({

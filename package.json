@@ -3,7 +3,7 @@
   "description": "My config files for AGS",
   "main": "config.js",
   "scripts": {
-    "lint": "eslint ./"
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

@@ -2,8 +2,12 @@ import { Widget, Audio } from '../../imports.js'
 import { Brightness } from '../../services/main.js'
 import Indicator from '../../services/indicator.js'
 
-const OsdValue = (name, labelConnections, progressConnections, props = {}) => 
-  Widget.Box({
+const OsdValue = (
+  name, 
+  labelConnections, 
+  progressConnections, 
+  props = {}
+) => Widget.Box({
   ...props,
   vertical: true,
   className: 'osd-bg osd-value',

@@ -2,11 +2,10 @@ const { Gtk } = imports.gi
 const Lang = imports.lang
 import { Utils, Widget } from '../imports.js'
 
- export default ({
+export default ({
   initFrom = 0,
   initTo = 0,
   initAnimTime = 2900,
-  initAnimPoints = 1,
   ...rest
 }) => Widget.DrawingArea({
   ...rest,
@@ -15,7 +14,6 @@ import { Utils, Widget } from '../imports.js'
     const styleContext = area.get_style_context()
     const width = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL)
     const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL)
-    const padding = styleContext.get_padding(Gtk.StateFlags.NORMAL).left
     const marginLeft = styleContext.get_margin(Gtk.StateFlags.NORMAL).left
     const marginRight = styleContext.get_margin(Gtk.StateFlags.NORMAL).right
     const marginTop = styleContext.get_margin(Gtk.StateFlags.NORMAL).top

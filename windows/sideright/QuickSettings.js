@@ -53,7 +53,7 @@ const Header = Widget.Box({
 })
 
 export default () => {
-  stackState.items = stack.items.map(item => item[0])
+  // stackState.items = stack.items.map(item => item[0])
   return Widget.EventBox({
     child: Widget.Box({
       vertical: true,

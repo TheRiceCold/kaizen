@@ -1,6 +1,6 @@
 import { Widget, Battery } from '../../../imports.js'
 import { PowerMenu } from '../../../services/main.js'
-import { Avatar } from '../../../misc/main.js'
+import { Avatar, FontIcon } from '../../../misc/main.js'
 
 import icons from '../../../icons.js'
 import { uptime } from '../../../variables.js'

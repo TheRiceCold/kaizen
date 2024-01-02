@@ -12,4 +12,4 @@ export default PanelButton({
   content: FontIcon({
     binds: [['icon', options.bar.icon, 'value', v => v === 'distro-icon' ? distroIcon : v ]],
   }),
-});
+})

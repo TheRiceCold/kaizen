@@ -4,7 +4,7 @@ import {
   Widget, 
   Network,
   Bluetooth, 
-  Notifications, 
+  // Notifications, 
 } from '../../../imports.js'
 import { FontIcon, HoverRevealer } from '../../../misc/main.js'
 import PanelButton from './PanelButton.js'

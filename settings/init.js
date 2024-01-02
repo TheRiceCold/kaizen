@@ -1,4 +1,4 @@
-
+// eslint-disable-next-line 
 import options from '../options.js'
 import reloadSass from './reloadSass.js'
 import setGlobals from '../settings/globals.js'

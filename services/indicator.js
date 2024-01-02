@@ -16,9 +16,9 @@ class IndicatorService extends Service {
     })
   }
 
-  connectWidget(widget, callback) {
-    connect(this, widget, callback, 'popup')
-  }
+  // connectWidget(widget, callback) {
+  //   connect(this, widget, callback, 'popup')
+  // }
 }
 
 // the singleton instance

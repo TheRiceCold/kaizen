@@ -8,10 +8,12 @@ export default (props = {}) => Widget.Button({
   onClicked: button => {
     const shaderPath = JSON.parse(Utils.exec('hyprctl -j getoption decoration:screen_shader')).str
     if (shaderPath != '[[EMPTY]]' && shaderPath != '') {
-      Utils.execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader ''`]).catch(print)
+      // eslint-disable-next-line 
+      Utils.execAsync(['bash', '-c', "hyprctl keyword decoration:screen_shader ''"]).catch(print)
       button.toggleClassName('sidebar-button-active', false)
     }
     else {
+      // eslint-disable-next-line
       Utils.execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader ~/.config/hypr/shaders/invert.frag`]).catch(print)
       button.toggleClassName('sidebar-button-active', true)
     }

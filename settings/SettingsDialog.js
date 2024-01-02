@@ -1,39 +1,38 @@
 import { Utils, App, Widget, Variable } from '../imports.js'
 import { FontIcon, RegularWindow } from '../misc/main.js'
 
-import icons from '../icons.js';
+import icons from '../icons.js'
 import options from '../options.js'
 import { getOptions, getValues } from './option.js'
 
 const optionsList = getOptions()
 const categories = Array.from(new Set(optionsList.map(opt => opt.category))).filter(category => category !== 'exclude')
 
-const currentPage = Variable(categories[0]);
-const search = Variable('');
-const showSearch = Variable(false);
+const currentPage = Variable(categories[0])
+const search = Variable('')
+const showSearch = Variable(false)
 showSearch.connect('changed', ({ value }) => {
   if (!value) search.value = ''
 })
 
 const EnumSetter = opt => {
-  const lbl = Widget.Label({ binds: [['label', opt]] });
+  const lbl = Widget.Label({ binds: [['label', opt]] })
   const step = (dir = 1) => {
     const i = opt.enums.findIndex(i => i === lbl.label)
     opt.setValue(dir > 0
       ? i + dir > opt.enums.length - 1
-          ? opt.enums[0] : opt.enums[i + dir]
-      : i + dir < 0
-          ? opt.enums[opt.enums.length - 1] : opt.enums[i + dir],
-      true)
+        ? opt.enums[0] : opt.enums[i + dir] : i + dir < 0
+        ? opt.enums[opt.enums.length - 1] : opt.enums[i + dir], true
+    )
   }
   const next = Widget.Button({
     child: FontIcon(icons.ui.arrow.right),
     onClicked: () => step(+1),
-  });
+  })
   const prev = Widget.Button({
     child: FontIcon(icons.ui.arrow.left),
     onClicked: () => step(-1),
-  });
+  })
   return Widget.Box({
     className: 'enum-setter',
     children: [prev, lbl, next],
@@ -61,16 +60,16 @@ const Setter = opt => {
       onAccept: self => opt.setValue(self.text, true),
       connections: [[opt, self => self.text = opt.value]],
     })
-    case 'enum': return EnumSetter(opt);
+    case 'enum': return EnumSetter(opt)
     case 'boolean': return Widget.Switch({
       connections: [
         ['notify::active', self => opt.setValue(self.active, true)],
         [opt, self => self.active = opt.value],
       ],
-    });
+    })
     case 'img': return Widget.FileChooserButton({
       connections: [['selection-changed', self => {
-        opt.setValue(self.get_uri()?.replace('file://', ''), true);
+        opt.setValue(self.get_uri()?.replace('file://', ''), true)
       }]],
     })
     case 'font': return Widget.FontButton({
@@ -80,8 +79,8 @@ const Setter = opt => {
         ['notify::font', ({ font }) => opt.setValue(font, true)],
         [opt, self => self.font = opt.value],
       ],
-    });
-    default: return Widget.Label({ label: 'no setter with type ' + opt.type });
+    })
+    default: return Widget.Label({ label: 'no setter with type ' + opt.type })
   }
 }
 
@@ -102,10 +101,7 @@ const Row = opt => Widget.Box({
       vpack: 'center',
       vertical: true,
       children: [
-        Widget.Box({
-            hpack: 'end',
-            child: Setter(opt),
-        }),
+        Widget.Box({ hpack: 'end', child: Setter(opt) }),
         opt.note && Widget.Label({
           xalign: 1,
           class_name: 'note',
@@ -217,7 +213,7 @@ const searchEntry = Widget.Revealer({
     secondary_icon_name: icons.apps.search,
     on_change: ({ text }) => search.value = text || '',
   }),
-});
+})
 
 const categoriesStack = Widget.Stack({
   transition: 'slide_left_right',
@@ -226,12 +222,12 @@ const categoriesStack = Widget.Stack({
     ['shown', currentPage],
     ['visible', search, 'value', v => !v],
   ],
-});
+})
 
 const searchPage = Widget.Box({
   binds: [['visible', search, 'value', v => !!v]],
   child: Page(''),
-});
+})
 
 export default RegularWindow({
   name: 'settings-dialog',
@@ -263,4 +259,4 @@ export default RegularWindow({
       }),
     ],
   }),
-});
+})

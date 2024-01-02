@@ -1,8 +1,8 @@
-import { Service, Utils } from '../imports.js';
+import { Service, Utils } from '../imports.js'
 
 function fileExists(filePath) {
-  let file = imports.gi.Gio.File.new_for_path(filePath);
-  return file.query_exists(null);
+  let file = imports.gi.Gio.File.new_for_path(filePath)
+  return file.query_exists(null)
 }
 
 class TodoService extends Service {
@@ -50,10 +50,11 @@ class TodoService extends Service {
   constructor() {
     super()
     this._todoPath = `${imports.gi.GLib.get_user_cache_dir()}/ags/user/todo.json`
-    if (!fileExists(this._todoPath)) { // No? create file with empty array
+    if (!fileExists(this._todoPath)) {
+      // eslint-disable-next-line 
       Utils.exec(`bash -c 'mkdir -p ~/.cache/ags/user'`)
       Utils.exec(`touch ${this._todoPath}`)
-      Utils.writeFile("[]", this._todoPath).then(() => {
+      Utils.writeFile('[]', this._todoPath).then(() => {
         this._todoJson = JSON.parse(Utils.readFile(this._todoPath))
       }).catch(print)
     }

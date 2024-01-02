@@ -29,16 +29,17 @@ const column1 = [
     icon: '',
     name: 'Windows',
     binds: [
-      { keys: ['⌘', '+', "←↑→↓"], action: "Focus window in direction" },
-      { keys: ['⌘', 'Shift', '+', '←↑→↓'], action: "Swap window in direction" },
-      { keys: ['⌘', '+', ';'], action: "Split ratio -" },
-      { keys: ['⌘', '+', "'"], action: "Split ratio +" },
-      { keys: ['⌘', '+', "Lmb"], action: "Move window" },
-      { keys: ['⌘', '+', "Mmb"], action: "Move window" },
-      { keys: ['⌘', '+', "Rmb"], action: "Resize window" },
+      { keys: ['⌘', '+', '←↑→↓'], action: 'Focus window in direction' },
+      { keys: ['⌘', 'Shift', '+', '←↑→↓'], action: 'Swap window in direction' },
+      { keys: ['⌘', '+', ';'], action: 'Split ratio -' },
+      // eslint-disable-next-line 
+      { keys: ['⌘', '+', "'"], action: 'Split ratio +' },
+      { keys: ['⌘', '+', 'Lmb'], action: 'Move window' },
+      { keys: ['⌘', '+', 'Mmb'], action: 'Move window' },
+      { keys: ['⌘', '+', 'Rmb'], action: 'Resize window' },
       { keys: ['⌘', '+', 'F'], action: 'Maximize' },
-      { keys: ['⌘', 'Shift', '+', 'F'], action: "Fullscreen" },
-      { keys: ['⌘', 'Alt', '+', 'F'], action: "Fake fullscreen" }
+      { keys: ['⌘', 'Shift', '+', 'F'], action: 'Fullscreen' },
+      { keys: ['⌘', 'Alt', '+', 'F'], action: 'Fake fullscreen' }
     ],
     appeartick: 1
   }
@@ -50,18 +51,16 @@ const column2 = [
     icon: '󰜬',
     name: 'Widgets (AGS)',
     binds: [
-      { keys: ["⌘", "OR", "⌘", "+", "Tab"], "action": "Toggle overview/launcher" },
-      { keys: ["Ctrl", "⌘", "+", "R"], "action": "Restart AGS" },
-      { keys: ["⌘", "+", "/"], "action": "Toggle this cheatsheet" },
-      { keys: ["⌘", "+", "N"], "action": "Toggle system sidebar" },
-      { keys: ["⌘", "+", "B", "OR", "⌘", "+", "O"], "action": "Toggle utilities sidebar" },
-      { keys: ["⌘", "+", "K"], "action": "Toggle virtual keyboard" },
-      { keys: ["Ctrl", "Alt", "+", "Del"], "action": "Power/Session menu" },
-
-      { keys: ["Esc"], "action": "Exit a window" },
-      { keys: ["rightCtrl"], "action": "Dismiss/close sidebar" },
-
-      { keys: ["Ctrl", "⌘", "+", "T"], "action": "Change wallpaper+colorscheme" },
+      { keys: ['⌘', 'OR', '⌘', '+', 'Tab'], action: 'Toggle overview/launcher' },
+      { keys: ['Ctrl', '⌘', '+', 'R'], action: 'Restart AGS' },
+      { keys: ['⌘', '+', '/'], action: 'Toggle this cheatsheet' },
+      { keys: ['⌘', '+', 'N'], action: 'Toggle system sidebar' },
+      { keys: ['⌘', '+', 'B', 'OR', '⌘', '+', 'O'], action: 'Toggle utilities sidebar' },
+      { keys: ['⌘', '+', 'K'], action: 'Toggle virtual keyboard' },
+      { keys: ['Ctrl', 'Alt', '+', 'Del'], action: 'Power/Session menu' },
+      { keys: ['Esc'], action: 'Exit a window' },
+      { keys: ['rightCtrl'], action: 'Dismiss/close sidebar' },
+      { keys: ['Ctrl', '⌘', '+', 'T'], action: 'Change wallpaper+colorscheme' },
     ],
     appeartick: 2
   },
