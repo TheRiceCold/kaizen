@@ -11,10 +11,10 @@ import ScreenCorners from './screencorners/main.js'
 export default [
   Bar,
   Desktop,
+  Sidebar,
   Launcher,
   Overview,
   CheatSheet,
   Indicators,
-  Sidebar,
   // QuickSettings,
 ].concat(ScreenCorners)

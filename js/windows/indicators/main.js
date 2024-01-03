@@ -11,18 +11,15 @@ export default Widget.Window({
   layer: 'overlay',
   name: 'indicator',
   className: 'indicator',
-  child: Widget.EventBox({
-    onHover: () => Indicator.popup(-1),
-    child: Widget.Box({
-      vertical: true,
-      className: 'osd-window',
-      css: 'min-height: 2px;',
-      children: [
-        IndicatorValues,
-        MusicControls,
-        NotificationPopups,
-        ColorScheme,
-      ]
-    })
+  child: Widget.Box({
+    vertical: true,
+    className: 'osd-window',
+    css: 'min-height: 2px;',
+    children: [
+      IndicatorValues,
+      MusicControls,
+      NotificationPopups,
+      ColorScheme,
+    ]
   })
 })

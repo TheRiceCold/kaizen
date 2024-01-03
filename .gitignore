@@ -1,5 +1,6 @@
 node_modules/
 highlightjs/
 
-main.css
 keys.js
+main.css
+variables.sass

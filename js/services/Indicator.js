@@ -11,7 +11,8 @@ class IndicatorService extends Service {
       this._count++
       Utils.timeout(this._delay, () => {
         this._count--
-        if (this._count === 0) this.emit('popup', -1)
+        if (this._count === 0) 
+          this.emit('popup', -1)
       })
     }
 
@@ -20,4 +21,5 @@ class IndicatorService extends Service {
     }
 }
 
-export default new IndicatorService()
+const service = new IndicatorService()
+export default service

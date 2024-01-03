@@ -5,11 +5,11 @@
   "scripts": {
     "lint": "eslint . --fix"
   },
-  "author": "Dale Walter Hicban",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kaizen-dw/ags-config.git"
   },
+  "author": "Dale Walter Hicban",
   "bugs": {
     "url": "https://github.com/kaizen-dw/ags-config/issues"
   },

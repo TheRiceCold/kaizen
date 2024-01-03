@@ -1,7 +1,7 @@
 import { App, Widget, Variable, SystemTray } from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
 import {
-  Tray,
+  // Tray,
   SubMenu,
   BatteryBar,
   DateButton,
@@ -9,17 +9,17 @@ import {
   SeparatorDot,
 } from './modules/exports.js'
 
-const submenuItems = Variable(1)
-SystemTray.connect('changed', () => {
-  submenuItems.setValue(Tray.items.length + 1)
-})
+// const submenuItems = Variable(1)
+// SystemTray.connect('changed', () => {
+//   submenuItems.setValue(Tray.items.length + 1)
+// })
 
 const Modules = [
   SubMenu({
-    items: submenuItems,
+  //   items: submenuItems,
     children: [ 
-      Tray, 
-      Utilities 
+  //     Tray, 
+      // Utilities 
     ],
   }),
   BatteryBar,
