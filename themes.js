@@ -2,22 +2,22 @@ import { Theme, WP, lightColors } from './settings/theme.js'
 
 export default [
   Theme({
-    name: 'Kitty Dark',
+    name: 'Colony',
     icon: '󰄛',
-    'desktop.wallpaper.img': WP + 'kittybl.jpeg',
+    'desktop.wallpaper.img': WP + 'colony-wallpaper.png',
   }),
   Theme({
-    name: 'Kitty Light',
+    name: 'Yukopi',
     icon: '󰄛',
-    'desktop.wallpaper.img': WP + 'kitty.jpeg',
+    'desktop.wallpaper.img': WP + 'yukopi-wallpaper.png',
     ...lightColors,
     'theme.widget.bg': '$accent',
     'theme.widget.opacity': 64,
   }),
   Theme({
-    name: 'Leaves',
+    name: 'NixOS',
     icon: '󰌪',
-    'desktop.wallpaper.img': WP + 'leaves.jpg',
+    'desktop.wallpaper.img': WP + 'nixos-wallpaper.jpg',
     'theme.accent.accent': '$green',
     'theme.accent.gradient': 'to right, $accent, darken($accent, 14%)',
     'theme.widget.opacity': 92,

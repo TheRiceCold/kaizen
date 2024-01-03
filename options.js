@@ -1,6 +1,8 @@
 import { Utils } from './imports.js'
 import Option from './settings/option.js'
 
+import themes from './themes.js'
+
 const option = (value, config) => new Option(value, config)
 
 export default {
@@ -25,9 +27,8 @@ export default {
   },
 
   theme: {
-    // name: Option(themes[0].name, { 'category': 'exclude', 'note': 'Name to show as active in quicktoggles' }),
-    // icon: Option(themes[0].icon, { 'category': 'exclude', 'note': 'Icon to show as active in quicktoggles' }),
-
+    name: option(themes[0].name, { 'category': 'exclude', 'note': 'Name to show as active in quicktoggles' }),
+    icon: option(themes[0].icon, { 'category': 'exclude', 'note': 'Icon to show as active in quicktoggles' }),
     scheme: option('dark', {
       'enums': ['dark', 'light'],
       'type': 'enum',
@@ -60,15 +61,6 @@ export default {
     'title': 'No. workspaces on bar and overview',
     'note': 'Set it to 0 to make it dynamic',
   }),
-
-  substitutions: {
-    icons: [
-      ['transmission-gtk', 'transmission'],
-      ['blueberry.py', 'bluetooth'],
-      ['Caprine', 'facebook-messenger'],
-      ['', 'preferences-desktop-display'],
-    ],
-  },
 
   hypr: {
     inactive_border: option('rgba(333333ff)', {
@@ -139,7 +131,7 @@ export default {
   desktop: {
     wallpaper: {
       fg: option('#fff', { 'sass': 'wallpaper-fg' }),
-      // img: option(themes[0].options['desktop.wallpaper.img'], { 'sassFormat': v => `"${v}"`, 'type': 'img' }),
+      img: option(themes[0].options['desktop.wallpaper.img'], { 'sassFormat': v => `"${v}"`, 'type': 'img' }),
     },
     avatar: option(`/var/lib/AccountsService/icons/${Utils.USER}`, {
       'sassFormat': v => `"${v}"`,

@@ -2,10 +2,12 @@
 import options from '../options.js'
 import reloadSass from './reloadSass.js'
 import setGlobals from '../settings/globals.js'
+import { wallpaper } from './wallpaper.js'
 
 export default () => {
   reloadSass()
   setGlobals()
+  wallpaper()
   // gtkFontSettings()
 }
 

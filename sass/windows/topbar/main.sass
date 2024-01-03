@@ -42,7 +42,8 @@
 
   @include battery 
 
-  .focused-client > box > box, .quicksettings > box > box
+  .focused-client, .quicksettings > box > box
+    font-weight: bold
     @include spacing(1)
 
   .quicksettings:not(.active):not(:active)
