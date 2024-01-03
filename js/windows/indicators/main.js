@@ -1,8 +1,6 @@
 import { Widget } from '../../imports.js'
-import { Indicator } from '../../services/main.js'
-import IndicatorValues from './IndicatorValues.js'
-import MusicControls from './MusicControls.js'
 import ColorScheme from './Colorscheme.js'
+import MusicControls from './MusicControls.js'
 import NotificationPopups from './NotificationPopups.js'
 
 export default Widget.Window({
@@ -16,7 +14,6 @@ export default Widget.Window({
     className: 'osd-window',
     css: 'min-height: 2px;',
     children: [
-      IndicatorValues,
       MusicControls,
       NotificationPopups,
       ColorScheme,

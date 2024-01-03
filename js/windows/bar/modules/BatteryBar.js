@@ -1,9 +1,7 @@
 import { Widget, Battery } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import PanelButton from './PanelButton.js'
-
-import icons from '../../../icons.js'
-import options from '../../../options.js'
+import { options, icons } from '../../../constants/main.js'
 
 const Indicator = Widget.Stack({
   binds: [['visible', options.battery.bar.showIcon]],

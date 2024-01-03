@@ -1,12 +1,12 @@
 import { Widget } from '../../../imports.js'
 
-import Weather from './Weather.js'
+// import Weather from './Weather.js'
 import LockButton from './LockButton.js'
 import PowerButton from './PowerButton.js'
 import ReloadButton from './ReloadButton.js'
 import SettingsButton from './SettingsButton.js'
 
-import { uptime } from '../../../variables.js'
+import { variables } from '../../../constants/main.js'
 
 export default Widget.Box({
   className: 'spacing-h-5 sidebar-group-invisible-morehorizpad',
@@ -14,10 +14,10 @@ export default Widget.Box({
     Widget.Box({
       vertical: true,
       children: [
-        Weather,
+        // Weather,
         Widget.Label({
           hpack: 'center',
-          binds: [['label', uptime, 'value', v => `System uptime: ${v}`]],
+          binds: [['label', variables.uptime, 'value', v => `System uptime: ${v}`]],
         }),
       ]
     }),

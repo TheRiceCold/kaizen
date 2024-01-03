@@ -1,6 +1,6 @@
 import { App, Widget, Variable, Utils } from '../../imports.js'
 import { FontIcon } from '../../misc/main.js'
-import icons from '../../icons.js'
+import { icons } from '../../constants/main.js'
 
 export const opened = Variable('')
 App.connect('window-toggled', (_, name, visible) => {

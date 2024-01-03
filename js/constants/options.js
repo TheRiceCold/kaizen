@@ -1,5 +1,5 @@
-import { Utils } from './imports.js'
-import Option from './settings/option.js'
+import { Utils } from '../imports.js'
+import Option from '../settings/option.js'
 
 import themes from './themes.js'
 

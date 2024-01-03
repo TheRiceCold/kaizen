@@ -2,7 +2,7 @@ import { Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { Brightness } from '../../../services/main.js'
 
-import icons from '../../../icons.js'
+import { icons } from '../../../constants/main.js'
 
 const BrightnessSlider = () => Widget.Slider({
   draw_value: false,

@@ -1,9 +1,7 @@
 import { Widget, Battery } from '../../../imports.js'
 import { PowerMenu } from '../../../services/main.js'
 import { Avatar, FontIcon } from '../../../misc/main.js'
-
-import icons from '../../../icons.js'
-import { uptime } from '../../../variables.js'
+import { icons, variables } from '../../../constants/main.js'
 
 export default () => Widget.Box({
   className: 'header horizontal',
@@ -23,7 +21,7 @@ export default () => Widget.Box({
         }),
         Widget.Label({
           className: 'uptime',
-          binds: [['label', uptime, 'value', v => `up: ${v}`]],
+          binds: [['label', variables.uptime, 'value', v => `up: ${v}`]],
         }),
         Widget.Button({
           onClicked: () => PowerMenu.action('shutdown'),

@@ -1,7 +1,7 @@
 import { App, Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
-import icons from '../../../icons.js'
+import { icons } from '../../../constants/main.js'
 
 export default Widget.Button({
   hpack: 'end',
@@ -10,7 +10,7 @@ export default Widget.Button({
   className: 'sidebar-iconbutton',
   onClicked: () => {
     // App.toggleWindow('session')
-    App.closeWindow('sideright')
+    App.closeWindow('sidebar')
   },
   setup: btn => setupCursorHover(btn)
 })

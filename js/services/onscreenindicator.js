@@ -1,7 +1,6 @@
 import { Utils, Service, Audio } from '../imports.js'
 import Brightness from './Brightness.js'
-import { getAudioTypeIcon } from '../utils.js'
-import icons from '../icons.js'
+import { icons, utils } from '../constants/main.js'
 
 class Indicator extends Service {
   static { Service.register(this, { 'popup': ['double', 'string'] }) }
@@ -22,7 +21,7 @@ class Indicator extends Service {
   speaker() {
     this.popup(
       Audio.speaker?.volume || 0,
-      getAudioTypeIcon(Audio.speaker?.icon_name || ''),
+      utils.getAudioTypeIcon(Audio.speaker?.icon_name || ''),
     )
   }
 

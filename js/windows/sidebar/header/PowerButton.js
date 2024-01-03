@@ -9,7 +9,7 @@ export default Widget.Button({
   className: 'sidebar-iconbutton',
   onClicked: () => {
     App.toggleWindow('powermenu')
-    App.closeWindow('sideright')
+    App.closeWindow('sidebar')
   },
   setup: btn => setupCursorHover(btn)
 })

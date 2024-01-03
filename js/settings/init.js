@@ -1,5 +1,5 @@
 // eslint-disable-next-line 
-import options from '../options.js'
+import { options } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
 import setGlobals from '../settings/globals.js'
 import { wallpaper } from './wallpaper.js'

@@ -1,6 +1,5 @@
 import { App } from '../imports.js'
-import options from '../options.js'
-import themes from '../themes.js'
+import { options, themes } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
 // import { setupHyprland } from './hyprland.js'
 // import { wallpaper } from './wallpaper.js'

@@ -1,6 +1,5 @@
 import { Widget, Utils } from '../imports.js'
-import icons from '../icons.js'
-import { blurImg } from '../utils.js'
+import { icons, utils } from '../constants/main.js'
 
 export const CoverArt = (player, props) => Widget.Box({
   ...props,
@@ -14,7 +13,7 @@ export const CoverArt = (player, props) => Widget.Box({
 export const BlurredCoverArt = (player, props) => Widget.Box({
   ...props,
   className: 'blurred-cover',
-  connections: [[player, box => blurImg(player.cover_path).then(img => {
+  connections: [[player, box => utils.blurImg(player.cover_path).then(img => {
     img && box.setCss(`background-image: url("${img}")`)
   }), 'notify::cover-path']],
 })

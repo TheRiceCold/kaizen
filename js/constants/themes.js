@@ -1,4 +1,4 @@
-import { Theme, WP, lightColors } from './settings/theme.js'
+import { Theme, WP, lightColors } from '../settings/theme.js'
 
 export default [
   Theme({

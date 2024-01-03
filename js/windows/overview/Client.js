@@ -1,6 +1,5 @@
 import { Widget, App, Hyprland } from '../../imports.js'
-import { createSurfaceFromWidget, substitute } from '../../utils.js'
-import options from '../../options.js'
+import { options, utils } from '../../constants/main.js'
 
 const SCALE = 0.08
 const { Gdk, Gtk } = imports.gi
@@ -10,7 +9,7 @@ const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)]
 const dispatch = args => Hyprland.sendMessage(`dispatch ${args}`)
 
 /** @param {string} str */
-const icon = str => substitute(options.substitutions.icons, str)
+const icon = str => utils.substitute(options.substitutions.icons, str)
 
 export default ({ address, size: [w, h], class: c, title }) => Widget.Button({
   className: 'client',
@@ -29,7 +28,7 @@ export default ({ address, size: [w, h], class: c, title }) => Widget.Button({
     btn.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, TARGET, Gdk.DragAction.COPY)
     btn.connect('drag-data-get', (_w, _c, data) => data.set_text(address, address.length))
     btn.connect('drag-begin', (_, context) => {
-      Gtk.drag_set_icon_surface(context, createSurfaceFromWidget(btn))
+      Gtk.drag_set_icon_surface(context, utils.createSurfaceFromWidget(btn))
       btn.toggleClassName('hidden', true)
     })
     btn.connect('drag-end', () => btn.toggleClassName('hidden', false))

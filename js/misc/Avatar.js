@@ -1,5 +1,5 @@
 import { Widget } from '../imports.js'
-import options from '../options.js'
+import { options } from '../constants/main.js'
 
 export default props => Widget.Box({ ...props, className: 'avatar' })
   .hook(options.desktop.avatar, box => box.setCss(`

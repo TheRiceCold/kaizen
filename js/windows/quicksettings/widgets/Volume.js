@@ -1,9 +1,7 @@
 import { Widget, Audio, Utils } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { Arrow, Menu } from '../ToggleButton.js'
-
-import icons from '../../../icons.js'
-import { getAudioTypeIcon } from '../../../utils.js'
+import { icons, utils } from '../../../constants/main.js'
 
 const VolumeIndicator = (type = 'speaker') => Widget.Button({
   onClicked: () => Audio[type].is_muted = !Audio[type].is_muted,
@@ -12,7 +10,7 @@ const VolumeIndicator = (type = 'speaker') => Widget.Button({
       if (!Audio[type]) return
 
       icon.icon = type === 'speaker'
-        ? getAudioTypeIcon(Audio[type].icon_name || '')
+        ? utils.getAudioTypeIcon(Audio[type].icon_name || '')
         : icons.audio.mic.high
 
       icon.tooltip_text = `Volume ${Math.floor(Audio[type].volume * 100)}%`
@@ -92,7 +90,7 @@ const SinkItem = stream => Widget.Button({
   child: Widget.Box({
     children: [
       FontIcon({
-        icon: getAudioTypeIcon(stream.icon_name || ''),
+        icon: utils.getAudioTypeIcon(stream.icon_name || ''),
         tooltip_text: stream.icon_name,
       }),
       Widget.Label((stream.description || '').split(' ').slice(0, 4).join(' ')),

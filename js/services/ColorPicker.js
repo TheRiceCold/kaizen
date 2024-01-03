@@ -1,6 +1,6 @@
 import { Variable } from 'resource:///com/github/Aylur/ags/variable.js'
 import { Notifications, Utils, Service } from '../imports.js'
-import { dependencies } from '../utils.js'
+import { utils } from '../constants/main.js'
 
 const COLORS_CACHE = Utils.CACHE_DIR + '/colorpicker.json'
 
@@ -30,7 +30,7 @@ class Colors extends Service {
   }
 
   async pick() {
-    if (!dependencies(['hyprpicker'])) return
+    if (!utils.dependencies(['hyprpicker'])) return
 
     const color = await Utils.execAsync('hyprpicker')
     if (!color) return

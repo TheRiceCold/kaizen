@@ -1,5 +1,5 @@
 import { Widget } from '../../imports.js'
-import data from './data.js'
+import { cheatsheet as data } from '../../constants/main.js'
 
 const Header = category => Widget.Box({
   vertical: false,

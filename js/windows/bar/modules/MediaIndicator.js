@@ -1,7 +1,7 @@
 import { Widget, Mpris, Utils } from '../../../imports.js'
 import { HoverRevealer } from '../../../misc/main.js'
 import * as mpris from '../../../misc/mpris.js'
-import options from '../../../options.js'
+import { options } from '../../../constants/main.js'
 
 export const getPlayer = (name = options.mpris.preferred.value) =>
   Mpris.getPlayer(name) || Mpris.players[0] || null

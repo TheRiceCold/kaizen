@@ -26,7 +26,7 @@ const Sidebar = Box({
 
 export default PopupWindow({
   child: Sidebar,
+  name: 'sidebar',
   focusable: true,
-  name: 'sideright',
   anchor: ['right', 'top', 'bottom'],
 })

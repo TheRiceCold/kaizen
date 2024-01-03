@@ -1,7 +1,7 @@
 import { Widget } from '../../../../imports.js'
 import { FontIcon } from '../../../../misc/main.js'
 import { setupCursorHover } from '../../../../misc/CursorHover.js'
-import icons from '../../../../icons.js'
+import { icons } from '../../../../constants/main.js'
 
 const items = [
   {

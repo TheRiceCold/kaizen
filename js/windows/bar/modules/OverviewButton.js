@@ -1,8 +1,7 @@
 import { App } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import PanelButton from './PanelButton.js'
-
-import options from '../../../options.js'
+import { options } from '../../../constants/main.js'
 
 export const distro = imports.gi.GLib.get_os_info('ID')
 

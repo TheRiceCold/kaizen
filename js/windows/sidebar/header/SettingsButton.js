@@ -10,6 +10,6 @@ export default  Widget.Button({
   setup: btn => setupCursorHover(btn),
   onClicked: () => {
     Utils.execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&'])
-    App.toggleWindow('sideright')
+    App.toggleWindow('sidebar')
   },
 })

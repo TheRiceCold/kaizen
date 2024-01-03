@@ -1,5 +1,5 @@
 import { Service, Utils, App } from '../imports.js'
-import { dependencies } from '../utils.js'
+import { utils } from '../constants/main.js'
 
 const { GLib } = imports.gi
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S')
@@ -17,7 +17,7 @@ class Recorder extends Service {
   recording = false
 
   async start() {
-    if (!dependencies(['slurp', 'wf-recorder'])) return
+    if (!utils.dependencies(['slurp', 'wf-recorder'])) return
 
     if (this.recording) return
 
@@ -36,7 +36,7 @@ class Recorder extends Service {
   }
 
   async stop() {
-    if (!dependencies(['notify-send'])) return
+    if (!utils.dependencies(['notify-send'])) return
 
     if (!this.recording) return
 
@@ -62,7 +62,7 @@ class Recorder extends Service {
   }
 
   async screenshot(full = false) {
-    if (!dependencies(['slurp', 'wayshot'])) return
+    if (!utils.dependencies(['slurp', 'wayshot'])) return
 
     const path = GLib.get_home_dir() + '/Pictures/Screenshots'
     const file = `${path}/${now()}.png`

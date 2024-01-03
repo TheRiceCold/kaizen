@@ -1,4 +1,4 @@
-import options from '../options.js'
+import { options } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
 import { Service } from '../imports.js'
 
@@ -28,7 +28,7 @@ export default class Option extends Service {
     if (config) 
       Object.keys(config).forEach(c => this[c] = config[c])
 
-    import('../options.js').then(this.#init.bind(this))
+    import('../constants/options.js').then(this.#init.bind(this))
   }
 
   set sass(sass) { this.#sass = sass }

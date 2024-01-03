@@ -1,8 +1,8 @@
 import { Widget, App, Hyprland } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
+
 import Workspace from './Workspace.js'
-import options from '../../options.js'
-import { range } from '../../utils.js'
+import { options, utils } from '../../constants/main.js'
 
 const ws = options.workspaces
 
@@ -32,7 +32,7 @@ export default PopupWindow({
     setup: update,
     connections: [
       [ws, box => {
-        box.children = range(ws.value).map(Workspace)
+        box.children = utils.range(ws.value).map(Workspace)
         update(box)
         children(box)
       }],

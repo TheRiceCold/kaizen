@@ -2,8 +2,7 @@ import { App, Audio, Mpris } from '../imports.js'
 
 export default async () => {
   try {
-    globalThis.options = (await import('../options.js')).default
-    // globalThis.iconBrowser = (await import('../misc/IconBrowser.js')).default
+    // globalThis.options = (await import('../constants/options.js')).default
     globalThis.app = App.default
     globalThis.audio = Audio.default
     globalThis.recorder = (await import('../services/ScreenRecorder.js')).default

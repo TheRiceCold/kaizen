@@ -12,7 +12,7 @@ import { BluetoothToggle, BluetoothDevices } from './widgets/Bluetooth.js'
 // import { ProfileToggle, ProfileSelector } from './widgets/AsusProfile.js'
 import { Volume, Microhone, SinkSelector, AppMixer } from './widgets/Volume.js'
 
-import options from '../../options.js'
+import { options } from '../../constants/main.js'
 
 const Row = (toggles = [], menus = []) => Widget.Box({
   vertical: true,

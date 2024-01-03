@@ -1,8 +1,6 @@
 import { Widget, Utils, Variable } from '../../../imports.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
-
-import icons from '../../../icons.js'
-import options from '../../../options.js'
+import { options, icons }from '../../../constants/main.js'
 
 function Arrow(revealer, direction, items) {
   let deg = 0

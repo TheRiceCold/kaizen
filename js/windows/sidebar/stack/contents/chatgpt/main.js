@@ -1,8 +1,8 @@
 import { Widget, App, Utils } from '../../../../../imports.js'
 import { ChatGPT } from '../../../../../services/main.js'
-import icons from '../../../../../icons.js'
 import Keys from '../../../../../keys.js'
 import { state as QSState } from '../../main.js'
+import { icons } from '../../../../../constants/main.js'
 
 import WebKit2 from 'gi://WebKit2?version=4.1'
 import { Marked } from '../../../../../node_modules/marked/lib/marked.esm.js'
@@ -150,7 +150,7 @@ export default () => {
             },
             hexpand: true,
           })
-            .on('key-press-event', (entry, event) => {
+            .on('key-press-event', (_, event) => {
               const keyval = event.get_keyval()[1]
               if (
                 (keyval === Gdk.KEY_c)
@@ -159,15 +159,15 @@ export default () => {
               }
             })
             .hook(QSState, entry => {
-              if (QSState.value === 'chatgpt') entry.grab_focus()
+              if (QSState.value === 'chatgpt') 
+                entry.grab_focus()
             })
             .hook(App, (entry, window, visible) => {
-              if (window === 'sideright' && visible && QSState.value === 'chatgpt') entry.grab_focus()
+              if (window === 'sidebar' && visible && QSState.value === 'chatgpt') entry.grab_focus()
             }),
           Widget.Button({
             className: 'ai-send-button',
             onClicked: btn => {
-              // @ts-ignore
               const entry = btn.get_parent().children[0]
               ChatGPT.send(entry.text)
               entry.text = ''

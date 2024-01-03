@@ -1,9 +1,9 @@
 import { App, Utils } from '../imports.js'
 import { getOptions } from './option.js'
-import { dependencies } from '../utils.js'
+import { utils } from '../constants/main.js'
 
 export default async () => {
-  if (!dependencies(['dart-sass'])) return
+  if (!utils.dependencies(['dart-sass'])) return
 
   const opts = getOptions()
   const vars = opts.map(opt => {

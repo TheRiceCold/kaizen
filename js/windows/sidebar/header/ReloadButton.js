@@ -8,7 +8,7 @@ export default Widget.Button({
   className: 'sidebar-iconbutton',
   onClicked: () => {
     Utils.execAsync(['bash', '-c', 'hyprctl reload &'])
-    App.toggleWindow('sideright')
+    App.toggleWindow('sidebar')
   },
   child: FontIcon('󰑓'),
   setup: btn =>  setupCursorHover(btn)

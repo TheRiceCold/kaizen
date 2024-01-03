@@ -1,6 +1,6 @@
 import { Widget, Mpris } from '../../../imports.js'
 import * as mpris from '../../../misc/mpris.js'
-import options from '../../../options.js'
+import { options } from '../../../constants/main.js'
 
 const Footer = player => Widget.CenterBox({
   className: 'footer-box',

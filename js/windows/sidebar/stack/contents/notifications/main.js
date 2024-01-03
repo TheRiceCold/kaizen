@@ -1,7 +1,8 @@
 import { Widget, Notifications } from '../../../../../imports.js'
 import { FontIcon } from '../../../../../misc/main.js'
+
 import StackContent from '../Content.js'
-import icons from '../../../../../icons.js'
+import { icons } from '../../../../../constants/main.js'
 // import NotificationList from './NotificationList.js'
 
 export default [

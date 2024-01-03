@@ -1,8 +1,7 @@
 import { Bluetooth, Widget } from '../../../imports.js'
 import { Menu, ArrowToggleButton } from '../ToggleButton.js'
 import { FontIcon } from '../../../misc/main.js'
-
-import icons from '../../../icons.js'
+import { icons } from '../../../constants/main.js'
 
 export const BluetoothToggle = () => ArrowToggleButton({
   name: 'bluetooth',

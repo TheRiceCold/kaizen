@@ -1,4 +1,4 @@
-import { Variable } from './imports.js'
+import { Variable } from '../imports.js'
 
 export const showMusicControls = Variable(false, {})
 

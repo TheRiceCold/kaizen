@@ -1,11 +1,10 @@
 import { Widget, Hyprland, Utils } from '../../../imports.js'
-import { substitute } from '../../../utils.js'
-import options from '../../../options.js'
+import { options, utils } from '../../../constants/main.js'
 
 export const ClientLabel = Widget.Label({
   binds: [['label', Hyprland.active.client, 'class', c => {
     const { titles } = options.substitutions
-    return substitute(titles, c)
+    return utils.substitute(titles, c)
   }]],
 })
 
@@ -14,8 +13,8 @@ export const ClientIcon = Widget.Icon({
     const { icons } = options.substitutions
     const { client } = Hyprland.active
 
-    const classIcon = substitute(icons, client.class) + '-symbolic'
-    const titleIcon = substitute(icons, client.class) + '-symbolic'
+    const classIcon = utils.substitute(icons, client.class) + '-symbolic'
+    const titleIcon = utils.substitute(icons, client.class) + '-symbolic'
 
     const hasTitleIcon = Utils.lookUpIcon(titleIcon)
     const hasClassIcon = Utils.lookUpIcon(classIcon)

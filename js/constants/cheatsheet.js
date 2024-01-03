@@ -119,4 +119,4 @@ const column3 = [
   }
 ]
 
-export default [column1, column2, column3,]
+export default [column1, column2, column3]

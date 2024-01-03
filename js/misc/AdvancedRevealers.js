@@ -57,9 +57,9 @@ export const MarginRevealer = ({
     ],
     setup: self => {
       if (!revealChild)
-        self.set_policy(Gtk.PolicyType.ALWAYS, Gtk.PolicyType.ALWAYS);
+        self.set_policy(Gtk.PolicyType.ALWAYS, Gtk.PolicyType.ALWAYS)
       else
-        self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
+        self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER)
       self.child = child
     },
   })

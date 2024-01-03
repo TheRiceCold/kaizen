@@ -2,7 +2,7 @@ import { Audio } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { SimpleToggleButton } from '../ToggleButton.js'
 
-import icons from '../../../icons.js'
+import { icons } from '../../../constants/main.js'
 
 export default () => SimpleToggleButton({
   icon: FontIcon({

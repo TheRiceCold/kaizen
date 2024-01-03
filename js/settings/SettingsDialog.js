@@ -1,8 +1,7 @@
 import { Utils, App, Widget, Variable } from '../imports.js'
 import { FontIcon, RegularWindow } from '../misc/main.js'
 
-import icons from '../icons.js'
-import options from '../options.js'
+import { options, icons } from '../constants/main.js'
 import { getOptions, getValues } from './option.js'
 
 const optionsList = getOptions()
