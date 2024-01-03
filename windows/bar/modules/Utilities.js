@@ -2,6 +2,7 @@ import { Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { ColorPicker, ScreenRecorder } from '../../../services/main.js'
 import PanelButton from './PanelButton.js'
+import icons from '../../../icons.js'
 
 const { NORTH, SOUTH } = imports.gi.Gdk
 
@@ -34,4 +35,43 @@ const ScreenShotButton = PanelButton({
   onClicked: () => ScreenRecorder.screenshot()
 })
 
-export default Widget.Box({ children: [ ColorPickerButton, ScreenShotButton ] })
+let isRecording = false
+const ScreenRecord = PanelButton({
+  className: 'recorder',
+  onClicked: () => {
+    isRecording = !isRecording
+    if (isRecording)
+      ScreenRecorder.stop()
+    else
+      ScreenRecorder.start()
+  },
+  // binds: [['visible', ScreenRecorder, 'recording']],
+  content: Widget.Box({
+    children: [
+      FontIcon('󰕧'),
+      Widget.Label({
+        binds: [[
+          'label', ScreenRecorder, 'timer', time => {
+            const sec = time % 60
+            const min = Math.floor(time / 60)
+            return ` ${min}:${sec < 10 ? '0' + sec : sec}`
+          }
+        ]],
+      }),
+    ],
+  }),
+})
+
+const OSK = PanelButton({
+  content: FontIcon('󰌌'),
+  onClicked: () => App.toggleWindow('osk')
+})
+
+export default Widget.Box({ 
+  children: [ 
+    ScreenRecord,
+    ScreenShotButton,
+    ColorPickerButton, 
+    OSK,
+  ] 
+})

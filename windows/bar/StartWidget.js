@@ -1,10 +1,12 @@
 import { Widget } from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
-import { MediaIndicator, OverviewButton } from './modules/exports.js'
+import { FocusedClient, MediaIndicator, OverviewButton, SeparatorDot } from './modules/exports.js'
 
 const Modules = [
   RoundedCorner('topleft', 'corner-black'),
   OverviewButton,
+  SeparatorDot(),
+  FocusedClient,
   MediaIndicator(),
 ]
 

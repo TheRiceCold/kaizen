@@ -1,24 +1,4 @@
-window#launcher .window-content
-  @include floating_widget
-
-  entry
-    @include button
-    font-size: 16px
-    padding: $padding
-    margin-bottom: $spacing
-
-    label, image
-      color: $fg-color
-
-  separator
-    min-height: 1px
-    background: $hover
-
-  scrolledwindow
-    @include scrollable
-    min-width: 500px
-    min-height: 500px
-
+@mixin app-item
   button.app-item
     @include button($flat: true, $reactive: false)
     transition: $transition

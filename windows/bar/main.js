@@ -1,13 +1,13 @@
 import { Widget } from '../../imports.js'
 
 import StartWidget from './StartWidget.js'
-import Workspaces from './modules/Workspaces.js'
+import CenterWidget from './CenterWidget.js'
 import EndWidget from './EndWidget.js'
 
 const Content = Widget.CenterBox({
   className: 'topbar',
   startWidget: StartWidget,
-  centerWidget: Workspaces,
+  centerWidget: CenterWidget,
   endWidget: EndWidget,
 })
 

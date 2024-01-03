@@ -6,10 +6,8 @@ import {
   BatteryBar,
   DateButton,
   Utilities,
-  ScreenRecord,
   SeparatorDot,
 } from './modules/exports.js'
-import { ScreenRecorder } from '../../services/main.js'
 
 const submenuItems = Variable(1)
 SystemTray.connect('changed', () => {
@@ -19,10 +17,11 @@ SystemTray.connect('changed', () => {
 const Modules = [
   SubMenu({
     items: submenuItems,
-    children: [ Tray, Utilities ],
+    children: [ 
+      Tray, 
+      Utilities 
+    ],
   }),
-  ScreenRecord,
-  SeparatorDot(ScreenRecorder, r => r.recording),
   BatteryBar,
   SeparatorDot(),
   DateButton({ onClicked: () => App.toggleWindow('sideright') }),

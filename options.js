@@ -16,12 +16,11 @@ export default {
   }),
 
   color: {
-    red: option('#e55f86', { 'sass': 'red' }),
-    green: option('#00D787', { 'sass': 'green' }),
-    yellow: option('#EBFF71', { 'sass': 'yellow' }),
-    blue: option('#51a4e7', { 'sass': 'blue' }),
+    red: option('#D67A96', { 'sass': 'red' }),
+    green: option('#93CDA8', { 'sass': 'green' }),
+    yellow: option('#E8C881', { 'sass': 'yellow' }),
+    blue: option('#6AAAFF', { 'sass': 'blue' }),
     magenta: option('#9077e7', { 'sass': 'magenta' }),
-    teal: option('#51e6e6', { 'sass': 'teal' }),
     orange: option('#E79E64', { 'sass': 'orange' }),
   },
 
@@ -36,7 +35,7 @@ export default {
       'title': 'Color Scheme',
       'sass': 'color-scheme',
     }),
-    bg: option('#171717', { 'title': 'Background Color', 'sass': 'bg-color' }),
+    bg: option('#373559', { 'title': 'Background Color', 'sass': 'bg-color' }),
     fg: option('#eeeeee', { 'title': 'Foreground Color', 'sass': 'fg-color' }),
     accent: {
       accent: option('$blue', { 'category': 'Theme', 'title': 'Accent Color', 'sass': 'accent' }),
@@ -190,5 +189,29 @@ export default {
       'note': 'filters for bus-name, name, identity, entry',
     }),
     preferred: option('spotify', { 'category': 'Bar', 'title': 'Preferred player' }),
-  }
+  },
+  substitutions: {
+    icons: [
+      ['transmission-gtk', 'transmission'],
+      ['blueberry.py', 'bluetooth'],
+      ['Caprine', 'facebook-messenger'],
+      ['', 'preferences-desktop-display'],
+    ],
+    titles: [
+      ['com.github.Aylur.ags', 'AGS'],
+      ['transmission-gtk', 'Transmission'],
+      ['com.obsproject.Studio', 'OBS'],
+      ['com.usebottles.bottles', 'Bottles'],
+      ['com.github.wwmm.easyeffects', 'Easy Effects'],
+      ['org.gnome.TextEditor', 'Text Editor'],
+      ['org.gnome.design.IconLibrary', 'Icon Library'],
+      ['blueberry.py', 'Blueberry'],
+      ['org.wezfurlong.wezterm', 'Wezterm'],
+      ['com.raggesilver.BlackBox', 'BlackBox'],
+      ['firefox', 'Firefox'],
+      ['org.gnome.Nautilus', 'Files'],
+      ['libreoffice-writer', 'Writer'],
+      ['', 'Desktop'],
+    ],
+  },
 }
