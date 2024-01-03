@@ -3,7 +3,7 @@ import { getOptions } from './option.js'
 import { dependencies } from '../utils.js'
 
 export default async () => {
-  if (!dependencies(['sassc'])) return
+  if (!dependencies(['dart-sass'])) return
 
   const opts = getOptions()
   const vars = opts.map(opt => {
@@ -16,7 +16,7 @@ export default async () => {
 
   try {
     await Utils.writeFile(vars.join('\n'), `${App.configDir}/sass/variables.sass`)
-    await Utils.execAsync(`sassc ${App.configDir}/sass/main.sass ${App.configDir}/main.css`)
+    await Utils.execAsync(`sass ${App.configDir}/sass/main.sass ${App.configDir}/main.css`)
     App.resetCss()
     App.applyCss(`${App.configDir}/main.css`)
   } catch (err) {

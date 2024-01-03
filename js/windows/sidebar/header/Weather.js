@@ -1,18 +1,13 @@
-import { Widget } from '../../imports.js'
-import { Weather } from '../../services/main.js'
+import { App, Widget, Variable } from '../../../imports.js'
 
-export default Widget.Box({
-  spacing: 5,
-  className: 'weather-container',
-  children: [
-    Widget.Label({
-      className: 'weather-icon',
-      label: Weather.bind('icon')
-    }),
-    Widget.Label({
-      className: 'weather-temp',
-      label: Weather.bind('temp').transform(temp => temp + '°C')
-    })
+const weather = Variable({}, {
+  poll: [30000, `python ${App.configDir}/bin/weather`, out => JSON.parse(out)],
+})
+
+export default Widget.Label({
+  className: 'weather',
+  binds: [
+    ['label', weather, 'value', value => value.text || '󰇘'],
+    ['tooltip-text', weather, 'value', value => value.tooltip || '󰇘'],
   ],
-  tooltipMarkup: Weather.bind('description')
 })

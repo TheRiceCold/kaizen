@@ -122,7 +122,7 @@ const CoverArt = ({ player, ...props }) => Widget.Box({
             ]).then(() => {
               Utils.exec(`wal -i "${player.coverPath}" -n -t -s -e -q ${lightDark}`)
               Utils.exec(`bash -c "cp ~/.cache/wal/colors.sass ${App.configDir}/sass/_musicwal.sass"`)
-              Utils.exec(`sassc ${App.configDir}/sass/_music.sass ${stylePath}`)
+              Utils.exec(`sass ${App.configDir}/sass/_music.sass ${stylePath}`)
               self.css = `background-image: url('${coverPath}');`
               App.applyCss(`${stylePath}`)
             }).catch(print)
