@@ -1,7 +1,7 @@
 import { Widget, Notifications } from '../../imports.js'
-import Notification from '../../misc/Notification.js'
+import { Notification } from '../../misc/main.js'
 
-const notifPopupList = Widget.Box({
+export default Widget.Box({
   vertical: true,
   className: 'osd-notifs spacing-v-5-revealer',
   properties: [
@@ -38,5 +38,3 @@ const notifPopupList = Widget.Box({
     [Notifications, (box, id) => box._dismiss(box, id, true), 'closed'],
   ]
 })
-
-export default () => notifPopupList

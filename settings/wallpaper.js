@@ -3,7 +3,7 @@ import options from '../options.js'
 import { dependencies } from '../utils.js'
 
 export function initWallpaper() {
- if (dependencies(['swww'])) {
+  if (dependencies(['swww'])) {
     Utils.exec('swww init')
 
     options.desktop.wallpaper.img.connect('changed', wallpaper)

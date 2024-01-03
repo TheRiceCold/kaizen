@@ -1,11 +1,11 @@
 import { Widget, Audio } from '../../imports.js'
-import { Brightness } from '../../services/main.js'
-import Indicator from '../../services/indicator.js'
+import { Brightness, Indicator } from '../../services/main.js'
+import { MarginRevealer } from '../../misc/AdvancedRevealers.js'
 
 const OsdValue = (
-  name, 
-  labelConnections, 
-  progressConnections, 
+  name,
+  labelConnections,
+  progressConnections,
   props = {}
 ) => Widget.Box({
   ...props,
@@ -17,14 +17,17 @@ const OsdValue = (
       vexpand: true,
       children: [
         Widget.Label({
+          xalign: 0, 
+          yalign: 0, 
+          hexpand: true,
           label: `${name}`,
           className: 'osd-label',
-          xalign: 0, yalign: 0, hexpand: true,
         }),
         Widget.Label({
           label: '100',
+          hexpand: false, 
+          className: 'osd-value-txt',
           connections: labelConnections,
-          hexpand: false, className: 'osd-value-txt',
         }),
       ]
     }),
@@ -41,32 +44,35 @@ const brightnessIndicator = OsdValue('Brightness',
   [[Brightness, self => {
     self.label = `${Math.round(Brightness.screen_value * 100)}`
   }, 'notify::screen-value']],
-  [[Brightness, (progress) => {
+  [[Brightness, progress => {
     const updateValue = Brightness.screen_value
     progress.value = updateValue
   }, 'notify::screen-value']],
 )
 
 const volumeIndicator = OsdValue('Volume',
-  [[Audio, (label) => {
+  [[Audio, label => {
     label.label = `${Math.round(Audio.speaker?.volume * 100)}`
   }]],
-  [[Audio, (progress) => {
+  [[Audio, progress => {
     const updateValue = Audio.speaker?.volume
     if (!isNaN(updateValue)) progress.value = updateValue
   }]],
 )
 
-export default () => Widget.Revealer({
+export default MarginRevealer({
   transition: 'slide_down',
-  connections: [
-    [Indicator, (revealer, value) => {
-      revealer.revealChild = (value > -1)
-    }, 'popup'],
-  ],
+  connections: [[
+    Indicator, 
+    (revealer, value) => {
+      if(value > -1) revealer._show(revealer)
+      else revealer._hide(revealer)
+    }, 'popup'
+  ]],
   child: Widget.Box({
     hpack: 'center',
     vertical: false,
-    children: [ brightnessIndicator, volumeIndicator ]
+    className: 'spacing-h--10',
+    children: [brightnessIndicator, volumeIndicator]
   })
 })

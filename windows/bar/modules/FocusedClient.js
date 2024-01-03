@@ -1,16 +1,15 @@
 import { Widget, Hyprland, Utils } from '../../../imports.js'
-import PanelButton from './PanelButton.js'
-import options from '../../../options.js'
 import { substitute } from '../../../utils.js'
+import options from '../../../options.js'
 
-export const ClientLabel = () => Widget.Label({
+export const ClientLabel = Widget.Label({
   binds: [['label', Hyprland.active.client, 'class', c => {
     const { titles } = options.substitutions
     return substitute(titles, c)
   }]],
 })
 
-export const ClientIcon = () => Widget.Icon({
+export const ClientIcon = Widget.Icon({
   connections: [[Hyprland.active.client, self => {
     const { icons } = options.substitutions
     const { client } = Hyprland.active
@@ -33,9 +32,6 @@ export const ClientIcon = () => Widget.Icon({
 
 export default Widget.Box({
   className: 'focused-client',
-  children: [
-    ClientIcon(),
-    ClientLabel(),
-  ],
+  children: [ClientIcon, ClientLabel],
   binds: [['tooltip-text', Hyprland.active, 'client', c => c.title]],
 })

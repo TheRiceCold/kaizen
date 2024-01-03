@@ -1,7 +1,8 @@
-const { Gio, GLib } = imports.gi
 import { App, Utils, Widget, Variable, Mpris } from '../../imports.js'
+import { MarginRevealer } from '../../misc/AdvancedRevealers.js'
 import { AnimatedCircularProgress } from '../../misc/main.js'
 
+const { Gio, GLib } = imports.gi
 const showMusicControls = Variable(false, {})
 
 const expandTilde = path => 
@@ -40,14 +41,13 @@ function getTrackfont(player) {
   return DEFAULT_MUSIC_FONT
 }
 
-const TrackProgress = ({ player, ...rest }) => {
+const TrackProgress = ({ player, ...props}) => {
   const _updateProgress = (circprog) => {
     if (!player) return
-    // Set circular progress (see definition of AnimatedCircProg for explanation)
     circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
   }
   return AnimatedCircularProgress({
-    ...rest,
+    ...props,
     className: 'osd-music-circprog',
     vpack: 'center',
     connections: [
@@ -57,24 +57,23 @@ const TrackProgress = ({ player, ...rest }) => {
   })
 }
 
-const TrackTitle = ({ player, ...rest }) => Widget.Label({
-  ...rest,
+const TrackTitle = ({ player, ...props }) => Widget.Label({
+  ...props,
   label: 'No music playing',
   xalign: 0,
   truncate: 'end',
-  // wrap: true,
   className: 'osd-music-title',
-  connections: [[player, (self) => {
-    // Player name
-    self.label = player.trackTitle.length > 0 ? player.trackTitle : 'No media'
-    // Font based on track/artist
-    const fontForThisTrack = getTrackfont(player)
-    self.css = `font-family: ${fontForThisTrack}, ${DEFAULT_MUSIC_FONT}`
-  }, 'notify::track-title']]
+  connections: [[
+    player, self => {
+      const fontForThisTrack = getTrackfont(player)
+      self.label = player.trackTitle.length > 0 ? player.trackTitle : 'No media'
+      self.css = `font-family: ${fontForThisTrack}, ${DEFAULT_MUSIC_FONT}`
+    }, 'notify::track-title'
+  ]]
 })
 
-const TrackArtists = ({ player, ...rest }) => Widget.Label({
-  ...rest,
+const TrackArtists = ({ player, ...props }) => Widget.Label({
+  ...props,
   xalign: 0,
   truncate: 'end',
   className: 'osd-music-artists',
@@ -85,26 +84,19 @@ const TrackArtists = ({ player, ...rest }) => Widget.Label({
   ]]
 })
 
-const CoverArt = ({ player, ...rest }) => Widget.Box({
-  ...rest,
+const CoverArt = ({ player, ...props }) => Widget.Box({
+  ...props,
   className: 'osd-music-cover',
   children: [
     Widget.Overlay({
       child: Widget.Box({ // Fallback
         homogeneous: true,
         className: 'osd-music-cover-fallback',
-        children: [Widget.Label({
-          label: 'music_note',
-          className: 'icon-material txt-hugeass',
-        })]
+        children: [Widget.Label({ label: 'music_note', className: 'icon-material txt-hugeass' })]
       }),
       overlays: [ // Real
         Widget.Box({
           properties: [['updateCover', self => {
-            const player = Mpris.getPlayer()
-
-            // Player closed
-            // Note that cover path still remains, so we're checking title
             if (!player || player.trackTitle == '') {
               self.css = 'background-image: none;'
               App.applyCss(`${App.configDir}/style.css`)
@@ -118,14 +110,12 @@ const CoverArt = ({ player, ...rest }) => Widget.Box({
             }
             lastCoverPath = player.coverPath
 
-            // If a colorscheme has already been generated, skip generation
             if (fileExists(stylePath)) {
               self.css = `background-image: url('${coverPath}');`
               App.applyCss(stylePath)
               return
             }
 
-            // Generate colors
             Utils.execAsync(['bash', '-c', 
               `${App.configDir}/scripts/color_generation/generate_colors_material.py --path \
               '${coverPath}' > ${App.configDir}/sass/_musicmaterial.sass ${lightDark}`
@@ -145,12 +135,12 @@ const CoverArt = ({ player, ...rest }) => Widget.Box({
   ],
 })
 
-const TrackControls = ({ player, ...rest }) => Widget.Revealer({
+const TrackControls = ({ player, ...props }) => Widget.Revealer({
   revealChild: false,
   transition: 'slide_right',
   transitionDuration: 200,
   child: Widget.Box({
-    ...rest,
+    ...props,
     vpack: 'center',
     className: 'osd-music-controls spacing-h-3',
     children: [
@@ -175,12 +165,12 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
   }, 'notify::play-back-status']]
 })
 
-const TrackTime = ({ player, ...rest }) => Widget.Revealer({
+const TrackTime = ({ player, ...props }) => Widget.Revealer({
   revealChild: false,
   transition: 'slide_left',
   transitionDuration: 200,
   child: Widget.Box({
-    ...rest,
+    ...props,
     vpack: 'center',
     className: 'osd-music-pill spacing-h-5',
     children: [
@@ -229,7 +219,7 @@ const PlayState = ({ player }) => {
   })
 }
 
-const MusicControlsWidget = (player) => Widget.Box({
+const MusicControlsWidget = player => Widget.Box({
   className: 'osd-music spacing-h-20',
   children: [
     CoverArt({ player: player, vpack: 'center' }),
@@ -260,9 +250,11 @@ const MusicControlsWidget = (player) => Widget.Box({
   ]
 })
 
-export default () => Widget.Revealer({
+export default MarginRevealer({
+  revealChild: false,
+  showClass: 'osd-show',
+  hideClass: 'osd-hide',
   transition: 'slide_down',
-  transitionDuration: 170,
   child: Widget.Box({
     connections: [[Mpris, box => {
       let foundPlayer = false
@@ -282,9 +274,12 @@ export default () => Widget.Revealer({
       }
     }, 'notify::players']],
   }),
-  connections: [
-    [showMusicControls, (revealer) => {
-      revealer.revealChild = showMusicControls.value
-    }],
-  ],
+  connections: [[
+    showMusicControls, revealer => {
+      if (showMusicControls.value) 
+        revealer._show(revealer)
+      else 
+        revealer._hide(revealer)
+    }
+  ]],
 })

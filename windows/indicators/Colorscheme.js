@@ -2,8 +2,8 @@ import { Widget, Variable } from '../../imports.js'
 
 const showColorScheme = Variable(false, {})
 
-const ColorBox = ({ name = 'Color', ...rest }) => Widget.Box({
-  ...rest,
+const ColorBox = ({ name = 'Color', ...props}) => Widget.Box({
+  ...props,
   homogeneous: true,
   children: [ Widget.Label({ label: `${name}` }) ]
 })
@@ -33,14 +33,13 @@ const colorschemeContent = Widget.Box({
   ]
 })
 
-export default () => Widget.Revealer({
+export default Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: 200,
   child: colorschemeContent,
   connections: [[
     showColorScheme, revealer => {
       revealer.revealChild = showColorScheme.value
-
     }
   ]],
 })

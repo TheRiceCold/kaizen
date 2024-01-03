@@ -1,6 +1,6 @@
-export { default as Todo } from './Todo.js'
 export { default as ChatGPT } from './ChatGPT.js'
 // export { default as Weather } from './Weather.js'
+export { default as Indicator } from './Indicator.js'
 export { default as PowerMenu } from './PowerMenu.js'
 export { default as Brightness } from './Brightness.js'
 export { default as StackState } from './StackState.js'

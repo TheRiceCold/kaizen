@@ -1,5 +1,5 @@
 import { Widget, App, Utils } from '../../../../../imports.js'
-// import { ChatGPT } from '../../../../../services/main.js'
+import { ChatGPT } from '../../../../../services/main.js'
 import icons from '../../../../../icons.js'
 import Keys from '../../../../../keys.js'
 import { state as QSState } from '../../main.js'
