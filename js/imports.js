@@ -18,3 +18,5 @@ export const Mpris = await service('mpris')
 export const Network = await service('network')
 export const Notifications = await service('notifications')
 export const SystemTray = await service('systemtray')
+
+// MODULES
