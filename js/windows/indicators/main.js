@@ -4,9 +4,11 @@ import Popups from './Popups.js'
 export default Widget.Window({
   layer: 'overlay',
   name: 'indicators',
-  anchor: ['top', 'right'],
+  anchor: ['top'],
   child:  Widget.Box({
     className: 'osd-window',
-    children: [ Popups ],
+    children: [ 
+      Popups 
+    ],
   })
 })
