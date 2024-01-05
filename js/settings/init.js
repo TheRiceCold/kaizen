@@ -1,13 +1,27 @@
 // eslint-disable-next-line 
+import { Utils } from '../imports.js'
+import { options, utils } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
 import setGlobals from '../settings/globals.js'
-// import { wallpaper } from './wallpaper.js'
 
 export default () => {
   reloadSass()
   setGlobals()
-  // wallpaper()
+  wallpaper()
   // gtkFontSettings()
+}
+
+function wallpaper() {
+  if (!utils.dependencies(['swww']))
+    return
+
+  Utils.execAsync([
+    'swww', 'img',
+    '--transition-type', 'grow',
+    '--transition-pos', 
+    Utils.exec('hyprctl cursorpos').replace(' ', ''),
+    options.desktop.wallpaper.img.value,
+  ]).catch(err => console.error(err))
 }
 
 // function gtkFontSettings() {
