@@ -8,6 +8,12 @@ export const range = (length, start = 1) =>
 export const substitute = (collection, item) => 
   collection.find(([from]) => from === item)?.[1] || item
 
+/** @type {function((id: number) => typeof Gtk.Widget): typeof Gtk.Widget[]}*/
+export function forMonitors(widget) {
+  const n = imports.gi.Gdk.Display.get_default().get_n_monitors()
+  return range(n, 0).map(widget)
+}
+
 export const createSurfaceFromWidget = widget => {
   const alloc = widget.get_allocation()
   const surface = new cairo.ImageSurface(

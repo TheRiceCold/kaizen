@@ -1,6 +1,6 @@
 import { App, Utils } from '../imports.js'
-import { getOptions } from './option.js'
 import { utils } from '../constants/main.js'
+import { getOptions } from './option.js'
 
 export default async () => {
   if (!utils.dependencies(['dart-sass'])) return

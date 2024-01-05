@@ -2,16 +2,16 @@
   border: $border
   color: $fg-color
   border-radius: $radii
+  background: $widget-bg
   transition: $transition
-  background-color: $widget-bg
 
 @mixin floating-widget
   @if $drop-shadow
     box-shadow: 0 0 5px 0 $shadow
 
   color: $fg-color
-  background: $bg-color
   padding: $popover-padding
-  margin: max($spacing, 8px)
-  border-radius: $popover-radius
+  // margin: max($spacing, 8px)
+  // border-radius: $popover-radius
+  background: rgba(37, 37, 58, 0.75)
   border: $border-width solid $popover-border-color

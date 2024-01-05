@@ -9,7 +9,7 @@
     min-width:  $width
     border-radius: $radii
     transition: $transition
-    background-color: $widget-bg
+    background: $widget-bg
 
     highlight, progress
       min-height: $width
@@ -29,10 +29,10 @@
 
   &:hover
     trough
-      background-color: $hover
+      background: $hover
     slider
       @if $slider
-        background-color: $fg-color
+        background: $fg-color
         border-color: $border-color
         @if $drop-shadow
           box-shadow: 0 0 3px 0 $shadow
@@ -44,10 +44,10 @@
 
   @if $focusable
     trough:focus
-      background-color: $hover
+      background: $hover
       box-shadow: inset 0 0 0 $border-width $accent
 
       slider
         @if $slider
-          background-color: $fg-color
+          background: $fg-color
           box-shadow: inset 0 0 0 $border-width $accent

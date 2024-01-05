@@ -2,8 +2,8 @@ import { Widget } from '../../imports.js'
 import { Clock } from '../../misc/main.js'
 
 const TimeDate = Widget.Box({
-  hpack: 'end',
-  vpack: 'end',
+  hpack: 'start',
+  vpack: 'start',
   vertical: true,
   className: 'bg-time-box',
   children: [

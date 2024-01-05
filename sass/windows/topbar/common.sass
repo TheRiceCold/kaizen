@@ -1,4 +1,4 @@
-$bar-spacing: $spacing / 2
+$bar-spacing: calc($spacing/2)
 $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $radii)
 
 @mixin panel-button($flat: $bar-flat-buttons, $reactive: true)
