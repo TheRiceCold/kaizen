@@ -1,7 +1,7 @@
 import { Widget } from '../../../imports.js'
 import { StackState } from '../../../services/main.js'
 import StackButtons from './buttons/main.js'
-// import { NotificationStack } from './contents/main.js'
+import { NotificationStack } from './contents/main.js'
 
 export const state = new StackState('notifications')
 
@@ -15,9 +15,7 @@ const Header = Widget.Box({
 const Contents = Widget.Stack({
   transition: 'slide_left_right',
   visible_child_name: state.bind(),
-  items: [
-    // NotificationStack,
-  ]
+  items: [ NotificationStack ]
 })
 
 state.items = Contents.items.map(item => item[0])

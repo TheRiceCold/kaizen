@@ -1,4 +1,4 @@
-import { App, Audio, Mpris } from '../imports.js'
+import { App, Audio } from '../imports.js'
 
 export default async () => {
   try {

@@ -21,11 +21,11 @@ export default [
           }),
           visible: Notifications.bind('notifications').transform(notifs => notifs.length > 0)
         }),
-        Widget.Switch().hook(Notifications, sw => {
-          sw.active =  (sw.active === Notifications.dnd) && !Notifications.dnd
-        }).on('notify::active', ({ active }) => {
-          Notifications.dnd = (active === Notifications.dnd) && !active
-        })
+        //     Widget.Switch().hook(Notifications, sw => {
+        //       sw.active =  (sw.active === Notifications.dnd) && !Notifications.dnd
+        //     }).on('notify::active', ({ active }) => {
+        //       Notifications.dnd = (active === Notifications.dnd) && !active
+        //     })
       ]
     })
   })

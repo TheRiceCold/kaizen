@@ -1,5 +1,6 @@
 import { Widget } from '../../imports.js'
 import Popups from './Popups.js'
+import Music from './Music.js'
 
 export default Widget.Window({
   layer: 'overlay',

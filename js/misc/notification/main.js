@@ -201,7 +201,6 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
   // in rem
   const maxOffset = 10.227
   const endMargin = 20.455
-  const disappearHeight = 6.818
   const leftAnim1 = `transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
                      margin-left: -${Number(maxOffset + endMargin)}rem;
                      margin-right: ${Number(maxOffset + endMargin)}rem;
