@@ -1,4 +1,7 @@
-import { Variable } from '../imports.js'
+import { Variable, Utils } from '../imports.js'
+
+export const SCREEN_WIDTH = Number(Utils.exec(`bash -c "xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1 | head -1" | awk '{print $1}'`))
+export const SCREEN_HEIGHT = Number(Utils.exec(`bash -c "xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -1" | awk '{print $1}'`))
 
 export const showMusicControls = Variable(false, {})
 

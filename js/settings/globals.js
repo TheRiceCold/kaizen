@@ -1,10 +1,14 @@
-import { App, Audio } from '../imports.js'
+import { App, Audio, Mpris } from '../imports.js'
+import { showMusicControls } from '../constants/variables.js'
 
 export default async () => {
   try {
     // globalThis.options = (await import('../constants/options.js')).default
-    globalThis.app = App.default
-    globalThis.audio = Audio.default
+    globalThis.App = App
+    globalThis.Mpris = Mpris
+    globalThis.openMusicControls = showMusicControls
+    // globalThis.audio = Audio.default
+
     // globalThis.recorder = (await import('../services/ScreenRecorder.js')).default
     // globalThis.brightness = (await import('../services/Brightness.js')).default
     // globalThis.indicator = (await import('../services/Indicator.js')).default

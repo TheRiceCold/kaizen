@@ -3,20 +3,20 @@ const { Label, Icon, Box, Button } = Widget
 
 export default app => {
   const title = Label({
-    className: 'title',
-    label: app.name,
     xalign: 0,
+    label: app.name,
     vpack: 'center',
     truncate: 'end',
+    className: 'title',
   })
 
   const description = Label({
+    xalign: 0,
+    wrap: true,
+    vpack: 'center',
+    justification: 'left',
     className: 'description',
     label: app.description || '',
-    wrap: true,
-    xalign: 0,
-    justification: 'left',
-    vpack: 'center',
   })
 
   const icon = Icon({

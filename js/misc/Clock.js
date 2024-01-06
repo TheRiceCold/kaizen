@@ -5,8 +5,8 @@ export default ({
   interval = 1000,
   ...rest
 } = {}) => Widget.Label({
-  className: 'clock',
   ...rest,
+  className: 'clock',
   connections: [[interval, label =>
     label.label = imports.gi.GLib.DateTime.new_now_local().format(format) || 'wrong format',
   ]],

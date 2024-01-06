@@ -4,12 +4,13 @@ import Music from './Music.js'
 
 export default Widget.Window({
   layer: 'overlay',
-  name: 'indicators',
+  name: 'indicator',
   anchor: ['top'],
   child:  Widget.Box({
     className: 'osd-window',
     children: [ 
-      Popups 
+      Popups, 
+      Music()
     ],
   })
 })

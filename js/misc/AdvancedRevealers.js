@@ -1,79 +1,62 @@
 import { Widget } from '../imports.js'
-const { Gtk } = imports.gi
 
 export const MarginRevealer = ({
-  transition = 'slide_down',
   child,
   revealChild,
-  showClass = 'element-show', // These are for animation curve, they don't really hide
-  hideClass = 'element-hide', // Don't put margins in these classes!
   extraProperties = [],
-  ...props
+  transition = 'slide_down',
+  showClass = 'element-show',
+  hideClass = 'element-hide',
+  ...rest
 }) => {
   const widget = Widget.Scrollable({
-    ...props,
-    css: 'min-height: 0;',
+    ...rest,
     properties: [
-      ['revealChild', true], // It'll be set to false after init if it's supposed to hide
+      ['revealChild', true],
       ['transition', transition],
-      ['show', self => {
-        if (self._revealChild) return
-        self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER)
+      ['show', () => {
+        if (widget._revealChild) return
+        widget.hscroll = 'never'
+        widget.vscroll = 'never'
         child.toggleClassName(hideClass, false)
         child.toggleClassName(showClass, true)
-        self._revealChild = true
+        widget._revealChild = true
         child.css = 'margin: 0;'
       }],
-      ['hide', self => {
-        if (!self._revealChild) return
+      ['hide', () => {
+        if (!widget._revealChild) return
         child.toggleClassName(hideClass, true)
         child.toggleClassName(showClass, false)
-        self._revealChild = false
-
-        const width = `${child.get_allocated_width()}px;`
-        const height = `${child.get_allocated_height()}px;`
-        switch(self._transition) {
-          case 'slide_left':
-            child.css = 'margin-right: -' + width
-            break
-          case 'slide_right':
-            child.css = 'margin-left: -' + width
-            break
-          case 'slide_up':
-            child.css = 'margin-bottom: -' + height
-            break
-          case 'slide_down':
-            child.css = 'margin-top: -' + height
-            break
-        }
+        widget._revealChild = false
+        if (widget._transition == 'slide_left')
+          child.css = `margin-right: -${child.get_allocated_width()}px;`
+        else if (widget._transition == 'slide_right')
+          child.css = `margin-left: -${child.get_allocated_width()}px;`
+        else if (widget._transition == 'slide_up')
+          child.css = `margin-bottom: -${child.get_allocated_height()}px;`
+        else if (widget._transition == 'slide_down')
+          child.css = `margin-top: -${child.get_allocated_height()}px;`
       }],
-      ['toggle', self => {
-        if (self._revealChild) 
-          self._hide(self)
-        else 
-          self._show(self)
+      ['toggle', () => {
+        if (widget._revealChild) widget._hide()
+        else widget._show()
       }],
       ...extraProperties,
-    ],
-    setup: self => {
-      if (!revealChild)
-        self.set_policy(Gtk.PolicyType.ALWAYS, Gtk.PolicyType.ALWAYS)
-      else
-        self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER)
-      self.child = child
-    },
+    ], child: child,
+    hscroll: `${revealChild ? 'never' : 'always'}`,
+    vscroll: `${revealChild ? 'never' : 'always'}`,
   })
   child.toggleClassName(`${revealChild ? showClass : hideClass}`, true)
   return widget
 }
 
 export const DoubleRevealer = ({
-  child,
-  revealChild,
-  duration1 = 150,
-  duration2 = 150,
   transition1 = 'slide_right',
   transition2 = 'slide_left',
+  duration1 = 150,
+  duration2 = 150,
+  child,
+  revealChild,
 }) => Widget.Revealer({
   transition: transition1,
   transitionDuration: duration1,

@@ -43,8 +43,8 @@ const Content = (notification, icon) => Box({
       }),
     }) : Label({
       hexpand: true,
+      className: 'txt-hugerass',
       label: getIconType(notification), 
-      className: 'icon-material txt-hugerass',
     })
   )]
 })

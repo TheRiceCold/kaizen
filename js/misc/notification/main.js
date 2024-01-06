@@ -172,7 +172,7 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
     child: Widget.Label({ 
       label: '󰅀', 
       vpack: 'center',
-      className: 'icon-material txt-norm', 
+      className: 'txt-norm', 
     }),
     setup: setupCursorHover,
   })

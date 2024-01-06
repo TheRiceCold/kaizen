@@ -65,12 +65,8 @@ export function getCalendarLayout(dateObject, highlight) {
         dim = daysInNextMonth
       toFill = 1
     }
-    // Next tile
     j++
-    if (j == 7) {
-      j = 0
-      i++
-    }
+    if (j == 7) { j = 0; i++; }
   }
   return calendar
 }

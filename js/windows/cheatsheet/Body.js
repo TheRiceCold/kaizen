@@ -8,7 +8,7 @@ const Header = category => Widget.Box({
     Widget.Label({
       xalign: 0,
       label: category.icon,
-      className: 'icon-material txt txt-larger',
+      className: 'txt txt-larger',
     }),
     Widget.Label({
       xalign: 0,
@@ -29,16 +29,16 @@ const Keys = category => Widget.Box({
         vertical: false,
         children: keybinds.keys.map(key => Widget.Label({ // Specific keys
           label: key,
-          className: `${key == 'OR' || key == '+' 
-            ? 'cheatsheet-key-notkey' 
+          className: `${key == 'OR' || key == '+'
+            ? 'cheatsheet-key-notkey'
             : 'cheatsheet-key'} txt-small`,
         }))
       }))
     }),
-    Widget.Box({ // Actions
+    Widget.Box({
       vertical: true,
       homogeneous: true,
-      children: category.binds.map(keybinds => Widget.Label({ // Binds
+      children: category.binds.map(keybinds => Widget.Label({
         xalign: 0,
         label: keybinds.action,
         className: 'txt chearsheet-action txt-small',
@@ -53,10 +53,7 @@ const Columns = group => Widget.Box({
   children: group.map(category => Widget.Box({
     vertical: true,
     className: 'spacing-v-15',
-    children: [ 
-      Header(category), 
-      Keys(category),
-    ]
+    children: [Header(category), Keys(category)]
   }))
 })
 

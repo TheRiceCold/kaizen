@@ -3,6 +3,8 @@ import { Widget, Mpris } from '../../imports.js'
 import { AnimatedCircularProgress } from '../../misc/main.js'
 import { MarginRevealer } from '../../misc/AdvancedRevealers.js'
 
+import { variables } from '../../constants/main.js'
+
 const PREFERRED_PLAYER = 'plasma-browser-integration'
 
 const isRealPlayer = player => (
@@ -30,12 +32,8 @@ function getTrackfont(player) {
     return 'Crimson Text, serif'
   return DEFAULT_MUSIC_FONT
 }
-function trimTrackTitle(title) {
-  // Removes stuff like【C93】 at beginning
-  var pattern = /【[^】]*】/
-  var cleanedTitle = title.replace(pattern, '')
-  return cleanedTitle.trim()
-}
+
+const trimTrackTitle = title => title.replace(/【[^】]*】/, '').trim()
 
 const TrackProgress = ({ player, ...rest }) => {
   const _updateProgress = (circprog) => {
@@ -90,13 +88,13 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
         className: 'osd-music-controlbtn',
         child: Widget.Label({
           label: 'skip_previous',
-          className: 'icon-material osd-music-controlbtn-txt',
+          className: 'osd-music-controlbtn-txt',
         })
       }),
       Widget.Button({
         className: 'osd-music-controlbtn',
         child: Widget.Label({
-          className: 'icon-material osd-music-controlbtn-txt',
+          className: 'osd-music-controlbtn-txt',
           label: 'skip_next',
         })
       }),
@@ -119,15 +117,15 @@ const TrackTime = ({ player, ...rest }) => {
       vpack: 'center',
       className: 'osd-music-pill spacing-h-5',
       children: [
-        Label({
+        Widget.Label({
           connections: [[1000, (self) => {
             const player = Mpris.getPlayer()
             if (!player) return
             self.label = lengthStr(player.position)
           }]]
         }),
-        Label({ label: '/' }),
-        Label({
+        Widget.Label({ label: '/' }),
+        Widget.Label({
           connections: [[Mpris, (self) => {
             const player = Mpris.getPlayer()
             if (!player) return
@@ -157,8 +155,8 @@ const PlayState = ({ player }) => {
             justification: 'center',
             hpack: 'fill',
             vpack: 'center',
-            connections: [[player, (label) => {
-              label.label = `${player.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`
+            connections: [[player, label => {
+              label.label = `${player.playBackStatus == 'Playing' ? '' : ''}`
             }, 'notify::play-back-status']],
           }),
         }),
@@ -228,8 +226,8 @@ export default () => MarginRevealer({
     }, 'notify::players']],
   }),
   connections: [
-    [showMusicControls, revealer => {
-      if(showMusicControls.value) 
+    [variables.showMusicControls, revealer => {
+      if(variables.showMusicControls.value) 
         revealer._show()
       else 
         revealer._hide()

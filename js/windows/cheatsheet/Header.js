@@ -7,24 +7,24 @@ export default Box({
   children: [
     Label({
       hpack: 'center',
-      css: 'margin-right: 0.682rem;',
-      className: 'txt-title txt',
       label: 'Cheat sheet',
+      className: 'txt-title txt',
+      css: 'margin-right: 0.682rem;',
     }),
     Label({
+      label: '⌘',
       vpack: 'center',
       className: 'cheatsheet-key txt-small',
-      label: '⌘',
     }),
     Label({
+      label: '+',
       vpack: 'center',
       className: 'cheatsheet-key-notkey txt-small',
-      label: '+',
     }),
     Label({
+      label: '/',
       vpack: 'center',
       className: 'cheatsheet-key txt-small',
-      label: '/',
     })
   ]
 })

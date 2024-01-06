@@ -10,7 +10,7 @@ function launchApp(app) {
 }
 
 function Launcher() {
-  const mkItems = () => [
+  const items = [
     Widget.Separator({ hexpand: true }),
     ...Applications.query('').flatMap(app => Widget.Revealer({
       setup: w => w.attribute = { app, revealer: w },
@@ -22,7 +22,6 @@ function Launcher() {
     Widget.Separator({ hexpand: true }),
   ]
 
-  let items = mkItems()
   const list = Widget.Box({ vertical: true, children: items })
 
   const entry = Widget.Entry({
@@ -59,7 +58,6 @@ function Launcher() {
       entry.text = ''
       if (visible) entry.grab_focus()
       else {
-        items = mkItems()
         list.children = items
       }
     }),

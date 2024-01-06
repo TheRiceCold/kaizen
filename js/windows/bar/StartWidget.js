@@ -1,13 +1,13 @@
 import { Widget } from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
-import { FocusedClient, MediaIndicator, OverviewButton, SeparatorDot } from './modules/exports.js'
+import { Music, FocusedClient, OverviewButton, SeparatorDot } from './modules/exports.js'
 
 const Modules = [
   RoundedCorner('topleft', 'corner-black'),
   OverviewButton,
   SeparatorDot(),
   FocusedClient,
-  MediaIndicator(),
+  Music,
 ]
 
 export default Widget.Box({ children: Modules })
