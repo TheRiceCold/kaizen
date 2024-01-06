@@ -15,7 +15,7 @@ const Sidebar = Box({
       children: [
         Box({
           vertical: true,
-          children: [Header, StackContent]
+          children: [ Header, StackContent ]
         }), Footer,
       ]
     }),

@@ -1,86 +1,20 @@
-import { Utils, Widget } from '../imports.js'
-import { setupCursorHover } from './CursorHover.js'
-import { AnimatedCircularProgress } from './main.js'
+import { Utils, Widget } from '../../imports.js'
+import { setupCursorHover } from '../CursorHover.js'
+import { AnimatedCircularProgress } from '../main.js'
 
+import NotificationIcon from './Icon.js'
+
+const { timeout } = Utils
 const { GLib, Gdk, Gtk } = imports.gi
 
-function guessMessageType(summary) {
-  if (summary.includes('recording')) 
-    return 'screen_record'
-  if (summary.includes('battery') || summary.includes('power')) 
-    return 'power'
-  if (summary.includes('screenshot')) 
-    return 'screenshot_monitor'
-  if (summary.includes('welcome')) 
-    return 'waving_hand'
-  if (summary.includes('time')) 
-    return 'scheduleb'
-  if (summary.includes('installed')) 
-    return 'download'
-  if (summary.includes('update')) 
-    return 'update'
-  if (summary.startsWith('file')) 
-    return 'folder_copy'
-  return 'chat'
-}
+export default ({ notification, isPopup = false, popupTimeout = 3000, props = {} }) => {
+  const command = isPopup ? () => notification.dismiss() : () => notification.close()
 
-const NotificationIcon = (notifObject) => {
-  if (notifObject.image) {
-    return Widget.Box({
-      hexpand: false,
-      className: 'notif-icon',
-      valign: Gtk.Align.CENTER,
-      css: `
-        background-image: url("${notifObject.image}");
-        background-size: auto 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-      `,
-    })
-  }
-
-  let icon = 'NO_ICON'
-  if (Utils.lookUpIcon(notifObject.appIcon))
-    icon = notifObject.appIcon
-  if (Utils.lookUpIcon(notifObject.appEntry))
-    icon = notifObject.appEntry
-
-  return Widget.Box({
-    hexpand: false,
-    vpack: 'center',
-    className: `notif-icon notif-icon-material-${notifObject.urgency}`,
-    homogeneous: true,
-    children: [(icon != 'NO_ICON' ?
-      Widget.Icon({
-        vpack: 'center',
-        icon: icon,
-        setup: self => Utils.timeout(1, () => {
-          const styleContext = self.get_parent().get_style_context()
-          const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL)
-          const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL)
-          self.size = Math.max(width * 0.7, height * 0.7, 1)
-        }),
-      }) : Widget.Label({
-        hexpand: true,
-        className: 'icon-material txt-hugerass',
-        label: `${notifObject.urgency == 'critical' ? 'release_alert' : guessMessageType(notifObject.summary.toLowerCase())}`, 
-      })
-    )]
-  })
-}
-
-export default ({
-  notifObject,
-  isPopup = false,
-  popupTimeout = 3000,
-  props = {},
-} = {}) => {
-  const command = (isPopup ? () => notifObject.dismiss() : () => notifObject.close())
   const destroyWithAnims = () => {
     widget.sensitive = false
     notificationBox.setCss(middleClickClose)
-    Utils.timeout(200, () => wholeThing.revealChild = false)
-    Utils.timeout(400, () => { command(); wholeThing.destroy() })
+    timeout(200, () => wholeThing.revealChild = false)
+    timeout(400, () => { command(); wholeThing.destroy() })
   }
 
   const widget = Widget.EventBox({
@@ -98,7 +32,7 @@ export default ({
 
   const wholeThing = Widget.Revealer({
     properties: [
-      ['id', notifObject.id],
+      ['id', notification.id],
       ['close', undefined],
       ['hovered', false],
       ['dragging', false],
@@ -121,8 +55,8 @@ export default ({
       useMarkup: true,
       maxWidthChars: 24,
       justify: Gtk.Justification.LEFT,
-      label: notifObject.body.split('\n')[0],
-      className: `txt-smallie notif-body-${notifObject.urgency}`,
+      label: notification.body.split('\n')[0],
+      className: `txt-smallie notif-body-${notification.urgency}`,
     }),
   })
   const notifTextExpanded = Widget.Revealer({
@@ -135,26 +69,26 @@ export default ({
       children: [
         Widget.Label({
           xalign: 0,
-          className: `txt-smallie notif-body-${notifObject.urgency}`,
-          useMarkup: true,
-          justify: Gtk.Justification.LEFT,
-          maxWidthChars: 24,
           wrap: true,
-          label: notifObject.body,
+          useMarkup: true,
+          maxWidthChars: 24,
+          label: notification.body,
+          justify: Gtk.Justification.LEFT,
+          className: `txt-smallie notif-body-${notification.urgency}`,
         }),
         Widget.Box({
           homogeneous: true,
           className: 'notif-actions',
           children: [
             Widget.Button({
-              className: `notif-action notif-action-${notifObject.urgency}`,
-              label: 'Close',
+              label: '󱎘',
               onClicked: () => destroyWithAnims(),
+              className: `notif-action notif-action-${notification.urgency}`,
             }),
-            ...notifObject.actions.map(action => Widget.Button({
-              className: `notif-action notif-action-${notifObject.urgency}`,
-              onClicked: () => notifObject.invoke(action.id),
+            ...notification.actions.map(action => Widget.Button({
               label: action.label,
+              onClicked: () => notification.invoke(action.id),
+              className: `notif-action notif-action-${notification.urgency}`,
             }))
           ],
         })
@@ -167,9 +101,9 @@ export default ({
     homogeneous: true,
     children: [
       Widget.Overlay({
-        child: NotificationIcon(notifObject),
+        child: NotificationIcon(notification),
         overlays: isPopup ? [AnimatedCircularProgress({
-          className: `notif-circprog-${notifObject.urgency}`,
+          className: `notif-circprog-${notification.urgency}`,
           vpack: 'center', hpack: 'center',
           initFrom: (isPopup ? 100 : 0),
           initTo: 0,
@@ -178,8 +112,9 @@ export default ({
       }),
     ]
   })
+
   let notifTime = ''
-  const messageTime = GLib.DateTime.new_from_unix_local(notifObject.time)
+  const messageTime = GLib.DateTime.new_from_unix_local(notification.time)
   if (messageTime.get_day_of_year() == GLib.DateTime.new_now_local().get_day_of_year())
     notifTime = messageTime.format('%H:%M')
   else if (messageTime.get_day_of_year() == GLib.DateTime.new_now_local().get_day_of_year() - 1)
@@ -201,8 +136,8 @@ export default ({
             maxWidthChars: 24,
             truncate: 'end',
             ellipsize: 3,
-            useMarkup: notifObject.summary.startsWith('<'),
-            label: notifObject.summary,
+            useMarkup: notification.summary.startsWith('<'),
+            label: notification.summary,
           }),
           Widget.Label({
             vpack: 'center',
@@ -224,19 +159,19 @@ export default ({
       if (notifTextPreview.revealChild) {
         notifTextPreview.revealChild = false
         notifTextExpanded.revealChild = true
-        self.child.label = 'expand_less'
+        self.child.label = '󰅃'
         expanded = true
       }
       else {
         notifTextPreview.revealChild = true
         notifTextExpanded.revealChild = false
-        self.child.label = 'expand_more'
+        self.child.label = '󰅀'
         expanded = false
       }
     },
     child: Widget.Label({ 
+      label: '󰅀', 
       vpack: 'center',
-      label: 'expand_more', 
       className: 'icon-material txt-norm', 
     }),
     setup: setupCursorHover,
@@ -244,7 +179,7 @@ export default ({
 
   const notificationContent = Widget.Box({
     ...props,
-    className: `${isPopup ? 'popup-' : ''}notif-${notifObject.urgency} spacing-h-10`,
+    className: `${isPopup ? 'popup-' : ''}notif-${notification.urgency} spacing-h-10`,
     children: [
       notifIcon,
       Widget.Box({
@@ -332,13 +267,13 @@ export default ({
         notifTextPreview.revealChild = false
         notifTextExpanded.revealChild = true
         expanded = true
-        notifExpandButton.child.label = 'expand_less'
+        notifExpandButton.child.label = '󰅃'
       }
       else if (initDirVertical == 1 && offset_y < -MOVE_THRESHOLD && expanded) {
         notifTextPreview.revealChild = true
         notifTextExpanded.revealChild = false
         expanded = false
-        notifExpandButton.child.label = 'expand_more'
+        notifExpandButton.child.label = '󰅀'
       }
 
     }, 'drag-update').hook(gesture, self => {
@@ -358,10 +293,8 @@ export default ({
           self.setCss(leftAnim1)
           widget.sensitive = false
         }
-        Utils.timeout(200, () => {
-          wholeThing.revealChild = false
-        })
-        Utils.timeout(400, () => {
+        timeout(200, () => wholeThing.revealChild = false)
+        timeout(400, () => {
           command()
           wholeThing.destroy()
         })
@@ -380,7 +313,6 @@ export default ({
       initDirX = 0
       initDirVertical = -1
     }, 'drag-end')
-    ,
   })
   widget.add(notificationBox)
   wholeThing.child.children = [widget]
