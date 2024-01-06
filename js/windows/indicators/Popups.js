@@ -1,42 +1,38 @@
-import { Notifications, Widget } from '../../imports.js'
+import { Utils, Widget, Notifications } from '../../imports.js'
 import { Notification } from '../../misc/main.js'
+
+const { GLib, Gtk } = imports.gi
 
 export default Widget.Box({
   vertical: true,
   className: 'osd-notifs spacing-v-5-revealer',
-  attribute: {
-    map: new Map(),
-    dismiss: (box, id) => {
-      if (!box.attribute.map.has(id))
-        return
-      const notif = box.attribute.map.get(id)
-      notif.attribute.count--
-      if (notif.attribute.count <= 0) {
-        box.attribute.map.delete(id)
-        notif.attribute.destroyWithAnims()
-      }
-    },
-    notify: (box, id) => {
+  properties: [
+    ['map', new Map()],
+
+    ['dismiss', (box, id, force = false) => {
+      if (!id || !box._map.has(id) || box._map.get(id)._hovered && !force) return
+
+      const notif = box._map.get(id)
+      notif.revealChild = false
+      notif._destroyWithAnims()
+    }],
+
+    ['notify', (box, id) => {
+      // console.log('new notiffy', id, Notifications.getNotification(id))
+      if (!id || Notifications.dnd) return
+      if (!Notifications.getNotification(id)) return
+
+      box._map.delete(id)
+
       const notif = Notifications.getNotification(id)
-      if (Notifications.dnd || !notif)
-        return
-      const replace = box.attribute.map.get(id)
-      if (!replace) {
-        const notification = Notification(notif)
-        box.attribute.map.set(id, notification)
-        notification.attribute.count = 1
-        box.pack_start(notification, false, false, 0)
-      } else {
-        const notification = Notification(notif, true)
-        notification.attribute.count = replace.attribute.count + 1
-        box.remove(replace)
-        replace.destroy()
-        box.pack_start(notification, false, false, 0)
-        box.attribute.map.set(id, notification)
-      }
-    },
-  },
+      const newNotif = Notification({ notifObject: notif, isPopup: true })
+      box._map.set(id, newNotif)
+      box.pack_end(box._map.get(id), false, false, 0)
+      box.show_all()
+    }],
+  ],
+  setup: self => self
+    .hook(Notifications, (box, id) => box._notify(box, id), 'notified')
+    .hook(Notifications, (box, id) => box._dismiss(box, id), 'dismissed')
+    .hook(Notifications, (box, id) => box._dismiss(box, id, true), 'closed'),
 })
-  .hook(Notifications, (box, id) => box.attribute.notify(box, id), 'notified')
-  .hook(Notifications, (box, id) => box.attribute.dismiss(box, id), 'dismissed')
-  .hook(Notifications, (box, id) => box.attribute.dismiss(box, id, true), 'closed');

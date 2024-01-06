@@ -7,8 +7,6 @@ import StackContent from './stack/main.js'
 const { Box } = Widget
 
 const Sidebar = Box({
-  vexpand: true,
-  hexpand: true,
   children: [
     Box({
       vexpand: true,
