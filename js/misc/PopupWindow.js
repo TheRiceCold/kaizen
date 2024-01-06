@@ -5,6 +5,8 @@ const { closeWindow } = App
 export default ({
   name,
   child,
+  showClassName,
+  hideClassName,
   ...props
 }) => Widget.Window({
   name,
@@ -15,10 +17,13 @@ export default ({
   ...props,
 
   child: Widget.Box({ 
-    className: 'window-content',
+    className: `window-content ${showClassName} ${hideClassName}`,
+    setup: self => self.hook(App, (self, currentName, visible) => {
+      if (currentName === name)
+        self.toggleClassName(hideClassName, !visible)
+    }),
     children: [
       child,
-      // Click Outside to Close
       Widget.EventBox({
         onPrimaryClick: () => closeWindow(name),
         onSecondaryClick: () => closeWindow(name),

@@ -21,7 +21,7 @@ const Modules = [
   }),
   BatteryBar,
   SeparatorDot(),
-  DateButton({ onClicked: () => App.toggleWindow('sidebar') }),
+  DateButton({ onClicked: () => App.toggleWindow('sideright') }),
   RoundedCorner('topright', 'corner-black')
 ]
 
