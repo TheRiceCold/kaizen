@@ -4,7 +4,7 @@ import SidebarRight from './SidebarRight.js'
 export default PopupWindow({
   focusable: true,
   name: 'sideright',
-  child: SidebarRight(),
+  child: SidebarRight,
   showClassName: 'sideright-show',
   hideClassName: 'sideright-hide',
   anchor: ['right', 'top', 'bottom'],

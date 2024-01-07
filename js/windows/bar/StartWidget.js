@@ -7,6 +7,7 @@ const Modules = [
   OverviewButton,
   SeparatorDot(),
   FocusedClient,
+  SeparatorDot(),
   Music,
 ]
 

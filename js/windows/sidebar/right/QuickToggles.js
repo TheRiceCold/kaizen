@@ -15,11 +15,11 @@ export const ToggleIconWifi = (props = {}) => Widget.Button({
   },
   child: NetworkIndicator(),
   connections: [
-    [Network, button => {
-      button.toggleClassName('sidebar-button-active', [Network.wifi?.internet, Network.wired?.internet].includes('connected'))
+    [Network, btn => {
+      btn.toggleClassName('sidebar-button-active', [Network.wifi?.internet, Network.wired?.internet].includes('connected'))
     }],
-    [Network, button => {
-      button.tooltipText = (`${Network.wifi?.ssid} | Right-click to configure` || 'Unknown');
+    [Network, btn => {
+      btn.tooltipText = (`${Network.wifi?.ssid} | Right-click to configure` || 'Unknown')
     }],
   ],
   setup: setupCursorHover,
@@ -37,35 +37,34 @@ export const ToggleIconBluetooth = (props = {}) => Widget.Button({
     App.closeWindow('sideright')
   },
   child: BluetoothIndicator(),
-  connections: [[Bluetooth, button =>
-    button.toggleClassName('sidebar-button-active', Bluetooth?.enabled)
+  connections: [[Bluetooth, btn =>
+    btn.toggleClassName('sidebar-button-active', Bluetooth?.enabled)
   ]],
   setup: setupCursorHover,
   ...props,
 });
 
 export const HyprToggleIcon = (icon, name, hyprlandConfigValue, props = {}) => Widget.Button({
+  tooltipText: name,
   className: 'txt-small sidebar-iconbutton',
-  tooltipText: `${name}`,
-  onClicked: button => {
+  onClicked: btn => {
     Utils.execAsync(`hyprctl -j getoption ${hyprlandConfigValue}`).then(result => {
       const currentOption = JSON.parse(result).int
       Utils.execAsync(['bash', '-c', `hyprctl keyword ${hyprlandConfigValue} ${1 - currentOption} &`]).catch(print)
-      button.toggleClassName('sidebar-button-active', currentOption == 0)
+      btn.toggleClassName('sidebar-button-active', currentOption == 0)
     }).catch(print)
   },
   child: Widget.Label({ label: icon, className: 'txt-norm', hpack: 'center' }),
-  setup: button => {
-    button.toggleClassName('sidebar-button-active', JSON.parse(Utils.exec(`hyprctl -j getoption ${hyprlandConfigValue}`)).int == 1)
-    setupCursorHover(button)
-  },
-  ...props,
+  setup: btn => {
+    btn.toggleClassName('sidebar-button-active', JSON.parse(Utils.exec(`hyprctl -j getoption ${hyprlandConfigValue}`)).int == 1)
+    setupCursorHover(btn)
+  }, ...props,
 })
 
 export const ModuleNightLight = (props = {}) => Widget.Button({
-  properties: [['enabled', false], ['yellowlight', undefined]],
   tooltipText: 'Night Light',
   className: 'txt-small sidebar-iconbutton',
+  properties: [['enabled', false], ['yellowlight', undefined]],
   onClicked: self => {
     self._enabled = !self._enabled;
     self.toggleClassName('sidebar-button-active', self._enabled);
@@ -83,18 +82,18 @@ export const ModuleNightLight = (props = {}) => Widget.Button({
 export const ModuleInvertColors = (props = {}) => Widget.Button({
   tooltipText: 'Color inversion',
   className: 'txt-small sidebar-iconbutton',
-  onClicked: button => {
+  onClicked: btn => {
     Hyprland.sendMessage('j/getoption decoration:screen_shader').then(output => {
       const shaderPath = JSON.parse(output)['str'].trim()
       if (shaderPath != "[[EMPTY]]" && shaderPath != "") {
         Utils.execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader '[[EMPTY]]'`]).catch(print);
-        button.toggleClassName('sidebar-button-active', false);
+        btn.toggleClassName('sidebar-button-active', false);
       }
       else {
         Hyprland.sendMessage(
           `j/keyword decoration:screen_shader ${expandTilde('~/.config/hypr/shaders/invert.frag')}`
         ).catch(print);
-        button.toggleClassName('sidebar-button-active', true)
+        btn.toggleClassName('sidebar-button-active', true)
       }
     })
   },
@@ -133,7 +132,7 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({
     App.toggleWindow('sideright')
   },
   child: Widget.Label({ label: 'edit', className: 'txt-norm' }),
-  setup: button => setupCursorHover(button)
+  setup: btn => setupCursorHover(btn)
 })
 
 export const ModuleReloadIcon = (props = {}) => Widget.Button({
@@ -162,10 +161,10 @@ export const ModuleSettingsIcon = (props = {}) => Widget.Button({
 
 export const ModulePowerIcon = (props = {}) => Widget.Button({
   ...props,
-  tooltipText: 'Session',
+  tooltipText: 'Power Menu',
   className: 'txt-small sidebar-iconbutton',
   onClicked: () => {
-    App.toggleWindow('session')
+    App.toggleWindow('powermenu')
     App.closeWindow('sideright')
   },
   setup: btn => setupCursorHover(btn),

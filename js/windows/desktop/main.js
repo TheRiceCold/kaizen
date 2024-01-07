@@ -5,17 +5,17 @@ const TimeDate = Widget.Box({
   hpack: 'start',
   vpack: 'start',
   vertical: true,
-  className: 'bg-time-box',
+  css: ' margin: 4rem; padding: 1rem; ',
   children: [
     Clock({ 
       interval: 5000,
       format: '%I:%M %p',
-      className: 'bg-time-clock',
+      css: ' font-size: 6rem; border: 4px solid white;'
     }),
     Clock({ 
       interval: 5000,
       format: '%A, %m/%d/%Y',
-      className: 'bg-time-date',
+      css: 'font-size: 3rem;',
     })
   ],
 })

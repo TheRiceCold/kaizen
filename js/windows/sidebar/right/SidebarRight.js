@@ -13,17 +13,15 @@ import {
 import ModuleCalendar from './Calendar.js'
 import ModuleNotificationList from './NotificationList.js'
 
+import { variables } from '../../../constants/main.js'
+
 const timeRow = Widget.Box({
   className: 'spacing-h-5 sidebar-group-invisible-morehorizpad',
   children: [
     Widget.Label({
       hpack: 'center',
       className: 'txt-small txt',
-      connections: [[5000, label => {
-        Utils.execAsync(['bash', '-c', `uptime -p | sed -e 's/up //;s/ hours,/h/;s/ minutes/m/'`]).then(upTimeString => {
-          label.label = `System uptime: ${upTimeString}`
-        }).catch(print)
-      }]],
+      binds: [['label', variables.uptime, 'value', v => `System uptime: ${v}`]],
     }),
     Widget.Box({ hexpand: true }),
     ModuleReloadIcon({ hpack: 'end' }),
@@ -46,7 +44,7 @@ const togglesBox = Widget.Box({
   ]
 })
 
-export default () => Widget.Box({
+export default Widget.Box({
   vexpand: true,
   hexpand: true,
   css: 'min-width: 2px;',

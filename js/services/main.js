@@ -1,4 +1,5 @@
 export { default as Todo } from './Todo.js'
+export { default as Waifus } from './Waifus.js'
 export { default as ChatGPT } from './ChatGPT.js'
 export { default as PowerMenu } from './PowerMenu.js'
 export { default as Brightness } from './Brightness.js'

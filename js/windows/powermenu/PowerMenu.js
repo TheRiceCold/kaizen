@@ -3,6 +3,7 @@ import { variables } from '../../constants/main.js'
 
 const { Gdk, Gtk } = imports.gi
 const { SCREEN_WIDTH, SCREEN_HEIGHT } = variables
+const WINDOW_NAME = 'powermenu'
 
 const SessionButton = (name, icon, command, props = {}) => {
   const buttonDescription = Widget.Revealer({
@@ -56,32 +57,32 @@ const SessionButton = (name, icon, command, props = {}) => {
 export default () => {
   // lock, logout, sleep
   const lockButton = SessionButton('Lock', '', () => {
-    App.closeWindow('session')
+    App.closeWindow(WINDOW_NAME)
     Utils.execAsync('gtklock')
   })
   const logoutButton = SessionButton('Logout', '󰍃', () => {
-    App.closeWindow('session')
+    App.closeWindow(WINDOW_NAME)
     Utils.execAsync(['bash', '-c', 'loginctl terminate-user $USER'])
   })
   const sleepButton = SessionButton('Sleep', '󰒲', () => {
-    App.closeWindow('session')
+    App.closeWindow(WINDOW_NAME)
     Utils.execAsync('systemctl suspend')
   })
   // hibernate, shutdown, reboot
   const hibernateButton = SessionButton('Hibernate', 'downloading', () => {
-    App.closeWindow('session')
+    App.closeWindow(WINDOW_NAME)
     Utils.execAsync('systemctl hibernate')
   })
   const shutdownButton = SessionButton('Shutdown', 'power_settings_new', () => {
-    App.closeWindow('session')
+    App.closeWindow(WINDOW_NAME)
     Utils.execAsync('systemctl poweroff')
   })
   const rebootButton = SessionButton('Reboot', '󰜉', () => {
-    App.closeWindow('session')
+    App.closeWindow(WINDOW_NAME)
     Utils.execAsync('systemctl reboot')
   })
   const cancelButton = SessionButton('Cancel', '󱎘',
-    () => App.closeWindow('session'),
+    () => App.closeWindow(WINDOW_NAME),
     { className: 'session-button-cancel' })
   return Widget.Box({
     vertical: true,
@@ -91,9 +92,9 @@ export default () => {
       min-height: ${SCREEN_HEIGHT * 1.5}px;`,
     children: [
       Widget.EventBox({
-        onPrimaryClick: () => App.closeWindow('session'),
-        onSecondaryClick: () => App.closeWindow('session'),
-        onMiddleClick: () => App.closeWindow('session'),
+        onPrimaryClick: () => App.closeWindow(WINDOW_NAME),
+        onSecondaryClick: () => App.closeWindow(WINDOW_NAME),
+        onMiddleClick: () => App.closeWindow(WINDOW_NAME),
       }),
       Widget.Box({
         hpack: 'center',

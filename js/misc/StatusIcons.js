@@ -71,18 +71,18 @@ export const BluetoothIndicator = () => Widget.Stack({
 const NetworkWiredIndicator = () => Widget.Stack({
   transition: 'slide_up_down',
   items: [
-      ['fallback', SimpleNetworkIndicator()],
-      ['unknown', Widget.Label({ className: 'txt-norm icon-material', label: '󰤭' })],
-      ['disconnected', Widget.Label({ className: 'txt-norm icon-material', label: '󰤫' })],
-      ['connected', Widget.Label({ className: 'txt-norm icon-material', label: 'lan' })],
-      ['connecting', Widget.Label({ className: 'txt-norm icon-material', label: 'settings_ethernet' })],
+    ['fallback', SimpleNetworkIndicator()],
+    ['unknown', Widget.Label({ className: 'txt-norm icon-material', label: '󰤭' })],
+    ['disconnected', Widget.Label({ className: 'txt-norm icon-material', label: '󰤫' })],
+    ['connected', Widget.Label({ className: 'txt-norm icon-material', label: 'lan' })],
+    ['connecting', Widget.Label({ className: 'txt-norm icon-material', label: 'settings_ethernet' })],
   ],
-  setup: (self) => self.hook(Network, stack => {
+  setup: self => self.hook(Network, stack => {
     if (!Network.wired) return
     const { internet } = Network.wired
     stack.shown = ['connecting', 'connected'].includes(internet) ? internet : Network.connectivity !== 'full' ? 'disconnected' : 'fallback'
   }),
-});
+})
 
 const SimpleNetworkIndicator = () => FontIcon({
   setup: self => self.hook(Network, self => {
@@ -104,7 +104,7 @@ const NetworkWifiIndicator = () => Widget.Stack({
     ['3', Widget.Label({ className: 'txt-norm icon-material', label: '󰤥' })],
     ['4', Widget.Label({ className: 'txt-norm icon-material', label: '󰤨' })],
   ],
-  setup: (self) => self.hook(Network, (stack) => {
+  setup: (self) => self.hook(Network, stack => {
     if (!Network.wifi) return
     if (Network.wifi.internet == 'connected')
       stack.shown = String(Math.ceil(Network.wifi.strength / 25))
@@ -125,15 +125,15 @@ export const NetworkIndicator = () => Widget.Stack({
       stack.shown = 'wifi'
       return
     }
-    const primary = Network.primary || 'fallback';
+    const primary = Network.primary || 'fallback'
     stack.shown = ['wifi', 'wired'].includes(primary) ? primary : 'fallback'
   }),
 })
 
 const KeyboardLayout = ({ useFlag } = {}) => {
-  var initLangs = [];
-  var languageStackArray = [];
-  var currentKeyboard;
+  var initLangs = []
+  var languageStackArray = []
+  var currentKeyboard
 
   const updateCurrentKeyboards = () => {
     currentKeyboard = JSON.parse(Utils.exec('hyprctl -j devices')).keyboards
@@ -177,7 +177,7 @@ const KeyboardLayout = ({ useFlag } = {}) => {
     }, 'keyboard-layout'),
   })
   widgetRevealer.child = widgetContent;
-  return widgetRevealer;
+  return widgetRevealer
 }
 
 export const StatusIcons = (props = {}) => Widget.Box({
@@ -191,4 +191,4 @@ export const StatusIcons = (props = {}) => Widget.Box({
       NetworkIndicator(),
     ]
   })
-});
+})

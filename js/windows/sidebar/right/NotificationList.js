@@ -15,7 +15,7 @@ export default props => {
             vertical: true,
             className: 'spacing-v-5',
             children: [
-              Widget.Label('notifications_active', 'badonkers'),
+              Widget.Label('󰂚', 'txt-badonkers'),
               Widget.Label({ label: 'No notifications', className: 'txt-small' }),
             ]
           }),
@@ -64,7 +64,7 @@ export default props => {
     }),
     setup: setupCursorHover,
   })
-  const silenceButton = ListActionButton('notifications_paused', 'Silence', self => {
+  const silenceButton = ListActionButton('󰂛', 'Silence', self => {
     Notifications.dnd = !Notifications.dnd
     self.toggleClassName('notif-listaction-btn-enabled', Notifications.dnd)
   })
