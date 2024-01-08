@@ -238,7 +238,7 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
       }
 
       if (initDirVertical == 0 && offset_x > MOVE_THRESHOLD) {
-        if (initDirX < 0) self.setCss('margin-left: 0px; margin-right: 0px;')
+        if (initDirX < 0) self.setCss('margin-left: 0; margin-right: 0;')
         else
           self.setCss(`
               margin-left:   ${Number(offset_x + startMargin - MOVE_THRESHOLD)}px;
@@ -247,7 +247,7 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
       }
       else if (initDirVertical == 0 && offset_x < -MOVE_THRESHOLD) {
         if (initDirX > 0)
-          self.setCss('margin-left: 0px; margin-right: 0px;')
+          self.setCss('margin-left: 0; margin-right: 0;')
         else {
           offset_x = Math.abs(offset_x)
           self.setCss(`

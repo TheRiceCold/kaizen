@@ -14,8 +14,8 @@ export default index => {
   const fixed = Gtk.Fixed.new()
 
   return Widget.Box({
-    class_name: 'workspace',
     vpack: 'center',
+    className: 'workspace',
     css: `
       min-width: ${1920 * SCALE}px;
       min-height: ${1080 * SCALE}px;

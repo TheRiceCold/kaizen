@@ -1,4 +1,4 @@
-import { App, Audio, Mpris } from '../imports.js'
+import { App, Mpris } from '../imports.js'
 import { showMusicControls } from '../constants/variables.js'
 
 export default async () => {
@@ -10,8 +10,8 @@ export default async () => {
     // globalThis.audio = Audio.default
 
     // globalThis.recorder = (await import('../services/ScreenRecorder.js')).default
-    // globalThis.brightness = (await import('../services/Brightness.js')).default
-    // globalThis.indicator = (await import('../services/Indicator.js')).default
+    globalThis.brightness = (await import('../services/Brightness.js')).default
+    globalThis.indicator = (await import('../services/Indicator.js')).default
 
     // Mpris.players.forEach(player => {
     //   player.connect('changed', player => {

@@ -84,7 +84,7 @@ const Setter = opt => {
 }
 
 const Row = opt => Widget.Box({
-  class_name: 'row',
+  className: 'row',
   setup: self => self.opt = opt,
   children: [
     Widget.Box({
@@ -92,7 +92,7 @@ const Row = opt => Widget.Box({
       vpack: 'center',
       children: [
         opt.title && Widget.Label({ xalign: 0, class_name: 'summary', label: opt.title }),
-        Widget.Label({ xalign: 0, class_name: 'id', label: `id: "${opt.id}"` }),
+        Widget.Label({ xalign: 0, className: 'id', label: `id: "${opt.id}"` }),
       ],
     }),
     Widget.Box({ hexpand: true }),
@@ -103,8 +103,8 @@ const Row = opt => Widget.Box({
         Widget.Box({ hpack: 'end', child: Setter(opt) }),
         opt.note && Widget.Label({
           xalign: 1,
-          class_name: 'note',
           label: opt.note,
+          className: 'note',
         }),
       ],
     }),
@@ -207,7 +207,7 @@ const searchEntry = Widget.Revealer({
         self.grab_focus()
     }]],
     hexpand: true,
-    class_name: 'search',
+    className: 'search',
     placeholder_text: 'Search Options',
     secondary_icon_name: icons.apps.search,
     onChange: ({ text }) => search.value = text || '',
@@ -229,14 +229,11 @@ const searchPage = Widget.Box({
 })
 
 export default RegularWindow({
-  name: 'settings-dialog',
   title: 'Settings',
+  name: 'settings-dialog',
   setup: win => win.set_default_size(800, 500),
   connections: [
-    ['delete-event', win => {
-      win.hide()
-      return true
-    }],
+    ['delete-event', win => { win.hide(); return true }],
     ['key-press-event', (self, event) => {
       if (event.get_keyval()[1] === imports.gi.Gdk.KEY_Escape) {
         self.text = ''

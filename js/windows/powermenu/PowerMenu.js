@@ -58,7 +58,7 @@ export default () => {
   // lock, logout, sleep
   const lockButton = SessionButton('Lock', '', () => {
     App.closeWindow(WINDOW_NAME)
-    Utils.execAsync('gtklock')
+    Utils.execAsync('swaylock')
   })
   const logoutButton = SessionButton('Logout', '󰍃', () => {
     App.closeWindow(WINDOW_NAME)

@@ -208,17 +208,16 @@ export const TodoWidget = () => {
   const TodoTabButton = (isDone, navIndex) => Widget.Button({
     hexpand: true,
     className: 'sidebar-selector-tab',
-    onClicked: button => {
+    onClicked: btn => {
       todoItemsBox.shown = `${isDone ? 'done' : 'undone'}`
-      const kids = button.get_parent().get_children()
-      for (let i = 0; i < kids.length; i++) {
-        if (kids[i] != button) 
-          kids[i].toggleClassName('sidebar-selector-tab-active', false)
-        else button.toggleClassName('sidebar-selector-tab-active', true)
-      }
-      // Fancy highlighter line width
-      const buttonWidth = button.get_allocated_width()
-      const highlightWidth = button.get_children()[0].get_allocated_width()
+      const kids = btn.get_parent().get_children()
+      kids.forEach(kid => {
+        if (kid !== btn) 
+          kid.toggleClassName('sidebar-selector-tab-active', false)
+        else btn.toggleClassName('sidebar-selector-tab-active', true)
+      })
+      const buttonWidth = btn.get_allocated_width()
+      const highlightWidth = btn.get_children()[0].get_allocated_width()
       navIndicator.css = `
         font-size: ${navIndex}px; 
         padding: 0px ${(buttonWidth - highlightWidth) / 2}px;
@@ -238,16 +237,16 @@ export const TodoWidget = () => {
         })
       ]
     }),
-    setup: button => Utils.timeout(1, () => {
-      setupCursorHover(button)
-      button.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`)
+    setup: btn => Utils.timeout(1, () => {
+      setupCursorHover(btn)
+      btn.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`)
     }),
   })
   const undoneButton = TodoTabButton(false, 0)
   const doneButton = TodoTabButton(true, 1)
   const navIndicator = NavigationIndicator(2, false, { // The line thing
     className: 'sidebar-selector-highlight',
-    css: 'font-size: 0px; padding: 0rem 1.636rem;', // Shush
+    css: 'font-size: 0; padding: 0rem 1.636rem;', // Shush
   })
   return Widget.Box({
     hexpand: true,

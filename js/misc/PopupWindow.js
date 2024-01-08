@@ -5,8 +5,6 @@ const { closeWindow } = App
 export default ({
   name,
   child,
-  showClassName,
-  hideClassName,
   ...props
 }) => Widget.Window({
   name,
@@ -17,11 +15,7 @@ export default ({
   ...props,
 
   child: Widget.Box({ 
-    className: `window-content ${showClassName} ${hideClassName}`,
-    setup: self => self.hook(App, (self, currentName, visible) => {
-      if (currentName === name)
-        self.toggleClassName(hideClassName, !visible)
-    }),
+    className: 'window-content',
     children: [
       child,
       Widget.EventBox({

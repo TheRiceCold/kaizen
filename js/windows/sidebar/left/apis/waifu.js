@@ -142,7 +142,7 @@ const WaifuImage = taglist => {
         // Start download
         const showImage = () => {
           downloadState.shown = 'done'
-          // blockImage.css = `background-color: ${dominant_color};`;
+          // blockImage.css = `background-color: ${dominant_color};`
           blockImage.css = `background-image:url('${thisBlock._imagePath}');` // TODO: use proper image widget
           Utils.timeout(IMAGE_REVEAL_DELAY, () => {
             blockImageRevealer.revealChild = true
@@ -159,7 +159,7 @@ const WaifuImage = taglist => {
         blockHeading.get_children().forEach((child) => {
           child.setCss(`border-color: ${dominant_color};`)
         })
-        colorIndicator.css = `background-color: ${dominant_color};`
+        colorIndicator.css = `background-color: ${dominant_color}`
       }],
     ],
     children: [

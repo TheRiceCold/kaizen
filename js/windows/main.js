@@ -8,6 +8,7 @@ import Indicators from './indicators/main.js'
 import SidebarLeft from './sidebar/left/main.js'
 import SidebarRight from './sidebar/right/main.js'
 import ScreenCorners from './screencorners/main.js'
+import Notifications from './notifications/main.js'
 
 export default [
   Bar,
@@ -19,4 +20,5 @@ export default [
   Indicators,
   SidebarLeft,
   SidebarRight,
+  Notifications,
 ].concat(ScreenCorners)

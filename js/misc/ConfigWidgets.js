@@ -1,21 +1,20 @@
 import { Utils, Widget } from '../imports.js'
 import { setupCursorHover } from './CursorHover.js'
 
-export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, ...rest }) => {
+export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, props }) => {
   let value = initValue
   const toggleIcon = Widget.Label({
-    className: `icon-material txt-bold ${value ? '' : 'txt-poof'}`,
     label: `${value ? 'check' : ''}`,
+    className: `icon-material txt-bold ${value ? '' : 'txt-poof'}`,
   })
   const toggleButtonIndicator = Widget.Box({
-    className: `switch-fg ${value ? 'switch-fg-true' : ''}`,
-    vpack: 'center',
     hpack: 'start',
+    vpack: 'center',
     homogeneous: true,
-    children: [toggleIcon,],
+    children: [toggleIcon],
+    className: `switch-fg ${value ? 'switch-fg-true' : ''}`,
   })
-  const toggleButton = Widget.Box({
-    hpack: 'end',
+  const toggleButton = Widget.Box({ hpack: 'end',
     className: `switch-bg ${value ? 'switch-bg-true' : ''}`,
     homogeneous: true,
     children: [toggleButtonIndicator,],
@@ -49,16 +48,16 @@ export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, ...re
       }]
     ],
     child: widgetContent,
-    onClicked: (self) => self._toggle(self),
-    setup: (button) => {
-      setupCursorHover(button),
-      button.connect('pressed', () => { // mouse down
+    onClicked: self => self._toggle(self),
+    setup: btn => {
+      setupCursorHover(btn),
+      btn.connect('pressed', () => { // mouse down
         toggleIcon.toggleClassName('txt-poof', true)
         toggleIcon.toggleClassName('switch-fg-true', false)
         if (!value) toggleIcon.toggleClassName('switch-fg-toggling-false', true)
       })
     },
-    ...rest,
+    ...props,
   })
   return interactionWrapper
 }
@@ -68,10 +67,11 @@ export const ConfigSegmentedSelection = ({
   options = [{ name: 'Option 1', value: 0 }, { name: 'Option 2', value: 1 }],
   initIndex = 0,
   onChange,
-  ...rest
+  ...props
 }) => {
   let lastSelected = initIndex
   let value = options[initIndex].value
+
   const widget = Widget.Box({
     tooltipText: desc,
     className: 'segment-container',
@@ -105,13 +105,11 @@ export const ConfigSegmentedSelection = ({
         }
       })
     }),
-    ...rest,
+    ...props,
   })
-  return widget
 
+  return widget
 }
 
-export const ConfigGap = ({ vertical = true, size = 5, ...rest }) => Widget.Box({
-  ...rest,
-  className: `gap-${vertical ? 'v' : 'h'}-${size}`,
-})
+export const ConfigGap = ({ vertical = true, size = 5, ...props }) => 
+  Widget.Box({ ...props, className: `gap-${vertical ? 'v' : 'h'}-${size}` })

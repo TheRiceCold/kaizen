@@ -1,9 +1,11 @@
-const { Gdk } = imports.gi
 import { App, Utils, Widget } from '../../../imports.js'
 import { NavigationIndicator } from '../../../misc/main.js'
+
 import toolBox from './Toolbox.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 // import apiwidgets from './ApiWidgets.js'
+
+const { Gdk } = imports.gi
 
 const contents = [
   {
@@ -76,8 +78,8 @@ const navIndicator = NavigationIndicator(2, false, {
 })
 
 const navBar = Widget.Box({
-  vertical: true,
   hexpand: true,
+  vertical: true,
   children: [navTabs, navIndicator]
 })
 

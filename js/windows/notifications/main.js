@@ -1,14 +1,17 @@
 import { Widget } from '../../imports.js'
-import Indicator from './Indicator.js'
+
+import Popups from './Popups.js'
+import Music from './Music.js'
 
 export default Widget.Window({
   layer: 'overlay',
-  name: 'indicators',
-  anchor: ['top', 'left'],
+  anchor: ['top'],
+  name: 'notifications',
   child:  Widget.Box({
     className: 'osd-window',
     children: [ 
-      Indicator(),
+      Popups, 
+      Music(),
     ],
   })
 })

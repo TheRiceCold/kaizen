@@ -3,7 +3,7 @@ import { Service, Utils } from '../imports.js'
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 
 class BrightnessService extends Service {
-  static { Service.register(this, { 'screen-changed': ['float'], }, { 'screen-value': ['float', 'rw'], }) }
+  static { Service.register(this, { 'screen-changed': ['float'], }, { 'screen-value': ['float', 'rw'] }) }
 
   _screenValue = 0
 
@@ -17,7 +17,6 @@ class BrightnessService extends Service {
       .then(() => {
         this.emit('screen-changed', percent)
         this.notify('screen-value')
-
       }).catch(print)
   }
 
@@ -34,5 +33,4 @@ class BrightnessService extends Service {
 }
 
 const service = new BrightnessService()
-
 export default service

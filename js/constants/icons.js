@@ -40,7 +40,11 @@ export default {
   brightness: {
     indicator: 'display-brightness-symbolic',
     keyboard: 'keyboard-brightness-symbolic',
-    screen: 'display-brightness-symbolic',
+    off: 'display-brightness-off-symbolic',
+    low: 'display-brightness-low-symbolic',
+    medium: 'display-brightness-medium-symbolic',
+    high: 'display-brightness-high-symbolic',
+    screen: ['󰛩', '󱩎', '󱩏', '󱩐', '󱩑', '󱩒', '󱩓', '󱩔', '󱩕', '󱩖', '󰛨'],
   },
   powermenu: {
     sleep: 'weather-clear-night-symbolic',
