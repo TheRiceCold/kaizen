@@ -35,14 +35,14 @@ function getTrackfont(player) {
 
 const trimTrackTitle = title => title.replace(/【[^】]*】/, '').trim()
 
-const TrackProgress = ({ player, ...rest }) => {
-  const _updateProgress = (circprog) => {
+const TrackProgress = props => {
+  const _updateProgress = circprog => {
     const player = Mpris.getPlayer()
     if (!player) return
     circprog.css = `font-size: ${Math.max(player.position / player.length * 100, 0)}px;`
   }
   return AnimatedCircularProgress({
-    ...rest,
+    ...props,
     className: 'osd-music-circprog',
     vpack: 'center',
     connections: [ // Update on change/once every 3 seconds
@@ -75,12 +75,12 @@ const TrackArtists = ({ player, ...rest }) => Widget.Label({
   }, 'notify::track-artists']]
 })
 
-const TrackControls = ({ player, ...rest }) => Widget.Revealer({
+const TrackControls = props => Widget.Revealer({
   revealChild: false,
   transition: 'slide_right',
   transitionDuration: 200,
   child: Widget.Box({
-    ...rest,
+    ...props,
     vpack: 'center',
     className: 'osd-music-controls spacing-h-3',
     children: [

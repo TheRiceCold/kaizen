@@ -66,7 +66,7 @@ export function getCalendarLayout(dateObject, highlight) {
       toFill = 1
     }
     j++
-    if (j == 7) { j = 0; i++; }
+    if (j == 7) { j = 0; i++ }
   }
   return calendar
 }

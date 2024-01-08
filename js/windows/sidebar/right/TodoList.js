@@ -102,28 +102,28 @@ const todoItems = isDone => Widget.Scrollable({
     const vScrollbar = listContents.get_vscrollbar()
     vScrollbar.get_style_context().add_class('sidebar-scrollbar')
   }
-});
+})
 
 const UndoneTodoList = () => {
   const newTaskButton = Widget.Revealer({
-      transition: 'slide_left',
-      transitionDuration: 200,
-      revealChild: true,
-      child: Widget.Button({
-          className: 'txt-small sidebar-todo-new',
-          halign: 'end',
-          vpack: 'center',
-          label: '+ New task',
-          setup: setupCursorHover,
-          onClicked: () => {
-            newTaskButton.revealChild = false
-            newTaskEntryRevealer.revealChild = true
-            confirmAddTask.revealChild = true
-            cancelAddTask.revealChild = true
-            newTaskEntry.grab_focus()
-          }
-      })
-  });
+    transition: 'slide_left',
+    transitionDuration: 200,
+    revealChild: true,
+    child: Widget.Button({
+      className: 'txt-small sidebar-todo-new',
+      halign: 'end',
+      vpack: 'center',
+      label: '+ New task',
+      setup: setupCursorHover,
+      onClicked: () => {
+        newTaskButton.revealChild = false
+        newTaskEntryRevealer.revealChild = true
+        confirmAddTask.revealChild = true
+        cancelAddTask.revealChild = true
+        newTaskEntry.grab_focus()
+      }
+    })
+  })
   const cancelAddTask = Widget.Revealer({
     transition: 'slide_right',
     transitionDuration: 200,
@@ -135,11 +135,11 @@ const UndoneTodoList = () => {
       label: 'close',
       setup: setupCursorHover,
       onClicked: () => {
-        newTaskEntryRevealer.revealChild = false;
-        confirmAddTask.revealChild = false;
-        cancelAddTask.revealChild = false;
-        newTaskButton.revealChild = true;
-        newTaskEntry.text = '';
+        newTaskEntryRevealer.revealChild = false
+        confirmAddTask.revealChild = false
+        cancelAddTask.revealChild = false
+        newTaskButton.revealChild = true
+        newTaskEntry.text = ''
       }
     })
   })
@@ -202,7 +202,7 @@ const todoItemsBox = Widget.Stack({
     ['undone', UndoneTodoList()],
     ['done', todoItems(true)],
   ],
-});
+})
 
 export const TodoWidget = () => {
   const TodoTabButton = (isDone, navIndex) => Widget.Button({
@@ -213,7 +213,7 @@ export const TodoWidget = () => {
       const kids = button.get_parent().get_children()
       for (let i = 0; i < kids.length; i++) {
         if (kids[i] != button) 
-          kids[i].toggleClassName('sidebar-selector-tab-active', false);
+          kids[i].toggleClassName('sidebar-selector-tab-active', false)
         else button.toggleClassName('sidebar-selector-tab-active', true)
       }
       // Fancy highlighter line width

@@ -1,14 +1,14 @@
-import { Widget, Utils, Bluetooth, Network, Hyprland } from '../../../imports.js'
-import { BluetoothIndicator, NetworkIndicator } from '../../../misc/StatusIcons.js'
+import { App, Widget, Utils, Bluetooth, Network, Hyprland } from '../../../imports.js'
+import { BluetoothIndicator, NetworkIndicator } from './StatusIcons.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const expandTilde = path =>
   path.startsWith('~') ? imports.gi.GLib.get_home_dir() + path.slice(1) : path
 
 export const ToggleIconWifi = (props = {}) => Widget.Button({
+  onClicked: Network.toggleWifi,
   className: 'txt-small sidebar-iconbutton',
   tooltipText: 'Wifi | Right-click to configure',
-  onClicked: Network.toggleWifi,
   onSecondaryClickRelease: () => {
     Utils.execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center wifi', '&'])
     App.closeWindow('sideright')
@@ -42,7 +42,7 @@ export const ToggleIconBluetooth = (props = {}) => Widget.Button({
   ]],
   setup: setupCursorHover,
   ...props,
-});
+})
 
 export const HyprToggleIcon = (icon, name, hyprlandConfigValue, props = {}) => Widget.Button({
   tooltipText: name,
@@ -66,8 +66,8 @@ export const ModuleNightLight = (props = {}) => Widget.Button({
   className: 'txt-small sidebar-iconbutton',
   properties: [['enabled', false], ['yellowlight', undefined]],
   onClicked: self => {
-    self._enabled = !self._enabled;
-    self.toggleClassName('sidebar-button-active', self._enabled);
+    self._enabled = !self._enabled
+    self.toggleClassName('sidebar-button-active', self._enabled)
     Utils.execAsync(self._enabled ? 'wlsunset' : 'pkill wlsunset')
   },
   child: Widget.Label({ label: '󱩌', className: 'txt-norm' }),
@@ -77,7 +77,7 @@ export const ModuleNightLight = (props = {}) => Widget.Button({
     self.toggleClassName('sidebar-button-active', self._enabled)
   },
   ...props,
-});
+})
 
 export const ModuleInvertColors = (props = {}) => Widget.Button({
   tooltipText: 'Color inversion',
@@ -85,14 +85,14 @@ export const ModuleInvertColors = (props = {}) => Widget.Button({
   onClicked: btn => {
     Hyprland.sendMessage('j/getoption decoration:screen_shader').then(output => {
       const shaderPath = JSON.parse(output)['str'].trim()
-      if (shaderPath != "[[EMPTY]]" && shaderPath != "") {
-        Utils.execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader '[[EMPTY]]'`]).catch(print);
-        btn.toggleClassName('sidebar-button-active', false);
+      if (shaderPath != '[[EMPTY]]' && shaderPath != '') {
+        Utils.execAsync(['bash', '-c', 'hyprctl keyword decoration:screen_shader \'[[EMPTY]]\'']).catch(print)
+        btn.toggleClassName('sidebar-button-active', false)
       }
       else {
         Hyprland.sendMessage(
           `j/keyword decoration:screen_shader ${expandTilde('~/.config/hypr/shaders/invert.frag')}`
-        ).catch(print);
+        ).catch(print)
         btn.toggleClassName('sidebar-button-active', true)
       }
     })
@@ -122,7 +122,7 @@ export const ModuleIdleInhibitor = (props = {}) => Widget.Button({ // TODO: Make
   child: Widget.Label({ label: '', className: 'txt-norm' }),
   setup: setupCursorHover,
   ...props,
-});
+})
 
 export const ModuleEditIcon = (props = {}) => Widget.Button({
   ...props,

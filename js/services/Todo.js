@@ -18,7 +18,7 @@ class TodoService extends Service {
   }
 
   connectWidget(widget, callback) {
-      this.connect(widget, callback, 'updated')
+    this.connect(widget, callback, 'updated')
   }
 
   get todo_json() { return this._todoJson }
@@ -53,7 +53,7 @@ class TodoService extends Service {
     if (!fileExists(this._todoPath)) { // No? create file with empty array
       Utils.exec(`bash -c 'mkdir -p ${GLib.get_user_cache_dir()}/ags/user'`)
       Utils.exec(`touch ${this._todoPath}`)
-      Utils.writeFile("[]", this._todoPath).then(() => {
+      Utils.writeFile('[]', this._todoPath).then(() => {
         this._todoJson = JSON.parse(Utils.readFile(this._todoPath))
       }).catch(print)
     }

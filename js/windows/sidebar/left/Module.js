@@ -14,4 +14,4 @@ export const SidebarModule = ({ name }) => Widget.Box({
       })
     })
   ]
-});
+})

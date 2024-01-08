@@ -73,7 +73,7 @@ const CodeBlock = (content = '', lang = 'txt') => {
         onClicked: () => {
           const buffer = sourceView.get_buffer()
           const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false)
-          Utils.execAsync([`wl-copy`, `${copyContent}`]).catch(print)
+          Utils.execAsync(['wl-copy', `${copyContent}`]).catch(print)
         },
       }),
     ]
@@ -186,13 +186,13 @@ export const ChatMessage = message => {
         ],
         connections: [
           [message, () => {
-            messageContentBox.toggleClassName('thinking', message.thinking);
+            messageContentBox.toggleClassName('thinking', message.thinking)
           }, 'notify::thinking'],
           [message, () => { // Message update
-            messageContentBox._fullUpdate(messageContentBox, message.content, message.role != 'user');
+            messageContentBox._fullUpdate(messageContentBox, message.content, message.role != 'user')
           }, 'notify::content'],
           [message, () => { // Remove the cursor
-            messageContentBox._fullUpdate(messageContentBox, message.content, false);
+            messageContentBox._fullUpdate(messageContentBox, message.content, false)
           }, 'notify::done'],
         ]
       })
@@ -206,7 +206,7 @@ export const SystemMessage = (content, commandName) => {
   const thisMessage = Widget.Box({
     className: 'sidebar-chat-message',
     children: [
-      Widget.Box({ className: `sidebar-chat-indicator sidebar-chat-indicator-System` }),
+      Widget.Box({ className: 'sidebar-chat-indicator sidebar-chat-indicator-System' }),
       Widget.Box({
         vertical: true,
         hpack: 'fill',

@@ -110,5 +110,5 @@ export default props => {
     vertical: true,
     className: 'sidebar-group spacing-v-5',
     children: [listTitle, listContents]
-  });
+  })
 }

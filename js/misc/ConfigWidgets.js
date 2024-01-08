@@ -52,11 +52,11 @@ export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, ...re
     onClicked: (self) => self._toggle(self),
     setup: (button) => {
       setupCursorHover(button),
-        button.connect('pressed', () => { // mouse down
-          toggleIcon.toggleClassName('txt-poof', true)
-          toggleIcon.toggleClassName('switch-fg-true', false)
-          if (!value) toggleIcon.toggleClassName('switch-fg-toggling-false', true)
-        })
+      button.connect('pressed', () => { // mouse down
+        toggleIcon.toggleClassName('txt-poof', true)
+        toggleIcon.toggleClassName('switch-fg-true', false)
+        if (!value) toggleIcon.toggleClassName('switch-fg-toggling-false', true)
+      })
     },
     ...rest,
   })
@@ -64,7 +64,7 @@ export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, ...re
 }
 
 export const ConfigSegmentedSelection = ({
-  icon, name, desc = '',
+  desc = '',
   options = [{ name: 'Option 1', value: 0 }, { name: 'Option 2', value: 1 }],
   initIndex = 0,
   onChange,

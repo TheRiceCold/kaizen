@@ -3,20 +3,20 @@ import { App, Utils, Widget } from '../../../imports.js'
 import { NavigationIndicator } from '../../../misc/main.js'
 import toolBox from './Toolbox.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
-// import apiwidgets, { chatEntry } from './ApiWidgets.js'
+// import apiwidgets from './ApiWidgets.js'
 
 const contents = [
-  // {
-  //   name: 'apis',
-  //   content: apiWidgets,
-  //   materialIcon: 'api',
-  //   friendlyName: 'APIs',
-  // },
+  {
+    name: 'apis',
+    // content: apiWidgets,
+    materialIcon: 'api',
+    friendlyName: 'APIs',
+  },
   {
     name: 'tools',
     content: toolBox,
+    materialIcon: '󰦬',
     friendlyName: 'Tools',
-    materialIcon: 'home_repair_service',
   },
 ]
 let currentTabId = 0
@@ -84,7 +84,7 @@ const navBar = Widget.Box({
 const pinButton = Widget.Button({
   properties: [
     ['enabled', false],
-    ['toggle', (self) => {
+    ['toggle', self => {
       self._enabled = !self._enabled
       self.toggleClassName('sidebar-pin-enabled', self._enabled)
 
@@ -96,14 +96,14 @@ const pinButton = Widget.Button({
       sideleftContent.toggleClassName('sidebar-pinned', self._enabled)
 
       if (self._enabled) {
-        sideleftWindow.layer = 'bottom'
         barWindow.layer = 'bottom'
+        sideleftWindow.layer = 'bottom'
         cornerTopLeftWindow.layer = 'bottom'
         sideleftWindow.exclusivity = 'exclusive'
       }
       else {
-        sideleftWindow.layer = 'top'
         barWindow.layer = 'top'
+        sideleftWindow.layer = 'top'
         cornerTopLeftWindow.layer = 'top'
         sideleftWindow.exclusivity = 'normal'
       }
@@ -111,9 +111,9 @@ const pinButton = Widget.Button({
   ],
   vpack: 'start',
   className: 'sidebar-pin',
-  child: Widget.Label({ label: 'push_pin', className: 'txt-larger' }),
   tooltipText: 'Pin sidebar',
-  onClicked: (self) => self._toggle(self),
+  child: Widget.Label({ label: '󰐃', className: 'txt-larger' }),
+  onClicked: self => self._toggle(self),
   connections: [[App, (self, currentName, visible) => {
     if (currentName === 'sideleft' && visible)
       self.grab_focus()

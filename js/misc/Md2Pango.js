@@ -1,7 +1,7 @@
 const monospaceFonts = 'JetBrains Mono NF, JetBrains Mono Nerd Font, JetBrains Mono NL, SpaceMono NF, SpaceMono Nerd Font, monospace'
 
-const H1 = "H1", H2 = "H2", H3 = "H3", H4 = "H4", H5 = "H5", BULLET = "BULLET", NUMBERING = "NUMBERING", CODE = "CODE"
-const BOLD = "BOLD", EMPH = "EMPH", INLCODE = "INLCODE", LINK = "LINK", HEXCOLOR = "HEXCOLOR", UND = "UND"
+const H1 = 'H1', H2 = 'H2', H3 = 'H3', H4 = 'H4', H5 = 'H5', BULLET = 'BULLET', NUMBERING = 'NUMBERING', CODE = 'CODE'
+const BOLD = 'BOLD', EMPH = 'EMPH', INLCODE = 'INLCODE', LINK = 'LINK', HEXCOLOR = 'HEXCOLOR', UND = 'UND'
 
 let sub_h1, sub_h2, sub_h3, sub_h4, sub_h5
 
@@ -13,15 +13,15 @@ const m2p_sections = [
   sub_h3 = { name: H3, re: /^(###\s+)(.*)(\s*)$/, sub: "<span font_weight='bold' size='125%'>$2</span>" },
   sub_h4 = { name: H4, re: /^(####\s+)(.*)(\s*)$/, sub: "<span font_weight='bold' size='100%'>$2</span>" },
   sub_h5 = { name: H5, re: /^(#####\s+)(.*)(\s*)$/, sub: "<span font_weight='bold' size='90%'>$2</span>" },
-  { name: BULLET, re: /^(\s*)([\*\-]\s)(.*)(\s*)$/, sub: "$1• $3" },
-  { name: NUMBERING, re: /^(\s*[0-9]+\.\s)(.*)(\s*)$/, sub: " $1$2" },
+  { name: BULLET, re: /^(\s*)([\*\-]\s)(.*)(\s*)$/, sub: '$1• $3' },
+  { name: NUMBERING, re: /^(\s*[0-9]+\.\s)(.*)(\s*)$/, sub: ' $1$2' },
 ]
 
 // m2p_styles defines how to replace inline styled text
 const m2p_styles = [
-  { name: BOLD, re: /(\*\*)(\S[\s\S]*?\S)(\*\*)/g, sub: "<b>$2</b>" },
-  { name: UND, re: /(__)(\S[\s\S]*?\S)(__)/g, sub: "<u>$2</u>" },
-  { name: EMPH, re: /\*(\S.*?\S)\*/g, sub: "<i>$1</i>" },
+  { name: BOLD, re: /(\*\*)(\S[\s\S]*?\S)(\*\*)/g, sub: '<b>$2</b>' },
+  { name: UND, re: /(__)(\S[\s\S]*?\S)(__)/g, sub: '<u>$2</u>' },
+  { name: EMPH, re: /\*(\S.*?\S)\*/g, sub: '<i>$1</i>' },
   // { name: EMPH, re: /_(\S.*?\S)_/g, sub: "<i>$1</i>" },
   { name: HEXCOLOR, re: /#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/g, sub: `<span bgcolor='#$1' fgcolor='#000000' font_family='${monospaceFonts}'> #$1 </span>` },
   { name: INLCODE, re: /(`)([^`]*)(`)/g, sub: `<span font_weight='bold' font_family='${monospaceFonts}'> $2 </span>` },
@@ -33,7 +33,7 @@ const re_color = /^(\s*<!--\s*(fg|bg)=(#?[0-9a-z_A-Z-]*)\s*((fg|bg)=(#?[0-9a-z_A
 const re_reset = /(<!--\/-->)/
 const re_uri = /http[s]?:\/\/[^\s']*/
 const re_href = "/href='(http[s]?:\\/\\/[^\\s]*)'"
-const re_atag = "<a\s.*>.*(http[s]?:\\/\\/[^\\s]*).*</a>/"
+const re_atag = '<a\s.*>.*(http[s]?:\\/\\/[^\\s]*).*</a>/'
 const re_h1line = /^===+\s*$/
 const re_h2line = /^---+\s*$/
 
@@ -71,38 +71,26 @@ export default text => {
     }
   }
 
-  const try_open_span = () => {
-    if (!color_span_open) {
-      output.push('</span>')
-      color_span_open = false
-    }
-  }
-
   for (const line of lines) {
-    // first parse color macros in non-code texts
     if (!is_code) {
       let colors = line.match(re_color)
-      if (colors || line.match(re_reset)) {
+      if (colors || line.match(re_reset))
         try_close_span()
-      }
 
       if (colors) {
         try_close_span()
-        if (color_span_open) {
+        if (color_span_open)
           close_span()
-        }
 
         let fg = colors[2] == 'fg' ? colors[3] : colors[5] == 'fg' ? colors[6] : ''
         let bg = colors[2] == 'bg' ? colors[3] : colors[5] == 'bg' ? colors[6] : ''
         let attrs = ''
 
-        if (fg != '') {
+        if (fg != '')
           attrs += ` foreground='${fg}'`
-        }
 
-        if (bg != '') {
+        if (bg != '')
           attrs += ` background='${bg}'`
-        }
 
         if (attrs != '') {
           output.push(`<span${attrs}>`)
@@ -111,15 +99,11 @@ export default text => {
       }
     }
 
-    // all macros processed, let's remove remaining comments
-    if (line.match(re_comment)) {
+    if (line.match(re_comment))
       continue
-    }
 
-    // is this line an opening statement of a code block
     let code_start = false
 
-    // escape all non-verbatim text
     let result = is_code ? line : escape_line(line)
 
     for (const { name, re, sub } of m2p_sections) {
@@ -150,13 +134,8 @@ export default text => {
               tt_must_close = false
             }
           }
-        } else {
-          if (is_code) {
-            result = line
-          } else {
-            result = line.replace(re, sub)
-          }
-        }
+        } 
+        else result = is_code ? line : line.replace(re, sub)
       }
     }
 
@@ -176,9 +155,8 @@ export default text => {
     }
 
     // all other text can be styled
-    for (const style of m2p_styles) {
+    for (const style of m2p_styles)
       result = result.replace(style.re, style.sub)
-    }
 
     // all raw urls can be linked if possible
     let uri = result.match(re_uri)    // look for any URI
@@ -186,9 +164,8 @@ export default text => {
     let atag = result.match(re_atag)   // and for URIs in <a></a>
     href = href && href[1] == uri
     atag = href && atag[1] == uri
-    if (uri && (href || atag)) {
+    if (uri && (href || atag))
       result = result.replace(uri, `<a href='${uri}'>${uri}</a>`)
-    }
 
     output.push(result)
   }
@@ -224,4 +201,4 @@ myArray = [23, 123, 43, 54, '6969'];
 console.log('uwu');
 \`\`\`
 To update arch lincox, run \`sudo pacman -Syu\`
-`;
+`

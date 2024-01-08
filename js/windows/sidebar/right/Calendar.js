@@ -50,9 +50,9 @@ const CalendarWidget = () => {
       btn.label = `${new Date().toLocaleString('default', { month: 'long' })} ${new Date().getFullYear()}`
       setupCursorHover(btn)
     }
-  });
+  })
   const addCalendarChildren = (box, calendarJson) => {
-    const children = box.get_children();
+    const children = box.get_children()
     children.forEach(child => child.destroy())
     box.children = calendarJson.map(row => Widget.Box({
       className: 'spacing-h-5',
@@ -60,20 +60,20 @@ const CalendarWidget = () => {
     }))
   }
   function shiftCalendarXMonths(x) {
-    if (x == 0) monthshift = 0;
-    else monthshift += x;
+    if (x == 0) monthshift = 0
+    else monthshift += x
     let newDate
-    if (monthshift == 0) newDate = new Date();
-    else newDate = getDateInXMonthsTime(monthshift);
+    if (monthshift == 0) newDate = new Date()
+    else newDate = getDateInXMonthsTime(monthshift)
 
-    calendarJson = getCalendarLayout(newDate, (monthshift == 0));
-    calendarMonthYear.label = `${monthshift == 0 ? '' : '• '}${newDate.toLocaleString('default', { month: 'long' })} ${newDate.getFullYear()}`;
-    addCalendarChildren(calendarDays, calendarJson);
+    calendarJson = getCalendarLayout(newDate, (monthshift == 0))
+    calendarMonthYear.label = `${monthshift == 0 ? '' : '• '}${newDate.toLocaleString('default', { month: 'long' })} ${newDate.getFullYear()}`
+    addCalendarChildren(calendarDays, calendarJson)
   }
   const calendarHeader = Widget.Box({
     className: 'spacing-h-5 sidebar-calendar-header',
     setup: box => {
-      box.pack_start(calendarMonthYear, false, false, 0);
+      box.pack_start(calendarMonthYear, false, false, 0)
       box.pack_end(Widget.Box({
         className: 'spacing-h-5',
         children: [
@@ -152,7 +152,7 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
     className: 'spacing-v-5',
     vertical: true,
     children: [
-      Widget.Label({ className: `txt icon-material txt-hugeass`, label: icon }),
+      Widget.Label({ className: 'txt icon-material txt-hugeass', label: icon }),
       Widget.Label({ label: name, className: 'txt txt-smallie' }),
     ]
   }),

@@ -1,10 +1,10 @@
 import { Utils, Widget } from '../../../../imports.js'
-import { Waifus } from '../../../../services/main.js'
+import { WaifuService } from '../../../../services/main.js'
 import { MarginRevealer } from '../../../../misc/AdvancedRevealers.js'
 import { setupCursorHover } from '../../../../misc/CursorHover.js'
 
 const { Gio, GLib, Gtk } = imports.gi
-const { Box, Button, Label, Revealer, Scrollable, Stack } = Widget
+const { Box, Scrollable } = Widget
 
 const IMAGE_REVEAL_DELAY = 13
 
@@ -28,7 +28,7 @@ export const waifuTabIcon = Widget.Box({
   homogeneous: true,
   className: 'sidebar-chat-apiswitcher-icon',
   children: [Widget.Label({ label: 'photo_library', className: 'txt-norm' })]
-});
+})
 
 const WaifuImage = taglist => {
   const ImageState = (icon, name) => Widget.Box({
@@ -51,8 +51,8 @@ const WaifuImage = taglist => {
     className: 'sidebar-waifu-image-action txt-norm icon-material',
   })
   const colorIndicator = Widget.Box({
-    className: `sidebar-chat-indicator`,
-  });
+    className: 'sidebar-chat-indicator',
+  })
   const downloadState = Widget.Stack({
     homogeneous: false,
     transition: 'slide_up_down',
@@ -63,13 +63,13 @@ const WaifuImage = taglist => {
       ['done', ImageState('done', 'Finished!')],
       ['error', ImageState('error', 'Error')],
     ]
-  });
+  })
   const downloadIndicator = MarginRevealer({
     vpack: 'center',
     transition: 'slide_left',
     revealChild: true,
     child: downloadState,
-  });
+  })
   const blockHeading = Widget.Box({
     hpack: 'fill',
     className: 'sidebar-waifu-content spacing-h-5',
@@ -78,7 +78,7 @@ const WaifuImage = taglist => {
       Widget.Box({ hexpand: true }),
       downloadIndicator,
     ]
-  });
+  })
   const blockImageActions = Box({
     className: 'sidebar-waifu-image-actions spacing-h-3',
     children: [
@@ -101,11 +101,10 @@ const WaifuImage = taglist => {
     ]
   })
   const blockImage = Widget.Box({
-    className: 'test',
     hpack: 'start',
     vertical: true,
-    className: 'sidebar-waifu-image',
     homogeneous: true,
+    className: 'sidebar-waifu-image',
     children: [
       Widget.Revealer({
         transition: 'crossfade',
@@ -122,45 +121,45 @@ const WaifuImage = taglist => {
     transitionDuration: 150,
     revealChild: false,
     child: blockImage,
-  });
+  })
   const thisBlock = Widget.Box({
     className: 'sidebar-chat-message',
     properties: [
       ['imagePath', ''],
       ['imageData', ''],
       ['update', (imageData, force = false) => {
-        thisBlock._imageData = imageData;
-        const { status, signature, url, extension, dominant_color, width, height } = thisBlock._imageData;
+        thisBlock._imageData = imageData
+        const { status, signature, url, extension, dominant_color, width, height } = thisBlock._imageData
         if (status != 200) {
-          downloadState.shown = 'error';
-          return;
+          downloadState.shown = 'error'
+          return
         }
-        thisBlock._imagePath = `${GLib.get_user_cache_dir()}/ags/media/waifus/${signature}${extension}`;
-        downloadState.shown = 'download';
+        thisBlock._imagePath = `${GLib.get_user_cache_dir()}/ags/media/waifus/${signature}${extension}`
+        downloadState.shown = 'download'
         // Width allocation
-        const widgetWidth = Math.min(Math.floor(waifuContent.get_allocated_width() * 0.75), width);
-        blockImage.set_size_request(widgetWidth, Math.ceil(widgetWidth * height / width));
+        const widgetWidth = Math.min(Math.floor(waifuContent.get_allocated_width() * 0.75), width)
+        blockImage.set_size_request(widgetWidth, Math.ceil(widgetWidth * height / width))
         // Start download
         const showImage = () => {
-          downloadState.shown = 'done';
+          downloadState.shown = 'done'
           // blockImage.css = `background-color: ${dominant_color};`;
-          blockImage.css = `background-image:url('${thisBlock._imagePath}');`; // TODO: use proper image widget
+          blockImage.css = `background-image:url('${thisBlock._imagePath}');` // TODO: use proper image widget
           Utils.timeout(IMAGE_REVEAL_DELAY, () => {
-            blockImageRevealer.revealChild = true;
+            blockImageRevealer.revealChild = true
           })
           Utils.timeout(IMAGE_REVEAL_DELAY + blockImageRevealer.transitionDuration,
             () => blockImage.get_children()[0].revealChild = true
-          );
-          downloadIndicator._hide();
+          )
+          downloadIndicator._hide()
         }
-        if (!force && fileExists(thisBlock._imagePath)) showImage();
+        if (!force && fileExists(thisBlock._imagePath)) showImage()
         else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock._imagePath}' '${url}'`])
           .then(showImage)
-          .catch(print);
+          .catch(print)
         blockHeading.get_children().forEach((child) => {
-          child.setCss(`border-color: ${dominant_color};`);
+          child.setCss(`border-color: ${dominant_color};`)
         })
-        colorIndicator.css = `background-color: ${dominant_color};`;
+        colorIndicator.css = `background-color: ${dominant_color};`
       }],
     ],
     children: [
@@ -174,7 +173,7 @@ const WaifuImage = taglist => {
         ]
       })
     ],
-  });
+  })
   return thisBlock
 }
 
@@ -185,21 +184,21 @@ const waifuContent = Widget.Box({
   properties: [['map', new Map()]],
   connections: [
     [WaifuService, (box, id) => {
-      if (id === undefined) return;
-      const newImageBlock = WaifuImage(WaifuService.queries[id]);
-      box.add(newImageBlock);
-      box.show_all();
-      box._map.set(id, newImageBlock);
+      if (id === undefined) return
+      const newImageBlock = WaifuImage(WaifuService.queries[id])
+      box.add(newImageBlock)
+      box.show_all()
+      box._map.set(id, newImageBlock)
     }, 'newResponse'],
     [WaifuService, (box, id) => {
-      if (id === undefined) return;
-      const data = WaifuService.responses[id];
-      if (!data) return;
-      const imageBlock = box._map.get(id);
-      imageBlock._update(data);
+      if (id === undefined) return
+      const data = WaifuService.responses[id]
+      if (!data) return
+      const imageBlock = box._map.get(id)
+      imageBlock._update(data)
     }, 'updateResponse'],
   ]
-});
+})
 
 export const waifuView = Scrollable({
   className: 'sidebar-chat-viewport',
@@ -214,7 +213,7 @@ export const waifuView = Scrollable({
       viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined))
     })
     const adjustment = scrolledWindow.get_vadjustment()
-    adjustment.connect("changed", () => {
+    adjustment.connect('changed', () => {
       adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
     })
   }
@@ -248,7 +247,7 @@ const waifuTags = Widget.Revealer({
       Widget.Box({ className: 'separator-line' }),
     ]
   })
-});
+})
 
 export const waifuCommands = Widget.Box({
   className: 'spacing-h-5',
@@ -271,10 +270,10 @@ const clearChat = () => {
 
 export const sendMessage = (text) => {
   if (text.startsWith('/')) {
-    if (text.startsWith('/clear')) clearChat();
+    if (text.startsWith('/clear')) clearChat()
     else if (text.startsWith('/test')) {
-      const newImage = WaifuImage(['/test']);
-      waifuContent.add(newImage);
+      const newImage = WaifuImage(['/test'])
+      waifuContent.add(newImage)
       Utils.timeout(IMAGE_REVEAL_DELAY, () => newImage._update({
         status: 200,
         url: 'https://picsum.photos/400/600',
@@ -286,8 +285,8 @@ export const sendMessage = (text) => {
         width: 300,
         height: 200,
         tags: ['/test'],
-      }, true));
+      }, true))
     }
   }
-  else WaifuService.fetch(text);
+  else WaifuService.fetch(text)
 }

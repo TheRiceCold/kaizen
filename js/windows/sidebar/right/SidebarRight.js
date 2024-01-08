@@ -1,4 +1,4 @@
-import { Utils, Widget } from '../../../imports.js'
+import { App, Widget } from '../../../imports.js'
 import {
   ToggleIconBluetooth,
   ToggleIconWifi,
@@ -28,7 +28,7 @@ const timeRow = Widget.Box({
     ModuleSettingsIcon({ hpack: 'end' }),
     ModulePowerIcon({ hpack: 'end' }),
   ]
-});
+})
 
 const togglesBox = Widget.Box({
   hpack: 'center',

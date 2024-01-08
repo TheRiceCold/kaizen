@@ -13,7 +13,7 @@ export const chatGPTTabIcon = Widget.Box({
   homogeneous: true,
   className: 'sidebar-chat-apiswitcher-icon',
   children: [Widget.Label({ label: 'forum', className: 'txt-norm' })],
-});
+})
 
 const chatGPTInfo = Widget.Box({
   vertical: true,
@@ -24,10 +24,10 @@ const chatGPTInfo = Widget.Box({
       className: 'sidebar-chat-welcome-logo',
       icon: `${App.configDir}/assets/openai-logomark.svg`,
       setup: (self) => Utils.timeout(1, () => {
-        const styleContext = self.get_style_context();
-        const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
-        const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
-        self.size = Math.max(width, height, 1) * 116 / 180; // Why such a specific proportion? See https://openai.com/brand#logos
+        const styleContext = self.get_style_context()
+        const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL)
+        const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL)
+        self.size = Math.max(width, height, 1) * 116 / 180 // Why such a specific proportion? See https://openai.com/brand#logos
       })
     }),
     Widget.Label({
@@ -62,10 +62,10 @@ export const chatGPTSettings = MarginRevealer({
   revealChild: true,
   connections: [
     [ChatGPT, (self) => Utils.timeout(200, () => {
-      self._hide();
+      self._hide()
     }), 'newMsg'],
     [ChatGPT, (self) => Utils.timeout(200, () => {
-      self._show();
+      self._show()
     }), 'clear'],
   ],
   child: Widget.Box({
@@ -84,7 +84,7 @@ export const chatGPTSettings = MarginRevealer({
         ],
         initIndex: 1,
         onChange: value => {
-          ChatGPT.temperature = value;
+          ChatGPT.temperature = value
         },
       }),
       ConfigGap({ vertical: true, size: 10 }), // Note: size can only be 5, 10, or 15 
@@ -99,7 +99,7 @@ export const chatGPTSettings = MarginRevealer({
             desc: 'Helps avoid exceeding the API rate of 3 messages per minute.\nTurn this on if you message rapidly.',
             initValue: ChatGPT.cycleModels,
             onChange: (_, newValue) => {
-              ChatGPT.cycleModels = newValue;
+              ChatGPT.cycleModels = newValue
             },
           }),
           ConfigToggle({
@@ -108,7 +108,7 @@ export const chatGPTSettings = MarginRevealer({
             desc: 'Tells ChatGPT\n  1. It\'s a sidebar assistant on Linux\n  2. Be short and concise\n  3. Use markdown features extensively\nLeave this off for a vanilla ChatGPT experience.',
             initValue: ChatGPT.assistantPrompt,
             onChange: (_, newValue) => {
-              ChatGPT.assistantPrompt = newValue;
+              ChatGPT.assistantPrompt = newValue
             },
           }),
         ]
@@ -133,7 +133,7 @@ export const openaiApiKeyInstructions = Widget.Box({
       }),
       setup: setupCursorHover,
       onClicked: () => {
-        Utils.execAsync(['bash', '-c', `xdg-open https://platform.openai.com/api-keys &`]);
+        Utils.execAsync(['bash', '-c', 'xdg-open https://platform.openai.com/api-keys &'])
       }
     })
   })]
@@ -149,29 +149,29 @@ export const chatGPTWelcome = Widget.Box({
     children: [
       chatGPTInfo,
       openaiApiKeyInstructions,
-      chatGPTSettings, ``
+      chatGPTSettings, ''
     ]
   })
-});
+})
 
 export const chatContent = Widget.Box({
   className: 'spacing-v-15',
   vertical: true,
   connections: [
     [ChatGPT, (box, id) => {
-      const message = ChatGPT.messages[id];
-      if (!message) return;
+      const message = ChatGPT.messages[id]
+      if (!message) return
       box.add(ChatMessage(message, chatGPTView))
     }, 'newMsg'],
   ]
-});
+})
 
 const clearChat = () => {
-  ChatGPT.clear();
-  const children = chatContent.get_children();
+  ChatGPT.clear()
+  const children = chatContent.get_children()
   for (let i = 0; i < children.length; i++) {
-    const child = children[i];
-    child.destroy();
+    const child = children[i]
+    child.destroy()
   }
 }
 
@@ -193,19 +193,19 @@ export const chatGPTView = Widget.Scrollable({
       viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined))
     })
     // Always scroll to bottom with new content
-    const adjustment = scrolledWindow.get_vadjustment();
+    const adjustment = scrolledWindow.get_vadjustment()
     adjustment.connect('changed', () => {
-      adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
+      adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
     })
   }
-});
+})
 
 const CommandButton = (command) => Widget.Button({
   className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
   onClicked: () => sendMessage(command),
   setup: setupCursorHover,
   label: command,
-});
+})
 
 export const chatGPTCommands = Widget.Box({
   className: 'spacing-h-5',
@@ -215,7 +215,7 @@ export const chatGPTCommands = Widget.Box({
     CommandButton('/model'),
     CommandButton('/clear'),
   ]
-});
+})
 
 export const sendMessage = (text) => {
   // Check if text or API key is empty
@@ -228,32 +228,32 @@ export const sendMessage = (text) => {
   }
   // Commands
   if (text.startsWith('/')) {
-    if (text.startsWith('/clear')) clearChat();
+    if (text.startsWith('/clear')) clearChat()
     else if (text.startsWith('/model')) chatContent.add(SystemMessage(`Currently using \`${ChatGPT.modelName}\``, '/model', chatGPTView))
     else if (text.startsWith('/prompt')) {
       const firstSpaceIndex = text.indexOf(' ')
       const prompt = text.slice(firstSpaceIndex + 1)
       if (firstSpaceIndex == -1 || prompt.length < 1)
-        chatContent.add(SystemMessage(`Usage: \`/prompt MESSAGE\``, '/prompt', chatGPTView))
+        chatContent.add(SystemMessage('Usage: `/prompt MESSAGE`', '/prompt', chatGPTView))
       else ChatGPT.addMessage('user', prompt)
     }
     else if (text.startsWith('/key')) {
-      const parts = text.split(' ');
+      const parts = text.split(' ')
       if (parts.length == 1) chatContent.add(SystemMessage(
         `Key stored in:\n\`${ChatGPT.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``,
         '/key',
-        chatGPTView));
+        chatGPTView))
       else {
-        ChatGPT.key = parts[1];
-        chatContent.add(SystemMessage(`Updated API Key at\n\`${ChatGPT.keyPath}\``, '/key', chatGPTView));
+        ChatGPT.key = parts[1]
+        chatContent.add(SystemMessage(`Updated API Key at\n\`${ChatGPT.keyPath}\``, '/key', chatGPTView))
       }
     }
     else if (text.startsWith('/test'))
-      chatContent.add(SystemMessage(markdownTest, `Markdown test`, chatGPTView));
+      chatContent.add(SystemMessage(markdownTest, 'Markdown test', chatGPTView))
     else
-      chatContent.add(SystemMessage(`Invalid command.`, 'Error', chatGPTView))
+      chatContent.add(SystemMessage('Invalid command.', 'Error', chatGPTView))
   }
   else {
-    ChatGPT.send(text);
+    ChatGPT.send(text)
   }
 }

@@ -10,4 +10,4 @@ export default Widget.Scrollable({
       QuickScripts(),
     ]
   })
-});
+})

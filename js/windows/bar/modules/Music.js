@@ -58,16 +58,16 @@ export default Widget.EventBox({
                   label.toggleClassName('bar-music-playstate', mpris !== null || mpris.playBackStatus == 'Paused')
                 }]],
               }),
-              overlays: [ TrackProgress() ]
+              overlays: [TrackProgress()]
             })]
           }),
 
           Widget.Label({
             className: 'txt-smallie',
-            connections: [[Mpris, label => 
-              label.label = Mpris.getPlayer('') ? 
-                `${trimTrackTitle(mpris.trackTitle)} • ${mpris.trackArtists.join(', ')}` : 'No media' 
-            ]]
+            connections: [[Mpris, label => {
+              const mpris = Mpris.getPlayer('')
+              label.label = mpris ? `${trimTrackTitle(mpris.trackTitle)} • ${mpris.trackArtists.join(', ')}` : 'No media'
+            }]]
           })
         ]
       })
