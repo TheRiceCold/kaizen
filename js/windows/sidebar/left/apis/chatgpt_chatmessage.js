@@ -4,7 +4,7 @@ import GtkSource from 'gi://GtkSource?version=3.0'
 
 const { Gio, GLib, Gtk } = imports.gi
 
-const CUSTOM_SOURCEVIEW_SCHEME_PATH = `${App.configDir}/data/sourceviewtheme.xml`
+const CUSTOM_SOURCEVIEW_SCHEME_PATH = `${App.configDir}/js/constants/data/sourceviewtheme.xml`
 const CUSTOM_SCHEME_ID = 'custom'
 const USERNAME = GLib.get_user_name()
 const CHATGPT_CURSOR = '  (o) '
@@ -18,8 +18,8 @@ function loadCustomColorScheme(filePath) {
     return
   }
 
-  const schemeManager = GtkSource.StyleSchemeManager.get_default()
-  schemeManager.append_search_path(file.get_parent().get_path())
+  // const schemeManager = GtkSource.StyleSchemeManager.get_default()
+  // schemeManager.append_search_path(file.get_parent().get_path())
 }
 loadCustomColorScheme(CUSTOM_SOURCEVIEW_SCHEME_PATH)
 

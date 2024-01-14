@@ -1,101 +1,191 @@
-import { Service } from '../imports.js'
-// @ts-ignore
-import Soup from 'gi://Soup?version=3.0'
-import Keys from '../keys.js'
+import { Service, Utils } from '../imports.js'
 
-const { Gio, GLib } = imports.gi
+const { Gio, GLib, Soup } = imports.gi
+import { fileExists } from './Messages.js'
 
-export class ChatGPTMessage extends Service {
-  static { Service.register(this, {}, { content: ['string'], thinking: ['boolean'] }) }
+// This is for custom prompt
+// It's hard to make gpt-3.5 listen to all these, I know
+// Disabled by default
+const initMessages = [
+  {
+    role: 'user',
+    content: `
+      ## Style
+      - You should a natural tone like a real conversation! 
+      ## Formatting
+      - Try to use **bold**, _italics_ and __underline__ extensively. Using bullet points is also encouraged.
+      - When providing code blocks or facts, precede with h2 heading (\`##\`) and use 2 spaces for indentation, not 4.
+      - Use dividers (\`---\`) to separate different information.
+      ## Content
+      - When asked to perform system tasks, include a bash code block to handle it on a Linux desktop with Wayland.
+      - Unless requested otherwise or asked writing questions, be as short and concise as possible.`,
+    thinking: false,
+    done: true
+  },
+  {
+    role: 'assistant',
+    content: "Got it! I'll try to give commands to perform Linux tasks. I'll try to use markdown features extensively, use divider when appropriate, and use a heading for code blocks. All code blocks should use 2 spaces for indent. And most importantly, I'll speak naturally.",
+    thinking: false,
+    done: true,
+  }
+]
+
+function expandTilde(path) {
+  if (path.startsWith('~')) {
+    return GLib.get_home_dir() + path.slice(1)
+  } else {
+    return path
+  }
+}
+
+// We're using many models to not be restricted to 3 messages per minute.
+// The whole chat will be sent every request anyway.
+const KEY_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/openai_api_key.txt`
+const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/openai_api_dom.txt`
+function replaceapidom(URL) {
+  //Utils.writeFile(URL, "/tmp/openai-url-old.log"); // For debugging
+  if (fileExists(expandTilde(APIDOM_FILE_LOCATION))) {
+    let contents = Utils.readFile(expandTilde(APIDOM_FILE_LOCATION)).trim()
+    URL = URL.toString().replace('api.openai.com', contents)
+  }
+  //Utils.writeFile(URL, "/tmp/openai-url.log"); // For debugging
+  return URL
+}
+const CHAT_MODELS = ['gpt-3.5-turbo-1106', 'gpt-3.5-turbo', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo-0613']
+const ONE_CYCLE_COUNT = 3
+
+class ChatGPTMessage extends Service {
+  static {
+    Service.register(this,
+      {
+        'delta': ['string'],
+      },
+      {
+        'content': ['string'],
+        'thinking': ['boolean'],
+        'done': ['boolean'],
+      })
+  }
 
   _role = ''
   _content = ''
   _thinking = false
+  _done = false
 
-  constructor(role, content, thinking = false) {
+  constructor(role, content, thinking = false, done = false) {
     super()
     this._role = role
     this._content = content
     this._thinking = thinking
+    this._done = done
   }
 
-  get role() {
-    return this._role
-  }
+  get done() { return this._done }
+  set done(isDone) { this._done = isDone; this.notify('done') }
 
-  set role(role) {
-    this._role = role
-    this.emit('changed')
-  }
+  get role() { return this._role }
+  set role(role) { this._role = role; this.emit('changed') }
 
-  get content() {
-    return this._content
-  }
-
+  get content() { return this._content }
   set content(content) {
     this._content = content
     this.notify('content')
     this.emit('changed')
   }
 
-  get thinking() {
-    return this._thinking
-  }
+  get label() { return this._parserState.parsed + this._parserState.stack.join('') }
 
+  get thinking() { return this._thinking }
   set thinking(thinking) {
     this._thinking = thinking
     this.notify('thinking')
     this.emit('changed')
   }
 
-  /**
-   * @param {string} delta
-  */
   addDelta(delta) {
     if (this.thinking) {
       this.thinking = false
       this.content = delta
-    } else {
+    }
+    else {
       this.content += delta
     }
+    this.emit('delta', delta)
   }
 }
 
 class ChatGPTService extends Service {
   static {
     Service.register(this, {
-      'newMsg': ['int'],
+      'initialized': [],
       'clear': [],
+      'newMsg': ['int'],
+      'hasKey': ['boolean'],
     })
   }
 
-  _systemMessage = {
-    role: 'system',
-    content: ''
-  }
-
-  /** @type {ChatGPTMessage[]} */
+  _assistantPrompt = false
   _messages = []
+  _cycleModels = true
+  _temperature = 0.5
+  _requestCount = 0
+  _modelIndex = 0
+  _key = ''
   _decoder = new TextDecoder()
-  model = 'gpt-3.5-turbo-1106'
-  url = GLib.Uri.parse('https://api.openai.com/v1/chat/completions', GLib.UriFlags.NONE)
 
-  /** @param {string} msg */
-  setSystemMessage(msg) {
-    this._systemMessage.content = msg
+  url = GLib.Uri.parse(replaceapidom('https://api.openai.com/v1/chat/completions'), GLib.UriFlags.NONE)
+
+  constructor() {
+    super()
+
+    if (fileExists(expandTilde(KEY_FILE_LOCATION))) this._key = Utils.readFile(expandTilde(KEY_FILE_LOCATION)).trim()
+    else this.emit('hasKey', false)
+
+    if (this._assistantPrompt) this._messages = [...initMessages]
+    else this._messages = []
+
+    this.emit('initialized')
   }
 
-  get messages() {
-    return this._messages
+  get modelName() { return CHAT_MODELS[this._modelIndex] }
+
+  get keyPath() { return KEY_FILE_LOCATION }
+  get key() { return this._key }
+  set key(keyValue) {
+    this._key = keyValue
+    Utils.writeFile(this._key, expandTilde(KEY_FILE_LOCATION))
+      .then(this.emit('hasKey', true))
+      .catch(err => print(err))
   }
 
-  get lastMessage() {
-    return this.messages[this.messages.length - 1]
+  get cycleModels() { return this._cycleModels }
+  set cycleModels(value) {
+    this._cycleModels = value
+    if (!value) this._modelIndex = 0
+    else {
+      this._modelIndex = (this._requestCount - (this._requestCount % ONE_CYCLE_COUNT)) % CHAT_MODELS.length
+    }
   }
+
+  get temperature() { return this._temperature }
+  set temperature(value) { this._temperature = value }
+
+  get messages() { return this._messages }
+  get lastMessage() { return this._messages[this._messages.length - 1] }
 
   clear() {
-    this._messages = []
+    if (this._assistantPrompt)
+      this._messages = [...initMessages]
+    else
+      this._messages = []
     this.emit('clear')
+  }
+
+  get assistantPrompt() { return this._assistantPrompt }
+  set assistantPrompt(value) {
+    this._assistantPrompt = value
+    if (value) this._messages = [...initMessages]
+    else this._messages = []
   }
 
   readResponse(stream, aiResponse) {
@@ -103,17 +193,20 @@ class ChatGPTService extends Service {
       0, null,
       (stream, res) => {
         if (!stream) return
-
         const [bytes] = stream.read_line_finish(res)
-        const line = this._decoder.decode(bytes ?? undefined)
+        const line = this._decoder.decode(bytes)
         if (line && line != '') {
-          let data = line.substring(6)
+          let data = line.substr(6)
           if (data == '[DONE]') return
           try {
             const result = JSON.parse(data)
-            if (result.choices[0].finish_reason === 'stop') return
+            if (result.choices[0].finish_reason === 'stop') {
+              aiResponse.done = true
+              return
+            }
             aiResponse.addDelta(result.choices[0].delta.content)
-          } catch {
+          }
+          catch {
             aiResponse.addDelta(line + '\n')
           }
         }
@@ -121,35 +214,41 @@ class ChatGPTService extends Service {
       })
   }
 
-  send(msg) {
-    this.messages.push(new ChatGPTMessage('user', msg))
-    this.emit('newMsg', this.messages.length - 1)
-    const aiResponse = new ChatGPTMessage('assistant', 'thinking...', true)
-    this.messages.push(aiResponse)
-    this.emit('newMsg', this.messages.length - 1)
+  addMessage(role, message) {
+    this._messages.push(new ChatGPTMessage(role, message))
+    this.emit('newMsg', this._messages.length - 1)
+  }
 
-    const messages = this.messages.map(msg => {
-      let m = {role: msg.role, content: msg.content}
-      return m
-    })
+  send(msg) {
+    this._messages.push(new ChatGPTMessage('user', msg))
+    this.emit('newMsg', this._messages.length - 1)
+    const aiResponse = new ChatGPTMessage('assistant', 'thinking...', true, false)
+    this._messages.push(aiResponse)
+    this.emit('newMsg', this._messages.length - 1)
+
     const body = {
-      model: this.model,
-      messages: this._systemMessage.content != '' ? [this._systemMessage, ...messages] : messages,
+      model: CHAT_MODELS[this._modelIndex],
+      messages: this._messages.map(msg => { let m = { role: msg.role, content: msg.content }; return m }),
+      temperature: this._temperature,
+      // temperature: 2, // <- Nuts
       stream: true,
     }
 
     const session = new Soup.Session()
-    const message = new Soup.Message({ method: 'POST', uri: this.url, })
-    message.request_headers.append('Authorization', 'Bearer ' + Keys.OPENAI_API_KEY)
+    const message = new Soup.Message({ method: 'POST', uri: this.url })
+    message.request_headers.append('Authorization', `Bearer ${this._key}`)
     message.set_request_body_from_bytes('application/json', new GLib.Bytes(JSON.stringify(body)))
 
-    session.send_async(message, 0, null, (_, result) => {
+    session.send_async(message, GLib.DEFAULT_PRIORITY, null, (_, result) => {
       const stream = session.send_finish(result)
-      this.readResponse(new Gio.DataInputStream({
-        close_base_stream: true,
-        base_stream: stream
-      }), aiResponse)
+      this.readResponse(new Gio.DataInputStream({ close_base_stream: true, base_stream: stream }), aiResponse)
     })
+
+    if (this._cycleModels) {
+      this._requestCount++
+      if (this._cycleModels)
+        this._modelIndex = (this._requestCount - (this._requestCount % ONE_CYCLE_COUNT)) % CHAT_MODELS.length
+    }
   }
 }
 

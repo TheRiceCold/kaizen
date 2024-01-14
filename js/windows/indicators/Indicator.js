@@ -46,29 +46,29 @@ const brightnessIndicator = OsdValue('Brightness',
 )
 
 const volumeIndicator = OsdValue('Volume',
-  [[Audio, (label) => {
+  [[Audio, label => {
     label.label = `${Math.round(Audio.speaker?.volume * 100)}`
   }]],
-  [[Audio, (progress) => {
+  [[Audio, progress => {
     const updateValue = Audio.speaker?.volume
     if (!isNaN(updateValue)) progress.value = updateValue
   }]],
 )
 
-export default () => MarginRevealer({
-  transition: 'slide_down',
+export default MarginRevealer({
   showClass: 'osd-show',
   hideClass: 'osd-hide',
-  connections: [
-    [Indicator, (revealer, value) => {
+  transition: 'slide_down',
+  connections: [[
+    Indicator, (revealer, value) => {
       if (value > -1) revealer._show()
       else revealer._hide()
-    }, 'popup'],
-  ],
+    }, 'popup'
+  ]],
   child: Widget.Box({
     hpack: 'center',
     vertical: false,
-    className: 'spacing-h--10',
+    className: 'spacing-h-10',
     children: [brightnessIndicator, volumeIndicator]
   })
 })

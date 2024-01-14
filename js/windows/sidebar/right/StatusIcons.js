@@ -1,17 +1,5 @@
-import { App, Utils, Widget, Bluetooth, Network, Notifications, Hyprland } from '../../../imports.js'
-import { languages } from '../../../constants/main.js'
+import { App, Widget, Bluetooth, Network, Notifications } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
-
-function isLanguageMatch(abbreviation, word) {
-  const lowerWord = word.toLowerCase()
-  const lowerAbbreviation = abbreviation.toLowerCase()
-  let i = 0
-  lowerWord.forEach(word => {
-    if (word === lowerAbbreviation[i]) i++
-    if (i === lowerAbbreviation.length) return true
-  })
-  return false
-}
 
 export const NotificationIndicator = (notifCenterName = 'sideright') => {
   const widget = Widget.Revealer({
@@ -105,7 +93,7 @@ const NetworkWifiIndicator = () => Widget.Stack({
     ['3', Widget.Label({ className: 'txt-norm', label: '󰤥' })],
     ['4', Widget.Label({ className: 'txt-norm', label: '󰤨' })],
   ],
-  setup: (self) => self.hook(Network, stack => {
+  setup: self => self.hook(Network, stack => {
     if (!Network.wifi) return
     if (Network.wifi.internet == 'connected')
       stack.shown = String(Math.ceil(Network.wifi.strength / 25))
@@ -121,7 +109,7 @@ export const NetworkIndicator = () => Widget.Stack({
     ['wifi', NetworkWifiIndicator()],
     ['wired', NetworkWiredIndicator()],
   ],
-  setup: (self) => self.hook(Network, stack => {
+  setup: self => self.hook(Network, stack => {
     if (!Network.primary) {
       stack.shown = 'wifi'
       return
@@ -131,61 +119,11 @@ export const NetworkIndicator = () => Widget.Stack({
   }),
 })
 
-const KeyboardLayout = ({ useFlag } = {}) => {
-  var initLangs = []
-  var languageStackArray = []
-  var currentKeyboard
-
-  const updateCurrentKeyboards = () => {
-    currentKeyboard = JSON.parse(Utils.exec('hyprctl -j devices')).keyboards
-      .find(device => device.name === 'at-translated-set-2-keyboard')
-    if (currentKeyboard)
-      initLangs = currentKeyboard.layout.split(',').map(lang => lang.trim())
-    languageStackArray = Array.from({ length: initLangs.length }, (_, i) => {
-      const lang = languages.find(lang => lang.layout == initLangs[i])
-      if (!lang) return [
-        initLangs[i],
-        Widget.Label({ label: initLangs[i] })
-      ]
-      return [
-        lang.layout,
-        Widget.Label({ label: (useFlag ? lang.flag : lang.layout) })
-      ]
-    })
-  }
-  updateCurrentKeyboards()
-  const widgetRevealer = Widget.Revealer({
-    transition: 'slide_left',
-    transition_duration: 150,
-    revealChild: languageStackArray.length > 1,
-  })
-  const widgetContent = Widget.Stack({
-    transition: 'slide_up_down',
-    items: [
-      ...languageStackArray,
-      ['undef', Widget.Label({ label: '?' })]
-    ],
-    setup: self => self.hook(Hyprland, (stack, kbName, layoutName) => {
-      if (!kbName) return
-      let lang = languages.find(lang => layoutName.includes(lang.name))
-      if (lang) widgetContent.shown = lang.layout
-      else {
-        lang = languageStackArray.find(lang => isLanguageMatch(lang[0], layoutName))
-        if (!lang) stack.shown = 'undef'
-        else stack.shown = lang[0]
-      }
-    }, 'keyboard-layout'),
-  })
-  widgetRevealer.child = widgetContent
-  return widgetRevealer
-}
-
 export const StatusIcons = (props = {}) => Widget.Box({
   ...props,
   child: Widget.Box({
     className: 'spacing-h-15',
     children: [
-      KeyboardLayout({ useFlag: false }),
       NotificationIndicator(),
       BluetoothIndicator(),
       NetworkIndicator(),

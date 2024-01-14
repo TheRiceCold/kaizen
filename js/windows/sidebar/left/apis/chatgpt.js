@@ -22,7 +22,7 @@ const chatGPTInfo = Widget.Box({
     Widget.Icon({
       hpack: 'center',
       className: 'sidebar-chat-welcome-logo',
-      icon: `${App.configDir}/assets/openai-logomark.svg`,
+      icon: `${App.configDir}/assets/chatgpt.svg`,
       setup: (self) => Utils.timeout(1, () => {
         const styleContext = self.get_style_context()
         const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL)
@@ -74,7 +74,7 @@ export const chatGPTSettings = MarginRevealer({
     children: [
       ConfigSegmentedSelection({
         hpack: 'center',
-        icon: 'casino',
+        // icon: 'casino',
         name: 'Randomness',
         desc: 'ChatGPT\'s temperature value.\n  Precise = 0\n  Balanced = 0.5\n  Creative = 1',
         options: [

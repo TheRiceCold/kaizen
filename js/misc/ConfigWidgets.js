@@ -23,7 +23,7 @@ export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, props
     tooltipText: desc,
     className: 'txt spacing-h-5 configtoggle-box',
     children: [
-      Widget.label({ label: icon, className: 'txt-norm' }),
+      // Widget.label({ label: icon, className: 'txt-norm' }),
       Widget.Label({ className: 'txt txt-small', label: name }),
       Widget.Box({ hexpand: true }),
       toggleButton,

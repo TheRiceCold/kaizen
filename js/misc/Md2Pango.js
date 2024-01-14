@@ -1,8 +1,9 @@
 const monospaceFonts = 'JetBrains Mono NF, JetBrains Mono Nerd Font, JetBrains Mono NL, SpaceMono NF, SpaceMono Nerd Font, monospace'
 
 const H1 = 'H1', H2 = 'H2', H3 = 'H3', H4 = 'H4', H5 = 'H5', BULLET = 'BULLET', NUMBERING = 'NUMBERING', CODE = 'CODE'
+// eslint-disable-next-line 
 const BOLD = 'BOLD', EMPH = 'EMPH', INLCODE = 'INLCODE', LINK = 'LINK', HEXCOLOR = 'HEXCOLOR', UND = 'UND'
-
+// eslint-disable-next-line 
 let sub_h1, sub_h2, sub_h3, sub_h4, sub_h5
 
 // m2p_sections defines how to detect special markdown sections.
@@ -13,6 +14,7 @@ const m2p_sections = [
   sub_h3 = { name: H3, re: /^(###\s+)(.*)(\s*)$/, sub: "<span font_weight='bold' size='125%'>$2</span>" },
   sub_h4 = { name: H4, re: /^(####\s+)(.*)(\s*)$/, sub: "<span font_weight='bold' size='100%'>$2</span>" },
   sub_h5 = { name: H5, re: /^(#####\s+)(.*)(\s*)$/, sub: "<span font_weight='bold' size='90%'>$2</span>" },
+  // eslint-disable-next-line 
   { name: BULLET, re: /^(\s*)([\*\-]\s)(.*)(\s*)$/, sub: '$1• $3' },
   { name: NUMBERING, re: /^(\s*[0-9]+\.\s)(.*)(\s*)$/, sub: ' $1$2' },
 ]
@@ -32,6 +34,7 @@ const re_comment = /^\s*<!--.*-->\s*$/
 const re_color = /^(\s*<!--\s*(fg|bg)=(#?[0-9a-z_A-Z-]*)\s*((fg|bg)=(#?[0-9a-z_A-Z-]*))?\s*-->\s*)$/
 const re_reset = /(<!--\/-->)/
 const re_uri = /http[s]?:\/\/[^\s']*/
+// eslint-disable-next-line 
 const re_href = "/href='(http[s]?:\\/\\/[^\\s]*)'"
 const re_atag = '<a\s.*>.*(http[s]?:\\/\\/[^\\s]*).*</a>/'
 const re_h1line = /^===+\s*$/

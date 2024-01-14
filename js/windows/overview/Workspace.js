@@ -26,7 +26,7 @@ export default index => {
     child: Widget.EventBox({
       hexpand: true,
       vexpand: true,
-      on_primary_click: () => dispatch(`workspace ${index}`),
+      onPrimaryClick: () => dispatch(`workspace ${index}`),
       setup: eventbox => {
         eventbox.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY)
         eventbox.connect('drag-data-received', (_w, _c, _x, _y, data) => {

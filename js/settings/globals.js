@@ -9,7 +9,7 @@ export default async () => {
     globalThis.openMusicControls = showMusicControls
     // globalThis.audio = Audio.default
 
-    // globalThis.recorder = (await import('../services/ScreenRecorder.js')).default
+    globalThis.recorder = (await import('../services/ScreenRecorder.js')).default
     globalThis.brightness = (await import('../services/Brightness.js')).default
     globalThis.indicator = (await import('../services/Indicator.js')).default
 

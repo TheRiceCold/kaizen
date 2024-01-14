@@ -3,14 +3,14 @@ import { NavigationIndicator } from '../../../misc/main.js'
 
 import toolBox from './Toolbox.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
-// import apiwidgets from './ApiWidgets.js'
+import apiWidgets from './ApiWidgets.js'
 
 const { Gdk } = imports.gi
 
 const contents = [
   {
     name: 'apis',
-    // content: apiWidgets,
+    content: apiWidgets,
     materialIcon: 'api',
     friendlyName: 'APIs',
   },

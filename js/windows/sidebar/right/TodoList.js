@@ -74,7 +74,7 @@ const todoListItem = (task, id, isDone) => {
 const todoItems = isDone => Widget.Scrollable({
   child: Widget.Box({
     vertical: true,
-    connections: [[Todo, (self) => {
+    connections: [[Todo, self => {
       self.children = Todo.todo_json.map((task, i) => task.done != isDone ? null : todoListItem(task, i, isDone))
       if (self.children.length == 0) {
         self.homogeneous = true
@@ -87,7 +87,7 @@ const todoItems = isDone => Widget.Scrollable({
             children: [
               Widget.Label({
                 className: 'txt-badonkers',
-                label: `${isDone ? 'checklist' : 'check_circle'}`, 
+                label: `${isDone ? '' : '󰸞'}`, 
               }),
               Widget.Label({ label: `${isDone ? 'Finished tasks will go here' : 'Nothing here!'}` })
             ]
@@ -220,7 +220,7 @@ export const TodoWidget = () => {
       const highlightWidth = btn.get_children()[0].get_allocated_width()
       navIndicator.css = `
         font-size: ${navIndex}px; 
-        padding: 0px ${(buttonWidth - highlightWidth) / 2}px;
+        padding: 0 ${(buttonWidth - highlightWidth) / 2}px;
       `
     },
     child: Widget.Box({
@@ -229,7 +229,7 @@ export const TodoWidget = () => {
       children: [
         Widget.Label({
           className: 'txt-larger',
-          label: `${isDone ? 'task_alt' : 'format_list_bulleted'}`, 
+          label: `${isDone ? '' : '󰥪'}`, 
         }),
         Widget.Label({
           className: 'txt txt-smallie',

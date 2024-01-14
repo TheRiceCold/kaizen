@@ -7,8 +7,6 @@ export default Widget.Window({
   anchor: ['top', 'left'],
   child:  Widget.Box({
     className: 'osd-window',
-    children: [ 
-      Indicator(),
-    ],
+    children: [ Indicator ],
   })
 })

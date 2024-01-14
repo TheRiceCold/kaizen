@@ -2,11 +2,7 @@ import { App, Widget } from '../imports.js'
 
 const { closeWindow } = App
 
-export default ({
-  name,
-  child,
-  ...props
-}) => Widget.Window({
+export default ({ name, child, ...props }) => Widget.Window({
   name,
   popup: true,
   visible: false,

@@ -55,8 +55,8 @@ export default Widget.Box({
       onMiddleClick: () => App.closeWindow('sideright'),
     }),
     Widget.Box({
-      vertical: true,
       vexpand: true,
+      vertical: true,
       className: 'sidebar-right spacing-v-15',
       children: [
         Widget.Box({

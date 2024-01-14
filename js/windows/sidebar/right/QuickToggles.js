@@ -119,44 +119,44 @@ export const ModuleIdleInhibitor = (props = {}) => Widget.Button({ // TODO: Make
     }
     else self._inhibitor.force_exit()
   },
-  child: Widget.Label({ label: '', className: 'txt-norm' }),
   setup: setupCursorHover,
+  child: Widget.Label({ label: '', className: 'txt-norm' }),
   ...props,
 })
 
 export const ModuleEditIcon = (props = {}) => Widget.Button({
   ...props,
+  setup: btn => setupCursorHover(btn),
   className: 'txt-small sidebar-iconbutton',
+  child: Widget.Label({ label: 'edit', className: 'txt-norm' }),
   onClicked: () => {
     Utils.execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&'])
     App.toggleWindow('sideright')
   },
-  child: Widget.Label({ label: 'edit', className: 'txt-norm' }),
-  setup: btn => setupCursorHover(btn)
 })
 
 export const ModuleReloadIcon = (props = {}) => Widget.Button({
   ...props,
   tooltipText: 'Reload Hyprland',
+  setup: btn => setupCursorHover(btn),
   className: 'txt-small sidebar-iconbutton',
+  child: Widget.Label({ label: '󰑐', className: 'norm' }),
   onClicked: () => {
     Utils.execAsync(['bash', '-c', 'hyprctl reload &'])
     App.toggleWindow('sideright')
   },
-  child: Widget.Label({ label: '󰑐', className: 'norm' }),
-  setup: btn => setupCursorHover(btn)
 })
 
 export const ModuleSettingsIcon = (props = {}) => Widget.Button({
   ...props,
   tooltipText: 'Open Settings',
+  setup: btn => setupCursorHover(btn),
   className: 'txt-small sidebar-iconbutton',
+  child: Widget.Label({ label: '', className: 'txt-norm' }),
   onClicked: () => {
     Utils.execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&'])
     App.toggleWindow('sideright')
   },
-  child: Widget.Label({ label: '', className: 'txt-norm' }),
-  setup: btn => setupCursorHover(btn)
 })
 
 export const ModulePowerIcon = (props = {}) => Widget.Button({
