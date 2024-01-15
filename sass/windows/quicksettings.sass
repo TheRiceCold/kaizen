@@ -1,38 +1,13 @@
-.qs-switcher
-  background: $bg-color
-  .qs-switcher-button
-    margin-right: 10px
-    background: $hover
-    &.focused
-      background: $bg-color
-      image 
-        background: $hover
-        border-top-right-radius: 1rem
-        border-bottom-right-radius: 1rem
-    &.before-focused
-      image 
-        border-bottom-left-radius: 1rem
-    &.after-focused
-      image 
-        border-top-left-radius: 1rem
-    image
-      padding: 10px
-      font-size: 2rem
-      color: $fg-color
-      background: $bg-color
-
-  .sidebar-iconbutton
-    padding: 2px
-
 .quicksettings
-  min-width: 28.8rem
+  padding: 1rem
+  margin: 0.5rem
+  min-width: 27rem
+  min-height: 27rem
+  border-radius: 1rem
+  background-color: $bg-color
+
   .qs-page
     min-height: 10rem
-    background: $hover
-    border-top-left-radius: 1rem
-    border-bottom-left-radius: 1rem
-    scale trough
-      background: $bg-color
 
   .cava
     color: $fg-color
@@ -43,17 +18,12 @@
 
     .qs-menu
       margin: 0
+      .qs-title
+        font-weight: bold
 
     separator
       margin: 3px 0
       background: $fg-color
-
-    .qs-title
-      font-weight: bold
-
-    .qs-content
-      .terminal
-        background: $hover
 
   .qs-header
     margin: 8px 0

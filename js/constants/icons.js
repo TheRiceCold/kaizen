@@ -33,10 +33,7 @@ export default {
     charging: ' ',
     warning: 'battery-empty-symbolic',
   },
-  bluetooth: {
-    enabled: '󰂯',
-    disabled: '󰂲',
-  },
+  bluetooth: { enabled: '󰂯', disabled: '󰂲' },
   brightness: {
     indicator: 'display-brightness-symbolic',
     keyboard: 'keyboard-brightness-symbolic',
@@ -66,7 +63,7 @@ export default {
     full: 'user-trash-full-symbolic',
   },
   mpris: {
-    fallback: 'audio-x-generic-symbolic',
+    fallback: '󰎈',
     shuffle: {
       enabled: '󰒟',
       disabled: '󰒟',
@@ -114,17 +111,7 @@ export default {
     Theme: '󰃟',
     Notifications: '󰂚 ',
   },
-  quicksettings: {
-    notifications: "notification-symbolic",
-    wifi: "network-wireless-signal-good-symbolic",
-    bluetooth: "bluetooth-active-symbolic",
-    audio: "audio-volume-high-symbolic",
-    mpris: "audio-x-generic-symbolic",
-    // chatgpt: `${App.configDir}/modules/icons/chatgpt.svg`
-  },
-  header: {
-    refresh: "view-refresh-symbolic",
-    settings: "settings-symbolic",
-    power: "system-shutdown-symbolic",
-  },
+  ai: {
+    chatgpt: `${App.configDir}/assets/chatgpt.svg`,
+  }
 }
