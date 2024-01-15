@@ -114,7 +114,17 @@ export default {
     Theme: '󰃟',
     Notifications: '󰂚 ',
   },
-  ai: {
-    chatgpt: `${App.configDir}/assets/chatgpt.svg`,
-  }
+  quicksettings: {
+    notifications: "notification-symbolic",
+    wifi: "network-wireless-signal-good-symbolic",
+    bluetooth: "bluetooth-active-symbolic",
+    audio: "audio-volume-high-symbolic",
+    mpris: "audio-x-generic-symbolic",
+    // chatgpt: `${App.configDir}/modules/icons/chatgpt.svg`
+  },
+  header: {
+    refresh: "view-refresh-symbolic",
+    settings: "settings-symbolic",
+    power: "system-shutdown-symbolic",
+  },
 }

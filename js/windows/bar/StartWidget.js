@@ -7,7 +7,6 @@ const Modules = [
   OverviewButton,
   SeparatorDot(),
   FocusedClient,
-  SeparatorDot(),
 ]
 
 export default Widget.Box({ children: Modules })

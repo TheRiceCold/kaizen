@@ -56,7 +56,7 @@ export const chatEntry = Widget.Entry({
 
 const chatSendButton = Widget.Button({
   vpack: 'center',
-  label: 'arrow_upward',
+  label: '󰁝',
   className: 'txt-norm icon-material sidebar-chat-send',
   setup: setupCursorHover,
   onClicked: () => {

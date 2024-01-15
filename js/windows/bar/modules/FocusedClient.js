@@ -4,7 +4,7 @@ import { options, utils } from '../../../constants/main.js'
 export const ClientLabel = Widget.Label({
   binds: [['label', Hyprland.active.client, 'class', c => {
     const { titles } = options.substitutions
-    return utils.substitute(titles, c)
+    return ' ' + utils.substitute(titles, c)
   }]],
 })
 
@@ -27,6 +27,7 @@ export const ClientIcon = Widget.Icon({
 
     self.visible = !!(hasTitleIcon || hasClassIcon)
   }]],
+  css: 'margin-left: 8px;'
 })
 
 export default Widget.Box({

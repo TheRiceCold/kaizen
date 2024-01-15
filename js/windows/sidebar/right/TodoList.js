@@ -26,7 +26,7 @@ const todoListItem = (task, id, isDone) => {
         child: Widget.Label({ 
           vpack: 'center',
           className: 'txt-norm', 
-          label: `${isDone ? 'remove_done' : 'check'}`, 
+          label: `${isDone ? '󰕌' : ''}`, 
         }),
         onClicked: () => {
           const contentWidth = todoContent.get_allocated_width()
@@ -46,9 +46,9 @@ const todoListItem = (task, id, isDone) => {
         vpack: 'center',
         className: 'txt sidebar-todo-item-action',
         child: Widget.Label({
+          label: '󰆴', 
           vpack: 'center',
           className: 'txt-norm', 
-          label: 'delete_forever', 
         }),
         onClicked: () => {
           const contentWidth = todoContent.get_allocated_width()
@@ -132,7 +132,7 @@ const UndoneTodoList = () => {
       className: 'txt-norm icon-material sidebar-todo-add',
       halign: 'end',
       vpack: 'center',
-      label: 'close',
+      label: '',
       setup: setupCursorHover,
       onClicked: () => {
         newTaskEntryRevealer.revealChild = false
@@ -168,7 +168,7 @@ const UndoneTodoList = () => {
     child: Widget.Button({
       halign: 'end',
       vpack: 'center',
-      label: 'arrow_upward',
+      label: '󰁝',
       className: 'txt-norm icon-material sidebar-todo-add',
       setup: setupCursorHover,
       onClicked: () => {

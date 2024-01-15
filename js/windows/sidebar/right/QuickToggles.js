@@ -1,9 +1,6 @@
-import { App, Widget, Utils, Bluetooth, Network, Hyprland } from '../../../imports.js'
+import { App, Widget, Utils, Bluetooth, Network } from '../../../imports.js'
 import { BluetoothIndicator, NetworkIndicator } from './StatusIcons.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
-
-const expandTilde = path =>
-  path.startsWith('~') ? imports.gi.GLib.get_home_dir() + path.slice(1) : path
 
 export const ToggleIconWifi = (props = {}) => Widget.Button({
   onClicked: Network.toggleWifi,
@@ -76,29 +73,6 @@ export const ModuleNightLight = (props = {}) => Widget.Button({
     self._enabled = !!Utils.exec('pidof wlsunset')
     self.toggleClassName('sidebar-button-active', self._enabled)
   },
-  ...props,
-})
-
-export const ModuleInvertColors = (props = {}) => Widget.Button({
-  tooltipText: 'Color inversion',
-  className: 'txt-small sidebar-iconbutton',
-  onClicked: btn => {
-    Hyprland.sendMessage('j/getoption decoration:screen_shader').then(output => {
-      const shaderPath = JSON.parse(output)['str'].trim()
-      if (shaderPath != '[[EMPTY]]' && shaderPath != '') {
-        Utils.execAsync(['bash', '-c', 'hyprctl keyword decoration:screen_shader \'[[EMPTY]]\'']).catch(print)
-        btn.toggleClassName('sidebar-button-active', false)
-      }
-      else {
-        Hyprland.sendMessage(
-          `j/keyword decoration:screen_shader ${expandTilde('~/.config/hypr/shaders/invert.frag')}`
-        ).catch(print)
-        btn.toggleClassName('sidebar-button-active', true)
-      }
-    })
-  },
-  child: Widget.Label({ label: '󰌁', className: 'txt-norm' }),
-  setup: setupCursorHover,
   ...props,
 })
 
