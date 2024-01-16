@@ -1,7 +1,7 @@
 import { Widget } from '../../imports.js'
 import Header from './header/main.js'
 import SettingsStack from './stack/main.js'
-import Calendar from '../sidebar/right/Calendar.js'
+// import Calendar from '../sidebar/right/Calendar.js'
 
 export default state => Widget.Box({
   vexpand: true,

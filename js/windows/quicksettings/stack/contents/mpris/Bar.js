@@ -1,6 +1,6 @@
-import { Widget, Mpris } from '../../../../imports.js'
-// import {RoundedAngleEnd} from "../roundedCorner/index.js"
-import { icons } from '../../../../constants/main.js'
+import { Widget, Mpris } from '../../../../../imports.js'
+// import { RoundedAngleEnd } from "../roundedCorner/index.js"
+import { icons } from '../../../../../constants/main.js'
 
 const MusicContainer = () => Widget.EventBox({
   on_primary_click: () => {
@@ -18,19 +18,18 @@ const MusicContainer = () => Widget.EventBox({
     spacing: 5,
     children: [
       Widget.CircularProgress({
-        class_name: 'music-progress',
-        start_at: 0.75,
-        child: Widget.Icon()
-          .hook(Mpris, (icon) => {
-            const player = Mpris.getPlayer('spotify') || Mpris.getPlayer()
-            if (!player) return
-            let icn = icons.mpris.stopped
-            if (player.play_back_status === 'Playing')
-              icn = icons.mpris.playing
-            else if (player.play_back_status === 'Paused')
-              icn = icons.mpris.paused
-            icon.icon = icn
-          }),
+        startAt: 0.75,
+        className: 'music-progress',
+        child: Widget.Icon().hook(Mpris, icon => {
+          const player = Mpris.getPlayer('spotify') || Mpris.getPlayer()
+          if (!player) return
+          let icn = icons.mpris.stopped
+          if (player.play_back_status === 'Playing')
+            icn = icons.mpris.playing
+          else if (player.play_back_status === 'Paused')
+            icn = icons.mpris.paused
+          icon.icon = icn
+        }),
       })
         .hook(Mpris, (prog) => {
           const player = Mpris.getPlayer('spotify') || Mpris.getPlayer()
@@ -42,15 +41,11 @@ const MusicContainer = () => Widget.EventBox({
           if (!player) return
           prog.value = player.position / player.length
         }),
-      Widget.Label({
-        max_width_chars: 35,
-        truncate: 'end',
+      Widget.Label({ max_width_chars: 35, truncate: 'end' }).hook(Mpris, label => {
+        const player = Mpris.getPlayer('spotify') || Mpris.getPlayer()
+        if (!player) return
+        label.label = player?.track_title + ' - ' + player?.track_artists
       })
-        .hook(Mpris, (label) => {
-          const player = Mpris.getPlayer('spotify') || Mpris.getPlayer()
-          if (!player) return
-          label.label = player?.track_title + ' - ' + player?.track_artists
-        })
     ]
   })
 })

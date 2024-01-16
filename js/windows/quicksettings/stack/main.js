@@ -1,7 +1,7 @@
 import { Widget } from '../../../imports.js'
 
 import Buttons from './Buttons.js'
-import Contents from './Contents.js'
+import Contents from './contents/main.js'
 
 export default state =>  {
   const contents = Contents(state)

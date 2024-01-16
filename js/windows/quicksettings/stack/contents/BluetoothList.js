@@ -1,4 +1,4 @@
-import { Widget, Bluetooth } from '../../../imports.js'
+import { Widget, Bluetooth } from '../../../../imports.js'
 
 export default () => Widget.Box({ 
   hexpand: true, 
@@ -10,12 +10,12 @@ export default () => Widget.Box({
       Widget.Label(device.name),
       Widget.Box({hexpand: true}),
       // device.connecting ?
-        // Widget.Spinner({ active: true }) :
-        // Switch({active: device.connected})
-        //   .on('notify::active', ({active}) => {
-        //     if (active !== device.connected)
-        //       device.setConnection(active)
-        //   })
+      // Widget.Spinner({ active: true }) :
+      // Switch({active: device.connected})
+      //   .on('notify::active', ({active}) => {
+      //     if (active !== device.connected)
+      //       device.setConnection(active)
+      //   })
     ],
   }))
 })

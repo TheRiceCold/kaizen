@@ -1,4 +1,4 @@
-import { Widget, Network, Utils } from '../../../imports.js'
+import { Widget, Network, Utils } from '../../../../imports.js'
 // import { FontIcon } from '../../../misc/main.js'
 // import { icons } from '../../../constants/main.js'
 

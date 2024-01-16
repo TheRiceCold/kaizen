@@ -108,39 +108,3 @@ export const ModuleEditIcon = (props = {}) => Widget.Button({
     App.toggleWindow('sideright')
   },
 })
-
-export const ModuleReloadIcon = (props = {}) => Widget.Button({
-  ...props,
-  tooltipText: 'Reload Hyprland',
-  setup: btn => setupCursorHover(btn),
-  className: 'txt-small sidebar-iconbutton',
-  child: Widget.Label({ label: '󰑐', className: 'norm' }),
-  onClicked: () => {
-    Utils.execAsync(['bash', '-c', 'hyprctl reload &'])
-    App.toggleWindow('sideright')
-  },
-})
-
-export const ModuleSettingsIcon = (props = {}) => Widget.Button({
-  ...props,
-  tooltipText: 'Open Settings',
-  setup: btn => setupCursorHover(btn),
-  className: 'txt-small sidebar-iconbutton',
-  child: Widget.Label({ label: '', className: 'txt-norm' }),
-  onClicked: () => {
-    Utils.execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&'])
-    App.toggleWindow('sideright')
-  },
-})
-
-export const ModulePowerIcon = (props = {}) => Widget.Button({
-  ...props,
-  tooltipText: 'Power Menu',
-  className: 'txt-small sidebar-iconbutton',
-  onClicked: () => {
-    App.toggleWindow('powermenu')
-    App.closeWindow('sideright')
-  },
-  setup: btn => setupCursorHover(btn),
-  child: Widget.Label({ label: '', className: 'txt-norm' }),
-})

@@ -1,6 +1,6 @@
-import { Widget, Notifications } from '../../../imports.js'
-import { Notification } from '../../../misc/main.js'
-import { setupCursorHover } from '../../../misc/CursorHover.js'
+import { Widget, Notifications } from '../../../../imports.js'
+import { Notification } from '../../../../misc/main.js'
+import { setupCursorHover } from '../../../../misc/CursorHover.js'
 
 export default () => {
   const notifEmptyContent = Widget.Box({

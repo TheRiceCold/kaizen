@@ -1,5 +1,5 @@
-import { Widget, Utils, Audio, Hyprland } from '../../../imports.js'
-import { icons } from '../../../constants/main.js'
+import { Widget, Utils, Audio, Hyprland } from '../../../../imports.js'
+import { icons } from '../../../../constants/main.js'
 import Menu from './Menu.js'
 
 /** @param {string} type */

@@ -1,5 +1,5 @@
-import { Widget, Mpris, Utils } from '../../../../imports.js'
-import { icons } from '../../../../constants/main.js'
+import { Widget, Mpris, Utils } from '../../../../../imports.js'
+import { icons } from '../../../../../constants/main.js'
 
 /**
  * @param {string} coverPath
@@ -54,8 +54,8 @@ const MprisPlayer = player => Widget.Box({
       children: [
         PlayerIcon(player),
         Widget.Label({
-          class_name: 'music-player-name',
-          label: player.identity
+          label: player.identity,
+          className: 'music-player-name',
         })
       ]
     }),
@@ -66,35 +66,35 @@ const MprisPlayer = player => Widget.Box({
           vertical: true,
           children: [
             Widget.Label({
-              max_width_chars: 35,
-              truncate: 'end',
-              class_name: 'music-title',
               xalign: 0,
+              truncate: 'end',
+              max_width_chars: 35,
+              class_name: 'music-title',
               label: player.bind('track_title')
             }),
             Widget.Label({
               max_width_chars: 35,
               truncate: 'end',
-              class_name: 'music-artist',
+              className: 'music-artist',
               xalign: 0,
               label: player.bind('track_artists').transform(art => art.join(', '))
             }),
           ]
         }),
         Widget.Box({
-          class_name: 'music-control-box',
+          className: 'music-control-box',
           children: [
             Widget.Box({
               vpack: 'center',
               spacing: 10,
               children: [
                 Widget.Button({
-                  class_name: 'music-button',
-                  on_clicked: () => player.previous(),
+                  className: 'music-button',
+                  onClicked: () => player.previous(),
                   child: Widget.Icon(icons.mpris.prev),
                 }),
                 Widget.Button({
-                  on_clicked: () => player.playPause(),
+                  onClicked: () => player.playPause(),
                   child: Widget.CircularProgress({
                     class_name: 'music-progress',
                     start_at: 0.75,
@@ -120,8 +120,8 @@ const MprisPlayer = player => Widget.Box({
                     })
                 }),
                 Widget.Button({
-                  class_name: 'music-button',
-                  on_clicked: () => player.next(),
+                  className: 'music-button',
+                  onClicked: () => player.next(),
                   child: Widget.Icon(icons.mpris.next)
                 }),
               ]
@@ -133,8 +133,7 @@ const MprisPlayer = player => Widget.Box({
   ]
 })
 
-
-const PlayerList = () => Widget.Box({
+export default () => Widget.Box({
   spacing: 5,
   hexpand: true,
   vertical: true,
@@ -161,8 +160,5 @@ const PlayerList = () => Widget.Box({
       box.attribute.player.delete(id)
     }
   }
-})
-  .hook(Mpris, (box, id) => box.attribute.onAdded(box, id), 'player-added')
+}).hook(Mpris, (box, id) => box.attribute.onAdded(box, id), 'player-added')
   .hook(Mpris, (box, id) => box.attribute.onRemoved(box, id), 'player-closed')
-
-export default PlayerList

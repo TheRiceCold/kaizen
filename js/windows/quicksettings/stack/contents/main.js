@@ -1,14 +1,14 @@
-import { Widget } from '../../../imports.js'
+import { Widget } from '../../../../imports.js'
 
 import Menu from './Menu.js'
-import Cava from './Cava.js'
+// import Cava from './Cava.js'
 import WifiList from './WifiList.js'
 import AudioContent from './Audio.js'
 import BluetoothList from './BluetoothList.js'
 import MprisPlayerList from './mpris/PlayerList.js'
 
-import { FontIcon } from '../../../misc/main.js'
-import { icons } from '../../../constants/main.js'
+import { FontIcon } from '../../../../misc/main.js'
+import { icons } from '../../../../constants/main.js'
 import NotificationList from './NotificationList.js'
 
 const Page = content => Widget.Scrollable({
@@ -47,9 +47,9 @@ export default state => Widget.Stack({
     ['chatgpt', Page(Menu({
       title: 'ChatGPT',
       icon: icons.ai,
-    //   content: AIContent(),
+      //   content: AIContent(),
       headerChild: Widget.Button({
-    //     on_clicked: () => ChatGPT.clear(),
+        //     on_clicked: () => ChatGPT.clear(),
         child: Widget.Box({
           children: [
             Widget.Label('Clear '),
