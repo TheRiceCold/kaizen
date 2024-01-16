@@ -59,7 +59,7 @@ export default {
     chat: 'notification-symbolic',
   },
   trash: {
-    empty: 'user-trash-symbolic',
+    empty: '',
     full: 'user-trash-full-symbolic',
   },
   mpris: {

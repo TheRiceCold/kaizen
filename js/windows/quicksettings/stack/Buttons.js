@@ -1,6 +1,7 @@
 import { Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { icons } from '../../../constants/main.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const buttons = [ 
   { 
@@ -38,8 +39,9 @@ const buttons = [
 const Button = ({ state, icon, title, ...props }) => Widget.Button({
   ...props,
   child: icon,
-  className: 'sidebar-iconbutton',
+  setup: btn => setupCursorHover(btn),
   onClicked: () => state.value = title,
+  className: 'txt-norm sidebar-iconbutton',
 }).hook(state, btn => {
   btn.toggleClassName('active', title === state.value)
 })

@@ -1,6 +1,6 @@
 import { Widget, Network, Utils } from '../../../imports.js'
-import { FontIcon } from '../../../misc/main.js'
-import { icons } from '../../../constants/main.js'
+// import { FontIcon } from '../../../misc/main.js'
+// import { icons } from '../../../constants/main.js'
 
 export default () => Widget.Box({ 
   spacing: 5,
@@ -16,11 +16,10 @@ export default () => Widget.Box({
     child: Widget.Box({
       spacing: 8,
       children: [
-        FontIcon(ap.iconName),
+        // Widget.Icon(ap.iconName),
         Widget.Label({label: ap.ssid}),
         // @ts-ignore
-        ap.active &&
-        FontIcon({ hpack: 'end', hexpand: true, icon: icons.tick }),
+        // ap.active && FontIcon({ hpack: 'end', hexpand: true, icon: icons.tick }),
       ],
     }),
   }))
