@@ -19,8 +19,8 @@ export default {
       high: '󰕾',
     },
     type: {
-      headset: 'audio-headphones-symbolic',
-      speaker: 'audio-speakers-symbolic',
+      headset: '󰋋',
+      speaker: '󰓃',
       card: 'audio-card-symbolic',
     },
     mixer: '',

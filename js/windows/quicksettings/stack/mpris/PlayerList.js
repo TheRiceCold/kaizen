@@ -1,5 +1,5 @@
-import { Widget, Mpris, Utils } from '../../../imports.js'
-import { icons } from '../../../constants/main.js'
+import { Widget, Mpris, Utils } from '../../../../imports.js'
+import { icons } from '../../../../constants/main.js'
 
 /**
  * @param {string} coverPath

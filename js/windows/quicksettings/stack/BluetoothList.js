@@ -1,4 +1,4 @@
-import { Widget, Bluetooth } from '../../imports.js'
+import { Widget, Bluetooth } from '../../../imports.js'
 // @ts-ignore
 import { Switch } from './Widgets.js'
 

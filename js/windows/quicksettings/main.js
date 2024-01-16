@@ -1,24 +1,16 @@
-import { Widget } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
+import { StackState } from '../../services/main.js'
 
-import SettingsStack from './QuickSettings.js'
+import QuickSettings from './QuickSettings.js'
 
-const { Gdk } = imports.gi
+const QSState = new StackState('audio')
 
 export default () => PopupWindow({
   name: 'quicksettings',
+  child: QuickSettings(QSState),
   anchor: ['right', 'top', 'bottom'],
-  child: Widget.Box({
-    vexpand: true,
-    hexpand: true,
-    spacing: 8,
-    className: 'quicksettings',
-    children: [
-      // Header(),
-      SettingsStack(),
-    ]
-  })
 }).on('key-press-event', (_, event) => {
+  const { Gdk } = imports.gi
   const keyval = event.get_keyval()[1]
   if (event.get_state()[1] != (Gdk.ModifierType.MOD1_MASK | Gdk.ModifierType.MOD2_MASK)) 
     return

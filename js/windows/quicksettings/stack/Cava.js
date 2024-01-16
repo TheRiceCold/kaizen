@@ -1,4 +1,4 @@
-import { Widget, Variable } from '../../imports.js'
+import { Widget, Variable } from '../../../imports.js'
 
 const { Gtk } = imports.gi
 

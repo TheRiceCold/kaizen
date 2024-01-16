@@ -1,6 +1,6 @@
-import { Widget, Mpris } from '../../../imports.js'
+import { Widget, Mpris } from '../../../../imports.js'
 // import {RoundedAngleEnd} from "../roundedCorner/index.js"
-import { icons } from '../../../constants/main.js'
+import { icons } from '../../../../constants/main.js'
 
 const MusicContainer = () => Widget.EventBox({
   on_primary_click: () => {
