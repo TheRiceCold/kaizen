@@ -97,7 +97,6 @@ const notifList = Widget.Scrollable({
   }
 })
 
-
 const Contents = Widget.Stack({
   transition: 'crossfade',
   transitionDuration: 150,

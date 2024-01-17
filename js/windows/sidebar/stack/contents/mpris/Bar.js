@@ -3,18 +3,18 @@ import { Widget, Mpris } from '../../../../../imports.js'
 import { icons } from '../../../../../constants/main.js'
 
 const MusicContainer = () => Widget.EventBox({
-  on_primary_click: () => {
+  onPrimaryClick: () => {
     const player = Mpris.getPlayer('spotify') || Mpris.getPlayer()
     if (!player) return
     player.playPause()
   },
-  on_secondary_click: () => {
+  onSecondaryClick: () => {
     const player = Mpris.getPlayer('spotify') || Mpris.getPlayer()
     if (!player) return
     player.next()
   },
   child: Widget.Box({
-    class_name: 'bar-music-container',
+    className: 'bar-music-container',
     spacing: 5,
     children: [
       Widget.CircularProgress({

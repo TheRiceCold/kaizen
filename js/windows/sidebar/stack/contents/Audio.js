@@ -1,6 +1,5 @@
 import { Widget, Utils, Audio, Hyprland } from '../../../../imports.js'
 import { icons } from '../../../../constants/main.js'
-import Menu from './Menu.js'
 
 /** @param {string} type */
 const sorm = type => type === 'sink' ? 'speaker' : 'microphone'
@@ -42,7 +41,7 @@ const streamIconSubstiture = stream => {
 
 /** @param {string} type */
 const TypeIndicator = (type = 'sink') => Widget.Button({
-  on_clicked: () => Utils.execAsync(`pactl set-${type}-mute @DEFAULT_${type.toUpperCase()}@ toggle`),
+  onClicked: () => Utils.execAsync(`pactl set-${type}-mute @DEFAULT_${type.toUpperCase()}@ toggle`),
   child: Widget.Label().hook(Audio, label => {
     if (Audio[sorm(type)])
       label.label = iconSubstitute(Audio[sorm(type)].icon_name, type)
@@ -62,7 +61,7 @@ const VolumeSlider = (type = 'sink') => Widget.Slider({
   hexpand: true,
   draw_value: false,
   // @ts-ignore
-  on_change: ({value}) => Audio[sorm(type)].volume = value,
+  onChange: ({value}) => Audio[sorm(type)].volume = value,
 })
   .hook(Audio, slider => {
     if (!Audio[sorm(type)])
@@ -76,7 +75,7 @@ const VolumeSlider = (type = 'sink') => Widget.Slider({
 
 /** @param {string} type */
 export const Volume = (type = 'sink') => Widget.Box({
-  class_name: 'audio-volume-box',
+  className: 'audio-volume-box',
   children: [
     TypeIndicator(type),
     VolumeSlider(type),
@@ -86,16 +85,16 @@ export const Volume = (type = 'sink') => Widget.Box({
 
 /** @param {import('types/service/audio').Stream} stream */
 const MixerItem = stream => Widget.EventBox({
-  on_primary_click: () => stream.is_muted = !stream.is_muted,
-  on_scroll_up: () => stream.volume += 0.03,
-  on_scroll_down: () => stream.volume -= 0.03,
+  onPrimaryClick: () => stream.is_muted = !stream.is_muted,
+  onScrollUp: () => stream.volume += 0.03,
+  onScrollDown: () => stream.volume -= 0.03,
   child: Widget.Box({
     hexpand: true,
-    class_name: 'mixer-item',
+    className: 'mixer-item',
     children: [
       Widget.Label({
         label: stream.bind('icon_name').transform(() => streamIconSubstiture(stream)),
-        tooltip_text: stream.bind('name').transform(name => name || '')
+        tooltipText: stream.bind('name').transform(name => name || '')
       }),
       Widget.Box({
         vertical: true,
@@ -106,25 +105,23 @@ const MixerItem = stream => Widget.EventBox({
               Widget.Label({
                 xalign: 0,
                 hexpand: true,
-                class_name: 'mixer-item-title',
                 truncate: 'end',
+                className: 'mixer-item-title',
                 label: stream.bind('description').transform(desc => desc || ''),
               }),
               Widget.Label({
                 xalign: 0,
-                class_name: 'mixer-item-volume',
+                className: 'mixer-item-volume',
                 label: stream.bind('volume').transform(volume => `${Math.floor(volume * 100)}%`)
               }),
             ]
           }),
           Widget.Slider({
             hexpand: true,
-            class_name: 'mixer-item-slider',
             draw_value: false,
             value: stream.bind('volume'),
-            on_change: ({value}) => {
-              stream.volume = value
-            },
+            className: 'mixer-item-slider',
+            onChange: ({ value }) => stream.volume = value,
           }),
         ],
       }),
@@ -137,13 +134,13 @@ const MixerItem = stream => Widget.EventBox({
  * @returns {function(import('types/service/audio').Stream): import('types/widgets/button').default}
  */
 const SinkItem = (type) => stream => Widget.Button({
-  on_clicked: () => Audio[sorm(type)] = stream,
+  onClicked: () => Audio[sorm(type)] = stream,
   child: Widget.Box({
     spacing: 5,
     children: [
       Widget.Label({
         label: iconSubstitute(stream.icon_name, type),
-        tooltip_text: stream.icon_name,
+        tooltipText: stream.icon_name,
       }),
       Widget.Label(stream.description?.split(' ').slice(0, 4).join(' ')),
       Widget.Label({
@@ -159,31 +156,30 @@ const SinkItem = (type) => stream => Widget.Button({
 
 /** @param {number} tab */
 const SettingsButton = (tab = 0) => Widget.Button({
-  on_clicked: () => Hyprland.sendMessage('dispatch exec pavucontrol -t ' + tab),
+  onClicked: () => Hyprland.sendMessage('dispatch exec pavucontrol -t ' + tab),
   child: Widget.Label(icons.settings),
 })
 
-export const AppMixer = () => Menu({
-  title: 'App Mixer',
-  icon: icons.audio.mixer,
-  content: Widget.Box({
-    class_name: 'app-mixer',
+export const AppMixer = () => Widget.Box({
+  // title: 'App Mixer',
+  // icon: icons.audio.mixer,
+  child: Widget.Box({
+    className: 'app-mixer',
     vertical: true,
     children: [
-      Widget.Box({vertical: true})
-        .hook(Audio, box => {
-          box.children = Audio.apps.map(MixerItem)
-        }, 'notify::apps')
+      Widget.Box({vertical: true}).hook(Audio, box => {
+        box.children = Audio.apps.map(MixerItem)
+      }, 'notify::apps')
     ],
   }),
-  headerChild: SettingsButton(1),
+  // headerChild: SettingsButton(1),
 })
 
-export const SinkSelector = (type = 'sink') => Menu({
-  title: type + ' Selector',
-  icon: type === 'sink' ? icons.audio.type.headset : icons.audio.mic.unmuted,
-  content: Widget.Box({
-    class_name: 'sink-selector',
+export const SinkSelector = (type = 'sink') => Widget.Box({
+  // title: type + ' Selector',
+  // icon: type === 'sink' ? icons.audio.type.headset : icons.audio.mic.unmuted,
+  child: Widget.Box({
+    className: 'sink-selector',
     vertical: true,
     children: [
       Widget.Box({vertical: true})
@@ -195,12 +191,13 @@ export const SinkSelector = (type = 'sink') => Menu({
         }, 'stream-removed')
     ],
   }),
-  headerChild: SettingsButton(type === 'sink' ? 3 : 4),
+  // headerChild: SettingsButton(type === 'sink' ? 3 : 4),
 })
 
 export default Widget.Box({
+  vexpand: true,
   vertical: true,
-  className: 'qs-menu',
+  className: 'sidebar-group spacing-v-5',
   children: [
     Widget.Box({
       spacing: 8,

@@ -91,7 +91,7 @@ const Row = opt => Widget.Box({
       vertical: true,
       vpack: 'center',
       children: [
-        opt.title && Widget.Label({ xalign: 0, class_name: 'summary', label: opt.title }),
+        opt.title && Widget.Label({ xalign: 0, className: 'summary', label: opt.title }),
         Widget.Label({ xalign: 0, className: 'id', label: `id: "${opt.id}"` }),
       ],
     }),

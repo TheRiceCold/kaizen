@@ -30,6 +30,7 @@ export default {
     search: 'folder-saved-search-symbolic',
   },
   battery: {
+    default: '',
     charging: ' ',
     warning: 'battery-empty-symbolic',
   },
@@ -107,7 +108,8 @@ export default {
     Miscellaneous: '󰠱',
     Notifications: '󰂚 ',
   },
-  ai: {
+  sidebar: {
     chatgpt: `${App.configDir}/assets/chatgpt.svg`,
-  }
+    calendar: `${App.configDir}/assets/calendar.svg`,
+  },
 }

@@ -69,7 +69,7 @@ const MprisPlayer = player => Widget.Box({
               xalign: 0,
               truncate: 'end',
               max_width_chars: 35,
-              class_name: 'music-title',
+              className: 'music-title',
               label: player.bind('track_title')
             }),
             Widget.Label({
@@ -96,25 +96,23 @@ const MprisPlayer = player => Widget.Box({
                 Widget.Button({
                   onClicked: () => player.playPause(),
                   child: Widget.CircularProgress({
-                    class_name: 'music-progress',
+                    className: 'music-progress',
                     start_at: 0.75,
-                    child: Widget.Icon({
-                      class_name: 'music-button',
-                    })
-                      .hook(Mpris, (icon) => {
-                        let icn = icons.mpris.stopped
-                        if (player.play_back_status === 'Playing')
-                          icn = icons.mpris.playing
-                        else if (player.play_back_status === 'Paused')
-                          icn = icons.mpris.paused
-                        icon.icon = icn
-                      }),
+                    child: Widget.Icon({ className: 'music-button' }).hook(Mpris, (icon) => {
+                      let icn = icons.mpris.stopped
+                      if (player.play_back_status === 'Playing')
+                        icn = icons.mpris.playing
+                      else if (player.play_back_status === 'Paused')
+                        icn = icons.mpris.paused
+
+                      icon.icon = icn
+                    }),
                   })
-                    .hook(player, (prog) => {
+                    .hook(player, prog => {
                       if (!player) return
                       prog.value = player.position / player.length
                     })
-                    .poll(1000, (prog) => {
+                    .poll(1000, prog => {
                       if (!player) return
                       prog.value = player.position / player.length
                     })

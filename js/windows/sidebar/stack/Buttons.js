@@ -31,7 +31,7 @@ const buttons = [
     tooltipText: 'Media',
   },
   {
-    icon: Widget.Icon(icons.ai.chatgpt),
+    icon: Widget.Icon(icons.sidebar.chatgpt),
     title: 'chatgpt',
     tooltipText: 'ChatGPT',
   },

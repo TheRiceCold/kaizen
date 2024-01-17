@@ -1,27 +1,38 @@
 import { Widget, Bluetooth } from '../../../../imports.js'
 
-export default Widget.Box({
-  vertical: true,
-  className: 'qs-menu',
+const Title = Widget.Box({
+  vpack: 'start',
+  className: 'sidebar-group-invisible txt spacing-h-5',
   children: [
-    Widget.Box({ 
-      hexpand: true, 
-      vertical: true 
-    }).hook(Bluetooth, box => {
-      box.children = Bluetooth.devices.map(device => Widget.Box({
-        hexpand: false,
-        children: [
-          Widget.Label(device.name),
-          Widget.Box({hexpand: true}),
-          // device.connecting ?
-          // Widget.Spinner({ active: true }) :
-          // Switch({active: device.connected})
-          //   .on('notify::active', ({active}) => {
-          //     if (active !== device.connected)
-          //       device.setConnection(active)
-          //   })
-        ],
-      }))
+    Widget.Label({
+      xalign: 0,
+      hexpand: true,
+      label: 'Bluetooth',
+      className: 'txt-title-small margin-left-10',
     })
   ]
+})
+
+const Content = Widget.Box({ hexpand: true, vertical: true }).hook(Bluetooth, box => {
+  box.children = Bluetooth.devices.map(device => Widget.Box({
+    hexpand: false,
+    children: [
+      Widget.Label(device.name),
+      Widget.Box({hexpand: true}),
+      // device.connecting ?
+      // Widget.Spinner({ active: true }) :
+      // Switch({active: device.connected})
+      //   .on('notify::active', ({active}) => {
+      //     if (active !== device.connected)
+      //       device.setConnection(active)
+      //   })
+    ],
+  }))
+})
+
+export default Widget.Box({
+  vexpand: true,
+  vertical: true,
+  className: 'sidebar-group spacing-v-5',
+  children: [ Title, Content ]
 })

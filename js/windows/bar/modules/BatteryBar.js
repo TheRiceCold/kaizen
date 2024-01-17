@@ -5,7 +5,10 @@ import { options, icons } from '../../../constants/main.js'
 
 const Indicator = Widget.Stack({
   binds: [['visible', options.battery.bar.showIcon]],
-  items: [ ['false', FontIcon('󱊣')], ['true', FontIcon(icons.battery.charging)] ],
+  items: [ 
+    ['false', FontIcon(icons.battery.default)], 
+    ['true', FontIcon(icons.battery.charging)] 
+  ],
   connections: [[ Battery, stack => stack.shown = `${Battery.charging || Battery.charged}` ]],
 })
 
