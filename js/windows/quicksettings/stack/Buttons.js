@@ -33,6 +33,11 @@ const buttons = [
     icon: Widget.Icon(icons.ai.chatgpt),
     title: 'chatgpt',
     tooltipText: 'ChatGPT',
+  },
+  {
+    icon: FontIcon('󰏘'),
+    title: 'themes',
+    tooltipText: 'Themes',
   }
 ]
 
@@ -42,12 +47,10 @@ const Button = ({ state, icon, title, ...props }) => Widget.Button({
   setup: btn => setupCursorHover(btn),
   onClicked: () => state.value = title,
   className: 'txt-norm sidebar-iconbutton',
-}).hook(state, btn => {
-  btn.toggleClassName('active', title === state.value)
 })
 
 export default state => Widget.Box({
   hpack: 'center',
-  className: 'sidebar-togglebox spacing-h-10',
+  className: 'sidebar-togglesbox spacing-h-10',
   children: buttons.map(props => Button({ state, ...props }))
 })

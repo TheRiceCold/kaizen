@@ -130,7 +130,7 @@ export default {
 
   desktop: {
     wallpaper: {
-      fg: option('#fff', { 'sass': 'wallpaper-fg' }),
+      fg: option('#fff', { sass: 'wallpaper-fg' }),
       img: option(themes[0].options['desktop.wallpaper.img'], { 'sassFormat': v => `"${v}"`, 'type': 'img' }),
     },
     avatar: option(`/var/lib/AccountsService/icons/${Utils.USER}`, {

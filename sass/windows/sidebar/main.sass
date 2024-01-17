@@ -1,5 +1,5 @@
 @mixin group-padding
-  padding: 0.341rem
+  padding: 0.5rem
 
 .sidebar-right
   padding: 1rem
@@ -40,7 +40,7 @@
   padding: 0.341rem 0.682rem
 
 .sidebar-togglesbox
-  margin-top: 8px
+  margin-bottom: 16px
   background: $hover
   @include full-rounding
   @include group-padding
@@ -52,10 +52,10 @@
   @include full-rounding
   transition: 300ms cubic-bezier(0.1, 1, 0, 1)
 
-.sidebar-iconbutton:hover, .sidebar-iconbutton:focus
+.sidebar-iconbutton:hover
   background: $hover
 
-.sidebar-iconbutton:active
+.sidebar-iconbutton:focus
   background: $accent
 
 .sidebar-button

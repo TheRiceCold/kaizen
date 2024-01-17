@@ -49,6 +49,7 @@ const MusicContainer = () => Widget.EventBox({
     ]
   })
 })
+
 const MusicBarContainer = () => Widget.Box({
   hexpand: true,
   children: [
@@ -58,17 +59,12 @@ const MusicBarContainer = () => Widget.Box({
   ],
 })
 
-const MusicBarContainerRevealer = () => {
-  const box = Widget.Box({
-    vertical: false,
-    vpack: 'start',
-  })
-  box.pack_start(Widget.Revealer({
-    child: MusicBarContainer(),
-    transition: 'slide_down',
-    transition_duration: 200,
-    reveal_child: Mpris.bind('players').transform(players => players.length > 0)
-  }), false, false, 0)
-  return box
-}
-export default MusicBarContainerRevealer
+export default () => Widget.Box({
+  vpack: 'start',
+  vertical: false,
+}).pack_start(Widget.Revealer({
+  child: MusicBarContainer(),
+  transition: 'slide_down',
+  transition_duration: 200,
+  reveal_child: Mpris.bind('players').transform(players => players.length > 0)
+}), false, false, 0)

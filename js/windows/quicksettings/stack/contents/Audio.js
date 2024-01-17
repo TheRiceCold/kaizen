@@ -3,9 +3,9 @@ import { icons } from '../../../../constants/main.js'
 import Menu from './Menu.js'
 
 /** @param {string} type */
-const sorm = (type) => type === 'sink' ? 'speaker' : 'microphone'
+const sorm = type => type === 'sink' ? 'speaker' : 'microphone'
 /** @param {string} type */
-const sorms = (type) => type === 'sink' ? 'speakers' : 'microphones'
+const sorms = type => type === 'sink' ? 'speakers' : 'microphones'
 /** @param {string | null} item
  *  @param {string} type */
 const iconSubstitute = (item, type) => {
@@ -198,18 +198,22 @@ export const SinkSelector = (type = 'sink') => Menu({
   headerChild: SettingsButton(type === 'sink' ? 3 : 4),
 })
 
-const AudioContent = () => Widget.Box({
+export default Widget.Box({
   vertical: true,
-  spacing: 8,
+  className: 'qs-menu',
   children: [
     Widget.Box({
+      spacing: 8,
       vertical: true,
-      children: [ Volume('sink'), Volume('source') ]
-    }),
-    SinkSelector('sink'),
-    SinkSelector('source'),
-    AppMixer(),
+      children: [
+        Widget.Box({
+          vertical: true,
+          children: [ Volume('sink'), Volume('source') ]
+        }),
+        SinkSelector('sink'),
+        SinkSelector('source'),
+        AppMixer(),
+      ]
+    })
   ]
 })
-
-export default AudioContent

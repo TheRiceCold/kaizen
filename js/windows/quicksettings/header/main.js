@@ -11,5 +11,8 @@ const Uptime = Widget.Label({
 
 export default Widget.Box({
   className: 'spacing-h-5 sidebar-group-invisible-morehorizpad',
-  children: [ Uptime, Widget.Box({ hexpand: true }) ].concat(Buttons)
+  children: [ 
+    Uptime, 
+    Widget.Box({ hexpand: true }) 
+  ].concat(Buttons)
 })

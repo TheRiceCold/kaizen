@@ -2,6 +2,7 @@ import { Widget } from '../../../imports.js'
 
 import Buttons from './Buttons.js'
 import Contents from './contents/main.js'
+import Calendar from '../../sidebar/right/Calendar.js'
 
 export default state =>  {
   const contents = Contents(state)
@@ -9,7 +10,11 @@ export default state =>  {
   return Widget.EventBox({
     child: Widget.Box({
       vertical: true, 
-      children: [ Buttons(state), contents ]
+      children: [
+        Buttons(state), 
+        contents,
+        // Calendar()
+      ]
     })
   })
 }

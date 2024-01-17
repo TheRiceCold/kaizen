@@ -5,12 +5,14 @@ import QuickSettings from './QuickSettings.js'
 
 const QSState = new StackState('notifications')
 
-export default () => PopupWindow({
+export default PopupWindow({
   focusable: true,
   name: 'quicksettings',
   child: QuickSettings(QSState),
   anchor: ['right', 'top', 'bottom'],
-}).on('key-press-event', (_, event) => {
+})
+
+.on('key-press-event', (_, event) => {
   const { Gdk } = imports.gi
   const keyval = event.get_keyval()[1]
   if (event.get_state()[1] != (Gdk.ModifierType.MOD1_MASK | Gdk.ModifierType.MOD2_MASK)) 

@@ -133,32 +133,31 @@ const MprisPlayer = player => Widget.Box({
   ]
 })
 
-export default () => Widget.Box({
-  spacing: 5,
-  hexpand: true,
+export default Widget.Box({
   vertical: true,
-  attribute: {
-    'player': new Map(),
-    /**
-     * @param {import('types/widgets/box').default} box
-     * @param {string} id
-    */
-    'onAdded': (box, id) => {
-      const player = Mpris.getPlayer(id)
-      if (!id || !player || box.attribute.player.has(id)) return
-      const playerWidget = MprisPlayer(player)
-      box.attribute.player.set(id, playerWidget)
-      box.pack_start(playerWidget, false, false, 0)
-    },
-    /**
-     * @param {import('types/widgets/box').default} box
-     * @param {string} id
-    */
-    'onRemoved': (box, id) => {
-      if (!id || !box.attribute.player.has(id)) return
-      box.attribute.player.get(id).destroy()
-      box.attribute.player.delete(id)
-    }
-  }
-}).hook(Mpris, (box, id) => box.attribute.onAdded(box, id), 'player-added')
-  .hook(Mpris, (box, id) => box.attribute.onRemoved(box, id), 'player-closed')
+  className: 'qs-menu',
+  children: [
+    Widget.Box({
+      spacing: 5,
+      hexpand: true,
+      vertical: true,
+      attribute: {
+        'player': new Map(),
+        'onAdded': (box, id) => {
+          const player = Mpris.getPlayer(id)
+          if (!id || !player || box.attribute.player.has(id)) return
+          const playerWidget = MprisPlayer(player)
+          box.attribute.player.set(id, playerWidget)
+          box.pack_start(playerWidget, false, false, 0)
+        },
+        'onRemoved': (box, id) => {
+          if (!id || !box.attribute.player.has(id)) return
+          box.attribute.player.get(id).destroy()
+          box.attribute.player.delete(id)
+        }
+      }
+    }).hook(Mpris, (box, id) => box.attribute.onAdded(box, id), 'player-added')
+      .hook(Mpris, (box, id) => box.attribute.onRemoved(box, id), 'player-closed')
+  ]
+})
+

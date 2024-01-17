@@ -1,21 +1,27 @@
 import { Widget, Bluetooth } from '../../../../imports.js'
 
-export default () => Widget.Box({ 
-  hexpand: true, 
-  vertical: true 
-}).hook(Bluetooth, box => {
-  box.children = Bluetooth.devices.map(device => Widget.Box({
-    hexpand: false,
-    children: [
-      Widget.Label(device.name),
-      Widget.Box({hexpand: true}),
-      // device.connecting ?
-      // Widget.Spinner({ active: true }) :
-      // Switch({active: device.connected})
-      //   .on('notify::active', ({active}) => {
-      //     if (active !== device.connected)
-      //       device.setConnection(active)
-      //   })
-    ],
-  }))
+export default Widget.Box({
+  vertical: true,
+  className: 'qs-menu',
+  children: [
+    Widget.Box({ 
+      hexpand: true, 
+      vertical: true 
+    }).hook(Bluetooth, box => {
+      box.children = Bluetooth.devices.map(device => Widget.Box({
+        hexpand: false,
+        children: [
+          Widget.Label(device.name),
+          Widget.Box({hexpand: true}),
+          // device.connecting ?
+          // Widget.Spinner({ active: true }) :
+          // Switch({active: device.connected})
+          //   .on('notify::active', ({active}) => {
+          //     if (active !== device.connected)
+          //       device.setConnection(active)
+          //   })
+        ],
+      }))
+    })
+  ]
 })

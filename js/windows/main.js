@@ -22,5 +22,5 @@ export default [
   SidebarLeft,
   SidebarRight,
   Notifications,
-  QuickSettings(),
+  QuickSettings,
 ].concat(ScreenCorners)
