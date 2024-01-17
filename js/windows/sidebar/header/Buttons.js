@@ -1,6 +1,7 @@
 import { Widget, App, Utils } from '../../../imports.js'
-import { setupCursorHover } from '../../../misc/CursorHover.js'
 import { FontIcon } from '../../../misc/main.js'
+
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const buttons = [
   {

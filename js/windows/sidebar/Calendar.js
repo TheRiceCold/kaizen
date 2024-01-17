@@ -1,6 +1,6 @@
-import { Widget, Utils } from '../../../imports.js'
-import { setupCursorHover } from '../../../misc/CursorHover.js'
-import { getCalendarLayout } from '../../../misc/CalendarLayout.js'
+import { Widget, Utils } from '../../imports.js'
+import { setupCursorHover } from '../../misc/CursorHover.js'
+import { getCalendarLayout } from '../../misc/CalendarLayout.js'
 
 import { TodoWidget } from './TodoList.js'
 
@@ -33,7 +33,7 @@ const weekDays = [ // MONDAY IS THE FIRST DAY OF THE WEEK :HESRIGHTYOUKNOW:
 const CalendarDay = (day, today) => Widget.Button({
   className: `sidebar-calendar-btn ${today == 1 ? 'sidebar-calendar-btn-today' : (today == -1 ? 'sidebar-calendar-btn-othermonth' : '')}`,
   child: Widget.Overlay({
-    child: Widget.Box({}),
+    child: Widget.Box(),
     overlays: [Widget.Label({
       hpack: 'center',
       label: String(day),
@@ -59,6 +59,7 @@ const CalendarWidget = () => {
       children: row.map(day => CalendarDay(day.day, day.today)),
     }))
   }
+
   function shiftCalendarXMonths(x) {
     if (x == 0) monthshift = 0
     else monthshift += x
@@ -70,6 +71,7 @@ const CalendarWidget = () => {
     calendarMonthYear.label = `${monthshift == 0 ? '' : '• '}${newDate.toLocaleString('default', { month: 'long' })} ${newDate.getFullYear()}`
     addCalendarChildren(calendarDays, calendarJson)
   }
+
   const calendarHeader = Widget.Box({
     className: 'spacing-h-5 sidebar-calendar-header',
     setup: box => {
@@ -93,12 +95,14 @@ const CalendarWidget = () => {
       }), false, false, 0)
     }
   })
+
   const calendarDays = Widget.Box({
     hexpand: true,
     vertical: true,
     className: 'spacing-v-5',
     setup: box => addCalendarChildren(box, calendarJson)
   })
+
   return Widget.EventBox({
     onScrollUp: () => shiftCalendarXMonths(-1),
     onScrollDown: () => shiftCalendarXMonths(1),
@@ -162,7 +166,7 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
   })
 })
 
-export default () => Widget.Box({
+export default Widget.Box({
   className: 'sidebar-group spacing-h-5',
   setup: box => {
     box.pack_start(Widget.Box({

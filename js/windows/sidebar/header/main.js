@@ -1,6 +1,7 @@
 import { Widget } from '../../../imports.js'
 
 import Buttons from './Buttons.js'
+
 import { variables } from '../../../constants/main.js'
 
 const Uptime = Widget.Label({

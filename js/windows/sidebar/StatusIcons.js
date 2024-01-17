@@ -1,7 +1,7 @@
-import { App, Widget, Bluetooth, Network, Notifications } from '../../../imports.js'
-import { FontIcon } from '../../../misc/main.js'
+import { App, Widget, Bluetooth, Network, Notifications } from '../../imports.js'
+import { FontIcon } from '../../misc/main.js'
 
-export const NotificationIndicator = (notifCenterName = 'sideright') => {
+export const NotificationIndicator = (notifCenterName = 'sidebar') => {
   const widget = Widget.Revealer({
     revealChild: false,
     transition: 'slide_left',

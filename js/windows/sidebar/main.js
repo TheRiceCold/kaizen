@@ -1,21 +1,24 @@
 import { PopupWindow } from '../../misc/main.js'
 import { StackState } from '../../services/main.js'
 
-import QuickSettings from './QuickSettings.js'
+import Sidebar from './Sidebar.js'
 
 const QSState = new StackState('notifications')
 
 export default PopupWindow({
   focusable: true,
-  name: 'quicksettings',
-  child: QuickSettings(QSState),
+  name: 'sidebar',
+  child: Sidebar(QSState),
   anchor: ['right', 'top', 'bottom'],
 })
 
 .on('key-press-event', (_, event) => {
   const { Gdk } = imports.gi
   const keyval = event.get_keyval()[1]
-  if (event.get_state()[1] != (Gdk.ModifierType.MOD1_MASK | Gdk.ModifierType.MOD2_MASK)) 
+  const MOD1 = Gdk.ModifierType.MOD1_MASK
+  const MOD2 = Gdk.ModifierType.MOD2_MASK
+
+  if (event.get_state()[1] !== (MOD1 | MOD2)) 
     return
   switch (keyval) {
     case Gdk.KEY_n: 

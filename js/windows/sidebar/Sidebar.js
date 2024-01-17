@@ -1,6 +1,7 @@
 import { Widget } from '../../imports.js'
 import Header from './header/main.js'
-import SettingsStack from './stack/main.js'
+import Calendar from './Calendar.js'
+import Stack from './stack/main.js'
 
 export default state => Widget.Box({
   vexpand: true,
@@ -11,10 +12,11 @@ export default state => Widget.Box({
       vexpand: true,
       vertical: true,
       className: 'sidebar-right spacing-v-15',
-      children: [ 
+      children: [
         Header,
-        SettingsStack(state),
+        Stack(state),
+        Calendar,
       ]
-    })
+    }),
   ]
 })
