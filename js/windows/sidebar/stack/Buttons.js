@@ -26,11 +26,6 @@ const buttons = [
     tooltipText: 'Audio',
   },
   {
-    icon: FontIcon(icons.mpris.fallback),
-    title: 'mpris',
-    tooltipText: 'Media',
-  },
-  {
     icon: Widget.Icon(icons.sidebar.chatgpt),
     title: 'chatgpt',
     tooltipText: 'ChatGPT',

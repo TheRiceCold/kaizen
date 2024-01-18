@@ -77,7 +77,7 @@ const notifEmptyContent = Widget.Box({
           vertical: true,
           className: 'spacing-v-5',
           children: [
-            Widget.Label('󰂚', 'txt-badonkers'),
+            Widget.Label({ label: '󰂚', css: 'font-size: 3rem' }),
             Widget.Label({ label: 'No notifications', className: 'txt-small' }),
           ]
         }),

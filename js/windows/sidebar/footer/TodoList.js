@@ -86,7 +86,7 @@ const todoItems = isDone => Widget.Scrollable({
             className: 'txt',
             children: [
               Widget.Label({
-                className: 'txt-badonkers',
+                css: 'font-size: 3rem;',
                 label: `${isDone ? '' : '󰸞'}`, 
               }),
               Widget.Label({ label: `${isDone ? 'Finished tasks will go here' : 'Nothing here!'}` })
