@@ -6,7 +6,6 @@ import Overview from './overview/main.js'
 import PowerMenu from './powermenu/main.js'
 import CheatSheet from './cheatsheet/main.js'
 import Indicators from './indicators/main.js'
-import SidebarLeft from './sidebar/left/main.js'
 import ScreenCorners from './screencorners/main.js'
 import Notifications from './notifications/main.js'
 
@@ -16,9 +15,8 @@ export default [
   Sidebar,
   Launcher,
   Overview,
-  CheatSheet,
   PowerMenu,
+  CheatSheet,
   Indicators,
-  SidebarLeft,
   Notifications,
 ].concat(ScreenCorners)

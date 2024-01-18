@@ -1,10 +1,10 @@
-import { App, Utils, Widget } from '../../../../imports.js'
-import { ChatGPT } from '../../../../services/main.js'
+import { App, Utils, Widget } from '../../../../../../imports.js'
+import { ChatGPT } from '../../../../../../services/main.js'
 import { SystemMessage, ChatMessage } from './chatgpt_chatmessage.js'
-import { MarginRevealer } from '../../../../misc/AdvancedRevealers.js'
-import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../../../misc/ConfigWidgets.js'
-import { markdownTest } from '../../../../misc/Md2Pango.js'
-import { setupCursorHover, setupCursorHoverInfo } from '../../../../misc/CursorHover.js'
+import { MarginRevealer } from '../../../../../../misc/AdvancedRevealers.js'
+import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../../../../../misc/ConfigWidgets.js'
+import { markdownTest } from '../../../../../../misc/Md2Pango.js'
+import { setupCursorHover, setupCursorHoverInfo } from '../../../../../../misc/CursorHover.js'
 
 const { Gtk } = imports.gi
 

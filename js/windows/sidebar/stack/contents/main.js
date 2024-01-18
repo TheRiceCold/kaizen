@@ -1,6 +1,7 @@
 import { Widget } from '../../../../imports.js'
 
 // import Cava from './Cava.js'
+import ChatGPT from './chatgpt/main.js'
 import WifiList from './WifiList.js'
 import AudioContent from './Audio.js'
 import BluetoothList from './BluetoothList.js'
@@ -17,7 +18,7 @@ export default state => Widget.Stack({
     ['bluetooth', BluetoothList],
     ['audio', AudioContent],
     ['mpris', MprisPlayerList],
-    // ['chatgpt', ChatGPT]
+    ['chatgpt', ChatGPT]
     // ['themes', Themes],
   ],
 })

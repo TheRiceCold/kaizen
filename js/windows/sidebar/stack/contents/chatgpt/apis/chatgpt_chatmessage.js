@@ -1,5 +1,5 @@
-import { App, Utils, Widget } from '../../../../imports.js'
-import md2pango from '../../../../misc/Md2Pango.js'
+import { App, Utils, Widget } from '../../../../../../imports.js'
+import md2pango from '../../../../../../misc/Md2Pango.js'
 import GtkSource from 'gi://GtkSource?version=3.0'
 
 const { Gio, GLib, Gtk } = imports.gi

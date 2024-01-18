@@ -1,12 +1,10 @@
-import { Utils, Widget } from '../../../../imports.js'
-import { WaifuService } from '../../../../services/main.js'
-import { MarginRevealer } from '../../../../misc/AdvancedRevealers.js'
-import { setupCursorHover } from '../../../../misc/CursorHover.js'
-
-const { Gio, GLib, Gtk } = imports.gi
-const { Box, Scrollable } = Widget
+import { Utils, Widget } from '../../../../../../imports.js'
+import { WaifuService } from '../../../../../../services/main.js'
+import { MarginRevealer } from '../../../../../../misc/AdvancedRevealers.js'
+import { setupCursorHover } from '../../../../../../misc/CursorHover.js'
 
 const IMAGE_REVEAL_DELAY = 13
+const { Gio, GLib, Gtk } = imports.gi
 
 Utils.exec(`bash -c 'mkdir -p ${GLib.get_user_cache_dir()}/ags/media/waifus'`)
 Utils.exec(`bash -c 'rm ${GLib.get_user_cache_dir()}/ags/media/waifus/*'`)
@@ -79,7 +77,7 @@ const WaifuImage = taglist => {
       downloadIndicator,
     ]
   })
-  const blockImageActions = Box({
+  const blockImageActions = Widget.Box({
     className: 'sidebar-waifu-image-actions spacing-h-3',
     children: [
       Widget.Box({ hexpand: true }),
@@ -200,7 +198,7 @@ const waifuContent = Widget.Box({
   ]
 })
 
-export const waifuView = Scrollable({
+export const waifuView = Widget.Scrollable({
   className: 'sidebar-chat-viewport',
   vexpand: true,
   child: Widget.Box({ vertical: true, children: [ waifuContent] }),

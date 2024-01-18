@@ -1,7 +1,7 @@
-import { Widget } from '../../../imports.js'
-import { setupCursorHover } from '../../../misc/CursorHover.js'
-// APIs
-import { ChatGPT } from '../../../services/main.js'
+import { Widget } from '../../../../../imports.js'
+import { ChatGPT } from '../../../../../services/main.js'
+import { setupCursorHover } from '../../../../../misc/CursorHover.js'
+
 import {
   chatGPTView,
   chatGPTCommands,
@@ -33,10 +33,11 @@ const APIS = [
     placeholderText: 'Enter tags',
   },
 ]
+
 let currentApiId = 0
 APIS[currentApiId].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', true)
 
-export const chatEntry = Widget.Entry({
+const chatEntry = Widget.Entry({
   className: 'sidebar-chat-entry',
   hexpand: true,
   connections: [[
@@ -52,6 +53,51 @@ export const chatEntry = Widget.Entry({
     APIS[currentApiId].sendCommand(entry.text)
     entry.text = ''
   },
+})
+
+
+const Title = Widget.Box({
+  vpack: 'start',
+  className: 'sidebar-group-invisible txt spacing-h-5',
+  children: [
+    Widget.Label({
+      xalign: 0,
+      hexpand: true,
+      label: 'ChatGPT',
+      className: 'txt-title-small margin-left-10',
+    })
+  ]
+})
+
+const apiCommandStack = Widget.Stack({
+  transition: 'slide_up_down',
+  items: APIS.map(api => [api.name, api.commandBar]),
+})
+
+
+function switchToTab(id) {
+  APIS[currentApiId].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', false)
+  APIS[id].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', true)
+  apiContentStack.shown = APIS[id].name
+  apiCommandStack.shown = APIS[id].name
+  chatEntry.placeholderText = APIS[id].placeholderText
+  currentApiId = id
+}
+
+const apiSwitcher = Widget.Box({
+  homogeneous: true,
+  children: [
+    Widget.Box({
+      className: 'sidebar-chat-apiswitcher spacing-h-5',
+      hpack: 'center',
+      children: APIS.map((api, id) => Widget.Button({
+        child: api.tabIcon,
+        tooltipText: api.name,
+        setup: setupCursorHover,
+        onClicked: () => switchToTab(id)
+      })),
+    }),
+  ]
 })
 
 const chatSendButton = Widget.Button({
@@ -76,47 +122,25 @@ const apiContentStack = Widget.Stack({
   items: APIS.map(api => [api.name, api.contentWidget]),
 })
 
-const apiCommandStack = Widget.Stack({
-  transition: 'slide_up_down',
-  items: APIS.map(api => [api.name, api.commandBar]),
-})
-
-function switchToTab(id) {
-  APIS[currentApiId].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', false)
-  APIS[id].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', true)
-  apiContentStack.shown = APIS[id].name
-  apiCommandStack.shown = APIS[id].name
-  chatEntry.placeholderText = APIS[id].placeholderText
-  currentApiId = id
-}
-const apiSwitcher = Widget.Box({
-  homogeneous: true,
-  children: [
-    Widget.Box({
-      className: 'sidebar-chat-apiswitcher spacing-h-5',
-      hpack: 'center',
-      children: APIS.map((api, id) => Widget.Button({
-        child: api.tabIcon,
-        tooltipText: api.name,
-        setup: setupCursorHover,
-        onClicked: () => switchToTab(id)
-      })),
-    }),
-  ]
-})
-
-export default Widget.Box({
+const Content = Widget.Box({
   properties: [
-    ['nextTab', () => switchToTab(Math.min(currentApiId + 1, APIS.length - 1))],
-    ['prevTab', () => switchToTab(Math.max(0, currentApiId - 1))],
+    ['nextTab', () => switchToTab(Math.min(currentApiId + 1, APIS.length -1))],
+    ['prevTab', () => switchToTab(Math.min(0, currentApiId - 1))],
   ],
   vertical: true,
-  className: 'spacing-v-10',
   homogeneous: false,
+  className: 'spacing-v-10',
   children: [
     apiSwitcher,
     apiContentStack,
     apiCommandStack,
     textboxArea,
-  ],
+  ]
+})
+
+export default Widget.Box({
+  vexpand: true,
+  vertical: true,
+  className: 'sidebar-group spacing-v-5',
+  children: [ Title, Content ]
 })

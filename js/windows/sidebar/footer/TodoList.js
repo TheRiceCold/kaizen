@@ -1,7 +1,7 @@
-import { Widget, Utils } from '../../imports.js'
-import { Todo } from '../../services/main.js'
-import { NavigationIndicator } from '../../misc/main.js'
-import { setupCursorHover } from '../../misc/CursorHover.js'
+import { Widget, Utils } from '../../../imports.js'
+import { Todo } from '../../../services/main.js'
+import { NavigationIndicator } from '../../../misc/main.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const { Gtk } = imports.gi
 
@@ -204,7 +204,7 @@ const todoItemsBox = Widget.Stack({
   ],
 })
 
-export const TodoWidget = () => {
+export default () => {
   const TodoTabButton = (isDone, navIndex) => Widget.Button({
     hexpand: true,
     className: 'sidebar-selector-tab',

@@ -9,7 +9,7 @@ const Title = Widget.Box({
     Widget.Label({
       xalign: 0,
       hexpand: true,
-      label: 'Wifi',
+      label: 'Wi-Fi',
       className: 'txt-title-small margin-left-10',
     })
   ]
