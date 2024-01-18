@@ -61,10 +61,10 @@ export const chatGPTSettings = MarginRevealer({
   transition: 'slide_down',
   revealChild: true,
   connections: [
-    [ChatGPT, (self) => Utils.timeout(200, () => {
+    [ChatGPT, self => Utils.timeout(200, () => {
       self._hide()
     }), 'newMsg'],
-    [ChatGPT, (self) => Utils.timeout(200, () => {
+    [ChatGPT, self => Utils.timeout(200, () => {
       self._show()
     }), 'clear'],
   ],
@@ -157,13 +157,13 @@ export const chatGPTWelcome = Widget.Box({
 export const chatContent = Widget.Box({
   className: 'spacing-v-15',
   vertical: true,
-  connections: [
-    [ChatGPT, (box, id) => {
+  connections: [[
+    ChatGPT, (box, id) => {
       const message = ChatGPT.messages[id]
       if (!message) return
       box.add(ChatMessage(message, chatGPTView))
-    }, 'newMsg'],
-  ]
+    }, 'newMsg'
+  ]]
 })
 
 const clearChat = () => {
@@ -253,7 +253,5 @@ export const sendMessage = (text) => {
     else
       chatContent.add(SystemMessage('Invalid command.', 'Error', chatGPTView))
   }
-  else {
-    ChatGPT.send(text)
-  }
+  else ChatGPT.send(text)
 }

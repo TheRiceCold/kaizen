@@ -8,12 +8,6 @@ import {
   sendMessage as chatGPTSendMessage,
   chatGPTTabIcon
 } from './apis/chatgpt.js'
-import {
-  waifuView,
-  waifuCommands,
-  sendMessage as waifuSendMessage,
-  waifuTabIcon
-} from './apis/waifu.js'
 
 const APIS = [
   {
@@ -23,15 +17,7 @@ const APIS = [
     commandBar: chatGPTCommands,
     tabIcon: chatGPTTabIcon,
     placeholderText: 'Message ChatGPT',
-  },
-  {
-    name: 'Waifus',
-    sendCommand: waifuSendMessage,
-    contentWidget: waifuView,
-    commandBar: waifuCommands,
-    tabIcon: waifuTabIcon,
-    placeholderText: 'Enter tags',
-  },
+  }
 ]
 
 let currentApiId = 0
@@ -55,7 +41,6 @@ const chatEntry = Widget.Entry({
   },
 })
 
-
 const Title = Widget.Box({
   vpack: 'start',
   className: 'sidebar-group-invisible txt spacing-h-5',
@@ -72,32 +57,6 @@ const Title = Widget.Box({
 const apiCommandStack = Widget.Stack({
   transition: 'slide_up_down',
   items: APIS.map(api => [api.name, api.commandBar]),
-})
-
-
-function switchToTab(id) {
-  APIS[currentApiId].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', false)
-  APIS[id].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', true)
-  apiContentStack.shown = APIS[id].name
-  apiCommandStack.shown = APIS[id].name
-  chatEntry.placeholderText = APIS[id].placeholderText
-  currentApiId = id
-}
-
-const apiSwitcher = Widget.Box({
-  homogeneous: true,
-  children: [
-    Widget.Box({
-      className: 'sidebar-chat-apiswitcher spacing-h-5',
-      hpack: 'center',
-      children: APIS.map((api, id) => Widget.Button({
-        child: api.tabIcon,
-        tooltipText: api.name,
-        setup: setupCursorHover,
-        onClicked: () => switchToTab(id)
-      })),
-    }),
-  ]
 })
 
 const chatSendButton = Widget.Button({
@@ -123,15 +82,10 @@ const apiContentStack = Widget.Stack({
 })
 
 const Content = Widget.Box({
-  properties: [
-    ['nextTab', () => switchToTab(Math.min(currentApiId + 1, APIS.length -1))],
-    ['prevTab', () => switchToTab(Math.min(0, currentApiId - 1))],
-  ],
   vertical: true,
   homogeneous: false,
   className: 'spacing-v-10',
   children: [
-    apiSwitcher,
     apiContentStack,
     apiCommandStack,
     textboxArea,

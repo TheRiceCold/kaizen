@@ -17,7 +17,7 @@ const contentStack = Widget.Stack({
 })
 
 const StackButton = (stackItemName, icon, name) => Widget.Button({
-  className: 'button-minsize sidebar-navrail-btn sidebar-button-alone txt-small spacing-h-5',
+  className: 'sidebar-navrail-btn sidebar-button-alone txt-small spacing-h-5',
   onClicked: btn => {
     contentStack.shown = stackItemName
     const kids = btn.get_parent().get_children()
