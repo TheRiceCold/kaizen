@@ -4,6 +4,7 @@ export const SCREEN_WIDTH = Number(Utils.exec('bash -c "xrandr --current | grep 
 export const SCREEN_HEIGHT = Number(Utils.exec('bash -c "xrandr --current | grep \'*\' | uniq | awk \'{print $1}\' | cut -d \'x\' -f2 | head -1" | awk \'{print $1}\''))
 
 export const showMusicControls = Variable(false, {})
+globalThis['openMusicControls'] = showMusicControls
 
 export const uptime = Variable('', {
   poll: [60_000, 'cat /proc/uptime', line => {

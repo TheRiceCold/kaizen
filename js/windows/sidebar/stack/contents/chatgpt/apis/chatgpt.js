@@ -58,16 +58,16 @@ const chatGPTInfo = Widget.Box({
 })
 
 export const chatGPTSettings = MarginRevealer({
-  transition: 'slide_down',
   revealChild: true,
-  connections: [
-    [ChatGPT, self => Utils.timeout(200, () => {
-      self._hide()
-    }), 'newMsg'],
-    [ChatGPT, self => Utils.timeout(200, () => {
-      self._show()
-    }), 'clear'],
-  ],
+  transition: 'slide_down',
+  extraSetup: self => self
+    .hook(ChatGPT, self => Utils.timeout(200, () => {
+        self.attribute.hide()
+    }), 'newMsg')
+    .hook(ChatGPT, self => Utils.timeout(200, () => {
+      self.attribute.show()
+    }), 'clear'),
+  
   child: Widget.Box({
     vertical: true,
     className: 'sidebar-chat-settings',
