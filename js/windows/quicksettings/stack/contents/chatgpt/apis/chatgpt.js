@@ -23,7 +23,7 @@ const chatGPTInfo = Widget.Box({
       hpack: 'center',
       className: 'sidebar-chat-welcome-logo',
       icon: `${App.configDir}/assets/chatgpt.svg`,
-      setup: (self) => Utils.timeout(1, () => {
+      setup: self => Utils.timeout(400, () => {
         const styleContext = self.get_style_context()
         const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL)
         const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL)
@@ -82,7 +82,7 @@ export const chatGPTSettings = MarginRevealer({
           { value: 0.50, name: 'Balanced', },
           { value: 1.00, name: 'Creative', },
         ],
-        initIndex: 1,
+        initIndex: 2,
         onChange: value => {
           ChatGPT.temperature = value
         },
