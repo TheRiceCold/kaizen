@@ -1,10 +1,21 @@
 import { App } from '../imports.js'
 
 export default {
+  distro: {
+    fedora: '',
+    arch: '',
+    nixos: '',
+    debian: '',
+    'opensuse-tumbleweed': '',
+    ubuntu: '' ,
+    endeavouros: '' ,
+  },
+
   lock: '',
   fallback: {
     executable: 'application-x-executable-symbolic',
   },
+
   audio: {
     mic: {
       muted: '',

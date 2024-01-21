@@ -42,18 +42,9 @@
 
   @include battery 
 
-  .focused-client, .quicksettings > box > box
+  .focused-client > *
+    margin-left: 8px
     font-weight: bold
-    @include spacing(1)
-
-  .quicksettings:not(.active):not(:active)
-    .bluetooth 
-      color: $blue
-    .battery
-      &.low 
-        color: $red
-      &.charged, &.charging 
-        color: $green
 
   .media
     &.spotify image 

@@ -6,7 +6,7 @@ const { NORTH, SOUTH } = imports.gi.Gdk.Gravity
 const SysTrayItem = item => PanelButton({
   className: 'tray-item',
   content: Widget.Icon({ icon: item.bind('icon') }),
-  tooltip_markup: item.bind('tooltip_markup'),
+  tooltipMarkup: item.bind('tooltip_markup'),
   setup: self => {
     const id = item.menu?.connect('popped-up', menu => {
       self.toggleClassName('active')
@@ -24,4 +24,8 @@ const SysTrayItem = item => PanelButton({
   onSecondaryClick: btn => item.menu?.popup_at_widget(btn, SOUTH, NORTH, null),
 })
 
-export default Widget.Box().bind('children', SystemTray, 'items', i => i.map(SysTrayItem))
+export default Widget.Box().bind(
+  'children', 
+  SystemTray, 
+  'items', i => i.map(SysTrayItem)
+)
