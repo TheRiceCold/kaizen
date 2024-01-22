@@ -4,7 +4,7 @@ import { options, icons }from '../../../constants/main.js'
 
 function Arrow(revealer, direction, items) {
   let deg = 0
-  const icon = Widget.Icon({ icon: icons.ui.arrow[direction] })
+  const icon = Widget.Icon({ icon: icons.arrow[direction] })
 
   const animate = () => {
     const t = options.transition.value / 20

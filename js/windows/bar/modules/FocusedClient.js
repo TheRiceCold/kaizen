@@ -13,13 +13,21 @@ const ClientLabel = Widget.Label({
 })
 
 const ClientIcon = Widget.Icon({
-  connections: [[
-    active.client, self => {
-      const icon = substitute(icons, active.client.class) + '-symbolic'
-      self.visible = !!Utils.lookUpIcon(icon)
-      self.icon = icon
-    }
-  ]],
+  setup: self => self.hook(Hyprland.active.client, self => {
+    const classIcon = substitute(icons, active.client.class) + '-symbolic'
+    const titleIcon = substitute(icons, active.client.class) + '-symbolic'
+
+    const hasTitleIcon = Utils.lookUpIcon(titleIcon)
+    const hasClassIcon = Utils.lookUpIcon(classIcon)
+
+    if (hasClassIcon)
+      self.icon = classIcon
+
+    if (hasTitleIcon)
+      self.icon = titleIcon
+
+    self.visible = !!(hasTitleIcon || hasClassIcon)
+  }),
 })
 
 export default Widget.Box({

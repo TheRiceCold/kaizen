@@ -19,8 +19,7 @@ const notificationList = Widget.Box({
   vertical: true,
   vpack: 'start',
   className: 'spacing-v-5-revealer',
-  connections: [
-    [Notifications, (box, id) => {
+  setup: self => self.hook(Notifications, (box, id) => {
       if (box.get_children().length == 0) { // On init there's no notif, or 1st notif
         Notifications.notifications.forEach(n => {
           box.pack_end(Notification({ notification: n, isPopup: false }), false, false, 0)
@@ -35,13 +34,12 @@ const notificationList = Widget.Box({
         box.pack_end(NewNotif, false, false, 0)
         box.show_all()
       }
-    }, 'notified'],
-    [Notifications, (box, id) => {
+    }, 'notified')
+    .hook(Notifications, (box, id) => {
       if (!id) return
       for (const ch of box.children)
         if (ch._id === id) ch._destroyWithAnims()
-    }, 'closed'],
-  ],
+    }, 'closed'),
 })
 
 const Title = Widget.Box({

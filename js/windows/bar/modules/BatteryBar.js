@@ -11,7 +11,9 @@ const Indicator = Widget.Stack({
     ['false', FontIcon(icons.battery.default)], 
     ['true', FontIcon(icons.battery.charging)] 
   ],
-  connections: [[ Battery, stack => stack.shown = `${Battery.charging || Battery.charged}` ]],
+  setup: self => self.hook(Battery, stack => 
+    stack.shown = `${Battery.charging || Battery.charged}`
+  ),
 })
 
 const PercentLabel = () => Widget.Revealer({
@@ -21,13 +23,13 @@ const PercentLabel = () => Widget.Revealer({
 })
 
 const LevelBar = () => Widget.LevelBar({
-  connections: [[ 
+  setup: self => self.hook(
     battery.bar.full, self => {
       const value = battery.bar.full.value ? 'fill' : 'center'
       self.vpack = value
       self.hpack = value
     }
-  ]],
+  ),
   binds: [['value', Battery, 'percent', p => p / 100]],
 })
 
@@ -50,14 +52,12 @@ const WholeButton = Widget.Overlay({
 })
 
 const Content = Widget.Box({
-  connections: [
-    [Battery, w => {
-      w.toggleClassName('charging', Battery.charging || Battery.charged)
-      w.toggleClassName('medium', Battery.percent < battery.medium.value)
-      w.toggleClassName('low', Battery.percent < battery.low.value)
-      w.toggleClassName('half', Battery.percent < 48)
-    }],
-  ],
+  setup: self => self.hook(Battery, w => {
+    w.toggleClassName('charging', Battery.charging || Battery.charged)
+    w.toggleClassName('medium', Battery.percent < battery.medium.value)
+    w.toggleClassName('low', Battery.percent < battery.low.value)
+    w.toggleClassName('half', Battery.percent < 48)
+  }),
   binds: [
     ['visible', Battery, 'available'],
     ['children', battery.bar.full, 'value', full => full ? [ WholeButton ] : [ 

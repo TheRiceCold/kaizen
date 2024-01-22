@@ -25,11 +25,11 @@ const EnumSetter = opt => {
     )
   }
   const next = Widget.Button({
-    child: FontIcon(icons.ui.arrow.right),
+    child: FontIcon(icons.arrow.right),
     onClicked: () => step(+1),
   })
   const prev = Widget.Button({
-    child: FontIcon(icons.ui.arrow.left),
+    child: FontIcon(icons.arrow.left),
     onClicked: () => step(-1),
   })
   return Widget.Box({

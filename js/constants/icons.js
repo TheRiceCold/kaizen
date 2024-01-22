@@ -11,11 +11,6 @@ export default {
     endeavouros: '' ,
   },
 
-  lock: '',
-  fallback: {
-    executable: 'application-x-executable-symbolic',
-  },
-
   audio: {
     mic: {
       muted: '',
@@ -36,16 +31,15 @@ export default {
     },
     mixer: '',
   },
-  apps: {
-    apps: 'view-app-grid-symbolic',
-    search: 'folder-saved-search-symbolic',
-  },
+
   battery: {
     default: '',
     charging: ' ',
     warning: 'battery-empty-symbolic',
   },
+
   bluetooth: { enabled: '󰂯', disabled: '󰂲' },
+
   brightness: {
     off: 'display-brightness-off-symbolic',
     low: 'display-brightness-low-symbolic',
@@ -55,31 +49,26 @@ export default {
     medium: 'display-brightness-medium-symbolic',
     screen: ['󰛩', '󱩎', '󱩏', '󱩐', '󱩑', '󱩒', '󱩓', '󱩔', '󱩕', '󱩖', '󰛨'],
   },
+
   powermenu: {
-    reboot: 'system-reboot-symbolic',
-    logout: 'system-log-out-symbolic',
-    shutdown: 'system-shutdown-symbolic',
-    sleep: 'weather-clear-night-symbolic',
+    lock: '',
+    sleep: '󰒲', 
+    cancel: '󱎘', 
+    logout: '󰍃',
+    reboot: '󰜉', 
+    shutdown: '',
   },
-  recorder: {
-    recording: 'media-record-symbolic',
-  },
+
   notifications: {
     bell: '󰂚',
     chat: 'notification-symbolic',
     silent: 'notifications-disabled-symbolic',
     noisy: 'preferences-system-notifications-symbolic',
   },
-  trash: {
-    empty: '',
-    full: 'user-trash-full-symbolic',
-  },
+
   mpris: {
     fallback: '󰎈',
-    shuffle: {
-      enabled: '󰒟',
-      disabled: '󰒟',
-    },
+    shuffle: { enabled: '󰒟', disabled: '󰒟' },
     loop: {
       none: '󰓦',
       track: '󰓦',
@@ -91,21 +80,14 @@ export default {
     prev: '󰒮',
     next: '󰒭',
   },
-  ui: {
-    info: 'info-symbolic',
-    menu: 'open-menu-symbolic',
-    link: 'external-link-symbolic',
-    tick: 'object-select-symbolic',
-    close: 'window-close-symbolic',
-    settings: 'emblem-system-symbolic',
-    arrow: {
-      up: 'pan-up-symbolic',
-      right: 'pan-end-symbolic',
-      down: 'pan-down-symbolic',
-      left: 'pan-start-symbolic',
-    },
+
+  arrow: {
+    up: 'pan-up-symbolic',
+    right: 'pan-end-symbolic',
+    down: 'pan-down-symbolic',
+    left: 'pan-start-symbolic',
   },
-  system: { temp: '', cpu: '', ram: '' },
+
   dialog: {
     Bar: '',
     Font: '',

@@ -10,9 +10,10 @@ const SysTrayItem = item => PanelButton({
   setup: self => {
     const id = item.menu?.connect('popped-up', menu => {
       self.toggleClassName('active')
-      menu.connect('notify::visible', menu => {
-        self.toggleClassName('active', menu.visible)
-      })
+      menu.connect(
+        'notify::visible',
+        menu => self.toggleClassName('active', menu.visible)
+      )
       menu.disconnect(id)
     })
 

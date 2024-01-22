@@ -17,7 +17,7 @@ export default (service, condition) => {
 
   return Widget.Separator({
     vpack: 'center',
-    connections: [['draw', visibility], ...conn],
     binds: [['visible', separators]],
+    connections: [['draw', visibility], ...conn],
   })
 }

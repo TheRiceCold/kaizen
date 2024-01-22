@@ -3,8 +3,6 @@ import { Todo } from '../../../services/main.js'
 import { NavigationIndicator } from '../../../misc/main.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 
-const { Gtk } = imports.gi
-
 const defaultTodoSelected = 'undone'
 
 const todoListItem = (task, id, isDone) => {
@@ -74,7 +72,7 @@ const todoListItem = (task, id, isDone) => {
 const todoItems = isDone => Widget.Scrollable({
   child: Widget.Box({
     vertical: true,
-    connections: [[Todo, self => {
+    setup: self => self.hook(Todo, self => {
       self.children = Todo.todo_json.map((task, i) => task.done != isDone ? null : todoListItem(task, i, isDone))
       if (self.children.length == 0) {
         self.homogeneous = true
@@ -85,22 +83,18 @@ const todoItems = isDone => Widget.Scrollable({
             vpack: 'center',
             className: 'txt',
             children: [
-              Widget.Label({
-                css: 'font-size: 3rem;',
-                label: `${isDone ? '' : '󰸞'}`, 
-              }),
+              Widget.Label({ css: 'font-size: 3rem;', label: `${isDone ? '' : '󰸞'}`, }),
               Widget.Label({ label: `${isDone ? 'Finished tasks will go here' : 'Nothing here!'}` })
             ]
           })
         ]
       }
       else self.homogeneous = false
-    }, 'updated']]
+    }, 'updated')
   }),
   setup: (listContents) => {
-    listContents.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-    const vScrollbar = listContents.get_vscrollbar()
-    vScrollbar.get_style_context().add_class('sidebar-scrollbar')
+      const vScrollbar = listContents.get_vscrollbar();
+      vScrollbar.get_style_context().add_class('sidebar-scrollbar');
   }
 })
 
