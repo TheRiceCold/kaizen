@@ -40,7 +40,7 @@ const buttons = [
 const Button = ({ state, icon, title, ...props }) => Widget.Button({
   ...props,
   child: icon,
-  setup: btn => setupCursorHover(btn),
+  setup: setupCursorHover,
   onClicked: () => state.value = title,
   className: 'txt-norm sidebar-iconbutton',
 })

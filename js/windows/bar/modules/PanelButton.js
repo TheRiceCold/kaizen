@@ -26,7 +26,7 @@ export default ({
 
   return Widget.Button({
     ...props,
-    setup: btn => setupCursorHover(btn),
+    setup: setupCursorHover,
     className: `panel-button ${className}`,
     child: Widget.Box({ children: [content] }),
     connections: connections.concat([connection]),

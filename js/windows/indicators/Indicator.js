@@ -7,7 +7,6 @@ const OsdValue = (name, labelSetup, progressSetup, props = {}) => Widget.Box({
   hexpand: true,
   vertical: true,
   className: 'osd-bg osd-value',
-  attribute: { 'disable': () => valueNumber.label = '󰖭' },
   children: [
     Widget.Box({
       vexpand: true,
@@ -38,23 +37,23 @@ const OsdValue = (name, labelSetup, progressSetup, props = {}) => Widget.Box({
 
 const brightnessIndicator = OsdValue('Brightness',
   self => self.hook(Brightness, self => {
-    self.label = `${Math.round(Brightness.screen_value * 100)}`;
+    self.label = `${Math.round(Brightness.screen_value * 100)}`
   }, 'notify::screen-value'),
   self => self.hook(Brightness, progress => {
-    const updateValue = Brightness.screen_value;
-    progress.value = updateValue;
+    const updateValue = Brightness.screen_value
+    progress.value = updateValue
   }, 'notify::screen-value'),
 )
 
 const volumeIndicator = OsdValue('Volume',
   self => self.hook(Audio, label => {
-    label.label = `${Math.round(Audio.speaker?.volume * 100)}`;
+    label.label = `${Math.round(Audio.speaker?.volume * 100)}`
   }),
   self => self.hook(Audio, progress => {
-    const updateValue = Audio.speaker?.volume;
-    if (!isNaN(updateValue)) progress.value = updateValue;
+    const updateValue = Audio.speaker?.volume
+    if (!isNaN(updateValue)) progress.value = updateValue
   }),
-);
+)
 
 export default MarginRevealer({
   showClass: 'osd-show',

@@ -1,24 +1,24 @@
 import { Widget, Hyprland } from '../../../imports.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
+import { options, utils } from '../../../constants/main.js'
 
-const { 
-  sendMessage,
-  active: {workspace} 
-} = Hyprland
+const { active: {workspace} } = Hyprland
 
-const WorkspaceButton = i => Widget.EventBox({
+const ws = options.workspaces.value
+const dispatch = arg => Utils.execAsync(`hyprctl dispatch workspace ${arg}`);
+
+const WorkspaceButton = i => Widget.Button({
+  setup: setupCursorHover,
+  onClicked: () => dispatch(i),
   className: 'workspace-button',
-  setup: btn => setupCursorHover(btn),
   child: Widget.Label({ label: `${i}`, className: 'button-label' }),
-  onPrimaryClickRelease: () => sendMessage(`dispatch workspace ${i}`),
 }).hook(workspace, btn => btn.toggleClassName('active', workspace.id === i))
 
-export default Widget.EventBox({
-  attribute: { clicked: false },
+export default Widget.Box({
   className: 'workspaces-background',
   child: Widget.Box({
     className: 'workspaces',
-    children: Array.from({ length: 9 }, (_, i) => i + 1).map(WorkspaceButton),
+    children: utils.range(ws || 20).map(WorkspaceButton),
   }).hook(Hyprland, ({ children }) => {
     children.forEach((item, i) => {
       const ws = Hyprland.getWorkspace(i + 1)

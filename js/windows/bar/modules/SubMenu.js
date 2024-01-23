@@ -18,9 +18,9 @@ function Arrow(revealer, direction, items) {
 
   return Widget.Button({
     child: icon,
+    setup: setupCursorHover,
     className: 'panel-button sub-menu',
-    setup: btn => setupCursorHover(btn),
-    connections: [[items, btn => btn.tooltip_text = `${items.value} Items` ]],
+    connections: [[ items, btn => btn.tooltip_text = `${items.value} Items` ]],
     onClicked: () => {
       animate()
       revealer.reveal_child = !revealer.reveal_child

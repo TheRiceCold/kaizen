@@ -1,5 +1,5 @@
 import { Widget, Notifications } from '../../../../imports.js'
-import { Notification } from '../../../../misc/main.js'
+import { FontIcon, Notification } from '../../../../misc/main.js'
 import { setupCursorHover } from '../../../../misc/CursorHover.js'
 
 const ListActionButton = (icon, name, action) => Widget.Button({
@@ -8,7 +8,7 @@ const ListActionButton = (icon, name, action) => Widget.Button({
   child: Widget.Box({
     className: 'spacing-h-5',
     children: [
-      Widget.Label({ label: icon, className: 'txt-norm' }),
+      FontIcon({ icon, className: 'txt-norm' }),
       Widget.Label({ className: 'txt-small', label: name })
     ]
   }),
@@ -20,21 +20,21 @@ const notificationList = Widget.Box({
   vpack: 'start',
   className: 'spacing-v-5-revealer',
   setup: self => self.hook(Notifications, (box, id) => {
-      if (box.get_children().length == 0) { // On init there's no notif, or 1st notif
-        Notifications.notifications.forEach(n => {
-          box.pack_end(Notification({ notification: n, isPopup: false }), false, false, 0)
-        })
-        box.show_all()
-        return
-      }
+    if (box.get_children().length == 0) { // On init there's no notif, or 1st notif
+      Notifications.notifications.forEach(n => {
+        box.pack_end(Notification({ notification: n, isPopup: false }), false, false, 0)
+      })
+      box.show_all()
+      return
+    }
 
-      const notif = Notifications.getNotification(id)
-      const NewNotif = Notification({ notification: notif, isPopup: false })
-      if (NewNotif) {
-        box.pack_end(NewNotif, false, false, 0)
-        box.show_all()
-      }
-    }, 'notified')
+    const notif = Notifications.getNotification(id)
+    const NewNotif = Notification({ notification: notif, isPopup: false })
+    if (NewNotif) {
+      box.pack_end(NewNotif, false, false, 0)
+      box.show_all()
+    }
+  }, 'notified')
     .hook(Notifications, (box, id) => {
       if (!id) return
       for (const ch of box.children)

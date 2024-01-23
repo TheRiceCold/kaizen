@@ -93,8 +93,8 @@ const todoItems = isDone => Widget.Scrollable({
     }, 'updated')
   }),
   setup: (listContents) => {
-      const vScrollbar = listContents.get_vscrollbar();
-      vScrollbar.get_style_context().add_class('sidebar-scrollbar');
+    const vScrollbar = listContents.get_vscrollbar()
+    vScrollbar.get_style_context().add_class('sidebar-scrollbar')
   }
 })
 

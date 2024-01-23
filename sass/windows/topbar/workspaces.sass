@@ -1,12 +1,12 @@
 .workspaces
-  padding: 6px
+  margin: 4px 0
   font-size: 14px
-  margin-top: 2px
-  background: #242339
+  padding: 4px 6px
+  background: $bg-color
   border-radius: 0.75rem
 
   .workspace-button
-    color: $hover
+    color: $magenta
     transition: all 0.3s ease-in-out
 
     &:hover
@@ -16,8 +16,8 @@
 
     &.occupied
       font-weight: bold
-      background: #7C6EEB
-      color: rgb(17, 17, 27)
+      color: $accent-fg
+      background: $magenta
 
       &:hover
         border-radius: 1rem
@@ -43,4 +43,4 @@
         transition: all 0.3s ease-in-out
 
     .button-label
-      min-width: 1.75rem
+      min-width: 1.65rem

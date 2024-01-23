@@ -4,6 +4,7 @@ export default [
   Theme({
     name: 'Colony',
     icon: '󰄛',
+    'theme.widget.bg': '$blue',
     'desktop.wallpaper.img': WP + 'colony-wallpaper.png',
   }),
   Theme({

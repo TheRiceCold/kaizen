@@ -1,10 +1,5 @@
 import { Service, Utils } from '../imports.js'
-const { Gio, GLib } = imports.gi
-
-function fileExists(filePath) {
-  let file = Gio.File.new_for_path(filePath)
-  return file.query_exists(null)
-}
+const { GLib } = imports.gi
 
 class TodoService extends Service {
   static {

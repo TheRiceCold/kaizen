@@ -31,7 +31,7 @@ export default Widget.Box({
     },
   },
   setup: self => self
-  .hook(Notifications, (box, id) => box.attribute.notify(box, id), 'notified')
-  .hook(Notifications, (box, id) => box.attribute.dismiss(box, id), 'dismissed')
-  .hook(Notifications, (box, id) => box.attribute.dismiss(box, id, true), 'closed')
+    .hook(Notifications, (box, id) => box.attribute.notify(box, id), 'notified')
+    .hook(Notifications, (box, id) => box.attribute.dismiss(box, id), 'dismissed')
+    .hook(Notifications, (box, id) => box.attribute.dismiss(box, id, true), 'closed')
 })

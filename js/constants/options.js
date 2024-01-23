@@ -1,11 +1,17 @@
 import { Utils } from '../imports.js'
-import Option from '../settings/option.js'
+import Option, { 
+  apply, 
+  resetOptions,
+} from '../settings/option.js'
 
 import themes from './themes.js'
 
 const option = (value, config) => new Option(value, config)
 
 export default {
+  reset: resetOptions,
+  apply: apply,
+
   spacing: option(8),
   padding: option(8),
   radii: option(8),

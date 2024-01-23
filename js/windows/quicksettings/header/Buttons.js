@@ -24,7 +24,7 @@ const buttons = [
 export default buttons.map(({ icon, tooltipText, onClicked })=> Widget.Button({
   tooltipText,
   hpack: 'end',
-  setup: btn => setupCursorHover(btn),
+  setup: setupCursorHover,
   className: 'txt-small sidebar-iconbutton',
   child: FontIcon({ icon: icon, className: 'txt-norm' }),
   onClicked: () => { onClicked(); App.closeWindow('quicksettings') },

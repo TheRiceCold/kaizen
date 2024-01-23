@@ -8,7 +8,7 @@ const WINDOW_NAME = 'powermenu'
 const SessionButton = ({
   name, 
   icon, 
-  exec = "",
+  exec = '',
   className,
 }) => {
   const buttonDescription = Widget.Revealer({
@@ -25,7 +25,7 @@ const SessionButton = ({
   return Widget.Button({
     onClicked: () => {
       App.closeWindow(WINDOW_NAME)
-      if (!!exec) 
+      if (exec) 
         Utils.execAsync(exec)
     },
     className: `session-button ${className}`,
@@ -55,9 +55,9 @@ const SessionButton = ({
         buttonDescription.revealChild = true
         self.toggleClassName('session-button-focused', true)
       }).on('focus-out-event', self => {
-        buttonDescription.revealChild = false
-        self.toggleClassName('session-button-focused', false)
-      }),
+      buttonDescription.revealChild = false
+      self.toggleClassName('session-button-focused', false)
+    }),
   })
 }
 

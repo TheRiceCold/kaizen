@@ -62,7 +62,7 @@ export const chatGPTSettings = MarginRevealer({
   transition: 'slide_down',
   extraSetup: self => self
     .hook(ChatGPT, self => Utils.timeout(200, () => {
-        self.attribute.hide()
+      self.attribute.hide()
     }), 'newMsg')
     .hook(ChatGPT, self => Utils.timeout(200, () => {
       self.attribute.show()

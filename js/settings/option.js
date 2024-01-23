@@ -1,6 +1,11 @@
+import { Service, Utils } from '../imports.js'
 import { options } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
-import { Service } from '../imports.js'
+
+const CACHE_FILE = Utils.CACHE_DIR + '/options.json';
+
+/** object that holds the overriedden values */
+let cacheObj = JSON.parse(Utils.readFile(CACHE_FILE) || '{}');
 
 export default class Option extends Service {
   static { Service.register(this, {}, { 'value': [ 'jsobject' ] }) }
@@ -70,8 +75,9 @@ export default class Option extends Service {
   }
 }
 
-export const getOptions = (object = options, path = '') =>
-  Object.keys(object).flatMap(key => {
+
+export const getOptions = (object = options, path = '') => {
+  return Object.keys(object).flatMap(key => {
     const obj = object[key]
     const id = path ? path + '.' + key : key
 
@@ -85,7 +91,13 @@ export const getOptions = (object = options, path = '') =>
 
     return []
   })
+}
 
+export function resetOptions() {
+  Utils.exec(`rm -rf ${CACHE_FILE}`)
+  cacheObj = {}
+  getOptions().forEach(opt => opt.reset())
+}
 
 export function getValues() {
   const obj = {}
@@ -94,4 +106,19 @@ export function getValues() {
       obj[opt.id] = opt.value
 
   return JSON.stringify(obj, null, 2)
+}
+
+export function apply(config) {
+  const options = getOptions();
+  const settings = typeof config === 'string' ? JSON.parse(config) : config;
+
+  for (const id of Object.keys(settings)) {
+    const opt = options.find(opt => opt.id === id)
+    if (!opt) {
+      print(`No option with id: "${id}"`)
+      continue
+    }
+
+    opt.setValue(settings[id])
+  }
 }
