@@ -17,8 +17,10 @@ SystemTray.connect('changed', () => {
 const Modules = [
   SubMenu({
     items: submenuItems,
-    children: [Tray, Utilities],
+    children: [Utilities],
   }),
+  Tray,
+  SeparatorDot(),
   BatteryBar,
   SeparatorDot(),
   DateButton({ 

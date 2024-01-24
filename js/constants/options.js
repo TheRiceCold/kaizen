@@ -151,23 +151,6 @@ export default {
     },
     drop_shadow: option(true, { 'sass': 'drop-shadow' }),
     shadow: option('rgba(0, 0, 0, .6)', { 'sass': 'shadow' }),
-    dock: {
-      icon_size: option(56),
-      pinned_apps: option([
-        'firefox',
-        'org.wezfurlong.wezterm',
-        'org.gnome.Nautilus',
-        'org.gnome.Calendar',
-        'obsidian',
-        'transmission-gtk',
-        'caprine',
-        'teams-for-linux',
-        'discord',
-        'spotify',
-        'com.usebottles.bottles',
-        'org.gnome.Software',
-      ], { 'sass': 'exclude' }),
-    },
   },
 
   notifications: {
@@ -176,18 +159,6 @@ export default {
     width: option(450),
   },
 
-  dashboard: {
-    sys_info_size: option(70, { 'category': 'Desktop', 'sass': 'sys-info-size' }),
-  },
-
-  mpris: {
-    black_list: option(['Caprine'], {
-      'category': 'Bar',
-      'title': 'List of blacklisted mpris players',
-      'note': 'filters for bus-name, name, identity, entry',
-    }),
-    preferred: option('spotify', { 'category': 'Bar', 'title': 'Preferred player' }),
-  },
   substitutions: {
     icons: [
       ['transmission-gtk', 'transmission'],
@@ -196,20 +167,22 @@ export default {
       ['', 'preferences-desktop-display'],
     ],
     titles: [
-      ['com.github.Aylur.ags', 'AGS'],
-      ['transmission-gtk', 'Transmission'],
       ['com.obsproject.Studio', 'OBS'],
+      ['transmission-gtk', 'Transmission'],
       ['com.usebottles.bottles', 'Bottles'],
       ['com.github.wwmm.easyeffects', 'Easy Effects'],
-      ['org.gnome.TextEditor', 'Text Editor'],
-      ['org.gnome.design.IconLibrary', 'Icon Library'],
-      ['blueberry.py', 'Blueberry'],
       ['org.wezfurlong.wezterm', 'Wezterm'],
-      ['com.raggesilver.BlackBox', 'BlackBox'],
       ['firefox', 'Firefox'],
       ['org.gnome.Nautilus', 'Files'],
-      ['libreoffice-writer', 'Writer'],
       ['', 'Desktop'],
+
+      ['foot', '󰽒   Foot'],
+      ['Godot', '   Godot']
+      ['kitty', '󰄛   Kitty'],
+      ['krita', '   Krita'],
+      ['VSCodium', '   VSCodium'],
+      ['wihotspot-gui', 'Wi-Hotspot'],
+      ['virt-manager', ' Virt-Manager']
     ],
   },
 }

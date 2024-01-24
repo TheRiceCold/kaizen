@@ -10,8 +10,8 @@ export default state =>  {
     child: Widget.Box({
       vertical: true, 
       children: [
-        Buttons(state), 
         contents,
+        Buttons(state), 
       ]
     })
   })

@@ -1,4 +1,4 @@
-import { Widget, App } from '../../../imports.js'
+import { Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { ColorPicker, ScreenRecorder } from '../../../services/main.js'
 import PanelButton from './PanelButton.js'
@@ -58,17 +58,10 @@ const ScreenRecord = PanelButton({
   }),
 })
 
-const OSK = PanelButton({
-  content: FontIcon('󰌌'),
-  tooltipText: 'On Screen Keyboard',
-  onClicked: () => App.toggleWindow('osk')
-})
-
 export default Widget.Box({ 
   children: [ 
     ScreenShotButton,
     ScreenRecord,
     ColorPickerButton, 
-    OSK,
   ] 
 })

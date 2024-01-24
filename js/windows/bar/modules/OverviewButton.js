@@ -7,9 +7,7 @@ import { options, icons } from '../../../constants/main.js'
 const distro = imports.gi.GLib.get_os_info('ID')
 
 export default PanelButton({
-  window: 'overview',
-  className: 'overview',
-  onClicked: () => App.toggleWindow('overview'),
+  onClicked: () => App.toggleWindow('launcher'),
   content: FontIcon({
     binds: [[
       'icon', options.bar.icon, 
