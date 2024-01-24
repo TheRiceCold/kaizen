@@ -11,7 +11,7 @@ export default state => Widget.Box({
     Widget.Box({
       vexpand: true,
       vertical: true,
-      className: 'sidebar-right spacing-v-15',
+      className: 'quicksettings spacing-v-15',
       children: [ Header, Footer, Stack(state) ]
     }),
   ]

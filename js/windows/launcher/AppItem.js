@@ -1,8 +1,7 @@
-import { Widget, App, Utils } from '../../imports.js'
-const { Label, Icon, Box, Button } = Widget
+import { Widget, Utils, App } from '../../imports.js'
 
-export default app => {
-  const title = Label({
+export default (app, windowName) => {
+  const title = Widget.Label({
     xalign: 0,
     label: app.name,
     vpack: 'center',
@@ -10,7 +9,7 @@ export default app => {
     className: 'title',
   })
 
-  const description = Label({
+  const description = Widget.Label({
     xalign: 0,
     wrap: true,
     vpack: 'center',
@@ -19,24 +18,24 @@ export default app => {
     label: app.description || '',
   })
 
-  const icon = Icon({
+  const icon = Widget.Icon({
     size: 52,
     icon: Utils.lookUpIcon(app.icon_name || '') ? app.icon_name || '' : '',
   })
 
-  const textBox = Box({
+  const textBox = Widget.Box({
     vertical: true,
     vpack: 'center',
     children: app.description ? [title, description] : [title],
   })
 
-  return Button({
-    className: 'app-item',
+  return Widget.Button({
     attribute: app,
-    child: Box({ children: [icon, textBox] }),
+    className: 'app-item',
+    child: Widget.Box({ children: [icon, textBox] }),
     onClicked: () => {
-      App.closeWindow('launcher')
       app.launch()
-    },
+      App.closeWindow(windowName)
+    }
   })
 }
