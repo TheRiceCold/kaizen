@@ -15,7 +15,7 @@
         padding: 0
 
     image, .font-icon
-      margin-right: $bar-spacing * .5
+      margin-right: calc($bar-spacing * 0.5)
 
     levelbar trough
       @include widget
@@ -23,7 +23,7 @@
       min-height: $battery-bar-height
 
       block.filled
-        border-radius: 4px
+        border-radius: $radii
         background-image: $active-gradient
 
     .medium

@@ -1,5 +1,5 @@
 @mixin notif-rounding
-  @include normal-rounding
+  border-radius: $radii
 
 .notif-low
   @include notif-rounding
@@ -48,9 +48,9 @@
   color: $red
 
 .notif-icon
-  @include full-rounding
   min-width: 3.409rem
   min-height: 3.409rem
+  border-radius: calc($radii * 2)
 
 .notif-icon-material
   color: $fg-color
@@ -114,7 +114,7 @@
   min-height: 2.045rem
 
 .notif-action
-  @include small-rounding
+  border-radius: $radii
 
 .notif-action-low
   color: $fg-color

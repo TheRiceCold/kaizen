@@ -2,8 +2,8 @@
   margin: 4px 0
   font-size: 14px
   padding: 4px 6px
-  background: $bg-color
-  border-radius: 0.75rem
+  background: $hover
+  border-radius: $radii
 
   .workspace-button
     color: $magenta
@@ -13,33 +13,33 @@
     &:hover
       color: $hover-fg
       background: $hover
-      border-radius: 1rem
+      border-radius: $radii
 
     &.occupied
       color: $accent-fg
       background: $magenta
 
       &:hover
-        border-radius: 1rem
         background: #f5f5f5
+        border-radius: $radii
 
       &.occupied-left
-        border-top-left-radius: 1rem
-        border-bottom-left-radius: 1rem
+        border-top-left-radius: $radii
+        border-bottom-left-radius: $radii
 
       &.occupied-right
-        border-top-right-radius: 1rem
-        border-bottom-right-radius: 1rem
+        border-top-right-radius: $radii
+        border-bottom-right-radius: $radii
       
     &:not(.occupied)
-      border-radius: 1.5rem
+      border-radius: $radii
       
     &.active
       .button-label
         background: $blue
         color: $accent-fg
         font-weight: bold
-        border-radius: 1rem
+        border-radius: $radii
         transition: all 0.3s ease-in-out
 
     .button-label
