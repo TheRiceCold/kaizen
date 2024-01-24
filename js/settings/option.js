@@ -2,10 +2,10 @@ import { Service, Utils } from '../imports.js'
 import { options } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
 
-const CACHE_FILE = Utils.CACHE_DIR + '/options.json';
+const CACHE_FILE = Utils.CACHE_DIR + '/options.json'
 
 /** object that holds the overriedden values */
-let cacheObj = JSON.parse(Utils.readFile(CACHE_FILE) || '{}');
+let cacheObj = JSON.parse(Utils.readFile(CACHE_FILE) || '{}')
 
 export default class Option extends Service {
   static { Service.register(this, {}, { 'value': [ 'jsobject' ] }) }
@@ -109,8 +109,8 @@ export function getValues() {
 }
 
 export function apply(config) {
-  const options = getOptions();
-  const settings = typeof config === 'string' ? JSON.parse(config) : config;
+  const options = getOptions()
+  const settings = typeof config === 'string' ? JSON.parse(config) : config
 
   for (const id of Object.keys(settings)) {
     const opt = options.find(opt => opt.id === id)

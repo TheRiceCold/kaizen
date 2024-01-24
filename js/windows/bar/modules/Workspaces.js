@@ -1,11 +1,11 @@
-import { Widget, Hyprland } from '../../../imports.js'
+import { Widget, Hyprland, Utils } from '../../../imports.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 import { options, utils } from '../../../constants/main.js'
 
 const { active: {workspace} } = Hyprland
 
 const ws = options.workspaces.value
-const dispatch = arg => Utils.execAsync(`hyprctl dispatch workspace ${arg}`);
+const dispatch = arg => Utils.execAsync(`hyprctl dispatch workspace ${arg}`)
 
 const WorkspaceButton = i => Widget.Button({
   setup: setupCursorHover,

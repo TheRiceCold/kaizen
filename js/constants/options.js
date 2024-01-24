@@ -173,7 +173,7 @@ export default {
       ['', 'Desktop'],
 
       ['foot', '󰽒   Foot'],
-      ['Godot', '   Godot']
+      ['Godot', '   Godot'],
       ['kitty', '󰄛   Kitty'],
       ['krita', '   Krita'],
       ['VSCodium', '   VSCodium'],

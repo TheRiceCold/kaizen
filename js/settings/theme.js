@@ -1,8 +1,7 @@
 import { App } from '../imports.js'
 import reloadSass from './reloadSass.js'
-// import { setupHyprland } from './hyprland.js'
-import { wallpaper } from './wallpaper.js'
-
+import { setupHyprland } from './hyprland.js'
+import { applyWallpaper } from './wallpaper.js'
 import { options, themes } from '../constants/main.js'
 
 /** @param {string} name */
@@ -14,8 +13,8 @@ export function setTheme(name) {
 
   options.apply(theme.options)
   reloadSass()
-  // setupHyprland()
-  wallpaper()
+  setupHyprland()
+  applyWallpaper()
 }
 
 export const WP = App.configDir + '/assets/'
