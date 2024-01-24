@@ -1,7 +1,7 @@
-import { Utils } from '../imports.js'
 import Option, { 
   apply, 
   resetOptions,
+  getOptions,
 } from '../settings/option.js'
 
 import themes from './themes.js'
@@ -11,10 +11,11 @@ const option = (value, config) => new Option(value, config)
 export default {
   reset: resetOptions,
   apply: apply,
+  list: getOptions,
 
-  spacing: option(8),
+  spacing: option(6),
   padding: option(8),
-  radii: option(8),
+  radii: option(12),
 
   popover_padding_multiplier: option(1.4, {
     'unit': '',
@@ -59,7 +60,7 @@ export default {
   border: {
     color: option('$fg-color', { 'category': 'Border', 'title': 'Border Color', 'sass': '_border-color' }),
     opacity: option(97, { 'category': 'Border', 'title': 'Border Opacity', 'unit': '', }),
-    width: option(1, { 'category': 'Border', 'title': 'Border Width', }),
+    width: option(2, { 'category': 'Border', 'title': 'Border Width', }),
   },
 
   workspaces: option(5, {
@@ -74,7 +75,7 @@ export default {
       'title': 'Border on Inactive Windows',
       'sass': 'exclude',
     }),
-    wm_gaps_multiplier: option(2.4, {
+    wm_gaps_multiplier: option(2, {
       'category': 'General',
       'sass': 'wm-gaps-multiplier',
       'note': 'wm-gaps: padding × this',

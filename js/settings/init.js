@@ -3,12 +3,16 @@ import { Utils } from '../imports.js'
 import { options, utils } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
 import setGlobals from '../settings/globals.js'
+import { hyprlandInit, setupHyprland } from './hyprland.js'
 
 export default () => {
-  reloadSass()
   setGlobals()
-  wallpaper()
   // gtkFontSettings()
+
+  reloadSass()
+  // hyprlandInit()
+  setupHyprland()
+  wallpaper()
 }
 
 function wallpaper() {
