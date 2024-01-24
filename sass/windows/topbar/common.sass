@@ -8,7 +8,7 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
       border-radius: $radii
       transition: $transition
       @include floating-widget
-      margin: $wm-gaps $bar-spacing
+      // margin: $wm-gaps $bar-spacing
       &:hover > *
         color: $hover-fg
         @if $drop-shadow
@@ -24,7 +24,7 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
   @else
     @include accs-button($flat, $reactive)
     > *
-      margin: $bar-spacing
+      margin: 6px 0
       border-radius: $button-radius
   label, image
     font-weight: bold

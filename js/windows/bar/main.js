@@ -3,12 +3,14 @@ import { Widget } from '../../imports.js'
 import StartWidget from './StartWidget.js'
 import CenterWidget from './CenterWidget.js'
 import EndWidget from './EndWidget.js'
+import { options } from '../../constants/main.js'
 
 export default Widget.Window({
   name: 'bar',
-  layer: 'overlay',
-  exclusivity: 'ignore',
-  anchor: ['top', 'left', 'right'],
+  exclusivity: 'exclusive',
+  anchor: options.bar.position.bind('value').transform(pos => ([
+    pos, 'left', 'right',
+  ])),
   child: Widget.CenterBox({
     className: 'topbar',
     startWidget: StartWidget,

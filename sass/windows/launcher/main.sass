@@ -2,6 +2,7 @@
 
 window#launcher .window-content
   @include floating_widget
+
   entry
     @include button
     font-size: 16px
@@ -10,10 +11,6 @@ window#launcher .window-content
 
     label, image
       color: $fg-color
-
-  separator
-    min-height: 1px
-    background: $hover
 
   scrolledwindow
     @include scrollable

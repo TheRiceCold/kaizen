@@ -5,7 +5,7 @@ export default [
     name: 'Colony',
     icon: '󰄛',
     'theme.widget.bg': '$blue',
-    'desktop.wallpaper.img': WP + 'colony-wallpaper.png',
+    'desktop.wallpaper.img': WP + 'colony-wallpaper-edit.png',
   }),
   Theme({
     name: 'Yukopi',

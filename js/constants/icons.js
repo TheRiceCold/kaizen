@@ -33,7 +33,7 @@ export default {
   },
 
   battery: {
-    default: '',
+    default: '󱐋',
     charging: ' ',
     warning: 'battery-empty-symbolic',
   },

@@ -28,7 +28,7 @@ export default {
     green: option('#93CDA8', { 'sass': 'green' }),
     yellow: option('#E8C881', { 'sass': 'yellow' }),
     blue: option('#6AAAFF', { 'sass': 'blue' }),
-    magenta: option('#9077e7', { 'sass': 'magenta' }),
+    magenta: option('#9F91FF', { 'sass': 'magenta' }),
     orange: option('#E79E64', { 'sass': 'orange' }),
   },
 
@@ -139,18 +139,13 @@ export default {
       fg: option('#fff', { sass: 'wallpaper-fg' }),
       img: option(themes[0].options['desktop.wallpaper.img'], { 'sassFormat': v => `"${v}"`, 'type': 'img' }),
     },
-    avatar: option(`/var/lib/AccountsService/icons/${Utils.USER}`, {
-      'sassFormat': v => `"${v}"`,
-      'type': 'img',
-      'note': 'displayed in quicksettings and locksreen',
-    }),
     screen_corners: option(true, { 'sass': 'screen-corners' }),
     clock: {
       enable: option(true),
       position: option('center center', { 'note': 'halign valign' }),
     },
     drop_shadow: option(true, { 'sass': 'drop-shadow' }),
-    shadow: option('rgba(0, 0, 0, .6)', { 'sass': 'shadow' }),
+    shadow: option('rgba(0, 0, 0, .5)', { 'sass': 'shadow' }),
   },
 
   notifications: {
