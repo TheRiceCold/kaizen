@@ -5,6 +5,7 @@ import { MarginRevealer } from '../../../../../../misc/AdvancedRevealers.js'
 import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../../../../../misc/ConfigWidgets.js'
 import { markdownTest } from '../../../../../../misc/Md2Pango.js'
 import { setupCursorHover, setupCursorHoverInfo } from '../../../../../../misc/CursorHover.js'
+import { utils } from '../../../../../../constants/main.js'
 
 const { Gtk } = imports.gi
 
@@ -133,7 +134,7 @@ export const openaiApiKeyInstructions = Widget.Box({
       }),
       setup: setupCursorHover,
       onClicked: () => {
-        Utils.execAsync(['bash', '-c', 'xdg-open https://platform.openai.com/api-keys &'])
+        utils.execBash('xdg-open https://platform.openai.com/api-keys &')
       }
     })
   })]

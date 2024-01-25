@@ -1,6 +1,6 @@
 import { Utils, Widget, Mpris } from '../../../imports.js'
 import { AnimatedCircularProgress } from '../../../misc/main.js'
-import { variables } from '../../../constants/main.js'
+import { variables, utils } from '../../../constants/main.js'
 
 const { showMusicControls } = variables
 
@@ -27,7 +27,7 @@ export default Widget.EventBox({
   onScrollUp: () => Utils.execAsync('hyprctl dispatch workspace -1'),
   onScrollDown: () => Utils.execAsync('hyprctl dispatch workspace +1'),
   onPrimaryClickRelease: () => showMusicControls.setValue(!showMusicControls.value),
-  onSecondaryClickRelease: () => Utils.execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']),
+  onSecondaryClickRelease: () => utils.execBash('playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &'),
   onMiddleClickRelease: () => Mpris.getPlayer('')?.playPause(),
   child: Widget.Box({
     className: 'bar-group-margin bar-sides',

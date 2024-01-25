@@ -3,7 +3,7 @@ import { App, Widget, Utils, Mpris } from '../../imports.js'
 import { AnimatedCircularProgress } from '../../misc/main.js'
 import { MarginRevealer } from '../../misc/AdvancedRevealers.js'
 
-import { variables } from '../../constants/main.js'
+import { utils } from '../../constants/main.js'
 
 const { Gio, GLib } = imports.gi
 
@@ -169,10 +169,9 @@ const TrackControls = props => Widget.Revealer({
       }),
       Widget.Button({
         className: 'osd-music-controlbtn',
-        onClicked: () => Utils.execAsync([
-          'bash', '-c', 
+        onClicked: () => utils.execBash(
           'playerctl next || playerctl position `bc << "100 * $(playerctl metadata mpris:length) / 1000000 / 100"`'
-        ]).catch(print),
+        ).catch(print),
         child: Widget.Label({
           className: 'osd-music-controlbtn-txt',
           label: 'skip_next',

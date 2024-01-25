@@ -1,6 +1,6 @@
 import { Utils, Battery } from '../imports.js'
 const { GLib, Gio } = imports.gi
-
+import { utils } from '../constants/main.js'
 
 export const fileExists = path => 
   Gio.File.new_for_path(path).query_exists(null)
@@ -14,14 +14,11 @@ const FIRST_RUN_NOTIF_BODY = 'Looks like this is your first run.\nHit <span fore
 
 export async function firstRunWelcome() {
   if (!fileExists(FIRST_RUN_PATH)) {
-    Utils.writeFile(FIRST_RUN_FILE_CONTENT, FIRST_RUN_PATH)
-      .then(() => {
-        // Note that we add a little delay to make sure the cool circular progress works
-        Utils.execAsync(['bash', '-c',
-          `sleep 0.5; notify-send "Millis since epoch" "$(date +%s%N | cut -b1-13)"; sleep 0.5; notify-send '${FIRST_RUN_NOTIF_TITLE}' '${FIRST_RUN_NOTIF_BODY}' -a '${APP_NAME}' &`
-        ]).catch(print)
-      })
-      .catch(print)
+    Utils.writeFile(FIRST_RUN_FILE_CONTENT, FIRST_RUN_PATH).then(() => {
+      utils.execBash(
+        `sleep 0.5; notify-send "Millis since epoch" "$(date +%s%N | cut -b1-13)"; sleep 0.5; notify-send '${FIRST_RUN_NOTIF_TITLE}' '${FIRST_RUN_NOTIF_BODY}' -a '${APP_NAME}' &`
+      ).catch(print)
+    }).catch(print)
   }
 }
 
@@ -39,9 +36,9 @@ async function batteryMessage() {
   for (let i = BATTERY_WARN_LEVELS.length - 1; i >= 0; i--) {
     if (perc <= BATTERY_WARN_LEVELS[i] && !charging && !batteryWarned) {
       batteryWarned = true
-      Utils.execAsync(['bash', '-c',
+      utils.execBash(
         `notify-send "${BATTERY_WARN_TITLES[i]}" "${BATTERY_WARN_BODIES[i]}" -u critical -a 'ags' &`
-      ]).catch(print)
+      ).catch(print)
       break
     }
   }

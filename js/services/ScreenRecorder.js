@@ -71,7 +71,7 @@ class Recorder extends Service {
     await Utils.execAsync([ 'wayshot', '-f', file ]
       .concat(full ? [] : [ '-s', await Utils.execAsync('slurp') ]))
 
-    Utils.execAsync(['bash', '-c', `wl-copy < ${file}`])
+    utils.execBash(`wl-copy < ${file}`)
 
     const res = await Utils.execAsync([
       'notify-send',

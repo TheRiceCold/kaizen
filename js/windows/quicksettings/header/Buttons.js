@@ -1,18 +1,19 @@
-import { Widget, App, Utils } from '../../../imports.js'
+import { Widget, App } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 
 import { setupCursorHover } from '../../../misc/CursorHover.js'
+import { utils } from '../../../constants/main.js'
 
 const buttons = [
   {
     icon: '󰑐',
     tooltipText: 'Reload Hyprland',
-    onClicked: () => Utils.execAsync(['bash', '-c', 'hyprctl reload &']),
+    onClicked: () => utils.execBash('hyprctl reload &')
   },
   {
     icon: '',
     tooltipText: 'Open Settings',
-    onClicked: () => Utils.execAsync(['bash', '-c', 'XDG_CURRENT_DESKTOP="gnome" gnome-control-center', '&']),
+    onClicked: () => utils.execBash('XDG_CURRENT_DESKTOP="gnome" gnome-control-center &'),
   },
   {
     icon: '',
@@ -21,7 +22,11 @@ const buttons = [
   },
 ]
 
-export default buttons.map(({ icon, tooltipText, onClicked })=> Widget.Button({
+export default buttons.map(({ 
+  icon, 
+  onClicked,
+  tooltipText, 
+}) => Widget.Button({
   tooltipText,
   hpack: 'end',
   setup: setupCursorHover,

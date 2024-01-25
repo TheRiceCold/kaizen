@@ -41,7 +41,6 @@ export function getAudioTypeIcon(icon) {
   return substitute(substitues, icon)
 }
 
-
 export function dependencies(bins) {
   const deps = bins.map(bin => {
     const has = Utils.exec(`which ${bin}`)
@@ -71,3 +70,6 @@ export function blurImg(img) {
       .catch(() => resolve(''))
   })
 }
+
+export const execBash = cmd => 
+  Utils.execAsync(['bash', '-c', cmd])
