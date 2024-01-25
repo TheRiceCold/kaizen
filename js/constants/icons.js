@@ -105,4 +105,9 @@ export default {
     chatgpt: `${App.configDir}/assets/chatgpt.svg`,
     calendar: `${App.configDir}/assets/calendar.svg`,
   },
+
+  apps: {
+    apps: 'view-app-grid-symbolic',
+    search: 'folder-saved-search-symbolic',
+  },
 }

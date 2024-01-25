@@ -4,7 +4,7 @@ import { Widget, Network, Utils } from '../../../../imports.js'
 
 const Title = Widget.Box({
   vpack: 'start',
-  className: 'sidebar-group-invisible txt spacing-h-5',
+  className: 'txt spacing-h-5',
   children: [
     Widget.Label({
       xalign: 0,
@@ -37,6 +37,6 @@ const Content = Widget.Box({ spacing: 5, vertical: true }).hook(Network, box => 
 export default Widget.Box({
   vexpand: true,
   vertical: true,
+  className: 'spacing-v-5',
   children: [ Title, Content ],
-  className: 'sidebar-group spacing-v-5',
 })

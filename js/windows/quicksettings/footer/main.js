@@ -43,7 +43,7 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
 })
 
 export default Widget.Box({
-  className: 'sidebar-group spacing-h-5',
+  className: 'spacing-h-5',
   setup: box => {
     box.pack_start(Widget.Box({
       vpack: 'center',

@@ -147,7 +147,26 @@ export default {
     },
     drop_shadow: option(true, { 'sass': 'drop-shadow' }),
     shadow: option('rgba(0, 0, 0, .5)', { 'sass': 'shadow' }),
+
+    dock: {
+      icon_size: option(56),
+      pinned_apps: option([
+        'firefox',
+        'org.wezfurlong.wezterm',
+        'org.gnome.Nautilus',
+        'org.gnome.Calendar',
+        'obsidian',
+        'transmission-gtk',
+        'caprine',
+        'teams-for-linux',
+        'discord',
+        'spotify',
+        'com.usebottles.bottles',
+        'org.gnome.Software',
+      ], { 'sass': 'exclude' }),
+    },
   },
+
 
   notifications: {
     black_list: option(['Spotify'], { 'note': 'app-name | entry' }),

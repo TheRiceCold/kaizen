@@ -43,7 +43,7 @@ const chatEntry = Widget.Entry({
 
 const Title = Widget.Box({
   vpack: 'start',
-  className: 'sidebar-group-invisible txt spacing-h-5',
+  className: 'txt spacing-h-5',
   children: [
     Widget.Label({
       xalign: 0,
@@ -95,6 +95,6 @@ const Content = Widget.Box({
 export default Widget.Box({
   vexpand: true,
   vertical: true,
-  className: 'sidebar-group spacing-v-5',
-  children: [ Title, Content ]
+  className: 'spacing-v-5',
+  children: [ Title, Content ],
 })

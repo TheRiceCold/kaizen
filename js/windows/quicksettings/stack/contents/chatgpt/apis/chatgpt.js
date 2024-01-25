@@ -180,13 +180,13 @@ export const chatGPTView = Widget.Scrollable({
   vexpand: true,
   child: Widget.Box({
     vertical: true,
-    children: [chatGPTWelcome, chatContent]
+    children: [ chatGPTWelcome, chatContent ]
   }),
-  setup: (scrolledWindow) => {
+  setup: scrolledWindow => {
     // Show scrollbar
     scrolledWindow.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
     const vScrollbar = scrolledWindow.get_vscrollbar()
-    vScrollbar.get_style_context().add_class('sidebar-scrollbar')
+    vScrollbar.get_style_context().add_class('qs-scrollbar')
     // Avoid click-to-scroll-widget-to-view behavior
     Utils.timeout(1, () => {
       const viewport = scrolledWindow.child

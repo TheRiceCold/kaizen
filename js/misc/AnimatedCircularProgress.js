@@ -3,14 +3,15 @@ const Lang = imports.lang
 import { Utils, Widget } from '../imports.js'
 
 export default ({
-  initFrom = 0,
   initTo = 0,
+  initFrom = 0,
   initAnimTime = 2900,
-  ...rest
+  extraSetup= () => {},
+  ...props
 }) => Widget.DrawingArea({
-  ...rest,
+  ...props,
   css: `${initFrom != initTo ? 'font-size: ' + initFrom + 'px; transition: ' + initAnimTime + 'ms linear;' : ''}`,
-  setup: (area) => {
+  setup: area => {
     const styleContext = area.get_style_context()
     const width = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL)
     const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL)
@@ -32,23 +33,23 @@ export default ({
 
       const progressValue = styleContext.get_property('font-size', Gtk.StateFlags.NORMAL) / 100.0
 
-      const bg_stroke = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL)
-      const fg_stroke = bg_stroke - padding
-      const radius = Math.min(width, height) / 2.0 - Math.max(bg_stroke, fg_stroke) / 2.0
-      const center_x = width / 2.0 + marginLeft
-      const center_y = height / 2.0 + marginTop
-      const start_angle = -Math.PI / 2.0
-      const end_angle = start_angle + (2 * Math.PI * progressValue)
-      const start_x = center_x + Math.cos(start_angle) * radius
-      const start_y = center_y + Math.sin(start_angle) * radius
-      const end_x = center_x + Math.cos(end_angle) * radius
-      const end_y = center_y + Math.sin(end_angle) * radius
+      const bgStroke = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL)
+      const fgStroke = bgStroke - padding
+      const radius = Math.min(width, height) / 2.0 - Math.max(bgStroke, fgStroke) / 2.0
+      const centerX = width / 2.0 + marginLeft
+      const centerY = height / 2.0 + marginTop
+      const startAngle = -Math.PI / 2.0
+      const endAngle = startAngle + (2 * Math.PI * progressValue)
+      const startX = centerX + Math.cos(startAngle) * radius
+      const startY = centerY + Math.sin(startAngle) * radius
+      const endX = centerX + Math.cos(endAngle) * radius
+      const endY = centerY + Math.sin(endAngle) * radius
 
       // Draw background
       const background_color = styleContext.get_property('background-color', Gtk.StateFlags.NORMAL)
       cr.setSourceRGBA(background_color.red, background_color.green, background_color.blue, background_color.alpha)
-      cr.arc(center_x, center_y, radius, 0, 2 * Math.PI)
-      cr.setLineWidth(bg_stroke)
+      cr.arc(centerX, centerY, radius, 0, 2 * Math.PI)
+      cr.setLineWidth(bgStroke)
       cr.stroke()
 
       if (progressValue == 0) return
@@ -56,22 +57,23 @@ export default ({
       // Draw progress
       const color = styleContext.get_property('color', Gtk.StateFlags.NORMAL)
       cr.setSourceRGBA(color.red, color.green, color.blue, color.alpha)
-      cr.arc(center_x, center_y, radius, start_angle, end_angle)
-      cr.setLineWidth(fg_stroke)
+      cr.arc(centerX, centerY, radius, startAngle, endAngle)
+      cr.setLineWidth(fgStroke)
       cr.stroke()
 
       // Draw rounded ends for progress arcs
       cr.setLineWidth(0)
-      cr.arc(start_x, start_y, fg_stroke / 2, 0, 0 - 0.01)
+      cr.arc(startX, startY, fgStroke / 2, 0, 0 - 0.01)
       cr.fill()
-      cr.arc(end_x, end_y, fg_stroke / 2, 0, 0 - 0.01)
+      cr.arc(endX, endY, fgStroke / 2, 0, 0 - 0.01)
       cr.fill()
     }))
 
-    // Init animation
-    if (initFrom != initTo) {
-      Utils.timeout(20, () => { area.css = `font-size: ${initTo}px;` })
-    }
-    else area.css = 'font-size: 0px;'
+    if (initFrom !== initTo)
+      Utils.timeout(20, () => area.css = `font-size: ${initTo}px;`, area)
+    else 
+      area.css = 'font-size: 0;'
+
+    extraSetup(area)
   },
 })

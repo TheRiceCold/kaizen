@@ -42,11 +42,11 @@ const Button = ({ state, icon, title, ...props }) => Widget.Button({
   child: icon,
   setup: setupCursorHover,
   onClicked: () => state.value = title,
-  className: 'txt-norm sidebar-iconbutton',
+  className: 'qs-icon-button txt-norm',
 })
 
 export default state => Widget.Box({
   hpack: 'center',
-  className: 'sidebar-togglesbox spacing-h-10',
+  className: 'qs-stack-buttons spacing-h-10',
   children: buttons.map(props => Button({ state, ...props }))
 })

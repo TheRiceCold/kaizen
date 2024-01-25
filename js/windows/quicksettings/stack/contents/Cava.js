@@ -17,15 +17,15 @@ export default ({
           'bash',
           '-c',
           `printf "[general]\n  \
-                    framerate=60\n    \
-                    bars = ${bars}\n  \
-                    [output]\n        \
-                    channels = mono\n \
-                    method = raw\n    \
-                    raw_target = /dev/stdout\n \
-                    data_format = ascii\n \
-                    ascii_max_range = ${barHeight}\n" | \
-                    cava -p /dev/stdin`
+            framerate=60\n    \
+            bars = ${bars}\n  \
+            [output]\n        \
+            channels = mono\n \
+            method = raw\n    \
+            raw_target = /dev/stdout\n \
+            data_format = ascii\n \
+            ascii_max_range = ${barHeight}\n" | \
+            cava -p /dev/stdin`
         ],
         out => out.split(';').slice(0, -1)
       ]

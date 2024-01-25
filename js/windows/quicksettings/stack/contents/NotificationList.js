@@ -91,7 +91,7 @@ const notifList = Widget.Scrollable({
   child: Widget.Box({ vexpand: true, children: [notificationList] }),
   setup: self => {
     const vScrollbar = self.get_vscrollbar()
-    vScrollbar.get_style_context().add_class('sidebar-scrollbar')
+    vScrollbar.get_style_context().add_class('qs-scrollbar')
   }
 })
 
@@ -108,6 +108,6 @@ const Contents = Widget.Stack({
 export default Widget.Box({
   vexpand: true,
   vertical: true,
+  className: 'spacing-v-5',
   children: [ Title, Contents ],
-  className: 'sidebar-group spacing-v-5',
 }) 

@@ -33,6 +33,6 @@ const Content = Widget.Box({ hexpand: true, vertical: true }).hook(Bluetooth, bo
 export default Widget.Box({
   vexpand: true,
   vertical: true,
-  className: 'sidebar-group spacing-v-5',
+  className: 'spacing-v-5',
   children: [ Title, Content ]
 })

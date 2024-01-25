@@ -197,7 +197,7 @@ export const SinkSelector = (type = 'sink') => Widget.Box({
 export default Widget.Box({
   vexpand: true,
   vertical: true,
-  className: 'sidebar-group spacing-v-5',
+  className: 'spacing-v-5',
   children: [
     Widget.Box({
       spacing: 8,

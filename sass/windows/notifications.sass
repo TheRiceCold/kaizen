@@ -1,41 +1,35 @@
-@mixin notif-rounding
-  border-radius: $radii
-
 .notif-low
-  @include notif-rounding
   color: $fg-color
+  border-radius: $radii
   background: $bg-color
   padding-right: 0.545rem
 
 .notif-normal
-  @include notif-rounding
   color: $fg-color
+  border-radius: $radii
   background: $bg-color
   // padding: $rounding_small
   padding-right: 0.545rem
 
 .popup-notif-low
-  @include notif-rounding
-  min-width: 30.682rem
   color: $fg-color
-  // padding: $rounding_small
+  border-radius: $radii
+  min-width: 30.682rem
   background: $bg-color
   padding-right: 0.545rem
 
 .popup-notif-normal
-  @include notif-rounding
-  min-width: 30.682rem
   color: $fg-color
   background: $bg-color
-  // padding: $rounding_small
+  border-radius: $radii
+  min-width: 30.682rem
   padding-right: 0.545rem
 
 .popup-notif-critical
-  @include notif-rounding
-  min-width: 30.682rem
   color: $fg-color
   background: $bg-color
-  // padding: $rounding_small
+  border-radius: $radii
+  min-width: 30.682rem
   padding-right: 0.545rem
 
 .notif-body-low
@@ -69,25 +63,20 @@
   background: $bg-color
 
 .notif-expand-btn
-  @include notif-rounding
   min-width: 1.841rem
   min-height: 1.841rem
-
-.notif-expand-btn:hover, .notif-expand-btn:focus
-  background: $hover
-
-.notif-expand-btn:active
-  background: $accent
+  &:hover, &:focus
+    background: $hover
+  &:active
+    background: $accent
 
 .notif-closeall-btn
-  @include notif-rounding
+  border-radius: $radii
   padding: 0.341rem 0.341rem
-
-.notif-closeall-btn:hover, .notif-closeall-btn:focus
-  background: $hover
-
-.notif-closeall-btn:active
-  background: $accent
+  &:hover, &:focus
+    background: $hover
+  &:active
+    background: $accent
 
 .notif-circprog-low
   padding: 0
@@ -119,29 +108,23 @@
 .notif-action-low
   color: $fg-color
   background: $bg-color
-
-.notif-action-low:focus, .notif-action-low:hover
-  background: $hover
-
-.notif-action-low:active
-  background: $bg-color
+  &:focus, &:hover
+    background: $hover
+  &:active
+    background: $bg-color
 
 .notif-action-normal
   color: $fg-color
   background: $bg-color
-
-.notif-action-normal:focus, .notif-action-normal:hover
-  background: $hover
-
-.notif-action-normal:active
-  background: $bg-color
+  &:focus, &:hover
+    background: $hover
+  &:active
+    background: $bg-color
 
 .notif-action-critical
   color: $fg-color
   background: $red
-
-.notif-action-critical:focus, .notif-action-critical:hover
-  background: red
-
-.notif-action-critical:active
-  background: $red
+  &:focus, &:hover
+    background: red
+  &:active
+    background: $red

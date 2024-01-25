@@ -73,7 +73,7 @@ const Content = Widget.Box({
 })
 
 export default PanelButton({ 
-  onHover: () => {
+  onClicked: () => {
     const { value } = options.battery.showPercentage
     battery.showPercentage.value = !value
   }, 

@@ -46,13 +46,12 @@ const HighlightedCode = (content, lang) => {
 }
 
 const TextBlock = (content = '') => Widget.Label({
-  hpack: 'fill',
-  className: 'txt sidebar-chat-txtblock sidebar-chat-txt',
-  useMarkup: true,
   xalign: 0,
   wrap: true,
-  selectable: true,
+  hpack: 'fill',
   label: content,
+  selectable: true,
+  className: 'txt sidebar-chat-txtblock sidebar-chat-txt',
 })
 
 const CodeBlock = (content = '', lang = 'txt') => {

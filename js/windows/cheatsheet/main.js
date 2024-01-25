@@ -9,6 +9,6 @@ export default PopupWindow({
   child: Widget.Box({
     vertical: true,
     children: [Header, Body],
-    className: 'cheatsheet-bg spacing-v-15',
+    className: 'cheatsheet spacing-v-15',
   })
 })

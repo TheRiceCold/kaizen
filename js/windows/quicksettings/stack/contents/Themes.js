@@ -37,6 +37,6 @@ const Content = Widget.Box({
 export default Widget.Box({
   vexpand: true,
   vertical: true,
+  className: 'spacing-v-5',
   children: [ Title, Content ],
-  className: 'sidebar-group spacing-v-5',
 })
