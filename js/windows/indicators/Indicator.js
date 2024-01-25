@@ -1,74 +1,99 @@
-import { Widget, Audio } from '../../imports.js'
-import { Brightness, Indicator } from '../../services/main.js'
-import { MarginRevealer } from '../../misc/AdvancedRevealers.js'
+import { Widget } from '../../imports.js'
+import { Indicator } from '../../services/main.js'
+import { icons } from '../../constants/main.js'
 
-const OsdValue = (name, labelSetup, progressSetup, props = {}) => Widget.Box({
+/**
+ * @param {number} brightness
+ * @returns {string}
+ */
+const brightnessToIcon = brightness => {
+  const idx = Math.floor(brightness * (icons.brightness.screen.length - 1));
+  return icons.brightness.screen[idx];
+};
+
+/**
+ * @param {number} volume
+ * @returns {string}
+ */
+const volumeToIcon = volume => {
+  if (volume <= 0)    return icons.audio.volume.muted;
+  if (volume <= 0.33) return icons.audio.volume.low;
+  if (volume <= 0.66) return icons.audio.volume.medium;
+  if (volume <= 1) return icons.audio.volume.high;
+  if (volume > 1) return icons.audio.volume.overamplified;
+  return icons.audio.volume.high;
+};
+
+
+/**
+ *
+ * @param {import('types/@girs/gtk-3.0/gtk-3.0').Gtk.Widget} icon
+ * @param {import('types/service').Binding<any, any, string>} label
+ * @param {import('types/service').Binding<any, any, number>} progress
+ * @param {import('types/widgets/box').BoxProps} props
+ * @returns {import('types/widgets/box').default}
+ */
+const OsdValue = (icon, label, progress, props = {}) => Widget.Box({
   ...props,
+  className: 'osd-indicator',
   hexpand: true,
-  vertical: true,
-  className: 'osd-bg osd-value',
+  spacing: 8,
   children: [
-    Widget.Box({
-      vexpand: true,
-      children: [
-        Widget.Label({
-          xalign: 0,
-          yalign: 0,
-          hexpand: true,
-          label: `${name}`,
-          className: 'osd-label',
-        }),
-        Widget.Label({
-          label: '100',
-          hexpand: false,
-          setup: labelSetup,
-          className: 'osd-value-txt',
-        }),
-      ]
-    }),
+    icon,
     Widget.ProgressBar({
+      class_name: 'osd-progress',
       hexpand: true,
+      vpack: 'center',
       vertical: false,
-      setup: progressSetup,
-      className: 'osd-progress',
+      value: progress
+    }),
+    Widget.Label({
+      hexpand: false,
+      className: 'osd-value-txt',
+      label: label
     })
-  ],
-})
+  ]
+});
 
-const brightnessIndicator = OsdValue('Brightness',
-  self => self.hook(Brightness, self => {
-    self.label = `${Math.round(Brightness.screen_value * 100)}`
-  }, 'notify::screen-value'),
-  self => self.hook(Brightness, progress => {
-    const updateValue = Brightness.screen_value
-    progress.value = updateValue
-  }, 'notify::screen-value'),
-)
-
-const volumeIndicator = OsdValue('Volume',
-  self => self.hook(Audio, label => {
-    label.label = `${Math.round(Audio.speaker?.volume * 100)}`
+const brightnessIndicator = OsdValue(
+  Widget.Label({
+    className: 'osd-icon',
+    label: Indicator.bind('brightness').transform(brightnessToIcon),
   }),
-  self => self.hook(Audio, progress => {
-    const updateValue = Audio.speaker?.volume
-    if (!isNaN(updateValue)) progress.value = updateValue
-  }),
-)
+  Indicator.bind('brightness').transform(bright => `${Math.round(bright*100)}`),
+  Indicator.bind('brightness')
+);
 
-export default MarginRevealer({
-  showClass: 'osd-show',
-  hideClass: 'osd-hide',
+const volumeIndicator = OsdValue(
+  Widget.Icon({
+    className: 'osd-icon',
+    icon: Indicator.bind('volume').transform(volumeToIcon),
+  }),
+  Indicator.bind('volume').transform(volume => `${Math.round(volume*100)}`),
+  Indicator.bind('volume').transform(volume => Math.min(volume, 1))
+);
+
+export default Widget.Revealer({
   transition: 'slide_down',
-  extraSetup: self => self.hook(Indicator, (revealer, value) => {
-    if (value > -1) 
-      revealer.attribute.show()
-    else 
-      revealer.attribute.hide()
-  }, 'popup'),
   child: Widget.Box({
-    hpack: 'center',
-    vertical: false,
-    className: 'spacing-h-10',
-    children: [brightnessIndicator, volumeIndicator]
+    vertical: true,
+    children: [
+      Widget.Box({
+        children: [
+          Widget.Stack({
+            transition: 'slide_up_down',
+            class_name: 'indicator-container',
+            visible_child_name: Indicator.bind('current'),
+            items: [
+              ['brightness', brightnessIndicator],
+              ['volume', volumeIndicator],
+            ]
+          }),
+        ]
+      }),
+    ]
   })
-})
+}).hook(Indicator, (revealer, value) => {
+  revealer.reveal_child = (value > -1)
+}, 'popup')
+
