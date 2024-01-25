@@ -2,11 +2,10 @@
   margin: 4px 0
   font-size: 14px
   padding: 4px 6px
-  background: $hover
   border-radius: $radii
 
   .workspace-button
-    color: $accent
+    color: $fg-color
     font-weight: bold
     transition: all 0.3s ease-in-out
 
@@ -17,10 +16,9 @@
 
     &.occupied
       color: $accent
-      background: $bg-color
-
+      background: $hover
       &:hover
-        background: #f5f5f5
+        background: $fg-color
         border-radius: $radii
 
       &.occupied-left

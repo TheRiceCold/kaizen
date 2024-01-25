@@ -1,12 +1,25 @@
-import { Widget } from '../../imports.js'
-import { RoundedCorner } from '../../misc/main.js'
-import { FocusedClient, OverviewButton, SeparatorDot } from './modules/exports.js'
+import { Widget, App } from '../../imports.js'
+import { RoundedCorner, FontIcon } from '../../misc/main.js'
+import { 
+  Separator,
+  Workspaces,
+  PanelButton,
+  LauncherButton, 
+} from './modules/exports.js'
 
 const Modules = [
   RoundedCorner('topleft', 'corner-black'),
-  OverviewButton,
-  SeparatorDot(),
-  FocusedClient,
+  LauncherButton,
+  PanelButton({
+    content: FontIcon('󱂬'),
+    onClicked: () => App.toggleWindow('overview'),
+  }),
+  PanelButton({
+    content: FontIcon(''),
+    onClicked: () => App.toggleWindow('launcher'),
+  }),
+  Separator(),
+  Workspaces,
 ]
 
 export default Widget.Box({ children: Modules })

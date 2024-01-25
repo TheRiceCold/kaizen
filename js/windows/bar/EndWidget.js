@@ -1,12 +1,11 @@
 import { App, Widget, Variable, SystemTray } from '../../imports.js'
-import { RoundedCorner } from '../../misc/main.js'
+import { RoundedCorner, FontIcon } from '../../misc/main.js'
 import {
   Tray,
   SubMenu,
-  BatteryBar,
-  DateButton,
   Utilities,
-  SeparatorDot,
+  BatteryBar,
+  PanelButton,
 } from './modules/exports.js'
 
 const submenuItems = Variable(1)
@@ -20,13 +19,12 @@ const Modules = [
     children: [Utilities],
   }),
   Tray,
-  SeparatorDot(),
   BatteryBar,
-  SeparatorDot(),
-  DateButton({ 
+  PanelButton({
+    content: FontIcon(''),
     onClicked: () => App.toggleWindow('quicksettings'),
   }),
-  RoundedCorner('topright', 'corner-black')
+  RoundedCorner('topright', 'corner-black'),
 ]
 
 export default Widget.Box({ hpack: 'end', className: 'end', children: Modules })

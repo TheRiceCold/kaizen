@@ -6,7 +6,7 @@ import { options, icons } from '../../../constants/main.js'
 const { battery } = options
 
 const Indicator = Widget.Stack({
-  binds: [['visible',  battery.bar.showIcon]],
+  binds: [['visible', battery.bar.showIcon]],
   items: [ 
     ['false', FontIcon(icons.battery.default)], 
     ['true', FontIcon(icons.battery.charging)] 
@@ -45,7 +45,11 @@ const WholeButton = Widget.Overlay({
           icon: icons.battery.charging, 
           binds: [['visible', Battery, 'charging']] 
         }),
-        Widget.Box({ hpack: 'center', vpack: 'center', child: PercentLabel() }),
+        Widget.Box({ 
+          hpack: 'center', 
+          vpack: 'center', 
+          child: PercentLabel() 
+        }),
       ],
     })
   ],
@@ -69,7 +73,7 @@ const Content = Widget.Box({
 })
 
 export default PanelButton({ 
-  onClicked: () => {
+  onHover: () => {
     const { value } = options.battery.showPercentage
     battery.showPercentage.value = !value
   }, 

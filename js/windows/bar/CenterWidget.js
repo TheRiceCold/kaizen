@@ -1,6 +1,14 @@
 import { Widget } from '../../imports.js'
-import Workspaces from './modules/Workspaces.js'
+import { 
+  DateButton,
+  FocusedClient,
+  Separator, 
+} from './modules/exports.js'
 
 export default Widget.Box({
-  children: [ Workspaces ] 
+  children: [ 
+    FocusedClient,
+    Separator(),
+    DateButton,
+  ]
 })

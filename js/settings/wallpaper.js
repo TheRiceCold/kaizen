@@ -19,6 +19,6 @@ export default () => {
   if (!depsExist) return
 
   exec('swww init')
-  options.desktop.wallpaper.img.connect('changed', wallpaper)
+  // options.desktop.wallpaper.img.connect('changed', wallpaper)
   applyWallpaper()
 }
