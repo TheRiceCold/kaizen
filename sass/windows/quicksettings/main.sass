@@ -1,26 +1,20 @@
-@mixin group-padding
-  padding: 0.5rem
-
 .quicksettings
   margin: 4px
   padding: 1rem
   min-width: 25rem
-  background: $bg-color
   border-radius: $radii
+  background: $bg-color
   box-shadow: 0 2px 3px black
   transition: 300ms cubic-bezier(0.1, 1, 0, 1)
 
 .sidebar-group
+  color: $fg-color
   background: $bg-color
   border-radius: $radii
-  @include group-padding
 
 .sidebar-group-nopad
   background: $bg-color
   border-radius: $radii
-
-.sidebar-group-invisible
-  @include group-padding
 
 .sidebar-group-invisible-morehorizpad
   padding: 0.341rem 0.682rem
@@ -29,7 +23,6 @@
   margin-bottom: 8px
   background: $hover
   border-radius: calc($radii * 2)
-  @include group-padding
 
 .sidebar-iconbutton
   color: $fg-color
@@ -328,7 +321,6 @@
   border: 0.068rem solid $_border-color
 
 .sidebar-chat-apiswitcher
-  @include group-padding
   background: $bg-color
   border-radius: calc($radii * 2)
 

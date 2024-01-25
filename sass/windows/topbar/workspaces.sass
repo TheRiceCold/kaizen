@@ -6,7 +6,7 @@
   border-radius: $radii
 
   .workspace-button
-    color: $magenta
+    color: $accent
     font-weight: bold
     transition: all 0.3s ease-in-out
 
@@ -16,8 +16,8 @@
       border-radius: $radii
 
     &.occupied
-      color: $accent-fg
-      background: $magenta
+      color: $accent
+      background: $bg-color
 
       &:hover
         background: #f5f5f5
@@ -36,9 +36,9 @@
       
     &.active
       .button-label
-        background: $blue
         color: $accent-fg
         font-weight: bold
+        background: $accent
         border-radius: $radii
         transition: all 0.3s ease-in-out
 

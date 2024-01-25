@@ -6,7 +6,7 @@ import { setupCursorHover } from '../../../../misc/CursorHover.js'
 
 const Title = Widget.Box({
   vpack: 'start',
-  className: 'sidebar-group-invisible txt spacing-h-5',
+  className: 'txt spacing-h-5',
   children: [
     Widget.Label({
       xalign: 0,
