@@ -88,7 +88,7 @@ const column3 = [
     binds: [
       { keys: ['⌘', '+', 'Return'], action: 'Launch terminal: Foot' },
       { keys: ['⌘', '+', 'B'], action: 'Launch browser: Firefox' },
-      { keys: ['⌘', '+', 'E'], action: 'Launch file manager: joshuto' },
+      { keys: ['⌘', '+', 'E'], action: 'Launch file manager: yazi' },
       { keys: ['⌘', '+', 'X'], action: 'Launch editor: GNOME Text Editor' },
       { keys: ['⌘', '+', 'I'], action: 'Launch settings: GNOME Control center' }
     ],

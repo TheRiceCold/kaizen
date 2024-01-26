@@ -15,7 +15,7 @@ export default state => Widget.Stack({
     ['notifications', NotificationList],
     ['wifi', WifiList],
     ['bluetooth', BluetoothList],
-    ['audio', AudioContent],
+    // ['audio', AudioContent],
     // ['mpris', MprisPlayerList],
     ['chatgpt', ChatGPT],
     ['themes', Themes],

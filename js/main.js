@@ -6,6 +6,6 @@ const style = `${App.configDir}/main.css`
 
 export default {
   style,
-  windows,
   onConfigParsed: init,
+  windows: windows().flat(1),
 }

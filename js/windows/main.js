@@ -9,7 +9,7 @@ import Notifications from './notifications/main.js'
 import Quicksettings from './quicksettings/main.js'
 import ScreenCorners from './screencorners/main.js'
 
-export default [
+export default () => [
   Bar,
   Desktop,
   Launcher,

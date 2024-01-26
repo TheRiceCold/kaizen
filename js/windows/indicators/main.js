@@ -6,7 +6,6 @@ export default Widget.Window({
   anchor: ['top'],
   layer: 'overlay',
   name: 'indicator',
-  className: 'indicator',
   child: Widget.EventBox({
     onHover: () => Indicator.popup(-1),
     child: Widget.Box({

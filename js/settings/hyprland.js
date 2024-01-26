@@ -32,7 +32,7 @@ export function hyprlandInit() {
       ? '' : `layerrule ignorealpha 0.6, ${name}`,
   ]))
 
-  Utils.writeFile('init', '/tmp/ags/hyprland-init')
+  // Utils.writeFile('init', '/tmp/ags/hyprland-init')
 }
 
 export function setupHyprland() {

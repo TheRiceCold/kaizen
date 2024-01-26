@@ -1,10 +1,10 @@
 .indicator-container
   min-width: 10rem
-  background-color: $bg-color
+  background: $bg-color
+  border-radius: $radii
+  padding: calc($padding * 2)
 
 .osd-indicator
-  padding: 1rem 0rem 1rem 1.5rem
-
   .osd-icon
     color: $fg-color
     font-size: 2rem
@@ -17,12 +17,8 @@
     min-width: 2.5rem
 
   .osd-progress
-    border-radius: 10rem
-
     trough
-      border-radius: 10rem
-      background-color: $hover
+      background: $hover
 
     progress
       background: $accent
-      border-radius: 10rem

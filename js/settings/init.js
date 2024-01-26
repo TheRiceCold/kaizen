@@ -9,7 +9,7 @@ export default () => {
   setGlobals()
 
   reloadSass()
-  // hyprlandInit()
+  hyprlandInit()
   setupHyprland()
   initWallpaper()
   // setupNeovim()

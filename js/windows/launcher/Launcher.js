@@ -9,7 +9,11 @@ export default windowName => {
     })),
   ]
 
-  const List = Widget.Box({ vertical: true, children: apps })
+  const List = Widget.Box({ 
+    vertical: true, 
+    children: apps,
+    className: 'app-list',
+  })
 
   const Entry = Widget.Entry({
     text: '',

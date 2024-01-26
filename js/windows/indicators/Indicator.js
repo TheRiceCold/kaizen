@@ -2,19 +2,11 @@ import { Widget } from '../../imports.js'
 import { Indicator } from '../../services/main.js'
 import { icons } from '../../constants/main.js'
 
-/**
- * @param {number} brightness
- * @returns {string}
- */
 const brightnessToIcon = brightness => {
   const idx = Math.floor(brightness * (icons.brightness.screen.length - 1));
   return icons.brightness.screen[idx];
 };
 
-/**
- * @param {number} volume
- * @returns {string}
- */
 const volumeToIcon = volume => {
   if (volume <= 0)    return icons.audio.volume.muted;
   if (volume <= 0.33) return icons.audio.volume.low;
@@ -25,14 +17,6 @@ const volumeToIcon = volume => {
 };
 
 
-/**
- *
- * @param {import('types/@girs/gtk-3.0/gtk-3.0').Gtk.Widget} icon
- * @param {import('types/service').Binding<any, any, string>} label
- * @param {import('types/service').Binding<any, any, number>} progress
- * @param {import('types/widgets/box').BoxProps} props
- * @returns {import('types/widgets/box').default}
- */
 const OsdValue = (icon, label, progress, props = {}) => Widget.Box({
   ...props,
   className: 'osd-indicator',
@@ -82,7 +66,7 @@ export default Widget.Revealer({
         children: [
           Widget.Stack({
             transition: 'slide_up_down',
-            class_name: 'indicator-container',
+            className: 'indicator-container',
             visible_child_name: Indicator.bind('current'),
             items: [
               ['brightness', brightnessIndicator],
@@ -94,6 +78,6 @@ export default Widget.Revealer({
     ]
   })
 }).hook(Indicator, (revealer, value) => {
-  revealer.reveal_child = (value > -1)
+  revealer.revealChild = (value > -1)
 }, 'popup')
 

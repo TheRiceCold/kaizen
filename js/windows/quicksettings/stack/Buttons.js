@@ -20,11 +20,11 @@ const buttons = [
     title: 'bluetooth',
     tooltipText: 'Bluetooth',
   },
-  {
-    icon: FontIcon(icons.audio.volume.high),
-    title: 'audio',
-    tooltipText: 'Audio',
-  },
+  // {
+  //   icon: FontIcon(icons.audio.volume.high),
+  //   title: 'audio',
+  //   tooltipText: 'Audio',
+  // },
   {
     icon: Widget.Icon(icons.sidebar.chatgpt),
     title: 'chatgpt',
