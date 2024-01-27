@@ -59,6 +59,7 @@ export default {
     logout: '󰍃',
     reboot: '󰜉', 
     shutdown: '',
+    hibernate: '⏼',
   },
 
   notifications: {

@@ -1,8 +1,7 @@
 import { App, Utils, Widget } from '../../imports.js'
-import { variables, icons } from '../../constants/main.js'
+import { icons } from '../../constants/main.js'
 
 const { Gdk, Gtk } = imports.gi
-const { SCREEN_WIDTH, SCREEN_HEIGHT } = variables
 const WINDOW_NAME = 'powermenu'
 
 const SessionButton = ({
@@ -13,9 +12,9 @@ const SessionButton = ({
 }) => {
   const buttonDescription = Widget.Revealer({
     vpack: 'end',
+    revealChild: false,
     transitionDuration: 200,
     transition: 'slide_down',
-    revealChild: false,
     child: Widget.Label({
       label: name,
       className: 'txt-smaller session-button-desc',
@@ -80,10 +79,16 @@ export default () => {
     icon: icons.powermenu.sleep,
   })
 
+  const rebootButton = SessionButton({
+    name: 'Reboot', 
+    exec: 'systemctl reboot',
+    icon: icons.powermenu.reboot, 
+  })
+
   const hibernateButton = SessionButton({
     name: 'Hibernate', 
-    icon: 'downloading', 
-    exec: 'systemctl hibernate'
+    exec: 'systemctl hibernate',
+    icon: icons.powermenu.hibernate,
   })
 
   const shutdownButton = SessionButton({
@@ -92,69 +97,37 @@ export default () => {
     icon: icons.powermenu.shutdown,
   })
 
-  const rebootButton = SessionButton({
-    name: 'Reboot', 
-    exec: 'systemctl reboot',
-    icon: icons.powermenu.reboot, 
-  })
-
-  const cancelButton = SessionButton({
-    name: 'Cancel', 
-    icon: icons.powermenu.cancel, 
-    className: 'session-button-cancel'
-  })
-
   return Widget.Box({
     vertical: true,
-    className: 'session-bg',
-    css: `
-      min-width: ${SCREEN_WIDTH * 1.5}px; 
-      min-height: ${SCREEN_HEIGHT * 1.5}px;`,
+    hpack: 'center',
+    className: 'powermenu',
     children: [
       Widget.Box({
-        hpack: 'center',
-        vexpand: true,
+        vpack: 'center',
         vertical: true,
+        className: 'spacing-v-15',
         children: [
+          Widget.Label({
+            className: 'txt-small txt',
+            justify: Gtk.Justification.CENTER,
+            label: 'Use arrow keys to navigate.\nEnter to select, Esc to cancel.'
+          }),
           Widget.Box({
-            vpack: 'center',
-            vertical: true,
-            className: 'spacing-v-15',
-            children: [
-              Widget.Box({
-                vertical: true,
-                css: 'margin-bottom: 0.682rem;',
-                children: [
-                  Widget.Label({ label: 'Session', className: 'txt-title txt' }),
-                  Widget.Label({
-                    className: 'txt-small txt',
-                    justify: Gtk.Justification.CENTER,
-                    label: 'Use arrow keys to navigate.\nEnter to select, Esc to cancel.'
-                  }),
-                ]
-              }),
-              Widget.Box({
-                hpack: 'center',
-                className: 'spacing-h-15',
-                children: [ lockButton, logoutButton, sleepButton ]
-              }),
-              Widget.Box({
-                hpack: 'center',
-                className: 'spacing-h-15',
-                children: [ hibernateButton, shutdownButton, rebootButton ]
-              }),
-              Widget.Box({
-                hpack: 'center',
-                className: 'spacing-h-15',
-                children: [ cancelButton ]
-              }),
-            ]
+            hpack: 'center',
+            className: 'spacing-h-15',
+            children: [ lockButton, logoutButton, sleepButton ]
+          }),
+          Widget.Box({
+            hpack: 'center',
+            className: 'spacing-h-15',
+            children: [ rebootButton, hibernateButton, shutdownButton ]
           })
         ]
       })
     ],
     setup: self => self.hook(App, (_b, _, visible) => {
-      if (visible) lockButton.grab_focus()
+      if (visible) 
+        lockButton.grab_focus()
     })
   })
 }
