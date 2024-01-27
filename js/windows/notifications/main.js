@@ -9,7 +9,7 @@ export default Widget.Window({
   anchor: ['top'],
   name: 'notifications',
   child:  Widget.Box({
-    className: 'osd-window',
+    className: 'notification',
     children: [ Popups, Music() ],
   })
 })

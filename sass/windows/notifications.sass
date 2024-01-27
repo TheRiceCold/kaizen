@@ -1,130 +1,137 @@
-.notif-low
-  color: $fg-color
-  border-radius: $radii
-  background: $bg-color
-  padding-right: 0.545rem
+.notification
+  padding: 2px
+  min-height: 2px
 
-.notif-normal
-  color: $fg-color
-  border-radius: $radii
-  background: $bg-color
-  // padding: $rounding_small
-  padding-right: 0.545rem
+  .notification-popup
+    padding-top: 0.5rem
 
-.popup-notif-low
-  color: $fg-color
-  border-radius: $radii
-  min-width: 30.682rem
-  background: $bg-color
-  padding-right: 0.545rem
+  .notif-low
+    color: $fg-color
+    border-radius: $radii
+    background: $bg-color
+    padding-right: 0.545rem
 
-.popup-notif-normal
-  color: $fg-color
-  background: $bg-color
-  border-radius: $radii
-  min-width: 30.682rem
-  padding-right: 0.545rem
+  .notif-normal
+    color: $fg-color
+    border-radius: $radii
+    background: $bg-color
+    // padding: $rounding_small
+    padding-right: 0.545rem
 
-.popup-notif-critical
-  color: $fg-color
-  background: $bg-color
-  border-radius: $radii
-  min-width: 30.682rem
-  padding-right: 0.545rem
+  .popup-notif-low
+    color: $fg-color
+    border-radius: $radii
+    min-width: 30.682rem
+    background: $bg-color
+    padding-right: 0.545rem
 
-.notif-body-low
-  color: $yellow
+  .popup-notif-normal
+    color: $fg-color
+    background: $bg-color
+    border-radius: $radii
+    min-width: 30.682rem
+    padding-right: 0.545rem
 
-.notif-body-normal
-  color: $accent
+  .popup-notif-critical
+    color: $fg-color
+    background: $bg-color
+    border-radius: $radii
+    min-width: 30.682rem
+    padding-right: 0.545rem
 
-.notif-body-critical
-  color: $red
+  .notif-body-low
+    color: $yellow
 
-.notif-icon
-  min-width: 3.409rem
-  min-height: 3.409rem
-  border-radius: calc($radii * 2)
+  .notif-body-normal
+    color: $accent
 
-.notif-icon-material
-  color: $fg-color
-  background: $bg-color
+  .notif-body-critical
+    color: $red
 
-.notif-icon-material-low
-  color: $fg-color
-  background: $bg-color
+  .notif-icon
+    min-width: 3.409rem
+    min-height: 3.409rem
+    border-radius: calc($radii * 2)
 
-.notif-icon-material-normal
-  color: $fg-color
-  background: $bg-color
-
-.notif-icon-material-critical
-  color: $fg-color
-  background: $bg-color
-
-.notif-expand-btn
-  min-width: 1.841rem
-  min-height: 1.841rem
-  &:hover, &:focus
-    background: $hover
-  &:active
-    background: $accent
-
-.notif-closeall-btn
-  border-radius: $radii
-  padding: 0.341rem 0.341rem
-  &:hover, &:focus
-    background: $hover
-  &:active
-    background: $accent
-
-.notif-circprog-low
-  padding: 0
-  color: $fg-color
-  min-width: 0.136rem // line width
-  min-height: 3.136rem
-  transition: 0ms linear
-
-.notif-circprog-normal
-  padding: 0
-  color: $fg-color
-  min-width: 0.136rem // line width
-  min-height: 3.136rem
-  transition: 0ms linear
-
-.notif-circprog-critical 
-  padding: 0
-  color: $fg-color
-  min-width: 0.136rem // line width
-  min-height: 3.136rem
-  transition: 0ms linear
-
-.notif-actions
-  min-height: 2.045rem
-
-.notif-action
-  border-radius: $radii
-
-.notif-action-low
-  color: $fg-color
-  background: $bg-color
-  &:focus, &:hover
-    background: $hover
-  &:active
+  .notif-icon-material
+    color: $fg-color
     background: $bg-color
 
-.notif-action-normal
-  color: $fg-color
-  background: $bg-color
-  &:focus, &:hover
-    background: $hover
-  &:active
+  .notif-icon-material-low
+    color: $fg-color
     background: $bg-color
 
-.notif-action-critical
-  color: $fg-color
-  background: $red
-  &:focus, &:hover
-    background: red
-  &:active
+  .notif-icon-material-normal
+    color: $fg-color
+    background: $bg-color
+
+  .notif-icon-material-critical
+    color: $fg-color
+    background: $bg-color
+
+  .notif-expand-btn
+    min-width: 1.841rem
+    min-height: 1.841rem
+    &:hover, &:focus
+      background: $hover
+    &:active
+      background: $accent
+
+  .notif-closeall-btn
+    border-radius: $radii
+    padding: 0.341rem 0.341rem
+    &:hover, &:focus
+      background: $hover
+    &:active
+      background: $accent
+
+  .notif-circprog-low
+    padding: 0
+    color: $fg-color
+    min-width: 0.136rem // line width
+    min-height: 3.136rem
+    transition: 0ms linear
+
+  .notif-circprog-normal
+    padding: 0
+    color: $fg-color
+    min-width: 0.136rem // line width
+    min-height: 3.136rem
+    transition: 0ms linear
+
+  .notif-circprog-critical 
+    padding: 0
+    color: $fg-color
+    min-width: 0.136rem // line width
+    min-height: 3.136rem
+    transition: 0ms linear
+
+  .notif-actions
+    min-height: 2.045rem
+
+  .notif-action
+    border-radius: $radii
+
+  .notif-action-low
+    color: $fg-color
+    background: $bg-color
+    &:focus, &:hover
+      background: $hover
+    &:active
+      background: $bg-color
+
+  .notif-action-normal
+    color: $fg-color
+    background: $bg-color
+    &:focus, &:hover
+      background: $hover
+    &:active
+      background: $bg-color
+
+  .notif-action-critical
+    color: $fg-color
     background: $red
+    &:focus, &:hover
+      background: red
+    &:active
+      background: $red

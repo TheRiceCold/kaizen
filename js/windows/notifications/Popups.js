@@ -3,7 +3,7 @@ import { Notification } from '../../misc/main.js'
 
 export default Widget.Box({
   vertical: true,
-  className: 'osd-notifs spacing-v-5-revealer',
+  className: 'notification-popup spacing-v-5-revealer',
   attribute: {
     map: new Map(),
 
