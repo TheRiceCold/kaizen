@@ -9,5 +9,5 @@ export default PopupWindow({
   focusable: true,
   name: 'quicksettings',
   child: QuickSettings(QSState),
-  anchor: ['right', 'top', 'bottom'],
+  anchor: ['right', 'top' ],
 })

@@ -3,6 +3,7 @@ import Desktop from './desktop/main.js'
 import Launcher from './launcher/main.js'
 import Overview from './overview/main.js'
 import PowerMenu from './powermenu/main.js'
+import Dashboard from './dashboard/main.js'
 import CheatSheet from './cheatsheet/main.js'
 import Indicators from './indicators/main.js'
 import Notifications from './notifications/main.js'
@@ -15,6 +16,7 @@ export default () => [
   Launcher,
   Overview,
   PowerMenu,
+  Dashboard,
   CheatSheet,
   Indicators,
   Notifications,

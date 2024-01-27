@@ -17,15 +17,15 @@ const contentStack = Widget.Stack({
 })
 
 const StackButton = (stackItemName, icon, name) => Widget.Button({
-  className: 'sidebar-navrail-btn txt-small spacing-h-5',
+  className: 'dashboard-btn txt-small spacing-h-5',
   onClicked: btn => {
     contentStack.shown = stackItemName
     const kids = btn.get_parent().get_children()
     kids.forEach(kid => {
       if (kid !== btn)
-        kid.toggleClassName('sidebar-navrail-btn-active', false)
+        kid.toggleClassName('dashboard-btn-active', false)
       else
-        btn.toggleClassName('sidebar-navrail-btn-active', true)
+        btn.toggleClassName('dashboard-btn-active', true)
     })
   },
   child: Widget.Box({
@@ -43,13 +43,13 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
 })
 
 export default Widget.Box({
-  className: 'spacing-h-5',
+  className: 'dashboard spacing-h-5',
   setup: box => {
     box.pack_start(Widget.Box({
       vpack: 'center',
       vertical: true,
       homogeneous: true,
-      className: 'sidebar-navrail spacing-v-10',
+      className: 'spacing-v-10',
       children: [
         StackButton('calendar', '', 'Calendar'),
         StackButton('todo', '󰏫', 'To Do'),

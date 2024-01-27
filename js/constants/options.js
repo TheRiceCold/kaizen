@@ -191,10 +191,10 @@ export default {
       ['org.gnome.Nautilus', 'Files'],
       ['', 'Desktop'],
 
-      ['foot', '󰽒   Foot'],
-      ['Godot', '   Godot'],
-      ['kitty', '󰄛   Kitty'],
-      ['krita', '   Krita'],
+      ['foot', '󰽒 Foot'],
+      ['Godot', '  Godot'],
+      ['kitty', '󰄛  Kitty'],
+      ['krita', '  Krita'],
       ['VSCodium', '   VSCodium'],
       ['wihotspot-gui', 'Wi-Hotspot'],
       ['virt-manager', ' Virt-Manager']

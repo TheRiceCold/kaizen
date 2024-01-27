@@ -1,6 +1,5 @@
 import { Widget } from '../../imports.js'
 import Header from './header/main.js'
-import Footer from './footer/main.js'
 import Stack from './stack/main.js'
 
 export default state => Widget.Box({
@@ -12,7 +11,7 @@ export default state => Widget.Box({
       vexpand: true,
       vertical: true,
       className: 'quicksettings spacing-v-15',
-      children: [ Header, Footer, Stack(state) ]
+      children: [ Header, Stack(state) ]
     }),
   ]
 })

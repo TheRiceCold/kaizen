@@ -29,13 +29,13 @@ const weekDays = [ // MONDAY IS THE FIRST DAY OF THE WEEK :HESRIGHTYOUKNOW:
 ]
 
 const CalendarDay = (day, today) => Widget.Button({
-  className: `qs-calendar-btn ${today == 1 ? 'qs-calendar-btn-today' : (today == -1 ? 'qs-calendar-btn-othermonth' : '')}`,
+  className: `calendar-btn ${today == 1 ? 'calendar-btn-today' : (today == -1 ? 'calendar-btn-othermonth' : '')}`,
   child: Widget.Overlay({
     child: Widget.Box(),
     overlays: [Widget.Label({
       hpack: 'center',
       label: String(day),
-      className: 'txt-smallie txt-semibold qs-calendar-btn-txt',
+      className: 'txt-smallie txt-semibold calendar-btn-txt',
     })],
   })
 })
@@ -43,7 +43,7 @@ const CalendarDay = (day, today) => Widget.Button({
 export default () => {
   const calendarMonthYear = Widget.Button({
     onClicked: () => shiftCalendarXMonths(0),
-    className: 'txt txt-large qs-calendar-monthyear-btn',
+    className: 'txt txt-large calendar-monthyear-btn',
     setup: btn => {
       btn.label = `${new Date().toLocaleString('default', { month: 'long' })} ${new Date().getFullYear()}`
       setupCursorHover(btn)
@@ -71,7 +71,7 @@ export default () => {
   }
 
   const calendarHeader = Widget.Box({
-    className: 'spacing-h-5 qs-calendar-header',
+    className: 'spacing-h-5 calendar-header',
     setup: box => {
       box.pack_start(calendarMonthYear, false, false, 0)
       box.pack_end(Widget.Box({
@@ -80,7 +80,7 @@ export default () => {
           Widget.Button({
             setup: setupCursorHover,
             onClicked: () => shiftCalendarXMonths(-1),
-            className: 'qs-calendar-monthshift-btn',
+            className: 'calendar-monthshift-btn',
             child: Widget.Label({ label: '', className: 'txt-norm' }),
           }),
           Widget.Button({

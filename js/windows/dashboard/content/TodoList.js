@@ -6,9 +6,9 @@ import { setupCursorHover } from '../../../misc/CursorHover.js'
 const defaultTodoSelected = 'undone'
 
 const todoListItem = (task, id, isDone) => {
-  const crosser = Widget.Box({ className: 'qs-todo-crosser' })
+  const crosser = Widget.Box({ className: 'todo-crosser' })
   const todoContent = Widget.Box({
-    className: 'qs-todo-item spacing-h-5',
+    className: 'todo-item spacing-h-5',
     children: [
       Widget.Label({
         xalign: 0,
@@ -16,11 +16,11 @@ const todoListItem = (task, id, isDone) => {
         hexpand: true,
         selectable: true,
         label: task.content,
-        className: 'txt txt-small qs-todo-txt',
+        className: 'txt txt-small todo-txt',
       }),
       Widget.Button({ // Check/Uncheck
         vpack: 'center',
-        className: 'txt qs-todo-item-action',
+        className: 'txt todo-item-action',
         child: Widget.Label({ 
           vpack: 'center',
           className: 'txt-norm', 
@@ -28,7 +28,7 @@ const todoListItem = (task, id, isDone) => {
         }),
         onClicked: () => {
           const contentWidth = todoContent.get_allocated_width()
-          crosser.toggleClassName('qs-todo-crosser-crossed', true)
+          crosser.toggleClassName('todo-crosser-crossed', true)
           crosser.css = `margin-left: -${contentWidth}px;`
           Utils.timeout(200, () => {
             widgetRevealer.revealChild = false
@@ -42,7 +42,7 @@ const todoListItem = (task, id, isDone) => {
       }),
       Widget.Button({
         vpack: 'center',
-        className: 'txt qs-todo-item-action',
+        className: 'txt todo-item-action',
         child: Widget.Label({
           label: '󰆴', 
           vpack: 'center',
@@ -50,7 +50,7 @@ const todoListItem = (task, id, isDone) => {
         }),
         onClicked: () => {
           const contentWidth = todoContent.get_allocated_width()
-          crosser.toggleClassName('qs-todo-crosser-removed', true)
+          crosser.toggleClassName('todo-crosser-removed', true)
           crosser.css = `margin-left: -${contentWidth}px;`
           Utils.timeout(200, () => widgetRevealer.revealChild = false)
           Utils.timeout(350, () => Todo.remove(id))
@@ -94,7 +94,7 @@ const todoItems = isDone => Widget.Scrollable({
   }),
   setup: listContents => {
     const vScrollbar = listContents.get_vscrollbar()
-    vScrollbar.get_style_context().add_class('qs-scrollbar')
+    vScrollbar.get_style_context().add_class('scrollbar')
   }
 })
 
@@ -104,7 +104,7 @@ const UndoneTodoList = () => {
     transitionDuration: 200,
     revealChild: true,
     child: Widget.Button({
-      className: 'txt-small qs-todo-new',
+      className: 'txt-small todo-new',
       halign: 'end',
       vpack: 'center',
       label: '+ New task',
@@ -123,7 +123,7 @@ const UndoneTodoList = () => {
     transitionDuration: 200,
     revealChild: false,
     child: Widget.Button({
-      className: 'txt-norm icon-material qs-todo-add',
+      className: 'txt-norm icon-material todo-add',
       halign: 'end',
       vpack: 'center',
       label: '',
@@ -140,14 +140,14 @@ const UndoneTodoList = () => {
   const newTaskEntry = Widget.Entry({
     // hexpand: true,
     vpack: 'center',
-    className: 'txt-small qs-todo-entry',
+    className: 'txt-small todo-entry',
     placeholderText: 'Add a task...',
     onAccept: ({ text }) => {
       if (text == '') return
       Todo.add(text)
       newTaskEntry.text = ''
     },
-    onChange: ({ text }) => confirmAddTask.child.toggleClassName('qs-todo-add-available', text != ''),
+    onChange: ({ text }) => confirmAddTask.child.toggleClassName('todo-add-available', text != ''),
   })
   const newTaskEntryRevealer = Widget.Revealer({
     transition: 'slide_right',
@@ -163,7 +163,7 @@ const UndoneTodoList = () => {
       halign: 'end',
       vpack: 'center',
       label: '󰁝',
-      className: 'txt-norm icon-material qs-todo-add',
+      className: 'txt-norm icon-material todo-add',
       setup: setupCursorHover,
       onClicked: () => {
         if (newTaskEntry.text == '') return
@@ -201,15 +201,15 @@ const todoItemsBox = Widget.Stack({
 export default () => {
   const TodoTabButton = (isDone, navIndex) => Widget.Button({
     hexpand: true,
-    className: 'qs-selector-tab',
+    className: 'selector-tab',
     onClicked: btn => {
       todoItemsBox.shown = `${isDone ? 'done' : 'undone'}`
       const kids = btn.get_parent().get_children()
       kids.forEach(kid => {
         if (kid !== btn) 
-          kid.toggleClassName('qs-selector-tab-active', false)
+          kid.toggleClassName('selector-tab-active', false)
         else 
-          btn.toggleClassName('qs-selector-tab-active', true)
+          btn.toggleClassName('selector-tab-active', true)
       })
       const buttonWidth = btn.get_allocated_width()
       const highlightWidth = btn.get_children()[0].get_allocated_width()
