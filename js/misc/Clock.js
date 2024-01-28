@@ -1,5 +1,4 @@
-import { Widget } from '../imports.js'
-
+import { Widget, Variable } from '../imports.js'
 const { DateTime } = imports.gi.GLib
 
 export default ({
@@ -7,11 +6,13 @@ export default ({
   interval = 1000,
   ...props
 } = {}) => {
-  const date = DateTime.new_now_local().format(format) || 'wrong format'
+  const clock = Variable(DateTime.new_now_local(), {
+    poll: [1000, () => DateTime.new_now_local()],
+  })
 
   return Widget.Label({
     ...props,
     className: 'clock',
-    connections: [[interval, label => label.label = date]],
+    label: clock.bind('value').transform(time => time.format(format) || 'wrong format'),
   })
 }

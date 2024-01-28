@@ -86,7 +86,7 @@ export default () => {
           Widget.Button({
             setup: setupCursorHover,
             onClicked: () => shiftCalendarXMonths(1),
-            className: 'sidebar-calendar-monthshift-btn',
+            className: 'calendar-monthshift-btn',
             child: Widget.Label({ label: '', className: 'txt-norm' }),
           })
         ]
