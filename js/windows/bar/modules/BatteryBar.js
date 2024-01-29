@@ -6,11 +6,11 @@ import { options, icons } from '../../../constants/main.js'
 const { battery } = options
 
 const Indicator = Widget.Stack({
-  binds: [['visible', battery.bar.showIcon]],
   items: [ 
     ['false', FontIcon(icons.battery.default)], 
     ['true', FontIcon(icons.battery.charging)] 
   ],
+  visible: options.battery.bar.showIcon.bind('value'),
   setup: self => self.hook(Battery, stack => 
     stack.shown = `${Battery.charging || Battery.charged}`
   ),
@@ -18,8 +18,10 @@ const Indicator = Widget.Stack({
 
 const PercentLabel = () => Widget.Revealer({
   transition: 'slide_right',
-  binds: [['reveal-child', battery.showPercentage]],
-  child: Widget.Label({ binds: [['label', Battery, 'percent', p => `${p}% `]] }),
+  revealChild: options.battery.showPercentage.bind('value'),
+  child: Widget.Label({ 
+    label: Battery.bind('percent').transform(p => `${p}%`),
+  }),
 })
 
 const LevelBar = () => Widget.LevelBar({
@@ -30,7 +32,7 @@ const LevelBar = () => Widget.LevelBar({
       self.hpack = value
     }
   ),
-  binds: [['value', Battery, 'percent', p => p / 100]],
+  value: Battery.bind('percent').transform(p => p / 100),
 })
 
 const WholeButton = Widget.Overlay({
@@ -43,7 +45,7 @@ const WholeButton = Widget.Overlay({
       children: [
         FontIcon({ 
           icon: icons.battery.charging, 
-          binds: [['visible', Battery, 'charging']] 
+          visible: Battery.bind('charging'),
         }),
         Widget.Box({ 
           hpack: 'center', 
@@ -62,14 +64,13 @@ const Content = Widget.Box({
     w.toggleClassName('low', Battery.percent < battery.low.value)
     w.toggleClassName('half', Battery.percent < 48)
   }),
-  binds: [
-    ['visible', Battery, 'available'],
-    ['children', battery.bar.full, 'value', full => full ? [ WholeButton ] : [ 
+  visible: Battery.bind('available'),
+  children: options.battery.bar.full.bind('value').transform(full => full
+    ? [WholeButton] : [
       Indicator,
-      PercentLabel(), 
-      LevelBar()
-    ]],
-  ],
+      PercentLabel(),
+      LevelBar(),
+    ]),
 })
 
 export default PanelButton({ 

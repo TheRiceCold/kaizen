@@ -5,12 +5,10 @@ const { active } = Hyprland
 const { substitute } = utils
 const { icons, titles } = options.substitutions
 
-const ClientLabel = Widget.Label({
-  binds: [[
-    'label', active.client, 
-    'class', c => substitute(titles, c) 
-  ]],
-})
+const ClientLabel = Widget.Label().bind(
+  'label', active.client, 
+  'class', c => substitute(titles, c) 
+)
 
 const ClientIcon = Widget.Icon({
   setup: self => self.hook(Hyprland.active.client, self => {
@@ -33,8 +31,7 @@ const ClientIcon = Widget.Icon({
 export default Widget.Box({
   className: 'focused-client',
   children: [ ClientIcon, ClientLabel ],
-  binds: [[
-    'tooltip-text', active, 
-    'client', c => c.title
-  ]],
-})
+}).bind(
+  'tooltip-text', active, 
+  'client', c => c.title
+)

@@ -6,16 +6,10 @@ import PanelButton from './PanelButton.js'
 const { NORTH, SOUTH } = imports.gi.Gdk
 
 const ColorPickerButton = PanelButton({
-  className: 'color-picker',
   content: FontIcon(''),
-  binds: [[
-    'tooltip-text', 
-    ColorPicker, 
-    'colors', 
-    v => `${v.length} colors`
-  ]],
+  className: 'color-picker',
+  tooltipText: ColorPicker.bind('colors').transform(v => `${v.length} colors`),
   onClicked: () => ColorPicker.pick(),
-
   onSecondaryClick: btn => {
     if (ColorPicker.colors.length === 0) return
     Widget.Menu({
@@ -60,8 +54,8 @@ const ScreenRecord = PanelButton({
 
 export default Widget.Box({ 
   children: [ 
+    ColorPickerButton,
     ScreenShotButton,
     ScreenRecord,
-    ColorPickerButton, 
   ] 
 })

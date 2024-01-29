@@ -30,8 +30,8 @@ export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, props
     ]
   })
   const interactionWrapper = Widget.Button({
-    properties: [
-      ['toggle', () => {
+    attribute: {
+      toggle: () => {
         value = !value
         toggleIcon.toggleClassName('switch-fg-toggling-false', false)
         if (!value) {
@@ -45,8 +45,8 @@ export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, props
           toggleIcon.toggleClassName('txt-poof', false)
         })
         onChange(interactionWrapper, value)
-      }]
-    ],
+      }
+    },
     child: widgetContent,
     onClicked: self => self._toggle(self),
     setup: btn => {

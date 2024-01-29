@@ -1,5 +1,5 @@
 import { Variable } from 'resource:///com/github/Aylur/ags/variable.js'
-import { Notifications, Utils, Service } from '../imports.js'
+import { Utils, Service } from '../imports.js'
 import { utils } from '../constants/main.js'
 
 const COLORS_CACHE = Utils.CACHE_DIR + '/colorpicker.json'
@@ -47,13 +47,16 @@ class Colors extends Service {
         .catch(err => console.error(err))
     }
 
-    this.#notifID = Notifications.Notify(
-      'Color Picker',
-      this.#notifID,
-      'color-select-symbolic',
-      color, '', [], {},
-    )
+    const n = await Utils.notify({
+      id: this.#notifID,
+      iconName: icons.ui.colorpicker,
+      summary: color,
+      actions: {
+        'Copy': () => this.wlCopy(color),
+      },
+    })
+    this.#notifID = n.id
   }
 }
 
-export default new Colors()
+export default new Colors

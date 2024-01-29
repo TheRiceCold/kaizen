@@ -1,13 +1,20 @@
+import AgsWidget from 'resource:///com/github/Aylur/ags/widgets/widget.js'
 import { Widget } from '../../../../../imports.js'
-import { ChatGPT } from '../../../../../services/main.js'
+import { ChatGPT, Gemini } from '../../../../../services/main.js'
 import { setupCursorHover } from '../../../../../misc/CursorHover.js'
-
 import {
   chatGPTView,
   chatGPTCommands,
   sendMessage as chatGPTSendMessage,
   chatGPTTabIcon
 } from './apis/chatgpt.js'
+
+const { Gdk, Gtk } = imports.gi
+class AgsTextView extends AgsWidget(Gtk.TextView, 'AgsTextView') {
+  static { AgsWidget.register(this, {}) }
+  constructor(params) { super(params) }
+}
+const TextView = Widget.createCtor(AgsTextView)
 
 const APIS = [
   {
@@ -23,22 +30,38 @@ const APIS = [
 let currentApiId = 0
 APIS[currentApiId].tabIcon.toggleClassName('sidebar-chat-apiswitcher-icon-enabled', true)
 
-const chatEntry = Widget.Entry({
-  className: 'sidebar-chat-entry',
+const chatEntry = TextView({
   hexpand: true,
-  connections: [[
-    ChatGPT, self => {
-      if (APIS[currentApiId].name != 'ChatGPT') return
-      self.placeholderText = (ChatGPT.key.length > 0 ? 'Ask a question...' : 'Enter OpenAI API Key...')
-    }, 'hasKey'
-  ]],
-  onChange: entry => {
-    chatSendButton.toggleClassName('sidebar-chat-send-available', entry.text.length > 0)
-  },
-  onAccept: entry => {
-    APIS[currentApiId].sendCommand(entry.text)
-    entry.text = ''
-  },
+  wrapMode: Gtk.WrapMode.WORD_CHAR,
+  acceptsTab: false,
+  className: 'sidebar-chat-entry',
+  setup: self => self
+    .hook(ChatGPT, self => {
+      if (APIS[currentApiId].name != 'Assistant (ChatGPT 3.5)') return
+      self.placeholderText = (ChatGPT.key.length > 0 ? 'Message ChatGPT...' : 'Enter OpenAI API Key...')
+    }, 'hasKey')
+    .hook(Gemini, self => {
+      if (APIS[currentApiId].name != 'Assistant (Gemini Pro)') return
+      self.placeholderText = (Gemini.key.length > 0 ? 'Message Gemini...' : 'Enter Google AI API Key...')
+    }, 'hasKey')
+    .on('key-press-event', (widget, event) => {
+      const keyval = event.get_keyval()[1]
+      if (event.get_keyval()[1] === Gdk.KEY_Return && event.get_state()[1] == Gdk.ModifierType.MOD2_MASK) {
+        apiSendMessage(widget)
+        return true
+      }
+      // Global keybinds
+      if (!(event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
+        event.get_keyval()[1] === Gdk.KEY_Page_Down) {
+        const toSwitchTab = contentStack.get_visible_child()
+        toSwitchTab.attribute.nextTab()
+      }
+      else if (!(event.get_state()[1] & Gdk.ModifierType.CONTROL_MASK) &&
+        event.get_keyval()[1] === Gdk.KEY_Page_Up) {
+        const toSwitchTab = contentStack.get_visible_child()
+        toSwitchTab.attribute.prevTab()
+      }
+    }),
 })
 
 const Title = Widget.Box({

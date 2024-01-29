@@ -123,7 +123,9 @@ export const openaiApiKeyInstructions = Widget.Box({
   children: [Widget.Revealer({
     transition: 'slide_down',
     transitionDuration: 150,
-    connections: [[ChatGPT, self => self.revealChild = (ChatGPT.key.length == 0), 'hasKey']],
+    setup: self => self.hook(ChatGPT, (self, hasKey) => {
+      self.revealChild = (ChatGPT.key.length == 0)
+    }, 'hasKey'),
     child: Widget.Button({
       child: Widget.Label({
         wrap: true,
@@ -158,13 +160,11 @@ export const chatGPTWelcome = Widget.Box({
 export const chatContent = Widget.Box({
   className: 'spacing-v-15',
   vertical: true,
-  connections: [[
-    ChatGPT, (box, id) => {
-      const message = ChatGPT.messages[id]
-      if (!message) return
-      box.add(ChatMessage(message, chatGPTView))
-    }, 'newMsg'
-  ]]
+  setup: self => self.hook(ChatGPT, (box, id) => {
+    const message = ChatGPT.messages[id]
+    if (!message) return
+    box.add(ChatMessage(message, 'ChatGPT'))
+  }, 'newMsg')
 })
 
 const clearChat = () => {

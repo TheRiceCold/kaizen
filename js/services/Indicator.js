@@ -35,7 +35,7 @@ class IndicatorService extends Service {
       this.notify('volume')
       this.notify('current')
       this.popup()
-    });
+    })
   }
 
   get current() { return this._current }
@@ -57,7 +57,7 @@ class IndicatorService extends Service {
 
       if (this._count === 0)
         this.emit('popup', -1)
-    });
+    })
   }
 
   connect(event = 'popup', callback) {

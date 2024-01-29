@@ -1,5 +1,5 @@
 export { default as Tray } from './Tray.js'
-export { default as Music } from './Music.js'
+// export { default as Music } from './Music.js'
 export { default as SubMenu } from './SubMenu.js'
 export { default as Separator } from './Separator.js'
 export { default as Utilities } from './Utilities.js'

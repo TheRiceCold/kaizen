@@ -14,12 +14,12 @@ const TrackProgress = () => {
   }
 
   return AnimatedCircularProgress({
+    vpack: 'center', 
+    hpack: 'center',
     className: 'bar-music-circprog',
-    vpack: 'center', hpack: 'center',
-    connections: [ // Update on change/once every 3 seconds
-      [Mpris, _updateProgress],
-      [3000, _updateProgress]
-    ]
+    extraSetup: self => self
+      .hook(Mpris, _updateProgress)
+      .poll(3000, _updateProgress),
   })
 }
 

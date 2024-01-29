@@ -25,11 +25,11 @@ const buttons = [
   //   title: 'audio',
   //   tooltipText: 'Audio',
   // },
-  {
-    icon: Widget.Icon(icons.sidebar.chatgpt),
-    title: 'chatgpt',
-    tooltipText: 'ChatGPT',
-  },
+  // {
+  //   icon: Widget.Icon(icons.sidebar.chatgpt),
+  //   title: 'chatgpt',
+  //   tooltipText: 'ChatGPT',
+  // },
   {
     icon: FontIcon('󰏘'),
     title: 'themes',

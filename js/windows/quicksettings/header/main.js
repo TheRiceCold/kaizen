@@ -7,7 +7,7 @@ import { variables } from '../../../constants/main.js'
 const Uptime = Widget.Label({
   hpack: 'center',
   className: 'txt-small',
-  binds: [[ 'label', variables.uptime, 'value', v => `System uptime: ${v}` ]],
+  label: variables.uptime.bind('value').transform(t => `System uptime: ${t}`),
 })
 
 export default Widget.Box({

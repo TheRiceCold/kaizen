@@ -6,7 +6,7 @@ export default ({
   initTo = 0,
   initFrom = 0,
   initAnimTime = 2900,
-  extraSetup= () => {},
+  extraSetup = () => {},
   ...props
 }) => Widget.DrawingArea({
   ...props,

@@ -9,9 +9,6 @@ const distro = imports.gi.GLib.get_os_info('ID')
 export default PanelButton({
   onClicked: () => App.toggleWindow('launcher'),
   content: FontIcon({
-    binds: [[
-      'icon', options.bar.icon, 
-      'value', v => v === 'distro-icon' ? icons.distro[distro] : v 
-    ]],
+    label: options.bar.icon.bind('value').transform(v => v === 'distro-icon' ? icons.distro[distro] : v),
   }),
 })

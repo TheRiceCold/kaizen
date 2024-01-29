@@ -20,7 +20,7 @@ function Arrow(revealer, direction, items) {
     child: icon,
     setup: setupCursorHover,
     className: 'panel-button sub-menu',
-    connections: [[ items, btn => btn.tooltip_text = `${items.value} Items` ]],
+    tooltipText: items.bind().transform(v => `${v} Items`),
     onClicked: () => {
       animate()
       revealer.reveal_child = !revealer.reveal_child

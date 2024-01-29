@@ -6,7 +6,6 @@ export default ({ name, child, ...props }) => Widget.Window({
   name,
   popup: true,
   visible: false,
-  focusable: true,
   layer: 'overlay',
   ...props,
 

@@ -1,23 +1,22 @@
 import { Widget } from '../../../imports.js'
 import { options } from '../../../constants/main.js'
 
-const { separators } = options.bar
+export default (service, condition) => Widget.Separator({
+  vpack: 'center',
+  setup: self => {
+    const visibility = () => {
+      if (!options.bar.separators.value)
+        return self.visible = false
 
-export default (service, condition) => {
-  const visibility = self => {
-    if (!separators.value)
-      return self.visible = false
+      self.visible = condition && service
+        ? condition(service)
+        : options.bar.separators.value
+    }
 
-    self.visible = condition && service
-      ? condition(service)
-      : separators.value
-  }
+    if (service && condition)
+      self.hook(service, visibility)
 
-  const conn = service ? [[service, visibility]] : []
-
-  return Widget.Separator({
-    vpack: 'center',
-    binds: [['visible', separators]],
-    connections: [['draw', visibility], ...conn],
-  })
-}
+    self.on('draw', visibility)
+    self.bind('visible', options.bar.separators)
+  },
+})

@@ -13,25 +13,25 @@ export default {
 
   audio: {
     mic: {
-      muted: "microphone-sensitivity-muted-symbolic",
-      unmuted: "audio-input-microphone-symbolic",
-      low: "microphone-sensitivity-low-symbolic",
-      medium: "microphone-sensitivity-medium-symbolic",
-      high: "microphone-sensitivity-high-symbolic",
+      muted: 'microphone-sensitivity-muted-symbolic',
+      unmuted: 'audio-input-microphone-symbolic',
+      low: 'microphone-sensitivity-low-symbolic',
+      medium: 'microphone-sensitivity-medium-symbolic',
+      high: 'microphone-sensitivity-high-symbolic',
     },
     volume: {
-      muted: "audio-volume-muted-symbolic",
-      low: "audio-volume-low-symbolic",
-      medium: "audio-volume-medium-symbolic",
-      high: "audio-volume-high-symbolic",
-      overamplified: "audio-volume-overamplified-symbolic",
+      muted: 'audio-volume-muted-symbolic',
+      low: 'audio-volume-low-symbolic',
+      medium: 'audio-volume-medium-symbolic',
+      high: 'audio-volume-high-symbolic',
+      overamplified: 'audio-volume-overamplified-symbolic',
     },
     type: {
-      headset: "audio-headphones-symbolic",
-      speaker: "audio-speakers-symbolic",
-      card: "audio-card-symbolic",
+      headset: 'audio-headphones-symbolic',
+      speaker: 'audio-speakers-symbolic',
+      card: 'audio-card-symbolic',
     },
-    mixer: "view-list-symbolic",
+    mixer: 'view-list-symbolic',
   },
 
   battery: {

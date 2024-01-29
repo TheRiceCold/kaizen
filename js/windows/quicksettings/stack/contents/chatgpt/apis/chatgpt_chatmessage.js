@@ -80,7 +80,9 @@ const CodeBlock = (content = '', lang = 'txt') => {
   const sourceView = HighlightedCode(content, lang)
 
   const codeBlock = Widget.Box({
-    properties: [['updateText', text => sourceView.get_buffer().set_text(text, -1)]],
+    attribute: {
+      'updateText': text => sourceView.get_buffer().set_text(text, -1)
+    },
     className: 'sidebar-chat-codeblock',
     vertical: true,
     children: [
@@ -105,11 +107,17 @@ const Divider = () => Widget.Box({ className: 'sidebar-chat-divider' })
 const MessageContent = content => {
   const contentBox = Widget.Box({
     vertical: true,
-    properties: [
-      ['fullUpdate', (self, content, useCursor = false) => {
+    attribute: {
+      'fullUpdate': (self, content, useCursor = false) => {
+        // Clear and add first text widget
         const children = contentBox.get_children()
-        children.forEach(child => child.destroy())
+        for (let i = 0; i < children.length; i++) {
+          const child = children[i]
+          child.destroy()
+        }
         contentBox.add(TextBlock())
+        // Loop lines. Put normal text in markdown parser 
+        // and put code into code highlighter (TODO)
         let lines = content.split('\n')
         let lastProcessed = 0
         let inCode = false
@@ -125,7 +133,7 @@ const MessageContent = content => {
               contentBox.add(CodeBlock('', codeBlockRegex.exec(line)[1]))
             }
             else {
-              lastLabel._updateText(blockContent)
+              lastLabel.attribute.updateText(blockContent)
               contentBox.add(TextBlock())
             }
 
@@ -151,11 +159,11 @@ const MessageContent = content => {
           if (!inCode)
             lastLabel.label = `${md2pango(blockContent)}${useCursor ? CHATGPT_CURSOR : ''}`
           else
-            lastLabel._updateText(blockContent)
+            lastLabel.attribute.updateText(blockContent)
         }
         contentBox.show_all()
-      }]
-    ]
+      }
+    }
   })
   contentBox._fullUpdate(contentBox, content, false)
   return contentBox
@@ -183,18 +191,17 @@ export const ChatMessage = message => {
           }),
           messageContentBox,
         ],
-        connections: [
-          [message, () => {
+        setup: self => self
+          .hook(message, () => {
             messageContentBox.toggleClassName('thinking', message.thinking)
-          }, 'notify::thinking'],
-          [message, () => { // Message update
+          }, 'notify::thinking')
+          .hook(message, () => { // Message update
             messageContentBox._fullUpdate(messageContentBox, message.content, message.role != 'user')
-          }, 'notify::content'],
-          [message, () => { // Remove the cursor
+          }, 'notify::content')
+          .hook(message, () => { // Remove the cursor
             messageContentBox._fullUpdate(messageContentBox, message.content, false)
-          }, 'notify::done'],
-        ]
-      })
+          }, 'notify::done')
+      }) 
     ]
   })
   return thisMessage

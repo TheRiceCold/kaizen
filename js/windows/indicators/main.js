@@ -14,4 +14,4 @@ export default Widget.Window({
       children: [ Indicator ]
     })
   }),
-});
+})
