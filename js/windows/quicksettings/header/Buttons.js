@@ -1,8 +1,8 @@
 import { Widget, App } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 
-import { setupCursorHover } from '../../../misc/CursorHover.js'
 import { utils } from '../../../constants/main.js'
+import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const buttons = [
   {
@@ -18,7 +18,8 @@ const buttons = [
   {
     icon: '',
     tooltipText: 'Power Menu',
-    onClicked: () => App.toggleWindow('powermenu'),
+    // onClicked: () => App.toggleWindow('powermenu'), // IDK why this doesn't work
+    onClicked: () => utils.execBash('ags -t powermenu') 
   },
 ]
 

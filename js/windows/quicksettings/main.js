@@ -7,6 +7,6 @@ const QSState = new StackState('notifications')
 
 export default PopupWindow({
   name: 'quicksettings',
-  child: QuickSettings(QSState),
   anchor: ['right', 'top' ],
+  child: QuickSettings(QSState),
 })

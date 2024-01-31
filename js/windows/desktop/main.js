@@ -6,6 +6,5 @@ export default Widget.Window({
   child: TimeDate,
   layer: 'background',
   className: 'desktop',
-  keymode: 'on-demand',
   anchor: ['top', 'bottom', 'left', 'right'],
 })
