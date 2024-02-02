@@ -33,7 +33,7 @@ export default class Option extends Service {
     if (config) 
       Object.keys(config).forEach(c => this[c] = config[c])
 
-    import('../constants/options.js').then(this.#init.bind(this))
+    import('../constants/data/options.js').then(this.#init.bind(this))
   }
 
   set sass(sass) { this.#sass = sass }

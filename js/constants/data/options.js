@@ -2,7 +2,7 @@ import Option, {
   apply, 
   resetOptions,
   getOptions,
-} from '../settings/option.js'
+} from '../../settings/option.js'
 
 import themes from './themes.js'
 

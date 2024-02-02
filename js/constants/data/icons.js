@@ -1,4 +1,4 @@
-import { App } from '../imports.js'
+import { App } from '../../imports.js'
 
 export default {
   distro: {

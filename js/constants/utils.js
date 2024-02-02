@@ -1,6 +1,6 @@
 import { Utils } from '../imports.js'
 import cairo from 'cairo'
-import icons from './icons.js'
+import icons from './data/icons.js'
 
 export const range = (length, start = 1) => 
   Array.from({ length }, (_, i) => i + start)

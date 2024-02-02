@@ -70,7 +70,7 @@ export default () => {
   const logoutButton = SessionButton({
     name: 'Logout', 
     icon: icons.powermenu.logout, 
-    exec: ['bash', '-c', 'loginctl terminate-user $USER']
+    exec: ['bash', '-c', 'pkill Hyprland']
   })
 
   const sleepButton = SessionButton({

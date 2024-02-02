@@ -13,44 +13,42 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
   const destroyWithAnims = () => {
     widget.sensitive = false
     notificationBox.setCss(middleClickClose)
-    timeout(200, () => wholeThing.revealChild = false)
-    timeout(400, () => { command(); wholeThing.destroy() })
+    timeout(200, () => wholeThing.revealChild = false, wholeThing)
+    timeout(400, () => { 
+      command()
+      wholeThing.destroy() 
+    }, wholeThing)
   }
 
-  const widget = Widget.EventBox({
-    onHover: self => {
-      self.window.set_cursor(Gdk.Cursor.new_from_name(display, 'grab'))
+  let notifTime = ''
+  const messageTime = GLib.DateTime.new_from_unix_local(notification.time)
+  if (messageTime.get_day_of_year() == GLib.DateTime.new_now_local().get_day_of_year())
+    notifTime = messageTime.format('%H:%M')
+  else if (messageTime.get_day_of_year() == GLib.DateTime.new_now_local().get_day_of_year() - 1)
+    notifTime = 'Yesterday'
+  else
+    notifTime = messageTime.format('%d/%m')
 
-      if (!wholeThing.attribute.hovered) 
-        wholeThing.attribute.hovered = true
-    },
-    onHoverLost: self => {
-      self.window.set_cursor(null)
-
-      if (wholeThing.attribute.hovered) 
-        wholeThing.attribute.hovered = false
-
-      if (isPopup) 
-        command()
-    },
-    onMiddleClick: () => destroyWithAnims()
+  const notifTextSummary = Widget.Label({
+    xalign: 0,
+    hexpand: true,
+    ellipsize: 3,
+    truncate: 'end',
+    maxWidthChars: 24,
+    label: notification.summary,
+    justify: Gtk.Justification.LEFT,
+    className: 'txt-small txt-semibold titlefont',
+    useMarkup: notification.summary.startsWith('<'),
   })
 
-  const wholeThing = Widget.Revealer({
-    attribute: {
-      id: notification.id,
-      close: undefined,
-      hovered: false,
-      dragging: false,
-      destroyWithAnims: () => destroyWithAnims,
-    },
-    revealChild: false,
-    transition: 'slide_down',
-    transitionDuration: 200,
-    child: Widget.Box({ homogeneous: true })
+
+  const notifTextBody = Widget.Label({
+    vpack: 'center',
+    label: notifTime,
+    justification: 'right',
+    className: 'txt-smaller txt-semibold',
   })
 
-  const display = Gdk.Display.get_default()
   const notifTextPreview = Widget.Revealer({
     transition: 'slide_down',
     transitionDuration: 120,
@@ -103,56 +101,13 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
     }),
   })
 
-  const notifIcon = Widget.Box({
-    vpack: 'start',
-    homogeneous: true,
-    children: [
-      Widget.Overlay({
-        child: NotificationIcon(notification),
-        overlays: isPopup ? [AnimatedCircularProgress({
-          className: `notif-circprog-${notification.urgency}`,
-          vpack: 'center', hpack: 'center',
-          initFrom: (isPopup ? 100 : 0),
-          initTo: 0,
-          initAnimTime: popupTimeout,
-        })] : [],
-      }),
-    ]
-  })
-
-  let notifTime = ''
-  const messageTime = GLib.DateTime.new_from_unix_local(notification.time)
-  if (messageTime.get_day_of_year() == GLib.DateTime.new_now_local().get_day_of_year())
-    notifTime = messageTime.format('%H:%M')
-  else if (messageTime.get_day_of_year() == GLib.DateTime.new_now_local().get_day_of_year() - 1)
-    notifTime = 'Yesterday'
-  else
-    notifTime = messageTime.format('%d/%m')
   const notifText = Widget.Box({
     hexpand: true,
     vertical: true,
     valign: Gtk.Align.CENTER,
     children: [
       Widget.Box({
-        children: [
-          Widget.Label({
-            xalign: 0,
-            className: 'txt-small txt-semibold titlefont',
-            justify: Gtk.Justification.LEFT,
-            hexpand: true,
-            maxWidthChars: 24,
-            truncate: 'end',
-            ellipsize: 3,
-            useMarkup: notification.summary.startsWith('<'),
-            label: notification.summary,
-          }),
-          Widget.Label({
-            vpack: 'center',
-            justification: 'right',
-            className: 'txt-smaller txt-semibold',
-            label: notifTime,
-          })
-        ]
+        children: [ notifTextSummary, notifTextBody ]
       }),
       notifTextPreview,
       notifTextExpanded,
@@ -176,12 +131,25 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
         expanded = false
       }
     },
-    child: Widget.Label({ 
-      label: '󰅀', 
-      vpack: 'center',
-      className: 'txt-norm', 
-    }),
+    child: Widget.Label({ label: '󰅀', vpack: 'center', className: 'txt-norm' }),
     setup: setupCursorHover,
+  })
+
+  const notifIcon = Widget.Box({
+    vpack: 'start',
+    homogeneous: true,
+    children: [
+      Widget.Overlay({
+        child: NotificationIcon(notification),
+        overlays: isPopup ? [AnimatedCircularProgress({
+          className: `notif-circprog-${notification.urgency}`,
+          vpack: 'center', hpack: 'center',
+          initFrom: (isPopup ? 100 : 0),
+          initTo: 0,
+          initAnimTime: popupTimeout,
+        })] : [],
+      }),
+    ]
   })
 
   const notificationContent = Widget.Box({
@@ -195,6 +163,58 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
       })
     ]
   })
+
+  const widget = Widget.EventBox({
+    onHover: self => {
+      self.window.set_cursor(Gdk.Cursor.new_from_name(display, 'grab'))
+
+      if (!wholeThing.attribute.hovered) 
+        wholeThing.attribute.hovered = true
+    },
+    onHoverLost: self => {
+      self.window.set_cursor(null)
+
+      if (wholeThing.attribute.hovered) 
+        wholeThing.attribute.hovered = false
+
+      if (isPopup) 
+        command()
+    },
+    onMiddleClick: () => destroyWithAnims(),
+    setup: self => {
+      self.on('button-press-event', () => {
+        wholeThing.attribute.held = true;
+        notificationContent.toggleClassName(`${isPopup ? 'popup-' : ''}notif-clicked-${notifObject.urgency}`, true)
+        timeout(800, () => {
+          if (wholeThing.attribute.held) {
+            Utils.execAsync(['wl-copy', `${notifObject.body}`])
+            notifTextSummary.label = notifObject.summary + ' (copied)'
+            timeout(3000, () => notifTextSummary.label = notifObject.summary)
+          }
+        })
+      }).on('button-release-event', () => {
+        wholeThing.attribute.held = false
+        notificationContent.toggleClassName(`${isPopup ? 'popup-' : ''}notif-clicked-${notifObject.urgency}`, false)
+      })
+    }
+  })
+
+  const wholeThing = Widget.Revealer({
+    attribute: {
+      held: false,
+      hovered: false,
+      dragging: false,
+      close: undefined,
+      id: notification.id,
+      destroyWithAnims: () => destroyWithAnims,
+    },
+    revealChild: false,
+    transition: 'slide_down',
+    transitionDuration: 200,
+    child: Widget.Box({ homogeneous: true })
+  })
+
+  const display = Gdk.Display.get_default()
 
   // Gesture stuff
   const gesture = Gtk.GestureDrag.new(widget)
@@ -263,11 +283,15 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
         }
       }
 
-      wholeThing.attribute.dragging = Math.abs(offset_x) > 10
+      // Update dragging
+      wholeThing.attribute.dragging = Math.abs(offset_x) > MOVE_THRESHOLD
 
-      if (widget.window)
-        widget.window.set_cursor(Gdk.Cursor.new_from_name(display, 'grabbing'))
+      if (Math.abs(offset_x) > MOVE_THRESHOLD || Math.abs(offset_y) > MOVE_THRESHOLD)
+        wholethis.attribute.held = false
 
+      widget.window?.set_cursor(Gdk.Cursor.new_from_name(display, 'grabbing'))
+
+      // Vertical drag
       if (initDirVertical == 1 && offset_y > MOVE_THRESHOLD && !expanded) {
         notifTextPreview.revealChild = false
         notifTextExpanded.revealChild = true
