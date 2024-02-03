@@ -1,4 +1,5 @@
 import { Widget, Utils, App } from '../../imports.js'
+import { options } from '../.././constants/main.js'
 
 export default (app, windowName) => {
   const title = Widget.Label({
@@ -19,7 +20,7 @@ export default (app, windowName) => {
   })
 
   const icon = Widget.Icon({
-    size: 52,
+    size: options.applauncher.iconSize.bind('value'),
     icon: Utils.lookUpIcon(app.icon_name || '') ? app.icon_name || '' : '',
   })
 

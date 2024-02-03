@@ -6,4 +6,5 @@ const WINDOW_NAME = 'launcher'
 export default PopupWindow({ 
   name: WINDOW_NAME, 
   child: Launcher(WINDOW_NAME),
+  // anchor: options.applauncher.anchor.bind('value'),
 })

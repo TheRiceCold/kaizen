@@ -8,7 +8,6 @@ export default ({
   setup,
   ...props
 }) => Widget.Button({
-  ...props,
   className: `panel-button ${className}`,
   child: Widget.Box({ children: [content] }),
   setup: self => {
@@ -32,5 +31,5 @@ export default ({
       setup(self)
 
     setupCursorHover(self)
-  },
+  }, ...props
 })

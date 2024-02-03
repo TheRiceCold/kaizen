@@ -103,6 +103,13 @@ export default {
     size: option(13, { 'sass': 'font-size', 'unit': 'pt' }),
   },
 
+  applauncher: {
+    width: option(500),
+    height: option(500),
+    iconSize: option(44),
+    // anchor: option([]),
+  },
+
   bar: {
     position: option('top', {
       'enums': ['top', 'bottom'],
@@ -182,6 +189,7 @@ export default {
       ['', 'preferences-desktop-display'],
     ],
     titles: [
+      ['com.github.Aylur.ags', 'AGS'],
       ['com.obsproject.Studio', 'OBS'],
       ['transmission-gtk', 'Transmission'],
       ['com.usebottles.bottles', 'Bottles'],

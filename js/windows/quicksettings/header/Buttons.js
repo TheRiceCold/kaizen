@@ -2,6 +2,7 @@ import { Widget, App } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 
 import { utils } from '../../../constants/main.js'
+import { openSettings } from '../../../settings/theme.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const buttons = [
@@ -12,8 +13,8 @@ const buttons = [
   },
   {
     icon: '',
+    onClicked: openSettings,
     tooltipText: 'Open Settings',
-    onClicked: () => utils.execBash('XDG_CURRENT_DESKTOP="gnome" gnome-control-center &'),
   },
   {
     icon: '',

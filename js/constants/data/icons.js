@@ -84,6 +84,21 @@ export default {
     next: '󰒭',
   },
 
+  ui: {
+    colorpicker: 'color-select-symbolic',
+    close: 'window-close-symbolic',
+    menu: 'open-menu-symbolic',
+    link: 'external-link-symbolic',
+    settings: 'emblem-system-symbolic',
+    tick: 'object-select-symbolic',
+    arrow: {
+      right: 'pan-end-symbolic',
+      left: 'pan-start-symbolic',
+      down: 'pan-down-symbolic',
+      up: 'pan-up-symbolic',
+    },
+  },
+
   arrow: {
     up: 'pan-up-symbolic',
     right: 'pan-end-symbolic',
