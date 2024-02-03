@@ -1,4 +1,4 @@
-import { Widget, App, Hyprland } from '../../imports.js'
+import { Widget, Utils, Hyprland } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
 
 import Workspace from './Workspace.js'
@@ -6,8 +6,22 @@ import { options, utils } from '../../constants/main.js'
 
 const ws = options.workspaces
 
+const Overview = Widget.Box({
+  children: [Workspace(0)],
+  setup: self => Utils.idle(() => {
+    self.hook(ws, () => {
+      self.children = utils.range(ws.value).map(Workspace)
+      update(self)
+      children(self)
+    })
+    self.hook(Hyprland, update)
+    self.hook(Hyprland, children, 'notify::workspaces')
+    update(self)
+  }),
+})
+
 const update = box => {
-  if (App.windows.has('overview') && !App.getWindow('overview')?.visible)
+  if (!box.get_parent()?.visible)
     return
 
   Hyprland.sendMessage('j/clients')
@@ -26,18 +40,4 @@ const children = box => {
   }
 }
 
-export default PopupWindow({
-  name: 'overview',
-  child: Widget.Box({
-    setup: self => {
-      self.hook(ws, () => {
-        self.children = utils.range(ws.value).map(Workspace)
-        update(self)
-        children(self)
-      })
-      self.hook(Hyprland, update)
-      self.hook(Hyprland, children, 'notify::workspaces')
-      update(self)
-    },
-  }),
-})
+export default PopupWindow({ name: 'overview', child: Overview })

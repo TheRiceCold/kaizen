@@ -1,7 +1,7 @@
 import { Widget, Utils } from '../../../imports.js'
 
-import TodoList from './TodoList.js'
 import Calendar from './Calendar.js'
+import TodoList from './TodoList.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 const defaultShown = 'calendar'
@@ -9,7 +9,7 @@ const contentStack = Widget.Stack({
   hexpand: true,
   items: [
     ['calendar', Calendar()],
-    ['todo', TodoList()],
+    ['todo', TodoList()]
   ],
   transitionDuration: 180,
   transition: 'slide_up_down',

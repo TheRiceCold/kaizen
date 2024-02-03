@@ -5,15 +5,9 @@ export default Widget.Box({
   hpack: 'end',
   vpack: 'end',
   vertical: true,
-  css: ' margin: 4rem; padding: 1rem; ',
+  className: 'time-date',
   children: [
-    Clock({ 
-      format: '%I:%M %p',
-      css: ' font-size: 6rem; border: 4px solid white;'
-    }),
-    Clock({ 
-      format: '%A, %m/%d/%Y',
-      css: 'font-size: 3rem;',
-    })
+    Clock({ className: 'time', format: '%I:%M %p' }),
+    Clock({ className: 'date', format: '%A, %m/%d/%Y' })
   ],
 })

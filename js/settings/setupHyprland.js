@@ -1,9 +1,6 @@
-import { App, Hyprland, Utils } from '../imports.js'
+import { Hyprland } from '../imports.js'
 import { options } from '../constants/main.js'
 
-const noIgnorealpha = ['launcher', 'powermenu', 'quicksettings']
-
-/** @param {Array<string>} batch */
 function sendBatch(batch) {
   const cmd = batch
     .filter(x => !!x)
@@ -23,19 +20,7 @@ function getColor(sass) {
   }
 }
 
-export function hyprlandInit() {
-  if (Utils.readFile('/tmp/ags/hyprland-init')) return
-
-  sendBatch(Array.from(App.windows).flatMap(([name]) => [
-    `layerrule blur, ${name}`,
-    noIgnorealpha.some(skip => name.includes(skip))
-      ? '' : `layerrule ignorealpha 0.6, ${name}`,
-  ]))
-
-  // Utils.writeFile('init', '/tmp/ags/hyprland-init')
-}
-
-export function setupHyprland() {
+export default() => {
   const radii = options.radii.value
   const border_width = options.border.width.value
   const drop_shadow = options.desktop.drop_shadow.value

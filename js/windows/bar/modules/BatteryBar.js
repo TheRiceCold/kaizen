@@ -6,9 +6,9 @@ import { options, icons } from '../../../constants/main.js'
 const { battery } = options
 
 const Indicator = Widget.Stack({
-  items: [ 
-    ['false', FontIcon(icons.battery.default)], 
-    ['true', FontIcon(icons.battery.charging)] 
+  items: [
+    ['false', FontIcon(icons.battery.default)],
+    ['true', FontIcon(icons.battery.charging)]
   ],
   visible: options.battery.bar.showIcon.bind('value'),
   setup: self => self.hook(Battery, stack => 

@@ -1,17 +1,18 @@
 import { Widget, Variable } from '../imports.js'
 const { DateTime } = imports.gi.GLib
 
-export default ({
-  format = '%H:%M:%S %B %e. %A',
-  ...props
-} = {}) => {
-  const clock = Variable(DateTime.new_now_local(), {
-    poll: [1000, () => DateTime.new_now_local()],
-  })
+const INTERVAL = 1000
+const local = DateTime.new_now_local
+const defaultFormat = '%H:%M:%S %B %e. %A'
+
+export default ({ format, ...props }) => {
+  const clock = Variable(local(), { poll: [INTERVAL, () => local()] })
+
+  const getFormat = time =>
+    time.format((format ?? defaultFormat) || 'wrong format')
 
   return Widget.Label({
     ...props,
-    className: 'clock',
-    label: clock.bind('value').transform(time => time.format(format) || 'wrong format'),
+    label: clock.bind('value').transform(getFormat),
   })
 }
