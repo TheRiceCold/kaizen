@@ -11,13 +11,13 @@ import NotificationList from './NotificationList.js'
 export default state => Widget.Stack({
   transition: 'slide_left_right',
   visibleChildName: state.bind(),
-  items: [
-    ['notifications', NotificationList],
-    ['wifi', WifiList],
-    ['bluetooth', BluetoothList],
-    // ['audio', AudioContent],
-    // ['mpris', MprisPlayerList],
-    // ['chatgpt', ChatGPT],
-    ['themes', Themes],
-  ],
+  children: {
+    notifications: NotificationList,
+    wifi: WifiList,
+    bluetooth: BluetoothList,
+    // audio: AudioContent,
+    // mpris: MprisPlayerList,
+    // chatgpt: ChatGPT,
+    themes: Themes,
+  },
 })

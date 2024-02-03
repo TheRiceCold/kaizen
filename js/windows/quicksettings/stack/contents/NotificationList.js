@@ -98,7 +98,10 @@ const notifList = Widget.Scrollable({
 const Contents = Widget.Stack({
   transition: 'crossfade',
   transitionDuration: 150,
-  items: [['empty', notifEmptyContent], ['list', notifList]],
+  children: { 
+    empty: notifEmptyContent, 
+    list: notifList 
+  },
   setup: self => self.hook(
     Notifications,
     self => self.shown = (Notifications.notifications.length > 0 ? 'list' : 'empty')

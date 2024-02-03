@@ -7,10 +7,10 @@ import { setupCursorHover } from '../../../misc/CursorHover.js'
 const defaultShown = 'calendar'
 const contentStack = Widget.Stack({
   hexpand: true,
-  items: [
-    ['calendar', Calendar()],
-    ['todo', TodoList()]
-  ],
+  children: {
+    calendar: Calendar(),
+    todo: TodoList()
+  },
   transitionDuration: 180,
   transition: 'slide_up_down',
   setup: stack => Utils.timeout(1, () => stack.shown = defaultShown)

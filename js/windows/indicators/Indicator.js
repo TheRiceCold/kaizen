@@ -68,10 +68,10 @@ export default Widget.Revealer({
             transition: 'slide_up_down',
             className: 'indicator-container',
             visible_child_name: Indicator.bind('current'),
-            items: [
-              ['brightness', brightnessIndicator],
-              ['volume', volumeIndicator],
-            ]
+            children: {
+              brightness: brightnessIndicator,
+              volume: volumeIndicator,
+            }
           }),
         ]
       }),
