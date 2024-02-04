@@ -69,6 +69,7 @@ export const ConfigSegmentedSelection = ({
   ...props
 }) => {
   let lastSelected = initIndex
+  // eslint-disable-next-line 
   let value = options[initIndex].value
 
   const widget = Widget.Box({

@@ -61,7 +61,7 @@ export default class Option extends Service {
 
     this.connect('changed', () => {
       cacheObj[this.id] = this.value
-      writeFile(
+      Utils.writeFile(
         JSON.stringify(cacheObj, null, 2),
         CACHE_FILE,
       )

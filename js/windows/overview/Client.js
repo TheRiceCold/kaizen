@@ -27,7 +27,7 @@ export default ({ address, size: [w, h], class: c, title }) => Widget.Button({
   setup: btn => btn
     .on('drag-data-get', (_w, _c, data) => data.set_text(address, address.length))
     .on('drag-begin', (_, context) => {
-      Gtk.drag_set_icon_surface(context, createSurfaceFromWidget(btn))
+      Gtk.drag_set_icon_surface(context, utils.createSurfaceFromWidget(btn))
       btn.toggleClassName('hidden', true)
     })
     .on('drag-end', () => btn.toggleClassName('hidden', false))

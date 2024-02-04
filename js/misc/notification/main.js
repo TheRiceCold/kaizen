@@ -204,7 +204,7 @@ export default ({ notification, isPopup = false, props = {} }) => {
     }
   })
 
-  const wholeThing = Widget.Revealer({
+  let wholeThing = Widget.Revealer({
     attribute: {
       held: false,
       hovered: false,
@@ -292,7 +292,7 @@ export default ({ notification, isPopup = false, props = {} }) => {
       wholeThing.attribute.dragging = Math.abs(offset_x) > MOVE_THRESHOLD
 
       if (Math.abs(offset_x) > MOVE_THRESHOLD || Math.abs(offset_y) > MOVE_THRESHOLD)
-        wholethis.attribute.held = false
+        wholeThing.attribute.held = false
 
       widget.window?.set_cursor(Gdk.Cursor.new_from_name(display, 'grabbing'))
 

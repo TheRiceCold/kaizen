@@ -1,5 +1,5 @@
 import { Variable } from 'resource:///com/github/Aylur/ags/variable.js'
-import { utils } from '../constants/main.js'
+import { utils, icons } from '../constants/main.js'
 
 const COLORS_CACHE = Utils.CACHE_DIR + '/colorpicker.json'
 

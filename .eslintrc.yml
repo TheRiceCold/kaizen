@@ -27,3 +27,9 @@ globals:
   print: readonly
   console: readonly
   logError: readonly
+
+  App: writable
+  Utils: writable
+  Widget: writable
+  Service: writable
+  Variable: writable
