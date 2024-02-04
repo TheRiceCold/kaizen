@@ -1,7 +1,6 @@
 import { FontIcon } from '../../../misc/main.js'
-
-// import { icons } from '../../../constants/main.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
+// import { icons } from '../../../constants/main.js'
 
 const buttons = [ 
   { 

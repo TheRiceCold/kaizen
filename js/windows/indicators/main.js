@@ -1,3 +1,5 @@
+import Music from './Music.js'
+import Popups from './Popups.js'
 import Indicator from './Indicator.js'
 
 export default Widget.Window({
@@ -5,12 +7,12 @@ export default Widget.Window({
   anchor: ['top'],
   layer: 'overlay',
   name: 'indicator',
-  child: Widget.EventBox({
-    onHover: () => Indicator.popup(-1),
-    child: Widget.Box({
-      vertical: true,
-      css: 'min-height: 2px;',
-      children: [ Indicator ]
-    })
+  child: Widget.Box({
+    css: 'min-height: 2px;',
+    children: [ 
+      Indicator,
+      Popups,
+      Music() 
+    ]
   }),
 })

@@ -6,7 +6,6 @@ import PowerMenu from './powermenu/main.js'
 import Dashboard from './dashboard/main.js'
 import CheatSheet from './cheatsheet/main.js'
 import Indicators from './indicators/main.js'
-import Notifications from './notifications/main.js'
 import Quicksettings from './quicksettings/main.js'
 import ScreenCorners from './screencorners/main.js'
 
@@ -19,6 +18,5 @@ export default () => [
   Dashboard,
   CheatSheet,
   Indicators,
-  Notifications,
   Quicksettings,
 ].concat(ScreenCorners)
