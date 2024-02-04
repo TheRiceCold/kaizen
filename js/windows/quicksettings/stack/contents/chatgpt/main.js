@@ -1,4 +1,3 @@
-import AgsWidget from 'resource:///com/github/Aylur/ags/widgets/widget.js'
 import { Widget } from '../../../../../imports.js'
 import { ChatGPT, Gemini } from '../../../../../services/main.js'
 import { setupCursorHover } from '../../../../../misc/CursorHover.js'
@@ -10,11 +9,7 @@ import {
 } from './apis/chatgpt.js'
 
 const { Gdk, Gtk } = imports.gi
-class AgsTextView extends AgsWidget(Gtk.TextView, 'AgsTextView') {
-  static { AgsWidget.register(this, {}) }
-  constructor(params) { super(params) }
-}
-const TextView = Widget.createCtor(AgsTextView)
+const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
 
 const APIS = [
   {

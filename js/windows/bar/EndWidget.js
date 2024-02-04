@@ -1,4 +1,4 @@
-import { App, Widget, Variable, SystemTray } from '../../imports.js'
+import { SystemTray } from '../../imports.js'
 import { RoundedCorner, FontIcon } from '../../misc/main.js'
 import {
   Tray,
@@ -10,7 +10,7 @@ import {
 
 const submenuItems = Variable(1)
 SystemTray.connect('changed', () => {
-  submenuItems.setValue(Tray.items.length + 1)
+  submenuItems.setValue(SystemTray.items.length + 1)
 })
 
 const Modules = [

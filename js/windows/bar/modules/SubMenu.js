@@ -1,4 +1,3 @@
-import { Widget, Utils, Variable } from '../../../imports.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 import { options, icons }from '../../../constants/main.js'
 

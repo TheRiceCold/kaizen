@@ -1,4 +1,4 @@
-import { Widget, Battery } from '../../../imports.js'
+import { Battery } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import PanelButton from './PanelButton.js'
 import { options, icons } from '../../../constants/main.js'

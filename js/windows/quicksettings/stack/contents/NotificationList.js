@@ -1,4 +1,4 @@
-import { Widget, Notifications } from '../../../../imports.js'
+import { Notifications } from '../../../../imports.js'
 import { FontIcon, Notification } from '../../../../misc/main.js'
 import { setupCursorHover } from '../../../../misc/CursorHover.js'
 

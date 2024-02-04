@@ -1,5 +1,3 @@
-import { Widget } from '../../../../imports.js'
-
 import Themes from './Themes.js'
 // import ChatGPT from './chatgpt/main.js'
 import WifiList from './WifiList.js'

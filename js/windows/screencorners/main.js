@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 import { RoundedCorner } from '../../misc/main.js'
 const { Window } = Widget
 

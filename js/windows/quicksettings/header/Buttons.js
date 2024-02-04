@@ -1,4 +1,3 @@
-import { Widget, App } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 
 import { utils } from '../../../constants/main.js'

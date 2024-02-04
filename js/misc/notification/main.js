@@ -1,22 +1,28 @@
-import { Utils, Widget } from '../../imports.js'
 import { setupCursorHover } from '../CursorHover.js'
-import { AnimatedCircularProgress } from '../main.js'
+import { AnimatedCircularProgress, FontIcon } from '../main.js'
 
 import NotificationIcon from './Icon.js'
 
 const { timeout } = Utils
 const { GLib, Gdk, Gtk } = imports.gi
 
-export default ({ notification, isPopup = false, popupTimeout = 3000, props = {} }) => {
+export default ({ notification, isPopup = false, props = {} }) => {
+  const popupTimeout = notification.timeout || (notification.urgency == 'critical' ? 8000 : 3000)
   const command = isPopup ? () => notification.dismiss() : () => notification.close()
 
   const destroyWithAnims = () => {
     widget.sensitive = false
     notificationBox.setCss(middleClickClose)
-    timeout(200, () => wholeThing.revealChild = false, wholeThing)
+    timeout(200, () => {
+      if (wholeThing)
+        wholeThing.revealChild = false
+    }, wholeThing)
     timeout(400, () => { 
       command()
-      wholeThing.destroy() 
+      if (wholeThing) {
+        wholeThing.destroy()
+        wholeThing = null
+      }
     }, wholeThing)
   }
 
@@ -40,7 +46,6 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
     className: 'txt-small txt-semibold titlefont',
     useMarkup: notification.summary.startsWith('<'),
   })
-
 
   const notifTextBody = Widget.Label({
     vpack: 'center',
@@ -82,16 +87,15 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
           className: `txt-smallie notif-body-${notification.urgency}`,
         }),
         Widget.Box({
-          homogeneous: true,
-          className: 'notif-actions',
+          className: 'notif-actions spacing-h-5',
           children: [
             Widget.Button({
-              label: '󱎘',
+              child: FontIcon('󱎘'),
               onClicked: () => destroyWithAnims(),
               className: `notif-action notif-action-${notification.urgency}`,
             }),
             ...notification.actions.map(action => Widget.Button({
-              label: action.label,
+              child: Widget.Label({ label: action.label }),
               onClicked: () => notification.invoke(action.id),
               className: `notif-action notif-action-${notification.urgency}`,
             }))
@@ -142,11 +146,12 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
       Widget.Overlay({
         child: NotificationIcon(notification),
         overlays: isPopup ? [AnimatedCircularProgress({
-          className: `notif-circprog-${notification.urgency}`,
-          vpack: 'center', hpack: 'center',
-          initFrom: (isPopup ? 100 : 0),
+          vpack: 'center', 
+          hpack: 'center',
           initTo: 0,
           initAnimTime: popupTimeout,
+          initFrom: (isPopup ? 100 : 0),
+          className: `notif-circprog-${notification.urgency}`,
         })] : [],
       }),
     ]
@@ -183,18 +188,18 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
     onMiddleClick: () => destroyWithAnims(),
     setup: self => {
       self.on('button-press-event', () => {
-        wholeThing.attribute.held = true;
-        notificationContent.toggleClassName(`${isPopup ? 'popup-' : ''}notif-clicked-${notifObject.urgency}`, true)
+        wholeThing.attribute.held = true
+        notificationContent.toggleClassName(`${isPopup ? 'popup-' : ''}notif-clicked-${notification.urgency}`, true)
         timeout(800, () => {
           if (wholeThing.attribute.held) {
-            Utils.execAsync(['wl-copy', `${notifObject.body}`])
-            notifTextSummary.label = notifObject.summary + ' (copied)'
-            timeout(3000, () => notifTextSummary.label = notifObject.summary)
+            Utils.execAsync(['wl-copy', `${notification.body}`])
+            notifTextSummary.label = notification.summary + ' (copied)'
+            timeout(3000, () => notifTextSummary.label = notification.summary)
           }
         })
       }).on('button-release-event', () => {
         wholeThing.attribute.held = false
-        notificationContent.toggleClassName(`${isPopup ? 'popup-' : ''}notif-clicked-${notifObject.urgency}`, false)
+        notificationContent.toggleClassName(`${isPopup ? 'popup-' : ''}notif-clicked-${notification.urgency}`, false)
       })
     }
   })
@@ -205,8 +210,8 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
       hovered: false,
       dragging: false,
       close: undefined,
+      destroyWithAnims, 
       id: notification.id,
-      destroyWithAnims: () => destroyWithAnims,
     },
     revealChild: false,
     transition: 'slide_down',
@@ -346,6 +351,19 @@ export default ({ notification, isPopup = false, popupTimeout = 3000, props = {}
   })
   widget.add(notificationBox)
   wholeThing.child.children = [widget]
+
+  if (isPopup) Utils.timeout(popupTimeout, () => {
+    if (wholeThing) {
+      wholeThing.revealChild = false
+      Utils.timeout(200, () => {
+        if (wholeThing) {
+          wholeThing.destroy()
+          wholeThing = null
+        }
+        command()
+      }, wholeThing)
+    }
+  })
 
   return wholeThing
 }

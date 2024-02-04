@@ -1,4 +1,4 @@
-import { Widget, Utils, Audio, Hyprland } from '../../../../imports.js'
+import { Audio, Hyprland } from '../../../../imports.js'
 import { icons } from '../../../../constants/main.js'
 
 /** @param {string} type */

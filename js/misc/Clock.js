@@ -1,4 +1,3 @@
-import { Widget, Variable } from '../imports.js'
 const { DateTime } = imports.gi.GLib
 
 const INTERVAL = 1000

@@ -1,4 +1,3 @@
-import { Widget } from '../../../../imports.js'
 import { FontIcon } from '../../../../misc/main.js'
 import { themes } from '../../../../constants/main.js'
 import { setTheme } from '../../../../settings/theme.js'

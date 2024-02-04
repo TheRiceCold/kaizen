@@ -1,5 +1,4 @@
 import { Variable } from 'resource:///com/github/Aylur/ags/variable.js'
-import { Service } from '../imports.js'
 
 class StackState extends Variable {
   static { Service.register(this, { }, { }) }

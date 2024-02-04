@@ -1,5 +1,3 @@
-import { Service, Utils } from '../imports.js'
-
 const { Gio, GLib, Soup } = imports.gi
 import { fileExists } from './Messages.js'
 

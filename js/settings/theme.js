@@ -1,4 +1,3 @@
-import { App } from '../imports.js'
 import reloadSass from './reloadSass.js'
 import setupHyprland from './setupHyprland.js'
 import { applyWallpaper } from './wallpaper.js'

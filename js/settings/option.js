@@ -1,4 +1,3 @@
-import { Service, Utils } from '../imports.js'
 import { options } from '../constants/main.js'
 import reloadSass from './reloadSass.js'
 import setupHyprland from './setupHyprland.js'
@@ -24,13 +23,13 @@ export default class Option extends Service {
 
 
   /** @type {Array<string>} */
-  enums = [];
+  enums = []
 
   /** @type {(v: T) => any} */
-  format = v => v;
+  format = v => v
 
   /** @type {(v: T) => any} */
-  sassFormat = v => v;
+  sassFormat = v => v
 
   constructor(value, config) {
     super()
@@ -51,7 +50,7 @@ export default class Option extends Service {
     getOptions()
 
     if (cacheObj[this.id] !== undefined)
-        this.setValue(cacheObj[this.id])
+      this.setValue(cacheObj[this.id])
 
     const words = this.id
       .split('.').flatMap(w => w.split('_'))
@@ -61,7 +60,7 @@ export default class Option extends Service {
     this.category ||= words.length === 1 ? 'General' : words.at(0) || 'General'
 
     this.connect('changed', () => {
-      cacheObj[this.id] = this.value;
+      cacheObj[this.id] = this.value
       writeFile(
         JSON.stringify(cacheObj, null, 2),
         CACHE_FILE,

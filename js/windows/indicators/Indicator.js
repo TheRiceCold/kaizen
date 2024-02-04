@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 import { Indicator } from '../../services/main.js'
 import { icons } from '../../constants/main.js'
 

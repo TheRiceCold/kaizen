@@ -1,4 +1,4 @@
-import { App, Widget, Utils, Mpris } from '../../imports.js'
+import {  Mpris } from '../../imports.js'
 
 import { AnimatedCircularProgress } from '../../misc/main.js'
 import { MarginRevealer } from '../../misc/AdvancedRevealers.js'

@@ -1,4 +1,4 @@
-import { Service, Utils, Audio } from '../imports.js'
+import { Audio } from '../imports.js'
 import { Brightness } from './main.js'
 
 class IndicatorService extends Service {

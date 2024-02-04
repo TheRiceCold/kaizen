@@ -1,4 +1,3 @@
-import { Service, Utils, App } from '../imports.js'
 import { utils } from '../constants/main.js'
 
 const { GLib } = imports.gi

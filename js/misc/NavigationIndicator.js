@@ -1,6 +1,5 @@
-import { Widget } from '../imports.js'
-const { Gtk } = imports.gi
 const Lang = imports.lang
+const { Gtk } = imports.gi
 
 export default (count, vertical, props) => Widget.DrawingArea({
   ...props,

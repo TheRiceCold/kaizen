@@ -1,5 +1,4 @@
 import { PopupWindow } from '../../misc/main.js'
-import { Widget } from '../../imports.js'
 
 import Header from './Header.js'
 import Body from './Body.js'

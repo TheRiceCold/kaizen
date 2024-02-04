@@ -1,4 +1,4 @@
-import { Hyprland, Widget, Utils } from '../../imports.js'
+import { Hyprland } from '../../imports.js'
 import Client from './Client.js'
 
 const { Gdk, Gtk } = imports.gi

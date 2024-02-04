@@ -1,4 +1,4 @@
-import { Widget, App, Utils, Applications } from '../../imports.js'
+import { Applications } from '../../imports.js'
 import AppItem from './AppItem.js'
 
 export default windowName => {

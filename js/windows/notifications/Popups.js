@@ -1,4 +1,4 @@
-import { Widget, Notifications } from '../../imports.js'
+import { Notifications } from '../../imports.js'
 import { Notification } from '../../misc/main.js'
 
 export default Widget.Box({
@@ -8,10 +8,13 @@ export default Widget.Box({
     map: new Map(),
 
     dismiss: (box, id, force = false) => {
-      if (!id || !box.attribute.map.has(id) || box.attribute.map.get(id).attribute.hovered && !force) 
+      if (!id || !box.attribute.map.has(id)) 
         return
 
       const notif = box.attribute.map.get(id)
+      if (notif === null || notif.attribute.hovered && !force)
+        return
+
       notif.revealChild = false
       notif.attribute.destroyWithAnims()
       box.attribute.map.delete(id)

@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 import TimeDate from './TimeDate.js'
 
 export default Widget.Window({

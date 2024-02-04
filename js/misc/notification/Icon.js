@@ -1,5 +1,3 @@
-import { Utils, Widget } from '../../imports.js'
-
 const { Gtk } = imports.gi
 const { Box, Icon, Label } = Widget
 const { timeout, lookUpIcon } = Utils
@@ -25,8 +23,8 @@ function getIconType(notification) {
 }
 
 const Content = (notification, icon) => Box({
-  hexpand: false,
   vpack: 'center',
+  hexpand: false,
   homogeneous: true,
   className: `notif-icon notif-icon-material-${notification.urgency}`,
   children: [(icon !== 'NO_ICON' ?
@@ -35,12 +33,12 @@ const Content = (notification, icon) => Box({
       vpack: 'center',
       setup: self => timeout(1, () => {
         const { NORMAL } = Gtk.StateFlags
-        const { get_property } = self.get_parent().get_style_context()
+        const styleContext = self.get_parent().get_style_context()
 
-        const width = get_property('min-width', NORMAL)
-        const height = get_property('min-height', NORMAL)
+        const width = styleContext.get_property('min-width', NORMAL)
+        const height = styleContext.get_property('min-height', NORMAL)
         self.size = Math.max(width * 0.7, height * 0.7, 1)
-      }),
+      }, self),
     }) : Label({
       hexpand: true,
       className: 'txt-hugerass',
@@ -52,7 +50,7 @@ const Content = (notification, icon) => Box({
 export default notification => {
   const { image, appIcon, appEntry } = notification
 
-  if (notification.image) {
+  if (image) {
     return Box({
       hexpand: false,
       className: 'notif-icon',
@@ -66,7 +64,11 @@ export default notification => {
     })
   }
 
-  const icon = lookUpIcon(appIcon) ? appIcon : lookUpIcon(appEntry) ? appEntry : 'NO_ICON'
+  let icon = 'NO_ICON'
+  if (lookUpIcon(appIcon))
+    icon = appIcon
+  if (lookUpIcon(appEntry))
+    icon = appEntry
 
   return Content(notification, icon)
 }

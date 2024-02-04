@@ -1,5 +1,3 @@
-import { App } from '../../imports.js'
-
 export default {
   distro: {
     fedora: '',

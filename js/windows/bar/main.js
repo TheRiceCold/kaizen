@@ -1,5 +1,3 @@
-import { Widget } from '../../imports.js'
-
 import StartWidget from './StartWidget.js'
 import CenterWidget from './CenterWidget.js'
 import EndWidget from './EndWidget.js'

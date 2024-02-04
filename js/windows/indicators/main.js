@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 import Indicator from './Indicator.js'
 
 export default Widget.Window({

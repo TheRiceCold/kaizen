@@ -1,4 +1,3 @@
-import { Widget } from '../../../imports.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 import { getCalendarLayout } from '../../../misc/CalendarLayout.js'
 

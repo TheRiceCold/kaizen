@@ -1,4 +1,4 @@
-import { Widget, Utils, Hyprland } from '../../imports.js'
+import { Hyprland } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
 
 import Workspace from './Workspace.js'

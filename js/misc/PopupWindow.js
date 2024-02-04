@@ -1,5 +1,4 @@
 import AgsWindow from 'resource:///com/github/Aylur/ags/widgets/window.js'
-import { App, Widget } from '../imports.js'
 import { options } from '../constants/main.js'
 
 const { GObject } = imports.gi
@@ -38,9 +37,9 @@ export class PopupWindow extends AgsWindow {
       keymode: 'exclusive',
       layer: 'overlay',
       class_names: ['popup-window', name],
-    });
+    })
 
-    child.toggleClassName('window-content');
+    child.toggleClassName('window-content')
     this.revealer = Widget.Revealer({
       transition,
       child,

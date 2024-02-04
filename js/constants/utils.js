@@ -1,4 +1,3 @@
-import { Utils } from '../imports.js'
 import cairo from 'cairo'
 import icons from './data/icons.js'
 

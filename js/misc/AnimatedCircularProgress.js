@@ -1,10 +1,10 @@
-const { Gtk } = imports.gi
 const Lang = imports.lang
-import { Utils, Widget } from '../imports.js'
+const { Gtk } = imports.gi
 
 export default ({
   initTo = 0,
   initFrom = 0,
+  initAnimPoints = 1,
   initAnimTime = 2900,
   extraSetup = () => {},
   ...props
@@ -69,10 +69,20 @@ export default ({
       cr.fill()
     }))
 
-    if (initFrom !== initTo)
+    if (initFrom !== initTo) {
+      area.css = `font-size: ${initFrom}px; transition: ${initAnimTime}ms linear;`
       Utils.timeout(20, () => area.css = `font-size: ${initTo}px;`, area)
-    else 
-      area.css = 'font-size: 0;'
+      const transitionDistance = initTo - initFrom
+      const oneStep = initAnimTime / initAnimPoints
+      area.css = `font-size: ${initFrom}px; transition: ${oneStep}ms linear`
+      for (let i = 0; i < initAnimPoints; i++) {
+        Utils.timeout(Math.max(10, i * oneStep), () => {
+          if (!area) return
+          area.css = `${initFrom != initTo ? 'font-size: ' + (initFrom + (transitionDistance / initAnimPoints * (i + 1))) + 'px;' : ''}`
+        })
+      }
+    }
+    else area.css = 'font-size: 0;'
 
     extraSetup(area)
   },

@@ -1,4 +1,3 @@
-import { Widget, Utils } from '../../../imports.js'
 import { Todo } from '../../../services/main.js'
 import { NavigationIndicator } from '../../../misc/main.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'

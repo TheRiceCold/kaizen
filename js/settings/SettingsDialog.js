@@ -1,4 +1,3 @@
-import { Utils, Widget, Variable } from '../imports.js'
 import { FontIcon, RegularWindow } from '../misc/main.js'
 
 import { options, icons } from '../constants/main.js'
@@ -64,7 +63,7 @@ const Setter = opt => {
 
     case 'img': return Widget.FileChooserButton()
       .on('selection-changed', self => {
-        opt.setValue(self.get_uri()?.replace('file://', ''), true);
+        opt.setValue(self.get_uri()?.replace('file://', ''), true)
       })
 
     case 'font': return Widget.FontButton({

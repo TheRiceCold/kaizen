@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 const { Box, Label } = Widget
 
 export default Box({

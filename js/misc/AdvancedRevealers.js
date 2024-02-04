@@ -1,5 +1,3 @@
-import { Widget } from '../imports.js'
-
 export const MarginRevealer = ({
   child,
   revealChild,

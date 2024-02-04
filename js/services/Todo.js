@@ -1,4 +1,3 @@
-import { Service, Utils } from '../imports.js'
 const { GLib } = imports.gi
 
 class TodoService extends Service {

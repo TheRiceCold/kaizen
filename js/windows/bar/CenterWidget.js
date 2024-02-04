@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 import { 
   DateButton,
   FocusedClient,

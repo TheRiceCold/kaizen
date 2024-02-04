@@ -1,4 +1,4 @@
-import { Utils, Widget, Mpris } from '../../../imports.js'
+import { Mpris } from '../../../imports.js'
 import { AnimatedCircularProgress } from '../../../misc/main.js'
 import { variables, utils } from '../../../constants/main.js'
 

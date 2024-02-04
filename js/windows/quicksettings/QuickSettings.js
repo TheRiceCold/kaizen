@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 import Header from './header/main.js'
 import Stack from './stack/main.js'
 

@@ -1,4 +1,4 @@
-import { Widget, Bluetooth } from '../../../../imports.js'
+import { Bluetooth } from '../../../../imports.js'
 
 const Title = Widget.Box({
   vpack: 'start',

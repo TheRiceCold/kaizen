@@ -1,5 +1,3 @@
-import { Widget } from '../../../imports.js'
-
 import Buttons from './Buttons.js'
 import Contents from './contents/main.js'
 

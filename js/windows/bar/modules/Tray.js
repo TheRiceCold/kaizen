@@ -1,4 +1,4 @@
-import { Widget, SystemTray } from '../../../imports.js'
+import { SystemTray } from '../../../imports.js'
 import PanelButton from './PanelButton.js'
 
 const { NORTH, SOUTH } = imports.gi.Gdk.Gravity

@@ -1,5 +1,3 @@
-import { Widget } from '../../imports.js'
-
 import Music from './Music.js'
 import Popups from './Popups.js'
 

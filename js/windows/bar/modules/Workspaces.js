@@ -1,4 +1,4 @@
-import { Widget, Hyprland, Utils } from '../../../imports.js'
+import { Hyprland } from '../../../imports.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 import { options, utils } from '../../../constants/main.js'
 

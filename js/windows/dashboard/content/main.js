@@ -1,5 +1,3 @@
-import { Widget, Utils } from '../../../imports.js'
-
 import Calendar from './Calendar.js'
 import TodoList from './TodoList.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'

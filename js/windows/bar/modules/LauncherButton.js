@@ -1,4 +1,3 @@
-import { App } from '../../../imports.js'
 import PanelButton from './PanelButton.js'
 
 import { FontIcon } from '../../../misc/main.js'

@@ -1,4 +1,4 @@
-import { Widget, App, Hyprland } from '../../imports.js'
+import { Hyprland } from '../../imports.js'
 import { options, utils } from '../../constants/main.js'
 
 const SCALE = 0.08

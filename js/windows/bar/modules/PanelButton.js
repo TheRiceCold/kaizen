@@ -1,4 +1,3 @@
-import { Widget, App } from '../../../imports.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
 
 export default ({

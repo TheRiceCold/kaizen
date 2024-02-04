@@ -1,5 +1,3 @@
-import { Widget, Utils } from '../imports.js'
-
 const Lang = imports.lang
 const { NORMAL } = imports.gi.Gtk.StateFlags
 

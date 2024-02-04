@@ -1,4 +1,3 @@
-import { Widget, App } from '../../imports.js'
 import { RoundedCorner, FontIcon } from '../../misc/main.js'
 import { 
   Separator,

@@ -1,4 +1,4 @@
-import { App, Mpris } from '../imports.js'
+import { Mpris } from '../imports.js'
 
 export default async () => {
   try {

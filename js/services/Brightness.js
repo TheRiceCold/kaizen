@@ -1,5 +1,3 @@
-import { Service, Utils } from '../imports.js'
-
 const { Gio } = imports.gi
 const { monitorFile, readFile } = Utils
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max)

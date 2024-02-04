@@ -1,4 +1,3 @@
-import { Widget } from '../../../imports.js'
 import { options } from '../../../constants/main.js'
 
 export default (service, condition) => Widget.Separator({

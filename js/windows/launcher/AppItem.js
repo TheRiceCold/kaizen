@@ -1,4 +1,3 @@
-import { Widget, Utils, App } from '../../imports.js'
 import { options } from '../.././constants/main.js'
 
 export default (app, windowName) => {

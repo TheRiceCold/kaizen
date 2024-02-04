@@ -1,4 +1,3 @@
-import { App, Utils, Widget } from '../../../../../../imports.js'
 import { ChatGPT } from '../../../../../../services/main.js'
 import { SystemMessage, ChatMessage } from './chatgpt_chatmessage.js'
 import { MarginRevealer } from '../../../../../../misc/AdvancedRevealers.js'

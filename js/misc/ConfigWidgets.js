@@ -1,4 +1,3 @@
-import { Utils, Widget } from '../imports.js'
 import { setupCursorHover } from './CursorHover.js'
 
 export const ConfigToggle = ({ icon, name, desc = '', initValue, onChange, props }) => {

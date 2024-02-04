@@ -1,4 +1,3 @@
-import { App } from '../../../imports.js'
 import { Clock } from '../../../misc/main.js'
 
 import PanelButton from './PanelButton.js'

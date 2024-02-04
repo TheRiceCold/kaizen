@@ -1,4 +1,3 @@
-import { Widget } from '../../../imports.js'
 import { FontIcon } from '../../../misc/main.js'
 import { ColorPicker, ScreenRecorder } from '../../../services/main.js'
 import PanelButton from './PanelButton.js'

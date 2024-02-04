@@ -1,4 +1,3 @@
-import { Widget } from '../../imports.js'
 import { Clock } from '../../misc/main.js'
 
 export default Widget.Box({

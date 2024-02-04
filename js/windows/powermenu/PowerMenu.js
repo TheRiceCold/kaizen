@@ -1,4 +1,3 @@
-import { App, Utils, Widget } from '../../imports.js'
 import { icons } from '../../constants/main.js'
 
 const { Gdk, Gtk } = imports.gi
