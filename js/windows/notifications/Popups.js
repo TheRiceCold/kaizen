@@ -1,5 +1,7 @@
-import { Notifications } from '../../imports.js'
+import { services } from '../../constants/main.js'
 import { Notification } from '../../misc/main.js'
+
+const { Notifications } = services
 
 export default Widget.Box({
   vertical: true,

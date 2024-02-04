@@ -1,5 +1,6 @@
-import { Audio } from '../imports.js'
 import { Brightness } from './main.js'
+import { services } from '../constants/main.js'
+const { Audio } = services
 
 class IndicatorService extends Service {
   static { 

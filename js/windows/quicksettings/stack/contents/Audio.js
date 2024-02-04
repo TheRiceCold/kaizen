@@ -1,5 +1,5 @@
-import { Audio, Hyprland } from '../../../../imports.js'
-import { icons } from '../../../../constants/main.js'
+import { services, icons } from '../../../../constants/main.js'
+const { Audio } = services
 
 /** @param {string} type */
 const sorm = type => type === 'sink' ? 'speaker' : 'microphone'
@@ -156,7 +156,7 @@ const SinkItem = (type) => stream => Widget.Button({
 
 /** @param {number} tab */
 const SettingsButton = (tab = 0) => Widget.Button({
-  onClicked: () => Hyprland.sendMessage('dispatch exec pavucontrol -t ' + tab),
+  onClicked: () => services.Hyprland.sendMessage('dispatch exec pavucontrol -t ' + tab),
   child: Widget.Label(icons.settings),
 })
 

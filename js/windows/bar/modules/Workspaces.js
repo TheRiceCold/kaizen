@@ -1,7 +1,7 @@
-import { Hyprland } from '../../../imports.js'
+import { services, options, utils } from '../../../constants/main.js'
 import { setupCursorHover } from '../../../misc/CursorHover.js'
-import { options, utils } from '../../../constants/main.js'
 
+const { Hyprland } = services
 const { active: {workspace} } = Hyprland
 
 const ws = options.workspaces.value

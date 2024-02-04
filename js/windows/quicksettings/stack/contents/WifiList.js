@@ -1,6 +1,7 @@
-import { Network } from '../../../../imports.js'
+import { services } from '../../../../constants/main.js'
 // import { FontIcon } from '../../../misc/main.js'
 // import { icons } from '../../../constants/main.js'
+const { Network } = services
 
 const Title = Widget.Box({
   vpack: 'start',

@@ -1,9 +1,9 @@
-import { Battery } from '../../../imports.js'
-import { FontIcon } from '../../../misc/main.js'
 import PanelButton from './PanelButton.js'
-import { options, icons } from '../../../constants/main.js'
+import { FontIcon } from '../../../misc/main.js'
+import { services, options, icons } from '../../../constants/main.js'
 
 const { battery } = options
+const { Battery } = services
 
 const Indicator = Widget.Stack({
   children: {

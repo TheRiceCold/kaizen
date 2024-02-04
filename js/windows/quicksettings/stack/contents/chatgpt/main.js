@@ -1,4 +1,3 @@
-import { Widget } from '../../../../../imports.js'
 import { ChatGPT, Gemini } from '../../../../../services/main.js'
 import { setupCursorHover } from '../../../../../misc/CursorHover.js'
 import {

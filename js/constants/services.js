@@ -1,6 +1,5 @@
 const resource = file => `resource:///com/github/Aylur/ags/${file}.js`
-const require = async file => (await import(resource(file))).default
-const service = async file => (await require(`service/${file}`))
+const service = async file => (await import(resource(`service/${file}`))).default
 
 // SERVICES
 export const Applications = await service('applications')

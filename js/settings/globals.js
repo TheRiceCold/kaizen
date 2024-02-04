@@ -1,10 +1,10 @@
-import { Mpris } from '../imports.js'
+import { services } from '../constants/main.js'
 
 export default async () => {
   try {
     // globalThis.options = (await import('../constants/options.js')).default
     globalThis.App = App
-    globalThis.Mpris = Mpris
+    globalThis.Mpris = services.Mpris
     // globalThis.audio = Audio.default
 
     globalThis.recorder = (await import('../services/ScreenRecorder.js')).default

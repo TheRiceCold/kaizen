@@ -1,8 +1,7 @@
-import { Hyprland } from '../../../imports.js'
-import { options, utils } from '../../../constants/main.js'
+import { services, options, utils } from '../../../constants/main.js'
 
-const { active } = Hyprland
 const { substitute } = utils
+const { active } = services.Hyprland
 const { icons, titles } = options.substitutions
 
 const ClientLabel = Widget.Label().bind(
@@ -11,7 +10,7 @@ const ClientLabel = Widget.Label().bind(
 )
 
 const ClientIcon = Widget.Icon({
-  setup: self => self.hook(Hyprland.active.client, self => {
+  setup: self => self.hook(active.client, self => {
     const classIcon = substitute(icons, active.client.class) + '-symbolic'
     const titleIcon = substitute(icons, active.client.class) + '-symbolic'
 

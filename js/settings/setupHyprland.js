@@ -1,5 +1,4 @@
-import { Hyprland } from '../imports.js'
-import { options } from '../constants/main.js'
+import { services, options } from '../constants/main.js'
 
 function sendBatch(batch) {
   const cmd = batch
@@ -7,7 +6,7 @@ function sendBatch(batch) {
     .map(x => `keyword ${x}`)
     .join('; ')
 
-  Hyprland.sendMessage(`[[BATCH]]/${cmd}`)
+  services.Hyprland.sendMessage(`[[BATCH]]/${cmd}`)
 }
 
 function getColor(sass) {

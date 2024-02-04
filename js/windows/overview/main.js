@@ -1,9 +1,10 @@
-import { Hyprland } from '../../imports.js'
 import { PopupWindow } from '../../misc/main.js'
+import { services } from '../../constants/main.js'
 
 import Workspace from './Workspace.js'
 import { options, utils } from '../../constants/main.js'
 
+const { Hyprland } = services
 const ws = options.workspaces
 
 const Overview = Widget.Box({

@@ -1,9 +1,9 @@
-import { Applications } from '../../imports.js'
+import { services } from '../../constants/main.js'
 import AppItem from './AppItem.js'
 
 export default windowName => {
   const apps = [
-    ...Applications.query('').flatMap(app => Widget.Revealer({
+    ...services.Applications.query('').flatMap(app => Widget.Revealer({
       setup: w => w.attribute = { app, revealer: w },
       child: Widget.Box({ vertical: true, children: [AppItem(app, windowName)] }),
     })),
@@ -19,7 +19,7 @@ export default windowName => {
     text: '',
     hexpand: true,
     onAccept: ({ text }) => {
-      const app = Applications.query(text || '')[0]
+      const app = services.Applications.query(text || '')[0]
       if (app) {
         Utils.execAsync(['hyprctl', 'dispatch', 'exec', `sh -c ${app.executable}`])
         app.frequency += 1

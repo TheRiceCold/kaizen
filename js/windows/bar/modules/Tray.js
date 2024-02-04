@@ -1,4 +1,5 @@
-import { SystemTray } from '../../../imports.js'
+import { services } from '../../../constants/main.js'
+
 import PanelButton from './PanelButton.js'
 
 const { NORTH, SOUTH } = imports.gi.Gdk.Gravity
@@ -27,6 +28,6 @@ const SysTrayItem = item => PanelButton({
 
 export default Widget.Box().bind(
   'children', 
-  SystemTray, 
+  services.SystemTray, 
   'items', i => i.map(SysTrayItem)
 )

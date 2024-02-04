@@ -1,11 +1,8 @@
-import {  Mpris } from '../../imports.js'
-
 import { AnimatedCircularProgress } from '../../misc/main.js'
 import { MarginRevealer } from '../../misc/AdvancedRevealers.js'
-
-import { utils } from '../../constants/main.js'
-
+import { services, utils } from '../../constants/main.js'
 const { Gio, GLib } = imports.gi
+const { Mpris } = services
 
 const expandTilde = path =>
   path.startsWith('~') ? GLib.get_home_dir() + path.slice(1) : path

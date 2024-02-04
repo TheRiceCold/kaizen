@@ -1,4 +1,6 @@
-import { Bluetooth } from '../../../../imports.js'
+import { services } from '../../../../constants/main.js'
+
+const { Bluetooth } = services
 
 const Title = Widget.Box({
   vpack: 'start',
@@ -13,7 +15,10 @@ const Title = Widget.Box({
   ]
 })
 
-const Content = Widget.Box({ hexpand: true, vertical: true }).hook(Bluetooth, box => {
+const Content = Widget.Box({ 
+  hexpand: true, 
+  vertical: true 
+}).hook(Bluetooth, box => {
   box.children = Bluetooth.devices.map(device => Widget.Box({
     hexpand: false,
     children: [

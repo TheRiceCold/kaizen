@@ -1,6 +1,8 @@
-import { Notifications } from '../../../../imports.js'
+import { services } from '../../../../constants/main.js'
 import { FontIcon, Notification } from '../../../../misc/main.js'
 import { setupCursorHover } from '../../../../misc/CursorHover.js'
+
+const { Notifications } = services
 
 const ListActionButton = (icon, name, action) => Widget.Button({
   onClicked: action,

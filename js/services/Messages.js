@@ -1,6 +1,6 @@
-import { Battery } from '../imports.js'
-import { utils } from '../constants/main.js'
+import { services, utils } from '../constants/main.js'
 const { GLib, Gio } = imports.gi
+const { Battery } = services
 
 export const fileExists = path => 
   Gio.File.new_for_path(path).query_exists(null)

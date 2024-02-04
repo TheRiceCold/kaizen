@@ -1,7 +1,8 @@
-import { Hyprland } from '../../imports.js'
-import Client from './Client.js'
-
+import { services } from '../../constants/main.js'
 const { Gdk, Gtk } = imports.gi
+const { Hyprland } = services
+
+import Client from './Client.js'
 
 const SCALE = 0.08
 const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)]
