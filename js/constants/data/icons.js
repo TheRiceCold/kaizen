@@ -62,9 +62,12 @@ export default {
 
   notifications: {
     bell: '󰂚',
-    chat: 'notification-symbolic',
     silent: 'notifications-disabled-symbolic',
     noisy: 'preferences-system-notifications-symbolic',
+  },
+  trash: {
+    full: 'user-trash-full-symbolic',
+    empty: 'user-trash-symbolic',
   },
 
   mpris: {

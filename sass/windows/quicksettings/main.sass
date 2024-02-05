@@ -1,6 +1,17 @@
+@import media
+
 .quicksettings
   @include spacing
   @include floating-widget
+
+  .avatar
+    @include widget
+    opacity: 0.9
+
+  .media
+    @include spacing
+    .player
+      @include media
 
   .qs-stack-buttons
     margin-bottom: 8px

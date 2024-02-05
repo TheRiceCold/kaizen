@@ -1,3 +1,4 @@
+export * as mpris from './Mpris.js'
 export { default as Clock } from './Clock.js'
 export { default as FontIcon } from './FontIcon.js'
 export { default as PopupWindow } from './PopupWindow.js'

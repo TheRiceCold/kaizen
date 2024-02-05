@@ -36,7 +36,7 @@ export class PopupWindow extends AgsWindow {
       popup: true,
       keymode: 'exclusive',
       layer: 'overlay',
-      class_names: ['popup-window', name],
+      classNames: ['popup-window', name],
     })
 
     child.toggleClassName('window-content')

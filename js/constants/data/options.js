@@ -147,6 +147,11 @@ export default {
       fg: option('#fff', { sass: 'wallpaper-fg' }),
       img: option(themes[0].options['desktop.wallpaper.img'], { 'sassFormat': v => `"${v}"`, 'type': 'img' }),
     },
+    avatar: option(`${App.configDir}/assets/avatar.jpg`, {
+      'sassFormat': v => `"${v}"`,
+      'type': 'img',
+      'note': 'displayed in quicksettings and locksreen',
+    }),
     screen_corners: option(true, { 'sass': 'screen-corners' }),
     clock: {
       enable: option(true),
