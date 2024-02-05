@@ -8,12 +8,11 @@ class Recorder extends Service {
     Service.register(this, {}, { 'timer': ['int'], 'recording': ['boolean'] })
   }
 
+  timer = 0
   #file = ''
   #interval = 0
-  #path = GLib.get_home_dir() + '/Videos/Screencasting'
-
-  timer = 0
   recording = false
+  #path = GLib.get_home_dir() + '/Videos/Screencasting'
 
   async start() {
     if (!utils.dependencies(['slurp', 'wf-recorder'])) return

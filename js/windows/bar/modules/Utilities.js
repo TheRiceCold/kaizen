@@ -1,5 +1,5 @@
 import { FontIcon } from '../../../misc/main.js'
-import { ColorPicker, ScreenRecorder } from '../../../services/main.js'
+import { ColorPicker, ScreenRecord } from '../../../services/main.js'
 import PanelButton from './PanelButton.js'
 
 const { NORTH, SOUTH } = imports.gi.Gdk
@@ -22,31 +22,32 @@ const ColorPickerButton = PanelButton({
   },
 })
 
-const ScreenShotButton = PanelButton({
+const ScreenshotButton = PanelButton({
   content: FontIcon(''),
   tooltipText: 'Screenshot',
-  onClicked: () => ScreenRecorder.screenshot()
+  onClicked: () => ScreenRecord.screenshot()
 })
 
-const ScreenRecord = PanelButton({
+const ScreenRecordButton = PanelButton({
   className: 'recorder',
-  tooltipText: 'Screen Record',
+  tooltipText: 'Toggle Screen Record',
   onClicked: () => {
-    ScreenRecorder.stop()
+    if (ScreenRecord.recording)
+      ScreenRecord.stop()
+    else
+      ScreenRecord.start()
   },
-  // binds: [['visible', ScreenRecorder, 'recording']],
   content: Widget.Box({
     children: [
       FontIcon('󰕧'),
-      // Widget.Label({
-      //   binds: [[
-      //     'label', ScreenRecorder, 'timer', time => {
-      //       const sec = time % 60
-      //       const min = Math.floor(time / 60)
-      //       return ` ${min}:${sec < 10 ? '0' + sec : sec}`
-      //     }
-      //   ]],
-      // }),
+      Widget.Label({
+        visible: ScreenRecord.bind('recording'),
+        label: ScreenRecord.bind('timer').transform(time => {
+          const sec = time % 60
+          const min = Math.floor(time / 60)
+          return ` ${min}:${sec < 10 ? '0' + sec : sec}`
+        }),
+      }),
     ],
   }),
 })
@@ -54,7 +55,7 @@ const ScreenRecord = PanelButton({
 export default Widget.Box({ 
   children: [ 
     ColorPickerButton,
-    ScreenShotButton,
-    ScreenRecord,
+    ScreenshotButton,
+    ScreenRecordButton,
   ] 
 })
