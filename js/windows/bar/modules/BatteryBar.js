@@ -58,12 +58,6 @@ const WholeButton = Widget.Overlay({
 })
 
 const Content = Widget.Box({
-  setup: self => self.hook(Battery, w => {
-    w.toggleClassName('charging', Battery.charging || Battery.charged)
-    w.toggleClassName('medium', Battery.percent < battery.medium.value)
-    w.toggleClassName('low', Battery.percent < battery.low.value)
-    w.toggleClassName('half', Battery.percent < 48)
-  }),
   visible: Battery.bind('available'),
   children: options.battery.bar.full.bind('value').transform(full => full
     ? [WholeButton] : [
@@ -71,13 +65,16 @@ const Content = Widget.Box({
       PercentLabel(),
       LevelBar(),
     ]),
+  setup: self => self.hook(Battery, w => {
+    w.toggleClassName('half', Battery.percent < 48)
+    w.toggleClassName('low', Battery.percent < battery.low.value)
+    w.toggleClassName('medium', Battery.percent < battery.medium.value)
+    w.toggleClassName('charging', Battery.charging || Battery.charged)
+  }),
 })
 
 export default PanelButton({ 
-  onClicked: () => {
-    const { value } = options.battery.showPercentage
-    battery.showPercentage.value = !value
-  }, 
   content: Content, 
-  className: 'battery-bar' 
+  className: 'battery-bar',
+  onClicked: () => battery.showPercentage.value = !options.battery.showPercentage.value, 
 })

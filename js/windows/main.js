@@ -1,4 +1,5 @@
 import Bar from './bar/main.js'
+import Osk from './osk/main.js'
 import Desktop from './desktop/main.js'
 import Launcher from './launcher/main.js'
 import Overview from './overview/main.js'
@@ -11,6 +12,7 @@ import ScreenCorners from './screencorners/main.js'
 
 export default () => [
   Bar,
+  Osk,
   Desktop,
   Launcher,
   Overview,

@@ -233,13 +233,13 @@ export default () => {
     }),
     setup: btn => Utils.timeout(1, () => {
       setupCursorHover(btn)
-      btn.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`)
+      btn.toggleClassName('selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`)
     }),
   })
   const undoneButton = TodoTabButton(false, 0)
   const doneButton = TodoTabButton(true, 1)
   const navIndicator = NavigationIndicator(2, false, { // The line thing
-    className: 'sidebar-selector-highlight',
+    className: 'selector-highlight',
     css: 'font-size: 0; padding: 0rem 1.636rem;', // Shush
   })
   return Widget.Box({
@@ -256,12 +256,12 @@ export default () => {
               box.pack_start(undoneButton, false, true, 0)
               box.pack_start(doneButton, false, true, 0)
             },
-            className: 'sidebar-selectors spacing-h-5',
+            className: 'selectors spacing-h-5',
           }),
           Widget.Box({
             homogeneous: true,
             children: [navIndicator],
-            className: 'sidebar-selector-highlight-offset',
+            className: 'selector-highlight-offset',
           })
         ]
       }), false, false, 0)
