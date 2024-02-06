@@ -250,4 +250,4 @@ gesture.connect('drag-end', () => {
       margin-bottom: 0;`)
 })
 
-export default () => gestureEvBox
+export default gestureEvBox

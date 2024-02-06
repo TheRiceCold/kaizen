@@ -1,16 +1,13 @@
 import Header from './header/main.js'
 import Stack from './stack/main.js'
+// import Media from './Media.js'
 
 export default state => Widget.Box({
-  vexpand: true,
-  hexpand: true,
-  css: 'min-width: 2px;',
-  children: [
-    Widget.Box({
-      vexpand: true,
-      vertical: true,
-      className: 'quicksettings spacing-v-15',
-      children: [ Header, Stack(state) ]
-    }),
+  vertical: true,
+  className: 'quicksettings',
+  children: [ 
+    Header, 
+    Stack(state), 
+    // Media()
   ]
 })
