@@ -9,4 +9,3 @@ export { default as DateButton } from './DateButton.js'
 export { default as FocusedClient } from './FocusedClient.js'
 
 export { default as PanelButton } from './PanelButton.js'
-export { default as LauncherButton } from './LauncherButton.js'

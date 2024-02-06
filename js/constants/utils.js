@@ -31,10 +31,11 @@ export const createSurfaceFromWidget = widget => {
 
 
 export function getAudioTypeIcon(icon) {
+  const icons = icons.audio.type
   const substitues = [
-    ['audio-headset-bluetooth', icons.audio.type.headset],
-    ['audio-card-analog-usb', icons.audio.type.speaker],
-    ['audio-card-analog-pci', icons.audio.type.card],
+    ['audio-headset-bluetooth', icons.headset],
+    ['audio-card-analog-usb', icons.speaker],
+    ['audio-card-analog-pci', icons.card],
   ]
 
   return substitute(substitues, icon)
@@ -51,8 +52,8 @@ export function dependencies(bins) {
   return deps.every(has => has)
 }
 
-const { GLib } = imports.gi
 export function blurImg(img) {
+  const { GLib } = imports.gi
   const cache = Utils.CACHE_DIR + '/media'
   return new Promise(resolve => {
     if (!img) resolve('')
@@ -64,11 +65,16 @@ export function blurImg(img) {
       return resolve(blurred)
 
     Utils.ensureDirectory(dir)
-    Utils.execAsync(['convert', img, '-blur', '0x22', blurred])
-      .then(() => resolve(blurred))
-      .catch(() => resolve(''))
+    Utils.execAsync(
+      [ 'convert', img, '-blur', '0x22', blurred ]
+    ).then(() => resolve(blurred)).catch(() => resolve(''))
   })
 }
 
-export const execBash = cmd => 
-  Utils.execAsync(['bash', '-c', cmd])
+export const execBash = cmd => Utils.execAsync(['bash', '-c', cmd])
+
+export function Screen() {
+  this.cmd = arg => Number(Utils.exec(`bash -c "xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f${arg.toString()} | head -1" | awk '{print $1}'`))
+  this.width = () => this.cmd(1)
+  this.height = () => this.cmd(2)
+}

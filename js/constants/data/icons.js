@@ -1,4 +1,8 @@
 export default {
+  fallback: {
+    executable: 'application-x-executable-symbolic',
+  },
+
   distro: {
     fedora: '',
     arch: '',

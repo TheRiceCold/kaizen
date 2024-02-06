@@ -4,10 +4,8 @@ import {
   Separator, 
 } from './modules/exports.js'
 
-export default Widget.Box({
-  children: [ 
-    FocusedClient,
-    Separator(),
-    DateButton,
-  ]
-})
+export default Widget.Box({ children: [ 
+  FocusedClient,
+  Separator(),
+  DateButton,
+] })

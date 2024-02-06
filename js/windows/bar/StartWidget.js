@@ -1,24 +1,32 @@
 import { RoundedCorner, FontIcon } from '../../misc/main.js'
-import { 
-  Separator,
-  Workspaces,
-  PanelButton,
-  LauncherButton, 
-} from './modules/exports.js'
+import { Separator, Workspaces, PanelButton } from './modules/exports.js'
+import { options, icons } from '../../constants/main.js'
 
-const Modules = [
+const toggle = window => App.toggleWindow(window)
+
+const getDistro = icons.distro[imports.gi.GLib.get_os_info('ID')]
+const DistroIcon = Widget.Label({
+  label: options.bar.icon.bind('value').transform(v => v === 'distro-icon' ? getDistro: v),
+})
+const SidebarButton = PanelButton({
+  content: DistroIcon,
+  tooltipText: 'Open Sidebar Tools',
+  onClicked: () => toggle('sidebar'),
+})
+
+export default Widget.Box({ children: [
   RoundedCorner('topleft', 'corner-black'),
-  LauncherButton,
+  SidebarButton,
   PanelButton({
     content: FontIcon('󱂬'),
-    onClicked: () => App.toggleWindow('overview'),
+    tooltipText: 'Workspace Overview',
+    onClicked: () => toggle('overview'),
   }),
   PanelButton({
     content: FontIcon(''),
-    onClicked: () => App.toggleWindow('launcher'),
+    tooltipText: 'App Launcher',
+    onClicked: () => toggle('launcher'),
   }),
   Separator(),
   Workspaces,
-]
-
-export default Widget.Box({ children: Modules })
+]})

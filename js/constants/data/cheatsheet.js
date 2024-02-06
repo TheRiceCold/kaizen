@@ -5,23 +5,9 @@ const column1 = [
     name: 'Workspaces: navigation',
     binds: [
       { keys: ['⌘', '+', '#'], action: 'Go to workspace #' },
-      { keys: ['⌘', '+', 'S'], action: 'Toggle special workspace' },
-      // { keys: ["⌘", "+", "(Scroll ↑↓)"], action: "Go to workspace -1/+1" },
-      { keys: ['Ctrl', '⌘', '+', '←'], action: 'Go to workspace on the left' },
-      { keys: ['Ctrl', '⌘', '+', '→'], action: 'Go to workspace on the right' },
-      { keys: ['⌘', '+', 'PageUp'], action: 'Go to workspace on the left' },
-      { keys: ['⌘', '+', 'PageDown'], action: 'Go to workspace on the right' }
-    ],
-    appeartick: 1
-  },
-  {
-    icon: '󰆾',
-    name: 'Workspaces: management',
-    binds: [
       { keys: ['⌘', 'Shift', '+', '#'], action: 'Move window to workspace #' },
-      { keys: ['⌘', 'Alt', '+', 'S'], action: 'Move window to special workspace' },
-      { keys: ['⌘', 'Alt', '+', 'PageUp'], action: 'Move window to workspace on the left' },
-      { keys: ['⌘', 'Alt', '+', 'PageDown'], action: 'Move window to workspace on the right' }
+      { keys: ['⌘', 'Ctrl', 'Shift', '+', '←'], action: 'Move window to workspace on the left' },
+      { keys: ['⌘', 'Ctrl', 'Shift', '+', '→'], action: 'Move window to workspace on the right' },
     ],
     appeartick: 1
   },
@@ -29,14 +15,8 @@ const column1 = [
     icon: '',
     name: 'Windows',
     binds: [
-      { keys: ['⌘', '+', '←↑→↓'], action: 'Focus window in direction' },
-      { keys: ['⌘', 'Shift', '+', '←↑→↓'], action: 'Swap window in direction' },
-      { keys: ['⌘', '+', ';'], action: 'Split ratio -' },
-      // eslint-disable-next-line 
-      { keys: ['⌘', '+', "'"], action: 'Split ratio +' },
-      { keys: ['⌘', '+', 'Lmb'], action: 'Move window' },
-      { keys: ['⌘', '+', 'Mmb'], action: 'Move window' },
-      { keys: ['⌘', '+', 'Rmb'], action: 'Resize window' },
+      { keys: ['⌘', '+', '←↑→↓ or hjkl'], action: 'Focus window in direction' },
+      { keys: ['⌘', 'Shift', '+', '←↑→↓ or hjkl'], action: 'Swap window in direction' },
       { keys: ['⌘', '+', 'F'], action: 'Maximize' },
       { keys: ['⌘', 'Shift', '+', 'F'], action: 'Fullscreen' },
       { keys: ['⌘', 'Alt', '+', 'F'], action: 'Fake fullscreen' }
@@ -51,15 +31,13 @@ const column2 = [
     icon: '󰜬',
     name: 'Widgets (AGS)',
     binds: [
-      { keys: ['⌘', 'OR', '⌘', '+', 'Tab'], action: 'Toggle overview/launcher' },
+      { keys: ['⌘', '+', 'Tab'], action: 'Toggle overview/launcher' },
       { keys: ['Ctrl', '⌘', '+', 'R'], action: 'Restart AGS' },
       { keys: ['⌘', '+', '/'], action: 'Toggle this cheatsheet' },
-      { keys: ['⌘', '+', 'N'], action: 'Toggle system sidebar' },
-      { keys: ['⌘', '+', 'B', 'OR', '⌘', '+', 'O'], action: 'Toggle utilities sidebar' },
+      { keys: ['⌘', '+', 'N'], action: 'Toggle sidebar' },
       { keys: ['⌘', '+', 'K'], action: 'Toggle virtual keyboard' },
       { keys: ['Ctrl', 'Alt', '+', 'Del'], action: 'Power/Session menu' },
-      { keys: ['Esc'], action: 'Exit a window' },
-      { keys: ['rightCtrl'], action: 'Dismiss/close sidebar' },
+      { keys: ['⌘', '+', 'Q'], action: 'Exit a window' },
       { keys: ['Ctrl', '⌘', '+', 'T'], action: 'Change wallpaper+colorscheme' },
     ],
     appeartick: 2
