@@ -1,0 +1,83 @@
+$osk_key_height: 2.5rem
+$osk_key_width: 2.5rem
+$osk_key_padding: 0.188rem
+$osk_key_rounding: 0.682rem
+$osk_key_fontsize: 1.091rem
+
+.osk-window
+  border-radius: $radii
+  background: $bg-color
+
+.osk-body
+  padding-top: 0
+  padding: 1.023rem
+
+.osk-dragline
+  background: $bg-color
+  min-height: 0.273rem
+  min-width: 10.227rem
+  margin-top: 0.545rem
+  margin-bottom: 0.205rem
+  border-radius: calc($radii * 2)
+
+.osk-key
+  font-weight: 500
+  color: $fg-color
+  border: 1px solid $hover
+  padding: $osk_key_padding
+  font-size: $osk_key_fontsize
+  border-radius: calc($radii * 0.5)
+
+.osk-key:hover, .osk-key:focus
+  background: $hover
+
+.osk-key:active
+  background: $accent
+  font-size: $osk_key_fontsize
+
+.osk-key-active
+  background: $accent
+
+.osk-key-normal
+  min-width: $osk_key_width
+  min-height: $osk_key_height
+
+.osk-key-fn
+  min-height: calc($osk_key_height / 2)
+  min-width: calc($osk_key_width * 1.005)
+
+.osk-key-tab
+  min-height: $osk_key_height
+  min-width: calc($osk_key_width * 1.6)
+
+.osk-key-caps
+  min-height: $osk_key_height
+  min-width: calc($osk_key_width * 1.9)
+
+.osk-key-shift
+  min-height: $osk_key_height
+  min-width: calc($osk_key_width * 2.5)
+
+.osk-key-control
+  min-height: $osk_key_height
+  min-width: calc($osk_key_width * 1.3)
+
+.osk-control-button
+  padding: 0.682rem
+  font-weight: 500
+  color: $fg-color
+  border: 1px solid $hover
+  font-size: $osk_key_fontsize
+  border-radius: $osk_key_rounding
+
+.osk-control-button:hover, .osk-control-button:focus
+  background: $hover
+
+.osk-control-button:active
+  background: $accent
+  font-size: $osk_key_fontsize
+
+.osk-key-empty, .osk-key-empty:hover, .osk-key-empty:focus
+  background: transparent
+  min-width: $osk_key_width
+  min-height: $osk_key_height
