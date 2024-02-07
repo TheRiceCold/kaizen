@@ -56,6 +56,11 @@ export default Widget.Box({
   children: [ 
     ColorPickerButton,
     ScreenshotButton,
-    ScreenRecordButton,
+    PanelButton({
+      content: FontIcon('󰌌'),
+      tooltipText: 'Show on-screen keyboard',
+      onClicked: () => App.toggleWindow('osk')
+    })
+    // ScreenRecordButton,
   ] 
 })

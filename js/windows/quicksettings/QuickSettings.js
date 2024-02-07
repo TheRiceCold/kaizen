@@ -1,7 +1,9 @@
+import Header from './header/main.js'
+import { FontIcon } from '../../misc/main.js'
+import NotificationList from './NotificationList.js'
+
 import { options } from '../../constants/main.js'
 import { setupCursorHover } from '../../misc/CursorHover.js'
-import FontIcon from '../../misc/FontIcon.js'
-import Header from './header/main.js'
 
 const Row = props => Widget.Box({
   hpack: 'center',
@@ -13,6 +15,7 @@ const Row = props => Widget.Box({
 const Button = (icon, label, sub) => Widget.Button({
   className: 'toggle-button',
   setup: setupCursorHover,
+  tooltipText: 'Right-click to configure',
   child: Widget.Box({
     vertical: true,
     children: [
@@ -31,7 +34,7 @@ const Button = (icon, label, sub) => Widget.Button({
 
 export default Widget.Box({
   vertical: true,
-  className: 'quicksettings',
+  className: 'quicksettings spacing-v-15',
   children: [ 
     Header, 
     Widget.Box({
@@ -41,18 +44,19 @@ export default Widget.Box({
         Row({
           children: [
             Button('󰖩', 'wifi_name', '121Mbps'),
-            Button('󰂲', 'Disabled'),
-            Button('', 'default'),
+            Button('󰂲', 'Disabled', ''),
+            Button('', 'Enabled', 'device_name'),
           ]
         }),
         Row({
           children: [
             Button('󰕧', 'Screen Record', 'Click to start'),
-            Button('', 'Night Light'),
-            Button('', 'Idle Inhibihor'),
+            Button('󰌁', 'Dark Mode', 'Off'),
+            Button('', 'Coffee', 'Do not disturb'),
           ]
         })
       ]
-    })
+    }),
+    NotificationList,
   ]
 })

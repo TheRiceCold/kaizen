@@ -5,6 +5,7 @@ import {
   SubMenu,
   Utilities,
   BatteryBar,
+  DateButton,
   PanelButton,
 } from './modules/exports.js'
 
@@ -22,10 +23,15 @@ const Modules = [
   Tray,
   BatteryBar,
   PanelButton({
-    content: FontIcon(''),
+    content: FontIcon(''),
     onClicked: () => App.toggleWindow('quicksettings'),
   }),
+  DateButton,
   RoundedCorner('topright', 'corner-black'),
 ]
 
-export default Widget.Box({ hpack: 'end', className: 'end', children: Modules })
+export default Widget.Box({ 
+  hpack: 'end', 
+  className: 'end', 
+  children: Modules 
+})

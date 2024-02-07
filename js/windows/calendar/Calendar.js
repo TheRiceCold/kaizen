@@ -1,5 +1,5 @@
-import { setupCursorHover } from '../../../misc/CursorHover.js'
-import { getCalendarLayout } from '../../../misc/CalendarLayout.js'
+import { setupCursorHover } from '../../misc/CursorHover.js'
+import { getCalendarLayout } from '../../misc/CalendarLayout.js'
 
 let calendarJson = getCalendarLayout(undefined, true)
 let monthshift = 0
@@ -100,27 +100,35 @@ export default () => {
     setup: box => addCalendarChildren(box, calendarJson)
   })
 
-  return Widget.EventBox({
-    onScrollUp: () => shiftCalendarXMonths(-1),
-    onScrollDown: () => shiftCalendarXMonths(1),
-    child: Widget.Box({
-      hpack: 'center',
-      children: [
-        Widget.Box({
-          hexpand: true,
-          vertical: true,
-          className: 'spacing-v-5',
+  return Widget.Box({
+    vpack: 'center',
+    vertical: true,
+    homogeneous: true,
+    className: 'calendar spacing-v-10',
+    children: [
+      Widget.EventBox({
+        onScrollUp: () => shiftCalendarXMonths(-1),
+        onScrollDown: () => shiftCalendarXMonths(1),
+        child: Widget.Box({
+          hpack: 'center',
           children: [
-            calendarHeader,
             Widget.Box({
-              homogeneous: true,
-              className: 'spacing-h-5',
-              children: weekDays.map(day => CalendarDay(day.day, day.today))
-            }),
-            calendarDays,
+              hexpand: true,
+              vertical: true,
+              className: 'spacing-v-5',
+              children: [
+                calendarHeader,
+                Widget.Box({
+                  homogeneous: true,
+                  className: 'spacing-h-5',
+                  children: weekDays.map(day => CalendarDay(day.day, day.today))
+                }),
+                calendarDays,
+              ]
+            })
           ]
         })
-      ]
-    })
+      })
+    ]
   })
 }

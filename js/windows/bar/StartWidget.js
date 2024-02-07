@@ -14,19 +14,22 @@ const SidebarButton = PanelButton({
   onClicked: () => toggle('sidebar'),
 })
 
-export default Widget.Box({ children: [
-  RoundedCorner('topleft', 'corner-black'),
-  SidebarButton,
-  PanelButton({
-    content: FontIcon('󱂬'),
-    tooltipText: 'Workspace Overview',
-    onClicked: () => toggle('overview'),
-  }),
-  PanelButton({
-    content: FontIcon(''),
-    tooltipText: 'App Launcher',
-    onClicked: () => toggle('launcher'),
-  }),
-  Separator(),
-  Workspaces,
-]})
+export default Widget.Box({ 
+
+  children: [
+    RoundedCorner('topleft', 'corner-black'),
+    SidebarButton,
+    PanelButton({
+      content: FontIcon('󱂬'),
+      tooltipText: 'Workspace Overview',
+      onClicked: () => toggle('overview'),
+    }),
+    PanelButton({
+      content: FontIcon(''),
+      tooltipText: 'App Launcher',
+      onClicked: () => toggle('launcher'),
+    }),
+    Separator(),
+    Workspaces,
+  ]
+})
