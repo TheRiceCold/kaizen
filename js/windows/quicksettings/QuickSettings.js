@@ -1,15 +1,15 @@
 import Header from './header/main.js'
 import { FontIcon } from '../../misc/main.js'
-import NotificationList from './NotificationList.js'
+import NotificationList from './notification-list/main.js'
 
-import { options } from '../../constants/main.js'
+import { options, icons } from '../../constants/main.js'
 import { setupCursorHover } from '../../misc/CursorHover.js'
 
 const Row = props => Widget.Box({
+  ...props,
   hpack: 'center',
   className: 'toggle-row',
   spacing: options.padding.value,
-  ...props,
 })
 
 const Button = (icon, label, sub) => Widget.Button({
@@ -19,14 +19,8 @@ const Button = (icon, label, sub) => Widget.Button({
   child: Widget.Box({
     vertical: true,
     children: [
-      FontIcon({ 
-        icon: icon,
-        className: 'toggle-button-icon',
-      }),
-      Widget.Label({
-        className: 'title',
-        label
-      }),
+      FontIcon({ icon, className: 'toggle-button-icon' }),
+      Widget.Label({ label, className: 'title' }),
       Widget.Label({ className: 'sub', label: sub })
     ]
   })
@@ -34,29 +28,38 @@ const Button = (icon, label, sub) => Widget.Button({
 
 export default Widget.Box({
   vertical: true,
+  spacing: options.padding.value,
   className: 'quicksettings spacing-v-15',
   children: [ 
     Header, 
     Widget.Box({
-      vpack: 'center',
       vertical: true,
+      className: 'content',
+      spacing: options.padding.value * 2,
       children: [
-        Row({
+        Widget.Box({
+          vertical: true,
+          vpack: 'center',
+          spacing: options.padding.value,
           children: [
-            Button('󰖩', 'wifi_name', '121Mbps'),
-            Button('󰂲', 'Disabled', ''),
-            Button('', 'Enabled', 'device_name'),
+            Row({
+              children: [
+                Button('󰖩', 'wifi_name', '121Mbps'),
+                Button('󰂲', 'Disabled', ''),
+                Button('', 'device_name', ''),
+              ]
+            }),
+            Row({
+              children: [
+                Button(icons.notifications.bell, 'Notifications', ''),
+                Button('', 'Themes', 'Yukopi'),
+                Button('󰕧', 'Recorder', 'Click to start'),
+              ]
+            })
           ]
         }),
-        Row({
-          children: [
-            Button('󰕧', 'Screen Record', 'Click to start'),
-            Button('󰌁', 'Dark Mode', 'Off'),
-            Button('', 'Coffee', 'Do not disturb'),
-          ]
-        })
+        NotificationList,
       ]
-    }),
-    NotificationList,
+    })
   ]
 })

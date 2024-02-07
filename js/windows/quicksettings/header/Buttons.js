@@ -31,9 +31,9 @@ export default Widget.Box({
   }) => Widget.Button({
     tooltipText,
     hpack: 'end',
+    child: FontIcon(icon),
     setup: setupCursorHover,
     className: 'icon-button',
-    child: FontIcon({ icon: icon, className: 'txt-norm' }),
     onClicked: () => { onClicked(); App.closeWindow('quicksettings') },
   }))
 })

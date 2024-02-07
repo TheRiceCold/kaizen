@@ -1,8 +1,10 @@
 import Buttons from './Buttons.js'
+import { FontIcon } from '../../../misc/main.js'
 import { variables, options } from '../../../constants/main.js'
 
 const Uptime = Widget.Label({
-  label: variables.uptime.bind('value').transform(t => `Uptime: ${t}`),
+  className: 'uptime',
+  label: variables.uptime.bind('value').transform(v => `Uptime: ${v}`),
 })
 
 const Avatar = Widget.Box({ className: 'avatar' })
@@ -11,10 +13,27 @@ const Avatar = Widget.Box({ className: 'avatar' })
 `)).on('size-allocate', box => {
   const h = box.get_allocated_height();
   box.set_size_request(Math.ceil(h * 1.1), -1);
-});
+})
+
+const TabButtons = Widget.Box({
+  children: [
+    Widget.Button({
+      className: 'icon-button',
+      child: FontIcon('')
+    }),
+    Widget.Button({
+      className: 'icon-button',
+      child: FontIcon('󱍓')
+    }),
+    Widget.Button({
+      className: 'icon-button',
+      child: FontIcon('󰚩')
+    })
+  ]
+})
 
 export default Widget.Box({
   hexpand: true,
   className: 'header',
-  children: [ Avatar, Uptime, Widget.Box({ hexpand: true }), Buttons ]
+  children: [ TabButtons, Widget.Box({ hexpand: true }), Buttons ]
 })
