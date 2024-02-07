@@ -19,11 +19,13 @@
 
     levelbar trough
       @include widget
+      background: $hover
       min-width: $battery-bar-width
       min-height: $battery-bar-height
+      border-radius: calc($radii * 0.65)
 
       block.filled
-        border-radius: $radii
+        border-radius: calc($radii * 0.5)
         background-image: $active-gradient
 
     .medium

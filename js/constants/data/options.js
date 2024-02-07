@@ -13,9 +13,9 @@ export default {
   apply: apply,
   list: getOptions,
 
-  spacing: option(6),
+  radii: option(8),
+  spacing: option(8),
   padding: option(8),
-  radii: option(12),
 
   popover_padding_multiplier: option(1, {
     'unit': '',

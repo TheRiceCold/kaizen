@@ -1,11 +1,10 @@
-import { services } from '../../constants/main.js'
-import { RoundedCorner, FontIcon } from '../../misc/main.js'
+import { options, services } from '../../constants/main.js'
+import { RoundedCorner, FontIcon, Clock } from '../../misc/main.js'
 import {
   Tray,
   SubMenu,
   Utilities,
   BatteryBar,
-  DateButton,
   PanelButton,
 } from './modules/exports.js'
 
@@ -23,10 +22,15 @@ const Modules = [
   Tray,
   BatteryBar,
   PanelButton({
-    content: FontIcon(''),
+    content: Widget.Box({
+      spacing: options.spacing.value * 1.5,
+      children: [
+        Clock({ format: '%a %d • %I:%M' }),
+        FontIcon(''),
+      ]
+    }),
     onClicked: () => App.toggleWindow('quicksettings'),
   }),
-  DateButton,
   RoundedCorner('topright', 'corner-black'),
 ]
 

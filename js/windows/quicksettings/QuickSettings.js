@@ -28,19 +28,19 @@ const Button = (icon, label, sub) => Widget.Button({
 
 export default Widget.Box({
   vertical: true,
-  spacing: options.padding.value,
+  spacing: options.spacing.value,
   className: 'quicksettings spacing-v-15',
   children: [ 
     Header, 
     Widget.Box({
       vertical: true,
       className: 'content',
-      spacing: options.padding.value * 2,
+      spacing: options.spacing.value * 2,
       children: [
         Widget.Box({
           vertical: true,
           vpack: 'center',
-          spacing: options.padding.value,
+          spacing: options.spacing.value,
           children: [
             Row({
               children: [
@@ -59,6 +59,13 @@ export default Widget.Box({
           ]
         }),
         NotificationList,
+        Widget.Box({
+          className: 'calendar',
+          children: [Widget.Calendar({
+            hexpand: true,
+            hpack: 'center',
+          })]
+        })
       ]
     })
   ]

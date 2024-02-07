@@ -2,37 +2,87 @@
 
 .quicksettings
   @include floating-widget
+  padding: 0
 
   .header
-    @include floating-widget
-    label
-      margin: 0 8px
+    margin: 0
+    box-shadow: none
+    background: none
+    padding: calc($padding * 1.5)
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+    border-bottom: 2px solid $hover
+
+    .uptime
+      font-weight: 700
+      font-size: 1.1rem
+      margin-right: calc($spacing * 2)
+      margin-left: calc($spacing * 2.5)
 
     .avatar
       border-radius: $radii
       background-size: cover
 
-  .icon-button
-    min-width: 3rem
-    min-height: 3rem
-    color: $fg-color
-    border-radius: $radii
-    transition: 300ms cubic-bezier(0.1, 1, 0, 1)
-    &:hover
-      background: $hover
-    &:focus
-      background: $accent
+    .icon-button
+      min-width: 2.5rem
+      min-height: 2.5rem
+      font-size: 1.25rem
+      color: $fg-color
+      border-radius: $radii
+      transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+      &:hover
+        background: $hover
+      &:focus
+        background: $accent
 
+  .content
+    padding: $padding
+    .toggle-row
+      .toggle-button
+        min-width: 7rem
+        @include floating-widget
+        &:hover
+          background: $hover
+        &:focus
+          background: $accent
+        .toggle-button-icon
+          font-size: 1.5rem 
+        .title
+          font-size: 1.15rem
+        .sub
+          color: transparentize($fg-color, 0.5)
 
-  .toggle-row
-    margin-top: $padding
-    .toggle-button
-      min-width: 8rem
+    .notification-list
+      min-height: 300px
       @include floating-widget
-      .toggle-button-icon
-        font-size: 1.5rem 
-      .title
-        font-weight: 800
-        font-size: 1.15rem
-      .sub
-        color: $hover
+      .action-button
+        font-size: 1.5rem
+        min-width: 2.25rem
+        min-height: 2.25rem
+        color: $fg-color
+        border-radius: calc($radii * 0.85)
+        &:hover
+          background: $hover
+
+    .calendar
+      @include floating-widget
+      padding: calc($padding * 2) calc($padding * 2) 0
+
+      calendar
+        all: unset
+        font-size: 1.25em
+        &.button
+          @include button($flat: false)
+
+        &:selected
+          border-radius: calc($radii * 2)
+          background: transparentize($accent, 0.5)
+
+        &.header
+
+        &.highlight
+          font-weight: 700
+
+        &:indeterminate
+          color: transparentize($fg-color, 0.5)
+
