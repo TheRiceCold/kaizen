@@ -17,7 +17,7 @@ export default {
   padding: option(8),
   radii: option(12),
 
-  popover_padding_multiplier: option(1.4, {
+  popover_padding_multiplier: option(1, {
     'unit': '',
     'type': 'float',
     'category': 'General',

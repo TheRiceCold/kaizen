@@ -23,15 +23,17 @@ const buttons = [
   },
 ]
 
-export default buttons.map(({ 
-  icon, 
-  onClicked,
-  tooltipText, 
-}) => Widget.Button({
-  tooltipText,
-  hpack: 'end',
-  setup: setupCursorHover,
-  className: 'qs-icon-button txt-small',
-  child: FontIcon({ icon: icon, className: 'txt-norm' }),
-  onClicked: () => { onClicked(); App.closeWindow('quicksettings') },
-}))
+export default Widget.Box({
+  children: buttons.map(({ 
+    icon, 
+    onClicked,
+    tooltipText, 
+  }) => Widget.Button({
+    tooltipText,
+    hpack: 'end',
+    setup: setupCursorHover,
+    className: 'icon-button',
+    child: FontIcon({ icon: icon, className: 'txt-norm' }),
+    onClicked: () => { onClicked(); App.closeWindow('quicksettings') },
+  }))
+})

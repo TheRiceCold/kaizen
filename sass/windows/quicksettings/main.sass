@@ -1,184 +1,40 @@
 @import media
 
 .quicksettings
-  @include spacing
   @include floating-widget
 
-  .avatar
-    @include widget
-    opacity: 0.9
+  .header
+    @include floating-widget
+    label
+      margin: 0 8px
 
-  .media
-    @include spacing
-    .player
-      @include media
+    .avatar
+      border-radius: $radii
+      background-size: cover
 
-  .qs-stack-buttons
-    margin-bottom: 8px
-    background: $hover
-    border-radius: calc($radii * 2)
-
-  .qs-icon-button
+  .icon-button
+    min-width: 3rem
+    min-height: 3rem
     color: $fg-color
-    min-width: 2.727rem
-    min-height: 2.727rem
-    border-radius: calc($radii * 2)
+    border-radius: $radii
     transition: 300ms cubic-bezier(0.1, 1, 0, 1)
     &:hover
       background: $hover
     &:focus
       background: $accent
 
-  .sidebar-chat-apiswitcher
-    background: $bg-color
-    border-radius: calc($radii * 2)
 
-  .sidebar-chat-apiswitcher-icon
-    color: $fg-color
-    min-width:  2.182rem
-    min-height: 2.182rem
-    border-radius: calc($radii * 2)
-    transition: 300ms cubic-bezier(0.1, 1, 0, 1)
-
-  .sidebar-chat-apiswitcher-icon-enabled
-    color: $fg-color
-    background: $bg-color
-
-  .sidebar-chat-viewport
-    padding: 0.682rem 0
-    transition: 300ms cubic-bezier(0.1, 1, 0, 1)
-
-  .sidebar-chat-textarea
-    padding: 0.682rem
-    border-radius: $radii
-    border: 0.068rem solid $fg-color
-
-  .sidebar-chat-entry
-    color: $fg-color
-    caret-color: $bg-color
-    min-height: 1.773rem
-    min-width: 0
-
-  .sidebar-chat-send
-    min-width: 1.705rem
-    min-height: 1.705rem
-    background: $bg-color
-    border-radius: $radii
-    transition: 300ms cubic-bezier(0.1, 1, 0, 1)
-    &:hover, &:focus
-      background: $hover
-    &:active
-      background: $accent
-
-  .sidebar-chat-send-available
-    background: $accent
-    color: $accent
-    &:hover, &:focus
-      background: $hover
-    &:active
-      background: $accent
-
-  .sidebar-chat-message
-    margin: 0.682rem
-
-  .sidebar-chat-indicator
-    min-width: 0.136rem
-    border-radius: calc($radii * 2)
-
-  .sidebar-chat-indicator-user
-    background: $bg-color
-
-  .sidebar-chat-indicator-bot
-    background: $bg-color
-
-  .sidebar-chat-indicator-System
-    background: $bg-color
-
-  .sidebar-chat-name
-    // @include titlefont
-    padding: 0.341rem
-    margin-left: -0.136rem
-    padding: 0.341rem
-    padding-left: 0.818rem
-
-  .sidebar-chat-txtblock
-    padding: 0.341rem
-    padding-left: 0.818rem
-    margin-left: -0.136rem
-
-  .sidebar-chat-txt
-    // @include readingfont
-
-  .sidebar-chat-codeblock
-    color: $fg-color
-    background: $bg-color
-    border-radius: $radii
-    margin: 0rem 0.682rem
-    border: 0.068rem solid $_border-color
-
-  .sidebar-chat-codeblock-topbar
-    // @include mainfont
-    margin: 0.273rem
-    margin-bottom: 0
-    color: $fg-color
-    background: $bg-color
-    border-radius: $radii
-    padding: 0.341rem 0.477rem
-    border: 0.068rem solid $_border-color
-
-  .sidebar-chat-codeblock-topbar-txt
-    padding: 0.273rem
-    border-radius: calc($radii * 2)
-
-  .sidebar-chat-codeblock-topbar-btn
-    padding: 0.273rem
-    border-radius: calc($radii * 2)
-    &:hover, &:focus
-      background: $hover
-    &:active
-      background: $accent
-
-  .sidebar-chat-codeblock-code
-    // @include techfont
-    padding: 0.682rem
-
-  .sidebar-chat-divider
-    min-height: 1px
-    margin: 0 0.545rem
-    background: $fg-color
-
-  .sidebar-chat-welcome-txt
-    margin: 0 3.409rem
-
-  .sidebar-chat-settings-toggles
-    margin: 0 5.455rem
-
-  .sidebar-chat-welcome-icon
-    font-size: 4rem
-    border-radius: calc($radii * 2)
-
-  .sidebar-chat-welcome-logo
-    color: black
-    font-size: 4rem
-    background: white
-    min-width: 4.773rem
-    min-height: 4.773rem
-    border-radius: calc($radii * 2)
-    transition: 300ms cubic-bezier(0.1, 1, 0, 1)
-
-  .sidebar-chat-chip
-    padding: 0.341rem 0.477rem
-    border-radius: calc($radii * 0.75)
-    transition: 300ms cubic-bezier(0.1, 1, 0, 1)
-
-  .sidebar-chat-chip-action
-    border: 0.068rem solid $fg-color
-    &:hover, &:focus
-      background: $bg-color
-    &:active
-      color: $fg-color
-      background: $bg-color
-
-  .sidebar-chat-chip-action-active
-    color: $fg-color
-    border: 0.068rem solid $bg-color
+  .toggle-row
+    margin-top: $padding
+    .toggle-button
+      min-width: 8rem
+      @include floating-widget
+      .toggle-button-icon
+        font-size: 1.5rem 
+        background: $hover
+        border-radius: 999px
+      .title
+        font-weight: 800
+        font-size: 1.15rem
+      .sub
+        color: $hover

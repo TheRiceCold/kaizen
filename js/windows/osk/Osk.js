@@ -55,8 +55,8 @@ const keyboardControls = Widget.Box({
   className: 'spacing-v-5',
   children: [
     Widget.Button({
-      label: 'keyboard_hide',
-      className: 'osk-control-button txt-norm icon-material',
+      label: '󰌏',
+      className: 'osk-control-button txt-norm',
       onClicked: () => {
         releaseAllKeys()
         App.toggleWindow('osk')

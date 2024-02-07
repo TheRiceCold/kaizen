@@ -1,10 +1,10 @@
 import cairo from 'cairo'
 import icons from './data/icons.js'
 
-export const range = (length, start = 1) => 
+const range = (length, start = 1) => 
   Array.from({ length }, (_, i) => i + start)
 
-export const substitute = (collection, item) => 
+const substitute = (collection, item) => 
   collection.find(([from]) => from === item)?.[1] || item
 
 /** @type {function((id: number) => typeof Gtk.Widget): typeof Gtk.Widget[]}*/
@@ -31,17 +31,17 @@ export const createSurfaceFromWidget = widget => {
 
 
 export function getAudioTypeIcon(icon) {
-  const icons = icons.audio.type
+  const icn = icons.audio.type
   const substitues = [
-    ['audio-headset-bluetooth', icons.headset],
-    ['audio-card-analog-usb', icons.speaker],
-    ['audio-card-analog-pci', icons.card],
+    ['audio-headset-bluetooth', icn.headset],
+    ['audio-card-analog-usb', icn.speaker],
+    ['audio-card-analog-pci', icn.card],
   ]
 
   return substitute(substitues, icon)
 }
 
-export function dependencies(bins) {
+function dependencies(bins) {
   const deps = bins.map(bin => {
     const has = Utils.exec(`which ${bin}`)
     if (!has) print(`missing dependency: ${bin}`)
@@ -52,7 +52,7 @@ export function dependencies(bins) {
   return deps.every(has => has)
 }
 
-export function blurImg(img) {
+function blurImg(img) {
   const { GLib } = imports.gi
   const cache = Utils.CACHE_DIR + '/media'
   return new Promise(resolve => {
@@ -71,10 +71,19 @@ export function blurImg(img) {
   })
 }
 
-export const execBash = cmd => Utils.execAsync(['bash', '-c', cmd])
+const execBash = cmd => Utils.execAsync(['bash', '-c', cmd])
 
-export function Screen() {
+function Screen() {
   this.cmd = arg => Number(Utils.exec(`bash -c "xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f${arg.toString()} | head -1" | awk '{print $1}'`))
   this.width = () => this.cmd(1)
   this.height = () => this.cmd(2)
+}
+
+export {
+  range,
+  Screen,
+  blurImg,
+  execBash,
+  substitute,
+  dependencies,
 }
