@@ -1,4 +1,5 @@
 import Settings from './tab-contents/settings/main.js'
+import { FontIcon, NavigationIndicator } from '../../misc/main.js'
 
 let currentTabId = 0
 const contents = [
@@ -28,8 +29,37 @@ const ContentStack = Widget.Stack({
   }, {})
 })
 
-export {
-  ContentStack,
-  currentTabId,
+function switchTab(id) {
+  const buttonList = Buttons.get_children()
+  const selectedButton = buttonList[id]
+  ContentStack.shown = contents[id].name
+  if (selectedButton)
+    Indicator.css = `font-size: ${id}px;`
+  currentTabId = id
+}
+
+const Buttons = Widget.Box({
+  children: contents.map((_, id) => Widget.Button({
+    className: 'tab-button',
+    onClicked: () => switchTab(id),
+    child: FontIcon(contents[id].icon)
+  })),
+})
+
+const Indicator = NavigationIndicator(
+  contents.length, 
+  false, { className: 'tab-indicator' }
+)
+
+const TabNavigator = Widget.Box({
+  vertical: true,
+  children: [ Buttons, Indicator ]
+})
+
+export { 
+  switchTab,
+  ContentStack, 
+  TabNavigator, 
   contents,
+  currentTabId,
 }
