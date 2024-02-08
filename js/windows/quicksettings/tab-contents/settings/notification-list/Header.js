@@ -1,6 +1,6 @@
-import { FontIcon }from '../../../misc/main.js'
-import { services } from '../../../constants/main.js'
-import { setupCursorHover } from '../../../misc/CursorHover.js'
+import { FontIcon }from '../../../../../misc/main.js'
+import { services } from '../../../../../constants/main.js'
+import { setupCursorHover } from '../../../../../misc/CursorHover.js'
 const { Notifications } = services
 
 const ClearButton = Widget.Button({

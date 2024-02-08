@@ -1,5 +1,5 @@
-import Buttons from './Buttons.js'
-import { FontIcon } from '../../../misc/main.js'
+import TabButtons from './TabButtons.js'
+import SystemButtons from './SystemButtons.js'
 import { variables, options } from '../../../constants/main.js'
 
 const Uptime = Widget.Label({
@@ -15,25 +15,12 @@ const Avatar = Widget.Box({ className: 'avatar' })
   box.set_size_request(Math.ceil(h * 1.1), -1);
 })
 
-const TabButtons = Widget.Box({
-  children: [
-    Widget.Button({
-      className: 'icon-button',
-      child: FontIcon('')
-    }),
-    Widget.Button({
-      className: 'icon-button',
-      child: FontIcon('󱍓')
-    }),
-    Widget.Button({
-      className: 'icon-button',
-      child: FontIcon('󰚩')
-    })
-  ]
-})
-
 export default Widget.Box({
   hexpand: true,
   className: 'header',
-  children: [ TabButtons, Widget.Box({ hexpand: true }), Buttons ]
+  children: [ 
+    TabButtons,
+    Widget.Box({ hexpand: true }), 
+    SystemButtons, 
+  ]
 })

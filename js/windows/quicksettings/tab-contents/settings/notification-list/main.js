@@ -2,7 +2,7 @@ import Header from './Header.js'
 import ListContent from './ListContent.js'
 import EmptyContent from './EmptyContent.js'
 
-import { services } from '../../../constants/main.js'
+import { services } from '../../../../../constants/main.js'
 const { Notifications } = services
 
 const Contents = Widget.Stack({
