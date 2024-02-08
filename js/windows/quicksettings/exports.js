@@ -1,5 +1,7 @@
-import Settings from './tab-contents/settings/main.js'
 import { FontIcon, NavigationIndicator } from '../../misc/main.js'
+import Apis from './tab-contents/apis/main.js'
+import Settings from './tab-contents/settings/main.js'
+import Utilities from './tab-contents/utilities/main.js'
 
 let currentTabId = 0
 const contents = [
@@ -11,12 +13,12 @@ const contents = [
   { 
     icon: '󱍓',
     name: 'utilities', 
-    content: Widget.Box({}),
+    content: Utilities,
   },
   { 
     icon: '󰚩',
     name: 'apis', 
-    content: Widget.Box({}),
+    content: Apis,
   },
 ]
 

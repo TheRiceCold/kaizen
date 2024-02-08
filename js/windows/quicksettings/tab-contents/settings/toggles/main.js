@@ -15,7 +15,7 @@ const Row = props => Widget.Box({
   spacing: options.padding.value,
 })
 
-const Button = ({ icon, name, sub }, id) => Widget.Button({
+const Button = ({ icon, title, subComponent = Widget.Box({ }) }, id) => Widget.Button({
   setup: setupCursorHover,
   className: 'toggle-button',
   onClicked: () => toggleSwitch(id),
@@ -24,8 +24,8 @@ const Button = ({ icon, name, sub }, id) => Widget.Button({
     vertical: true,
     children: [
       FontIcon({ icon, className: 'toggle-button-icon' }),
-      // Widget.Label({ label, className: 'title' }),
-      Widget.Label({ className: 'sub', ...sub })
+      Widget.Label({ label: title, className: 'title' }),
+      subComponent,
     ]
   })
 })

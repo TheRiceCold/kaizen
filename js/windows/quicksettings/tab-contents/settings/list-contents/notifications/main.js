@@ -33,12 +33,13 @@ const SilenceButton = Widget.Button({
 })
 
 export default {
-  sub: { 
+  title: 'Notifications',
+  subComponent: Widget.Label({ 
     setup: self => self.hook(Notifications, self => {
       const notifs = Notifications.notifications.length
-      self.label = (notifs > 0 ? `notification` : 'empty') 
+      self.label = (notifs > 0 ? 'New' : 'Empty') 
     }, 'notified') 
-  },
+  }),
   name: 'notifications',
   icon: icons.notifications.bell,
   list: Widget.Box({

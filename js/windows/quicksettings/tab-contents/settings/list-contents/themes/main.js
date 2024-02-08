@@ -1,6 +1,6 @@
 import Header from '../header.js'
 import FontIcon from '../../../../../../misc/FontIcon.js'
-import { themes } from '../../../../../../constants/main.js'
+import { options, themes } from '../../../../../../constants/main.js'
 import { setTheme } from '../../../../../../settings/theme.js'
 
 const List = Widget.Box({
@@ -20,6 +20,8 @@ const List = Widget.Box({
 export default {
   icon: '',
   name: 'themes',
+  title: 'Themes',
+  subComponent: Widget.Label().bind('label', options.theme.name),
   list: Widget.Box({
     vexpand: true,
     vertical: true,
