@@ -1,5 +1,5 @@
-import { Notification }from '../../../../../misc/main.js'
-import { services } from '../../../../../constants/main.js'
+import { Notification }from '../../../../../../misc/main.js'
+import { services } from '../../../../../../constants/main.js'
 const { Notifications } = services
 
 export default Widget.Scrollable({

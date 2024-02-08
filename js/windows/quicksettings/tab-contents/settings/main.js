@@ -1,5 +1,5 @@
 import Toggles from './toggles/main.js'
-import NotificationList from './notification-list/main.js'
+import { ListStack } from './exports.js'
 import { options } from '../../../../constants/main.js'
 
 const Calendar = Widget.Box({
@@ -11,5 +11,5 @@ export default Widget.Box({
   vertical: true,
   className: 'content',
   spacing: options.spacing.value * 2,
-  children: [ Toggles, NotificationList, Calendar ]
+  children: [ Toggles, ListStack, Calendar ]
 })

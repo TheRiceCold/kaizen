@@ -1,6 +1,6 @@
 import Settings from './tab-contents/settings/main.js'
 
-const currentTabId = 0
+let currentTabId = 0
 const contents = [
   { 
     icon: '',

@@ -2,23 +2,20 @@ import { FontIcon, NavigationIndicator } from '../../../misc/main.js'
 import { ContentStack, contents, currentTabId } from '../exports.js'
 
 function switchTab(id) {
-  const allTabs = Tabs.get_children()
-  const tabButton = allTabs[id]
+  const buttonList = Buttons.get_children()
+  const selectedButton = buttonList[id]
   ContentStack.shown = contents[id].name
-  if (tabButton)
+  if (selectedButton)
     Indicator.css = `font-size: ${id}px;`
   currentTabId = id
 }
 
-const TabButton = id => Widget.Button({
-  className: 'tab-button',
-  onClicked: () => switchTab(id),
-  child: FontIcon(contents[id].icon)
-})
-
-const Tabs = Widget.Box({
-  homogeneous: true,
-  children: contents.map((_, id) => TabButton(id))
+const Buttons = Widget.Box({
+  children: contents.map((_, id) => Widget.Button({
+    className: 'tab-button',
+    onClicked: () => switchTab(id),
+    child: FontIcon(contents[id].icon)
+  })),
 })
 
 const Indicator = NavigationIndicator(
@@ -28,5 +25,5 @@ const Indicator = NavigationIndicator(
 
 export default Widget.Box({
   vertical: true,
-  children: [ Tabs, Indicator ]
+  children: [ Buttons, Indicator ]
 })
