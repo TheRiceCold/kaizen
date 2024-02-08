@@ -14,7 +14,7 @@ export default Widget.Scrollable({
         vpack: 'start',
         className: 'spacing-v-5-revealer',
         setup: self => self.hook(Notifications, (box, id) => {
-          if (box.get_children().length == 0) {
+          if (box.get_children().length === 0) {
             Notifications.notifications.forEach(n => {
               box.pack_end(Notification({
                 notification: n,

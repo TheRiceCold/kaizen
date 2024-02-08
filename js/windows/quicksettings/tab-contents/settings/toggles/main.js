@@ -15,7 +15,7 @@ const Row = props => Widget.Box({
   spacing: options.padding.value,
 })
 
-const Button = ({ icon, name }, id) => Widget.Button({
+const Button = ({ icon, name, sub }, id) => Widget.Button({
   setup: setupCursorHover,
   className: 'toggle-button',
   onClicked: () => toggleSwitch(id),
@@ -25,7 +25,7 @@ const Button = ({ icon, name }, id) => Widget.Button({
     children: [
       FontIcon({ icon, className: 'toggle-button-icon' }),
       // Widget.Label({ label, className: 'title' }),
-      // Widget.Label({ className: 'sub', label: sub })
+      Widget.Label({ className: 'sub', ...sub })
     ]
   })
 })
@@ -35,7 +35,6 @@ export default Widget.Box({
   vpack: 'center',
   spacing: options.spacing.value,
   children: [
-    Row({ children: contents.map((item, id) => (id < 3) && Button(item, id)) }),
-    Row({ children: contents.map((item, id) => (id > 2) && Button(item, id)) }),
+    Row({ children: contents.map((item, id) => Button(item, id)) }),
   ]
 })

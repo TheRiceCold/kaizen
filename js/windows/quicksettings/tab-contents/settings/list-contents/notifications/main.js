@@ -33,15 +33,21 @@ const SilenceButton = Widget.Button({
 })
 
 export default {
+  sub: { 
+    setup: self => self.hook(Notifications, self => {
+      const notifs = Notifications.notifications.length
+      self.label = (notifs > 0 ? `notification` : 'empty') 
+    }, 'notified') 
+  },
   name: 'notifications',
   icon: icons.notifications.bell,
   list: Widget.Box({
     vexpand: true,
     vertical: true,
+    className: 'notification-list spacing-v-5',
     children: [ 
-      Header('Notifications'), 
+      Header( 'Notifications', [ SilenceButton, ClearButton ]), 
       Contents 
     ],
-    className: 'notification-list spacing-v-5',
   })
 }

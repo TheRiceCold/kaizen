@@ -1,4 +1,4 @@
-export default (label) => Widget.Box({
+export default (label, children = []) => Widget.Box({
   vpack: 'start',
   className: 'spacing-h-5',
   children: [
@@ -8,5 +8,5 @@ export default (label) => Widget.Box({
       hexpand: true,
       className: 'txt-title-small',
     })
-  ]
+  ].concat(children)
 })

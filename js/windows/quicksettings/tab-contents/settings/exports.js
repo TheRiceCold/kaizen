@@ -1,13 +1,15 @@
 import ThemeList from './list-contents/themes/main.js'
-import AudioList from './list-contents/audio/main.js'
+// import AudioList from './list-contents/audio/main.js'
 import NetworkList from './list-contents/network/main.js'
 import BluetoothList from './list-contents/bluetooth/main.js'
 import NotificationList from './list-contents/notifications/main.js'
 
-let currentTabId = 3 // default tab: Notifications
+let currentTabId = 0
 const contents = [
-  NetworkList, BluetoothList, AudioList,
-  NotificationList, ThemeList,
+  NotificationList, 
+  NetworkList, 
+  BluetoothList, 
+  ThemeList
 ]
 
 const ListStack = Widget.Stack({

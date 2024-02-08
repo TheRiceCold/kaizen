@@ -2,6 +2,7 @@ import Header from '../header.js'
 
 export default {
   icon: '󰂲',
+  sub: '',
   name: 'bluetooth',
   list: Widget.Box({
     vexpand: true,
