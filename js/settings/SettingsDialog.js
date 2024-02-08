@@ -201,7 +201,9 @@ const categoriesStack = Widget.Stack({
   shown: currentPage.bind(),
   transition: 'slide_left_right',
   visible: search.bind().transform(v => !v),
-  children: categories.reduce((obj, name) => Object.assign(obj, { name: Page(name) }), {}),
+  children: categories.reduce((obj, name) => { 
+    obj[name] = Page(name); return obj 
+  }, {}),
 })
 
 const searchPage = Widget.Box({
