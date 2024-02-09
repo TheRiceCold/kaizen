@@ -5,9 +5,9 @@ $button-radius: if($bar-style == 'floating', max(0, $radii - $bar-spacing), $rad
   @if $bar-style == 'separated'
     transition: $transition
     > *
+      @include container
       border-radius: $radii
       transition: $transition
-      @include floating-widget
       // margin: $wm-gaps $bar-spacing
       &:hover > *
         color: $hover-fg

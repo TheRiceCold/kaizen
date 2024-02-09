@@ -17,8 +17,8 @@ import media
 
 @mixin big-button
   min-width: 7.3rem
+  @include container
   @include icon-button
-  @include floating-widget
   .icon
     font-size: 1.5rem 
   .title
@@ -29,7 +29,7 @@ import media
     color: $bg-color
 
 .quicksettings
-  @include floating-widget
+  @include container
   padding: 0
 
   .header
@@ -80,7 +80,7 @@ import media
 
     .settings-list
       min-height: 300px
-      @include floating-widget
+      @include container
       .action-button
         font-size: 1.5rem
         min-width: 2.25rem
@@ -95,7 +95,7 @@ import media
         @include big-button
 
       .calendar
-        @include floating-widget
+        @include container
         calendar
           font-size: 1.3em
           padding: calc($padding * 0.6)
