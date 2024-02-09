@@ -15,6 +15,19 @@ import media
     color: $bg-color
     background: $accent
 
+@mixin big-button
+  min-width: 7.3rem
+  @include icon-button
+  @include floating-widget
+  .icon
+    font-size: 1.5rem 
+  .title
+    font-size: 1.15rem
+    + label
+      color: transparentize($fg-color, 0.5)
+  &:focus .title + label
+    color: $bg-color
+
 .quicksettings
   @include floating-widget
   padding: 0
@@ -53,22 +66,19 @@ import media
       @include header-icon
       @include icon-button
 
+  .sliders
+    @include widget
+    padding: $padding
+
+    scale
+      @include slider
+
   .content
     padding: $padding
-    .toggle-row .toggle-button
-      min-width: 7rem
-      @include icon-button
-      @include floating-widget
-      .toggle-button-icon
-        font-size: 1.5rem 
-      .title
-        font-size: 1.15rem
-        + label
-          color: transparentize($fg-color, 0.5)
-      &:focus .title + label
-        color: $bg-color
+    .toggle-button
+      @include big-button
 
-    .notification-list
+    .settings-list
       min-height: 300px
       @include floating-widget
       .action-button
@@ -82,24 +92,21 @@ import media
 
     .footer
       .footer-button
-        min-width: 7rem
-        @include floating-widget
+        @include big-button
 
       .calendar
         @include floating-widget
         calendar
           font-size: 1.3em
-          padding: calc($padding * 0.75)
+          padding: calc($padding * 0.6)
 
           &:selected
-            color: $bg-color
-            background: $accent
-            border-radius: $radii
+            color: $accent
+            font-weight: 700
 
           &.header
 
           &.highlight
-            font-weight: 700
 
           &:indeterminate
             color: transparentize($fg-color, 0.5)

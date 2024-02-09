@@ -1,8 +1,27 @@
-import { ListStack } from './exports.js'
+import { ListStack, contents, currentTabId } from './exports.js'
 import { options } from '../../../../constants/main.js'
-import Footer from './footer.js'
-import Toggles from './toggles/main.js'
-import Sliders from './sliders.js'
+import Footer from './Footer.js'
+import Sliders from './Sliders.js'
+import BigButton from './BigButton.js'
+
+const TabListButtons = Widget.Box({
+  vertical: true,
+  vpack: 'center',
+  spacing: options.spacing.value,
+  children: [
+    Widget.Box({ 
+      hpack: 'center',
+      spacing: options.padding.value,
+      children: contents.map(
+        (item, id) => BigButton({ 
+          onClicked: () => {
+            ListStack.shown = contents[id].name
+            currentTabId = id
+          }, ...item 
+        }))
+    }),
+  ]
+})
 
 
 export default Widget.Box({
@@ -10,9 +29,9 @@ export default Widget.Box({
   className: 'content',
   spacing: options.spacing.value * 2,
   children: [ 
-    Toggles, 
-    Sliders, 
+    TabListButtons, 
     ListStack,
-    Footer
+    Sliders, 
+    Footer,
   ]
 })

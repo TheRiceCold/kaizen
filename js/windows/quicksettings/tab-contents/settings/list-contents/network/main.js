@@ -13,7 +13,8 @@ const Contents = Widget.Stack({
 })
 
 export default {
-  title: Network.wifi.bind('ssid').transform(ssid => ssid.substring(0, 10) || 'Not connected'),
+  title: Network.wifi.bind('ssid').transform(ssid => ssid.substring(0, 11) || 'Not connected'),
+  titleTooltip: Network.wifi.bind('ssid').transform(ssid => ssid || ''),
   icon: Network.wifi.enabled ? '󰖩' : '󰖪',
   sub: '',
   name: 'network',
