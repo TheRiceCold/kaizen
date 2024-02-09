@@ -45,7 +45,7 @@ export default {
   list: Widget.Box({
     vexpand: true,
     vertical: true,
-    className: 'notification-list spacing-v-5',
+    className: 'settings-list spacing-v-5',
     children: [ 
       Header( 'Notifications', [ SilenceButton, ClearButton ]), 
       Contents 

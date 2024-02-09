@@ -26,6 +26,6 @@ export default {
     vexpand: true,
     vertical: true,
     children: [ Header('Theme Selector'), List ],
-    className: 'notification-list spacing-v-5',
+    className: 'settings-list spacing-v-5',
   })
 }

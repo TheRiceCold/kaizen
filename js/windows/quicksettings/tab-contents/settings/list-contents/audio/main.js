@@ -25,6 +25,6 @@ export default {
     vexpand: true,
     vertical: true,
     children: [ Header('Audio'), Content ],
-    className: 'notification-list spacing-v-5',
+    className: 'settings-list spacing-v-5',
   })
 }
