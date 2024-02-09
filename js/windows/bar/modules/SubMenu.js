@@ -3,7 +3,7 @@ import { options, icons }from '../../../constants/main.js'
 
 function Arrow(revealer, direction, items) {
   let deg = 0
-  const icon = Widget.Icon({ icon: icons.arrow[direction] })
+  const icon = Widget.Icon({ icon: icons.arrow.right })
 
   const animate = () => {
     const t = options.transition.value / 20
@@ -35,6 +35,7 @@ export default ({
   const posStart = direction === 'up' || direction === 'left'
   const posEnd = direction === 'down' || direction === 'right'
   const revealer = Widget.Revealer({
+    revealChild: true,
     transition: `slide_${direction}`,
     child: Widget.Box({ children }),
   })

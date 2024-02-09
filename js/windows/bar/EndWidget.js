@@ -3,7 +3,6 @@ import { RoundedCorner, FontIcon, Clock } from '../../misc/main.js'
 import {
   Tray,
   SubMenu,
-  Utilities,
   BatteryBar,
   PanelButton,
 } from './modules/exports.js'
@@ -15,11 +14,7 @@ SystemTray.connect('changed', () => {
 })
 
 const Modules = [
-  SubMenu({
-    items: submenuItems,
-    children: [Utilities],
-  }),
-  Tray,
+  SubMenu({ items: submenuItems, children: [ Tray ] }),
   BatteryBar,
   PanelButton({
     content: Widget.Box({

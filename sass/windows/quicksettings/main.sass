@@ -1,4 +1,4 @@
-@import media
+import media
 
 @mixin header-icon
   min-width: 2.5rem
@@ -55,19 +55,18 @@
 
   .content
     padding: $padding
-    .toggle-row
-      .toggle-button
-        min-width: 7rem
-        @include icon-button
-        @include floating-widget
-        .toggle-button-icon
-          font-size: 1.5rem 
-        .title
-          font-size: 1.15rem
-        .sub
+    .toggle-row .toggle-button
+      min-width: 7rem
+      @include icon-button
+      @include floating-widget
+      .toggle-button-icon
+        font-size: 1.5rem 
+      .title
+        font-size: 1.15rem
+        + label
           color: transparentize($fg-color, 0.5)
-        &:focus .sub
-          color: $bg-color
+      &:focus .title + label
+        color: $bg-color
 
     .notification-list
       min-height: 300px
@@ -81,26 +80,26 @@
         &:hover
           background: $hover
 
-    .calendar
-      @include floating-widget
-      padding: calc($padding * 2) calc($padding * 2) 0
+    .footer
+      .footer-button
+        min-width: 7rem
+        @include floating-widget
 
-      calendar
-        all: unset
-        font-size: 1.25em
-        &.button
-          @include button($flat: false)
+      .calendar
+        @include floating-widget
+        calendar
+          font-size: 1.3em
+          padding: calc($padding * 0.75)
 
-        &:selected
-          color: $bg-color
-          background: $accent
-          border-radius: calc($radii * 2)
+          &:selected
+            color: $bg-color
+            background: $accent
+            border-radius: $radii
 
-        &.header
+          &.header
 
-        &.highlight
-          font-weight: 700
+          &.highlight
+            font-weight: 700
 
-        &:indeterminate
-          color: transparentize($fg-color, 0.5)
-
+          &:indeterminate
+            color: transparentize($fg-color, 0.5)
