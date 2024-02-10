@@ -30,6 +30,5 @@ export default Widget.Box({
       onClicked: () => toggle('launcher'),
     }),
     Separator(),
-    Workspaces,
   ]
 })

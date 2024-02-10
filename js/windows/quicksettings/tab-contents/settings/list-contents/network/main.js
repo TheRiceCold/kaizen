@@ -16,7 +16,6 @@ export default {
   title: Network.wifi.bind('ssid').transform(ssid => ssid.substring(0, 11) || 'Not connected'),
   titleTooltip: Network.wifi.bind('ssid').transform(ssid => ssid || ''),
   icon: Network.wifi.enabled ? '󰖩' : '󰖪',
-  sub: '',
   name: 'network',
   list: Widget.Box({
     vexpand: true,

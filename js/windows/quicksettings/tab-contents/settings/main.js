@@ -23,7 +23,6 @@ const TabListButtons = Widget.Box({
   ]
 })
 
-
 export default Widget.Box({
   vertical: true,
   className: 'content',

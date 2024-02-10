@@ -14,23 +14,37 @@ class Recorder extends Service {
   recording = false
   #path = GLib.get_home_dir() + '/Videos/Screencasting'
 
-  async start() {
-    if (!utils.dependencies(['slurp', 'wf-recorder'])) return
-
-    if (this.recording) return
-
-    const area = await Utils.execAsync('slurp')
-    Utils.ensureDirectory(this.#path)
-    this.#file = `${this.#path}/${now()}.mp4`
-    Utils.execAsync(['wf-recorder', '-g', area, '-f', this.#file])
+  async start(exec) {
+    Utils.execAsync(exec)
     this.recording = true
     this.changed('recording')
 
     this.timer = 0
-    this.#interval = Utils.interval(1000, () => {
-      this.changed('timer')
-      this.timer++
-    })
+    this.#interval = Utils.interval(1000, () => { this.changed('timer'); this.timer++ })
+  }
+
+  async record() { 
+    if (!utils.dependencies(['slurp', 'wf-recorder'])) return
+    if (this.recording) return
+
+    const area = await Utils.execAsync('slurp')
+
+    Utils.ensureDirectory(this.#path)
+    this.#file = `${this.#path}/${now()}.mp4`
+    const exec = ['wf-recorder', '-g', area, '-f', this.#file, '-a' ]
+
+    this.start(exec) 
+  }
+
+  async recordFullscreen() { 
+    if (!utils.dependencies(['wf-recorder'])) return
+    if (this.recording) return
+
+    Utils.ensureDirectory(this.#path)
+    this.#file = `${this.#path}/${now()}.mp4`
+    const exec = ['wf-recorder', '-a', '-f', this.#file ]
+
+    this.start(exec) 
   }
 
   async stop() {

@@ -19,21 +19,26 @@ const Avatar = Widget.Box({ className: 'avatar' })
 
 const systemButtons = [
   {
+    icon: '',
+    onClicked: () => { },
+    tooltip: 'Open Settings',
+  },
+  {
     icon: '',
     onClicked: openSettings,
-    tooltipText: 'Open Settings',
+    tooltip: 'Open Settings',
   },
   {
     icon: '',
-    tooltipText: 'Power Menu',
+    tooltip: 'Power Menu',
     onClicked: () => App.toggleWindow('powermenu')
   },
 ]
 
-const Button = ({ icon, onClicked, tooltipText }) => Widget.Button({
+const Button = ({ icon, onClicked, tooltip }) => Widget.Button({
   onClicked,
-  tooltipText,
   hpack: 'end',
+  tooltipText: tooltip,
   child: FontIcon(icon),
   setup: setupCursorHover,
   className: 'icon-button',

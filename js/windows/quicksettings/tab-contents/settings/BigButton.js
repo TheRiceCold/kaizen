@@ -4,12 +4,12 @@ import { setupCursorHover } from '../../../../misc/CursorHover.js'
 export default ({ 
   icon, 
   title, 
+  list = null,
   tooltip = '',
   titleTooltip = '', 
-  onClicked = () => {},
-  subComponent = Widget.Box({ }) 
+  subComponent = Widget.Box({ }),
+  ...props
 }) => Widget.Button({
-  onClicked,
   setup: setupCursorHover,
   className: 'toggle-button',
   child: Widget.Box({
@@ -24,5 +24,5 @@ export default ({
       }),
       subComponent,
     ]
-  })
+  }), ...props
 })
