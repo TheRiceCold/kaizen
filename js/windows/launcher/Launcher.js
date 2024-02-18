@@ -9,8 +9,8 @@ export default windowName => {
     })),
   ]
 
-  const List = Widget.Box({ 
-    vertical: true, 
+  const List = Widget.Box({
+    vertical: true,
     children: apps,
     className: 'app-list',
   })

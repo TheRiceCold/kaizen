@@ -6,7 +6,7 @@ function sendBatch(batch) {
     .map(x => `keyword ${x}`)
     .join('; ')
 
-  services.Hyprland.sendMessage(`[[BATCH]]/${cmd}`)
+  services.Hyprland.messageAsync(`[[BATCH]]/${cmd}`)
 }
 
 function getColor(sass) {

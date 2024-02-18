@@ -5,7 +5,7 @@ const { Gdk, Gtk } = imports.gi
 const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)]
 
 /** @param {string} args */
-const dispatch = args => services.Hyprland.sendMessage(`dispatch ${args}`)
+const dispatch = args => services.Hyprland.messageAsync(`dispatch ${args}`)
 
 /** @param {string} str */
 const icon = str => {
@@ -13,7 +13,7 @@ const icon = str => {
 
   if (Utils.lookUpIcon(icon))
     return icon
-  
+
   return icons.fallback.executable
 }
 

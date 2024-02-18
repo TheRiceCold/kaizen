@@ -1,5 +1,5 @@
-import Option, { 
-  apply, 
+import Option, {
+  apply,
   resetOptions,
   getOptions,
 } from '../../settings/option.js'
@@ -108,6 +108,12 @@ export default {
     height: option(500),
     iconSize: option(44),
     // anchor: option([]),
+  },
+
+  overview: {
+    scale: option(9),
+    workspaces: option(7),
+    monochromeIcon: option(true),
   },
 
   bar: {
