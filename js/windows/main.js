@@ -10,7 +10,7 @@ import Indicators from './indicators/main.js'
 import Quicksettings from './quicksettings/main.js'
 import ScreenCorners from './screencorners/main.js'
 
-export default () => [
+export default [
   Bar,
   Osk,
   // Dock,
