@@ -23,7 +23,7 @@ $bar-spacing: calc($spacing * 0.3)
       font-size: 0
       min-width: 5pt
       min-height: 5pt
-      margin: 0 calc($padding * 9.5)
+      margin: 0 calc($padding * 0.5)
       border-radius: calc($radius * 0.6)
       transition: calc($transition * 0.5)
       background-color: transparentize($fg, 0.8)
@@ -35,8 +35,8 @@ $bar-spacing: calc($spacing * 0.3)
         background-color: transparentize($fg, 0.2)
 
       &.active
-        min-width: 20pt
-        min-height: 12pt
+        min-width: 16pt
+        min-height: 10pt
         background-image: $active-gradient
 
     &.active, &:active
@@ -103,7 +103,7 @@ $bar-spacing: calc($spacing * 0.3)
         background-color: color.mix($bg, $error-bg, calc($i * 3))
 
       &.charging block:nth-child(#{$i}).filled
-        background-color: green
+        background-color: color.mix($bg, $charging-bg, calc($i * 3))
 
       &:active .regular block:nth-child(#{$i}).filled
         background-color: color.mix($bg, $primary-fg, calc($i * 3))
@@ -112,7 +112,7 @@ $bar-spacing: calc($spacing * 0.3)
       color: $error-bg
 
     &.charging image
-      color: green
+      color: $charging-bg
 
     &:active image
       color: $primary-fg

@@ -18,11 +18,11 @@ export default ({
   setup: self => {
     let open = false
 
-    self.toggleClassName("panel-button")
+    self.toggleClassName('panel-button')
     self.toggleClassName(window)
 
     self.hook(options.bar.flatButtons, () => {
-      self.toggleClassName("flat", flat ?? options.bar.flatButtons.value)
+      self.toggleClassName('flat', flat ?? options.bar.flatButtons.value)
     })
 
     self.hook(App, (_, win, visible) => {
@@ -30,12 +30,12 @@ export default ({
 
       if (open && !visible) {
         open = false
-        self.toggleClassName("active", false)
+        self.toggleClassName('active', false)
       }
 
       if (visible) {
         open = true
-        self.toggleClassName("active")
+        self.toggleClassName('active')
       }
     })
 

@@ -2,7 +2,7 @@ import PanelButton from './PanelButton.js'
 import icons from 'lib/icons'
 import options from 'options'
 
-const battery = await Service.import("battery")
+const battery = await Service.import('battery')
 const { bar, percentage, blocks, width, low } = options.bar.battery
 
 const Indicator = () => Widget.Label({
@@ -13,16 +13,16 @@ const Indicator = () => Widget.Label({
 const PercentLabel = () => Widget.Revealer({
   clickThrough: true,
   transition: 'slide_right',
-  reveal_child: percentage.bind(),
+  revealChild: percentage.bind(),
   child: Widget.Label({
-    label: battery.bind("percent").as(p => `${p}%`),
+    label: battery.bind('percent').as(p => `${p}%`),
   }),
 })
 
 const LevelBar = () => {
   const level = Widget.LevelBar({
     mode: 1,
-    max_value: blocks.bind(),
+    maxValue: blocks.bind(),
     visible: bar.bind().as(b => b !== 'hidden'),
     value: battery.bind('percent').as(p => (p / 100) * blocks.value),
   })
@@ -42,8 +42,8 @@ const LevelBar = () => {
 const WholeButton = () => Widget.Overlay({
   vexpand: true,
   child: LevelBar(),
-  class_name: "whole",
-  pass_through: true,
+  className: 'whole',
+  passThrough: true,
   overlay: Widget.Box({
     hpack: 'center',
     children: [
