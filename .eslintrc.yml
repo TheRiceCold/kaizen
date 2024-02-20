@@ -1,10 +1,32 @@
 env:
-  es2021: true
-extends: eslint:recommended
+  es2022: true
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+parser: "@typescript-eslint/parser"
 parserOptions:
-  ecmaVersion: latest
+  ecmaVersion: 2022
   sourceType: module
+  project: ./tsconfig.json
+  warnOnUnsupportedTypeScriptVersion: false
+root: true
+ignorePatterns:
+  - types/
+plugins:
+  - "@typescript-eslint"
 rules:
+  "@typescript-eslint/ban-ts-comment":
+    - "off"
+  "@typescript-eslint/no-non-null-assertion":
+    - "off"
+  # "@typescript-eslint/no-explicit-any":
+  #   - "off"
+  "@typescript-eslint/no-unused-vars":
+    - error
+    - varsIgnorePattern: (^unused|_$)
+      argsIgnorePattern: ^(unused|_)
+  "@typescript-eslint/no-empty-interface":
+    - "off"
   indent:
     - error
     - 2

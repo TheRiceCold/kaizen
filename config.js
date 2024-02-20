@@ -1,2 +1,17 @@
-export default (await import('./js/main.js')).default
+const main = '/tmp/ags/main.js'
+const outdir = `${App.configDir}/main.ts`
 
+try {
+  await Utils.execAsync([
+    'bun', 'build', outdir,
+    '--outfile', main,
+    '--external', 'resource://*',
+    '--external', 'gi://*',
+    '--external', 'file://*',
+  ])
+} catch (error) {
+  console.error(error)
+  App.quit()
+}
+
+export default (await import(`file://${main}`))

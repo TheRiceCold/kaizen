@@ -1,0 +1,33 @@
+@mixin media
+  @include widget
+  padding: $padding
+
+  .cover
+    @if $shadows
+      box-shadow: 2px 2px 2px 0 $shadow-color
+
+    margin-right: $spacing
+    background-size: cover
+    background-position: center
+    border-radius: calc($radius * 0.8)
+
+  button
+    @include button($flat: true)
+    padding: calc($padding * 0.5)
+
+    &.play-pause
+      margin: 0 calc($spacing * 0.5)
+
+    image
+      font-size: 1.2em
+
+  .artist
+    color: transparentize($fg, 0.2)
+    font-size: 0.9em
+
+  scale
+    @include slider($width: 0.5em, $slider: false, $gradient: linear-gradient($fg, $fg))
+    margin-bottom: calc($padding * 0.5)
+
+    trough
+      border: none
