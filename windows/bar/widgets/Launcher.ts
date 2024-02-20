@@ -4,7 +4,7 @@ import options from 'options'
 const { icon, label, action } = options.bar.launcher
 
 export default () => PanelButton({
-  window: 'applauncher',
+  window: 'launcher',
   onClicked: action.bind(),
   child: Widget.Box([
     Widget.Icon({

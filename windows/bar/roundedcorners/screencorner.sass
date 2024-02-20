@@ -1,11 +1,11 @@
-$_shadow-size: $padding
-$_radius: $radius * $hyprland-gaps-multiplier
 $_margin: 99px
+$_shadow-size: $padding
+$_radius: calc($radius * $hyprland-gaps-multiplier)
 
 window.screen-corner
   box.shadow
-    margin-right: calc($_margin * -1)
     margin-left: calc($_margin * -1)
+    margin-right: calc($_margin * -1)
 
     @if $shadows
       box-shadow: inset 0 0 $_shadow-size 0 $shadow-color
@@ -23,16 +23,16 @@ window.screen-corner
     @if $bar-position == 'bottom'
       border-bottom: $border-width solid $bg
 
-    margin-right: $_margin
     margin-left: $_margin
+    margin-right: $_margin
 
   box.corner
     box-shadow: 0 0 0 $border-width $border-color
 
   &.corners
     box.border
-      border-radius: if($radius>0, $radius * $hyprland-gaps-multiplier, 0)
       box-shadow: 0 0 0 $_radius $bg
+      border-radius: if($radius > 0, calc($radius * $hyprland-gaps-multiplier), 0)
 
     box.corner
-      border-radius: if($radius>0, $radius * $hyprland-gaps-multiplier, 0)
+      border-radius: if($radius > 0, calc($radius * $hyprland-gaps-multiplier), 0)

@@ -16,18 +16,18 @@
     padding: calc($padding * 0.5)
 
     &.play-pause
-      margin: 0 calc($spacing * 0.5)
+      margin: 0 ($spacing * 0.5)
 
     image
       font-size: 1.2em
 
   .artist
-    color: transparentize($fg, 0.2)
     font-size: 0.9em
+    color: transparentize($fg, 0.2)
 
   scale
-    @include slider($width: 0.5em, $slider: false, $gradient: linear-gradient($fg, $fg))
     margin-bottom: calc($padding * 0.5)
+    @include slider($width: .5em, $slider: false, $gradient: linear-gradient($fg, $fg))
 
     trough
       border: none

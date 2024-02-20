@@ -4,7 +4,7 @@ import {
   Launcher,
   BatteryBar,
   Workspaces
-} from './widgets/exports'
+} from './widgets'
 import options from 'options'
 
 export type BarWidget = keyof typeof widget

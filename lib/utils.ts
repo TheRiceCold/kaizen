@@ -2,7 +2,7 @@ import { type Config } from 'ts/types/app'
 import { type Application } from 'ts/types/service/applications'
 import { substitutes } from './icons'
 
-const { Gtk, Gdk, GLib } = imports.gi
+const { GLib } = imports.gi
 
 const config = <T extends Gtk.Window> (config: Config<T>) => config
 

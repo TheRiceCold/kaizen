@@ -3,10 +3,10 @@ import PanelButton from './PanelButton'
 import options from 'options'
 
 const { Gdk } = imports.gi
-const { ignore } = options.bar.systray
+const { ignore } = options.bar.tray
 const systemtray = await Service.import('systemtray')
 
-const SysTrayItem = (item: TrayItem) => PanelButton({
+const Item = (item: TrayItem) => PanelButton({
   className: 'tray-item',
   child: Widget.Icon({ icon: item.bind('icon') }),
   tooltipMarkup: item.bind('tooltip_markup'),
@@ -29,4 +29,4 @@ const SysTrayItem = (item: TrayItem) => PanelButton({
   onSecondaryClick: btn => item.menu?.popup_at_widget(btn, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
 })
 
-export default () => Widget.Box().bind('children', systemtray, 'items', i => i.filter(({ id }) => !ignore.value.includes(id)).map(SysTrayItem))
+export default () => Widget.Box().bind('children', systemtray, 'items', i => i.filter(({ id }) => !ignore.value.includes(id)).map(Item))

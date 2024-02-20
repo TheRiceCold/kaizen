@@ -1,9 +1,4 @@
-import { forMonitors } from 'lib/utils'
-
-import Bar from './bar'
-import BarRoundedCorners from './bar/corners'
-
-export default [
-  ...forMonitors(Bar),
-  ...forMonitors(BarRoundedCorners),
-]
+export { default as Bar } from './bar'
+export { default as Indicators } from './indicators'
+export { default as AppLauncher } from './applauncher'
+export { default as BarRoundedCorners } from './bar/roundedcorners'
