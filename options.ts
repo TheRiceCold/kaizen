@@ -63,7 +63,6 @@ const options = mkOptions(OPTIONS, {
     corners: opt(true),
     layout: {
       start: opt<BarWidget[]>([
-        // 'overview',
         'launcher',
         // 'taskbar',
         // 'expander',
@@ -141,7 +140,7 @@ const options = mkOptions(OPTIONS, {
 
   overview: {
     scale: opt(9),
-    workspaces: opt(7),
+    workspaces: opt(9),
     monochromeIcon: opt(true),
   },
 
