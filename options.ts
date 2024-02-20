@@ -9,14 +9,14 @@ const options = mkOptions(OPTIONS, {
   theme: {
     dark: {
       primary: {
-        bg: opt('#51a4e7'),
+        bg: opt('#6AAAFF'),
         fg: opt('#141414'),
       },
       error: {
         bg: opt('#e55f86'),
         fg: opt('#141414'),
       },
-      bg: opt('#171717'),
+      bg: opt('#373559'),
       fg: opt('#eeeeee'),
       widget: opt('#eeeeee'),
       border: opt('#eeeeee'),
@@ -31,7 +31,7 @@ const options = mkOptions(OPTIONS, {
         fg: opt('#eeeeee'),
       },
       bg: opt('#fffffa'),
-      fg: opt('#080808'),
+      fg: opt('#171717'),
       widget: opt('#080808'),
       border: opt('#080808'),
     },
@@ -53,8 +53,8 @@ const options = mkOptions(OPTIONS, {
   transition: opt(200),
 
   font: {
-    size: opt(13),
-    name: opt('Ubuntu Nerd Font'),
+    size: opt(10),
+    name: opt('JetBrainsMono Nerd Font'),
   },
 
   bar: {
@@ -63,19 +63,20 @@ const options = mkOptions(OPTIONS, {
     corners: opt(true),
     layout: {
       start: opt<BarWidget[]>([
-        // 'launcher',
+        // 'overview',
+        'launcher',
         // 'taskbar',
-        'expander',
+        // 'expander',
         // 'messages',
       ]),
       center: opt<BarWidget[]>([ 'workspaces' ]),
       end: opt<BarWidget[]>([
         // 'media',
         'expander',
-        // 'systray',
+        'tray',
         // 'system',
         'battery',
-        // 'date'
+        'date'
       ]),
     },
     launcher: {
@@ -83,26 +84,23 @@ const options = mkOptions(OPTIONS, {
         colored: opt(true),
         icon: opt('system-search-symbolic'),
       },
-      label: {
-          colored: opt(false),
-          label: opt(' Applications'),
-      },
+      label: { colored: opt(false), label: opt(''), },
       action: opt(() => App.toggleWindow('applauncher')),
     },
     date: {
-        format: opt('%H:%M - %A %e.'),
-        action: opt(() => App.toggleWindow('datemenu')),
+      format: opt('%a %d %I:%M  '),
+      action: opt(() => App.toggleWindow('quicksettings')),
     },
     battery: {
-      bar: opt<'hidden' | 'regular' | 'whole'>('regular'),
-      charging: opt("#00D787"),
-      percentage: opt(true),
+      bar: opt<'hidden' | 'regular' | 'whole'>('whole'),
+      charging: opt('#93CDA8'),
+      percentage: opt(false),
       blocks: opt(10),
-      width: opt(70),
+      width: opt(28),
       low: opt(30),
     },
     workspaces: {
-      workspaces: opt(7),
+      workspaces: opt(9),
     },
     taskbar: {
       monochrome: opt(true),

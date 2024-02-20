@@ -22,7 +22,7 @@ export class Opt<T = unknown> extends Variable<T> {
   toJSON() { return `opt:${this.value}` }
 
   init(cacheFile: string) {
-    const cacheV = JSON.parse(Utils.readFile(cacheFile) || "{}")[this.id]
+    const cacheV = JSON.parse(Utils.readFile(cacheFile) || '{}')[this.id]
     if (cacheV !== undefined) this.value = cacheV
 
     this.connect('changed', () => {

@@ -3,12 +3,14 @@
 import 'lib/session'
 // import 'lib/init'
 
+import options from 'options'
 import { init } from 'lib/init'
-import { config } from 'lib/utils'
-import windows from 'windows/main'
+
+import windows from 'windows'
 
 init()
-export default config({
+export default {
   // onConfigParsed: () => { init() }, // FIX: Not working, idk why
+  // closeWindowDelay: { applauncher: options.transition.value },
   windows,
-})
+}
