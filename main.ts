@@ -2,6 +2,7 @@ import 'lib/session'
 import 'lib/init'
 
 import {
+  setupQuickSettings,
   SettingsDialog,
   AppLauncher, Overview,
   Bar, BarRoundedCorners,
@@ -14,7 +15,10 @@ import { init } from 'lib/init'
 import options from 'options'
 
 export default {
-  onConfigParsed: init,
+  onConfigParsed: () => {
+    setupQuickSettings()
+    init()
+  },
   closeWindowDelay: {
     applauncher: options.transition.value,
     overview: options.transition.value,

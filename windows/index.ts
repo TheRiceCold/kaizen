@@ -8,3 +8,5 @@ export { default as Notifications } from './notifications'
 export { default as BarRoundedCorners } from './bar/roundedcorners'
 
 export { default as SettingsDialog } from './settings'
+
+export { setupQuickSettings } from './quicksettings'

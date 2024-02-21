@@ -1,0 +1,127 @@
+window#quicksettings .quicksettings
+  @include spacing
+  @include floating-widget
+
+  padding: calc($popover-padding * 1.4)
+
+  .avatar
+    @include widget
+    border-radius: calc($radius * 3)
+
+  .header
+    @include spacing(0.5)
+    color: transparentize($fg, 0.15)
+    button
+      @include button
+      padding: $padding
+      image
+        font-size: 1.4em
+
+  .sliders-box
+    @include widget
+    padding: $padding
+
+    button
+      @include button($flat: true)
+      padding: calc($padding * 0.5)
+
+    .volume button.arrow:last-child
+      margin-left: calc($spacing * 0.4)
+
+    .volume, .brightness
+      padding: calc($padding * 0.5)
+
+    scale
+      @include slider
+      margin: 0 calc($spacing * 0.5)
+
+  .row
+    @include spacing
+
+  .menu
+    @include unset
+    @include widget
+    padding: $padding
+    margin-top: $spacing
+
+    .icon
+      margin: 0 calc($spacing * 0.5)
+      margin-left: calc($spacing * 0.2)
+
+    .title
+      font-weight: bold
+
+    separator
+      margin: calc($radius * 0.5)
+      background-color: $border-color
+
+    button
+      @include button($flat: true)
+      padding: calc($padding * 0.5)
+
+      image:first-child
+        margin-right: calc($spacing * 0.5)
+
+    .bluetooth-devices
+      @include spacing(0.5)
+
+    switch
+      @include switch
+
+  .sliders-box .menu
+    margin: calc($spacing * 0.5) 0
+
+    &.app-mixer
+      .mixer-item
+        padding-left: 0
+        padding: calc($padding * 0.5)
+        padding-right: calc($padding * 2)
+
+        scale
+          @include slider($width: 0.5em)
+
+        image
+          font-size: 1.2em
+          margin: 0 $padding
+
+  .toggle-button
+    @include button
+    font-weight: bold
+    image
+      font-size: 1.3em
+    label
+      margin-left: calc($spacing * 0.3)
+
+    button
+      @include button($flat: true)
+
+      &:first-child
+        border-top-right-radius: 0
+        border-bottom-right-radius: 0
+        padding: calc($padding * 1.2)
+
+      &:last-child
+        border-top-left-radius: 0
+        border-bottom-left-radius: 0
+        padding: calc($padding * 0.5)
+
+    &.active
+      background-color: $primary-bg
+      label, image
+        color: $primary-fg
+
+  .simple-toggle
+    @include button
+    font-weight: bold
+    padding: calc($padding * 1.2)
+
+    label
+      margin-left: calc($spacing * 0.3)
+
+    image
+      font-size: 1.3em
+
+  .media
+    @include spacing
+    .player
+      @include media
