@@ -1,0 +1,91 @@
+window.settings-dialog
+  color: $fg
+  background-color: $bg
+
+  .header
+    .pager
+      @include spacing(0.5)
+
+    padding: $padding
+
+    button
+      @include button
+      font-weight: bold
+      padding: calc($padding * 0.5) $padding
+
+      box
+        @include spacing($spacing: 0.3em)
+
+    button.close
+      padding: calc($padding * 0.4)
+
+    button.reset
+      padding: calc($padding * 0.5)
+      @include button($flat: true)
+
+  .page
+    padding-top: 0
+    padding: calc($padding * 2)
+
+  .group
+    .group-title
+      color: $primary-bg
+      margin-bottom: calc($spacing * 0.5)
+
+    &:not(:first-child)
+      margin-top: $spacing
+
+  .row
+    border-top: none
+    border: $border
+    padding: $padding
+    background-color: $widget-bg
+
+    &:first-child
+      border: $border
+      border-radius: $radius $radius 0 0
+
+    &:last-child
+      border-radius: 0 0 $radius $radius
+
+    &:first-child:last-child
+      border: $border
+      border-radius: $radius
+
+    button.reset
+      margin-left: $spacing
+
+    label.id, label.note
+      color: transparentize($fg, 0.4)
+
+    entry, button
+      @include button
+      padding: $padding
+
+    switch
+      @include switch
+
+    spinbutton
+      @include unset
+
+      entry
+        border-radius: $radius 0 0 $radius
+
+      button
+        border-radius: 0
+
+      button:last-child
+        border-radius: 0 $radius $radius 0
+
+    .enum-setter
+      label
+        border: $border
+        padding: 0 $padding
+        background-color: $widget-bg
+        border-radius: $radius 0 0 $radius
+
+      button
+        border-radius: 0
+
+      button:last-child
+        border-radius: 0 $radius $radius 0

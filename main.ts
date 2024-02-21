@@ -1,14 +1,17 @@
 import 'lib/session'
 import 'lib/init'
-import options from 'options'
+
 import {
-  Bar, BarRoundedCorners,
+  SettingsDialog,
   AppLauncher, Overview,
+  Bar, BarRoundedCorners,
   PowerMenu, Verification,
-  Indicators
+  Indicators, Notifications,
 }from 'windows'
+
 import { forMonitors } from 'lib/utils'
 import { init } from 'lib/init'
+import options from 'options'
 
 export default {
   onConfigParsed: init,
@@ -18,11 +21,13 @@ export default {
   },
   windows: [
     ...forMonitors(Bar),
+    ...forMonitors(Notifications),
     ...forMonitors(BarRoundedCorners),
     ...forMonitors(Indicators),
     Overview,
     AppLauncher,
     PowerMenu,
     Verification,
+    SettingsDialog(),
   ],
 }
