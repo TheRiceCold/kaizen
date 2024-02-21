@@ -1,0 +1,82 @@
+// the fraction has to be more than hyprland ignorealpha
+window#powermenu, window#verification
+  background-color: rgba(0, 0, 0, 0.4)
+
+window#verification .verification
+  @include floating-widget
+  min-width: 300px
+  min-height: 100px
+  padding: calc($popover-padding * 1.5)
+
+  .text-box
+    margin-bottom: $spacing
+
+    .title
+      font-size: 1.6em
+
+    .desc
+      font-size: 1.1em
+      color: transparentize($fg, 0.1)
+
+  .buttons
+    @include spacing
+    margin-top: $padding
+
+    button
+      @include button
+      font-size: 1.5em
+      padding: $padding
+
+window#powermenu .powermenu
+  @include floating-widget
+
+  &.line
+    padding: calc($popover-padding * 1.5)
+
+    button
+      padding: $popover-padding
+
+    label
+      margin-bottom: calc($spacing * -0.5)
+
+  &.box
+    padding: calc($popover-padding * 2)
+
+    button
+      padding: calc($popover-padding * 1.5)
+
+    label
+      margin-bottom: calc($spacing * -1)
+
+  button
+    @include unset
+
+    image
+      @include button
+      font-size: 4em
+      min-width: 1.7em
+      min-height: 1.7em
+      border-radius: $radius + calc($popover-padding * 1.4)
+
+    label, image
+      color: transparentize($fg, 0.1)
+
+    label
+      margin-top: calc($spacing * 0.3)
+
+    &:hover
+      image
+        @include button-hover
+
+      label
+        color: $fg
+
+    &:focus image
+      @include button-focus
+
+    &:active image
+      @include button-active
+
+    &:focus, &:active
+      label
+        color: $primary-bg

@@ -1,8 +1,6 @@
 node_modules/
-highlightjs/
+types/
 
-main.css
-main.css.map
-variables.sass
-
-.goutputsteam*
+package-lock.json
+bun.lockb
+flake.lock

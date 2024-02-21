@@ -1,0 +1,6 @@
+@mixin unset($rec: false)
+  all: unset
+
+  @if $rec
+    *
+      all: unset

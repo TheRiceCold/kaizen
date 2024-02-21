@@ -1,0 +1,52 @@
+@mixin button-focus
+  color: $hover-fg
+  background-color: $hover-bg
+  box-shadow: inset 0 0 0 $border-width $primary-bg
+
+@mixin button-hover
+  color: $hover-fg
+  background-color: $hover-bg
+  box-shadow: inset 0 0 0 $border-width $border-color
+
+@mixin button-active
+  color: $primary-fg
+  background-color: $primary-bg
+  background-image: $active-gradient
+  box-shadow: inset 0 0 0 $border-width $border-color
+
+@mixin button-disabled
+  box-shadow: none
+  background-color: transparent
+  color: transparentize($fg, 0.7)
+
+@mixin button($flat: false, $reactive: true, $radius: $radius, $focusable: true)
+  all: unset
+  color: $fg
+  border-radius: $radius
+  transition: $transition
+
+  @if $flat
+    box-shadow: none
+    background-image: none
+    background-color: transparent
+
+  @else
+    background-color: $widget-bg
+    box-shadow: inset 0 0 0 $border-width $border-color
+
+  @if $reactive
+    @if $focusable
+      &:focus
+        @include button-focus
+
+    &:hover
+      @include button-hover
+
+    &:active, &.on, &.active, &:checked
+      @include button-active
+
+      &:hover
+        box-shadow: inset 0 0 0 $border-width $border-color, inset 0 0 0 99px $hover-bg
+
+  &:disabled
+    @include button-disabled

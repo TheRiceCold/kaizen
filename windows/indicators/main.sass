@@ -1,0 +1,21 @@
+window.indicator
+  .progress
+    @include floating-widget
+    padding: calc($padding * 0.5)
+    @debug $radius
+    border-radius: if($radius >0, calc($radius + $padding * 0.5), 0)
+
+    .fill
+      color: $primary-fg
+      border-radius: $radius
+      background-color: $primary-bg
+
+      image
+        -gtk-icon-transform: scale(0.7)
+
+  .microphone
+    font-size: 58px
+    @include floating-widget
+    margin: calc($spacing * 2)
+    color: transparentize($fg, 0.1)
+    padding: calc($popover-padding * 2)
