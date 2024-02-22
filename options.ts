@@ -36,18 +36,18 @@ const options = mkOptions(OPTIONS, {
       border: opt('#080808'),
     },
 
-    blur: opt(0),
+    blur: opt(4),
     scheme: opt<'dark' | 'light'>('dark'),
     widget: { opacity: opt(94) },
     border: {
-      width: opt(1),
+      width: opt(4),
       opacity: opt(96),
     },
 
     shadows: opt(true),
-    padding: opt(7),
-    spacing: opt(12),
-    radius: opt(11),
+    padding: opt(4),
+    spacing: opt(8),
+    radius: opt(0),
   },
 
   transition: opt(200),
@@ -65,9 +65,7 @@ const options = mkOptions(OPTIONS, {
       start: opt<BarWidget[]>([
         'launcher',
         'media',
-        // 'taskbar',
-        // 'expander',
-        // 'messages',
+        'expander',
       ]),
       center: opt<BarWidget[]>([ 'workspaces' ]),
       end: opt<BarWidget[]>([
@@ -87,7 +85,7 @@ const options = mkOptions(OPTIONS, {
       action: opt(() => App.toggleWindow('applauncher')),
     },
     date: {
-      format: opt('%a %d %I:%M  '),
+      format: opt('%a %d %I:%M 󰌽'),
       action: opt(() => App.toggleWindow('quicksettings')),
     },
     battery: {
@@ -194,7 +192,7 @@ const options = mkOptions(OPTIONS, {
   },
 
   hyprland: {
-    gaps: opt(1),
+    gaps: opt(2),
     inactiveBorder: opt('333333ff'),
   },
 })

@@ -1,38 +1,25 @@
-import {
-  Date,
-  Tray,
-  Media,
-  Launcher,
-  BatteryBar,
-  Workspaces
-} from './widgets'
+import widgets from './widgets'
 import options from 'options'
 
 export type BarWidget = keyof typeof widget
-const widget = {
-  date: Date,
-  tray: Tray,
-  media: Media,
-  launcher: Launcher,
-  battery: BatteryBar,
-  workspaces: Workspaces,
-  expander: () => Widget.Box({ expand: true }),
-}
 
+const { Box, CenterBox, Window } = Widget
 const pos = options.bar.position.bind()
 const { start, center, end } = options.bar.layout
 
-const startWidget = Widget.Box({ hexpand: true, children: start.bind().as(s => s.map(w => widget[w]())) })
-const centerWidget = Widget.Box({ hpack: 'center', children: center.bind().as(c => c.map(w => widget[w]())) })
-const endWidget = Widget.Box({ hexpand: true, children: end.bind().as(e => e.map(w => widget[w]())) })
+const bindWidgets = layout => layout.bind().as(i => i.map(w => widgets[w]()))
 
-export default (monitor: number) => Widget.Window({
+const content = CenterBox({
+  css: 'min-width: 2px; min-height: 2.5rem;',
+  startWidget: Box({ hexpand: true, children: bindWidgets(start) }),
+  centerWidget: Box({ hpack: 'center', children: bindWidgets(center) }),
+  endWidget: Box({ hexpand: true, children: bindWidgets(end) }),
+})
+
+export default (monitor: number) => Window({
+  child: content,
   className: 'bar',
   name: `bar${monitor}`,
   exclusivity: 'exclusive',
   anchor: pos.as(pos => [pos, 'right', 'left']),
-  child: Widget.CenterBox({
-    startWidget, centerWidget, endWidget,
-    css: 'min-width: 2px; min-height: 2.5rem;',
-  })
 })

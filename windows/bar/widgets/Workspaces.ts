@@ -18,8 +18,7 @@ const Workspaces = (ws: number) => Widget.Box({
     }),
   })),
   setup: box => {
-    if (ws === 0)
-      box.hook(
+    if (ws === 0) box.hook(
         hyprland.active.workspace,
         () => box.children.map(btn => btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute))
       )
@@ -29,8 +28,8 @@ const Workspaces = (ws: number) => Widget.Box({
 export default () => PanelButton({
   window: 'overview',
   className: 'workspaces',
+  child: workspaces.bind().as(Workspaces),
   onScrollUp: () => dispatch('m+1'),
   onScrollDown: () => dispatch('m-1'),
   onClicked: () => App.toggleWindow('overview'),
-  child: workspaces.bind().as(Workspaces),
 })

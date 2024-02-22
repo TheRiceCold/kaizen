@@ -1,8 +1,16 @@
-export { default as Tray } from './Tray'
-export { default as Date } from './Date'
-export { default as Media } from './Media'
-export { default as Launcher } from './Launcher'
-export { default as BatteryBar } from './BatteryBar'
-export { default as Workspaces } from './Workspaces'
+import tray from './Tray'
+import date from './Date'
+import media from './Media'
+import launcher from './Launcher'
+import batteryBar from './BatteryBar'
+import workspaces from './Workspaces'
 
-export { default as PanelButton } from './PanelButton'
+export default {
+  date,
+  tray,
+  media,
+  launcher,
+  workspaces,
+  battery: batteryBar,
+  expander: () => Widget.Box({ expand: true }),
+}
