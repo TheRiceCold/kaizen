@@ -190,7 +190,7 @@ const options = mkOptions(OPTIONS, {
   },
 
   notifications: {
-    position: opt<Array<'top' | 'bottom' | 'left' | 'right'>>(['top', 'right']),
+    position: opt<Array<'top' | 'bottom' | 'left' | 'right'>>(['top']),
     blacklist: opt(['Spotify']),
     width: opt(440),
   },

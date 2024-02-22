@@ -12,7 +12,7 @@ function Animated(id: number) {
 
   const inner = Widget.Revealer({
     child: widget,
-    transition: 'slide_left',
+    transition: 'slide_down',
     css: 'border: 1px solid magenta;',
     transitionDuration: transition.value,
   })

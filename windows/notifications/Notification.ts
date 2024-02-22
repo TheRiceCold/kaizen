@@ -27,9 +27,9 @@ const NotificationIcon = ({ app_entry, app_icon, image }: Notification) => {
     icon = app_entry || ''
 
   return Widget.Box({
-    vpack: "start",
+    vpack: 'start',
     hexpand: false,
-    class_name: "icon",
+    className: 'icon',
     css: 'min-width: 78px; min-height: 78px;',
     child: Widget.Icon({
       icon, size: 58,
