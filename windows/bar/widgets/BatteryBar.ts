@@ -5,12 +5,12 @@ import options from 'options'
 const battery = await Service.import('battery')
 const { bar, percentage, blocks, width, low } = options.bar.battery
 
-const Indicator = Widget.Label({
+const Indicator = () => Widget.Label({
   setup: self => self.hook(battery, () =>
     self.label = battery.charging || battery.charged ? icons.battery.charging : battery.icon_name)
 })
 
-const PercentLabel = Widget.Revealer({
+const PercentLabel = () => Widget.Revealer({
   clickThrough: true,
   transition: 'slide_right',
   revealChild: percentage.bind(),
@@ -58,7 +58,7 @@ const WholeButton = Widget.Overlay({
       Widget.Box({
         hpack: 'center',
         vpack: 'center',
-        child: PercentLabel,
+        child: PercentLabel(),
       }),
     ],
   }),
@@ -66,7 +66,7 @@ const WholeButton = Widget.Overlay({
 
 const Regular = Widget.Box({
   className: 'regular',
-  children: [ Indicator, PercentLabel, LevelBar() ],
+  children: [ Indicator(), PercentLabel(), LevelBar() ],
 })
 
 export default () => PanelButton({

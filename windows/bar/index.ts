@@ -12,13 +12,10 @@ export type BarWidget = keyof typeof widget
 const widget = {
   date: Date,
   tray: Tray,
+  media: Media,
   launcher: Launcher,
   battery: BatteryBar,
   workspaces: Workspaces,
-  media: Media,
-  // system: SystemIndicators,
-  // taskbar: Taskbar,
-  // messages: Messages,
   expander: () => Widget.Box({ expand: true }),
 }
 

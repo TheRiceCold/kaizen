@@ -2,13 +2,14 @@ import 'lib/session'
 import 'lib/init'
 
 import {
-  setupQuickSettings,
+//   setupQuickSettings,
   SettingsDialog,
-  AppLauncher, Overview,
+  AppLauncher,
+  Overview,
   Bar, BarRoundedCorners,
   PowerMenu, Verification,
   Indicators, Notifications,
-}from 'windows'
+} from 'windows'
 
 import { forMonitors } from 'lib/utils'
 import { init } from 'lib/init'
@@ -16,7 +17,7 @@ import options from 'options'
 
 export default {
   onConfigParsed: () => {
-    setupQuickSettings()
+    // setupQuickSettings()
     init()
   },
   closeWindowDelay: {
