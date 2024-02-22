@@ -1,6 +1,6 @@
 import type Gtk from 'gi://Gtk?version=3.0'
-import { ProfileSelector, ProfileToggle } from './widgets/AsusProfile'
 import { Header } from './widgets/Header'
+import PopupWindow from '../PopupWindow'
 import {
   Brightness,
   Media, MicMute,
@@ -9,7 +9,6 @@ import {
   BluetoothToggle, BluetoothDevices,
   Volume, Microphone, AppMixer, SinkSelector
 } from './widgets'
-import PopupWindow from '../PopupWindow'
 import options from 'options'
 
 const { bar, quicksettings } = options
@@ -41,19 +40,20 @@ const Settings = () => Widget.Box({
       className: 'sliders-box vertical',
       vertical: true,
       children: [
-        Row( [Volume], [SinkSelector, AppMixer]),
+        Row(
+          [ Volume ],
+          [ SinkSelector, AppMixer ]
+        ),
         Microphone(),
         Brightness(),
       ],
     }),
-    Row([NetworkToggle, BluetoothToggle], [WifiSelection, BluetoothDevices]),
-    Row([
-      // ProfileToggle,
-      DarkModeToggle
-    ],
-      // [ProfileSelector]
+    Row(
+      [ NetworkToggle, BluetoothToggle ],
+      [ WifiSelection, BluetoothDevices ]
     ),
-    Row([MicMute, DND]),
+    Row([ DarkModeToggle ]),
+    Row([ MicMute, DND ]),
     Widget.Box({
       child: Media(),
       visible: media.as(l => l.length > 0),

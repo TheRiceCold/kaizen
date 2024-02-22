@@ -1,6 +1,7 @@
 import {
   Date,
   Tray,
+  Media,
   Launcher,
   BatteryBar,
   Workspaces
@@ -14,7 +15,7 @@ const widget = {
   launcher: Launcher,
   battery: BatteryBar,
   workspaces: Workspaces,
-  // media: Media,
+  media: Media,
   // system: SystemIndicators,
   // taskbar: Taskbar,
   // messages: Messages,

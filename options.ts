@@ -13,7 +13,7 @@ const options = mkOptions(OPTIONS, {
         fg: opt('#141414'),
       },
       error: {
-        bg: opt('#e55f86'),
+        bg: opt('#D67A96'),
         fg: opt('#141414'),
       },
       bg: opt('#373559'),
@@ -23,11 +23,11 @@ const options = mkOptions(OPTIONS, {
     },
     light: {
       primary: {
-        bg: opt('#426ede'),
+        bg: opt('#6AAAFF'),
         fg: opt('#eeeeee'),
       },
       error: {
-        bg: opt('#b13558'),
+        bg: opt('#D67A96'),
         fg: opt('#eeeeee'),
       },
       bg: opt('#fffffa'),
@@ -64,13 +64,13 @@ const options = mkOptions(OPTIONS, {
     layout: {
       start: opt<BarWidget[]>([
         'launcher',
+        'media',
         // 'taskbar',
         // 'expander',
         // 'messages',
       ]),
       center: opt<BarWidget[]>([ 'workspaces' ]),
       end: opt<BarWidget[]>([
-        // 'media',
         'expander',
         'tray',
         // 'system',
@@ -94,12 +94,12 @@ const options = mkOptions(OPTIONS, {
       bar: opt<'hidden' | 'regular' | 'whole'>('whole'),
       charging: opt('#93CDA8'),
       percentage: opt(false),
-      blocks: opt(10),
+      blocks: opt(7),
       width: opt(28),
       low: opt(30),
     },
     workspaces: {
-      workspaces: opt(9),
+      workspaces: opt(5),
     },
     taskbar: {
       monochrome: opt(true),
@@ -140,7 +140,7 @@ const options = mkOptions(OPTIONS, {
 
   overview: {
     scale: opt(9),
-    workspaces: opt(9),
+    workspaces: opt(5),
     monochromeIcon: opt(true),
   },
 

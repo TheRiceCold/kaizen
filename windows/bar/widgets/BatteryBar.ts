@@ -5,12 +5,12 @@ import options from 'options'
 const battery = await Service.import('battery')
 const { bar, percentage, blocks, width, low } = options.bar.battery
 
-const Indicator = () => Widget.Label({
+const Indicator = Widget.Label({
   setup: self => self.hook(battery, () =>
-    self.label = battery.charging || battery.charged ? icons.battery.charging : battery.icon_name),
+    self.label = battery.charging || battery.charged ? icons.battery.charging : battery.icon_name)
 })
 
-const PercentLabel = () => Widget.Revealer({
+const PercentLabel = Widget.Revealer({
   clickThrough: true,
   transition: 'slide_right',
   revealChild: percentage.bind(),
@@ -34,12 +34,13 @@ const LevelBar = () => {
     .hook(width, update)
     .hook(blocks, update)
     .hook(bar, () => {
-      level.vpack = bar.value === 'whole' ? 'fill' : 'center'
-      level.hpack = bar.value === 'whole' ? 'fill' : 'center'
+      const barType = (bar.value === 'whole') ? 'fill' : 'center'
+      level.vpack = barType
+      level.hpack = barType
     })
 }
 
-const WholeButton = () => Widget.Overlay({
+const WholeButton = Widget.Overlay({
   vexpand: true,
   child: LevelBar(),
   className: 'whole',
@@ -57,25 +58,26 @@ const WholeButton = () => Widget.Overlay({
       Widget.Box({
         hpack: 'center',
         vpack: 'center',
-        child: PercentLabel(),
+        child: PercentLabel,
       }),
     ],
   }),
 })
 
-const Regular = () => Widget.Box({
+const Regular = Widget.Box({
   className: 'regular',
-  children: [ Indicator(), PercentLabel(), LevelBar() ],
+  children: [ Indicator, PercentLabel, LevelBar() ],
 })
 
 export default () => PanelButton({
   hexpand: false,
   className: 'battery-bar',
-  onClicked: () => { percentage.value = !percentage.value },
+  visible: battery.bind('available'),
+  onClicked: () => percentage.value = !percentage.value,
   child: Widget.Box({
     expand: true,
     visible: battery.bind('available'),
-    child: bar.bind().as(b => b === 'whole' ? WholeButton() : Regular()),
+    child: bar.bind().as(b => b === 'whole' ? WholeButton : Regular),
   }),
   setup: self => self
     .hook(bar, w => w.toggleClassName('bar-hidden', bar.value === 'hidden'))

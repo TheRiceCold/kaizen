@@ -5,9 +5,7 @@ import { sh, range } from 'lib/utils'
 const hyprland = await Service.import('hyprland')
 const { workspaces } = options.bar.workspaces
 
-const dispatch = (arg: string | number) => {
-  sh(`hyprctl dispatch workspace ${arg}`)
-}
+const dispatch = (arg: string | number) => sh(`hyprctl dispatch workspace ${arg}`)
 
 const Workspaces = (ws: number) => Widget.Box({
   children: range(ws || 20).map(i => Widget.Label({

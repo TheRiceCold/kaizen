@@ -3,7 +3,7 @@ import options from 'options'
 
 const notifications = await Service.import('notifications')
 const { transition } = options
-const { position, blacklist } = options.notifications
+const { position } = options.notifications
 const { timeout, idle } = Utils
 
 function Animated(id: number) {
@@ -11,10 +11,10 @@ function Animated(id: number) {
   const widget = Notification(n)
 
   const inner = Widget.Revealer({
-    css: 'border: 1px solid magenta;',
-    transition: 'slide_left',
-    transitionDuration: transition.value,
     child: widget,
+    transition: 'slide_left',
+    css: 'border: 1px solid magenta;',
+    transitionDuration: transition.value,
   })
 
   const outer = Widget.Revealer({
@@ -61,9 +61,6 @@ function PopupList() {
         if (map.has(id))
           remove(null, id)
 
-        if (blacklist.value.includes(notifications.getNotification(id)!.app_name))
-          return
-
         if (notifications.dnd)
           return
 
@@ -72,8 +69,8 @@ function PopupList() {
         box.children = [w, ...box.children]
       }
     }, 'notified')
-    .hook(notifications, remove, "dismissed")
-    .hook(notifications, remove, "closed")
+    .hook(notifications, remove, 'dismissed')
+    .hook(notifications, remove, 'closed')
 }
 
 export default (monitor: number) => Widget.Window({

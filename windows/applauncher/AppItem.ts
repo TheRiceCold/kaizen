@@ -39,8 +39,8 @@ export const AppItem = (app: Application) => {
   })
 
   const appicon = Widget.Icon({
-    icon: icon(app.icon_name, icons.fallback.executable),
     size: iconSize.bind(),
+    icon: icon(app.icon_name, icons.fallback.executable),
   })
 
   const textBox = Widget.Box({
@@ -50,12 +50,9 @@ export const AppItem = (app: Application) => {
   })
 
   return Widget.Button({
-    className: 'app-item',
     attribute: { app },
+    className: 'app-item',
     child: Widget.Box({ children: [ appicon, textBox ] }),
-    onClicked: () => {
-      App.closeWindow('applauncher')
-      launchApp(app)
-    },
+    onClicked: () => { App.closeWindow('applauncher'); launchApp(app); },
   })
 }

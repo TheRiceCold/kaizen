@@ -30,7 +30,7 @@ const Player = (player: MprisPlayer) => {
     hpack: 'start',
     truncate: 'end',
     className: 'title',
-    max_width_chars: 20,
+    maxWidthChars: 20,
     label: player.bind('track_title'),
   })
 
@@ -59,16 +59,16 @@ const Player = (player: MprisPlayer) => {
   })
 
   const positionLabel = Widget.Label({
-      className: 'position',
-      hpack: 'start',
-      setup: self => {
-        const update = (_: unknown, time?: number) => {
-          self.label = lengthStr(time || player.position)
-          self.visible = player.length > 0
-        }
-        self.hook(player, update, 'position')
-        self.poll(1000, update)
-      },
+    className: 'position',
+    hpack: 'start',
+    setup: self => {
+      const update = (_: unknown, time?: number) => {
+        self.label = lengthStr(time || player.position)
+        self.visible = player.length > 0
+      }
+      self.hook(player, update, 'position')
+      self.poll(1000, update)
+    },
   })
 
   const lengthLabel = Widget.Label({

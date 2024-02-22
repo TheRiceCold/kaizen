@@ -75,14 +75,14 @@ function MicrophoneMute() {
 
 export default (monitor: number) => Widget.Window({
   monitor,
-  name: `indicator${monitor}`,
-  className: 'indicator',
   layer: 'overlay',
   clickThrough: true,
+  className: 'indicator',
+  name: `indicator${monitor}`,
   anchor: [ 'right', 'left', 'top', 'bottom' ],
   child: Widget.Box({
-    css: 'padding: 2px;',
     expand: true,
+    css: 'padding: 2px;',
     child: Widget.Overlay<Gtk.Widget>(
       { child: Widget.Box({ expand: true }) },
       Widget.Box({

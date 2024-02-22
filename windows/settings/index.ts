@@ -5,7 +5,7 @@ import options from 'options'
 
 const current = Variable(layout[0].attribute.name)
 
-const Header = () => Widget.CenterBox({
+const Header = Widget.CenterBox({
   className: 'header',
   startWidget: Widget.Button({
     className: 'reset',
@@ -33,7 +33,7 @@ const Header = () => Widget.CenterBox({
   }),
 })
 
-const PagesStack = () => Widget.Stack({
+const PagesStack = Widget.Stack({
   transition: 'slide_left_right',
   children: layout.reduce((obj, page) => ({ ...obj, [page.attribute.name]: page }), {}),
   shown: current.bind() as never,
@@ -45,10 +45,10 @@ export default () => RegularWindow({
   className: 'settings-dialog',
   setup(win) {
     win.on('delete-event', () => { win.hide(); return true; })
-    win.set_default_size(600, 500)
+    win.set_default_size(500, 600)
   },
   child: Widget.Box({
     vertical: true,
-    children: [ Header(), PagesStack() ],
+    children: [ Header, PagesStack ],
   }),
 })

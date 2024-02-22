@@ -127,9 +127,7 @@ export const SimpleToggleButton = ({
 }: SimpleToggleButtonProps) => Widget.Button({
   onClicked: toggle,
   className: 'simple-toggle',
-  setup: self => self.hook(service, () => {
-    self.toggleClassName('active', condition())
-  }),
+  setup: self => self.hook(service, () => self.toggleClassName('active', condition())),
   child: Widget.Box([
     Widget.Icon({ icon }),
     Widget.Label({ max_width_chars: 10, truncate: 'end', label }),

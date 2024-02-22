@@ -1,6 +1,5 @@
 export { Volume, Microphone, AppMixer, SinkSelector } from './Volume'
 export { BluetoothToggle, BluetoothDevices } from './Bluetooth'
-export { ProfileToggle,  ProfileSelector } from './AsusProfile'
 export { NetworkToggle, WifiSelection } from './Network'
 export { DarkModeToggle } from './DarkMode'
 export { Brightness } from './Brightness'
