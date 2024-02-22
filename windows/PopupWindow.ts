@@ -7,16 +7,17 @@ import options from 'options'
 type Transition = RevealerProps['transition']
 type Child = WindowProps['child']
 
-type PopupWindowProps = WindowProps & {
+type PopupWindowProps = Omit<WindowProps, 'name'> & {
   name: string
   layout?: keyof ReturnType<typeof Layout>
   transition?: Transition,
 }
 
-export const Padding = (
-  name: string,
-  { css = '', hexpand = true, vexpand = true }: EventBoxProps = {}
-) => Widget.EventBox({
+export const Padding = (name: string, {
+  css = '',
+  hexpand = true,
+  vexpand = true,
+}: EventBoxProps = {}) => Widget.EventBox({
   hexpand,
   vexpand,
   canFocus: false,
@@ -27,13 +28,16 @@ export const Padding = (
 const PopupRevealer = (
   name: string,
   child: Child,
-  transition: Transition = 'slide_down'
+  transition: Transition = 'slide_down',
 ) => Widget.Box(
   { css: 'padding: 1px;' },
   Widget.Revealer({
     transition,
+    child: Widget.Box({
+      child,
+      className: 'window-content',
+    }),
     transitionDuration: options.transition.bind(),
-    child: Widget.Box({ child, className: 'window-content' }),
     setup: self => self.hook(App, (_, wname, visible) => {
       if (wname === name) self.reveal_child = visible
     }),
@@ -119,14 +123,15 @@ export default ({
   layout = 'center',
   exclusivity = 'ignore',
   ...props
-}: PopupWindowProps) => Widget.Window({
+}: PopupWindowProps) => Widget.Window<Gtk.Widget>({
   name,
   exclusivity,
   layer: 'top',
   visible: false,
   keymode: 'on-demand',
-  classNames: [ name, 'popup-window' ],
+  classNames: [name, 'popup-window'],
   anchor: ['top', 'bottom', 'right', 'left'],
   child: Layout(name, child, transition)[layout](),
+  setup: w => w.keybind('Escape', () => App.closeWindow(name)),
   ...props,
 })
