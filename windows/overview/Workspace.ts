@@ -19,14 +19,12 @@ const size = (id: number) => {
 }
 
 export default (id: number) => Widget.Box({
+  vpack: 'center',
   attribute: { id },
   tooltipText: `${id}`,
   className: 'workspace',
-  vpack: 'center',
   css: ` min-width: ${scale(size(id).w)}px; min-height: ${scale(size(id).h)}px;`,
-  setup: box => box.hook(hyprland, () => {
-      box.toggleClassName('active', hyprland.active.workspace.id === id)
-  }),
+  setup: box => box.hook(hyprland, () => box.toggleClassName('active', hyprland.active.workspace.id === id)),
   child: Widget.EventBox({
     expand: true,
     onPrimaryClick: () => {

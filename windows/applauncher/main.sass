@@ -3,23 +3,22 @@
 
 window#applauncher .applauncher
   @include floating_widget
-
   .quicklaunch
     @include spacing
-
     button
       padding: $padding
       @include button($flat: true)
 
   entry
-    @include button
-    padding: $padding
+    all: unset
+    color: $fg
     margin: $spacing
-
+    padding: $padding
+    border-radius: $radius
+    border: 1px solid transparentize($fg, 0.2)
     selection
+      background-color: $primary-bg
       color: color.mix($fg, $bg, 50%)
-      background-color: transparent
-
     label, image
       color: $fg
 
@@ -29,7 +28,6 @@ window#applauncher .applauncher
 
   button.app-item
     @include button($flat: true, $reactive: false)
-
     > box
       @include spacing(0.5)
 
@@ -38,10 +36,8 @@ window#applauncher .applauncher
 
     label
       transition: $transition
-
       &.title
         color: $fg
-
       &.description
         color: transparentize($fg, 0.3)
 
@@ -52,7 +48,7 @@ window#applauncher .applauncher
       .title
         color: $primary-bg
       .description
-          color: transparentize($primary-bg, 0.4)
+        color: transparentize($primary-bg, 0.4)
       image
         -gtk-icon-shadow: 2px 2px $primary-bg
 

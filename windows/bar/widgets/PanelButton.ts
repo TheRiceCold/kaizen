@@ -1,4 +1,5 @@
 import options from 'options'
+import { setupCursorHover } from 'lib/cursorhover'
 import { ButtonProps } from 'types/widgets/button'
 
 type PanelButtonProps = ButtonProps & {
@@ -6,7 +7,6 @@ type PanelButtonProps = ButtonProps & {
   flat?: boolean
 }
 
-// TODO: Add CursorHover
 export default ({
   window = '',
   flat,
@@ -16,6 +16,7 @@ export default ({
 }: PanelButtonProps) => Widget.Button({
   child: Widget.Box({ child }),
   setup: self => {
+    setupCursorHover(self)
     let open = false
 
     self.toggleClassName('panel-button')

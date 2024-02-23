@@ -64,7 +64,7 @@ const options = mkOptions(OPTIONS, {
     layout: {
       start: opt<BarWidget[]>([
         'launcher',
-        'media',
+        // 'media',
         'expander',
       ]),
       center: opt<BarWidget[]>([ 'workspaces' ]),
@@ -72,8 +72,8 @@ const options = mkOptions(OPTIONS, {
         'expander',
         'tray',
         // 'system',
+        'date',
         'battery',
-        'date'
       ]),
     },
     launcher: {
@@ -122,10 +122,10 @@ const options = mkOptions(OPTIONS, {
   },
 
   applauncher: {
-    iconSize: opt(62),
+    iconSize: opt(48),
     width: opt(0),
     margin: opt(80),
-    maxItem: opt(6),
+    maxItem: opt(5),
     favorites: opt([
       [
         "firefox",
@@ -135,8 +135,9 @@ const options = mkOptions(OPTIONS, {
       [
         "neovide",
         "krita",
+        "godot",
         "blender",
-      ]
+      ],
     ]),
   },
 

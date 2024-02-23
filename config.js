@@ -9,8 +9,8 @@ try {
     '--external', 'gi://*',
     '--external', 'file://*',
   ])
-} catch (error) {
-  console.error(error)
+} catch (err) {
+  console.error(err)
   App.quit()
 }
 
