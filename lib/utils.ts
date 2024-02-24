@@ -87,6 +87,12 @@ const createSurfaceFromWidget = (widget: Gtk.Widget) => {
   return surface
 }
 
+const fileExists = (path: string)  =>
+  imports.gi.Gio.File.new_for_path(path).query_exists(null)
+
+const expandTilde = (path: string) =>
+  path.startsWith('~') ? GLib.get_home_dir() + path.slice(1) : path
+
 export {
   config,
   icon,
@@ -98,4 +104,6 @@ export {
   dependencies,
   launchApp,
   createSurfaceFromWidget,
+  fileExists,
+  expandTilde,
 }
