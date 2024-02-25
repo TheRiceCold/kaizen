@@ -1,5 +1,5 @@
 import options from 'options'
-import { setupCursorHover } from 'lib/cursorhover'
+import { setupCursorHover } from 'misc/cursorhover'
 import { ButtonProps } from 'types/widgets/button'
 
 type PanelButtonProps = ButtonProps & {

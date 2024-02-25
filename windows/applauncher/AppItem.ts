@@ -1,7 +1,7 @@
 import { type Application } from 'types/service/applications'
 import options from 'options'
 import { launchApp, icon } from 'lib/utils'
-import { setupCursorHover } from 'lib/cursorhover'
+import { setupCursorHover } from 'misc/cursorhover'
 import icons from 'lib/icons'
 
 const { iconSize } = options.applauncher

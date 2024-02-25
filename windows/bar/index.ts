@@ -9,7 +9,7 @@ const { start, center, end } = options.bar.layout
 
 const bindWidgets = layout => layout.bind().as(i => i.map(w => widgets[w]()))
 
-const content = CenterBox({
+const Content = CenterBox({
   css: 'min-width: 2px; min-height: 2.5rem;',
   startWidget: Box({ hexpand: true, children: bindWidgets(start) }),
   centerWidget: Box({ hpack: 'center', children: bindWidgets(center) }),
@@ -17,7 +17,7 @@ const content = CenterBox({
 })
 
 export default (monitor: number) => Window({
-  child: content,
+  child: Content,
   className: 'bar',
   name: `bar${monitor}`,
   exclusivity: 'exclusive',

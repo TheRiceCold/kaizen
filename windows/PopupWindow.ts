@@ -57,58 +57,58 @@ const Layout = (name: string, child: Child, transition?: Transition) => ({
   ),
   top: () => Widget.CenterBox({},
     Padding(name),
-    Widget.Box<Gtk.Widget>(
+    Widget.Box(
       { vertical: true },
       PopupRevealer(name, child, transition),
       Padding(name),
     ),
     Padding(name),
   ),
-  'top-right': () => Widget.Box<Gtk.Widget>({},
+  'top-right': () => Widget.Box({},
     Padding(name),
-    Widget.Box<Gtk.Widget>(
+    Widget.Box(
       { hexpand: false, vertical: true },
       PopupRevealer(name, child, transition),
       Padding(name),
     ),
   ),
-  'top-center': () => Widget.Box<Gtk.Widget>({},
+  'top-center': () => Widget.Box({},
     Padding(name),
-    Widget.Box<Gtk.Widget>(
-      { hexpand: false, vertical: true },
-      PopupRevealer(name, child, transition),
-      Padding(name),
-    ),
-    Padding(name),
-  ),
-  'top-left': () => Widget.Box<Gtk.Widget>({},
-    Widget.Box<Gtk.Widget>(
+    Widget.Box(
       { hexpand: false, vertical: true },
       PopupRevealer(name, child, transition),
       Padding(name),
     ),
     Padding(name),
   ),
-  'bottom-left': () => Widget.Box<Gtk.Widget>({},
-    Widget.Box<Gtk.Widget>(
+  'top-left': () => Widget.Box({},
+    Widget.Box(
+      { hexpand: false, vertical: true },
+      PopupRevealer(name, child, transition),
+      Padding(name),
+    ),
+    Padding(name),
+  ),
+  'bottom-left': () => Widget.Box({},
+    Widget.Box(
       { hexpand: false, vertical: true },
       Padding(name),
       PopupRevealer(name, child, transition),
     ),
     Padding(name),
   ),
-  'bottom-center': () => Widget.Box<Gtk.Widget>({},
+  'bottom-center': () => Widget.Box({},
     Padding(name),
-    Widget.Box<Gtk.Widget>(
+    Widget.Box(
       { hexpand: false, vertical: true },
       Padding(name),
       PopupRevealer(name, child, transition),
     ),
     Padding(name),
   ),
-  'bottom-right': () => Widget.Box<Gtk.Widget>({},
+  'bottom-right': () => Widget.Box({},
     Padding(name),
-    Widget.Box<Gtk.Widget>(
+    Widget.Box(
       { hexpand: false, vertical: true },
       Padding(name),
       PopupRevealer(name, child, transition),
@@ -123,7 +123,7 @@ export default ({
   layout = 'center',
   exclusivity = 'ignore',
   ...props
-}: PopupWindowProps) => Widget.Window<Gtk.Widget>({
+}: PopupWindowProps) => Widget.Window({
   name,
   exclusivity,
   layer: 'top',

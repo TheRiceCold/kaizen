@@ -14,7 +14,7 @@ $bar-spacing: calc($spacing * 0.3)
     padding: calc($padding * 0.4) calc($padding * 0.8)
 
 .bar
-  background-color: $bg
+  background-color: transparentize($bg, 0.5)
   .panel-button
     @include panel-button
     &:not(.flat)

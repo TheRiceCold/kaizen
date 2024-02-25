@@ -25,7 +25,7 @@ const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/ai/google_ap
 function replaceapidom(URL) {
   if (fileExists(expandTilde(APIDOM_FILE_LOCATION))) {
     var contents = Utils.readFile(expandTilde(APIDOM_FILE_LOCATION)).trim()
-    var URL = URL.toString().replace("generativelanguage.googleapis.com", contents)
+    var URL = URL.toString().replace('generativelanguage.googleapis.com', contents)
   }
   return URL
 }
@@ -213,7 +213,7 @@ class GeminiService extends Service {
 
     const body = {
       contents: this._messages.map(msg => ({ role: msg.role, parts: msg.parts })),
-      generationConfig.temperature: this._temperature,
+      generationConfig: { temperature: this._temperature }
     }
 
     const session = new Soup.Session()
