@@ -71,27 +71,32 @@ const options = mkOptions(OPTIONS, {
       end: opt<BarWidget[]>([
         'expander',
         'tray',
-        // 'system',
-        'date',
         'battery',
+        'date',
+        'utils',
       ]),
     },
     launcher: {
       icon: {
-        colored: opt(true),
+        colored: opt(false),
         icon: opt('system-search-symbolic'),
       },
       label: { colored: opt(false), label: opt(''), },
       action: opt(() => App.toggleWindow('applauncher')),
     },
     date: {
-      format: opt('%a %d %I:%M 󰌽'),
+      colored: opt(false),
+      format: opt('%a %I:%M'),
+      action: opt(() => App.toggleWindow('quicksettings')),
+    },
+    utils: {
+      colored: opt(false),
       action: opt(() => App.toggleWindow('quicksettings')),
     },
     battery: {
-      bar: opt<'hidden' | 'regular' | 'whole'>('whole'),
+      bar: opt<'hidden' | 'regular' | 'whole'>('hidden'),
       charging: opt('#93CDA8'),
-      percentage: opt(false),
+      percentage: opt(true),
       blocks: opt(7),
       width: opt(28),
       low: opt(30),

@@ -1,127 +1,110 @@
-window#quicksettings .quicksettings
-  @include spacing
-  @include floating-widget
+// @mixin header-icon
+//   min-width: 2.5rem
+//   min-height: 2.5rem
+//   font-size: 1.25rem
 
-  padding: calc($popover-padding * 1.4)
+// @mixin icon-button
+//   color: $fg-color
+//   border-radius: $radii
+//   transition: 300ms cubic-bezier(0.1, 1, 0, 1)
+//   &:hover
+//     background: $hover
+//   &:focus
+//     color: $bg-color
+//     background: $accent
 
-  .avatar
-    @include widget
-    border-radius: calc($radius * 3)
+// @mixin big-button
+//   min-width: 7.3rem
+//   @include container
+//   @include icon-button
+//   .icon
+//     font-size: 1.5rem
+//   .title
+//     font-size: 1.15rem
+//     + label
+//       color: transparentize($fg-color, 0.5)
+//   &:focus .title + label
+//     color: $bg-color
 
-  .header
-    @include spacing(0.5)
-    color: transparentize($fg, 0.15)
-    button
-      @include button
-      padding: $padding
-      image
-        font-size: 1.4em
+// .quicksettings
+//   @include container
+//   padding: 0
 
-  .sliders-box
-    @include widget
-    padding: $padding
+//   .header
+//     margin: 0
+//     box-shadow: none
+//     background: none
+//     padding: calc($padding * 1.5)
+//     border-bottom-left-radius: 0
+//     border-bottom-right-radius: 0
+//     border-bottom: 2px solid $hover
 
-    button
-      @include button($flat: true)
-      padding: calc($padding * 0.5)
+//     .uptime
+//       font-weight: 700
+//       font-size: 1.1rem
+//       margin-right: calc($spacing * 2)
+//       margin-left: calc($spacing * 2.5)
 
-    .volume button.arrow:last-child
-      margin-left: calc($spacing * 0.4)
+//     .avatar
+//       border-radius: $radii
+//       background-size: cover
 
-    .volume, .brightness
-      padding: calc($padding * 0.5)
+//     .tab-button
+//       @include header-icon
+//       &:focus
+//         color: $accent
 
-    scale
-      @include slider
-      margin: 0 calc($spacing * 0.5)
+//     .tab-indicator
+//       font-size: 0
+//       color: $accent
+//       min-height: 0.2rem
+//       transition: 180ms ease-in-out
 
-  .row
-    @include spacing
+//     .icon-button
+//       @include header-icon
+//       @include icon-button
 
-  .menu
-    @include unset
-    @include widget
-    padding: $padding
-    margin-top: $spacing
+//   .sliders
+//     @include widget
+//     padding: $padding
 
-    .icon
-      margin: 0 calc($spacing * 0.5)
-      margin-left: calc($spacing * 0.2)
+//     scale
+//       @include slider
 
-    .title
-      font-weight: bold
+//   .content
+//     padding: $padding
+//     .toggle-button
+//       @include big-button
 
-    separator
-      margin: calc($radius * 0.5)
-      background-color: $border-color
+//     .settings-list
+//       min-height: 300px
+//       @include container
+//       .action-button
+//         font-size: 1.5rem
+//         min-width: 2.25rem
+//         min-height: 2.25rem
+//         color: $fg-color
+//         border-radius: calc($radii * 0.85)
+//         &:hover
+//           background: $hover
 
-    button
-      @include button($flat: true)
-      padding: calc($padding * 0.5)
+//     .footer
+//       .footer-button
+//         @include big-button
 
-      image:first-child
-        margin-right: calc($spacing * 0.5)
+//       .calendar
+//         @include container
+//         calendar
+//           font-size: 1.3em
+//           padding: calc($padding * 0.6)
 
-    .bluetooth-devices
-      @include spacing(0.5)
+//           &:selected
+//             color: $accent
+//             font-weight: 700
 
-    switch
-      @include switch
+//           &.header
 
-  .sliders-box .menu
-    margin: calc($spacing * 0.5) 0
+//           &.highlight
 
-    &.app-mixer
-      .mixer-item
-        padding-left: 0
-        padding: calc($padding * 0.5)
-        padding-right: calc($padding * 2)
-
-        scale
-          @include slider($width: 0.5em)
-
-        image
-          font-size: 1.2em
-          margin: 0 $padding
-
-  .toggle-button
-    @include button
-    font-weight: bold
-    image
-      font-size: 1.3em
-    label
-      margin-left: calc($spacing * 0.3)
-
-    button
-      @include button($flat: true)
-
-      &:first-child
-        border-top-right-radius: 0
-        border-bottom-right-radius: 0
-        padding: calc($padding * 1.2)
-
-      &:last-child
-        border-top-left-radius: 0
-        border-bottom-left-radius: 0
-        padding: calc($padding * 0.5)
-
-    &.active
-      background-color: $primary-bg
-      label, image
-        color: $primary-fg
-
-  .simple-toggle
-    @include button
-    font-weight: bold
-    padding: calc($padding * 1.2)
-
-    label
-      margin-left: calc($spacing * 0.3)
-
-    image
-      font-size: 1.3em
-
-  .media
-    @include spacing
-    .player
-      @include media
+//           &:indeterminate
+//             color: transparentize($fg-color, 0.5)

@@ -1,11 +1,13 @@
-import type Gtk from 'gi://Gtk?version=3.0'
 import icons from 'lib/icons'
-import { uptime } from 'lib/variables'
 import options from 'options'
 import powermenu, { Action } from 'service/powermenu'
 
 const battery = await Service.import('battery')
 const { image, size } = options.quicksettings.avatar
+
+const uptime = Variable(0, {
+  poll: [60_000, 'cat /proc/uptime', line => Number.parseInt(line.split('.')[0]) / 60],
+})
 
 function up(up: number) {
   const h = Math.floor(up / 60)
@@ -29,7 +31,7 @@ const SysButton = (action: Action) => Widget.Button({
   child: Widget.Icon(icons.powermenu[action]),
 })
 
-export const Header = () => Widget.Box<Gtk.Widget>(
+export const Header = () => Widget.Box(
   { className: 'header horizontal' },
   Avatar(),
   Widget.Box({

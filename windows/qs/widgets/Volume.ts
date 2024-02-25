@@ -1,4 +1,3 @@
-import type Gtk from 'gi://Gtk?version=3.0'
 import { type Stream } from 'types/service/audio'
 import { Arrow, Menu } from '../ToggleButton'
 import { dependencies, icon, sh } from 'lib/utils'
@@ -49,33 +48,29 @@ export const Microphone = () => Widget.Box({
   ],
 })
 
-const MixerItem = (stream: Stream) => Widget.Box<Gtk.Widget>(
+const MixerItem = (stream: Stream) => Widget.Box(
   {
-      hexpand: true,
-      class_name: "mixer-item horizontal",
+    hexpand: true,
+    className: 'mixer-item horizontal',
   },
   Widget.Icon({
-      tooltip_text: stream.bind("name").as(n => n || ""),
-      icon: stream.bind("name").as(n => {
-          return Utils.lookUpIcon(n || "")
-              ? (n || "")
-              : icons.fallback.audio
-      }),
+    tooltip_text: stream.bind('name').as(n => n || ''),
+    icon: stream.bind('name').as(n => Utils.lookUpIcon(n || '') ? (n || '') : icons.fallback.audio),
   }),
-  Widget.Box<Gtk.Widget>(
-      { vertical: true },
-      Widget.Label({
-          xalign: 0,
-          truncate: "end",
-          max_width_chars: 28,
-          label: stream.bind("description").as(d => d || ""),
-      }),
-      Widget.Slider({
-          hexpand: true,
-          draw_value: false,
-          value: stream.bind("volume"),
-          on_change: ({ value }) => stream.volume = value,
-      }),
+  Widget.Box(
+    { vertical: true },
+    Widget.Label({
+      xalign: 0,
+      truncate: 'end',
+      maxWidthChars: 28,
+      label: stream.bind('description').as(d => d || ''),
+    }),
+    Widget.Slider({
+      hexpand: true,
+      drawValue: false,
+      value: stream.bind('volume'),
+      on_change: ({ value }) => stream.volume = value,
+    }),
   ),
 )
 
@@ -115,8 +110,8 @@ const SettingsButton = () => Widget.Button({
 
 export const AppMixer = () => Menu({
   name: 'app-mixer',
-  icon: icons.audio.mixer,
   title: 'App Mixer',
+  icon: icons.audio.mixer,
   content: [
     Widget.Box({
       vertical: true,

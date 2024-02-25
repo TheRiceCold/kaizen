@@ -2,7 +2,7 @@ import 'lib/session'
 import 'lib/init'
 
 import {
-//   setupQuickSettings,
+  setupQuickSettings,
   SettingsDialog,
   AppLauncher,
   Overview,
@@ -17,7 +17,7 @@ import options from 'options'
 
 export default {
   onConfigParsed: () => {
-    // setupQuickSettings()
+    setupQuickSettings()
     init()
   },
   closeWindowDelay: {
@@ -26,12 +26,13 @@ export default {
   },
   windows: [
     ...forMonitors(Bar),
+    // ...forMonitors(Desktop),
     ...forMonitors(Notifications),
     ...forMonitors(BarRoundedCorners),
     ...forMonitors(Indicators),
     Overview,
-    AppLauncher,
     PowerMenu,
+    AppLauncher,
     Verification,
     SettingsDialog(),
   ],

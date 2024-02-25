@@ -1,26 +1,23 @@
-import { type BluetoothDevice } from "types/service/bluetooth"
-import { Menu, ArrowToggleButton } from "../ToggleButton"
+import { type BluetoothDevice } from 'types/service/bluetooth'
+import { Menu, ArrowToggleButton } from '../ToggleButton'
 import icons from "lib/icons"
-import { watch } from 'lib/experiments'
 
-const bluetooth = await Service.import("bluetooth")
-const title = watch("Disabled", bluetooth, () => {
-  if (!bluetooth.enabled)
-    return "Disabled"
-
-  if (bluetooth.connected_devices.length === 1)
-      return bluetooth.connected_devices[0].alias
-
-  return `${bluetooth.connected_devices.length} Connected`
-})
+const bluetooth = await Service.import('bluetooth')
 
 export const BluetoothToggle = () => ArrowToggleButton({
-  name: "bluetooth",
-  icon: bluetooth.bind("enabled").as(p => icons.bluetooth[p ? "enabled" : "disabled"]),
-  label: title,
-  connection: [bluetooth, () => bluetooth.enabled],
-  deactivate: () => bluetooth.enabled = false,
+  name: 'bluetooth',
+  label: Utils.watch('Disabled', bluetooth, () => {
+    if (!bluetooth.enabled)
+      return 'Disabled'
+    if (bluetooth.connected_devices.length === 1)
+      return bluetooth.connected_devices[0].alias
+
+    return `${bluetooth.connected_devices.length} Connected`
+  }),
   activate: () => bluetooth.enabled = true,
+  deactivate: () => bluetooth.enabled = false,
+  connection: [bluetooth, () => bluetooth.enabled],
+  icon: bluetooth.bind('enabled').as(p => icons.bluetooth[p ? 'enabled' : 'disabled']),
 })
 
 const DeviceItem = (device: BluetoothDevice) => Widget.Box({

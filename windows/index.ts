@@ -1,4 +1,5 @@
 export { default as Bar } from './bar'
+export { default as Desktop } from './desktop'
 export { default as BarRoundedCorners } from './bar/roundedcorners'
 export { default as Overview } from './overview'
 export { default as PowerMenu } from './powermenu'
@@ -9,4 +10,4 @@ export { default as Notifications } from './notifications'
 
 export { default as SettingsDialog } from './settings'
 
-// export { setupQuickSettings } from './qs'
+export { setupQuickSettings } from './quicksettings'
