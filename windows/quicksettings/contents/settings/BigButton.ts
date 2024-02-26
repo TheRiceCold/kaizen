@@ -1,3 +1,5 @@
+import { setupCursorHover } from 'misc/cursorhover'
+
 export default ({
   icon,
   title,
@@ -7,7 +9,7 @@ export default ({
   subComponent = Widget.Box({ }),
   ...props
 }) => Widget.Button({
-  // setup: setupCursorHover,
+  setup: setupCursorHover,
   className: 'toggle-button',
   child: Widget.Box({
     vertical: true,

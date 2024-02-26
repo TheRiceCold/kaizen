@@ -7,16 +7,16 @@ const systemButtons = [
     onClicked: () => { },
     tooltip: 'Open Settings',
   },
-  {
-    icon: '',
-    tooltip: 'Open Settings',
-    onClicked: () => App.openWindow('settings-dialog'),
-  },
-  {
-    icon: '',
-    tooltip: 'Power Menu',
-    onClicked: () => App.toggleWindow('powermenu')
-  },
+  // {
+  //   icon: '',
+  //   tooltip: 'Open Settings',
+  //   onClicked: () => App.openWindow('settings-dialog'),
+  // },
+  // {
+  //   icon: '',
+  //   tooltip: 'Power Menu',
+  //   onClicked: () => App.toggleWindow('powermenu')
+  // },
 ]
 
 const Button = ({ icon, onClicked, tooltip }) => Widget.Button({
@@ -31,8 +31,6 @@ const Button = ({ icon, onClicked, tooltip }) => Widget.Button({
 export default Widget.Box({
   hexpand: true,
   className: 'header',
-  children: [
-    TabNavigator,
-    Widget.Box({ hexpand: true }),
-  ].concat(systemButtons.map(Button))
+  children: [ TabNavigator ]
+  // .concat(systemButtons.map(Button))
 })

@@ -110,15 +110,15 @@ const chatSendButton = Widget.Button({
 const chatPlaceholder = Widget.Label({
   hpack: 'start',
   vpack: 'center',
-  className: 'txt-subtext txt-smallie margin-left-5',
   label: APIS[currentApiId].placeholderText,
+  className: 'txt-subtext txt-smallie margin-left-5',
 })
 
 const chatPlaceholderRevealer = Widget.Revealer({
   revealChild: true,
+  child: chatPlaceholder,
   transition: 'crossfade',
   transitionDuration: 200,
-  child: chatPlaceholder,
   setup: enableClickthrough,
 })
 
@@ -165,8 +165,8 @@ function switchToTab(id) {
 
 const apiSwitcher = Widget.CenterBox({
   centerWidget: Widget.Box({
-    className: 'sidebar-chat-apiswitcher spacing-h-5',
     hpack: 'center',
+    className: 'sidebar-chat-apiswitcher spacing-h-5',
     children: APIS.map((api, id) => Widget.Button({
       child: api.tabIcon,
       tooltipText: api.name,

@@ -1,14 +1,8 @@
 import Header from './Header'
-import { ContentStack, switchTab, currentTabId, contents } from './imports'
-
-import options from 'options'
+import { ContentStack } from './imports'
 
 export default Widget.Box({
   vertical: true,
-  // spacing: options.theme.spacing.value,
-  children: [
-    Header,
-    ContentStack
-  ],
   className: 'quicksettings',
+  children: [ Header, ContentStack ],
 })

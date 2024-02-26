@@ -1,19 +1,20 @@
 import Indicator from 'misc/navIndicator'
 import Apis from './contents/apis'
-import Utils from './contents/utils'
 import Settings from './contents/settings'
+import Dashboard from './contents/dashboard'
 
 let currentTabId = 0
+const setCurrentTab = (id: number) => currentTabId = id
 const contents = [
   {
-    icon: '',
-    name: 'settings',
-    content: Settings
+    icon: '󰕮',
+    name: 'dashboard',
+    content: Dashboard
   },
   {
     icon: '󱍓',
-    name: 'utilities',
-    content: Utils,
+    name: 'settings',
+    content: Settings,
   },
   {
     icon: '󰚩',
@@ -31,7 +32,7 @@ const ContentStack = Widget.Stack({
   }, {})
 })
 
-function switchTab(id) {
+function switchTab(id: number) {
   const buttonList = buttons.get_children()
   const selectedButton = buttonList[id]
   ContentStack.shown = contents[id].name
@@ -41,7 +42,7 @@ function switchTab(id) {
 }
 
 const buttons = Widget.Box({
-  children: contents.map((_, id) => Widget.Button({
+  children: contents.map((_, id: number) => Widget.Button({
     className: 'tab-button',
     onClicked: () => switchTab(id),
     child: Widget.Label({ label: contents[id].icon })
@@ -61,4 +62,5 @@ export {
   TabNavigator,
   contents,
   currentTabId,
+  setCurrentTab,
 }

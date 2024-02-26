@@ -1,13 +1,11 @@
 import { ListStack, contents, setCurrentTab } from './imports'
-import Footer from './Footer'
-// import Sliders from './Sliders.js'
 import BigButton from './BigButton'
+import Sliders from './sliders'
 import options from 'options'
 
 const TabListButtons = Widget.Box({
   vertical: true,
   vpack: 'center',
-  spacing: options.theme.spacing.value,
   children: [
     Widget.Box({
       hpack: 'center',
@@ -26,11 +24,9 @@ const TabListButtons = Widget.Box({
 export default Widget.Box({
   vertical: true,
   className: 'content',
-  spacing: options.theme.spacing.value * 2,
   children: [
     TabListButtons,
     ListStack,
-    // Sliders,
-    Footer,
+    Sliders,
   ]
 })
