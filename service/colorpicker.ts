@@ -1,4 +1,4 @@
-import icons from 'lib/icons'
+import icons from 'data/icons'
 import { bash, dependencies } from 'lib/utils'
 
 const COLORS_CACHE = Utils.CACHE_DIR + '/colorpicker.json'

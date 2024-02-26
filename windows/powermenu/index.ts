@@ -1,6 +1,6 @@
 import PopupWindow from '../PopupWindow'
 import powermenu, { type Action } from 'service/powermenu'
-import icons from 'lib/icons'
+import icons from 'data/icons'
 import options from 'options'
 import type Gtk from 'gi://Gtk?version=3.0'
 

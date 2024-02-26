@@ -1,10 +1,9 @@
-import options from 'options'
-import icons from 'lib/icons'
 import powermenu, { Action } from 'service/powermenu'
+import options from 'options'
+import icons from 'data/icons'
 
 const battery = await Service.import('battery')
 const { image, size } = options.quicksettings.avatar
-
 
 function up(up: number) {
   const h = Math.floor(up / 60)

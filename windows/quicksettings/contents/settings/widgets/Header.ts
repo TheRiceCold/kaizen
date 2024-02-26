@@ -1,5 +1,5 @@
-import icons from 'lib/icons'
 import options from 'options'
+import icons from 'data/icons'
 import powermenu, { Action } from 'service/powermenu'
 
 const battery = await Service.import('battery')
@@ -17,12 +17,13 @@ function up(up: number) {
 
 const Avatar = () => Widget.Box({
   className: 'avatar',
-  css: Utils.merge([image.bind(), size.bind()], (img, size) => `
-    min-width: ${size}px;
-    min-height: ${size}px;
-    background-image: url('${img}');
-    background-size: cover;
-  `),
+  css: Utils.merge(
+    [ image.bind(), size.bind() ],
+    (img, size) => `
+      min-width: ${size}px;
+      min-height: ${size}px;
+      background-image: url('${img}');
+      background-size: cover;`)
 })
 
 const SysButton = (action: Action) => Widget.Button({

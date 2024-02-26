@@ -1,4 +1,4 @@
-import icons from 'lib/icons'
+import icons from 'data/icons'
 import brightness from 'service/brightness'
 
 const BrightnessSlider = () => Widget.Slider({
@@ -15,8 +15,7 @@ export const Brightness = () => Widget.Box({
       vpack: 'center',
       child: Widget.Icon(icons.brightness.indicator),
       onClicked: () => brightness.screen = 0,
-      tooltipText: brightness.bind('screen').as(v =>
-        `Screen Brightness: ${Math.floor(v * 100)}%`),
+      tooltipText: brightness.bind('screen').as(v => `Screen Brightness: ${Math.floor(v * 100)}%`),
     }),
     BrightnessSlider(),
   ],

@@ -1,8 +1,8 @@
-import { icon } from 'lib/utils'
-import icons from 'lib/icons'
 import Progress from './Progress'
-import brightness from 'service/brightness'
 import options from 'options'
+import icons from 'data/icons'
+import { icon } from 'lib/utils'
+import brightness from 'service/brightness'
 
 const audio = await Service.import('audio')
 const { progress, microphone } = options.osd

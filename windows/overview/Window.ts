@@ -1,9 +1,9 @@
 import { type Client } from 'types/service/hyprland'
 import { createSurfaceFromWidget, icon } from 'lib/utils'
-import Gdk from 'gi://Gdk'
-import Gtk from 'gi://Gtk?version=3.0'
 import options from 'options'
-import icons from 'lib/icons'
+import icons from 'data/icons'
+
+const { Gdk, Gtk } = imports.gi
 
 const monochrome = options.overview.monochromeIcon
 const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)]

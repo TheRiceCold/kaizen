@@ -1,11 +1,11 @@
 import PopupWindow, { Padding } from '../PopupWindow'
 import { AppItem, QuickButton } from './AppItem'
-import icons from 'lib/icons'
+
 import options from 'options'
+import icons from 'data/icons'
 import { launchApp } from 'lib/utils'
 
 const apps = await Service.import('applications')
-const { query } = apps
 const { width, margin, maxItem, favorites } = options.applauncher
 
 const SeparatedAppItem = (app: Parameters<typeof AppItem>[0]) => Widget.Revealer(
@@ -18,6 +18,7 @@ const SeparatedAppItem = (app: Parameters<typeof AppItem>[0]) => Widget.Revealer
 )
 
 const Applauncher = () => {
+  const { query } = apps
   const applist = Variable(query(''))
   let first = applist.value[0]
 

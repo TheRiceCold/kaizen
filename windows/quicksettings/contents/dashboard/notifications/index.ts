@@ -1,7 +1,8 @@
 import { type Notification as Notif } from 'types/service/notifications'
 import Notification from 'windows/notifications'
+
 import options from 'options'
-import icons from 'lib/icons'
+import icons from 'data/icons'
 
 const notifications = await Service.import('notifications')
 const notifs = notifications.bind('notifications')

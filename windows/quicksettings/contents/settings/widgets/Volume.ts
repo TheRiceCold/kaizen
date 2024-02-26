@@ -1,10 +1,11 @@
 import { type Stream } from 'types/service/audio'
 import { Arrow, Menu } from '../ToggleButton'
+
+import icons from 'data/icons'
 import { dependencies, icon, sh } from 'lib/utils'
-import icons from 'lib/icons'
-const audio = await Service.import('audio')
 
 type Type = 'microphone' | 'speaker'
+const audio = await Service.import('audio')
 
 const VolumeIndicator = (type: Type = 'speaker') => Widget.Button({
   vpack: 'center',

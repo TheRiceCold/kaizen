@@ -1,5 +1,5 @@
-import PanelButton from './PanelButton.js'
-import icons from 'lib/icons'
+import PanelButton from './PanelButton'
+import icons from 'data/icons'
 import options from 'options'
 
 const battery = await Service.import('battery')

@@ -1,5 +1,6 @@
 import { SimpleToggleButton } from '../ToggleButton'
-import icons from 'lib/icons'
+import icons from 'data/icons'
+
 const { microphone } = await Service.import('audio')
 
 const icon = () =>

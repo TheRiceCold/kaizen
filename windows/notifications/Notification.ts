@@ -1,5 +1,5 @@
 import { type Notification } from 'types/service/notifications'
-import icons from 'lib/icons'
+import icons from 'data/icons'
 
 const time = (time: number, format = '%H:%M') => imports.gi.GLib.DateTime.new_from_unix_local(time).format(format)
 

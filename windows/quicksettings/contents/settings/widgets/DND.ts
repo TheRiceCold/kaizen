@@ -1,5 +1,5 @@
 import { SimpleToggleButton } from '../ToggleButton'
-import icons from 'lib/icons'
+import icons from 'data/icons'
 
 const n = await Service.import('notifications')
 const dnd = n.bind('dnd')

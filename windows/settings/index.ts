@@ -1,7 +1,7 @@
 import RegularWindow from '../RegularWindow'
 import layout from './layout'
-import icons from 'lib/icons'
 import options from 'options'
+import icons from 'data/icons'
 
 const current = Variable(layout[0].attribute.name)
 

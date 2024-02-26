@@ -1,6 +1,6 @@
 import { type Config } from 'ts/types/app'
 import { type Application } from 'ts/types/service/applications'
-import { substitutes } from './icons'
+import { substitutes } from 'data/icons'
 
 const { GLib } = imports.gi
 

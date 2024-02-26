@@ -2,7 +2,7 @@ import Row from './Row'
 import Group from './Group'
 import Page from './Page'
 import options from 'options'
-import icons from 'lib/icons'
+import icons from 'data/icons'
 
 const {
   wallpaper: wp,

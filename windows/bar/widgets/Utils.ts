@@ -1,6 +1,6 @@
 import PanelButton from './PanelButton'
 import options from 'options'
-import icons from 'lib/icons'
+import icons from 'data/icons'
 
 const { action } = options.bar.utils
 

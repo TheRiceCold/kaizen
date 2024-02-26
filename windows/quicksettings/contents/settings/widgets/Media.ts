@@ -1,6 +1,7 @@
 import { type MprisPlayer } from 'types/service/mpris'
-import icons from 'lib/icons'
+
 import options from 'options'
+import icons from 'data/icons'
 import { icon } from 'lib/utils'
 
 const mpris = await Service.import('mpris')

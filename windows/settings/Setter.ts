@@ -1,7 +1,6 @@
 import { type RowProps } from './Row'
 import { Opt } from 'lib/option'
-import icons from 'lib/icons'
-import Gdk from 'gi://Gdk'
+import icons from 'data/icons'
 
 function EnumSetter(opt: Opt<string>, values: string[]) {
   const lbl = Widget.Label({ label: opt.bind().as(v => `${v}`) })
@@ -69,7 +68,7 @@ export default function Setter<T>({
     })
     case 'color': return Widget.ColorButton({
       setup: self => self.hook(opt, () => {
-        const rgba = new Gdk.RGBA()
+        const rgba = new imports.gi.Gdk.RGBA()
         rgba.parse(opt.value as string)
         self.rgba = rgba
       }).on('color-set', ({ rgba: { red, green, blue } }) => {

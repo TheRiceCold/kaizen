@@ -1,4 +1,4 @@
-import icons from './icons'
+import icons from 'data/icons'
 
 export default async function init() {
   const bat = await Service.import('battery')

@@ -1,5 +1,5 @@
 import GLib from 'gi://GLib'
-import icons from 'lib/icons'
+import icons from 'data/icons'
 import { dependencies, sh, bash } from 'lib/utils'
 
 const now = () => GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S')

@@ -1,6 +1,6 @@
-import icons from 'lib/icons'
 import PanelButton from './PanelButton'
 import options from 'options'
+import icons from 'data/icons'
 
 const n = await Service.import('notifications')
 const notifs = n.bind('notifications')

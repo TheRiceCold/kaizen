@@ -1,6 +1,6 @@
 import { SimpleToggleButton } from '../ToggleButton'
-import icons from 'lib/icons'
 import options from 'options'
+import icons from 'data/icons'
 
 const { scheme } = options.theme
 
