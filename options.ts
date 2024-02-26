@@ -139,9 +139,12 @@ const options = mkOptions(OPTIONS, {
       ],
       [
         "neovide",
-        "krita",
         "godot",
+      ],
+      [
+        "krita",
         "blender",
+        "inkscape",
       ],
     ]),
   },

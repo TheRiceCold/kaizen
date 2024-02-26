@@ -6,9 +6,11 @@ import {
   SettingsDialog,
   AppLauncher,
   Overview,
+  PowerMenu,
+  Verification,
+  Indicators,
+  Notifications,
   Bar, BarRoundedCorners,
-  PowerMenu, Verification,
-  Indicators, Notifications,
 } from 'windows'
 
 import { forMonitors } from 'lib/utils'

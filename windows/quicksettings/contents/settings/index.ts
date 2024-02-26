@@ -1,32 +1,26 @@
-import { ListStack, contents, setCurrentTab } from './imports'
-import BigButton from './BigButton'
-import Sliders from './sliders'
+import {
+  MicMute,
+  DarkModeToggle,
+  NetworkToggle,
+  WifiSelection,
+  BluetoothToggle,
+  BluetoothDevices,
+} from './widgets'
+import Row from './Row'
+import Sliders from './Sliders'
 import options from 'options'
 
-const TabListButtons = Widget.Box({
-  vertical: true,
-  vpack: 'center',
-  children: [
-    Widget.Box({
-      hpack: 'center',
-      spacing: options.theme.padding.value,
-      children: contents.map(
-        (item, id) => BigButton({
-          onClicked: () => {
-            ListStack.shown = contents[id].name
-            setCurrentTab(id)
-          }, ...item
-        }))
-    }),
-  ]
-})
+const { quicksettings } = options
 
 export default Widget.Box({
   vertical: true,
-  className: 'content',
+  css: quicksettings.width.bind().as(w => `min-width: ${w}px;`),
   children: [
-    TabListButtons,
-    ListStack,
+    Row(
+      [NetworkToggle, BluetoothToggle],
+      [WifiSelection, BluetoothDevices],
+    ),
+    Row([MicMute, DarkModeToggle]),
     Sliders,
   ]
 })

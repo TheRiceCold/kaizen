@@ -25,26 +25,26 @@ const VolumeSlider = (type: Type = 'speaker') => Widget.Slider({
 export const Volume = () => Widget.Box({
   className: 'volume',
   children: [
-    VolumeIndicator("speaker"),
-    VolumeSlider("speaker"),
+    VolumeIndicator('speaker'),
+    VolumeSlider('speaker'),
     Widget.Box({
-      vpack: "center",
-      child: Arrow("sink-selector"),
+      vpack: 'center',
+      child: Arrow('sink-selector'),
     }),
     Widget.Box({
-      vpack: "center",
-      child: Arrow("app-mixer"),
-      visible: audio.bind("apps").as(a => a.length > 0),
+      vpack: 'center',
+      child: Arrow('app-mixer'),
+      visible: audio.bind('apps').as(a => a.length > 0),
     }),
   ],
 })
 
 export const Microphone = () => Widget.Box({
-  class_name: "slider horizontal",
+  className: 'slider horizontal',
   visible: audio.bind("recorders").as(a => a.length > 0),
   children: [
-      VolumeIndicator("microphone"),
-      VolumeSlider("microphone"),
+    VolumeIndicator('microphone'),
+    VolumeSlider('microphone'),
   ],
 })
 
