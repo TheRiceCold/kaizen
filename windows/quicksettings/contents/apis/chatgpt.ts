@@ -177,7 +177,7 @@ export const chatGPTView = Widget.Scrollable({
     })
     // Always scroll to bottom with new content
     const adjustment = scrolledWindow.get_vadjustment();
-    adjustment.connect("changed", () => adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size()))
+    adjustment.connect('changed', () => adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size()))
   }
 })
 

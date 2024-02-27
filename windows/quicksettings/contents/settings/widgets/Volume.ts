@@ -42,7 +42,7 @@ export const Volume = () => Widget.Box({
 
 export const Microphone = () => Widget.Box({
   className: 'slider horizontal',
-  visible: audio.bind("recorders").as(a => a.length > 0),
+  visible: audio.bind('recorders').as(a => a.length > 0),
   children: [
     VolumeIndicator('microphone'),
     VolumeSlider('microphone'),
@@ -117,7 +117,7 @@ export const AppMixer = () => Menu({
     Widget.Box({
       vertical: true,
       className: 'vertical mixer-item-box',
-      children: audio.bind("apps").as(a => a.map(MixerItem)),
+      children: audio.bind('apps').as(a => a.map(MixerItem)),
     }),
     Widget.Separator(),
     SettingsButton(),

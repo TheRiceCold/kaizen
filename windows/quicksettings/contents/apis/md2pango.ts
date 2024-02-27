@@ -19,9 +19,9 @@ const replacements = {
     { name: 'H5', re: /^(#####\s+)(.*)(\s*)$/, sub: '<span font_weight="bold" size="90%">$2</span>' },
   ],
   styles: [
-    { name: 'BOLD', re: /(\*\*)(\S[\s\S]*?\S)(\*\*)/g, sub: "<b>$2</b>" },
-    { name: 'UND', re: /(__)(\S[\s\S]*?\S)(__)/g, sub: "<u>$2</u>" },
-    { name: 'EMPH', re: /\*(\S.*?\S)\*/g, sub: "<i>$1</i>" },
+    { name: 'BOLD', re: /(\*\*)(\S[\s\S]*?\S)(\*\*)/g, sub: '<b>$2</b>' },
+    { name: 'UND', re: /(__)(\S[\s\S]*?\S)(__)/g, sub: '<u>$2</u>' },
+    { name: 'EMPH', re: /\*(\S.*?\S)\*/g, sub: '<i>$1</i>' },
     { name: 'HEXCOLOR', re: /#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/g, sub: '<span bgcolor="#$1" fgcolor="#000000" font_family="' + monospaceFonts + '">#$1</span>' },
     { name: 'INLCODE', re: /(`)([^`]*)(`)/g, sub: '<span font_weight="bold" font_family="' + monospaceFonts + '">$2</span>' },
   ],

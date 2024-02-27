@@ -44,7 +44,7 @@ class Recorder extends Service {
       body: this.#file,
       iconName: icons.fallback.video,
       actions: {
-        "Show in Files": () => sh(`xdg-open ${this.#recordings}`),
+        'Show in Files': () => sh(`xdg-open ${this.#recordings}`),
         View: () => sh(`xdg-open ${this.#file}`),
       },
     })

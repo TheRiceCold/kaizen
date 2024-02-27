@@ -12,8 +12,8 @@ class PowerMenu extends Service {
     })
   }
 
-  #title = ""
-  #cmd = ""
+  #title = ''
+  #cmd = ''
 
   get title() { return this.#title }
   get cmd() { return this.#cmd }

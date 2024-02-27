@@ -133,18 +133,18 @@ const options = mkOptions(OPTIONS, {
     maxItem: opt(5),
     favorites: opt([
       [
-        "firefox",
-        "spotify",
-        "discord",
+        'firefox',
+        'spotify',
+        'discord',
       ],
       [
-        "neovide",
-        "godot",
+        'neovide',
+        'godot',
       ],
       [
-        "krita",
-        "blender",
-        "inkscape",
+        'krita',
+        'blender',
+        'inkscape',
       ],
     ]),
   },
