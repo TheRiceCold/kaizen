@@ -2,7 +2,7 @@ import { type BarWidget } from 'widget/bar/Bar'
 import { opt, mkOptions } from 'lib/option'
 
 const options = mkOptions(OPTIONS, {
-  autotheme: opt(false),
+  autotheme: opt(true),
 
   wallpaper: opt(`/home/${USER}/.config/background`, { persistent: true }),
 
@@ -44,10 +44,10 @@ const options = mkOptions(OPTIONS, {
       opacity: opt(96),
     },
 
-    shadows: opt(true),
+    shadows: opt(false),
     padding: opt(4),
     spacing: opt(8),
-    radius: opt(0),
+    radius: opt(8),
   },
 
   transition: opt(200),
@@ -87,11 +87,11 @@ const options = mkOptions(OPTIONS, {
     date: {
       colored: opt(false),
       format: opt('%a %I:%M'),
-      action: opt(() => App.toggleWindow('quicksettings')),
+      action: opt(() => App.toggleWindow('menu')),
     },
     utils: {
       colored: opt(false),
-      action: opt(() => App.toggleWindow('quicksettings')),
+      action: opt(() => App.toggleWindow('menu')),
     },
     battery: {
       bar: opt<'hidden' | 'regular' | 'whole'>('hidden'),

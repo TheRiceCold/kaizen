@@ -6,7 +6,7 @@ import icons from 'data/icons'
 
 export const opened = Variable('')
 App.connect('window-toggled', (_, name: string, visible: boolean) => {
-  if (name === 'quicksettings' && !visible)
+  if (name === 'menu' && !visible)
     Utils.timeout(500, () => opened.value = '')
 })
 
@@ -66,7 +66,7 @@ export const ArrowToggleButton = ({
           Widget.Label({
             label,
             truncate: 'end',
-            maxWidthChars: 10,
+            maxWidthChars: 15,
             className: 'label',
           }),
         ],

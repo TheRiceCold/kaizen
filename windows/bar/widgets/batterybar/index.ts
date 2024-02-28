@@ -1,4 +1,4 @@
-import PanelButton from './PanelButton'
+import PanelButton from '../PanelButton'
 import icons from 'data/icons'
 import options from 'options'
 

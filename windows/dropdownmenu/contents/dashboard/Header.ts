@@ -1,5 +1,6 @@
 import options from 'options'
 import icons from 'data/icons'
+import { bash } from 'lib/utils'
 
 const battery = await Service.import('battery')
 const { GLib } = imports.gi
@@ -64,12 +65,8 @@ export default Widget.Box({
     }),
     Widget.Button({
       vpack: 'center',
-      child: Widget.Icon(icons.ui.settings),
-      onClicked: () => {
-        App.closeWindow('quicksettings')
-        App.closeWindow('settings-dialog')
-        App.openWindow('settings-dialog')
-      },
+      child: Widget.Icon(icons.ui.refresh),
+      onClicked: () => bash`hyprctl reload`,
     }),
     Widget.Button({
       vpack: 'center',

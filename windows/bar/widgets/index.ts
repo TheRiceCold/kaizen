@@ -2,9 +2,9 @@ import tray from './Tray'
 import date from './Date'
 import media from './Media'
 import utils from './Utils'
-import launcher from './Launcher'
-import batteryBar from './BatteryBar'
-import workspaces from './Workspaces'
+import launcher from './launcher'
+import batteryBar from './batterybar'
+import workspaces from './workspaces'
 
 export default {
   date,

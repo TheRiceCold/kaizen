@@ -18,10 +18,10 @@ window.screen-corner
 
   box.border
     @if $bar-position == 'top'
-      border-top: $border-width solid $bg
+      border-top: $border-width solid transparentize($bg, 0.5)
 
     @if $bar-position == 'bottom'
-      border-bottom: $border-width solid $bg
+      border-bottom: $border-width solid transparentize($bg, 0.5)
 
     margin-left: $_margin
     margin-right: $_margin
@@ -31,7 +31,7 @@ window.screen-corner
 
   &.corners
     box.border
-      box-shadow: 0 0 0 $_radius $bg
+      box-shadow: 0 0 0 $_radius transparentize($bg, 0.5)
       border-radius: if($radius > 0, calc($radius * $hyprland-gaps-multiplier), 0)
 
     box.corner

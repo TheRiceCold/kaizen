@@ -1,25 +1,31 @@
 import Indicator from 'misc/navIndicator'
 import Apis from './contents/apis'
 import Settings from './contents/settings'
+import Utilities from './contents/utilities'
 import Dashboard from './contents/dashboard'
 
 let currentTabId = 0
-const setCurrentTab = (id: number) => currentTabId = id
+// const setCurrentTab = (id: number) => currentTabId = id
 const contents = [
   {
-    icon: '󰕮',
+    icon: '󰇄',
     name: 'dashboard',
     content: Dashboard
   },
   {
     icon: '󱍓',
-    name: 'settings',
-    content: Settings,
+    name: 'utilities',
+    content: Utilities,
   },
   {
     icon: '󰚩',
     name: 'apis',
     content: Apis,
+  },
+  {
+    icon: '',
+    name: 'settings',
+    content: Settings,
   },
 ]
 
@@ -57,10 +63,10 @@ const TabNavigator = Widget.Box({
 })
 
 export {
-  switchTab,
+  // switchTab,
   ContentStack,
   TabNavigator,
   contents,
   currentTabId,
-  setCurrentTab,
+  // setCurrentTab,
 }

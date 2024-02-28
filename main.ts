@@ -2,7 +2,7 @@ import 'lib/session'
 import 'lib/init'
 
 import {
-  setupQuickSettings,
+  setupMenu,
   SettingsDialog,
   AppLauncher,
   Overview,
@@ -20,7 +20,7 @@ import options from 'options'
 export default config({
   icons: `${App.configDir}/assets/icons`,
   onConfigParsed: () => {
-    setupQuickSettings()
+    setupMenu()
     init()
   },
   closeWindowDelay: {

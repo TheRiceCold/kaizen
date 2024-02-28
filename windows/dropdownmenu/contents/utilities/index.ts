@@ -14,6 +14,7 @@ const { quicksettings } = options
 
 export default Widget.Box({
   vertical: true,
+  className: 'utilities',
   css: quicksettings.width.bind().as(w => `min-width: ${w}px;`),
   children: [
     Row(

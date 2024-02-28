@@ -10,4 +10,4 @@ export { default as Notifications } from './notifications'
 
 export { default as SettingsDialog } from './settings'
 
-export { setupQuickSettings } from './quicksettings'
+export { setupMenu } from './dropdownmenu'

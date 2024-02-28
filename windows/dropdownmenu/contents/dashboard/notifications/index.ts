@@ -14,7 +14,7 @@ const Animated = (n: Notif) => Widget.Revealer({
   setup: self => Utils.timeout(options.transition.value, () => {
     if (!self.is_destroyed)
       self.reveal_child = true
-  }),
+  })
 })
 
 const SilentButton = Widget.Button({

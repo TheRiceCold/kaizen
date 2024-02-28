@@ -1,4 +1,4 @@
-@mixin bar-workspaces
+.bar .workspaces
   label
     font-size: 0
     min-width: 5pt
@@ -19,10 +19,9 @@
       min-height: 8pt
       background-image: $active-gradient
 
-  &.active, &:active
-    label
-      background-color: transparentize($primary-fg, 0.3)
-      &.occupied
-        background-color: transparentize($primary-fg, 0.15)
-      &.active
-        background-color: $primary-fg
+  &.active, &:active label
+    background-color: transparentize($primary-fg, 0.3)
+    &.occupied
+      background-color: transparentize($primary-fg, 0.15)
+    &.active
+      background-color: $primary-fg

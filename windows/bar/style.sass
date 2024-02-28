@@ -1,0 +1,13 @@
+.bar
+  background-color: transparentize($bg, 0.5)
+  .panel-button
+    @include accs-button($flat: true)
+    > *
+      border-radius: $radius
+      margin: calc($spacing * 0.3)
+    label, image
+      font-weight: bold
+    > *
+      padding: calc($padding * 0.4) calc($padding * 0.8)
+    &:not(.flat)
+      @include accs-button($flat: false)

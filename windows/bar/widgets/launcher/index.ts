@@ -1,4 +1,4 @@
-import PanelButton from './PanelButton'
+import PanelButton from '../PanelButton'
 import options from 'options'
 
 const { icon, label, action } = options.bar.launcher

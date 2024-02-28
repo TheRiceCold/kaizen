@@ -1,0 +1,65 @@
+window#menu .menu .dashboard
+  .header
+    @include widget
+    padding: $padding
+    .avatar
+      // border-radius: 999px
+      border-radius: $radius
+      background: $primary-bg
+    .clock-box
+      color: $primary-bg
+      .clock
+        font-size: 2.5em
+    button
+      margin-left: calc($spacing * 0.5)
+
+  .notifications
+    .notifications-header
+      margin-right: $spacing
+      margin-bottom: $spacing
+      > label
+        font-size: 1.15em
+        color: $primary-bg
+        margin-left: calc($radius * 0.5)
+    .notification-scrollable
+      @include scrollable
+    .notification-list
+      margin-right: $spacing
+    .notification
+      @include widget
+      @include notification
+      padding: $padding
+      margin-bottom: $spacing
+    .placeholder
+      image
+        font-size: 7em
+      label
+        font-size: 1.2em
+
+  .calendar
+    @include widget
+    margin-bottom: calc($spacing * 0.5)
+    padding: calc($padding * 2) calc($padding * 2) 0
+    calendar
+      all: unset
+      font-size: 1.2em
+      padding: calc($padding * 0.5)
+      &.button
+        @include button($flat: true)
+
+      &:selected
+        color: $primary-bg
+        border-radius: $radius
+        box-shadow: inset 0 0 0 1px $primary-bg
+
+      &.header
+        border: none
+        color: $primary-bg
+        background-color: transparent
+
+      &.highlight
+        color: $primary-bg
+
+      &:indeterminate
+        color: transparentize($fg, 0.5)
+

@@ -5,7 +5,7 @@ import icons from 'data/icons'
 const { action } = options.bar.utils
 
 export default () => PanelButton({
-  window: 'quicksettings',
+  window: 'menu',
   onClicked: action.bind(),
   child: Widget.Icon(icons.ui.arrow.down),
 })

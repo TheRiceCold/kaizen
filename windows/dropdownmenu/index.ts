@@ -1,5 +1,5 @@
 import PopupWindow from '../PopupWindow'
-import QuickSettings from './QuickSettings'
+import Menu from './Menu'
 import options from 'options'
 
 const { bar, quicksettings } = options
@@ -9,17 +9,17 @@ const layout = Utils.derive(
 )
 
 const Content = PopupWindow({
-  child: QuickSettings,
+  child: Menu,
+  name: 'menu',
   layout: layout.value,
-  name: 'quicksettings',
   exclusivity: 'exclusive',
   transition: bar.position.bind().as(pos => pos === 'top' ? 'slide_down' : 'slide_up')
 })
 
-export function setupQuickSettings() {
+export function setupMenu() {
   App.addWindow(Content)
   layout.connect('changed', () => {
-    App.removeWindow('quicksettings')
+    App.removeWindow('menu')
     App.addWindow(Content)
   })
 }
