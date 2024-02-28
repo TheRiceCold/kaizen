@@ -13,11 +13,12 @@ import {
   Bar, BarRoundedCorners,
 } from 'windows'
 
-import { forMonitors } from 'lib/utils'
+import { config, forMonitors } from 'lib/utils'
 import { init } from 'lib/init'
 import options from 'options'
 
-export default {
+export default config({
+  icons: `${App.configDir}/assets/icons`,
   onConfigParsed: () => {
     setupQuickSettings()
     init()
@@ -36,6 +37,6 @@ export default {
     PowerMenu,
     AppLauncher,
     Verification,
-    SettingsDialog(),
+    SettingsDialog,
   ],
-}
+})

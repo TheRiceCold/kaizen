@@ -39,7 +39,7 @@ const PagesStack = Widget.Stack({
   shown: current.bind() as never,
 })
 
-export default () => RegularWindow({
+export default RegularWindow({
   title: 'Settings',
   name: 'settings-dialog',
   className: 'settings-dialog',
