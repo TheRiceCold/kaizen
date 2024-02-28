@@ -6,7 +6,7 @@ export default Widget.Box({
   className: 'dashboard',
   children: [
     Header,
-    Notifications(),
+    Notifications,
     Widget.Box({
       className: 'calendar',
       children: [ Widget.Calendar({ hexpand: true }) ],

@@ -9,6 +9,30 @@ window#quicksettings .quicksettings
       border-radius: 999px
       // border-radius: calc($radius * 3)
 
+    .notifications
+      .header
+        margin-right: $spacing
+        margin-bottom: $spacing
+        > label
+          margin-left: calc($radius * 0.5)
+        button
+          @include button
+          padding: calc($padding * 0.7) $padding
+      .notification-scrollable
+        @include scrollable
+      .notification-list
+        margin-right: $spacing
+      .notification
+        @include notification
+        @include widget
+        padding: $padding
+        margin-bottom: $spacing
+      .placeholder
+        image
+          font-size: 7em
+        label
+          font-size: 1.2em
+
     .calendar
       @include widget
       padding: calc($padding * 2) calc($padding * 2) 0

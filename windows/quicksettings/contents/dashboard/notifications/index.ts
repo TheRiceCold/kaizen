@@ -1,5 +1,5 @@
 import { type Notification as Notif } from 'types/service/notifications'
-import Notification from 'windows/notifications'
+import Notification from 'windows/notifications/Notification'
 
 import options from 'options'
 import icons from 'data/icons'
@@ -17,7 +17,7 @@ const Animated = (n: Notif) => Widget.Revealer({
   }),
 })
 
-const ClearButton = () => Widget.Button({
+const ClearButton = Widget.Button({
   onClicked: notifications.clear,
   sensitive: notifs.as(n => n.length > 0),
   child: Widget.Box({
@@ -30,11 +30,11 @@ const ClearButton = () => Widget.Button({
   }),
 })
 
-const Header = () => Widget.Box({
+const Header = Widget.Box({
   className: 'header',
   children: [
     Widget.Label({ label: 'Notifications', hexpand: true, xalign: 0 }),
-    ClearButton(),
+    ClearButton,
   ],
 })
 
@@ -74,7 +74,7 @@ const NotificationList = () => {
   }, 'notified')
 }
 
-const Placeholder = () => Widget.Box({
+const Placeholder = Widget.Box({
   vexpand: true,
   hexpand: true,
   vertical: true,
@@ -88,12 +88,12 @@ const Placeholder = () => Widget.Box({
   ],
 })
 
-export default () => Widget.Box({
+export default Widget.Box({
+  vertical: true,
   className: 'notifications',
   css: options.notifications.width.bind().as(w => `min-width: ${w}px`),
-  vertical: true,
   children: [
-    Header(),
+    Header,
     Widget.Scrollable({
       vexpand: true,
       hscroll: 'never',
@@ -101,7 +101,7 @@ export default () => Widget.Box({
       child: Widget.Box({
         className: 'notification-list vertical',
         vertical: true,
-        children: [ NotificationList(), Placeholder() ],
+        children: [ NotificationList(), Placeholder ],
       }),
     }),
   ],

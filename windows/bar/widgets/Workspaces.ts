@@ -10,8 +10,8 @@ const dispatch = (arg: string | number) => sh(`hyprctl dispatch workspace ${arg}
 const Workspaces = (ws: number) => Widget.Box({
   children: range(ws || 20).map(i => Widget.Label({
     attribute: i,
-    vpack: 'center',
     label: `${i}`,
+    vpack: 'center',
     setup: self => self.hook(hyprland, () => {
       self.toggleClassName('active', hyprland.active.workspace.id === i)
       self.toggleClassName('occupied', (hyprland.getWorkspace(i)?.windows || 0) > 0)
