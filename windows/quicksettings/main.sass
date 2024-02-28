@@ -4,27 +4,32 @@ window#quicksettings .quicksettings
   padding: calc($popover-padding * 1.4)
 
   .dashboard
-    .avatar
+    .header
       @include widget
-      border-radius: 999px
-      // border-radius: calc($radius * 3)
+      padding: $padding
+      .avatar
+        border-radius: 999px
+        // border-radius: calc($radius * 3)
+      .clock-box
+        color: $primary-bg
+        .clock
+          font-size: 2.5em
 
     .notifications
-      .header
+      .notifications-header
         margin-right: $spacing
         margin-bottom: $spacing
         > label
+          font-size: 1.15em
+          color: $primary-bg
           margin-left: calc($radius * 0.5)
-        button
-          @include button
-          padding: calc($padding * 0.7) $padding
       .notification-scrollable
         @include scrollable
       .notification-list
         margin-right: $spacing
       .notification
-        @include notification
         @include widget
+        @include notification
         padding: $padding
         margin-bottom: $spacing
       .placeholder

@@ -11,18 +11,14 @@
       font-size: 1.1em
       color: $fg
       margin-right: $spacing
-
     .time
       color: transparentize($fg, 0.2)
-
     .description
       font-size: 0.9em
       color: transparentize($fg, 0.2)
-
     .icon
       margin-right: $spacing
       border-radius: calc($radius * 0.8)
-
       &.img
         border: $border
 
@@ -51,8 +47,7 @@
       background-color: $error-bg
 
 window.notifications
-  @include unset
-
+  all: unset
   .notification
     @include notification
     @include floating-widget

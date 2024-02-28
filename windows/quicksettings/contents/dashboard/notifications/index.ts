@@ -17,24 +17,25 @@ const Animated = (n: Notif) => Widget.Revealer({
   }),
 })
 
+const SilentButton = Widget.Button({
+  child: Widget.Label('󱏧'),
+  onClicked: () => notifications.dnd = !notifications.dnd
+})
+
 const ClearButton = Widget.Button({
+  child: Widget.Label('󰃢'),
   onClicked: notifications.clear,
   sensitive: notifs.as(n => n.length > 0),
-  child: Widget.Box({
-    children: [
-      Widget.Label('Clear '),
-      Widget.Icon({
-        icon: notifs.as(n => icons.trash[n.length > 0 ? 'full' : 'empty']),
-      }),
-    ],
-  }),
 })
 
 const Header = Widget.Box({
-  className: 'header',
+  className: 'notifications-header',
   children: [
     Widget.Label({ label: 'Notifications', hexpand: true, xalign: 0 }),
-    ClearButton,
+    Widget.Box({
+      spacing: options.theme.spacing * 0.75,
+      children: [ SilentButton, ClearButton ]
+    })
   ],
 })
 
