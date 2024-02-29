@@ -3,7 +3,6 @@ import 'lib/init'
 
 import {
   setupMenu,
-  SettingsDialog,
   AppLauncher,
   Overview,
   PowerMenu,
@@ -24,8 +23,8 @@ export default config({
     init()
   },
   closeWindowDelay: {
-    applauncher: options.transition.value,
     overview: options.transition.value,
+    applauncher: options.transition.value,
   },
   windows: [
     ...forMonitors(Bar),
@@ -37,6 +36,5 @@ export default config({
     PowerMenu,
     AppLauncher,
     Verification,
-    SettingsDialog,
   ],
 })

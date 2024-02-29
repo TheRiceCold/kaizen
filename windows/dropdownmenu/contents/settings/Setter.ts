@@ -16,8 +16,8 @@ function EnumSetter(opt: Opt<string>, values: string[]) {
     child: Widget.Icon(icons.ui.arrow.right),
   })
   const prev = Widget.Button({
-    child: Widget.Icon(icons.ui.arrow.left),
     onClicked: () => step(-1),
+    child: Widget.Icon(icons.ui.arrow.left),
   })
   return Widget.Box({
     className: 'enum-setter',
@@ -60,8 +60,8 @@ export default function Setter<T>({
     })
 
     case 'font': return Widget.FontButton({
-      showSize: false,
       useSize: false,
+      showSize: false,
       setup: self => self.hook(opt,
         () => self.font = opt.value as string).on('font-set',
           ({ font }) => opt.value = font!.split(' ').slice(0, -1).join(' ') as T)

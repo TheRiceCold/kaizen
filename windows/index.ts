@@ -8,6 +8,4 @@ export { default as Indicators } from './indicators'
 export { default as AppLauncher } from './applauncher'
 export { default as Notifications } from './notifications'
 
-export { default as SettingsDialog } from './settings'
-
 export { setupMenu } from './dropdownmenu'

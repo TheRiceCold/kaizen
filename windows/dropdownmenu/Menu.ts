@@ -1,4 +1,5 @@
-import { TabNavigator, ContentStack, contents, currentTabId } from './imports'
+import { TabNavigator, ContentStack } from './imports'
+import options from 'options'
 
 const Header = Widget.Box({
   hexpand: true,
@@ -8,7 +9,8 @@ const Header = Widget.Box({
     Widget.Label({
       hpack: 'end',
       hexpand: true,
-      // label: contents[currentTabId].bind(v => v.name),
+      className: 'tab-label',
+      label: options.menu.tab.bind()
     })
   ]
 })
