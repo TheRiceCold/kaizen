@@ -47,7 +47,7 @@ export const WifiSelection = () => Menu({
     }),
     Widget.Separator(),
     Widget.Button({
-      onClicked: () => sh(options.quicksettings.networkSettings.value),
+      onClicked: () => sh(options.menu.networkSettings.value),
       child: Widget.Box({
         children: [
           Widget.Icon(icons.ui.settings),

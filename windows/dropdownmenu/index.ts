@@ -2,10 +2,10 @@ import PopupWindow from '../PopupWindow'
 import Menu from './Menu'
 import options from 'options'
 
-const { bar, quicksettings } = options
+const { bar, menu } = options
 const layout = Utils.derive(
-  [bar.position, quicksettings.position],
-  (bar, qs) => `${bar}-${qs}` as const
+  [bar.position, menu.position],
+  (bar, menu) => `${bar}-${menu}` as const
 )
 
 const Content = PopupWindow({

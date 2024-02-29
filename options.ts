@@ -164,22 +164,16 @@ const options = mkOptions(OPTIONS, {
     labels: opt(true),
   },
 
-  quicksettings: {
-    avatar: {
-      image: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
-      size: opt(70),
-    },
+  menu: {
     width: opt(380),
-    position: opt<'left' | 'center' | 'right'>('right'),
-    networkSettings: opt('gtk-launch gnome-control-center'),
-    media: {
-      monochromeIcon: opt(true),
-      coverSize: opt(100),
+    dashboard: {
+      avatar: {
+        image: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
+        size: opt(70),
+      },
     },
-  },
-
-  datemenu: {
-    position: opt<'left' | 'center' | 'right'>('center'),
+    position: opt<'left' | 'center' | 'right'>('right'),
+    tab: opt<'dashboard' | 'utilities' | 'apis' | 'settings'>('dashboard'),
   },
 
   osd: {

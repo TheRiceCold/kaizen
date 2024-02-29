@@ -4,7 +4,7 @@ import { bash } from 'lib/utils'
 
 const battery = await Service.import('battery')
 const { GLib } = imports.gi
-const { image, size } = options.quicksettings.avatar
+const { image, size } = options.menu.dashboard.avatar
 
 const clock = Variable(GLib.DateTime.new_now_local(), {
   poll: [1000, () => GLib.DateTime.new_now_local()],
