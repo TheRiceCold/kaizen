@@ -1,6 +1,5 @@
 const { Gtk, Gdk } = imports.gi
 import { setupCursorHover, setupCursorHoverInfo } from 'misc/cursorhover'
-import { contents } from '../../imports'
 // APIs
 import Gemini from 'service/api/gemini'
 import ChatGPT from 'service/api/chatgpt'
@@ -60,15 +59,6 @@ export const chatEntry = TextView({
       if (keyval === Gdk.KEY_Return && event.get_state()[1] == Gdk.ModifierType.MOD2_MASK) {
         apiSendMessage(widget)
         return true
-      }
-      // Global keybinds
-      if (!(keyval & Gdk.ModifierType.CONTROL_MASK) && keyval === Gdk.KEY_Page_Down) {
-        const toSwitchTab = contents.get_visible_child()
-        toSwitchTab.attribute.nextTab()
-      }
-      else if (!(keyval & Gdk.ModifierType.CONTROL_MASK) && keyval === Gdk.KEY_Page_Up) {
-        const toSwitchTab = contents.get_visible_child()
-        toSwitchTab.attribute.prevTab()
       }
     }),
 })

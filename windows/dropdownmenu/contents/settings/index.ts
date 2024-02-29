@@ -4,8 +4,8 @@ const current = Variable(layout[0].attribute.name)
 
 const Footer =  Widget.Box({
   hpack: 'center',
-  spacing: options.theme.spacing,
   className: 'foot horizontal',
+  spacing: options.theme.spacing,
   children: layout.map(({
     attribute: { name, icon }
   }) => Widget.Button({

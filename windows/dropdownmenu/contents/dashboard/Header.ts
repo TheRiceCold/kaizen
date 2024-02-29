@@ -65,8 +65,8 @@ export default Widget.Box({
     }),
     Widget.Button({
       vpack: 'center',
-      child: Widget.Icon(icons.ui.refresh),
-      onClicked: () => bash`hyprctl reload`,
+      child: Widget.Icon(icons.ui.lock),
+      // onClicked: () => bash`hyprctl reload`,
     }),
     Widget.Button({
       vpack: 'center',
