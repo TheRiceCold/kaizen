@@ -1,6 +1,6 @@
-import Header from './Header'
-import options from 'options'
+import Header from './header'
 import Notifications from './notifications'
+import options from 'options'
 
 export default Widget.Box({
   vertical: true,
