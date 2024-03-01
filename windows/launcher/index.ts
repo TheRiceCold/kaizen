@@ -1,6 +1,5 @@
 import PopupWindow from '../PopupWindow'
-import Sites from './Sites'
-import Weather from './Weather'
+import Bookmarks from './Bookmarks'
 import AppLauncher from './applauncher'
 import options from 'options'
 
@@ -15,11 +14,7 @@ const Content = Widget.Box({
   className: 'launcher',
   children: [
     AppLauncher(),
-    Widget.Box({
-      vertical: true,
-      className: 'launcher-right',
-      children: [ Weather(), Sites ]
-    })
+    Bookmarks,
   ]
 })
 

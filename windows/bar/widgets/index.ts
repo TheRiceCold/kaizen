@@ -1,7 +1,6 @@
-import tray from './Tray'
 import date from './Date'
-import media from './Media'
-import utils from './Utils'
+import menu from './Menu'
+import tray from './Tray'
 import launcher from './launcher'
 import batteryBar from './batterybar'
 import workspaces from './workspaces'
@@ -9,8 +8,7 @@ import workspaces from './workspaces'
 export default {
   date,
   tray,
-  media,
-  utils,
+  menu,
   launcher,
   workspaces,
   battery: batteryBar,

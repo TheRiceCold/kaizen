@@ -13,7 +13,7 @@ const Time = Widget.Label({
 
 export default () => PanelButton({
   child: Time,
-  window: 'dashboard',
+  window: 'datemenu',
   className: 'datetime',
   onClicked: action.bind(),
 })

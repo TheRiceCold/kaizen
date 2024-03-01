@@ -3,6 +3,14 @@
 
 window#launcher .launcher
   @include floating_widget
+  .bookmarks
+    @include widget
+    padding: $padding
+    .header
+      color: $primary-bg
+      font-size: 1.15em
+      font-weight: bold
+      padding: calc($padding * 0.5)
 
   .appmenu
     @include widget
@@ -29,36 +37,36 @@ window#launcher .launcher
       margin: 4pt 0
       background-color: $popover-border-color
 
-    button.app-item
-      @include button($flat: true, $reactive: false)
-      > box
-        @include spacing(0.5)
+  button.item
+    @include button($flat: true, $reactive: false)
+    > box
+      @include spacing(0.5)
 
-      padding: $padding
+    padding: $padding
+    transition: $transition
+
+    label
+      transition: $transition
+      &.title
+        color: $fg
+      &.description
+        color: transparentize($fg, 0.3)
+
+    image
       transition: $transition
 
-      label
-        transition: $transition
-        &.title
-          color: $fg
-        &.description
-          color: transparentize($fg, 0.3)
-
+    &:hover, &:focus
+      .title
+        color: $primary-bg
+      .description
+        color: transparentize($primary-bg, 0.4)
       image
-        transition: $transition
+        -gtk-icon-shadow: 2px 2px $primary-bg
 
-      &:hover, &:focus
-        .title
-          color: $primary-bg
-        .description
-          color: transparentize($primary-bg, 0.4)
-        image
-          -gtk-icon-shadow: 2px 2px $primary-bg
+    &:active
+      border-radius: $radius
+      background-color: transparentize($primary-bg, 0.5)
+      box-shadow: inset 0 0 0 $border-width $border-color
 
-      &:active
-        border-radius: $radius
-        background-color: transparentize($primary-bg, 0.5)
-        box-shadow: inset 0 0 0 $border-width $border-color
-
-        .title
-          color: $fg
+      .title
+        color: $fg
