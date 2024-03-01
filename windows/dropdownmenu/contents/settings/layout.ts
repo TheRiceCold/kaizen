@@ -10,7 +10,7 @@ const {
   font,
   theme,
   bar: b,
-  applauncher: al,
+  launcher: al,
   overview: ov,
   powermenu: pm,
   menu,

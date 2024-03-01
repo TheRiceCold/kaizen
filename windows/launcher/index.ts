@@ -1,7 +1,7 @@
 import PopupWindow from '../PopupWindow'
 import Sites from './Sites'
 import Weather from './Weather'
-import Launcher from './Launcher'
+import AppLauncher from './applauncher'
 import options from 'options'
 
 const { bar, launcher } = options
@@ -13,12 +13,10 @@ const layout = Utils.derive(
 
 const Content = Widget.Box({
   className: 'launcher',
-  homogeneous: false,
   children: [
-    Launcher(),
+    AppLauncher(),
     Widget.Box({
       vertical: true,
-      homogeneous: false,
       className: 'launcher-right',
       children: [ Weather(), Sites ]
     })

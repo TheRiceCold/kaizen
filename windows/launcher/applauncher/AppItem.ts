@@ -1,26 +1,11 @@
 import { type Application } from 'types/service/applications'
+import { launchApp, icon } from 'lib/utils'
 import options from 'options'
 import icons from 'data/icons'
-import { launchApp, icon } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
-const { iconSize } = options.applauncher
+const { iconSize } = options.launcher
 
-export const QuickButton = (app: Application) => Widget.Button({
-  hexpand: true,
-  tooltipText: app.name,
-  setup: setupCursorHover,
-  onClicked: () => {
-    App.closeWindow('applauncher')
-    launchApp(app)
-  },
-  child: Widget.Icon({
-    size: iconSize.bind(),
-    icon: icon(app.icon_name, icons.fallback.executable),
-  }),
-})
-
-export const AppItem = (app: Application) => {
+export default (app: Application) => {
   const title = Widget.Label({
     xalign: 0,
     hexpand: true,
@@ -55,8 +40,7 @@ export const AppItem = (app: Application) => {
   return Widget.Button({
     attribute: { app },
     className: 'app-item',
-    setup: setupCursorHover,
     child: Widget.Box({ children: [ appicon, textBox ] }),
-    onClicked: () => { App.closeWindow('applauncher'); launchApp(app); },
+    onClicked: () => { App.closeWindow('launcher'); launchApp(app); },
   })
 }
