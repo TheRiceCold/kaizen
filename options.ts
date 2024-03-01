@@ -108,9 +108,6 @@ const options = mkOptions(OPTIONS, {
       monochrome: opt(true),
       exclusive: opt(false),
     },
-    messages: {
-      action: opt(() => App.toggleWindow('datemenu')),
-    },
     tray: {
       ignore: opt([ 'KDE Connect Indicator' ]),
     },
@@ -124,6 +121,10 @@ const options = mkOptions(OPTIONS, {
       monochrome: opt(false),
       action: opt(() => App.toggleWindow('powermenu')),
     },
+  },
+
+  launcher: {
+    position: opt<'left' | 'center' | 'right'>('left'),
   },
 
   applauncher: {

@@ -1,6 +1,5 @@
 import {
   MicMute,
-  DarkModeToggle,
   NetworkToggle,
   WifiSelection,
   BluetoothToggle,
@@ -19,7 +18,6 @@ export default Widget.Box({
       [NetworkToggle, BluetoothToggle],
       [WifiSelection, BluetoothDevices],
     ),
-    Row([MicMute, DarkModeToggle]),
     Sliders,
   ]
 })

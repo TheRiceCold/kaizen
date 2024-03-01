@@ -1,14 +1,37 @@
-import PopupWindow, { Padding } from '../PopupWindow'
 import { AppItem, QuickButton } from './AppItem'
-
 import options from 'options'
 import icons from 'data/icons'
-import { launchApp } from 'lib/utils'
 
 const apps = await Service.import('applications')
 const { width, margin, maxItem, favorites } = options.applauncher
 
-const SeparatedAppItem = (app: Parameters<typeof AppItem>[0]) => Widget.Revealer(
+const AppItem = app => Widget.Button({
+  onClicked: () => {
+    App.closeWindow('launcher')
+    app.launch()
+  },
+  attribute: { app },
+  child: Widget.Box({
+    children: [
+      Widget.Icon({
+        size: 32,
+        icon: app.icon_name || '',
+        className: 'launcher-appmenu-appicon',
+      }),
+      Widget.Label({
+        xalign: 0,
+        vpack: 'center',
+        truncate: 'end',
+        label: app.name,
+        className: 'launcher-appmenu-apptitle',
+      }),
+    ],
+  }),
+})
+
+const SeparatedAppItem = (
+  app: Parameters<typeof AppItem>[0]
+) => Widget.Revealer(
   { attribute: { app } },
   Widget.Box(
     { vertical: true },
@@ -17,10 +40,11 @@ const SeparatedAppItem = (app: Parameters<typeof AppItem>[0]) => Widget.Revealer
   ),
 )
 
-const Applauncher = () => {
+export default () => {
   const { query } = apps
   const applist = Variable(query(''))
   let first = applist.value[0]
+  let applications = apps.query('').map(AppItem)
 
   const list = Widget.Box({
     vertical: true,
@@ -28,6 +52,12 @@ const Applauncher = () => {
   })
 
   list.hook(apps, () => applist.value = query(''), 'notify::frequents')
+
+  // repopulate the box, so the most frequent apps are on top of the list
+  function repopulate() {
+    applications = apps.query('').map(AppItem)
+    list.children = applications
+  }
 
   const entry = Widget.Entry({
     hexpand: true,
@@ -76,7 +106,7 @@ const Applauncher = () => {
     quicklaunch.reveal_child = true
   }
 
-  const layout = Widget.Box({
+  return Widget.Box({
     vpack: 'start',
     vertical: true,
     className: 'applauncher',
@@ -89,19 +119,4 @@ const Applauncher = () => {
     }),
     children: [ entry, quicklaunch, list ],
   })
-
-  return Widget.Box(
-    { vertical: true, css: 'padding: 1px;' },
-    Padding('applauncher', {
-      vexpand: false,
-      css: margin.bind().as(v => `min-height: ${v}pt;`),
-    }),
-    layout,
-  )
 }
-
-export default PopupWindow({
-  layout: 'top',
-  name: 'applauncher',
-  child: Applauncher(),
-})

@@ -5,11 +5,15 @@ import { clock } from 'lib/variables'
 const { format, action } = options.bar.date
 
 const Time = Widget.Label({
-  label: Utils.derive([clock, format], (c, f) => c.format(f) || '').bind()
+  label: Utils.derive(
+    [clock, format],
+    (c, f) => c.format(f) || ''
+  ).bind()
 })
 
 export default () => PanelButton({
   child: Time,
   window: 'dashboard',
+  className: 'datetime',
   onClicked: action.bind(),
 })

@@ -93,6 +93,8 @@ const fileExists = (path: string)  =>
 const expandTilde = (path: string) =>
   path.startsWith('~') ? GLib.get_home_dir() + path.slice(1) : path
 
+const capitalize = (word: string) => word.charAt(0).toUpperCase() + word.slice(1)
+
 export {
   config,
   icon,
@@ -106,4 +108,5 @@ export {
   createSurfaceFromWidget,
   fileExists,
   expandTilde,
+  capitalize,
 }

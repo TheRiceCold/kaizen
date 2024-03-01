@@ -1,6 +1,7 @@
 import { Dashboard, Utilities, Apis, Settings } from './contents'
 import icons from 'data/icons'
 import options from 'options'
+import { capitalize } from 'lib/utils'
 
 const contents = [
   { icon: '󰇄', name: 'dashboard', content: Dashboard },
@@ -32,11 +33,11 @@ const Nav = Widget.Box({
     Widget.Box({
       hpack: 'end',
       hexpand: true,
-      spacing: options.theme.spacing * 0.75,
+      spacing: options.theme.spacing * 0.5,
       children: [
         Widget.Label({
           className: 'tab-label',
-          label: options.menu.tab.bind()
+          label: options.menu.tab.bind().as(v => capitalize(v))
         }),
         Widget.Button({ child: Widget.Label('') }),
         Widget.Button({ child: Widget.Icon(icons.ui.refresh) })

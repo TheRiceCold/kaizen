@@ -3,7 +3,7 @@ import 'lib/init'
 
 import {
   setupMenu,
-  AppLauncher,
+  Launcher,
   Overview,
   PowerMenu,
   Verification,
@@ -34,7 +34,7 @@ export default config({
     ...forMonitors(Indicators),
     Overview,
     PowerMenu,
-    AppLauncher,
+    Launcher,
     Verification,
   ],
 })
