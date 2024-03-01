@@ -1,4 +1,9 @@
-export default [
+type Message = {
+  role: 'user' | 'model',
+  parts: Array<{ text: string }>
+}
+
+export const initMessages: Message[] = [
   {
     role: 'user',
     parts: [{
@@ -53,7 +58,7 @@ export default [
   {
     role: 'model',
     parts: [{
-      text: "```latex\n\\[\n\\frac{d}{dx}\\left(\\frac{x - 438}{x^2 + 23x - 7} + x^x\\right) = \\frac{-(x^2+23x-7)-(x-438)(2x+23)}{(x^2+23x-7)^2} + x^x(\\ln(x) + 1)\n\\]\n```" 
+      text: "```latex\n\\[\n\\frac{d}{dx}\\left(\\frac{x - 438}{x^2 + 23x - 7} + x^x\\right) = \\frac{-(x^2+23x-7)-(x-438)(2x+23)}{(x^2+23x-7)^2} + x^x(\\ln(x) + 1)\n\\]\n```"
     }],
   },
   {

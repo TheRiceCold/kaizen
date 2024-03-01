@@ -1,11 +1,11 @@
 import List from './List'
-import icons from 'data/icons'
 import options from 'options'
+import icons from 'data/icons'
 import { launchApp } from 'lib/utils'
 
+const { maxItem } = options.launcher
 const apps = await Service.import('applications')
 let first = Variable(apps.query('')).value[0]
-const { maxItem } = options.launcher
 
 const Entry = Widget.Entry({
   hexpand: true,
@@ -18,17 +18,17 @@ const Entry = Widget.Entry({
     first = apps.query(text || '')[0]
     List.children.reduce((i, item) => {
       if (!text || i >= maxItem.value) {
-        item.reveal_child = false
+        item.revealChild = false
         return i
       }
       if (item.attribute.app.match(text)) {
-        item.reveal_child = true
+        item.revealChild = true
         return ++i
       }
-      item.reveal_child = false
+      item.revealChild = false
       return i
     }, 0)
-  },
+  }
 })
 
 export default Entry

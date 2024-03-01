@@ -1,5 +1,6 @@
 import GtkSource from 'gi://GtkSource?version=3.0'
 import md2pango from './md2pango'
+import { sh } from 'lib/utils'
 
 const { Gio, GLib, Gtk } = imports.gi
 
@@ -90,7 +91,7 @@ const CodeBlock = (content = '', lang = 'txt') => {
         onClicked: () => {
           const buffer = sourceView.get_buffer()
           const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false) // TODO: fix this
-          Utils.execAsync([`wl-copy`, `${copyContent}`]).catch(print)
+          sh([`wl-copy`, `${copyContent}`]).catch(print)
         },
       }),
     ]

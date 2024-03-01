@@ -1,15 +1,8 @@
 import Soup from 'gi://Soup?version=3.0'
-import initMessages from 'data/chatgptMessages'
+import { initMessages } from 'data/chatgpt'
 import { fileExists, expandTilde } from 'lib/utils'
 
 const { GLib } = imports.gi
-
-function expandTilde(path) {
-  if (path.startsWith('~'))
-    return GLib.get_home_dir() + path.slice(1)
-  else
-    return path
-}
 
 // We're using many models to not be restricted to 3 messages per minute.
 // The whole chat will be sent every request anyway.

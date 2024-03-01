@@ -26,7 +26,7 @@ export const WifiSelection = () => Menu({
         self.children = wifi.access_points.map(ap => Widget.Button({
           onClicked: () => {
             if (dependencies('nmcli'))
-              Utils.execAsync(`nmcli device wifi connect ${ap.bssid}`)
+              sh(`nmcli device wifi connect ${ap.bssid}`)
           },
           child: Widget.Box({
             children: [

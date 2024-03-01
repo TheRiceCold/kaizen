@@ -65,29 +65,29 @@ const options = mkOptions(OPTIONS, {
       start: opt<BarWidget[]>([
         'launcher',
         // 'media',
+        'workspaces',
         'expander',
       ]),
-      center: opt<BarWidget[]>([ 'workspaces' ]),
+      center: opt<BarWidget[]>([ 'date' ]),
       end: opt<BarWidget[]>([
         'expander',
         'tray',
         'battery',
-        'date',
-        'utils',
+        'menu',
       ]),
     },
     launcher: {
       icon: {
+        icon: opt(null),
         colored: opt(false),
-        icon: opt('system-search-symbolic'),
       },
-      label: { colored: opt(false), label: opt(''), },
-      action: opt(() => App.toggleWindow('applauncher')),
+      action: opt(() => App.toggleWindow('launcher')),
+      label: { colored: opt(false), label: opt('Find'), },
     },
     date: {
       colored: opt(false),
-      format: opt('%a %I:%M'),
-      action: opt(() => App.toggleWindow('menu')),
+      format: opt('%d/%m %a • %I:%M'),
+      action: opt(() => App.toggleWindow('datemenu')),
     },
     utils: {
       colored: opt(false),
@@ -125,28 +125,19 @@ const options = mkOptions(OPTIONS, {
 
   launcher: {
     position: opt<'left' | 'center' | 'right'>('left'),
-  },
-
-  applauncher: {
     iconSize: opt(48),
     width: opt(0),
     margin: opt(80),
     maxItem: opt(5),
     favorites: opt([
-      [
-        'firefox',
-        'spotify',
-        'discord',
-      ],
-      [
-        'neovide',
-        'godot',
-      ],
-      [
-        'krita',
-        'blender',
-        'inkscape',
-      ],
+      'firefox',
+      'spotify',
+      'discord',
+      'neovide',
+      'godot',
+      'krita',
+      'blender',
+      'inkscape',
     ]),
   },
 
@@ -179,10 +170,10 @@ const options = mkOptions(OPTIONS, {
 
   osd: {
     progress: {
-      vertical: opt(true),
+      vertical: opt(false),
       pack: {
-        h: opt<'start' | 'center' | 'end'>('end'),
-        v: opt<'start' | 'center' | 'end'>('center'),
+        h: opt<'start' | 'center' | 'end'>('center'),
+        v: opt<'start' | 'center' | 'end'>('start'),
       },
     },
     microphone: {

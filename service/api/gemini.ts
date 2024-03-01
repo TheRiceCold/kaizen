@@ -1,5 +1,5 @@
 import Soup from 'gi://Soup?version=3.0'
-import initMessages from 'data/geminiMessages'
+import { initMessages } from 'data/gemini'
 import { fileExists, expandTilde } from 'lib/utils'
 
 const { GLib } = imports.gi

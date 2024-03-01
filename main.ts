@@ -24,7 +24,6 @@ export default config({
   },
   closeWindowDelay: {
     overview: options.transition.value,
-    applauncher: options.transition.value,
   },
   windows: [
     ...forMonitors(Bar),
