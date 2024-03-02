@@ -18,13 +18,13 @@ const Animated = (n: Notif) => Widget.Revealer({
 })
 
 const SilentButton = Widget.Button({
-  child: Widget.Label('󱏧'),
+  child: Widget.Icon(icons.notifications.silent),
   onClicked: () => notifications.dnd = !notifications.dnd
 })
 
 const ClearButton = Widget.Button({
-  child: Widget.Label('󰃢'),
   onClicked: notifications.clear,
+  child: Widget.Icon(icons.ui.broom),
   sensitive: notifs.as(n => n.length > 0),
 })
 

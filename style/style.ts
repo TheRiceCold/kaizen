@@ -1,11 +1,10 @@
+import { bash, dependencies, sh } from 'lib/utils'
 import { type Opt } from 'lib/option'
 import options from 'options'
-import { bash, dependencies, sh } from 'lib/utils'
 
 const deps = [
   'font',
   'theme',
-  'bar.flatButtons',
   'bar.position',
   'bar.battery.charging',
   'bar.battery.blocks',
@@ -58,8 +57,8 @@ const variables = () => [
   $('popover-border-color', `transparentize(${t(dark.border, light.border)}, ${Math.max(((border.opacity.value - 1) / 100), 0)})`),
   $('popover-padding', `$padding * ${popoverPaddingMultiplier}`),
   $('popover-radius', radius.value === 0 ? '0' : '$radius + $popover-padding'),
-  $('font-size', `${options.font.size}pt`),
-  $('font-name', options.font.name),
+  $('font-name', options.font.default.name),
+  $('font-size', `${options.font.default.size}pt`),
 
   //etc
   $('charging-bg', options.bar.battery.charging),

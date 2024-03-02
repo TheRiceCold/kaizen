@@ -1,4 +1,5 @@
 import layout from './layout'
+import options from 'options'
 
 const current = Variable(layout[0].attribute.name)
 

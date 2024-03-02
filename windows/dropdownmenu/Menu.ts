@@ -10,11 +10,13 @@ const contents = [
   { icon: '', name: 'settings', content: Settings },
 ]
 
-const NavButtons = Widget.Box(contents.map((_, id: number) => Widget.Button({
-  className: 'tab-button',
-  child: Widget.Label({ label: contents[id].icon }),
-  onClicked: () => ContentStack.shown = contents[id].name,
-})))
+const NavButtons = Widget.Box(
+  contents.map((_, id: number) => Widget.Button({
+    className: 'tab-button',
+    label: contents[id].icon,
+    onClicked: () => ContentStack.shown = contents[id].name,
+  })
+))
 
 const ContentStack = Widget.Stack({
   vexpand: true,
@@ -39,8 +41,8 @@ const Nav = Widget.Box({
           className: 'tab-label',
           label: options.menu.tab.bind().as(v => capitalize(v))
         }),
-        Widget.Button({ child: Widget.Label('') }),
-        Widget.Button({ child: Widget.Icon(icons.ui.refresh) })
+        Widget.Button({ child: Widget.Icon(icons.ui.refresh) }),
+        Widget.Button({ child: Widget.Icon(icons.ui.pin) }),
       ]
     })
   ]

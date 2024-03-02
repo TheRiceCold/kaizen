@@ -14,7 +14,7 @@ const chatSendButton = Widget.Button({
   vpack: 'end',
   label: 'arrow_upward',
   setup: setupCursorHover,
-  className: 'txt-norm icon-material sidebar-chat-send',
+  className: 'txt-norm sidebar-chat-send',
   onClicked: () => {
     APIS[currentApiId].sendCommand(chatEntry.get_buffer().text)
     chatEntry.get_buffer().set_text('', -1)

@@ -96,8 +96,8 @@ export default (notification: Notification) => {
         className: 'actions horizontal',
         children: notification.actions.map(action => Widget.Button({
           hexpand: true,
+          label: action.label,
           className: 'action-button',
-          child: Widget.Label(action.label),
           onClicked: () => notification.invoke(action.id),
         })),
       }),

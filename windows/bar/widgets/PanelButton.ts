@@ -1,15 +1,12 @@
-import options from 'options'
 import { setupCursorHover } from 'misc/cursorhover'
 import { ButtonProps } from 'types/widgets/button'
 
 type PanelButtonProps = ButtonProps & {
   window?: string,
-  flat?: boolean
 }
 
 export default ({
   window = '',
-  flat,
   child,
   setup,
   ...props
@@ -21,10 +18,7 @@ export default ({
 
     self.toggleClassName('panel-button')
     self.toggleClassName(window)
-
-    self.hook(options.bar.flatButtons, () => {
-      self.toggleClassName('flat', flat ?? options.bar.flatButtons.value)
-    })
+    self.toggleClassName('flat')
 
     self.hook(App, (_, win, visible) => {
       if (win !== window) return

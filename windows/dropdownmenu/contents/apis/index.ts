@@ -90,7 +90,7 @@ const chatSendButton = Widget.Button({
   vpack: 'end',
   label: 'arrow_upward',
   setup: setupCursorHover,
-  className: 'txt-norm icon-material sidebar-chat-send',
+  className: 'txt-norm sidebar-chat-send',
   onClicked: () => {
     APIS[currentApiId].sendCommand(chatEntry.get_buffer().text)
     chatEntry.get_buffer().set_text('', -1)
@@ -168,7 +168,7 @@ const apiSwitcher = Widget.CenterBox({
     hpack: 'end',
     label: 'lightbulb',
     setup: setupCursorHoverInfo,
-    className: 'txt-subtext txt-norm icon-material',
+    className: 'txt-subtext txt-norm',
     tooltipText: 'Use PageUp/PageDown to switch between API pages',
   }),
 })

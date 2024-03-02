@@ -44,7 +44,7 @@ const ChatGPTInfo = () => {
           Widget.Button({
             label: 'info',
             setup: setupCursorHoverInfo,
-            className: 'txt-subtext txt-norm icon-material',
+            className: 'txt-subtext txt-norm',
             tooltipText: 'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.\n\nPrivacy: OpenAI claims they do not use your data when you use their API.',
           }),
         ]

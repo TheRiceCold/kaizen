@@ -1,80 +1,19 @@
 import { type BarWidget } from 'widget/bar/Bar'
-import { opt, mkOptions } from 'lib/option'
+import { opt } from 'lib/option'
 
-const options = mkOptions(OPTIONS, {
-  autotheme: opt(true),
-
-  wallpaper: opt(`/home/${USER}/.config/background`, { persistent: true }),
-
-  theme: {
-    dark: {
-      primary: {
-        bg: opt('#6AAAFF'),
-        fg: opt('#141414'),
-      },
-      error: {
-        bg: opt('#D67A96'),
-        fg: opt('#141414'),
-      },
-      bg: opt('#373559'),
-      fg: opt('#eeeeee'),
-      widget: opt('#eeeeee'),
-      border: opt('#eeeeee'),
-    },
-    light: {
-      primary: {
-        bg: opt('#6AAAFF'),
-        fg: opt('#eeeeee'),
-      },
-      error: {
-        bg: opt('#D67A96'),
-        fg: opt('#eeeeee'),
-      },
-      bg: opt('#fffffa'),
-      fg: opt('#171717'),
-      widget: opt('#080808'),
-      border: opt('#080808'),
-    },
-
-    blur: opt(4),
-    scheme: opt<'dark' | 'light'>('dark'),
-    widget: { opacity: opt(94) },
-    border: {
-      width: opt(4),
-      opacity: opt(96),
-    },
-
-    shadows: opt(false),
-    padding: opt(4),
-    spacing: opt(8),
-    radius: opt(8),
-  },
-
-  transition: opt(200),
-
-  font: {
-    size: opt(10),
-    name: opt('JetBrainsMono Nerd Font'),
-  },
-
+export default {
   bar: {
-    flatButtons: opt(true),
     position: opt<'top' | 'bottom'>('top'),
     corners: opt(true),
     layout: {
       start: opt<BarWidget[]>([
-        'launcher',
-        'workspaces',
-        'expander',
+        'launcher', 'workspaces'
       ]),
       center: opt<BarWidget[]>([
         'cava', 'date', 'cava'
       ]),
       end: opt<BarWidget[]>([
-        'expander',
-        'tray',
-        'battery',
-        'menu',
+        'expander', 'tray', 'battery', 'menu'
       ]),
     },
     cava: {
@@ -101,7 +40,7 @@ const options = mkOptions(OPTIONS, {
       action: opt(() => App.toggleWindow('menu')),
     },
     battery: {
-      bar: opt<'hidden' | 'regular' | 'whole'>('hidden'),
+      bar: opt<'hidden' | 'regular' | 'whole'>('whole'),
       charging: opt('#93CDA8'),
       percentage: opt(true),
       blocks: opt(7),
@@ -109,7 +48,7 @@ const options = mkOptions(OPTIONS, {
       low: opt(30),
     },
     workspaces: {
-      workspaces: opt(5),
+      workspaces: opt(9),
     },
     taskbar: {
       monochrome: opt(true),
@@ -144,7 +83,7 @@ const options = mkOptions(OPTIONS, {
 
   overview: {
     scale: opt(9),
-    workspaces: opt(5),
+    workspaces: opt(9),
     monochromeIcon: opt(true),
   },
 
@@ -200,12 +139,4 @@ const options = mkOptions(OPTIONS, {
     blacklist: opt(['Spotify']),
     width: opt(440),
   },
-
-  hyprland: {
-    gaps: opt(2),
-    inactiveBorder: opt('333333ff'),
-  },
-})
-
-globalThis['options'] = options
-export default options
+}

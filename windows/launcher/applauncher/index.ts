@@ -10,15 +10,15 @@ export default () => Widget.Box({
   children: [ Entry, Favorites, List ],
   css: options.launcher.width.bind().as(v => `min-width: ${v}pt;`),
   setup: self => self.hook(App, (_, win, visible) => {
-    if (win !== 'launcher') return
+    if (win !== 'launcher')
+      return
 
     Entry.text = ''
     if (visible) { // Focus
-      Entry.text = 'Search'
       Entry.set_position(-1)
       Entry.select_region(0, -1)
       Entry.grab_focus()
-      Favorites.reveal_child = true
+      Favorites.revealChild = true
     }
   }),
 })

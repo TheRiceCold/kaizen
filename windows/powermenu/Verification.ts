@@ -23,7 +23,7 @@ export default PopupWindow({
         className: 'buttons horizontal',
         children: [
           Widget.Button({
-            child: Widget.Label('No'),
+            label: 'No',
             onClicked: () => App.toggleWindow('verification'),
             setup: self => self.hook(App, (_, name: string, visible: boolean) => {
               if (name === 'verification' && visible)
@@ -31,7 +31,7 @@ export default PopupWindow({
             }),
           }),
           Widget.Button({
-            child: Widget.Label('Yes'),
+            label: 'Yes',
             onClicked: () => Utils.exec(powermenu.cmd),
           }),
         ],

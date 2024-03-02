@@ -46,7 +46,7 @@ const GeminiInfo = () => {
           Widget.Button({
             label: 'info',
             setup: setupCursorHoverInfo,
-            className: 'txt-subtext txt-norm icon-material',
+            className: 'txt-subtext txt-norm',
             tooltipText: 'Uses gemini-pro.\nNot affiliated, endorsed, or sponsored by Google.\n\nPrivacy: Google collects data for training by default.\nIf you mind, turn off Gemini Apps Activity in your account.',
           }),
         ]
