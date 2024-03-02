@@ -68,7 +68,7 @@ const options = mkOptions(OPTIONS, {
         'workspaces',
         'expander',
       ]),
-      center: opt<BarWidget[]>([ 'date' ]),
+      center: opt<BarWidget[]>([ 'cava', 'date', 'cava' ]),
       end: opt<BarWidget[]>([
         'expander',
         'tray',
@@ -166,6 +166,10 @@ const options = mkOptions(OPTIONS, {
     },
     position: opt<'left' | 'center' | 'right'>('right'),
     tab: opt<'dashboard' | 'utilities' | 'apis' | 'settings'>('dashboard'),
+  },
+
+  datemenu: {
+    position: opt<'left' | 'center' | 'right'>('center'),
   },
 
   osd: {
