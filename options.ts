@@ -64,17 +64,24 @@ const options = mkOptions(OPTIONS, {
     layout: {
       start: opt<BarWidget[]>([
         'launcher',
-        // 'media',
         'workspaces',
         'expander',
       ]),
-      center: opt<BarWidget[]>([ 'cava', 'date', 'cava' ]),
+      center: opt<BarWidget[]>([
+        'cava', 'date', 'cava'
+      ]),
       end: opt<BarWidget[]>([
         'expander',
         'tray',
         'battery',
         'menu',
       ]),
+    },
+    cava: {
+      bars: 8,
+      width: 8,
+      height: 24,
+      action: opt(() => App.toggleWindow('media')),
     },
     launcher: {
       icon: {
@@ -110,12 +117,6 @@ const options = mkOptions(OPTIONS, {
     },
     tray: {
       ignore: opt([ 'KDE Connect Indicator' ]),
-    },
-    media: {
-      monochrome: opt(true),
-      preferred: opt('spotify'),
-      direction: opt<'left' | 'right'>('right'),
-      length: opt(40),
     },
     powermenu: {
       monochrome: opt(false),
@@ -169,6 +170,12 @@ const options = mkOptions(OPTIONS, {
   },
 
   datemenu: {
+    position: opt<'left' | 'center' | 'right'>('center'),
+  },
+
+  media: {
+    coverSize: opt(100),
+    monochromeIcon: opt(true),
     position: opt<'left' | 'center' | 'right'>('center'),
   },
 

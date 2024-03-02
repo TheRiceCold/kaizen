@@ -3,6 +3,8 @@ import 'lib/init'
 
 import {
   setupMenu,
+  setupDateMenu,
+  Media,
   Launcher,
   Overview,
   PowerMenu,
@@ -20,6 +22,7 @@ export default config({
   icons: `${App.configDir}/assets/icons`,
   onConfigParsed: () => {
     setupMenu()
+    setupDateMenu()
     init()
   },
   closeWindowDelay: {
@@ -31,9 +34,10 @@ export default config({
     ...forMonitors(Notifications),
     ...forMonitors(BarRoundedCorners),
     ...forMonitors(Indicators),
+    Media,
+    Launcher,
     Overview,
     PowerMenu,
-    Launcher,
     Verification,
   ],
 })

@@ -7,27 +7,24 @@
       box-shadow: 2px 2px 2px 0 $shadow-color
 
     margin-right: $spacing
+    border-radius: $radius
     background-size: cover
     background-position: center
-    border-radius: calc($radius * 0.8)
 
   button
     @include button($flat: true)
-    padding: calc($padding * 0.5)
-
+    padding: $padding
     &.play-pause
-      margin: 0 ($spacing * 0.5)
-
+      margin: 0 $spacing
     image
       font-size: 1.2em
 
   .artist
-    font-size: 0.9em
     color: transparentize($fg, 0.2)
 
   scale
     margin-bottom: calc($padding * 0.5)
-    @include slider($width: .5em, $slider: false, $gradient: linear-gradient($fg, $fg))
+    @include slider($width: 0.5em, $slider: false, $gradient: linear-gradient($fg, $fg))
 
     trough
       border: none
