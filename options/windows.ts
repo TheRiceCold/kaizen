@@ -40,11 +40,10 @@ export default {
       action: opt(() => App.toggleWindow('menu')),
     },
     battery: {
-      bar: opt<'hidden' | 'regular' | 'whole'>('whole'),
       charging: opt('#93CDA8'),
       percentage: opt(true),
       blocks: opt(7),
-      width: opt(28),
+      width: opt(32),
       low: opt(30),
     },
     workspaces: {

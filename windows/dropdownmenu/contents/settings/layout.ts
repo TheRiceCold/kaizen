@@ -94,7 +94,6 @@ export default [
       Row({ opt: b.date.format, title: 'Date Format' }),
     ),
     Group('Battery',
-      Row({ opt: b.battery.bar, title: 'Style', type: 'enum', enums: ['hidden', 'regular', 'whole'] }),
       Row({ opt: b.battery.blocks, title: 'Number of Blocks' }),
       Row({ opt: b.battery.width, title: 'Width of Bar' }),
       Row({ opt: b.battery.charging, title: 'Charging Color', type: 'color' }),

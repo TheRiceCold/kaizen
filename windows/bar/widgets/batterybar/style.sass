@@ -2,8 +2,6 @@
 
 .bar .battery-bar
   > *
-    padding: 0
-
   .bar-hidden > box
     padding: 0 calc($spacing * 0.5)
     image
@@ -14,22 +12,19 @@
     transition: $transition
 
   .whole
+    padding: calc($padding * 0.75)
+    image
+      -gtk-icon-transform: rotate(90deg)
     @if $shadows
       image
         -gtk-icon-shadow: $text-shadow
       label
         text-shadow: $text-shadow
 
-  .regular image
-    margin-left: calc($spacing * 0.5)
-
   trough
     @include widget
     min-width: 12pt
     min-height: 12pt
-
-  .regular trough
-    margin-right: calc($spacing * 0.5)
 
   block
     margin: 0
