@@ -14,7 +14,7 @@ const {
   overview: ov,
   powermenu: pm,
   menu,
-  osd,
+  indicators,
 } = options
 
 const {
@@ -123,10 +123,10 @@ export default [
       Row({ opt: pm.layout, title: 'Layout', type: 'enum', enums: [ 'box', 'line' ] }),
       Row({ opt: pm.labels, title: 'Show Labels' }),
     ),
-    Group('On Screen Indicator',
-      Row({ opt: osd.progress.vertical, title: 'Vertical' }),
-      Row({ opt: osd.progress.pack.h, title: 'Horizontal Alignment', type: 'enum', enums: [ 'start', 'center', 'end' ] }),
-      Row({ opt: osd.progress.pack.v, title: 'Vertical Alignment', type: 'enum', enums: [ 'start', 'center', 'end' ] }),
+    Group('Screen Indicator',
+      Row({ opt: indicators.progress.vertical, title: 'Vertical' }),
+      Row({ opt: indicators.progress.pack.h, title: 'Horizontal Alignment', type: 'enum', enums: [ 'start', 'center', 'end' ] }),
+      Row({ opt: indicators.progress.pack.v, title: 'Vertical Alignment', type: 'enum', enums: [ 'start', 'center', 'end' ] }),
     ),
   ),
 ] as const

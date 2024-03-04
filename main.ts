@@ -14,23 +14,25 @@ import {
   Bar, BarRoundedCorners,
 } from 'windows'
 
-import { config, forMonitors } from 'lib/utils'
+import { forMonitors } from 'lib/utils'
 import { init } from 'lib/init'
 import options from 'options'
 
-export default config({
-  icons: `${App.configDir}/assets/icons`,
+App.config({
+  icons: `./assets/icons`,
   onConfigParsed: () => {
     setupMenu()
     setupDateMenu()
     init()
   },
   closeWindowDelay: {
+    menu: options.transition.value,
+    datemenu: options.transition.value,
+    launcher: options.transition.value,
     overview: options.transition.value,
   },
-  windows: [
+  windows: () => [
     ...forMonitors(Bar),
-    // ...forMonitors(Desktop),
     ...forMonitors(Notifications),
     ...forMonitors(BarRoundedCorners),
     ...forMonitors(Indicators),

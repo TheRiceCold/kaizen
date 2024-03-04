@@ -39,7 +39,7 @@ export default {
       opacity: opt(96),
     },
 
-    shadows: opt(false),
+    shadows: opt(true),
     padding: opt(4),
     spacing: opt(8),
     radius: opt(8),

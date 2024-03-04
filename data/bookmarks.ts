@@ -11,11 +11,6 @@ const bookmarks: Bookmark[] = [
     url: 'https://github.com/TheRiceCold'
   },
   {
-    icon: 'nixos',
-    label: 'Nix packages',
-    url: 'https://search.nixos.org'
-  },
-  {
     icon: 'gmail',
     label: 'Gmail',
     url: 'https://gmail.com'
@@ -34,6 +29,21 @@ const bookmarks: Bookmark[] = [
     icon: 'reddit',
     label: 'Reddit',
     url: 'https://reddit.com'
+  },
+  {
+    icon: 'facebook',
+    label: 'Facebook',
+    url: 'https://facebook.com'
+  },
+  {
+    icon: 'nixos',
+    label: 'Nix packages',
+    url: 'https://search.nixos.org'
+  },
+  {
+    icon: 'pinterest',
+    label: 'Pinterest',
+    url: 'https://pinterest.ph'
   },
 ]
 

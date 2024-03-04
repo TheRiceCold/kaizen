@@ -1,12 +1,33 @@
-$color1: #242424
-$color4: #313131
-$music_gradient1: mix($color1, $bg, 50%)
-$music_extra_transparentize: 0.15
-$music_colorstart_transparentize: 0.3
-$transparentize_amount: 0.3
-
 window#media .media
   min-width: 29.5rem
   @include floating-widget
+  background-color: transparentize($bg, 0.6)
   .player
-    @include media
+    padding: $padding
+
+    .cover
+      @if $shadows
+        box-shadow: 2px 2px 2px 0 $shadow-color
+
+      margin-right: $spacing
+      border-radius: $radius
+      background-size: cover
+      background-position: center
+
+    button
+      @include button($flat: true)
+      padding: $padding
+      &.play-pause
+        margin: 0 $spacing
+      image
+        font-size: 1.2em
+
+    .artist
+      color: transparentize($fg, 0.2)
+
+    scale
+      margin-bottom: calc($padding * 0.5)
+      @include slider($width: 0.5em, $slider: false, $gradient: linear-gradient($fg, $fg))
+
+      trough
+        border: none

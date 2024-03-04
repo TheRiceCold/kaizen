@@ -5,7 +5,7 @@ import { icon } from 'lib/utils'
 import brightness from 'service/brightness'
 
 const audio = await Service.import('audio')
-const { progress, microphone } = options.osd
+const { progress, microphone } = options.indicators
 
 const DELAY = 2500
 

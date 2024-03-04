@@ -1,10 +1,7 @@
-import { type Config } from 'ts/types/app'
 import { type Application } from 'ts/types/service/applications'
 import { substitutes } from 'data/icons'
 
 const { GLib } = imports.gi
-
-const config = <T extends Gtk.Window> (config: Config<T>) => config
 
 /** @returns substitute icon || name || fallback icon */
 function icon(name: string | null, fallback = name) {

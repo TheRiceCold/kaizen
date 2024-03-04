@@ -1,5 +1,5 @@
 import PopupWindow from '../PopupWindow'
-import Menu from './Menu'
+import Content from './Menu'
 import options from 'options'
 
 const { bar, menu } = options
@@ -8,8 +8,8 @@ const layout = Utils.derive(
   (bar, menu) => `${bar}-${menu}` as const
 )
 
-const Content = PopupWindow({
-  child: Menu,
+const MenuWindow = PopupWindow({
+  child: Content,
   name: 'menu',
   layout: layout.value,
   exclusivity: 'exclusive',
@@ -17,9 +17,9 @@ const Content = PopupWindow({
 })
 
 export function setupMenu() {
-  App.addWindow(Content)
+  App.addWindow(MenuWindow)
   layout.connect('changed', () => {
     App.removeWindow('menu')
-    App.addWindow(Content)
+    App.addWindow(MenuWindow)
   })
 }

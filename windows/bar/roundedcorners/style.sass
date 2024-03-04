@@ -7,9 +7,6 @@ window.screen-corner
     margin-left: calc($_margin * -1)
     margin-right: calc($_margin * -1)
 
-    @if $shadows
-      box-shadow: inset 0 0 $_shadow-size 0 $shadow-color
-
     @if $bar-position == 'top'
       margin-bottom: calc($_margin * -1)
 
@@ -25,9 +22,6 @@ window.screen-corner
 
     margin-left: $_margin
     margin-right: $_margin
-
-  box.corner
-    box-shadow: 0 0 0 $border-width $border-color
 
   &.corners
     box.border

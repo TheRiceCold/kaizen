@@ -28,7 +28,7 @@ export default {
         colored: opt(false),
       },
       action: opt(() => App.toggleWindow('launcher')),
-      label: { colored: opt(false), label: opt('Find'), },
+      label: { colored: opt(false), label: opt('Start'), },
     },
     date: {
       colored: opt(false),
@@ -117,7 +117,7 @@ export default {
     position: opt<'left' | 'center' | 'right'>('center'),
   },
 
-  osd: {
+  indicators: {
     progress: {
       vertical: opt(false),
       pack: {

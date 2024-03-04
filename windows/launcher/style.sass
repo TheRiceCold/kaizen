@@ -4,12 +4,12 @@
 window#launcher .launcher
   @include floating_widget
   .bookmarks
-    @include widget
     padding: $padding
+
     .header
-      color: $primary-bg
       font-size: 1.15em
       font-weight: bold
+      color: $primary-bg
       padding: calc($padding * 0.5)
 
   .appmenu
@@ -60,8 +60,6 @@ window#launcher .launcher
         color: $primary-bg
       .description
         color: transparentize($primary-bg, 0.4)
-      image
-        -gtk-icon-shadow: 2px 2px $primary-bg
 
     &:active
       border-radius: $radius

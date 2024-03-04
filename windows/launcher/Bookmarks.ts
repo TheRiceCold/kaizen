@@ -15,9 +15,9 @@ export default Widget.Box({
     }),
     Widget.Box({
       vertical: true,
-      children: bookmarks.map(({ label, url, icon })=> Widget.Button({
+      children: bookmarks.map(({ label, url, icon }) => Widget.Button({
         className: 'item',
-        onClicked: () => sh(`firefox ${url}`),
+        onClicked: () => sh(`firefox ${url} open=0`),
         child: Widget.Box([
           Widget.Icon({
             icon: `${icon}-symbolic`,
