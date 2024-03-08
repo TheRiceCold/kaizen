@@ -12,7 +12,7 @@ import options from 'options'
 export default Widget.Box({
   vertical: true,
   className: 'utilities',
-  css: options.menu.width.bind().as(w => `min-width: ${w}px;`),
+  css: options.dropmenu.width.bind().as(w => `min-width: ${w}px;`),
   children: [
     Row(
       [NetworkToggle, BluetoothToggle],

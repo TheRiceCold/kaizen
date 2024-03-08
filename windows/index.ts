@@ -11,5 +11,5 @@ export { default as Notifications } from './notifications'
 export { default as PowerMenu } from './powermenu'
 export { default as Verification } from './powermenu/Verification'
 
-export { setupMenu } from './dropdownmenu'
+export { setupDropMenu } from './dropmenu'
 export { setupDateMenu } from './datemenu'

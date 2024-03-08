@@ -1,25 +1,25 @@
 import PopupWindow from '../PopupWindow'
-import Content from './Menu'
+import DropMenu from './DropMenu'
 import options from 'options'
 
-const { bar, menu } = options
+const { bar, dropmenu } = options
 const layout = Utils.derive(
-  [bar.position, menu.position],
+  [bar.position, dropmenu.position],
   (bar, menu) => `${bar}-${menu}` as const
 )
 
-const MenuWindow = PopupWindow({
-  child: Content,
-  name: 'menu',
+const Window = PopupWindow({
+  child: DropMenu,
+  name: 'dropmenu',
   layout: layout.value,
   exclusivity: 'exclusive',
   transition: bar.position.bind().as(pos => pos === 'top' ? 'slide_down' : 'slide_up')
 })
 
-export function setupMenu() {
-  App.addWindow(MenuWindow)
+export function setupDropMenu() {
+  App.addWindow(Window)
   layout.connect('changed', () => {
-    App.removeWindow('menu')
-    App.addWindow(MenuWindow)
+    App.removeWindow('dropmenu')
+    App.addWindow(Window)
   })
 }

@@ -6,21 +6,27 @@ export default {
     position: opt<'top' | 'bottom'>('top'),
     corners: opt(true),
     layout: {
-      start: opt<BarWidget[]>([
-        'launcher', 'workspaces'
-      ]),
-      center: opt<BarWidget[]>([
-        'cava', 'date', 'cava'
-      ]),
-      end: opt<BarWidget[]>([
-        'expander', 'tray', 'battery', 'menu'
-      ]),
+      start: opt<BarWidget[]>([ 'launcher', 'workspaces' ]),
+      center: opt<BarWidget[]>([ 'media' ]),
+      end: opt<BarWidget[]>([ 'expander', 'tray', 'battery', 'date', 'dropmenu' ]),
     },
-    cava: {
-      bars: 8,
-      width: 8,
-      height: 24,
+    tray: {
+      ignore: opt([ 'KDE Connect Indicator' ]),
+    },
+    media: {
+      cava: { bars: 8, width: 8, height: 24 },
       action: opt(() => App.toggleWindow('media')),
+    },
+    date: {
+      colored: opt(false),
+      format: opt('%m %a • %I:%M'),
+      action: opt(() => {
+        App.toggleWindow('datemenu')
+      }),
+    },
+    dropmenu: {
+      colored: opt(false),
+      action: opt(() => App.toggleWindow('dropmenu')),
     },
     launcher: {
       icon: {
@@ -30,14 +36,8 @@ export default {
       action: opt(() => App.toggleWindow('launcher')),
       label: { colored: opt(false), label: opt('Start'), },
     },
-    date: {
-      colored: opt(false),
-      format: opt('%d/%m %a • %I:%M'),
-      action: opt(() => App.toggleWindow('datemenu')),
-    },
-    utils: {
-      colored: opt(false),
-      action: opt(() => App.toggleWindow('menu')),
+    workspaces: {
+      workspaces: opt(9),
     },
     battery: {
       charging: opt('#93CDA8'),
@@ -46,15 +46,9 @@ export default {
       width: opt(32),
       low: opt(30),
     },
-    workspaces: {
-      workspaces: opt(9),
-    },
     taskbar: {
       monochrome: opt(true),
       exclusive: opt(false),
-    },
-    tray: {
-      ignore: opt([ 'KDE Connect Indicator' ]),
     },
     powermenu: {
       monochrome: opt(false),
@@ -95,7 +89,7 @@ export default {
     labels: opt(true),
   },
 
-  menu: {
+  dropmenu: {
     width: opt(380),
     dashboard: {
       avatar: {

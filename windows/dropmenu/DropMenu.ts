@@ -39,7 +39,7 @@ const Nav = Widget.Box({
       children: [
         Widget.Label({
           className: 'tab-label',
-          label: options.menu.tab.bind().as(v => capitalize(v))
+          label: options.dropmenu.tab.bind().as(v => capitalize(v))
         }),
         Widget.Button({ child: Widget.Icon(icons.ui.refresh) }),
         Widget.Button({ child: Widget.Icon(icons.ui.pin) }),
@@ -50,6 +50,6 @@ const Nav = Widget.Box({
 
 export default Widget.Box({
   vertical: true,
-  className: 'menu',
+  className: 'dropmenu',
   children: [ Nav, ContentStack ],
 })

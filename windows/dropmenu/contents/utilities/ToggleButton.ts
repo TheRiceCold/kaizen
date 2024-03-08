@@ -6,7 +6,7 @@ import icons from 'data/icons'
 
 export const opened = Variable('')
 App.connect('window-toggled', (_, name: string, visible: boolean) => {
-  if (name === 'menu' && !visible)
+  if (name === 'dropmenu' && !visible)
     Utils.timeout(500, () => opened.value = '')
 })
 

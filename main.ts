@@ -2,7 +2,7 @@ import 'lib/session'
 import 'lib/init'
 
 import {
-  setupMenu,
+  setupDropMenu,
   setupDateMenu,
   Media,
   Launcher,
@@ -21,12 +21,12 @@ import options from 'options'
 App.config({
   icons: `./assets/icons`,
   onConfigParsed: () => {
-    setupMenu()
+    setupDropMenu()
     setupDateMenu()
     init()
   },
   closeWindowDelay: {
-    menu: options.transition.value,
+    dropmenu: options.transition.value,
     datemenu: options.transition.value,
     launcher: options.transition.value,
     overview: options.transition.value,

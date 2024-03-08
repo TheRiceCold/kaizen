@@ -1,0 +1,52 @@
+window#datemenu .datemenu
+  @include floating_widget
+  .timer
+    .selection
+      font-size: 16px
+      border-radius: 10px
+      padding: 0.4rem 0.8rem
+
+    .buttons
+      border-radius: 40px
+      padding: 0.6rem 2rem
+      background: $primary-bg
+
+    .button
+      margin: 0 1rem
+      font-size: 20px
+
+    .time
+      padding: 0.8rem
+      font-size: 50px
+
+    .title
+      padding: 1rem
+      font-size: 17px
+
+  .calendar
+    @include widget
+    margin-bottom: calc($spacing * 0.5)
+    padding: calc($padding * 2) calc($padding * 2) 0
+    calendar
+      all: unset
+      font-size: 1.2em
+      padding: calc($padding * 0.5)
+      &.button
+        @include button($flat: true)
+
+      &:selected
+        color: $primary-bg
+        border-radius: $radius
+        box-shadow: inset 0 0 0 1px $primary-bg
+
+      &.header
+        border: none
+        color: $primary-bg
+        background-color: transparent
+
+      &.highlight
+        color: $primary-bg
+
+      &:indeterminate
+        color: transparentize($fg, 0.5)
+

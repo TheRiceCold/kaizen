@@ -13,7 +13,7 @@ const {
   launcher: al,
   overview: ov,
   powermenu: pm,
-  menu,
+  dropmenu,
   indicators,
 } = options
 
@@ -104,8 +104,8 @@ export default [
   ),
   Page('Menu',icons.ui.menu,
     Group('Dashboard',
-      Row({ opt: menu.dashboard.avatar.image, title: 'Avatar', type: 'img' }),
-      Row({ opt: menu.dashboard.avatar.size, title: 'Avatar Size' }),
+      Row({ opt: dropmenu.dashboard.avatar.image, title: 'Avatar', type: 'img' }),
+      Row({ opt: dropmenu.dashboard.avatar.size, title: 'Avatar Size' }),
     )
   ),
   Page('General', icons.ui.settings,

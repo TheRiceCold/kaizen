@@ -1,16 +1,16 @@
-import date from './Date'
-import menu from './Menu'
 import tray from './Tray'
-import cava from './cava'
-import launcher from './launcher'
-import batteryBar from './batterybar'
-import workspaces from './workspaces'
+import media from './Media'
+import date from './DateMenu'
+import dropmenu from './DropMenu'
+import launcher from './Launcher'
+import batteryBar from './BatteryBar'
+import workspaces from './Workspaces'
 
 export default {
-  cava,
-  date,
   tray,
-  menu,
+  date,
+  media,
+  dropmenu,
   launcher,
   workspaces,
   battery: batteryBar,

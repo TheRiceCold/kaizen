@@ -1,6 +1,6 @@
 import options from 'options'
 
-const { image, size } = options.menu.dashboard.avatar
+const { image, size } = options.dropmenu.dashboard.avatar
 
 export default Widget.Box({
   className: 'avatar',
