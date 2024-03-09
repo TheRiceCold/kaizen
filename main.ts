@@ -19,7 +19,6 @@ import { init } from 'lib/init'
 import options from 'options'
 
 App.config({
-  icons: `./assets/icons`,
   onConfigParsed: () => {
     setupDropMenu()
     setupDateMenu()

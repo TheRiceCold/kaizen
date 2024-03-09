@@ -43,7 +43,7 @@ export default {
       charging: opt('#93CDA8'),
       percentage: opt(true),
       blocks: opt(7),
-      width: opt(32),
+      width: opt(28),
       low: opt(30),
     },
     taskbar: {

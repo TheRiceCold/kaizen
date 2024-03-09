@@ -43,9 +43,6 @@ function forMonitors(widget: (monitor: number) => Gtk.Window) {
   return range(n, 0).map(widget).flat(1)
 }
 
-/** promisified timeout */
-const wait = <T> (ms: number, cb: () => T): Promise<T> => new Promise(resolve => Utils.timeout(ms, () => resolve(cb())))
-
 /** @returns true if all of the `bins` are found */
 function dependencies(...bins: string[]) {
   const missing = bins.filter(bin => !Utils.exec(`which ${bin}`))

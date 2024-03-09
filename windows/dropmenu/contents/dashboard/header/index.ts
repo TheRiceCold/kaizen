@@ -1,12 +1,13 @@
 import icons from 'data/icons'
 import Avatar from './Avatar'
 import ClockBox from './ClockBox'
+import { sh } from 'lib/utils'
 
 const SysButtons = [
   Widget.Button({
     vpack: 'center',
+    onClicked: () => sh('hyprlock'),
     child: Widget.Icon(icons.ui.lock),
-    // onClicked: () => bash`hyprctl reload`,
   }),
   Widget.Button({
     vpack: 'center',

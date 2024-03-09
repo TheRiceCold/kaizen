@@ -10,6 +10,7 @@ export default mkOptions(OPTIONS, {
 
   hyprland: {
     gaps: opt(2),
+    gapsWhenOnly: opt(false),
     inactiveBorder: opt('333333ff'),
   },
 

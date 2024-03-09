@@ -19,9 +19,9 @@ const PercentLabel = Widget.Box({
 
 const LevelBar = () => {
   const level = Widget.LevelBar({
-    mode: 1,
     vpack: 'fill',
     hpack: 'fill',
+    bar_mode: 'discrete',
     maxValue: blocks.bind(),
     value: battery.bind('percent').as(p => (p / 100) * blocks.value),
   })
