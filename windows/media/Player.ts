@@ -1,5 +1,4 @@
 import { type MprisPlayer } from 'types/service/mpris'
-import CircularProgress from 'misc/circularprogress'
 import options from 'options'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
