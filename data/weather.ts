@@ -1,4 +1,5 @@
-export default {
+
+export default Variable({
   weather: [
     {
       id: 701,
@@ -19,5 +20,5 @@ export default {
   visibility: 1000,
   wind: { speed: 0, deg: 0 },
   clouds: { all: 20 },
-  name: "Weather Not Available!",
-}
+  name: 'Weather Not Available!',
+})

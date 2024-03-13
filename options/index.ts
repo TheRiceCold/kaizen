@@ -2,6 +2,7 @@ import { opt, mkOptions } from 'lib/option'
 import windows from './windows'
 import theme from './theme'
 import fonts from './fonts'
+import api from './api'
 
 export default mkOptions(OPTIONS, {
   autotheme: opt(true),
@@ -14,6 +15,7 @@ export default mkOptions(OPTIONS, {
     inactiveBorder: opt('333333ff'),
   },
 
+  ...api,
   ...fonts,
   ...theme,
   ...windows,

@@ -23,7 +23,10 @@ export default (player: MprisPlayer) => {
     ),
   })
 
-  return Widget.Box({
-    children: direction.bind().as(d => d === 'right' ? [playericon, text] : [text, playericon]),
+  return Widget.Overlay({
+    child: Widget.Box({
+      hpack: 'center',
+      children: direction.bind().as(d => d === 'right' ? [playericon, text] : [text, playericon]),
+    }),
   })
 }
