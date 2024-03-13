@@ -1,5 +1,6 @@
 import 'lib/session'
 import 'lib/init'
+import 'style/style'
 
 import {
   setupDropMenu,
@@ -15,14 +16,12 @@ import {
 } from 'windows'
 
 import { forMonitors } from 'lib/utils'
-import { init } from 'lib/init'
 import options from 'options'
 
 App.config({
   onConfigParsed: () => {
     setupDropMenu()
     setupDateMenu()
-    init()
   },
   closeWindowDelay: {
     dropmenu: options.transition.value,
