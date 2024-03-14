@@ -64,11 +64,9 @@ window#dropmenu .dropmenu .dashboard
         color: transparentize($fg, 0.5)
 
   .weather
-    border-radius: $radius
-  .overlay
-    background: linear-gradient(to bottom, rgba($bg, 0.6), rgba($bg, 0.9))
-  .info
     padding: 2rem
+    @include widget
+
     .feelslike
       font-size: 1.3rem
     .temp
