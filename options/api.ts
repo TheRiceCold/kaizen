@@ -1,13 +1,11 @@
 import { opt } from 'lib/option'
+import keys from 'keys'
 
 export default {
   api: {
-    weather: {
-      key: opt(''),
-      city: opt('Caloocan')
-    },
+    weather: { url: `wttr.in/caloocan?format=j1` },
     openai: {
-      key: opt(''),
+      key: opt(keys.OPENAI_API_KEY),
     },
     gemini: {
       key: opt(''),

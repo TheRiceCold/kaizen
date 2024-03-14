@@ -1,27 +1,15 @@
 window#datemenu .datemenu
   @include floating_widget
-  .timer
-    .selection
-      font-size: 16px
-      border-radius: 10px
-      padding: 0.4rem 0.8rem
+  .weather
+    padding: 2rem
+    @include widget
 
-    .buttons
-      border-radius: 40px
-      padding: 0.6rem 2rem
-      background: $primary-bg
-
-    .button
-      margin: 0 1rem
-      font-size: 20px
-
-    .time
-      padding: 0.8rem
-      font-size: 50px
-
-    .title
-      padding: 1rem
-      font-size: 17px
+    .feelslike
+      font-size: 1.3rem
+    .temp
+      font-size: 2.3rem
+    .city
+      margin-top: 2.8rem
 
   .calendar
     @include widget
