@@ -19,6 +19,7 @@ const StackContent = Widget.Stack({
 })
 
 export default () => PanelButton({
+  className: 'media',
   child: StackContent,
   onClicked: action.bind(),
   onScrollUp: () => StackContent.shown = 'player',

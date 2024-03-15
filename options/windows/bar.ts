@@ -16,14 +16,12 @@ export default {
     cava: { bars: 12, width: 8, height: 24 },
     action: opt(() => App.toggleWindow('media')),
 
-    monochrome: opt(true),
-    preferred: opt('spotify'),
-    direction: opt<'left' | 'right'>('right'),
     length: opt(20),
+    preferred: opt('spotify'),
   },
   date: {
     colored: opt(false),
-    format: opt('%d %a • %I:%M'),
+    format: opt('%d %a, %I:%M'),
     action: opt(() => {
       App.toggleWindow('datemenu')
       App.closeWindow('dropmenu')
