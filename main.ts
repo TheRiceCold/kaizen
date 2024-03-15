@@ -5,13 +5,12 @@ import 'style/style'
 import {
   setupDropMenu,
   setupDateMenu,
-  Media,
+  Popups,
   Launcher,
   Overview,
   PowerMenu,
   Verification,
   Indicators,
-  Notifications,
   Bar, BarRoundedCorners,
 } from 'windows'
 
@@ -30,14 +29,13 @@ App.config({
     overview: options.transition.value,
   },
   windows: () => [
-    ...forMonitors(Bar),
-    ...forMonitors(Notifications),
-    ...forMonitors(BarRoundedCorners),
-    ...forMonitors(Indicators),
-    Media,
+    Popups,
     Launcher,
     Overview,
     PowerMenu,
+    Indicators,
     Verification,
+    ...forMonitors(Bar),
+    ...forMonitors(BarRoundedCorners),
   ],
 })

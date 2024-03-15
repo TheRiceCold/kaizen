@@ -1,5 +1,5 @@
 import { type Notification as Notif } from 'types/service/notifications'
-import Notification from 'windows/notifications/Notification'
+import Notification from 'windows/popups/Notification'
 
 import options from 'options'
 import icons from 'data/icons'

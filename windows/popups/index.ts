@@ -3,7 +3,7 @@ import options from 'options'
 
 const notifications = await Service.import('notifications')
 const { transition } = options
-const { position } = options.notifications
+const { position, width } = options.notifications
 const { timeout, idle } = Utils
 
 function Animated(id: number) {
@@ -44,19 +44,16 @@ function Animated(id: number) {
 
 function PopupList() {
   const map: Map<number, ReturnType<typeof Animated>> = new Map
-  const box = Widget.Box({
-    hpack: 'end',
-    vertical: true,
-    css: options.notifications.width.bind().as(w => `min-width: ${w}px;`),
-  })
-
   function remove(_: unknown, id: number) {
     map.get(id)?.dismiss()
     map.delete(id)
   }
 
-  return box
-    .hook(notifications, (_, id: number) => {
+  return Widget.Box({
+    hpack: 'end',
+    vertical: true,
+    css: width.bind().as(w => `min-width: ${w}px;`),
+  }).hook(notifications, (self, id: number) => {
       if (id !== undefined) {
         if (map.has(id))
           remove(null, id)
@@ -66,20 +63,20 @@ function PopupList() {
 
         const w = Animated(id)
         map.set(id, w)
-        box.children = [w, ...box.children]
+        self.children = [w, ...self.children]
       }
     }, 'notified')
     .hook(notifications, remove, 'dismissed')
     .hook(notifications, remove, 'closed')
 }
 
-export default (monitor: number) => Widget.Window({
-  monitor,
+export default Widget.Window({
+  name: `popups`,
+  className: 'popups',
   anchor: position.bind(),
-  className: 'notifications',
-  name: `notifications${monitor}`,
   child: Widget.Box({
+    vertical: true,
     css: 'padding: 2px;',
-    child: PopupList(),
+    children: [ PopupList() ]
   }),
 })

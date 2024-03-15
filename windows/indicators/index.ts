@@ -1,3 +1,5 @@
+// TODO: Update design
+
 import Progress from './Progress'
 import options from 'options'
 import icons from 'data/icons'
@@ -72,12 +74,11 @@ function MicrophoneMute() {
   }))
 }
 
-export default (monitor: number) => Widget.Window({
-  monitor,
+export default Widget.Window({
   layer: 'overlay',
+  name: `indicator`,
   clickThrough: true,
   className: 'indicator',
-  name: `indicator${monitor}`,
   anchor: [ 'right', 'left', 'top', 'bottom' ],
   child: Widget.Box({
     expand: true,
