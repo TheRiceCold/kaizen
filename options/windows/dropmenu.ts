@@ -9,5 +9,5 @@ export default {
     },
   },
   position: opt<'left' | 'center' | 'right'>('right'),
-  tab: opt<'dashboard' | 'utilities' | 'apis' | 'settings'>('dashboard'),
+  tab: opt<'utilities' | 'apis' | 'settings'>('utilities'),
 }

@@ -1,10 +1,9 @@
-import { Dashboard, Utilities, Apis, Settings } from './contents'
+import { Utilities, Apis, Settings } from './contents'
 import icons from 'data/icons'
 import options from 'options'
 import { capitalize } from 'lib/utils'
 
 const contents = [
-  { icon: '󰇄', name: 'dashboard', content: Dashboard },
   { icon: '󱍓', name: 'utilities', content: Utilities },
   { icon: '󰚩', name: 'apis', content: Apis },
   { icon: '', name: 'settings', content: Settings },
