@@ -5,7 +5,4 @@ const clock = (interval: number = 5000) => Variable(
   { poll: [interval, () => GLib.DateTime.new_now_local()] }
 )
 
-const showMedia = Variable(false)
-globalThis['openMedia'] = showMedia
-
-export { clock, showMedia }
+export { clock }

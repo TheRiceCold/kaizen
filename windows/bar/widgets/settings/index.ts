@@ -11,7 +11,7 @@ export default () => BarButton({
   window: 'dropmenu',
   onClicked: action.bind(),
   child: Widget.Box({
-    spacing: options.theme.spacing ,
+    spacing: options.theme.spacing * 1.75,
     children: [
       Network,
       Widget.Label({

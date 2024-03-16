@@ -1,10 +1,12 @@
 import { opt } from 'lib/option'
 import bar from './bar'
+import media from './media'
 import launcher from './launcher'
 import dropmenu from './dropmenu'
 
 export default {
   bar: {...bar},
+  media: {...media},
   dropmenu: {...dropmenu},
   launcher: {...launcher},
 
@@ -25,12 +27,6 @@ export default {
 
   datemenu: {
     position: opt<'left' | 'center' | 'right'>('right'),
-  },
-
-  media: {
-    coverSize: opt(100),
-    monochromeIcon: opt(true),
-    position: opt<'left' | 'center' | 'right'>('center'),
   },
 
   indicators: {

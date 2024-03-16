@@ -17,11 +17,8 @@ export default {
     direction: opt<'left' | 'right'>('right'),
   },
   media: {
-    cava: { bars: 12, width: 8, height: 24 },
-    action: opt(() => App.toggleWindow('media')),
-
     length: opt(20),
-    preferred: opt('spotify'),
+    cava: { bars: opt(16), width: opt(8), height: opt(24) },
   },
   datemenu: {
     interval: 5000,
