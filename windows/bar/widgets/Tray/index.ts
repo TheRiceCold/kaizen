@@ -37,7 +37,7 @@ const ArrowIcon = () => {
 }
 
 const dir = direction.value
-export default Widget.Box([
+export default () => Widget.Box([
   dir === 'right' && Revealer,
   ArrowIcon(),
   dir === 'left' && Revealer,

@@ -9,8 +9,8 @@ export default {
   launcher: {...launcher},
 
   overview: {
-    scale: opt(12),
-    workspaces: opt(5),
+    scale: opt(9),
+    workspaces: opt(9),
     monochromeIcon: opt(true),
   },
 

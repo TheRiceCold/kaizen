@@ -1,7 +1,7 @@
 import BarButton from '../BarButton'
 const notifications = await Service.import('notifications')
 
-export default BarButton({
+export default () => BarButton({
   child: Widget.Box([
     Widget.Label('󱅫'),
     Widget.Label({

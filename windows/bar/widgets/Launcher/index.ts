@@ -3,7 +3,7 @@ import options from 'options'
 
 const { icon, label, action } = options.bar.launcher
 
-export default BarButton({
+export default () => BarButton({
   window: 'launcher',
   onClicked: action.bind(),
   child: Widget.Box([

@@ -25,7 +25,7 @@ const Workspaces = (ws: number) => Widget.Box({
   },
 })
 
-export default BarButton({
+export default () => BarButton({
   window: 'overview',
   className: 'workspaces',
   child: workspaces.bind().as(Workspaces),

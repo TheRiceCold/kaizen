@@ -18,7 +18,7 @@ const StackContent = Widget.Stack({
   },
 })
 
-export default BarButton({
+export default () => BarButton({
   className: 'media',
   child: StackContent,
   onClicked: action.bind(),

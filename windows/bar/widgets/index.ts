@@ -16,5 +16,5 @@ export default {
   settings,
   powermenu,
   workspaces,
-  expander: Widget.Box({ expand: true })
+  expander: () => Widget.Box({ expand: true })
 }

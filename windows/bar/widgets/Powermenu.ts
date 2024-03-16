@@ -4,7 +4,7 @@ import BarButton from '../BarButton'
 
 const { monochrome, action } = options.bar.powermenu
 
-export default BarButton({
+export default () => BarButton({
   window: 'powermenu',
   onClicked: action.bind(),
   child: Widget.Icon(icons.powermenu.shutdown),

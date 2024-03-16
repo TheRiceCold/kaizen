@@ -3,7 +3,7 @@ import AppItem from './AppItem'
 
 import options from 'options'
 
-const { favorites } = options.launcher
+const { favorites } = options.launcher.apps
 const apps = await Service.import('applications')
 
 export default Widget.Revealer({

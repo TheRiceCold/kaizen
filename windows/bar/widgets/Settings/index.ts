@@ -7,7 +7,7 @@ const battery = await Service.import('battery')
 
 const setBatteryIcon = (p: number) => (p < 10) ? ' ' : (p < 30) ? ' ' : (p < 60) ? ' ' : (p < 90) ? ' ' : ' '
 
-export default BarButton({
+export default () => BarButton({
   window: 'dropmenu',
   onClicked: action.bind(),
   child: Widget.Box({
