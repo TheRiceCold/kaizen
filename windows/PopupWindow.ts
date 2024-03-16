@@ -38,7 +38,7 @@ const PopupRevealer = (
     }),
     transitionDuration: options.transition.bind(),
     setup: self => self.hook(App, (_, wname, visible) => {
-      if (wname === name) self.reveal_child = visible
+      if (wname === name) self.revealChild = visible
     }),
   }),
 )

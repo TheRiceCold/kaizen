@@ -1,5 +1,5 @@
 import { type Notification as Notif } from 'types/service/notifications'
-import Notification from 'windows/popups/Notification'
+import Notification from 'windows/popups/notifications/Notification'
 
 import options from 'options'
 import icons from 'data/icons'
@@ -13,7 +13,7 @@ const Animated = (n: Notif) => Widget.Revealer({
   transitionDuration: options.transition.value,
   setup: self => Utils.timeout(options.transition.value, () => {
     if (!self.is_destroyed)
-      self.reveal_child = true
+      self.revealChild = true
   })
 })
 
@@ -54,7 +54,7 @@ const NotificationList = () => {
   function remove(_: unknown, id: number) {
     const n = map.get(id)
     if (n) {
-      n.reveal_child = false
+      n.revealChild = false
       Utils.timeout(options.transition.value, () => {
         n.destroy()
         map.delete(id)

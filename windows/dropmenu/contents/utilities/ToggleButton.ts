@@ -91,7 +91,7 @@ type MenuProps = {
 }
 export const Menu = ({ name, icon, title, content }: MenuProps) => Widget.Revealer({
   transition: 'slide_down',
-  reveal_child: opened.bind().as(v => v === name),
+  revealChild: opened.bind().as(v => v === name),
   child: Widget.Box({
     classNames: ['menu', name],
     vertical: true,

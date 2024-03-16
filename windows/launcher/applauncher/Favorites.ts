@@ -17,5 +17,5 @@ export default Widget.Revealer({
       .map(AppItem),
     ),
   }),
-  setup: self => self.hook(Entry, () => self.reveal_child = !Entry.text, 'notify::text'),
+  setup: self => self.hook(Entry, () => self.revealChild = !Entry.text, 'notify::text'),
 })

@@ -1,17 +1,11 @@
-import PopupWindow from '../PopupWindow'
 import Player from './Player'
 import options from 'options'
+import { showMedia } from 'lib/variables'
 
-const { bar, media } = options
-const layout = Utils.derive(
-  [bar.position, media.position],
-  (bar, media) => `${bar}-${media}` as const
-)
+const { bar } = options
 
-export default PopupWindow({
-  name: `media`,
+export default Widget.Revealer({
   child: Player,
-  layout: layout.value,
-  exclusivity: 'exclusive',
+  setup: self => self.hook(showMedia, self => self.revealChild = showMedia.value),
   transition: bar.position.bind().as(pos => pos === 'top' ? 'slide_down' : 'slide_up'),
 })

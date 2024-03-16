@@ -24,7 +24,7 @@ function OnScreenProgress(vertical: boolean) {
 
   let count = 0
   function show(value: number, icon: string) {
-    revealer.reveal_child = true
+    revealer.revealChild = true
     indicator.icon = icon
     progress.setValue(value)
     count++
@@ -32,7 +32,7 @@ function OnScreenProgress(vertical: boolean) {
       count--
 
       if (count === 0)
-        revealer.reveal_child = false
+        revealer.revealChild = false
     })
   }
 
@@ -62,13 +62,13 @@ function MicrophoneMute() {
     if (mute !== audio.microphone.stream?.is_muted) {
       mute = audio.microphone.stream!.is_muted
       icon.icon = icons.audio.mic[ mute ? 'muted' : 'high' ]
-      revealer.reveal_child = true
+      revealer.revealChild = true
       count++
 
       Utils.timeout(DELAY, () => {
         count--
         if (count === 0)
-          revealer.reveal_child = false
+          revealer.revealChild = false
       })
     }
   }))

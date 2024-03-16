@@ -109,11 +109,11 @@ export default (notification: Notification) => {
     onPrimaryClick: notification.dismiss,
     onHover() {
       if (actionsbox)
-        actionsbox.reveal_child = true
+        actionsbox.revealChild = true
     },
     onHoverLost() {
       if (actionsbox)
-        actionsbox.reveal_child = true
+        actionsbox.revealChild = true
 
       notification.dismiss()
     },
