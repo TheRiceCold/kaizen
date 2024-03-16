@@ -1,19 +1,19 @@
-import PanelButton from './PanelButton'
 import options from 'options'
 import { clock } from 'lib/variables'
+import BarButton from '../BarButton'
 
-const { format, action } = options.bar.date
+const { interval, format, action } = options.bar.datemenu
 
 const Time = Widget.Label({
   label: Utils.derive(
-    [clock, format],
+    [clock(interval), format],
     (c, f) => c.format(f) || ''
   ).bind()
 })
 
-export default () => PanelButton({
+export default BarButton({
   child: Time,
   window: 'datemenu',
-  className: 'datetime',
+  className: 'datemenu',
   onClicked: action.bind(),
 })

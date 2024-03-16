@@ -1,6 +1,6 @@
-import PanelButton from '../PanelButton'
 import options from 'options'
 import { sh, range } from 'lib/utils'
+import BarButton from '../../BarButton'
 
 const hyprland = await Service.import('hyprland')
 const { workspaces } = options.bar.workspaces
@@ -25,7 +25,7 @@ const Workspaces = (ws: number) => Widget.Box({
   },
 })
 
-export default () => PanelButton({
+export default BarButton({
   window: 'overview',
   className: 'workspaces',
   child: workspaces.bind().as(Workspaces),

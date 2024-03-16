@@ -6,8 +6,6 @@ const deps = [
   'font',
   'theme',
   'bar.position',
-  'bar.battery.charging',
-  'bar.battery.blocks',
 ]
 
 const {
@@ -60,9 +58,6 @@ const variables = () => [
   $('font-name', options.font.default.name),
   $('font-size', `${options.font.default.size}pt`),
 
-  //etc
-  $('charging-bg', options.bar.battery.charging),
-  $('bar-battery-blocks', options.bar.battery.blocks),
   $('bar-position', options.bar.position),
   $('hyprland-gaps-multiplier', options.hyprland.gaps),
 ]

@@ -5,13 +5,13 @@ import 'style/style'
 import {
   setupDropMenu,
   setupDateMenu,
+  Bar,
   Popups,
   Launcher,
   Overview,
   PowerMenu,
   Verification,
   Indicators,
-  Bar, BarRoundedCorners,
 } from 'windows'
 
 import { forMonitors } from 'lib/utils'
@@ -36,6 +36,5 @@ App.config({
     Indicators,
     Verification,
     ...forMonitors(Bar),
-    ...forMonitors(BarRoundedCorners),
   ],
 })

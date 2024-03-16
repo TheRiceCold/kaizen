@@ -1,13 +1,14 @@
 .bar
   background-color: transparentize($bg, 0.5)
-  .panel-button
+  .bar-button
     @include accs-button($flat: true)
     > *
       border-radius: $radius
-      margin: calc($spacing * 0.3)
+      margin: calc($spacing * 0.25)
     label, image
       color: $fg
       font-weight: bold
+      padding: calc($padding * 0.5)
     &:not(.flat)
       @include accs-button($flat: false)
     > *

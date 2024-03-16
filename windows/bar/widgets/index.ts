@@ -1,18 +1,20 @@
 import tray from './Tray'
 import media from './Media'
-import date from './DateMenu'
-import dropmenu from './DropMenu'
+import datemenu from './Datemenu'
 import launcher from './Launcher'
-import batteryBar from './BatteryBar'
+import settings from './Settings'
+import powermenu from './Powermenu'
+import notifs from './Notifications'
 import workspaces from './Workspaces'
 
 export default {
   tray,
-  date,
   media,
-  dropmenu,
+  notifs,
   launcher,
+  datemenu,
+  settings,
+  powermenu,
   workspaces,
-  battery: batteryBar,
-  expander: () => Widget.Box({ expand: true }),
+  expander: Widget.Box({ expand: true })
 }

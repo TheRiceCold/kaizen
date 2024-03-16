@@ -7,7 +7,7 @@ const { Box, CenterBox, Window } = Widget
 const pos = options.bar.position.bind()
 const { start, center, end } = options.bar.layout
 
-const bindWidgets = layout => layout.bind().as(i => i.map(w => widgets[w]()))
+const bindWidgets = layout => layout.bind().as(i => i.map(w => widgets[w]))
 
 const Content = CenterBox({
   css: 'min-width: 2px; min-height: 2.5rem;',

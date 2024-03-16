@@ -1,4 +1,4 @@
-import PanelButton from '../PanelButton'
+import BarButton from '../../BarButton'
 import Player from './Player'
 import cava from 'misc/cava'
 import options from 'options'
@@ -18,7 +18,7 @@ const StackContent = Widget.Stack({
   },
 })
 
-export default () => PanelButton({
+export default BarButton({
   className: 'media',
   child: StackContent,
   onClicked: action.bind(),

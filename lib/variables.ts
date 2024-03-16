@@ -1,9 +1,8 @@
-import options from 'options'
 const { GLib } = imports.gi
 
-const clock = Variable(
+const clock = (interval: number = 5000) => Variable(
   GLib.DateTime.new_now_local(),
-  { poll: [5000, () => GLib.DateTime.new_now_local()] }
+  { poll: [interval, () => GLib.DateTime.new_now_local()] }
 )
 
 export { clock }

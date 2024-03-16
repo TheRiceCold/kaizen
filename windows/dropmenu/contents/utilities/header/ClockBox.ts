@@ -23,7 +23,7 @@ export default Widget.Box({
   children: [
     Widget.Label({
       className: 'clock',
-      label: clock.bind().as(t => t.format('%I:%M')!),
+      label: clock().bind().as(t => t.format('%I:%M')!),
     }),
     Widget.Box([
       Widget.Box({

@@ -1,9 +1,9 @@
-import PanelButton from '../PanelButton'
+import BarButton from '../../BarButton'
 import options from 'options'
 
 const { icon, label, action } = options.bar.launcher
 
-export default () => PanelButton({
+export default BarButton({
   window: 'launcher',
   onClicked: action.bind(),
   child: Widget.Box([

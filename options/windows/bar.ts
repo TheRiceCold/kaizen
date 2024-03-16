@@ -7,10 +7,14 @@ export default {
   layout: {
     start: opt<BarWidget[]>([ 'launcher', 'workspaces' ]),
     center: opt<BarWidget[]>([ 'media' ]),
-    end: opt<BarWidget[]>([ 'expander', 'tray', 'battery', 'date', 'dropmenu' ]),
+    end: opt<BarWidget[]>([
+      'expander', 'tray', 'settings',
+      'datemenu', 'notifs', 'powermenu',
+    ]),
   },
   tray: {
     ignore: opt([ 'KDE Connect Indicator' ]),
+    direction: opt<'left' | 'right'>('right'),
   },
   media: {
     cava: { bars: 12, width: 8, height: 24 },
@@ -19,15 +23,16 @@ export default {
     length: opt(20),
     preferred: opt('spotify'),
   },
-  date: {
-    colored: opt(false),
-    format: opt('%d %a, %I:%M'),
+  datemenu: {
+    interval: 5000,
+    // DOCS: https://docs.gtk.org/glib/method.DateTime.format.html
+    format: opt('%a %d  %I:%M'),
     action: opt(() => {
       App.toggleWindow('datemenu')
       App.closeWindow('dropmenu')
     }),
   },
-  dropmenu: {
+  settings: {
     colored: opt(false),
     action: opt(() => {
       App.toggleWindow('dropmenu')
@@ -43,14 +48,7 @@ export default {
     label: { colored: opt(false), label: opt('Start'), },
   },
   workspaces: {
-    workspaces: opt(9),
-  },
-  battery: {
-    charging: opt('#93CDA8'),
-    percentage: opt(true),
-    blocks: opt(7),
-    width: opt(28),
-    low: opt(30),
+    workspaces: opt(5),
   },
   taskbar: {
     monochrome: opt(true),
