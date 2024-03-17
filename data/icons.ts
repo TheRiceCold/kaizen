@@ -35,7 +35,6 @@ export default {
     tick: 'object-select-symbolic',
     refresh: 'view-refresh-symbolic',
     search: 'system-search-symbolic',
-    avatar: 'avatar-default-symbolic',
     settings: 'emblem-system-symbolic',
     warning: 'dialog-warning-symbolic',
     lock: 'system-lock-screen-symbolic',

@@ -35,13 +35,13 @@ export default {
     scheme: opt<'dark' | 'light'>('dark'),
     widget: { opacity: opt(94) },
     border: {
-      width: opt(4),
+      width: opt(1),
       opacity: opt(96),
     },
 
     shadows: opt(true),
     padding: opt(4),
     spacing: opt(8),
-    radius: opt(8),
+    radius: opt(16),
   },
 }

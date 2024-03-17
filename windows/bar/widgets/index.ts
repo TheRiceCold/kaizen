@@ -4,18 +4,18 @@ import launcher from './launcher'
 import settings from './settings'
 import workspaces from './workspaces'
 
+import profile from './Profile'
 import datemenu from './Datemenu'
-import powermenu from './Powermenu'
 import notifs from './Notifications'
 
 export default {
   tray,
   media,
   notifs,
+  profile,
   launcher,
   datemenu,
   settings,
-  powermenu,
   workspaces,
   expander: () => Widget.Box({ expand: true })
 }

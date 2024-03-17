@@ -3,20 +3,19 @@ import options from 'options'
 
 export type BarWidget = keyof typeof widget
 
-const { Box, CenterBox, Window } = Widget
 const pos = options.bar.position.bind()
-const { start, center, end } = options.bar.layout
+const { start, end } = options.bar.layout
 
 const bindWidgets = layout => layout.bind().as(i => i.map(w => widgets[w]()))
 
-const Content = CenterBox({
+const Content = Widget.CenterBox({
   css: 'min-width: 2px; min-height: 2.5rem;',
-  startWidget: Box({ hexpand: true, children: bindWidgets(start) }),
-  centerWidget: Box({ hpack: 'center', children: bindWidgets(center) }),
-  endWidget: Box({ hexpand: true, children: bindWidgets(end) }),
+  startWidget: Widget.Box({ hpack: 'start', className: 'side-content', children: bindWidgets(start) }),
+  centerWidget: widgets.media(),
+  endWidget: Widget.Box({ hpack: 'end', className: 'side-content', children: bindWidgets(end) }),
 })
 
-export default (monitor: number) => Window({
+export default (monitor: number) => Widget.Window({
   child: Content,
   className: 'bar',
   name: `bar${monitor}`,

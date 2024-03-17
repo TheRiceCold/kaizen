@@ -5,13 +5,7 @@ type TProps = ButtonProps & {
   window?: string,
 }
 
-export default ({
-  window = '',
-  child,
-  setup,
-  ...props
-}: TProps) => Widget.Button({
-  child: Widget.Box({ child }),
+export default ({ window = '', setup, ...props }: TProps) => Widget.Button({
   setup: self => {
     setupCursorHover(self)
     let open = false

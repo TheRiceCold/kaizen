@@ -3,12 +3,14 @@ import bar from './bar'
 import media from './media'
 import launcher from './launcher'
 import dropmenu from './dropmenu'
+import leftmenus from './leftmenus'
 
 export default {
   bar: {...bar},
   media: {...media},
   dropmenu: {...dropmenu},
   launcher: {...launcher},
+  leftmenus: {...leftmenus},
 
   overview: {
     scale: opt(9),
@@ -46,8 +48,7 @@ export default {
   },
 
   notifications: {
-    position: opt<Array<'top' | 'bottom' | 'left' | 'right'>>(['top']),
-    blacklist: opt(['Spotify']),
     width: opt(440),
+    blacklist: opt(['Spotify']),
   },
 }
