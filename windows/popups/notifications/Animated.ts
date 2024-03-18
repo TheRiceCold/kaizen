@@ -2,27 +2,19 @@ import options from 'options'
 import Notification from './Notification'
 
 const { timeout } = Utils
-const { transition } = options
+const { transition, bar } = options
 const notifications = await Service.import('notifications')
 
 export default (id: number) => {
   const n = notifications.getNotification(id)!
   const widget = Notification(n)
-
-  const inner = Widget.Revealer({
-    child: widget,
-    transition: 'slide_down',
-    css: 'border: 1px solid magenta;',
+  const transitionRevealer = {
     transitionDuration: transition.value,
-  })
+    transition: bar.position.bind().as(pos => pos === 'top' ? 'slide_down' : 'slide_up'),
+  }
 
-  const outer = Widget.Revealer({
-    child: inner,
-    transition: 'slide_down',
-    css: 'border: 1px solid yellow;',
-    transitionDuration: transition.value,
-  })
-
+  const inner = Widget.Revealer({ child: widget, ...transitionRevealer })
+  const outer = Widget.Revealer({ child: inner, ...transitionRevealer })
   const box = Widget.Box({ hpack: 'end', child: outer })
 
   Utils.idle(() => {

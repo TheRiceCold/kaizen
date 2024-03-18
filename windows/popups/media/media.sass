@@ -1,19 +1,15 @@
 window.popups .media
-  min-width: 29.5rem
   @include floating-widget
   background-color: transparentize($bg, 0.6)
   .player
     padding: $padding
-
     .cover
       @if $shadows
         box-shadow: 2px 2px 2px 0 $shadow-color
-
       margin-right: $spacing
       border-radius: $radius
       background-size: cover
       background-position: center
-
     button
       @include button($flat: true)
       padding: $padding
@@ -21,13 +17,10 @@ window.popups .media
         margin: 0 $spacing
       image
         font-size: 1.2em
-
     .artist
       color: transparentize($fg, 0.2)
-
     scale
       margin-bottom: calc($padding * 0.5)
       @include slider($width: 0.5em, $slider: false, $gradient: linear-gradient($fg, $fg))
-
       trough
         border: none
