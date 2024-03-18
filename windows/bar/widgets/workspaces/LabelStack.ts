@@ -1,19 +1,28 @@
 import options from 'options'
 import { capitalize } from 'lib/utils'
 
+export type TWorkspace = {
+  label: string
+  gerund: string
+}
+
 const { workspaces } = options.bar
 const hyprland = await Service.import('hyprland')
 
 const getLabel = (isStack: bool) => {
-  const items = workspaces.items.value
-  const id = hyprland.active.workspace.id - 1
-  const client = hyprland.active.client.class
-  const window = client.length > 0 ? '  '+capitalize(client) : ''
-  return isStack ? items[id] : capitalize(items[id]) + window
+  const { active } = hyprland
+  const id = active.workspace.id - 1
+  const client = active.client.class
+  const subs = workspaces.substitutes
+
+  const ws = workspaces.items.value[id]
+  const win = client in subs ? subs[client] : capitalize(client)
+  const withWindow = client.length > 0 ? `${capitalize(ws.gerund)} in ${win}` : capitalize(ws.label)
+
+  return isStack ? ws.label : withWindow
 }
 
-const Items = (ws: string[]) => {
-  ws.push(workspaces.fallback)
+const Items = (ws: TWorkspace) => {
   const Label = (workspace: string) => Widget.Label({
     label: workspace,
     maxWidthChars: 28,
@@ -22,7 +31,7 @@ const Items = (ws: string[]) => {
     setup: self => self.hook(hyprland, () => self.label = getLabel())
   })
 
-  return ws.reduce((acc, label) => (acc[label] = Label(label), acc), {})
+  return ws.reduce((acc, {label}) => (acc[label] = Label(label), acc), {})
 }
 
 export default Widget.Stack({
