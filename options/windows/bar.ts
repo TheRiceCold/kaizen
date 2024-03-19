@@ -12,7 +12,7 @@ export default {
     ignore: opt([ 'KDE Connect Indicator' ]),
   },
   media: {
-    length: opt(20),
+    length: opt(56),
     visualizer: { width: opt(8), height: opt(24) },
   },
   datemenu: {

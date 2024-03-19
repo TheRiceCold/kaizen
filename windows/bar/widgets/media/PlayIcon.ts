@@ -16,7 +16,6 @@ export default (player: MprisPlayer) => {
 
   return Widget.CircularProgress({
     child: Icon,
-    startAt: 0.75,
     className: 'progress',
   }).hook(mpris, progressUpdate).poll(1500, progressUpdate)
 }

@@ -19,6 +19,7 @@ const {
   shadows,
   widget,
   border,
+  colors,
 } = options.theme
 
 const popoverPaddingMultiplier = 1.6
@@ -30,6 +31,8 @@ const t = (
 const $ = (name: string, value: string | Opt<any>) => `$${name}: ${value}`
 
 const variables = () => [
+  $('black', colors.black),
+
   $('bg', blur.value ? `transparentize(${t(dark.bg, light.bg)}, ${blur.value / 100})` : t(dark.bg, light.bg)),
   $('fg', t(dark.fg, light.fg)),
 
