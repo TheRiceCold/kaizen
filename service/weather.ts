@@ -72,5 +72,4 @@ class WeatherService extends Service {
   }
 }
 
-const service = new WeatherService()
-export default service
+export default new WeatherService

@@ -6,12 +6,10 @@ const MAX_NUM_COLORS = 10
 
 class ColorPicker extends Service {
   static {
-    Service.register(this, {}, {
-      colors: [ 'jsobject' ],
-    })
+    Service.register(this, {}, { colors: ['jsobject'] })
   }
 
-  notifID = 0
+  #notifID = 0
   #colors = JSON.parse(Utils.readFile(COLORS_CACHE) || '[]') as string[]
 
   get colors() { return [...this.#colors] }
@@ -20,34 +18,34 @@ class ColorPicker extends Service {
     this.changed('colors')
   }
 
-  async wlCopy(color: string) {
-    if (dependencies('wl-copy')) bash(`wl-copy ${color}`)
+  wlCopy(color: string) {
+    if (dependencies('wl-copy'))
+      bash(`wl-copy ${color}`)
   }
 
-  async pick() {
-    if (!dependencies('hyprpicker')) return
+  readonly pick = () => {
+    if (!dependencies('hyprpicker'))
+      return
 
-    const color = await bash('hyprpicker -a -r')
+    const color = bash('hyprpicker -a -r')
     if (!color) return
 
-    colorpicker.wlCopy(color)
-    const list = colorpicker.colors
+    this.wlCopy(color)
+    const list = this.colors
     if (!list.includes(color)) {
       list.push(color)
-      if (list.length > MAX_NUM_COLORS)
-        list.shift()
+      if (list.length > MAX_NUM_COLORS) list.shift()
 
-      colorpicker.colors = list
+      this.colors = list
       Utils.writeFile(JSON.stringify(list, null, 2), COLORS_CACHE)
     }
 
-    colorpicker.notifID = await Utils.notify({
-      id: colorpicker.notifID,
+    this.#notifID = Utils.notify({
+      id: this.#notifID,
       iconName: icons.ui.colorpicker,
       summary: color,
     })
   }
 }
 
-const colorpicker = new ColorPicker
-export default colorpicker
+export default new ColorPicker

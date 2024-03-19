@@ -38,6 +38,4 @@ class PowerMenu extends Service {
   }
 }
 
-const powermenu = new PowerMenu
-globalThis['powermenu'] = powermenu
-export default powermenu
+export default new PowerMenu
