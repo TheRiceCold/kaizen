@@ -1,6 +1,5 @@
 import options from 'options'
 import { sh } from 'lib/utils'
-import Commands from './Commands'
 import LabelStack from './LabelStack'
 import BarButton from '../../BarButton'
 
@@ -15,6 +14,5 @@ export default () => Widget.Box([
     onScrollDown: () => dispatch('m-1'),
     onClicked: () => App.toggleWindow('overview'),
   }),
-  LabelStack,
-  Commands,
+  LabelStack
 ])

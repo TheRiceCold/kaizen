@@ -3,16 +3,31 @@ import options from 'options'
 
 export type BarWidget = keyof typeof widget
 
-const pos = options.bar.position.bind()
 const { start, end } = options.bar.layout
 
 const bindWidgets = layout => layout.bind().as(i => i.map(w => widgets[w]()))
 
+const startWidget = Widget.Box({
+  hpack: 'start',
+  className: 'side-items',
+  children: start.bind().as(items => [
+    ...items.map(item => widgets[item]()),
+    widgets.leftCommands()
+  ])
+})
+
+const endWidget = Widget.Box({
+  hpack: 'end',
+  className: 'side-items',
+  children: end.bind().as(items => [
+    widgets.rightCommands(),
+    ...items.map(item => widgets[item]()),
+  ])
+})
+
 const Content = Widget.CenterBox({
   css: 'min-width: 2px; min-height: 2.5rem;',
-  startWidget: Widget.Box({ hpack: 'start', className: 'side-content', children: bindWidgets(start) }),
-  centerWidget: widgets.media(),
-  endWidget: Widget.Box({ hpack: 'end', className: 'side-content', children: bindWidgets(end) }),
+  startWidget, centerWidget: widgets.media(), endWidget
 })
 
 export default (monitor: number) => Widget.Window({
@@ -20,5 +35,5 @@ export default (monitor: number) => Widget.Window({
   className: 'bar',
   name: `bar${monitor}`,
   exclusivity: 'exclusive',
-  anchor: pos.as(pos => [pos, 'right', 'left']),
+  anchor: [ 'top', 'right', 'left' ],
 })

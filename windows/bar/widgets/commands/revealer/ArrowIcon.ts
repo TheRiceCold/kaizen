@@ -1,10 +1,10 @@
 import options from 'options'
 import icons from 'data/icons'
-import BarButton from './BarButton'
+import BarButton from 'windows/bar/BarButton'
 
-export default ({ direction, revealer, ...props }) => {
+export default (dir, revealer) => {
   let deg = 0
-  const Icon = Widget.Icon({ icon: icons.ui.arrow[direction] })
+  const Icon = Widget.Icon({ icon: icons.ui.arrow[dir] })
   const animate = () => {
     const t = options.transition / 20
     const step = revealer.revealChild ? 10 : -10
@@ -21,6 +21,5 @@ export default ({ direction, revealer, ...props }) => {
       animate()
       revealer.revealChild = !revealer.revealChild
     },
-    ...props
   })
 }

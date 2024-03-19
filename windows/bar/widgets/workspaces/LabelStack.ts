@@ -1,4 +1,6 @@
 import options from 'options'
+import { type Props as LabelProps } from 'types/widgets/label'
+import { type Props as StackProps } from 'types/widgets/stack'
 import { capitalize } from 'lib/utils'
 
 export type TWorkspace = {
@@ -9,7 +11,7 @@ export type TWorkspace = {
 const { workspaces } = options.bar
 const hyprland = await Service.import('hyprland')
 
-const getLabel = (isStack: bool) => {
+const getLabel = (isStack: bool = true) => {
   const { active } = hyprland
   const id = active.workspace.id - 1
   const client = active.client.class
@@ -28,8 +30,7 @@ const Items = (ws: TWorkspace) => {
     maxWidthChars: 28,
     justification: 'center',
     css: `margin-right: ${options.theme.spacing};`,
-    setup: self => self.hook(hyprland, () => self.label = getLabel())
-  })
+  }).hook(hyprland, (self: LabelProps) => self.label = getLabel(false))
 
   return ws.reduce((acc, {label}) => (acc[label] = Label(label), acc), {})
 }
@@ -37,5 +38,4 @@ const Items = (ws: TWorkspace) => {
 export default Widget.Stack({
   transition: 'slide_left_right',
   children: workspaces.items.bind().as(Items),
-  setup: self => self.hook(hyprland, () => self.shown = getLabel(true))
-})
+}).hook(hyprland, (self: StackProps) => self.shown = getLabel())
