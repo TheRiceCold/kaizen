@@ -5,8 +5,8 @@ import { opt } from 'lib/option'
 export default {
   position: opt<'top' | 'bottom'>('top'),
   layout: {
-    start: opt<BarWidget[]>([ 'launcher', 'workspaces', 'rules' ]),
-    end: opt<BarWidget[]>([ 'utilities', 'tray', 'notifs', 'settings', 'profile', 'datemenu' ]),
+    start: opt<BarWidget[]>([ 'launcher', 'workspaces', ]),
+    end: opt<BarWidget[]>([ 'tray', 'notifs', 'settings', 'profile', 'datemenu' ]),
   },
   tray: {
     ignore: opt([ 'KDE Connect Indicator' ]),

@@ -17,8 +17,9 @@ const commands = [
     }
   },
   { label: 'Zoom', onClicked: ScreenTools.zoom },
-  { label: 'Record', onClicked: ScreenTools.record },
+  { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
   { label: 'Snip', onClicked: ScreenTools.snip  }, // TODO: menu for options
+  { label: 'Record', onClicked: ScreenTools.record },
   {
     label: 'Pick',
     onClicked: Colorpicker.pick,

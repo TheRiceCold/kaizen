@@ -9,7 +9,7 @@ import launcher from './Launcher'
 import notifs from './Notifications'
 
 // Command Revealers
-import leftCommands from './commands/LeftCommands'
+import leftCommands from './commands/leftCommands'
 import rightCommands from './commands/rightCommands'
 
 export default {

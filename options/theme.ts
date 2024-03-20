@@ -39,6 +39,10 @@ export default {
       opacity: opt(96),
     },
 
+    colors: {
+      black: opt('#12101E'),
+    },
+
     shadows: opt(true),
     padding: opt(4),
     spacing: opt(8),
