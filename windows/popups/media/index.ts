@@ -2,9 +2,9 @@ import { type Props as RevealerProps } from 'types/widgets/label'
 
 import Player from './Player'
 import options from 'options'
+import { showMedia } from 'lib/variables'
 
 const { transition } = options
-const showMedia = Variable(false)
 const mpris = await Service.import('mpris')
 
 const toggleMedia = () => showMedia.value = (!mpris.getPlayer()) ? false : !showMedia.value
