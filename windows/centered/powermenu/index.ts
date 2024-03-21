@@ -1,4 +1,4 @@
-import PopupWindow from '../PopupWindow'
+import CenteredWindow from '../CenteredWindow'
 import powermenu, { type Action } from 'service/powermenu'
 import icons from 'data/icons'
 import options from 'options'
@@ -18,7 +18,7 @@ const SysButton = (action: Action, label: string) => Widget.Button({
   }),
 })
 
-export default PopupWindow({
+export default CenteredWindow({
   name: 'powermenu',
   transition: 'crossfade',
   child: Widget.Box<Gtk.Widget>({

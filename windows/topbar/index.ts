@@ -5,8 +5,6 @@ export type BarWidget = keyof typeof widget
 
 const { start, end } = options.bar.layout
 
-const bindWidgets = layout => layout.bind().as(i => i.map(w => widgets[w]()))
-
 const startWidget = Widget.Box({
   hpack: 'start',
   className: 'side-items',
@@ -37,3 +35,5 @@ export default (monitor: number) => Widget.Window({
   exclusivity: 'exclusive',
   anchor: [ 'top', 'right', 'left' ],
 })
+
+/* NOTE: Maybe add an auto-hide(revealer) option? */

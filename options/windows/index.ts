@@ -14,7 +14,7 @@ export default {
 
   overview: {
     scale: opt(9),
-    workspaces: opt(9),
+    workspaces: opt(5),
     monochromeIcon: opt(true),
   },
 

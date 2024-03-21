@@ -7,9 +7,12 @@ const dispatch = (cmd: string) => sh(`hyprctl dispatch ${cmd}`)
 
 const commands: MenuItemProps[] = [
   { label: 'Fullscreen', onActivate: () => dispatch('fullscreen')},
-  { label: 'Center', onActivate: () => { sh('pypr layout_center toggle')} },
-  { label: 'Float', onActivate: () => dispatch('togglefloating') },
-  { label: 'Pin', onActivate: () => { dispatch('setfloating'); dispatch('pin') } },
+  {
+    label: 'Toggle float',
+    onActivate: () => dispatch('togglefloating'),
+  },
+  { label: 'Toggle Center', onActivate: () => { sh('pypr layout_center toggle')} },
+  { label: 'Pin (Floats only)', onActivate: () => { dispatch('pin') } },
   { label: 'Quit', onActivate: () => dispatch('killactive') },
 ]
 

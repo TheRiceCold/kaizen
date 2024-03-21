@@ -1,3 +1,4 @@
+// TODO: Update
 import Window from './Window'
 import Gdk from 'gi://Gdk'
 import Gtk from 'gi://Gtk?version=3.0'
@@ -23,7 +24,10 @@ export default (id: number) => Widget.Box({
   attribute: { id },
   tooltipText: `${id}`,
   className: 'workspace',
-  css: ` min-width: ${scale(size(id).w)}px; min-height: ${scale(size(id).h)}px;`,
+  css: `
+    min-width: ${scale(size(id).w)}px;
+    min-height: ${scale(size(id).h)}px;
+  `,
   setup: box => box.hook(hyprland, () => box.toggleClassName('active', hyprland.active.workspace.id === id)),
   child: Widget.EventBox({
     expand: true,

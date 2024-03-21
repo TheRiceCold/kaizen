@@ -5,7 +5,8 @@ import BarButton from '../../BarButton'
 const { action } = options.bar.settings
 const battery = await Service.import('battery')
 
-const setBatteryIcon = (p: number) => (p < 10) ? ' ' : (p < 30) ? ' ' : (p < 60) ? ' ' : (p < 90) ? ' ' : ' '
+const setBatteryIcon = (p: number) =>
+  (p < 10) ? ' ' : (p < 30) ? ' ' : (p < 60) ? ' ' : (p < 90) ? ' ' : ' '
 
 export default () => BarButton({
   window: 'dropmenu',
@@ -17,6 +18,7 @@ export default () => BarButton({
       Widget.Label({
         visible: battery.bind('available'),
         label: battery.bind('percent').as(setBatteryIcon),
+        className: battery.bind('percent').as((p: number) => p < 15 ? 'error' : '')
       })
     ]
   })

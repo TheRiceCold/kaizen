@@ -1,4 +1,4 @@
-import PopupWindow from '../PopupWindow'
+import CenteredWindow from '../CenteredWindow'
 import Workspace from './Workspace'
 import options from 'options'
 import { range } from 'lib/utils'
@@ -30,8 +30,7 @@ const Overview = (ws: number) => Widget.Box({
   },
 })
 
-export default PopupWindow({
+export default CenteredWindow({
   name: 'overview',
-  layout: 'center',
   child: options.overview.workspaces.bind().as(Overview),
 })

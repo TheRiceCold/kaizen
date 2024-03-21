@@ -35,7 +35,14 @@ const Items = (ws: TWorkspace) => {
   return ws.reduce((acc, {label}) => (acc[label] = Label(label), acc), {})
 }
 
-export default Widget.Stack({
+const Stack = Widget.Stack({
   transition: 'slide_left_right',
   children: workspaces.items.bind().as(Items),
 }).hook(hyprland, (self: StackProps) => self.shown = getLabel())
+
+export default Widget.EventBox({
+  child: Stack,
+  // NOTE: maybe implement this for switching workspaces
+  // onScrollUp: () => Stack.shown = '',
+  // onScrollDown: () => Stack.shown = ''
+})

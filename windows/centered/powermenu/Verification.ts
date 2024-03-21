@@ -1,7 +1,7 @@
-import PopupWindow from '../PopupWindow'
+import CenteredWindow from '../PopupWindow'
 import powermenu from 'service/powermenu'
 
-export default PopupWindow({
+export default CenteredWindow({
   name: 'verification',
   transition: 'crossfade',
   child: Widget.Box({

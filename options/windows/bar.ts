@@ -34,10 +34,10 @@ export default {
   launcher: {
     icon: {
       icon: opt(null),
-      colored: opt(false),
+      colored: opt(true),
     },
     action: opt(() => App.toggleWindow('launcher')),
-    label: { colored: opt(false), label: opt(''), },
+    label: { colored: opt(true), label: opt(''), },
   },
   workspaces: {
     label: opt('Workspace: '),
