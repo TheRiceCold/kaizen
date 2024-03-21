@@ -1,7 +1,9 @@
+import { type Props as RevealerProps } from 'types/widgets/label'
+
 import Player from './Player'
 import options from 'options'
 
-const { bar: { position }, transition } = options
+const { transition } = options
 const showMedia = Variable(false)
 const mpris = await Service.import('mpris')
 
@@ -13,7 +15,6 @@ options.media.action.value = toggleMedia
 
 export default Widget.Revealer({
   child: Player,
+  transition: 'slide_down',
   transitionDuration: transition.value,
-  setup: self => self.hook(showMedia, self => self.revealChild = showMedia.value),
-  transition: position.bind().as(pos => pos === 'top' ? 'slide_down' : 'slide_up'),
-})
+}).hook(showMedia, (self: RevealerProps) => self.revealChild = showMedia.value)

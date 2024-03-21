@@ -1,0 +1,35 @@
+.bar
+  *
+    font-weight: bold
+
+  separator
+    margin: 0 calc($spacing * 0.5)
+
+  .side-items
+    @include floating-widget
+    border-radius: $radius
+    padding: calc($padding * 0.5)
+    background-color: transparentize($bg, 0.6)
+    margin: 0 calc($spacing * 0.75 * $hyprland-gaps-multiplier)
+    margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
+    .bar-button
+      @include accs-button($flat: true)
+      > *
+        border-radius: $radius
+        margin: calc($spacing * 0.3)
+      label, image
+        color: $fg
+        font-weight: bold
+      &:not(.flat)
+        @include accs-button($flat: false)
+      > *
+        padding: calc($padding * 0.4) calc($padding * 0.8)
+
+menu
+  padding: 0
+  border-radius: calc($radius * 0.5)
+  background-color: transparentize($bg, 0.5)
+  menuitem
+    label, image
+      color: $fg
+      font-weight: bold
