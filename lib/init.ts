@@ -1,11 +1,13 @@
+import battery from './battery'
 import matugen from './matugen'
 import hyprland from './hyprland'
-import gtk from './gtk'
 import swww from './swww'
+import gtk from './gtk'
 
 try {
   gtk()
+  swww()
+  battery()
   matugen()
   hyprland()
-  swww()
 } catch (error) { logError(error) }

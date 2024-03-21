@@ -67,6 +67,10 @@ export default {
     },
     mixer: 'mixer-symbolic',
   },
+  battery: {
+    charging: "battery-flash-symbolic",
+    warning: "battery-empty-symbolic",
+  },
   bluetooth: {
     enabled: 'bluetooth-active-symbolic',
     disabled: 'bluetooth-disabled-symbolic'
