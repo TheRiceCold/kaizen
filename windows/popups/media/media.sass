@@ -1,6 +1,6 @@
 window.popups .media
   @include floating-widget
-  background-color: transparentize($bg, 0.6)
+  background: transparentize($primary-fg, 0.6)
   .player
     padding: $padding
     .cover
@@ -21,6 +21,6 @@ window.popups .media
       color: transparentize($fg, 0.2)
     scale
       margin-bottom: calc($padding * 0.5)
-      @include slider($width: 0.5em, $slider: false, $gradient: linear-gradient($fg, $fg))
+      @include slider($width: 0.15em, $slider: false, $gradient: linear-gradient($primary-bg, $primary-bg))
       trough
         border: none

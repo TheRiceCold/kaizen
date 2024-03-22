@@ -1,5 +1,5 @@
 import media from './media'
-import settings from './settings'
+import control from './control'
 import workspaces from './workspaces'
 
 import tray from './Tray'
@@ -17,9 +17,9 @@ export default {
   media,
   notifs,
   profile,
+  control,
   launcher,
   datemenu,
-  settings,
   workspaces,
   leftCommands,
   rightCommands,

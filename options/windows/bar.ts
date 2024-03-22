@@ -6,7 +6,7 @@ export default {
   position: opt<'top' | 'bottom'>('top'),
   layout: {
     start: opt<BarWidget[]>([ 'launcher', 'workspaces', ]),
-    end: opt<BarWidget[]>([ 'tray', 'notifs', 'settings', 'profile', 'datemenu' ]),
+    end: opt<BarWidget[]>([ 'tray', 'notifs', 'control', 'profile', 'datemenu' ]),
   },
   tray: {
     ignore: opt([ 'KDE Connect Indicator' ]),
@@ -42,10 +42,11 @@ export default {
   workspaces: {
     label: opt('Workspace: '),
     items: opt<TWorkspace[]>([
-      { label: 'work', gerund: 'working' },
-      { label: 'explore', gerund: 'exploring' },
-      { label: 'listen', gerund: 'listening' },
-      { label: 'communicate', gerund: 'communicating' },
+      { label: 'work', gerund: 'working in' },
+      { label: 'explore', gerund: 'exploring in', only: [ 'firefox' ] },
+      { label: 'listen', gerund: 'listening in', only: [ 'Spotify' ] },
+      { label: 'communicate', gerund: 'communicating in', only: [ 'vesktop' ] },
+      { label: 'virtual', gerund: 'virtualized |', only: [] },
       { label: 'extra', gerund: '' }
     ]),
     substitutes: {

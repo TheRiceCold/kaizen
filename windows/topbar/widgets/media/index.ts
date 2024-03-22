@@ -30,12 +30,11 @@ const update = (self: EventBoxProps) => {
   // FIX: doesn't hide the revealer when the player(like spotify) is open before ags
   const revealTimeout = () => Utils.timeout(1000, () => Revealer.revealChild = !!player.entry)
 
-  if (!player.entry) { revealTimeout(); return }
+  if (!player.entry) { revealTimeout(); return; }
   if (player.play_back_status === 'Paused') stack.shown = 'song'
 
   self.onPrimaryClick = player.playPause
   self.tooltipText = getTooltip(player)
-  self.css = `background-color: ${options.theme.colors.black};`
   label.value = `${artists && artists+' - '} ${player.track_title}`
 
   Revealer.child.children = [ PlayIcon(player), stack ]

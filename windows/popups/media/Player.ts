@@ -20,6 +20,10 @@ const isRealPlayer = player => (
 )
 
 const Player = (player: MprisPlayer) => {
+
+  // TODO: Turnable animation, like spicetify
+  // reference: https://github.com/spicetify/spicetify-themes/raw/master/Turntable/screenshots/fad.png
+
   const cover = Widget.Box({
     vpack: 'start',
     className: 'cover',

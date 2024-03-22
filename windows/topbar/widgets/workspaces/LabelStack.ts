@@ -19,7 +19,7 @@ const getLabel = (isStack: bool = true) => {
 
   const ws = workspaces.items.value[id]
   const win = client in subs ? subs[client] : capitalize(client)
-  const withWindow = client.length > 0 ? `${capitalize(ws.gerund)} in ${win}` : capitalize(ws.label)
+  const withWindow = client.length > 0 ? `${capitalize(ws.gerund)} ${win}` : capitalize(ws.label)
 
   return isStack ? ws.label : withWindow
 }
