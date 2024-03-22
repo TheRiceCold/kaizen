@@ -1,7 +1,7 @@
-import CenteredWindow from '../PopupWindow'
+import RevealerWindow from 'windows/RevealerWindow'
 import powermenu from 'service/powermenu'
 
-export default CenteredWindow({
+export default RevealerWindow({
   name: 'verification',
   transition: 'crossfade',
   child: Widget.Box({

@@ -1,4 +1,4 @@
-import CenteredWindow from '../CenteredWindow'
+import RevealerWindow from 'windows/RevealerWindow'
 import Workspace from './Workspace'
 import options from 'options'
 import { range } from 'lib/utils'
@@ -30,7 +30,7 @@ const Overview = (ws: number) => Widget.Box({
   },
 })
 
-export default CenteredWindow({
+export default RevealerWindow({
   name: 'overview',
   child: options.overview.workspaces.bind().as(Overview),
 })

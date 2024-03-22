@@ -1,6 +1,7 @@
 import { type WindowProps } from 'types/widgets/window'
 import { type RevealerProps } from 'types/widgets/revealer'
 import { type EventBoxProps } from 'types/widgets/eventbox'
+import type Gtk from 'gi://Gtk?version=3.0'
 import options from 'options'
 
 type Transition = RevealerProps['transition']
@@ -19,7 +20,7 @@ export const Padding = (name: string, {
 }: EventBoxProps = {}) => Widget.EventBox({
   hexpand,
   vexpand,
-  canFocus: false,
+  can_focus: false,
   child: Widget.Box({ css }),
   setup: w => w.on('button-press-event', () => App.toggleWindow(name)),
 })
@@ -38,13 +39,14 @@ const PopupRevealer = (
     }),
     transitionDuration: options.transition.bind(),
     setup: self => self.hook(App, (_, wname, visible) => {
-      if (wname === name) self.revealChild = visible
+      if (wname === name)
+        self.reveal_child = visible
     }),
   }),
 )
 
 const Layout = (name: string, child: Child, transition?: Transition) => ({
-  center: () => Widget.CenterBox({},
+  'center': () => Widget.CenterBox({},
     Padding(name),
     Widget.CenterBox(
       { vertical: true },
@@ -54,7 +56,7 @@ const Layout = (name: string, child: Child, transition?: Transition) => ({
     ),
     Padding(name),
   ),
-  top: () => Widget.CenterBox({},
+  'top': () => Widget.CenterBox({},
     Padding(name),
     Widget.Box(
       { vertical: true },
@@ -122,15 +124,15 @@ export default ({
   layout = 'center',
   exclusivity = 'ignore',
   ...props
-}: PopupWindowProps) => Widget.Window({
+}: PopupWindowProps) => Widget.Window<Gtk.Widget>({
   name,
+  classNames: [name, 'popup-window'],
+  setup: w => w.keybind('Escape', () => App.closeWindow(name)),
   exclusivity,
   layer: 'top',
   visible: false,
   keymode: 'on-demand',
-  classNames: [name, 'popup-window'],
   anchor: ['top', 'bottom', 'right', 'left'],
   child: Layout(name, child, transition)[layout](),
-  setup: w => w.keybind('Escape', () => App.closeWindow(name)),
   ...props,
 })

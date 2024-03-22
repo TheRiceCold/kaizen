@@ -1,8 +1,8 @@
-import CenteredWindow from '../CenteredWindow'
+import type Gtk from 'gi://Gtk?version=3.0'
+import RevealerWindow from 'windows/RevealerWindow'
 import powermenu, { type Action } from 'service/powermenu'
 import icons from 'data/icons'
 import options from 'options'
-import type Gtk from 'gi://Gtk?version=3.0'
 
 const { layout, labels } = options.powermenu
 
@@ -18,7 +18,7 @@ const SysButton = (action: Action, label: string) => Widget.Button({
   }),
 })
 
-export default CenteredWindow({
+export default RevealerWindow({
   name: 'powermenu',
   transition: 'crossfade',
   child: Widget.Box<Gtk.Widget>({
