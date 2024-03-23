@@ -2,7 +2,7 @@
   border-bottom-left-radius: $radius
   border-bottom-right-radius: $radius
   background: transparentize($primary-fg, 0.5)
-  > *
+  revealer
     padding: $padding calc($padding * 2.5)
   .progress
     font-size: 2px
@@ -12,6 +12,7 @@
     image
       font-size: 0.75rem
   .text
+    padding: calc($padding * 1.25)
     margin-left: calc($spacing * 0.75)
   .visualizer
     padding: 0 $spacing

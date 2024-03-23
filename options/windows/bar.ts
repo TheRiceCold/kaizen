@@ -6,7 +6,7 @@ export default {
   position: opt<'top' | 'bottom'>('top'),
   layout: {
     start: opt<BarWidget[]>([ 'launcher', 'workspaces', ]),
-    end: opt<BarWidget[]>([ 'tray', 'notifs', 'control', 'profile', 'datemenu' ]),
+    end: opt<BarWidget[]>([ 'tray', 'profile', 'control', 'datemenu' ]),
   },
   tray: {
     ignore: opt([ 'KDE Connect Indicator' ]),

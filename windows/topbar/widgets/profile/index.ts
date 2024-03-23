@@ -1,11 +1,11 @@
 import { type Props as LabelProps } from 'types/widgets/label'
-import BarButton from '../BarButton'
+import BarButton from '../../BarButton'
 
 const notifications = await Service.import('notifications')
 
 export default () => BarButton({
   child: Widget.Box([
-    Widget.Label('󱅫'),
+    Widget.Label(' '),
     Widget.Label({
       attribute: {
         unreadCount: 0,

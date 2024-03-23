@@ -10,7 +10,7 @@ const commands = [
     label: 'Files',
     onClicked: () => sh(`nautilus`),
     onSecondaryClick: () => sh(`foot yazi`),
-    tooltipText: 'Right Click | Terminal (Yazi)'
+    tooltipText: 'Right Click | Terminal (yazi)'
   },
   { label: 'Shortcuts', onClicked: () => App.openWindow('shortcuts') },
   { label: 'Settings', onClicked: () => { App.openWindow('settings-dialog') } }
