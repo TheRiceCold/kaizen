@@ -1,0 +1,27 @@
+.shortcuts
+  @include floating-widget
+  background-color: transparentize($primary-fg, 0.75)
+  .container
+    @include widget
+    padding: calc($spacing * 2.5)
+    border-color: transparentize($fg, 0.75)
+    background-color: transparentize($bg, 0.15)
+    .header
+      margin-bottom: calc($spacing * 2)
+      .title
+        color: $primary-bg
+      .data-stored
+        color: transparentize($fg, 0.25)
+
+    .cheatsheet-key
+      margin: 0.17rem
+      min-width: 1.364rem
+      min-height: 1.364rem
+      border-radius: 0.409rem
+      padding: 0.136rem 0.205rem
+      -gtk-outline-radius: 0.409rem
+
+    .cheatsheet-key-notkey
+      margin: 0.17rem
+      min-height: 1.364rem
+      padding: 0.136rem 0.205rem

@@ -1,75 +1,18 @@
-const { Gdk, Gtk } = imports.gi
 import RevealerWindow from 'windows/RevealerWindow'
-import shortcutsData from 'data/shortcuts'
-
-const Header = Widget.Box({
-  vertical: true,
-  className: "spacing-h-15",
-  children: [
-    Widget.Box({
-      hpack: 'center',
-      className: 'spacing-h-5 cheatsheet-title',
-      children: [
-        Widget.Label({
-          hpack: 'center',
-          label: 'Shortcut keys',
-          className: 'txt-title',
-          css: 'margin-right: 0.5rem;',
-        }),
-        Widget.Label({
-          vpack: 'center',
-          className: "cheatsheet-key txt-small",
-          label: "",
-        }),
-        Widget.Label({
-          vpack: 'center',
-          className: "cheatsheet-key-notkey txt-small",
-          label: "+",
-        }),
-        Widget.Label({
-          vpack: 'center',
-          className: "cheatsheet-key txt-small",
-          label: '/',
-        })
-      ]
-    }),
-    Widget.Label({
-      useMarkup: true,
-      selectable: true,
-      className: 'txt-small txt',
-      justify: Gtk.Justification.CENTER,
-      label: 'Sheet data stored in <tt>~/.config/ags/data/shortcuts.ts</tt>'
-    }),
-  ]
-})
-
+import data from 'data/shortcuts'
+import Header from './Header'
 
 export const Keybinds = Widget.Box({
-  vertical: false,
   homogeneous: true,
-  className: "spacing-h-15",
-  children: shortcutsData.map((group, _) => Widget.Box({
+  children: data.map((group, _) => Widget.Box({
     vertical: true,
-    className: 'spacing-v-15',
     children: group.map((category, _) => Widget.Box({
       vertical: true,
-      className: 'spacing-v-15',
       children: [
-        Widget.Box({
-          vertical: false,
-          className: 'spacing-h-10',
-          children: [
-            Widget.Label({
-              xalign: 0,
-              label: category.icon,
-              className: `icon-material txt-larger cheatsheet-color-${category.id}`,
-            }),
-            Widget.Label({
-              xalign: 0,
-              label: category.name,
-              className: 'cheatsheet-category-title txt',
-            }),
-          ]
+        Widget.Label({ 
+          xalign: 0, 
+          css: 'font-size: 1.5em;',
+          label: `${category.icon} ${category.name}`
         }),
         Widget.Box({
           vertical: false,
@@ -82,7 +25,7 @@ export const Keybinds = Widget.Box({
                 vertical: false,
                 children: keybinds.keys.map((key, _) => Widget.Label({ // Specific keys
                   label: key,
-                  className: `${['OR', '+'].includes(key) ? 'cheatsheet-key-notkey' : 'cheatsheet-key cheatsheet-color-' + category.id} txt-small`,
+                  className: `${['OR', '+'].includes(key) ? 'cheatsheet-key-notkey' : 'cheatsheet-key cheatsheet-color-' + category.id}`,
                 }))
               }))
             }),
@@ -105,9 +48,10 @@ export const Keybinds = Widget.Box({
 
 export default RevealerWindow({
   name: 'shortcuts',
+  className: 'shortcuts',
   child: Widget.Box({
     vertical: true,
-    className: 'shortcuts',
+    className: 'container',
     children: [ Header, Keybinds ]
   })
 })

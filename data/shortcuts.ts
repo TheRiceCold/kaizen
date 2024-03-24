@@ -4,25 +4,44 @@ const column1 = [
     icon: '',
     name: 'Workspaces: navigation',
     binds: [
-      { keys: ['⌘', '+', '#'], action: 'Go to workspace #' },
-      { keys: ['⌘', 'Shift', '+', '#'], action: 'Move window to workspace #' },
-      { keys: ['⌘', 'Ctrl', 'Shift', '+', '←'], action: 'Move window to workspace on the left' },
-      { keys: ['⌘', 'Ctrl', 'Shift', '+', '→'], action: 'Move window to workspace on the right' },
+      { keys: ['⌘', '+', '1'], action: 'Go to workspace: Work ' },
+      { keys: ['⌘', '+', '2'], action: 'Go to workspace: Explore' },
+      { keys: ['⌘', '+', '3'], action: 'Go to workspace: Listen' },
+      { keys: ['⌘', '+', '4'], action: 'Go to workspace: Communicate' },
+      { keys: ['⌘', '+', '5'], action: 'Go to workspace: Virtual' },
+      { keys: ['⌘', '+', '6'], action: 'Go to workspace: Extra' },
     ],
     appeartick: 1
   },
+
   {
-    icon: '',
-    name: 'Windows',
+    icon: '',
+    name: 'Windows: Action',
     binds: [
-      { keys: ['⌘', '+', '←↑→↓ or hjkl'], action: 'Focus window in direction' },
-      { keys: ['⌘', 'Shift', '+', '←↑→↓ or hjkl'], action: 'Swap window in direction' },
-      { keys: ['⌘', '+', 'F'], action: 'Maximize' },
-      { keys: ['⌘', 'Shift', '+', 'F'], action: 'Fullscreen' },
-      { keys: ['⌘', 'Alt', '+', 'F'], action: 'Fake fullscreen' }
+      { keys: ['⌘', '+', 'Q'], action: 'Quit window' },
+      { keys: ['⌘', 'Shift', '+', '#'], action: 'Move window to workspace #' },
+      { keys: ['⌘', '+', '<direction>'], action: 'Focus window' },
+      { keys: ['⌘', 'Shift', '+', '<direction>'], action: 'Switch window' },
+      { keys: ['⌘', 'Alt', '+', '<direction>'], action: 'Move window (float)' },
+      { keys: ['⌘', 'Ctrl', '+', '<direction>'], action: 'Resize window (float)' },
     ],
     appeartick: 1
-  }
+  },
+
+  {
+    icon: '',
+    name: 'Windows: Type',
+    binds: [
+      { keys: ['⌘', '+', 'M'], action: 'Maximize' },
+      { keys: ['⌘', 'Shift', '+', 'F'], action: 'Fullscreen' },
+      { keys: ['⌘', 'Alt', '+', 'F'], action: 'FakeFullscreen' },
+      { keys: ['⌘', '+', '<direction>'], action: 'Focus window' },
+      { keys: ['⌘', '+', 'C'], action: 'Center Layout' },
+      { keys: ['⌘', '+', 'T'], action: 'Toggle Floating' },
+      { keys: ['⌘', '+', 'P'], action: 'Pin (Float Window)' },
+    ],
+    appeartick: 1
+  },
 ]
 
 // COLUMN2
@@ -31,25 +50,22 @@ const column2 = [
     icon: '󰜬',
     name: 'Widgets (AGS)',
     binds: [
-      { keys: ['⌘', '+', 'Tab'], action: 'Toggle overview/launcher' },
-      { keys: ['Ctrl', '⌘', '+', 'R'], action: 'Restart AGS' },
-      { keys: ['⌘', '+', '/'], action: 'Toggle this cheatsheet' },
-      { keys: ['⌘', '+', 'N'], action: 'Toggle sidebar' },
+      { keys: ['⌘', '+', 'R'], action: 'Restart AGS' },
+      { keys: ['⌘', '+', 'Tab'], action: 'Toggle Overview' },
+      { keys: ['⌘', '+', 'F4'], action: 'Toggle Power Menu' },
+      { keys: ['⌘', '+', '/'], action: 'Toggle Shortcuts Menu' },
       { keys: ['⌘', '+', 'K'], action: 'Toggle virtual keyboard' },
-      { keys: ['Ctrl', 'Alt', '+', 'Del'], action: 'Power/Session menu' },
-      { keys: ['⌘', '+', 'Q'], action: 'Exit a window' },
-      { keys: ['Ctrl', '⌘', '+', 'T'], action: 'Change wallpaper+colorscheme' },
     ],
     appeartick: 2
   },
   {
     icon: '',
-    name: 'Utilities',
+    name: 'Screen Utilities',
     binds: [
       { keys: ['PrtSc'], action: 'Screenshot  >>  clipboard' },
       { keys: ['⌘', 'Shift', '+', 'S'], action: 'Screen snip  >>  clipboard' },
-      { keys: ['⌘', 'Shift', '+', 'T'], action: 'Image to text  >>  clipboard' },
-      { keys: ['⌘', 'Shift', '+', 'C'], action: 'Color picker' },
+      { keys: ['⌘', 'Crtl', '+', 'C'], action: 'Color picker' },
+      { keys: ['⌘', 'Ctrl', '+', 'K'], action: 'Show Screen Keys' },
       { keys: ['⌘', 'Alt', '+', 'R'], action: 'Record region' },
       { keys: ['Ctrl', 'Alt', '+', 'R'], action: 'Record region with sound' },
       { keys: ['⌘', 'Shift', 'Alt', '+', 'R'], action: 'Record screen with sound' }
@@ -65,19 +81,10 @@ const column3 = [
     name: 'Apps',
     binds: [
       { keys: ['⌘', '+', 'Return'], action: 'Launch terminal: Foot' },
-      { keys: ['⌘', '+', 'B'], action: 'Launch browser: Firefox' },
-      { keys: ['⌘', '+', 'E'], action: 'Launch file manager: yazi' },
-      { keys: ['⌘', '+', 'X'], action: 'Launch editor: GNOME Text Editor' },
-      { keys: ['⌘', '+', 'I'], action: 'Launch settings: GNOME Control center' }
-    ],
-    appeartick: 3
-  },
-  {
-    icon: '󰥻',
-    name: 'Typing',
-    binds: [
-      { keys: ['⌘', '+', 'V'], action: 'Clipboard history  >>  clipboard' },
-      { keys: ['⌘', '+', '.'], action: 'Emoji picker  >>  clipboard' },
+      { keys: ['⌘', 'Ctrl', '+', 'T'], action: 'Toggle scratchpad Terminal' },
+      { keys: ['⌘', 'Ctrl', '+', 'B'], action: 'Launch browser: Firefox' },
+      { keys: ['⌘', 'Ctrl', '+', 'E'], action: 'Launch file manager: Nautilus' },
+      { keys: ['⌘', 'Ctrl', '+', 'V'], action: 'Launch volume control: Pavucontrol' },
     ],
     appeartick: 3
   },
