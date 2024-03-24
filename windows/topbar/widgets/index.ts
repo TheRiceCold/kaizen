@@ -1,4 +1,4 @@
-import media from './media'
+import middle from './middle'
 import control from './control'
 import profile from './profile'
 import workspaces from './workspaces'
@@ -13,7 +13,7 @@ import rightCommands from './commands/rightCommands'
 
 export default {
   tray,
-  media,
+  middle,
   profile,
   control,
   launcher,

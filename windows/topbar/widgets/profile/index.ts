@@ -1,5 +1,6 @@
 import { type Props as LabelProps } from 'types/widgets/label'
 import BarButton from '../../BarButton'
+import options from 'options'
 
 const notifications = await Service.import('notifications')
 

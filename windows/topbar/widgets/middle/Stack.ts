@@ -9,6 +9,7 @@ export default (label) => Widget.Stack({
   className: 'stack',
   transition: 'slide_up_down',
   children: {
+    // TODO: Startup greeter
     song: Widget.Label({
       truncate: 'end',
       className: 'text',

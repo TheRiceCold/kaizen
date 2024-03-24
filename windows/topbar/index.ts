@@ -24,8 +24,10 @@ const endWidget = Widget.Box({
 })
 
 const Content = Widget.CenterBox({
+  startWidget, 
+  centerWidget: widgets.middle(), 
+  endWidget,
   css: 'min-width: 2px; min-height: 2.5rem;',
-  startWidget, centerWidget: widgets.media(), endWidget
 })
 
 export default (monitor: number) => Widget.Window({
