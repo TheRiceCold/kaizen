@@ -1,22 +1,25 @@
 window.sideright .profile
   @include floating_widget
   .header
-    margin-bottom: $spacing
     padding: calc($padding * 3.5)
-    padding-top: calc($padding * 2)
-    border-bottom: 1px solid transparentize($fg, 0.75)
     .avatar
-      border-radius: 999px
-      border: 1px solid $fg
+      border-radius: $radius
       background: $primary-bg
+      border: $border-width solid $primary-bg
     .clock-box
-      margin: 0 calc($spacing * 1.5)
+      margin: 0 $spacing
       .clock
         font-size: 3em
         color: $primary-bg
+  .control-buttons
+    margin-bottom: $spacing
+    padding: calc($padding * 2.5)
+    border-bottom: 1px solid transparentize($fg, 0.75)
   button
     margin-left: calc($spacing * 0.5)
     border-radius: calc($radius * 0.5)
     background-color: transparentize($fg, 0.90)
     image 
       font-size: 1.15em
+    .arrow-icon
+      font-size: 1em

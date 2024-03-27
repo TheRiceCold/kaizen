@@ -13,7 +13,6 @@ const commands = [
     tooltipText: 'Right Click | Terminal (yazi)'
   },
   { label: 'Shortcuts', onClicked: () => App.openWindow('shortcuts') },
-  { label: 'Settings', onClicked: () => { App.openWindow('settings-dialog') } }
 ]
 
 export default () => Revealer('right', commands)
