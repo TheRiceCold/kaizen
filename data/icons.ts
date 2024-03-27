@@ -25,6 +25,7 @@ export default {
     terminal: "terminal-symbolic",
   },
   ui: {
+    cup: 'cup-symbolic',
     pin: 'pin-symbolic',
     info: 'info-symbolic',
     broom: 'broom-symbolic',

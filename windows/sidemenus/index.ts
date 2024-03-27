@@ -1,7 +1,6 @@
 import options from 'options'
-import Profile from './profile'
-import Utilities from './utilities'
 import DateWeather from './dateweather'
+import QuickSettings from './quicksettings'
 
 const pos = options.bar.position.bind()
 
@@ -12,7 +11,7 @@ const right = Widget.Window({
   child: Widget.Box({
     vertical: true,
     css: 'padding: 2px;',
-    children: [ Profile, Utilities, DateWeather ]
+    children: [ QuickSettings, DateWeather ]
   }),
 })
 

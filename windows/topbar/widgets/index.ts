@@ -1,9 +1,8 @@
 import middle from './middle'
-import control from './control'
-import profile from './profile'
 import workspaces from './workspaces'
 
 import tray from './Tray'
+import control from './Control'
 import datemenu from './Datemenu'
 import launcher from './Launcher'
 
@@ -14,7 +13,6 @@ import rightCommands from './commands/rightCommands'
 export default {
   tray,
   middle,
-  profile,
   control,
   launcher,
   datemenu,

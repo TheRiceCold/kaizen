@@ -10,7 +10,7 @@ export default {
     clock: {
       interval: 5000,
       // DOCS: https://docs.gtk.org/glib/method.DateTime.format.html
-      format: opt('%I:%M'),
+      format: opt('%I:%M %p'),
     }
   },
 }

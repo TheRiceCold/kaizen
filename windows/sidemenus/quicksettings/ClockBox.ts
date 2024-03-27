@@ -1,6 +1,6 @@
 import options from 'options'
-import icons from 'data/icons'
 import { clock } from 'lib/variables'
+import { capitalize } from 'lib/utils'
 
 const battery = await Service.import('battery')
 const { interval, format } = options.sideright.profile.clock
@@ -8,14 +8,22 @@ const { interval, format } = options.sideright.profile.clock
 const uptime = Variable(0, {
   poll: [
     60_000, 'cat /proc/uptime',
-    line => Number.parseInt(line.split('.')[0]) / 60
+    (line: string) => Number.parseInt(line.split('.')[0]) / 60
   ],
 })
 function up(up: number) {
   const h = Math.floor(up / 60)
   const m = Math.floor(up % 60)
-  return `up: ${h}h ${m < 10 ? '0' + m : m}m`
+  return `•  up: ${h}h ${m < 10 ? '0' + m : m}m`
 }
+
+const Battery = Widget.Box({
+  visible: battery.bind('available'),
+  children: [
+    Widget.Icon({ icon: battery.bind('icon_name') }),
+    Widget.Label({ label: battery.bind('percent').as((p: string) => ` ${p}%`) })
+  ]
+})
 
 export default Widget.Box({
   hexpand: true,
@@ -27,24 +35,19 @@ export default Widget.Box({
       className: 'clock',
       label: Utils.derive(
         [clock(interval), format],
-        (c, f) => c.format(f) || ''
+        (c, f: string) => c.format(f) || ''
       ).bind()
     }),
-    Widget.Box([
-      Widget.Box({
-        visible: battery.bind('available'),
-        children: [
-          Widget.Icon({ icon: battery.bind('icon_name') }),
-          Widget.Label({ label: battery.bind('percent').as(p => ` ${p}%  |`) })
-        ]
-      }),
-      Widget.Box([
-        Widget.Icon({ icon: icons.ui.time }),
+    Widget.Box({
+      spacing: options.theme.spacing,
+      children: [
+        Widget.Label(`${capitalize(Utils.USER)}  •`),
+        Battery,
         Widget.Label({
           className: 'uptime',
           label: uptime.bind().as(up)
         }),
-      ])
-    ])
+      ]
+    })
   ],
 })
