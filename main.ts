@@ -3,8 +3,8 @@ import 'lib/init'
 import 'style/style'
 
 import { forMonitors } from 'lib/utils'
-import { TopBar, Centered, Dialogs, Popups } from 'windows'
+import { TopBar, Centered, Dialogs, Popups, SideMenus } from 'windows'
 
-const windows = [ ...forMonitors(TopBar) ].concat(Centered, Dialogs, Popups)
+const windows = [ ...forMonitors(TopBar) ].concat(Centered, Dialogs, Popups, SideMenus)
 
 App.config({ windows })

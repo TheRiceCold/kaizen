@@ -2,15 +2,15 @@ import { opt } from 'lib/option'
 import bar from './bar'
 import media from './media'
 import launcher from './launcher'
-import dropmenu from './dropmenu'
-import leftmenus from './leftmenus'
+import sideleft from './sideleft'
+import sideright from './sideright'
 
 export default {
   bar: {...bar},
   media: {...media},
-  dropmenu: {...dropmenu},
   launcher: {...launcher},
-  leftmenus: {...leftmenus},
+  sideleft: {...sideleft},
+  sideright: {...sideright},
 
   overview: {
     scale: opt(9),
