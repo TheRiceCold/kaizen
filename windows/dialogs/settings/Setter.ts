@@ -58,10 +58,9 @@ export default function Setter<T>({
       .on('notify::active', self => opt.value = self.active as T)
       .hook(opt, self => self.active = opt.value as boolean)
 
-    case 'img': return Widget.FileChooserButton()
-      .on('selection-changed', self => {
-        opt.value = self.get_uri()?.replace('file://', '') as T
-      })
+    case 'img': return Widget.FileChooserButton({
+      onFileSet: ({ url }) => { opt.value = uri!.replace('file://', '') as T}
+    })
 
     case 'font': return Widget.FontButton({
       useSize: false,
@@ -72,7 +71,7 @@ export default function Setter<T>({
           .split(' ').slice(0, -1).join(' ') as T),
     })
 
-    case 'color': return Widget.ColorButton({ }).hook(opt, self => {
+    case 'color': return Widget.ColorButton().hook(opt, self => {
       const rgba = new Gdk.RGBA()
       rgba.parse(opt.value as string)
       self.rgba = rgba

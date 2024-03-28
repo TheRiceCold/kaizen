@@ -1,11 +1,12 @@
 import Row from './Row'
-import Group from './Group'
 import Page from './Page'
+import Group from './Group'
+import Wallpaper from './Wallpaper'
+
 import options from 'options'
 import icons from 'data/icons'
 
 const {
-  wallpaper: wp,
   autotheme: at,
   font,
   theme,
@@ -35,7 +36,7 @@ const {
 export default [
   Page('Theme', icons.ui.themes,
     Group('',
-      Row({ opt: wp, title: 'Wallpaper', type: 'img' }),
+      Wallpaper() as ReturnType<typeof Row>,
       Row({ opt: at, title: 'Auto Generate Color Scheme' }),
       Row({ opt: scheme, title: 'Color Scheme', type: 'enum', enums: ['dark', 'light'] }),
       Row({ opt: blur, title: 'Blur', note: '0 to disable', max: 70 }),

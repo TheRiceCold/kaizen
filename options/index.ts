@@ -6,7 +6,6 @@ import api from './api'
 
 export default mkOptions(OPTIONS, {
   autotheme: opt(true),
-  wallpaper: opt(`/home/${USER}/.config/background`, { persistent: true }),
   transition: opt(200),
 
   hyprland: {
