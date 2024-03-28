@@ -4,14 +4,13 @@ class WeatherService extends Service {
   static {
     Service.register(this, {},
       {
-        'feels-like': ['int'],
-        'temp': ['int'],
-        'icon': ['string'],
-        'region': ['string'],
-        'country': ['string'],
-        'location': ['string'],
-        'description': ['string'],
+        icon: ['string'],
+        region: ['string'],
+        country: ['string'],
+        weather_days: ['array'],
+        hourly_icons: ['array'],
         'weather-data': ['jsobject'],
+        'current-condition': ['jsobject'],
       })
   }
 
@@ -19,21 +18,20 @@ class WeatherService extends Service {
   _icon = ''
   _region = ''
   _country = ''
-  _location = ''
-  _feels_like = 0
-  _description = ''
+  _weather_days = []
+  _hourly_icons = []
   _weather_data = {}
+  _current_condition = {}
   _url = 'http://wttr.in/?format=j1'
   _decoder = new TextDecoder()
 
-  get temp() { return this._temp }
   get icon() { return this._icon }
   get region() { return this._region }
   get country() { return this._country }
-  get location() { return this._location }
-  get feels_like() { return this._feels_like }
-  get description() { return this._description }
+  get weather_days() { return this._weather_days }
+  get hourly_icons() { return this._hourly_icons }
   get weather_data() { return this._weather_data }
+  get current_condition() { return this._current_condition }
 
   constructor() {
     super()
@@ -50,25 +48,28 @@ class WeatherService extends Service {
         const country = area['country'][0]['value']
         const currentCondition = weatherData['current_condition'][0]
         const astronomy = weatherData['weather'][0]['astronomy'][0]
+        const hourly = weatherData['weather'][0]['hourly']
 
         this.updateProperty('region', region)
         this.updateProperty('country', country)
-        this.updateProperty('location', `${region}, ${country}`)
         this.updateProperty('weather_data', weatherData)
-        this.updateProperty('temp', Number(currentCondition['temp_C']))
-        this.updateProperty('feels_like', Number(currentCondition['FeelsLikeC']))
-        this.updateProperty('description', currentCondition['weatherDesc'][0]['value'])
+        this.updateProperty('current_condition', currentCondition) 
 
         const curHour = new Date().getHours()
-        const weatherCode = currentCondition['weatherCode']
         const sunsetHour = astronomy['sunset'].split(':')[0]
         const sunriseHour = astronomy['sunrise'].split(':')[0]
         const timeOfDay = curHour >= sunriseHour && curHour <= sunsetHour + 12 ? 'day' : 'night'
-        this.updateProperty('icon', icons.weather[timeOfDay][weatherCode]
-          || icons.weather['day'][weatherCode] // fallback to day
-          || '')
-      })
-      .catch(logError)
+        const getIcon = code => 'wi-' + icons.weather[timeOfDay][code] || icons.weather['day'][code] || ''
+
+        this.updateProperty('icon', getIcon(currentCondition['weatherCode']))
+        this.updateProperty('hourly_icons', hourly.map(hour => getIcon(hour['weatherCode'])))
+
+        this.updateProperty('weather_days', weatherData['weather'].map((day, index) => ({
+          icon: getIcon(day['hourly'][0]['weatherCode']),
+          temp: day['avgtempC'],
+          maxTemp: day['maxtempC'],
+        })))
+      }).catch(logError)
   }
 }
 

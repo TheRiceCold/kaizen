@@ -12,7 +12,7 @@ class Brightness extends Service {
     Service.register(this, {}, { screen: ['float', 'rw'], kbd: ['int', 'rw'] })
   }
 
-  #kbdMax = get(`--device ${kbd} max`)
+ #kbdMax = get(`--device ${kbd} max`)
   #kbd = get(`--device ${kbd} get`)
   #screenMax = get('max')
   #screen = get('get') / get('max')
