@@ -20,11 +20,11 @@ export default ({ address, size: [w, h], class: c, title }: Client) => Widget.Bu
     css: ` min-width: ${scale(w)}px; min-height: ${scale(h)}px;`,
     icon: monochrome.bind().as(m => {
       const app = apps.list.find(app => app.match(c))
-      if (!app) return icons.fallback.executable
+      if (!app) return icons.fallback.executable + (m ? '-symbolic' : '')
 
       return icon(
         app.icon_name + (m ? '-symbolic' : ''),
-        icons.fallback.executable,
+        icons.fallback.executable + (m ? '-symbolic' : '')
       )
     }),
   }),
