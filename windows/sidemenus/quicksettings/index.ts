@@ -1,8 +1,7 @@
 import icons from 'data/icons'
 import Avatar from './Avatar'
 import ClockBox from './ClockBox'
-import Notifications from './notifications'
-import { sh } from 'lib/utils'
+import Notifications from './Notifications'
 
 const SysButtons = [
   Widget.Button({
@@ -50,10 +49,10 @@ const ControlButtons = Widget.Box({
 
 export default Widget.Box({
   vertical: true,
-  className: 'profile',
+  className: 'quicksettings',
   children: [
     Widget.Box({ 
-      className: 'header', 
+      className: 'profile', 
       children: [ Avatar, ClockBox ].concat(SysButtons)
     }), 
     ControlButtons,
