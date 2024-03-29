@@ -1,5 +1,8 @@
+import { type Props as RevealerProps } from 'types/widgets/label'
 import weather from './weather'
+
 import options from 'options'
+import { sidemenuShow } from 'lib/variables'
 
 const Stack = Widget.Stack({
   transition: 'slide_left_right',
@@ -9,21 +12,15 @@ const Stack = Widget.Stack({
       children: [ Widget.Calendar({ hexpand: true }) ],
     }),
     weather,
-    agenda: Widget.Box({
-
-    }),
-    timer: Widget.Box({
-
-    }),
-    events: Widget.Box({
-
-    }),
+    agenda: Widget.Box({ }),
+    timer: Widget.Box({ }),
+    events: Widget.Box({ }),
   },
 })
 
 const buttons = [ 'calendar', 'agenda', 'weather', 'timer', 'events' ]
 
-export default Widget.Box({
+const DateMenu = Widget.Box({
   className: 'datemenu',
   vertical: true,
   children: [
@@ -42,3 +39,9 @@ export default Widget.Box({
     })
   ]
 })
+
+export default Widget.Revealer({
+  child: DateMenu,
+  transition: 'slide_down',
+  transitionDuration: options.transition.value,
+}).hook(sidemenuShow.datemenu, (self: RevealerProps) => self.revealChild = sidemenuShow.datemenu.value)

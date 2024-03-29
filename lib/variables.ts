@@ -7,4 +7,11 @@ const clock = (interval: number = 5000) => Variable(
   { poll: [interval, () => GLib.DateTime.new_now_local()] }
 )
 
-export { clock, showMedia }
+const sidemenuShow = {
+  quicksettings: Variable(false), 
+  datemenu: Variable(false)
+}
+
+globalThis['sidemenuShow'] = (name:string) => sidemenuShow[name].value = !sidemenuShow[name].value
+
+export { clock, showMedia, sidemenuShow }

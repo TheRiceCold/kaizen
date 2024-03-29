@@ -1,7 +1,12 @@
-import icons from 'data/icons'
+import { type Props as RevealerProps } from 'types/widgets/label'
+
 import Avatar from './Avatar'
 import ClockBox from './ClockBox'
 import Notifications from './Notifications'
+
+import options from 'options'
+import icons from 'data/icons'
+import { sidemenuShow } from 'lib/variables'
 
 const SysButtons = [
   Widget.Button({
@@ -47,7 +52,7 @@ const ControlButtons = Widget.Box({
   })
 })
 
-export default Widget.Box({
+const QuickSettings = Widget.Box({
   vertical: true,
   className: 'quicksettings',
   children: [
@@ -59,3 +64,9 @@ export default Widget.Box({
     Notifications
   ]
 })
+
+export default Widget.Revealer({
+  child: QuickSettings,
+  transition: 'slide_down',
+  transitionDuration: options.transition.value,
+}).hook(sidemenuShow.quicksettings, (self: RevealerProps) => self.revealChild = sidemenuShow.quicksettings.value)
