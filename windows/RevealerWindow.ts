@@ -22,7 +22,9 @@ export const Padding = (name: string, {
   vexpand,
   can_focus: false,
   child: Widget.Box({ css }),
-  setup: w => w.on('button-press-event', () => App.toggleWindow(name)),
+  setup(self: EventBoxProps ) {
+    self.on('button-press-event', () => App.toggleWindow(name))
+  }
 })
 
 const PopupRevealer = (
@@ -127,12 +129,14 @@ export default ({
 }: PopupWindowProps) => Widget.Window<Gtk.Widget>({
   name,
   classNames: [name, 'popup-window'],
-  setup: w => w.keybind('Escape', () => App.closeWindow(name)),
   exclusivity,
   layer: 'top',
   visible: false,
   keymode: 'on-demand',
   anchor: ['top', 'bottom', 'right', 'left'],
   child: Layout(name, child, transition)[layout](),
+  setup(self: WindowProps) {
+    self.keybind('Escape', () => App.closeWindow(name))
+  },
   ...props,
 })

@@ -1,5 +1,7 @@
 import { type Props as RevealerProps } from 'types/widgets/label'
+import { type BoxProps } from 'types/widgets/box'
 import weather from './weather'
+import timer from './timer'
 
 import options from 'options'
 import { sidemenuShow } from 'lib/variables'
@@ -13,7 +15,7 @@ const Stack = Widget.Stack({
     }),
     weather,
     agenda: Widget.Box({ }),
-    timer: Widget.Box({ }),
+    timer,
     events: Widget.Box({ }),
   },
 })
@@ -31,7 +33,7 @@ const DateMenu = Widget.Box({
       spacing: options.theme.spacing * 1.5,
       children: buttons.map(item => Widget.Button({
         label: item, 
-        onClicked(self) {
+        onClicked(self: BoxProps) {
           Stack.shown = item
           self.toggleClassName('active', true)
         },
