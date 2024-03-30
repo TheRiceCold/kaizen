@@ -1,8 +1,10 @@
 import { type Notification as Notif } from 'types/service/notifications'
+import { type RevealerProps } from 'types/widgets/revealer'
 import Notification from 'windows/popups/notifications/Notification'
 
 import options from 'options'
 import icons from 'data/icons'
+import { notificationIcon } from 'lib/variables'
 
 const notifications = await Service.import('notifications')
 const notifs = notifications.bind('notifications')
@@ -11,14 +13,16 @@ const Animated = (n: Notif) => Widget.Revealer({
   child: Notification(n),
   transition: 'slide_down',
   transitionDuration: options.transition.value,
-  setup: self => Utils.timeout(options.transition.value, () => {
-    if (!self.is_destroyed)
-      self.revealChild = true
-  })
+  setup(self: RevealerProps) {
+    Utils.timeout(options.transition.value, () => {
+      if (!self.is_destroyed) self.revealChild = true
+    })
+  }
 })
 
+// TODO: Replace with switch
 const SilentButton = Widget.Button({
-  child: Widget.Icon(icons.notifications.silent),
+  child: Widget.Icon({ icon: notificationIcon }),
   onClicked: () => notifications.dnd = !notifications.dnd
 })
 
