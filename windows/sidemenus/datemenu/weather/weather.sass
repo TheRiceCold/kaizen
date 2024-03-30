@@ -1,0 +1,37 @@
+window.sideright .datemenu 
+  .current-weather
+    padding: 0 calc($padding * 2)
+    border-right: 1px solid transparentize($fg, 0.75)
+    .region
+      font-weight: 500
+      font-size: 1.75em
+    .temp
+      > label
+        font-size: 2em
+        font-weight: 600
+      .icon
+        font-size: 7em
+    .description
+      font-weight: 500
+      font-size: 1.25em
+      margin-bottom: 1em
+    .current-condition
+      > label
+        font-weight: 500
+        font-size: 1.15em
+        &:first-child
+          font-weight: 400
+          font-size: 0.9em
+
+  .forecast
+    padding: $padding calc($padding * 2.5)
+    label
+      font-size: 1.15em
+    .day
+      min-width: 2em 
+      margin-right: 1.5em
+    image
+      font-size: 1.5em
+      margin-right: 1em
+    .temp 
+      margin-right: 1em
