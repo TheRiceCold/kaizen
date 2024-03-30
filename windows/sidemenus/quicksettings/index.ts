@@ -2,7 +2,7 @@ import { type Props as RevealerProps } from 'types/widgets/label'
 
 import Avatar from './Avatar'
 import ClockBox from './ClockBox'
-import Notifications from './Notifications'
+import StackChildren from './StackChildren'
 
 import options from 'options'
 import icons from 'data/icons'
@@ -21,37 +21,6 @@ const SysButtons = [
   })
 ]
 
-const { wifi } = await Service.import('network')
-const bluetooth = await Service.import('bluetooth')
-const notifications = await Service.import('notifications')
-
-const StackButton = icon => Widget.Button({ 
-  child: Widget.Box([ 
-    Widget.Icon({ icon }),
-    Widget.Icon({
-      className: 'arrow-icon', 
-      icon: icons.ui.arrow.down 
-    }),
-  ])
-})
-
-const ControlButtons = Widget.Box({
-  className: 'control-buttons',
-  child: Widget.Box({ 
-    hexpand: true,
-    hpack: 'center',
-    children: [
-      StackButton(icons.notifications.silent),
-      StackButton(wifi.bind('icon_name')),
-      StackButton(bluetooth.bind('enabled').as(p => icons.bluetooth[p ? 'enabled' : 'disabled'])),
-      StackButton(icons.audio.type.speaker),
-
-      Widget.Button({ child: Widget.Icon(icons.color.dark) }),
-      Widget.Button({ child: Widget.Icon(icons.ui.cup) }),
-    ]
-  })
-})
-
 const QuickSettings = Widget.Box({
   vertical: true,
   className: 'quicksettings',
@@ -60,9 +29,7 @@ const QuickSettings = Widget.Box({
       className: 'profile', 
       children: [ Avatar, ClockBox ].concat(SysButtons)
     }), 
-    ControlButtons,
-    Notifications
-  ]
+  ].concat(StackChildren)
 })
 
 export default Widget.Revealer({

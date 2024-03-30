@@ -1,8 +1,5 @@
-import options from 'options'
 import DateMenu from './datemenu'
 import QuickSettings from './quicksettings'
-
-const pos = options.bar.position.bind()
 
 const right = Widget.Window({
   name: `sideright`,
