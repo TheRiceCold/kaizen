@@ -6,7 +6,7 @@ type TProps = ButtonProps & {
 }
 
 export default ({ window = '', setup, ...props }: TProps) => Widget.Button({
-  setup: self => {
+  setup (self: ButtonProps) {
     setupCursorHover(self)
     let open = false
 
@@ -14,7 +14,7 @@ export default ({ window = '', setup, ...props }: TProps) => Widget.Button({
     self.toggleClassName(window)
     self.toggleClassName('flat')
 
-    self.hook(App, (_, win, visible) => {
+    self.hook(App, (_, win: string, visible: bool) => {
       if (win !== window) return
 
       if (open && !visible) {

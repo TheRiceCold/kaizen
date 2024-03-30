@@ -1,16 +1,12 @@
+import { type ButtonProps } from 'types/widgets/button'
+
 import ArrowIcon from './ArrowIcon'
 import BarButton from 'windows/topbar/BarButton'
 
-export type TRule = {
-  name: string
-  exec?: string
-  dispatch?: string
-}
-
-export default (dir, commands) => {
+export default (dir: string, buttons: ButtonProps[]) => {
   const Revealer = Widget.Revealer({
     transition: `slide_${dir}`,
-    child: Widget.Box(commands.map(BarButton))
+    child: Widget.Box(buttons.map(BarButton))
   })
 
   return Widget.Box([

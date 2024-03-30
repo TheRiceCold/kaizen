@@ -1,8 +1,10 @@
+import { type RevealerProps } from 'types/widgets/revealer'
+
 import options from 'options'
 import icons from 'data/icons'
 import BarButton from 'windows/topbar/BarButton'
 
-export default (dir, revealer) => {
+export default (dir: string, revealer: RevealerProps) => {
   let deg = 0
   const Icon = Widget.Icon({ icon: icons.ui.arrow[dir] })
   const animate = () => {

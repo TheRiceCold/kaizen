@@ -8,7 +8,7 @@ const mpris = await Service.import('mpris')
 const pref = options.media.preferred.value
 
 const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
-const getTooltip = (player: MprisPlayer) => {
+function getTooltip(player: MprisPlayer) {
   switch (player.play_back_status) {
     case 'Playing': return `Playing on ${player.name}`
     default: return `Click to play on ${player.name}`

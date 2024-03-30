@@ -15,7 +15,7 @@ const Menu = () => {
 
   return Widget.Menu({
     className: 'colorpicker',
-    children: Colorpicker.bind('colors').as(c => c.map(color => Widget.MenuItem({
+    children: Colorpicker.bind('colors').as((c: Array<string>) => c.map((color: string) => Widget.MenuItem({
       css: css(color),
       child: Widget.Label(color),
       onActivate: () => Colorpicker.wlCopy(color),

@@ -1,18 +1,30 @@
+import { type Props as CircularProgressProps } from 'types/widgets/circularprogress'
+import { type Props as IconProps } from 'types/widgets/icon'
 import { type MprisPlayer } from 'types/service/mpris'
 import icons from 'data/icons'
 
 const mpris = await Service.import('mpris')
 
 export default (player: MprisPlayer) => {
-  const progressUpdate = prog => prog.value = player.position / player.length
+  function progressUpdate (prog: CircularProgressProps) {
+    return prog.value = player.position / player.length
+  }
 
-  const Icon = Widget.Icon().hook(mpris, self => {
+  function iconUpdate (self: IconProps) {
     switch (player.play_back_status) {
-      case 'Playing': self.icon = icons.mpris.playing; break
-      case 'Paused': self.icon = icons.mpris.paused; break
-      default: self.icon = icons.mpris.stopped; break
+      case 'Playing': 
+        self.icon = icons.mpris.playing
+        break
+      case 'Paused': 
+        self.icon = icons.mpris.paused 
+        break
+      default: 
+        self.icon = icons.mpris.stopped
+        break
     }
-  })
+  }
+
+  const Icon = Widget.Icon().hook(mpris, iconUpdate)
 
   return Widget.CircularProgress({
     child: Icon,

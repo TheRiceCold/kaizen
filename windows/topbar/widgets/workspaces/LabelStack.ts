@@ -1,7 +1,7 @@
-import options from 'options'
 import { type Props as LabelProps } from 'types/widgets/label'
 import { type Props as StackProps } from 'types/widgets/stack'
 import { capitalize } from 'lib/utils'
+import options from 'options'
 
 export type TWorkspace = {
   label: string
