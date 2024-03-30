@@ -22,7 +22,7 @@ export const Padding = (name: string, {
   vexpand,
   can_focus: false,
   child: Widget.Box({ css }),
-  setup(self: EventBoxProps ) {
+  setup(self: EventBoxProps) {
     self.on('button-press-event', () => App.toggleWindow(name))
   }
 })
@@ -35,20 +35,19 @@ const PopupRevealer = (
   { css: 'padding: 1px;' },
   Widget.Revealer({
     transition,
-    child: Widget.Box({
-      child,
-      className: 'window-content',
-    }),
+    child: Widget.Box({ child, className: 'window-content' }),
     transitionDuration: options.transition.bind(),
-    setup: self => self.hook(App, (_, wname, visible) => {
-      if (wname === name)
-        self.reveal_child = visible
-    }),
+    setup (self: RevealerProps) {
+      self.hook(App, ({}, wname: string, visible: boolean) => {
+        if (wname === name)
+          self.revealChild = visible
+      })
+    },
   }),
 )
 
 const Layout = (name: string, child: Child, transition?: Transition) => ({
-  'center': () => Widget.CenterBox({},
+  center: () => Widget.CenterBox({},
     Padding(name),
     Widget.CenterBox(
       { vertical: true },
@@ -58,7 +57,7 @@ const Layout = (name: string, child: Child, transition?: Transition) => ({
     ),
     Padding(name),
   ),
-  'top': () => Widget.CenterBox({},
+  top: () => Widget.CenterBox({},
     Padding(name),
     Widget.Box(
       { vertical: true },

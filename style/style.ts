@@ -73,7 +73,7 @@ async function resetCss() {
     await Utils.writeFile(variables().join('\n'), vars)
 
     const fd = await sh(`fd '.sass' ${App.configDir}`)
-    const files = fd.split(/\s+/).map(f => `@import '${f}';`)
+    const files = fd.split(/\s+/).map((f: string) => `@import '${f}';`)
     const sass = [`@import '${vars}';`, ...files].join('\n')
     const css = await bash`echo "${sass}" | sass --stdin`
 

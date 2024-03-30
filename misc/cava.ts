@@ -1,6 +1,6 @@
 const { Gtk } = imports.gi
 
-const Cava = ({
+export default ({
   bars = 20,
   width = 1,
   spacing = 1,
@@ -29,25 +29,25 @@ const Cava = ({
                     ascii_max_range = ${height}\n" | \
                     cava -p /dev/stdin`
         ],
-        out => out.split(';').slice(0, -1)
+        (out: string) => out.split(';').slice(0, -1)
       ]
     })
   },
-  setup: widget => {
+  setup(self) {
     if (vertical)
-      widget.set_size_request(height, bars)
+      self.set_size_request(height, bars)
     else
-      widget.set_size_request(bars, height)
-    const varHandler = widget.attribute.cavaVar.connect('changed', () => widget.queue_draw())
-    widget.on('destroy', () => {
-      widget.attribute.cavaVar.stopListen()
-      widget.attribute.cavaVar.disconnect(varHandler)
+      self.set_size_request(bars, height)
+    const varHandler = self.attribute.cavaVar.connect('changed', () => self.queue_draw())
+    self.on('destroy', () => {
+      self.attribute.cavaVar.stopListen()
+      self.attribute.cavaVar.disconnect(varHandler)
     })
   },
-}).on('draw', (widget, cr) => {
-  const context = widget.get_style_context()
-  const w = widget.get_allocated_width() * width
-  const h = widget.get_allocated_height()
+}).on('draw', (self, cr) => {
+  const context = self.get_style_context()
+  const w = self.get_allocated_width() * width
+  const h = self.get_allocated_height()
 
   const bg = context.get_property('background-color', Gtk.StateFlags.NORMAL)
   const fg = context.get_property('color', Gtk.StateFlags.NORMAL)
@@ -66,8 +66,8 @@ const Cava = ({
 
   cr.setSourceRGBA(fg.red, fg.green, fg.blue, fg.alpha)
   if (!smooth) {
-    for (let i = 0; i < widget.attribute.cavaVar.value.length; i++) {
-      const barHeight = h * (widget.attribute.cavaVar.value[i] / height)
+    for (let i = 0; i < self.attribute.cavaVar.value.length; i++) {
+      const barHeight = h * (self.attribute.cavaVar.value[i] / height)
       let y = 0
       let x = 0
       switch (align) {
@@ -93,10 +93,10 @@ const Cava = ({
     }
   } else {
     let lastX = 0
-    let lastY = h - h * (widget.attribute.cavaVar.value[0] / height)
+    let lastY = h - h * (self.attribute.cavaVar.value[0] / height)
     cr.moveTo(lastX, lastY)
-    for (let i = 1; i < widget.attribute.cavaVar.value.length; i++) {
-      const barHeight = h * (widget.attribute.cavaVar.value[i] / height)
+    for (let i = 1; i < self.attribute.cavaVar.value.length; i++) {
+      const barHeight = h * (self.attribute.cavaVar.value[i] / height)
       let y = h - barHeight
       cr.curveTo(lastX + w / (bars - 1) / 2, lastY, lastX + w / (bars - 1) / 2, y, i * (w / (bars - 1)), y)
       lastX = i * (w / (bars - 1))
@@ -107,14 +107,3 @@ const Cava = ({
     cr.fill()
   }
 })
-
-
-let CavaWidget
-if (Utils.exec('which cava') != '')
-  CavaWidget = Cava
-else {
-  console.warn('cava is not installed. Cava module has been disabled.')
-  CavaWidget = () => Widget.Box()
-}
-
-export default CavaWidget

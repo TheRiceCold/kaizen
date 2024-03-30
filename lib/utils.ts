@@ -57,7 +57,7 @@ function dependencies(...bins: string[]) {
 function launchApp(app: Application) {
   const exe = app.executable
     .split(/\s+/)
-    .filter(str => !str.startsWith('%') && !str.startsWith('@'))
+    .filter((str: string) => !str.startsWith('%') && !str.startsWith('@'))
     .join(' ')
 
   sh(exe)

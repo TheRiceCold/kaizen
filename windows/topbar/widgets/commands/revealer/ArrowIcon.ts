@@ -7,7 +7,8 @@ import BarButton from 'windows/topbar/BarButton'
 export default (dir: string, revealer: RevealerProps) => {
   let deg = 0
   const Icon = Widget.Icon({ icon: icons.ui.arrow[dir] })
-  const animate = () => {
+
+  function animate() {
     const t = options.transition / 20
     const step = revealer.revealChild ? 10 : -10
     for (let i = 0; i < 18; ++i)
@@ -19,7 +20,7 @@ export default (dir: string, revealer: RevealerProps) => {
 
   return BarButton({
     child: Icon,
-    onClicked: () => {
+    onClicked() {
       animate()
       revealer.revealChild = !revealer.revealChild
     },

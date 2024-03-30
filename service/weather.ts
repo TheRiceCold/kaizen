@@ -68,7 +68,7 @@ class WeatherService extends Service {
       const forecastData = await getForecast.json()
       this.updateProperty('forecast_days', forecastData['forecast']['forecastday'].map(forecast => forecast.day))
 
-    } catch (err) { console.error(err) }
+    } catch (err) { logError(err) }
   }
 }
 

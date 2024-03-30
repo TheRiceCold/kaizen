@@ -14,7 +14,7 @@ export default ({ window = '', setup, ...props }: TProps) => Widget.Button({
     self.toggleClassName(window)
     self.toggleClassName('flat')
 
-    self.hook(App, (_, win: string, visible: bool) => {
+    self.hook(App, (_, win: string, visible: boolean) => {
       if (win !== window) return
 
       if (open && !visible) {

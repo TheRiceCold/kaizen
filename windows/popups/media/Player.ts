@@ -1,3 +1,5 @@
+import { type Props as LabelProps } from 'types/widgets/label'
+import { type Props as SliderProps } from 'types/widgets/slider'
 import { type MprisPlayer } from 'types/service/mpris'
 import options from 'options'
 import icons from 'data/icons'
@@ -13,7 +15,7 @@ function lengthStr(length: number) {
   return `${min}:${sec0}${sec}`
 }
 
-const isRealPlayer = player => (
+const isRealPlayer = (player: MprisPlayer) => (
   !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless
   !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') && // Doesn't have cover art
   !player.busName.endsWith('.mpd') // Non-instance mpd bus
@@ -23,7 +25,6 @@ const Player = (player: MprisPlayer) => {
 
   // TODO: Turnable animation, like spicetify
   // reference: https://github.com/spicetify/spicetify-themes/raw/master/Turntable/screenshots/fad.png
-
   const cover = Widget.Box({
     vpack: 'start',
     className: 'cover',
@@ -31,7 +32,7 @@ const Player = (player: MprisPlayer) => {
       player.bind('cover_path'),
       player.bind('track_cover_url'),
       options.media.coverSize.bind(),
-    ], (path, url, size) => `
+    ], (path: string, url: string, size: number) => `
       min-width: ${size}px;
       min-height: ${size}px;
       background-image: url('${path || url}');
@@ -51,14 +52,14 @@ const Player = (player: MprisPlayer) => {
     truncate: 'end',
     maxWidthChars: 20,
     className: 'artist',
-    label: player.bind('track_artists').as(a => a.join(', ')),
+    label: player.bind('track_artists').as((a: Array<string>) => a.join(', ')),
   })
 
   const positionSlider = Widget.Slider({
     drawValue: false,
     className: 'position',
     onChange: ({ value }) => player.position = value * player.length,
-    setup: self => {
+    setup(self: SliderProps) {
       const update = () => {
         const { length, position } = player
         self.visible = length > 0
@@ -73,7 +74,7 @@ const Player = (player: MprisPlayer) => {
   const positionLabel = Widget.Label({
     hpack: 'start',
     className: 'position',
-    setup: self => {
+    setup(self: LabelProps) {
       const update = (_: unknown, time?: number) => {
         self.label = lengthStr(time || player.position)
         self.visible = player.length > 0
@@ -87,7 +88,7 @@ const Player = (player: MprisPlayer) => {
     hpack: 'end',
     className: 'length',
     label: player.bind('length').as(lengthStr),
-    visible: player.bind('length').as(l => l > 0),
+    visible: player.bind('length').as((l: number) => l > 0),
   })
 
   const playericon = Widget.Icon({
@@ -98,7 +99,7 @@ const Player = (player: MprisPlayer) => {
     tooltipText: player.identity || '',
     icon: Utils.merge(
       [ player.bind('entry'), options.media.monochromeIcon.bind() ],
-      (e, s) => icon(`${e}${s ? '-symbolic' : ''}`, icons.fallback.audio)
+      (e: string, s: string) => icon(`${e}${s ? '-symbolic' : ''}`, icons.fallback.audio)
     ),
   })
 
@@ -107,7 +108,7 @@ const Player = (player: MprisPlayer) => {
     onClicked: () => player.playPause(),
     visible: player.bind('can_play'),
     child: Widget.Icon({
-      icon: player.bind('play_back_status').as(s => {
+      icon: player.bind('play_back_status').as((s: string) => {
         switch (s) {
           case 'Playing': return icons.mpris.playing
           case 'Paused':
@@ -151,5 +152,5 @@ const Player = (player: MprisPlayer) => {
 export default Widget.Box({
   vertical: true,
   className: 'media vertical',
-  children: players.as(p => p.map(player => isRealPlayer(player) ? Player(player) : null)),
+  children: players.as( (p: MprisPlayer[]) => p.map((player: MprisPlayer) => isRealPlayer(player) ? Player(player) : null)),
 })

@@ -1,4 +1,3 @@
-import { type Props as ButtonProps } from 'types/widgets/button'
 import notificationList from './notifications'
 import icons from 'data/icons'
 import { notificationIcon } from 'lib/variables'

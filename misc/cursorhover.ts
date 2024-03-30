@@ -1,6 +1,7 @@
+import { ButtonProps } from 'types/widgets/button'
 const { Gdk } = imports.gi
 
-export function setupCursorHover(btn) { // Hand pointing cursor on hover
+export function setupCursorHover(btn: ButtonProps) { // Hand pointing cursor on hover
   const display = Gdk.Display.get_default()
   btn.connect('enter-notify-event', () => {
     const cursor = Gdk.Cursor.new_from_name(display, 'pointer')
@@ -13,7 +14,7 @@ export function setupCursorHover(btn) { // Hand pointing cursor on hover
   })
 }
 
-export function setupCursorHoverAim(btn) { // Crosshair cursor on hover
+export function setupCursorHoverAim(btn: ButtonProps) { // Crosshair cursor on hover
   btn.connect('enter-notify-event', () => {
     const display = Gdk.Display.get_default()
     const cursor = Gdk.Cursor.new_from_name(display, 'crosshair')
@@ -27,7 +28,7 @@ export function setupCursorHoverAim(btn) { // Crosshair cursor on hover
   })
 }
 
-export function setupCursorHoverGrab(btn) { // Hand ready to grab on hover
+export function setupCursorHoverGrab(btn: ButtonProps) { // Hand ready to grab on hover
   btn.connect('enter-notify-event', () => {
     const display = Gdk.Display.get_default()
     const cursor = Gdk.Cursor.new_from_name(display, 'grab')
@@ -41,7 +42,7 @@ export function setupCursorHoverGrab(btn) { // Hand ready to grab on hover
   })
 }
 
-export function setupCursorHoverInfo(btn) { // "?" mark cursor on hover
+export function setupCursorHoverInfo(btn: ButtonProps) { // "?" mark cursor on hover
   const display = Gdk.Display.get_default()
   btn.connect('enter-notify-event', () => {
     const cursor = Gdk.Cursor.new_from_name(display, 'help')

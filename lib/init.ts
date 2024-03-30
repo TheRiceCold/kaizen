@@ -11,5 +11,5 @@ export default () => {
     matugen()
     hyprland()
     notifications()
-  } catch (error) { logError(error) }
+  } catch (err) { logError(err) }
 }
