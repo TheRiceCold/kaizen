@@ -1,10 +1,9 @@
-import { type Notification as Notif } from 'types/service/notifications'
 import { type RevealerProps } from 'types/widgets/revealer'
-import Notification from 'windows/popups/notifications/Notification'
+import { type Notification as Notif } from 'types/service/notifications'
 
+import Notification from 'windows/popups/notifications/Notification'
 import options from 'options'
 import icons from 'data/icons'
-import { notificationIcon } from 'lib/variables'
 
 const notifications = await Service.import('notifications')
 const notifs = notifications.bind('notifications')
@@ -18,29 +17,6 @@ const Animated = (n: Notif) => Widget.Revealer({
       if (!self.is_destroyed) self.revealChild = true
     })
   }
-})
-
-// TODO: Replace with switch
-const SilentButton = Widget.Button({
-  child: Widget.Icon({ icon: notificationIcon }),
-  onClicked: () => notifications.dnd = !notifications.dnd
-})
-
-const ClearButton = Widget.Button({
-  onClicked: notifications.clear,
-  child: Widget.Icon(icons.ui.broom),
-  sensitive: notifs.as(n => n.length > 0),
-})
-
-const Header = Widget.Box({
-  className: 'header',
-  children: [
-    Widget.Label({ label: 'Notifications', hexpand: true, xalign: 0 }),
-    Widget.Box({
-      spacing: options.theme.spacing * 0.75,
-      children: [ SilentButton, ClearButton ]
-    })
-  ],
 })
 
 const NotificationList = () => {
@@ -93,21 +69,13 @@ const Placeholder = Widget.Box({
   ],
 })
 
-export default Widget.Box({
-  vertical: true,
-  className: 'notifications',
-  css: options.notifications.width.bind().as(w => `min-width: ${w}px`),
-  children: [
-    Header,
-    Widget.Scrollable({
-      vexpand: true,
-      hscroll: 'never',
-      className: 'notification-scrollable',
-      child: Widget.Box({
-        className: 'notification-list vertical',
-        vertical: true,
-        children: [ NotificationList(), Placeholder ],
-      }),
-    }),
-  ],
+export default Widget.Scrollable({
+  vexpand: true,
+  hscroll: 'never',
+  className: 'notification-scrollable',
+  child: Widget.Box({
+    className: 'notification-list vertical',
+    vertical: true,
+    children: [ NotificationList(), Placeholder ],
+  }),
 })

@@ -3,9 +3,10 @@ window.sideright .quicksettings
   @include floating_widget
   .control-buttons
     padding: calc($padding * 2.5)
-  button
-    border-radius: calc($radius * 0.5)
-    image 
-      font-size: 1.15em
+    button
+      @include button
+      padding: $padding calc($padding * 1.5)
+      image 
+        font-size: 1.25em
   button.active
     background-color: $primary-fg

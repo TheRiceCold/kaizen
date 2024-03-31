@@ -1,7 +1,7 @@
 import { type Props as RevealerProps } from 'types/widgets/label'
 
 import Profile from './profile'
-import StackChildren from './StackChildren'
+import StackList from './stacklist'
 
 import options from 'options'
 import { sidemenuShow } from 'lib/variables'
@@ -9,7 +9,7 @@ import { sidemenuShow } from 'lib/variables'
 const QuickSettings = Widget.Box({
   vertical: true,
   className: 'quicksettings',
-  children: [ Profile ].concat(StackChildren)
+  children: [ Profile ].concat(StackList)
 })
 
 export default Widget.Revealer({
