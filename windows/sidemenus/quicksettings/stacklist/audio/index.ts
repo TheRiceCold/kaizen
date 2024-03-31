@@ -4,7 +4,7 @@ export default Widget.Box({
   vertical: true,
   className: 'audio-list',
   children: [
-    Header('Sound and Audio', [
+    Header('Sound and Audio', {}, [
       // {
       //   child: Widget.Icon({ icon: notificationIcon }),
       //   onClicked: () => notifications.dnd = !notifications.dnd

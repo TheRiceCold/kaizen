@@ -1,12 +1,14 @@
 window.sideright .quicksettings
-  min-height: 500px
+  min-height: 600px
   @include floating_widget
   .control-buttons
     padding: calc($padding * 2.5)
+    padding-top: 0
     button
       @include button
       padding: $padding calc($padding * 1.5)
       image 
         font-size: 1.25em
+    border-bottom: 1px solid transparentize($fg, 0.75)
   button.active
     background-color: $primary-fg

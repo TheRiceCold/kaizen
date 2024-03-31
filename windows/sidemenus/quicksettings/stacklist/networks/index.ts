@@ -4,7 +4,7 @@ export default Widget.Box({
   vertical: true,
   className: 'network-list',
   children: [
-    Header('Network', [
+    Header('Network', { }, [
       // {
       //   child: Widget.Icon({ icon: notificationIcon }),
       //   onClicked: () => notifications.dnd = !notifications.dnd

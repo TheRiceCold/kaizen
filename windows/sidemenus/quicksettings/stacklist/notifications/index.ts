@@ -2,8 +2,6 @@ import Header from '../Header'
 import Content from './Content'
 
 import options from 'options'
-import icons from 'data/icons'
-import { notificationIcon } from 'lib/variables'
 
 const notifications = await Service.import('notifications')
 const notifs = notifications.bind('notifications')
@@ -13,14 +11,13 @@ export default Widget.Box({
   className: 'notifications',
   css: options.notifications.width.bind().as(w => `min-width: ${w}px`),
   children: [
-    Header('Notifications', [
+    Header('Notifications', {
+      active: !notifications.dnd,
+      onActivate: () => notifications.dnd = !notifications.dnd, 
+    }, [
       {
-        child: Widget.Icon({ icon: notificationIcon }),
-        onClicked: () => notifications.dnd = !notifications.dnd
-      },
-      {
+        label: 'Clear',
         onClicked: notifications.clear,
-        child: Widget.Icon(icons.ui.broom),
         sensitive: notifs.as(n => n.length > 0),
       }
     ]),

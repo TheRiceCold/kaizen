@@ -20,8 +20,8 @@ const Buttons = Widget.Box({
     spacing: options.theme.spacing,
     children: items.map(item => Button(item.name, item.icon)).concat([
       Widget.Box({ hexpand: true }),
-      Widget.Button({ child: Widget.Icon(icons.ui.cup) }),
-      Widget.Button({ child: Widget.Icon(icons.color.dark) }),
+      Widget.ToggleButton({ child: Widget.Icon(icons.ui.cup) }),
+      Widget.ToggleButton({ child: Widget.Icon(icons.color.dark) }),
       Widget.Button({ 
         child: Widget.Icon(icons.ui.settings),
         onClicked: () => App.openWindow('settings-dialog')
@@ -31,6 +31,7 @@ const Buttons = Widget.Box({
 })
 
 const Stack = Widget.Stack({
+  className: 'stack-list',
   transition: 'slide_down',
   children: items.reduce((acc, item) => {
     acc[item.name] = item.content

@@ -4,7 +4,7 @@ export default Widget.Box({
   vertical: true,
   className: 'bluetooth-list',
   children: [
-    Header('Bluetooth', [
+    Header('Bluetooth', { }, [
       // {
       //   child: Widget.Icon({ icon: notificationIcon }),
       //   onClicked: () => notifications.dnd = !notifications.dnd
