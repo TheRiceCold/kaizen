@@ -59,7 +59,7 @@ export default function Setter<T>({
       .hook(opt, self => self.active = opt.value as boolean)
 
     case 'img': return Widget.FileChooserButton({
-      onFileSet: ({ url }) => { opt.value = uri!.replace('file://', '') as T}
+      onFileSet: ({ uri }) => { opt.value = uri!.replace('file://', '') as T}
     })
 
     case 'font': return Widget.FontButton({

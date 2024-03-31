@@ -1,0 +1,28 @@
+window.sideright .quicksettings .profile
+  padding: calc($padding * 3.5)
+  .avatar 
+    box
+      border-radius: $radius
+      background: $primary-bg
+      border: $border-width solid $primary-bg
+    revealer image
+      border-radius: $radius
+      background-color: transparentize($primary-fg, 0.75)
+
+  .clock-box
+    margin: 0 $spacing
+    .clock
+      font-size: 3em
+      color: $primary-bg
+  border-bottom: 1px solid transparentize($fg, 0.75)
+
+  .progress
+    font-size: 3px
+    min-width: 28px
+    min-height: 28px
+    color: $primary-bg
+    background-color: $primary-fg
+  .label-stack label
+    font-weight: 500
+    color: $primary-bg
+    margin-left: calc($spacing * 0.75)

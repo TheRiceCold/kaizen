@@ -8,7 +8,7 @@ const wpConfig = {
   mkt: "random" as "en-US" | "ja-JP" | "en-AU" | "en-GB" | "de-DE" | "en-NZ" | "en-CA" | "random",
 }
 
-const WP = `${Utils.HOME}/.config/background`
+const WP = `${Utils.HOME}/.config/background.png`
 const Cache = `${Utils.HOME}/Pictures/Wallpaper/Bing`
 
 class Wallpaper extends Service {

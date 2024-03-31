@@ -29,6 +29,7 @@ export default {
     pin: 'pin-symbolic',
     info: 'info-symbolic',
     broom: 'broom-symbolic',
+    camera: 'camera-symbolic',
     menu: 'open-menu-symbolic',
     toolbars: 'toolbars-symbolic',
     close: 'window-close-symbolic',

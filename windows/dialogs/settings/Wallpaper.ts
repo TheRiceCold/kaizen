@@ -6,13 +6,13 @@ export default () => Widget.Box(
     { vertical: true },
     Widget.Label({
       xalign: 0,
-      className: 'row-title',
-      label: 'Wallpaper',
       vpack: 'start',
+      label: 'Wallpaper',
+      className: 'row-title',
     }),
     Widget.Button({
-      onClicked: wallpaper.random,
       label: 'Random',
+      onClicked: wallpaper.random,
     }),
     Widget.FileChooserButton({
       onFileSet: ({ uri }) => wallpaper.set(uri!.replace('file://', '')),
@@ -21,7 +21,7 @@ export default () => Widget.Box(
   Widget.Box({ hexpand: true }),
   Widget.Box({
     className: 'preview',
-    css: wallpaper.bind('wallpaper').as(wp => `
+    css: wallpaper.bind('wallpaper').as((wp: string) => `
       min-height: 120px;
       min-width: 200px;
       background-image: url('${wp}');

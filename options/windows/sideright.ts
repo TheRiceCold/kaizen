@@ -5,7 +5,7 @@ export default {
   profile: {
     avatar: {
       image: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
-      size: opt(70),
+      size: opt(80),
     },
     clock: {
       interval: 5000,
