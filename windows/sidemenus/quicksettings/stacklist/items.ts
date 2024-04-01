@@ -1,8 +1,8 @@
 import { notificationIcon } from 'lib/variables'
 import icons from 'data/icons'
 
+import WifiList from './wifi'
 import AudioList from './audio'
-import NetworkList from './networks'
 import BluetoothList from './bluetooth'
 import NotificationList from './notifications'
 
@@ -12,12 +12,12 @@ const bluetooth = await Service.import('bluetooth')
 export default [
   { 
     name: 'notificationList', 
-    icon: notificationIcon,
     content: NotificationList,  
+    icon: notificationIcon,
   },
   { 
-    name: 'networkList',
-    content: NetworkList,
+    name: 'wifiList',
+    content: WifiList,
     icon: wifi.bind('icon_name'),
   },
   { 
@@ -25,8 +25,9 @@ export default [
     content: BluetoothList,
     icon: bluetooth.bind('enabled').as((p: string) => icons.bluetooth[p ? 'enabled' : 'disabled']),
   },
-  { name: 'audioList', 
-    icon: icons.audio.type.speaker,
+  { 
+    name: 'audioList', 
     content: AudioList,
+    icon: icons.audio.type.speaker,
   }
 ]

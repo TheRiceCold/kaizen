@@ -11,15 +11,16 @@ export default Widget.Box({
   className: 'notifications',
   css: options.notifications.width.bind().as(w => `min-width: ${w}px`),
   children: [
-    Header('Notifications', {
-      active: !notifications.dnd,
-      onActivate: () => notifications.dnd = !notifications.dnd, 
-    }, [
-      {
+    Header('Notifications', [
+      Widget.Switch({
+        active: !notifications.dnd,
+        onActivate: () => notifications.dnd = !notifications.dnd, 
+      }),
+      Widget.Button({
         label: 'Clear',
         onClicked: notifications.clear,
         sensitive: notifs.as(n => n.length > 0),
-      }
+      })
     ]),
     Content
   ],
