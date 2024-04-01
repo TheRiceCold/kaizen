@@ -11,17 +11,3 @@ window.sideright .quicksettings
     border-bottom: 1px solid transparentize($fg, 0.75)
   button.active
     background-color: $primary-fg
-
-  .slider-box
-    padding: $padding
-    button
-      @include button($flat: true)
-      padding: calc($padding * 0.5)
-
-    scale
-      @include slider
-      margin: 0 calc($spacing * 0.5)
-
-      &.muted highlight
-        background-image: none
-        background-color: transparentize($fg, $amount: 0.2)

@@ -1,0 +1,39 @@
+window.sideright .quicksettings .stack-list .audio-list 
+  label
+    font-size: 1.05em
+  .title
+    font-weight: 500
+    font-size: 1.15em
+    padding: $padding
+    margin: $spacing 0
+    border-bottom: 1px solid transparentize($fg, 0.75)
+
+  .slider-box
+    padding: $padding
+    button
+      @include button($flat: true)
+      padding: calc($padding * 0.5)
+
+    scale
+      @include slider
+      margin: 0 calc($spacing * 0.5)
+
+      &.muted highlight
+        background-image: none
+        background-color: transparentize($fg, $amount: 0.2)
+    
+  .sink-button   
+    @include button
+    padding: $padding
+    background-color: transparent
+    border-radius: calc($radius * 0.5)
+    label
+      margin-left: $spacing
+
+  .mixer-item
+    label:first-child
+      font-weight: 500
+      margin-left: calc($spacing * 0.5)
+      margin-bottom: calc($spacing * 0.25)
+    image
+      font-size: 28px

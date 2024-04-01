@@ -5,7 +5,7 @@ import options from 'options'
 // TODO: Add switch or toggle for enabling and disabling
 export default (
   label: string, 
-  buttons: Array<ButtonProps|SwitchProps>
+  buttons: Array<ButtonProps|SwitchProps> = []
 ) => Widget.Box({
   className: 'header',
   children: [

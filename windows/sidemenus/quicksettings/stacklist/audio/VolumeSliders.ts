@@ -1,47 +1,39 @@
-import { sorm, iconSubstitute } from './exports'
+import iconSubstitute from './iconSubstitute'
 
+type Type = 'microphone' | 'speaker'
 const audio = await Service.import('audio')
 
-const TypeIndicator = (type = 'sink') => Widget.Button({
-  onClicked: () => Utils.execAsync(`pactl set-${type}-mute @DEFAULT_${type.toUpperCase()}@ toggle`),
-  child: Widget.Icon().hook(audio, icon => {
-      if (audio[sorm(type)])
-        icon.icon = iconSubstitute(audio[sorm(type)].icon_name, type)
-    }, sorm(type) + '-changed')
+const Indicator = (type: Type = 'speaker') => Widget.Button({
+  vpack: 'center',
+  onClicked: () => audio[type].is_muted = !audio[type].is_muted,
+  child: Widget.Icon({
+    icon: audio[type].bind('icon_name').as((i: string) => iconSubstitute(i, type)),
+  }),
 })
 
-const VolumeSlider = (type = 'sink') => Widget.Slider({
+const Slider = (type: Type = 'speaker') => Widget.Slider({
   hexpand: true,
-  draw_value: false,
-  onChange: ({ value }) => audio[sorm(type)].volume = value,
-}).hook(audio, slider => {
-    if (!audio[sorm(type)])
-      return;
+  drawValue: false,
+  onChange: ({ value, dragging }) => {
+    if (dragging) {
+      audio[type].volume = value
+      audio[type].is_muted = false
+    }
+  },
+  value: audio[type].bind('volume'),
+  className: audio[type].bind('is_muted').as(m => m ? 'muted' : ''),
+})
 
-    slider.sensitive = !audio[sorm(type)]?.stream.is_muted
-    slider.value = audio[sorm(type)].volume
-  }, sorm(type) + '-changed')
+const Percent = (type: Type = 'speaker') => Widget.Label({
+  label: audio[type].bind('volume').as((v: number) => `${Math.floor(v * 100)}%`)
+})
 
-const PercentLabel = (type = 'sink') => Widget.Label({
-  className: 'audio-volume-label',
-}).hook(audio, label => {
-  if (audio[sorm(type)])
-    label.label = `${Math.floor(audio[sorm(type)].volume * 100)}%`
-}, sorm(type) + '-changed')
-
-const Volume = (type = 'sink') => Widget.Box({
+const Volume = (type: Type = 'speaker') => Widget.Box({
   className: 'slider-box',
-  children: [
-    TypeIndicator(type),
-    VolumeSlider(type),
-    PercentLabel(type)
-  ],
+  children: [ Indicator(type), Slider(type), Percent(type) ],
 })
 
 export default Widget.Box({
   vertical: true,
-  children: [
-    Volume('sink'),
-    Volume('source'),
-  ]
+  children: [ Volume('speaker'), Volume('microphone') ]
 })
