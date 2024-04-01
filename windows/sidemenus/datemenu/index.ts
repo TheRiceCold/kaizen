@@ -1,11 +1,10 @@
-import { type Props as RevealerProps } from 'types/widgets/label'
 import { type ButtonProps } from 'types/widgets/button'
 
 import timer from './timer'
 import weather from './weather'
+import MenuRevealer from '../MenuRevealer'
 
 import options from 'options'
-import { sidemenuShow } from 'lib/variables'
 
 const isActive = Variable('calendar')
 const stackItems = [
@@ -44,15 +43,4 @@ const Buttons = Widget.Box({
   .hook(isActive, (self: ButtonProps) => self.toggleClassName('active', isActive.value === self.label)))
 })
 
-export default Widget.Revealer({
-  transition: 'slide_down',
-  child: Widget.Box({
-    vertical: true,
-    className: 'datemenu',
-    children: [ Stack, Buttons ]
-  }),
-  transitionDuration: options.transition.value,
-})
-.hook(sidemenuShow.datemenu, (self: RevealerProps) => {
-  self.revealChild = sidemenuShow.datemenu.value
-})
+export default MenuRevealer('datemenu', [ Stack, Buttons ])
