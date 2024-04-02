@@ -21,7 +21,7 @@ const Slider = (type: Type = 'speaker') => Widget.Slider({
     }
   },
   value: audio[type].bind('volume'),
-  className: audio[type].bind('is_muted').as(m => m ? 'muted' : ''),
+  className: audio[type].bind('is_muted').as((m: boolean) => m ? 'muted' : ''),
 })
 
 const Percent = (type: Type = 'speaker') => Widget.Label({

@@ -2,7 +2,7 @@ import { type Stream } from 'types/service/audio'
 
 const audio = await Service.import('audio')
 
-const streamIconSubstiture = (stream: Stream) => {
+const streamIconSubstitute = (stream: Stream) => {
   const subs = {
     'spotify': 'spotify',
     'Firefox': 'firefox',
@@ -16,7 +16,7 @@ const MixerItem = (stream: Stream) => Widget.Box({
   children: [
     Widget.Icon({
       tooltipText: stream.bind('name').transform((name: string) => name || ''),
-      icon: stream.bind('icon_name').transform(() => streamIconSubstiture(stream)),
+      icon: stream.bind('icon_name').transform(() => streamIconSubstitute(stream)),
     }),
     Widget.Box({
       vertical: true,

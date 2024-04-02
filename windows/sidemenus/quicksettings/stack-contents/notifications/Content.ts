@@ -42,17 +42,19 @@ const NotificationList = () => {
     }
   }
 
-  return box.hook(notifications, remove, 'closed').hook(notifications, (_, id: number) => {
-    if (id !== undefined) {
-      if (map.has(id)) remove(null, id)
+  return box.hook(notifications, remove, 'closed').hook(
+    notifications, (_, id: number) => {
+      if (id !== undefined) {
+        if (map.has(id)) remove(null, id)
 
-      const n = notifications.getNotification(id)!
+        const n = notifications.getNotification(id)!
 
-      const w = Animated(n)
-      map.set(id, w)
-      box.children = [w, ...box.children]
-    }
-  }, 'notified')
+        const w = Animated(n)
+        map.set(id, w)
+        box.children = [w, ...box.children]
+      }
+    }, 'notified'
+  )
 }
 
 const Placeholder = Widget.Box({

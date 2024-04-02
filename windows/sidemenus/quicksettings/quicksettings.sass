@@ -1,13 +1,12 @@
 window.sideright .quicksettings
   min-height: 600px
   .control-buttons
-    padding: calc($padding * 2.5)
     padding-top: 0
+    padding: calc($padding * 2.5)
+    border-bottom: 1px solid transparentize($fg, 0.75)
     button
       @include button
       padding: $padding calc($padding * 1.5)
       image 
+        color: $fg
         font-size: 1.25em
-    border-bottom: 1px solid transparentize($fg, 0.75)
-  button.active
-    background-color: $primary-fg

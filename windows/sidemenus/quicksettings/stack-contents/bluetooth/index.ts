@@ -1,15 +1,21 @@
 import Header from '../Header'
+
 import { sh } from 'lib/utils'
+import { setupCursorHover } from 'misc/cursorhover'
 
 const bluetooth = await Service.import('bluetooth')
 
 const header = Header('Bluetooth', [
-  Widget.Switch({
-    active: !bluetooth.enabled,
-    onActivate: () => bluetooth.enabled = !bluetooth.enabled,
+  Widget.Button({
+    setup: setupCursorHover,
+    tooltipText: 'Click to toggle',
+    onClicked: () => bluetooth.enabled = !bluetooth.enabled,
+    label: bluetooth.bind('enabled').as((p: boolean) => `Status: ${p ? 'enabled' : 'disabled'}`),
   }),
+
   Widget.Button({
     label: 'Settings',
+    setup: setupCursorHover,
     onClicked: () => sh('blueman-manager')
   }) 
 ])
@@ -25,10 +31,15 @@ function Battery (device) {
 }
 
 const ToggleButton = device => Widget.ToggleButton({
+  hpack: 'end',
+  hexpand: true,
   active: device.connected,
   visible: device.bind('connecting').as((p: boolean) => !p),
-  label: device.bind('connected').as((c: boolean) => c ? 'Disconnect' : 'Connect'),
-  setup: (self) => self.on('notify::active', () => device.setConnection(self.active))
+  label: device.bind('connected').as((c: boolean) => c ? 'Connected' : 'Connect'),
+  setup (self) { 
+    setupCursorHover(self)
+    self.on('notify::active', () => device.setConnection(self.active))
+  }
 })
 
 const Item = device => Widget.Box({
@@ -37,8 +48,9 @@ const Item = device => Widget.Box({
     Widget.Icon(device.icon_name + '-symbolic'),
     Widget.Label({ label: device.name, className: 'name' }),
     Battery(device),
-    Widget.Box({ hexpand: true }),
     Widget.Spinner({
+      hpack: 'end',
+      hexpand: true,
       active: device.bind('connecting'),
       visible: device.bind('connecting'),
     }),

@@ -5,6 +5,7 @@ import SinkSelector from './SinkSelector'
 import VolumeSliders from './VolumeSliders'
 
 import { sh } from 'lib/utils'
+import { setupCursorHover } from 'misc/cursorhover'
 
 export default Widget.Box({
   vertical: true,
@@ -13,6 +14,7 @@ export default Widget.Box({
     Header('Volume', [ 
       Widget.Button({
         label: 'Settings',
+        setup: setupCursorHover,
         onClicked: () => sh('pavucontrol')
       }) 
     ]),

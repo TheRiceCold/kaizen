@@ -1,3 +1,4 @@
+import { type BoxProps } from 'types/widgets/box'
 import { notificationIcon } from 'lib/variables'
 import icons from 'data/icons'
 
@@ -6,8 +7,11 @@ import AudioList from './audio'
 import BluetoothList from './bluetooth'
 import NotificationList from './notifications'
 
-const { wifi } = await Service.import('network')
-const bluetooth = await Service.import('bluetooth')
+export type TStackItem = {
+  name: string,
+  icon: string,
+  content: BoxProps
+}
 
 export default [
   { 
@@ -18,12 +22,12 @@ export default [
   { 
     name: 'wifiList',
     content: WifiList,
-    icon: wifi.bind('icon_name'),
+    icon: 'network-wireless-symbolic' ,
   },
   { 
     name: 'bluetoothList',
     content: BluetoothList,
-    icon: bluetooth.bind('enabled').as((p: string) => icons.bluetooth[p ? 'enabled' : 'disabled']),
+    icon: icons.bluetooth.enabled,
   },
   { 
     name: 'audioList', 
