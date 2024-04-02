@@ -5,8 +5,12 @@ window.sideright .quicksettings .stack-list .audio-list
     font-weight: 500
     font-size: 1.15em
     padding: $padding
-    margin: $spacing 0
+    margin-top: $spacing
     border-bottom: 1px solid transparentize($fg, 0.75)
+  .sub-title
+    font-weight: 500
+    margin: calc($spacing * 0.5) 0
+    margin-left: calc($spacing * 0.5)
 
   .slider-box
     padding: $padding
@@ -31,6 +35,7 @@ window.sideright .quicksettings .stack-list .audio-list
       margin-left: $spacing
 
   .mixer-item
+    padding: $padding
     label:first-child
       font-weight: 500
       margin-left: calc($spacing * 0.5)

@@ -26,11 +26,9 @@ const SinkItem = (type: Type) => (stream: Stream) => Widget.Button({
   }),
 })
 
-const SinkSelector = (type: Type) => Widget.Box({ vertical: true })
-.hook(audio, box => {
+const SinkSelector = (type: Type) => Widget.Box({ vertical: true }).hook(audio, box => {
   box.children = Array.from(audio[`${type}s`].values()).map(SinkItem(type))
-}, 'stream-added')
-.hook(audio, box => {
+}, 'stream-added').hook(audio, box => {
   box.children = Array.from(audio[`${type}s`].values()).map(SinkItem(type))
 }, 'stream-removed')
 
@@ -42,7 +40,9 @@ export default Widget.Box({
       className: 'title',
       label: 'Sink Selector',
     }),
+    Widget.Label({ className: 'sub-title', label: 'Speakers', xalign: 0 }),
     SinkSelector('speaker'),
+    Widget.Label({ className: 'sub-title', label: 'Microphones', xalign: 0 }),
     SinkSelector('microphone'),
   ]
 })
