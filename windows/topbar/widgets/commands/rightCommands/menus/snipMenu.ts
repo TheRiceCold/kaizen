@@ -1,13 +1,11 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
 import { type ButtonProps } from 'types/widgets/button'
-import Menu from '../Menu'
-// import { sh } from 'lib/utils'
+import Menu from '../../Menu'
 
 const commands: MenuItemProps[] = [
   { label: 'Fullscreen', onActivate: () => { } },
   { label: 'Region', onActivate: () => { } },
-  { label: 'Audio', onActivate: () => { } },
   { label: 'Open Files', onActivate: () => { } },
 ]
 
-export const openRecordMenu = (self: ButtonProps) => Menu(self, commands)
+export default (self: ButtonProps) => Menu(self, commands)

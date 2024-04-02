@@ -1,7 +1,11 @@
 import Revealer from '../revealer'
 import ScreenTools from 'service/screen'
-import Colorpicker from 'service/colorpicker'
-import { openColorPickMenu } from './ColorPickMenu'
+import { 
+  openKeyMenu, 
+  openZoomMenu, 
+  openSnipMenu,
+  openRecordMenu, 
+} from './menus'
 
 const systemtray = await Service.import('systemtray')
 
@@ -16,20 +20,15 @@ const commands = [
       const gromit = systemtray.items.find(i => i.id === 'gromit-mpx')
     }
   },
-  { label: 'Zoom', onClicked: ScreenTools.zoom },
-  { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
-  { label: 'Keys' }, // TODO: implement using showmethekeys-cli
-
   {
-    label: 'Pick',
-    onClicked: Colorpicker.pick,
-    onSecondaryClick: openColorPickMenu,
+    label: 'Color',
   },
+  { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
 
-  // TODO: menu options
-  { label: 'Record ', onClicked: ScreenTools.record },
-  { label: 'Snip ', onClicked: ScreenTools.snip  },
-
+  { label: 'Keys ', onClicked: openKeyMenu },
+  { label: 'Zoom ', onClicked: openZoomMenu },
+  { label: 'Record ', onClicked: openRecordMenu },
+  { label: 'Snip ', onClicked: openSnipMenu },
 ]
 
 export default () => Revealer('left', commands)

@@ -1,5 +1,5 @@
 import { setupCursorHover } from 'misc/cursorhover'
-import { ButtonProps } from 'types/widgets/button'
+import { type ButtonProps } from 'types/widgets/button'
 
 type TProps = ButtonProps & {
   window?: string,
