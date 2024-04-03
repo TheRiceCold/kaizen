@@ -3,8 +3,8 @@ import { type ButtonProps } from 'types/widgets/button'
 import Menu from '../../Menu'
 
 const commands: MenuItemProps[] = [
-  { label: 'show keys', onActivate: () => {} }, // TODO: implement using showmethekeys-cli
-  { label: 'keyboard', onActivate: () => App.openWindow('osk') } ,
+  { label: 'Show keys', onActivate: () => {} }, // TODO: implement using showmethekeys-cli
+  { label: 'Keyboard', onActivate: () => App.toggleWindow('osk') } ,
 ]
 
 export default (self: ButtonProps) => Menu(self, commands)

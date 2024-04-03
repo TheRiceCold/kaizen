@@ -1,12 +1,13 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
 import { type ButtonProps } from 'types/widgets/button'
-import Menu from '../Menu'
+import Menu from '../../Menu'
 import { sh } from 'lib/utils'
 
 const dispatch = (cmd: string) => sh(`hyprctl dispatch ${cmd}`)
 
 const commands: MenuItemProps[] = [
-  { label: 'Fullscreen', onActivate: () => dispatch('fullscreen')},
+  { 
+    label: 'Fullscreen', onActivate: () => dispatch('fullscreen')},
   {
     label: 'Toggle float',
     onActivate: () => dispatch('togglefloating'),
@@ -16,4 +17,4 @@ const commands: MenuItemProps[] = [
   { label: 'Quit', onActivate: () => dispatch('killactive') },
 ]
 
-export const openWindowMenu = (self: ButtonProps) => Menu(self, commands)
+export default (self: ButtonProps) => Menu(self, commands)

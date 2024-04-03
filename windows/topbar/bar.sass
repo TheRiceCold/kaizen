@@ -2,8 +2,6 @@
   *
     font-weight: bold
 
-  separator
-    margin: 0 calc($spacing * 0.5)
 
   .side-items
     @include floating-widget
@@ -11,6 +9,7 @@
     padding: calc($padding * 0.5)
     margin: 0 calc($spacing * 0.75 * $hyprland-gaps-multiplier)
     margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
+
     .bar-button
       @include accs-button($flat: true)
       > *
@@ -30,11 +29,26 @@
       .charging
         color: #58D9BD
 
+    &:first-child // Left
+      .bar-button:first-child
+        margin-left: calc($spacing * 0.5)
+      separator
+        margin-left: calc($spacing * 0.5)
+    &:last-child // right
+      .bar-button:last-child
+        margin-right: calc($spacing * 0.5)
+      separator
+        margin-right: calc($spacing * 0.5)
+
 menu
   padding: 0
   border-radius: calc($radius * 0.5)
-  background-color: transparentize($bg, 0.5)
+  background-color: transparentize($bg, 0.25)
   menuitem
     label, image
       color: $fg
       font-weight: bold
+    &:hover
+      background: $primary-bg
+      label
+        color: $bg

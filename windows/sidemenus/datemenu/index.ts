@@ -3,6 +3,7 @@ import { type ButtonProps } from 'types/widgets/button'
 import timer from './timer'
 import weather from './weather'
 import MenuRevealer from '../MenuRevealer'
+import { setupCursorHover } from 'misc/cursorhover'
 
 import options from 'options'
 
@@ -35,6 +36,7 @@ const Buttons = Widget.Box({
   spacing: options.theme.spacing * 1.5,
   children: stackItems.map(item => Widget.Button({
     label: item.name,
+    setup: setupCursorHover,
     onClicked() {
       Stack.shown = item.name
       isActive.value = item.name

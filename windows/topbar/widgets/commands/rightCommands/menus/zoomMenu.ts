@@ -6,7 +6,7 @@ import { sh } from 'lib/utils'
 const zoom = (val: number | string = '') => sh(`pypr zoom ${val}`)
 
 const commands: MenuItemProps[] = [
-  { label: 'toggle', onActivate: () => zoom() },
+  { label: 'Toggle', onActivate: () => zoom() },
   { label: '3x', onActivate: () => zoom(3) } ,
   { label: '4x', onActivate: () => zoom(4) },
   { label: '5x', onActivate: () => zoom(5) },

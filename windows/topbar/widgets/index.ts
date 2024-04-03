@@ -2,9 +2,10 @@ import middle from './middle'
 import workspaces from './workspaces'
 
 import tray from './Tray'
-import control from './Control'
-import datemenu from './Datemenu'
-import launcher from './Launcher'
+import DateButton from './DateButton'
+import PowerButton from './PowerButton'
+import ControlButton from './ControlButton'
+import LauncherButton from './LauncherButton'
 
 // Command Revealers
 import leftCommands from './commands/leftCommands'
@@ -13,9 +14,12 @@ import rightCommands from './commands/rightCommands'
 export default {
   tray,
   middle,
-  control,
-  launcher,
-  datemenu,
+
+  date: DateButton,
+  power: PowerButton,
+  control: ControlButton,
+  launcher: LauncherButton,
+
   workspaces,
   leftCommands,
   rightCommands,

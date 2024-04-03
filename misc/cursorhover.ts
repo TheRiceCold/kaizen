@@ -1,4 +1,4 @@
-import { ButtonProps } from 'types/widgets/button'
+import { type ButtonProps } from 'types/widgets/button'
 const { Gdk } = imports.gi
 
 export function setupCursorHover(btn: ButtonProps) { // Hand pointing cursor on hover

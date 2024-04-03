@@ -7,7 +7,7 @@ export default {
   position: opt<'top' | 'bottom'>('top'),
   layout: {
     start: opt<BarWidget[]>([ 'launcher', 'workspaces', ]),
-    end: opt<BarWidget[]>([ 'tray', 'control', 'datemenu' ]),
+    end: opt<BarWidget[]>([ 'tray', 'control', 'date', 'power' ]),
   },
   tray: {
     ignore: opt([ 'KDE Connect Indicator' ]),
@@ -33,6 +33,9 @@ export default {
     },
     action: opt(() => App.toggleWindow('launcher')),
     label: { colored: opt(true), label: opt(''), },
+  },
+  power: {
+    action: opt(() => App.toggleWindow('powermenu')),
   },
   workspaces: {
     label: opt('Workspace: '),
