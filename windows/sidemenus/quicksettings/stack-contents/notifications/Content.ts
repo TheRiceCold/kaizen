@@ -74,6 +74,7 @@ const Placeholder = Widget.Box({
 export default Widget.Scrollable({
   vexpand: true,
   hscroll: 'never',
+  vscroll: 'automatic',
   className: 'notification-scrollable',
   child: Widget.Box({
     className: 'notification-list vertical',

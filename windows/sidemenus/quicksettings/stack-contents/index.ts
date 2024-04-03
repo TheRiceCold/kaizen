@@ -4,6 +4,7 @@ import icons from 'data/icons'
 
 import WifiList from './wifi'
 import AudioList from './audio'
+import DisplayOptions from './display'
 import BluetoothList from './bluetooth'
 import NotificationList from './notifications'
 
@@ -17,7 +18,7 @@ export default [
   { 
     name: 'notificationList', 
     content: NotificationList,  
-    icon: notificationIcon,
+    icon: 'notification-symbolic',
   },
   { 
     name: 'wifiList',
@@ -33,5 +34,10 @@ export default [
     name: 'audioList', 
     content: AudioList,
     icon: icons.audio.type.speaker,
+  },
+  {
+    name: 'displayOptions',
+    content: DisplayOptions,
+    icon: 'computer-symbolic',
   }
 ]

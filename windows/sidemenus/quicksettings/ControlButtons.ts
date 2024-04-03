@@ -7,7 +7,7 @@ import options from 'options'
 import icons from 'data/icons'
 
 import { Stack } from '.'
-import stackContents, { type TStackItem } from './stack-contents'
+import stackContents from './stack-contents'
 
 const isActive = Variable('notificationList')
 
@@ -35,7 +35,7 @@ export default Widget.Box({
     hexpand: true,
     spacing: options.theme.spacing,
     children: stackContents.map(
-      (item: TStackItem) => StackButton(item.name, item.icon)
+      (item: TStack) => StackButton(item.name, item.icon)
     ).concat([
       Widget.Box({ hexpand: true }),
       EndButton(icons.ui.lock, () => sh('hyprlock')),
