@@ -21,7 +21,7 @@ const Battery = Widget.Box({
   visible: battery.bind('available'),
   children: [
     Widget.Icon({ icon: battery.bind('icon_name') }),
-    Widget.Label({ label: battery.bind('percent').as((p: string) => ` ${p}%`) })
+    Widget.Label({ label: battery.bind('percent').as((p: number) => ` ${p.toFixed()}%`) })
   ]
 })
 

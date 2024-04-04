@@ -1,6 +1,16 @@
 window.sideright .quicksettings .profile
   padding: calc($padding * 3.5)
+  padding-bottom: 0
   .avatar 
+    border-radius: $radius
+
+    .file-choose button // HACK: hides everything inside filechooserbutton
+      background-color: transparent
+      box
+        border: 0
+        padding: 99px
+        background-color: transparent
+
     box
       border-radius: $radius
       background: $primary-bg

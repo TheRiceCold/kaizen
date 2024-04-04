@@ -15,7 +15,7 @@ export default items => {
     const Progress = Widget.CircularProgress({
       value: obj.type.bind(),
       className: 'progress',
-      child: Widget.Label(obj.icon),
+      child: Widget.Icon(obj.icon),
     })
 
     return Widget.EventBox({

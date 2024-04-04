@@ -7,8 +7,18 @@ const { image, size } = options.sideright.profile.avatar
 const ChangeButtonRevealer = Widget.Revealer({ child: Widget.Icon(icons.ui.camera) })
 
 export default Widget.EventBox({
-  className: 'avatar',
+  setup: setupCursorHover,
   child: Widget.Overlay({
+    className: 'avatar',
+    overlays: [ 
+      ChangeButtonRevealer, 
+      Widget.FileChooserButton({ 
+        className: 'file-choose',
+        onFileSet: ({ uri }) => { 
+          image.value = uri!.replace('file://', '') as T
+        }
+      }) 
+    ],
     child: Widget.Box({
       css: Utils.merge(
         [ image.bind(), size.bind() ], (img: string, size: number) => `
@@ -17,12 +27,7 @@ export default Widget.EventBox({
         background-image: url('${img}');
         background-size: cover;`),
     }),
-    overlay: ChangeButtonRevealer,
   }),
-  setup: setupCursorHover,
   onHover: () => ChangeButtonRevealer.revealChild = true,
   onHoverLost: () => ChangeButtonRevealer.revealChild = false,
-  onPrimaryClick: () => { 
-    // TODO: Open FileChooser
-  }
 })
