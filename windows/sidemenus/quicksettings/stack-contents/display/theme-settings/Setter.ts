@@ -47,7 +47,7 @@ export default function Setter<T>({
         self.hook(opt, () => self.value = opt.value as number)
       },
     })
-    case 'float': case "object": return Widget.Entry({
+    case 'float': case 'object': return Widget.Entry({
       onAccept: self => opt.value = JSON.parse(self.text || ''),
       setup: self => self.hook(opt, () => self.text = JSON.stringify(opt.value)),
     })
@@ -56,9 +56,13 @@ export default function Setter<T>({
       setup: self => self.hook(opt, () => self.text = opt.value as string),
     })
     case 'enum': return EnumSetter(opt as unknown as Opt<string>, enums!)
-    case 'boolean': return Widget.Switch({ setup: setupCursorHover })
+    case 'boolean': return Widget.ToggleButton({ setup: setupCursorHover })
       .on('notify::active', self => opt.value = self.active as T)
-      .hook(opt, self => self.active = opt.value as boolean)
+      .hook(opt, self => {
+        const val = opt.value as boolean
+        self.active = val
+        self.label = val ? 'enabled' : 'disabled'
+      })
 
     case 'img': return Widget.FileChooserButton({
       setup: setupCursorHover,

@@ -5,13 +5,11 @@ import options from 'options'
 export default (
   label: string, 
   buttons: Array<ButtonProps|SwitchProps> = []
-) => Widget.Box({
-  className: 'header',
-  children: [
-    Widget.Label({ label, hexpand: true, xalign: 0 }),
-    Widget.Box({
-      children: buttons,
-      spacing: options.theme.spacing * 0.75,
-    })
-  ],
-})
+) => Widget.Box(
+  { className: 'header' },
+  Widget.Label({ label, hexpand: true, xalign: 0 }),
+  Widget.Box({
+    children: buttons,
+    spacing: options.theme.spacing * 0.75,
+  })
+)

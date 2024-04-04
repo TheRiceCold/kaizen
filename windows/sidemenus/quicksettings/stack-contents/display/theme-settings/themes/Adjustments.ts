@@ -3,14 +3,10 @@ import ListRevealer from './ListRevealer'
 
 import options from 'options'
 
-const { font, theme: { 
-  blur, border,
-  widget, radius,
-} } = options
+const { blur, border, widget, radius } = options.theme
 
 export default ListRevealer('Adjustments', Widget.Box(
   { vertical: true },
-  Item('Font', { opt: font.default.name, type: 'font' }),
   Item('Border', { opt: border.width }),
   Item('Roundness', { opt: radius }),
   Item('Blur', { opt: blur, max: 50 }),

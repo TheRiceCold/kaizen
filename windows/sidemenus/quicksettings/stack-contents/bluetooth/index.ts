@@ -42,27 +42,23 @@ const ToggleButton = device => Widget.ToggleButton({
   }
 })
 
-const Item = device => Widget.Box({
-  className: 'device-item',
-  children: [
-    Widget.Icon(device.icon_name + '-symbolic'),
-    Widget.Label({ label: device.name, className: 'name' }),
-    Battery(device),
-    Widget.Spinner({
-      hpack: 'end',
-      hexpand: true,
-      active: device.bind('connecting'),
-      visible: device.bind('connecting'),
-    }),
-    ToggleButton(device)
-  ]
-})
+const Item = device => Widget.Box(
+  { className: 'device-item' },
+  Widget.Icon(device.icon_name + '-symbolic'),
+  Widget.Label({ label: device.name, className: 'name' }),
+  Battery(device),
+  Widget.Spinner({
+    hpack: 'end',
+    hexpand: true,
+    active: device.bind('connecting'),
+    visible: device.bind('connecting'),
+  }),
+  ToggleButton(device)
+)
 
 const list = Widget.Box({
   vertical: true,
-  children: bluetooth.bind('devices').as(
-    ds => ds.filter(d => d.name).map(Item)
-  ),
+  children: bluetooth.bind('devices').as(ds => ds.filter(d => d.name).map(Item)),
 })
 
 export default Widget.Box({

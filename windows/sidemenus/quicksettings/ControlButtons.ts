@@ -16,11 +16,11 @@ const StackButton = (stackName: string, icon: string) => Widget.Button({
   },
 }).hook(isActive, (self: ButtonProps) => self.toggleClassName('active', isActive.value === stackName))
 
-export default Widget.Box({
-  className: 'control-buttons',
-  child: Widget.Box({ 
+export default Widget.Box(
+  { className: 'control-buttons' },
+  Widget.Box({ 
     hexpand: true,
     hpack: 'center',
     children: stackContents.map((item: TStack) => StackButton(item.name, item.icon))
   })
-})
+)

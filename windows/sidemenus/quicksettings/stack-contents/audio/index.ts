@@ -18,9 +18,6 @@ export default Widget.Box({
         onClicked: () => sh('pavucontrol')
       }) 
     ]),
-    Widget.Box({
-      vertical: true,
-      children: [ VolumeSliders, AppMixer, SinkSelector ]
-    })
+    Widget.Box({ vertical: true, }, VolumeSliders, AppMixer, SinkSelector)
   ],
 })
