@@ -8,21 +8,15 @@ import { setupCursorHover } from 'misc/cursorhover'
 
 const { scheme } = options.theme
 
-export default Widget.Box({
-  vertical: true,
-  className: 'display-options',
-  children: [ 
-    Header('Display Options',[
-      Widget.Button({
-        setup: setupCursorHover,
-        tooltipText: 'Click to toggle',
-        label: scheme.bind().as((s: string) => `Color mode: ${s}`),
-        onClicked: () => scheme.value = (scheme.value === 'dark') ? 'light' : 'dark',
-      }),
-    ]),
-    Widget.Box({ 
-      vertical: true, 
-      children: [ Brightness, ThemeSettings ]
-    })
-  ],
-})
+export default Widget.Box(
+  { vertical: true, className: 'display-options' },
+  Header('Display Options',[
+    Widget.Button({
+      setup: setupCursorHover,
+      tooltipText: 'Click to toggle',
+      label: scheme.bind().as((s: string) => `Color mode: ${s}`),
+      onClicked: () => scheme.value = (scheme.value === 'dark') ? 'light' : 'dark',
+    }),
+  ]),
+  Widget.Box({ vertical: true }, Brightness, ThemeSettings)
+)

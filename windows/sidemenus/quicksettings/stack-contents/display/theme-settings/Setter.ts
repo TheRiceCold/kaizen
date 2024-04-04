@@ -76,7 +76,10 @@ export default function Setter<T>({
       }
     })
 
-    case 'color': return Widget.ColorButton().hook(opt, self => {
+    case 'color': return Widget.ColorButton({
+      setup: setupCursorHover,
+      className: 'color-button',
+    }).hook(opt, self => {
       const rgba = new Gdk.RGBA()
       rgba.parse(opt.value as string)
       self.rgba = rgba

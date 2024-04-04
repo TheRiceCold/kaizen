@@ -12,11 +12,9 @@ const Percent = Widget.Label({
   label: brightness.bind('screen').as((v: number) => `${Math.floor(v * 100)}%`)
 })
 
-export default Widget.Box({
-  className: 'slider-box',
-  children: [
-    Widget.Icon(icons.brightness.indicator),
-    BrightnessSlider,
-    Percent
-  ]
-})
+export default Widget.Box(
+  { className: 'slider-box' },
+  Widget.Icon(icons.brightness.indicator),
+  BrightnessSlider,
+  Percent
+)

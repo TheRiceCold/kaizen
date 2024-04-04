@@ -1,0 +1,29 @@
+window.sideright .quicksettings .stack-list 
+  .display-options .theme-settings .themes-stack
+    .item
+      margin-left: calc($spacing * 2)
+    .list-button
+      all: unset
+      font-weight: 500
+      padding: $padding
+      background-color: transparent
+      margin: ($spacing * 0.25) $spacing
+      border-bottom: 1px solid transparentize($fg, 0.75)
+      &:hover
+        background: none
+        label, image
+          color: $primary-bg
+      label
+        font-size: 1.15em
+
+    .theme-button
+      all: unset
+      margin: ($spacing * 0.25) $spacing
+      border-radius: calc($radius * 0.5)
+      label
+        font-weight: 500
+        padding: calc($padding * 2)
+
+    .color-button
+      padding: 3px 0
+      background-color: transparent
