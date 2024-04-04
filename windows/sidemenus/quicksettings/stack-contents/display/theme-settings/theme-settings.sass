@@ -1,0 +1,45 @@
+window.sideright .quicksettings .stack-list .display-options .theme-settings
+  button
+    @include button
+    padding: calc($padding * 1)
+  entry
+    background: transparentize($bg, 0.5)
+    + button
+      margin: 0 2px 
+      border-radius: calc($radius * 0.25)
+      background: transparentize($bg, 0.5)
+      + button
+        border-radius: calc($radius * 0.25)
+        background: transparentize($bg, 0.5)
+
+  .wallpaper
+    padding: $padding
+    margin: calc($spacing * 0.25) $spacing
+    label
+      font-weight: 500
+      font-size: 1.05em
+    button
+      @include button
+      margin-top: $spacing
+      margin-right: $spacing
+      padding: calc($padding * 1.5)
+      label
+        font-weight: 500
+    .preview
+      border-radius: calc($radius * 0.75)
+
+  .title
+    margin: $spacing
+    margin-bottom: calc($spacing * 0.5)
+    label, image
+      font-size: 1.05em
+    button
+      @include button
+      padding: $padding
+
+  .item
+    margin: calc($spacing * 0.15) $spacing
+    padding: calc($padding * 0.5)
+    label
+      font-weight: 500
+      font-size: 1.05em

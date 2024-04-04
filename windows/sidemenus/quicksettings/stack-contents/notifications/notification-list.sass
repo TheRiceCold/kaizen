@@ -1,13 +1,10 @@
 window.sideright .quicksettings .notifications
   .notification-scrollable
-      @include scrollable($top: true, $bottom: true)
-
-  .notification-list
-    margin-right: $spacing
+    @include scrollable($top: true, $bottom: true)
 
   .notification
-    @include notification
     @include widget
+    @include notification
     padding: $padding
     margin-bottom: $spacing
 

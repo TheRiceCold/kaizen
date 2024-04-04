@@ -1,7 +1,6 @@
-import { Title } from '.'
+import { Title } from '..'
 
 import options from 'options'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const { theme: { blur, border, radius }, font } = options
 

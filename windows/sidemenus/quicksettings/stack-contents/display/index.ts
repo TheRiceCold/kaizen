@@ -1,7 +1,6 @@
 import Header from '../Header'
 import Brightness from './Brightness'
 
-import ThemeList from './ThemeList'
 import ThemeSettings from './theme-settings'
 
 import options from 'options'
@@ -23,7 +22,7 @@ export default Widget.Box({
     ]),
     Widget.Box({ 
       vertical: true, 
-      children: [ Brightness, ThemeSettings, ThemeList ]
+      children: [ Brightness, ThemeSettings ]
     })
   ],
 })

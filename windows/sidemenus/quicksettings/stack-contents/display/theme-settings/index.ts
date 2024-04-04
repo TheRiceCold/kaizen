@@ -1,5 +1,6 @@
-import general from './General'
-import colorschemes from './Colorschemes'
+import Setter from './Setter'
+import general from './general'
+import colorschemes from './colorschemes'
 
 import icons from 'data/icons'
 import { setupCursorHover } from 'misc/cursorhover'
@@ -27,16 +28,23 @@ export function Title (label: string, dir: 'left' | 'right', gotoStack: string) 
   })
 }
 
-export function Item(label: string, children) {
+export function Item(label: string, props) {
   return Widget.Box({
     className: 'item',
     children: [ 
       Widget.Label(label),
       Widget.Box({
-        children,
+        child: Setter(props),
         hpack: 'end',
         hexpand: true,
-      })
+      }),
+      Widget.Button({
+        vpack: 'center',
+        className: 'reset',
+        onClicked: () => props.opt.reset(),
+        child: Widget.Icon(icons.ui.refresh),
+        sensitive: props.opt.bind().as(v => v !== props.opt.initial),
+      }),
     ]
   })
 } 
