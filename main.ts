@@ -3,11 +3,11 @@ import 'style/style'
 import init from 'lib/init'
 
 import { forMonitors } from 'lib/utils'
-import { TopBar, Centered, Dialogs, Popups, SideMenus } from 'windows'
+import { TopBar, Centered, Popups, SideMenus } from 'windows'
 
 App.config({ 
   windows: [ ...forMonitors(TopBar) ].concat(
-    Centered, Dialogs, Popups, SideMenus
+    Popups, Centered, SideMenus
   ),
   onConfigParsed: init,
 })

@@ -10,6 +10,7 @@ import options from 'options'
 const isActive = Variable('calendar')
 const stackItems = [
   { 
+    // TODO: replace with better design
     name: 'calendar' , 
     content: Widget.Box({
       className: 'calendar',

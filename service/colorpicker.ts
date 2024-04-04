@@ -4,6 +4,7 @@ import { bash, dependencies } from 'lib/utils'
 const COLORS_CACHE = Utils.CACHE_DIR + '/colorpicker.json'
 const MAX_NUM_COLORS = 10
 
+// FIX: Broken service
 class ColorPicker extends Service {
   static {
     Service.register(this, {}, { colors: ['jsobject'] })
@@ -41,9 +42,9 @@ class ColorPicker extends Service {
     }
 
     this.#notifID = Utils.notify({
+      summary: color,
       id: this.#notifID,
       iconName: icons.ui.colorpicker,
-      summary: color,
     })
   }
 }

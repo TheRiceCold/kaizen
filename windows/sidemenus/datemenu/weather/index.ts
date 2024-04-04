@@ -6,19 +6,16 @@ const currentCondition = Weather.bind('current_condition')
 
 const Region = Widget.Label({ className: 'region', label: Weather.bind('region') })
 
-const Temp = Widget.Box({ 
-  hpack: 'center', 
-  className: 'temp',
-  children: [ 
-    Widget.Label({
-      hpack: 'start',
-      vpack: 'center',
-      truncate: 'end',
-      label: currentCondition.as(c => !!c['temp_C'] ? c['temp_C'] + '°C' : 'Wait...')
-    }),
-    Widget.Icon({ className: 'icon', icon: Weather.bind('icon') })
-  ] 
-})
+const Temp = Widget.Box(
+  { hpack: 'center', className: 'temp' },
+  Widget.Label({
+    hpack: 'start',
+    vpack: 'center',
+    truncate: 'end',
+    label: currentCondition.as(c => !!c['temp_C'] ? c['temp_C'] + '°C' : 'Wait...')
+  }),
+  Widget.Icon({ className: 'icon', icon: Weather.bind('icon') })
+)
 
 const Description = Widget.Label({ 
   className: 'description',
@@ -34,14 +31,12 @@ function CurrentCondition() {
     ]
   })
 
-  return Widget.Box({
-    spacing: options.theme.spacing,
-    children: [
-      Label('Wind', currentCondition.as(c => `${c.windspeedKmph}km/h`)),
-      Label('Humidity', currentCondition.as(c => `${c.humidity}%`)),
-      Label('Feels Like', currentCondition.as(c => `${c.FeelsLikeC}°C`)),
-    ]
-  })
+  return Widget.Box(
+    { spacing: options.theme.spacing },
+    Label('Wind', currentCondition.as(c => `${c.windspeedKmph}km/h`)),
+    Label('Humidity', currentCondition.as(c => `${c.humidity}%`)),
+    Label('Feels Like', currentCondition.as(c => `${c.FeelsLikeC}°C`)),
+  )
 }
 
 const Today = Widget.Box({
