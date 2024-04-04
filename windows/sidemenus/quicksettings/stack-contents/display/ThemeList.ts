@@ -32,9 +32,8 @@ export default Widget.Box({
       setup: setupCursorHover,
       className: 'list-button',
       child: Widget.Box([
-        Widget.Label({ xalign: 0, label: 'Themes' }),
-        Widget.Box({ hexpand: true }),
-        Widget.Icon(icons.ui.arrow.down),
+        Widget.Label({ xalign: 0, label: 'Custom Themes' }),
+        Widget.Icon({ hexpand: true, hpack: 'end', icon: icons.ui.arrow.down }),
       ]),
       onClicked: () => ThemeList.revealChild = !ThemeList.revealChild
     }),

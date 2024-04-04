@@ -1,6 +1,8 @@
 window.sideright .quicksettings .stack-list .display-options
   .slider-box
     margin: $spacing
+    margin-bottom: 0
+
   .list-button
     border: 0
     font-weight: 500
@@ -14,6 +16,22 @@ window.sideright .quicksettings .stack-list .display-options
         color: $primary-bg
     label
       font-size: 1.15em
+
+  .theme-settings
+    .title
+      margin: $spacing
+      margin-bottom: calc($spacing * 0.5)
+      label, image
+        font-size: 1.05em
+      button
+        @include button
+        padding: $padding
+
+    .item
+      margin-left: $spacing
+      padding: calc($padding * 0.5)
+      label
+        font-size: 1.05em
 
   .theme-list
     margin-top: calc($spacing * 0.5)
