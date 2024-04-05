@@ -22,6 +22,7 @@ export default Widget.Box({
 
       Widget.Button({
         label: 'Clear',
+        setup: setupCursorHover,
         onClicked: notifications.clear,
         visible: notifs.as(n => n.length > 0),
       })

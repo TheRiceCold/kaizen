@@ -10,7 +10,7 @@ export const Stack = Widget.Stack({
   children: stackContents.reduce((acc, item: TStackItem) => {
     acc[item.name] = item.content
     return acc
-  }, {})
+  }, {}),
 })
 
 export default MenuRevealer(

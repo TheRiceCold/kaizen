@@ -26,8 +26,8 @@ export default () => Widget.Box(
   Widget.Box({
     className: 'preview',
     css: wallpaper.bind('wallpaper').as((wp: string) => `
-      min-height: 75px;
-      min-width: 135px;
+      min-height: 80px;
+      min-width: 140px;
       background: url('${wp}');
       background-size: contain, cover;
     `),
