@@ -8,7 +8,7 @@ import { dependencies, sh } from 'lib/utils'
 const { 
   font, autotheme,
   theme: { shadows }, 
-  hyprland: { shade, gapsWhenOnly },
+  hyprland: { shader, gapsWhenOnly },
 } = options
 
 export default Widget.Box(
@@ -19,10 +19,27 @@ export default Widget.Box(
   Item('Auto generate colorscheme', { opt: autotheme }),
   Item('Shadows', { opt: shadows }),
   Item('Gaps when only', { opt: gapsWhenOnly }),
-  Item('Blue light filter', { opt: shade.blueLight })
-    .hook(shade.blueLight, (self: BoxProps) => {
+  Item('Screen Shader', { 
+    opt: shader, 
+    type: 'enum', 
+    enums: [ 'default', 'blue light', 'grayscale', 'invert' ] 
+  })
+    .hook(shader, (self: BoxProps) => {
       if (!dependencies('hyprshade')) { self.visible = false; return }
-      sh(`hyprshade ${shade.blueLight.value ? 'on blue-light-filter' : 'off'}`)
+      switch(shader.value) {
+        case 'grayscale':
+          sh('hyprshade on grayscale')
+          break
+        case 'invert':
+          sh('hyprshade on invert-colors')
+          break
+        case 'blue light':
+          sh('hyprshade on blue-light-filter')
+          break
+        default:
+          sh('hyprshade off') 
+          break
+      }
     }),
   Item('Font', { opt: font.default.name, type: 'font' }),
   Item('Font Size', { opt: font.default.size }),

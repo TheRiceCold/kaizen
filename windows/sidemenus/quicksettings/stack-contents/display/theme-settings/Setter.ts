@@ -15,13 +15,15 @@ function EnumSetter(opt: Opt<string>, values: string[]) {
   }
 
   const next = Widget.Button({
-    child: Widget.Icon(icons.ui.arrow.right),
+    setup: setupCursorHover,
     onClicked: () => step(+1),
+    child: Widget.Icon(icons.ui.arrow.right),
   })
 
   const prev = Widget.Button({
-    child: Widget.Icon(icons.ui.arrow.left),
+    setup: setupCursorHover,
     onClicked: () => step(-1),
+    child: Widget.Icon(icons.ui.arrow.left),
   })
 
   return Widget.Box({

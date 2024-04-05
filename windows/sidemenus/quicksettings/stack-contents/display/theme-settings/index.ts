@@ -31,9 +31,9 @@ export function Item(label: string, props) {
     { className: 'item' },
     Widget.Label(label),
     Widget.Box({
-      child: Setter(props),
       hpack: 'end',
       hexpand: true,
+      child: Setter(props),
     }),
     Widget.Button({
       vpack: 'center',
