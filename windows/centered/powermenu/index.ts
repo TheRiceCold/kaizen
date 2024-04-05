@@ -3,19 +3,18 @@ import RevealerWindow from 'windows/RevealerWindow'
 import powermenu, { type Action } from 'service/powermenu'
 import icons from 'data/icons'
 import options from 'options'
+import { setupCursorHover } from 'misc/cursorhover'
 
 const { layout, labels } = options.powermenu
 
 const SysButton = (action: Action, label: string) => Widget.Button({
+  setup: setupCursorHover,
   onClicked: () => powermenu.action(action),
-  child: Widget.Box({
-    vertical: true,
-    className: 'system-button',
-    children: [
-      Widget.Icon(icons.powermenu[action]),
-      Widget.Label({ label, visible: labels.bind() }),
-    ],
-  }),
+  child: Widget.Box(
+    { vertical: true, className: 'system-button' },
+    Widget.Icon(icons.powermenu[action]),
+    Widget.Label({ label, visible: labels.bind() }),
+  ),
 })
 
 export default RevealerWindow({

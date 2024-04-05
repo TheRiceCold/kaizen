@@ -1,6 +1,9 @@
 // the fraction has to be more than hyprland ignorealpha
+// window#powermenu, window#verification
+  // background-color: rgba(0, 0, 0, 0.4)
+
 window#powermenu, window#verification
-  background-color: rgba(0, 0, 0, 0.4)
+  background-color: transparentize($primary-fg, 0.85)
 
 window#verification .verification
   @include floating-widget
@@ -29,7 +32,6 @@ window#verification .verification
 
 window#powermenu .powermenu
   @include floating-widget
-
   &.line
     padding: calc($popover-padding * 1.5)
 
