@@ -11,6 +11,7 @@ const commands = [
   { label: 'Terminal ', onClicked: openTerminalMenu },
   { label: 'Dev Tools ', onClicked: openDevsMenu },
   { label: 'Shortcuts', onClicked: () => App.openWindow('shortcuts') },
+  { label: 'Help', onClicked: () =>  { }}, // TODO: Create documentation
 ]
 
 export default () => Revealer('right', commands)

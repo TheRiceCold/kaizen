@@ -89,18 +89,19 @@ const expandTilde = (path: string) =>
 
 const capitalize = (word: string) => word.charAt(0).toUpperCase() + word.slice(1)
 
+const clamp = (x: number, min: number, max: number) => Math.min(Math.max(x, min), max)
+
 export {
-  config,
   icon,
   bash,
   sh,
   range,
   forMonitors,
-  wait,
   dependencies,
   launchApp,
   createSurfaceFromWidget,
   fileExists,
   expandTilde,
   capitalize,
+  clamp,
 }

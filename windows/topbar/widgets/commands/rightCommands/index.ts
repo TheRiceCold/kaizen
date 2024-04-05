@@ -4,6 +4,7 @@ import {
   openKeyMenu, 
   openZoomMenu, 
   openSnipMenu,
+  openColorMenu,
   openRecordMenu, 
 } from './menus'
 
@@ -20,13 +21,11 @@ const commands = [
       const gromit = systemtray.items.find(i => i.id === 'gromit-mpx')
     }
   },
-  {
-    label: 'Color',
-  },
   { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
 
   { label: 'Keys ', onClicked: openKeyMenu },
   { label: 'Zoom ', onClicked: openZoomMenu },
+  { label: 'Color ', onClicked: openColorMenu },
   { label: 'Record ', onClicked: openRecordMenu },
   { label: 'Snip ', onClicked: openSnipMenu },
 ]
