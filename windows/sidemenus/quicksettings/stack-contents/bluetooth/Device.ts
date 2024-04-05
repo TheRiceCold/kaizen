@@ -23,11 +23,10 @@ const ToggleButton = (device: TDevice) => Widget.ToggleButton({
     setupCursorHover(self)
     self.on('notify::active', () => device.setConnection(self.active))
   },
+  sensitive: bluetooth.bind('enabled'),
+  visible: device.bind('connecting').as((p: boolean) => !p),
   label: device.bind('connected').as((c: boolean) => c ? 'Connected' : 'Connect'),
-  visible: Utils.merge([
-    bluetooth.bind('enabled'),
-    device.bind('connecting'),
-  ], (enabled: boolean, connecting: boolean) => enabled && !connecting),
+  tooltipText: bluetooth.bind('enabled').as((p: boolean) => p ? '' : 'Bluetooth is disabled'),
 })
 
 

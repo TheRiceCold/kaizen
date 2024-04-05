@@ -28,12 +28,10 @@ const Percent = (type: Type = 'speaker') => Widget.Label({
   label: audio[type].bind('volume').as((v: number) => `${Math.floor(v * 100)}%`)
 })
 
-const Volume = (type: Type = 'speaker') => Widget.Box({
-  className: 'slider-box',
-  children: [ Indicator(type), Slider(type), Percent(type) ],
-})
+const Volume = (type: Type = 'speaker') => Widget.Box(
+  { className: 'slider-box' },
+  Indicator(type), Slider(type), Percent(type)
+)
 
-export default Widget.Box({
-  vertical: true,
-  children: [ Volume('speaker'), Volume('microphone') ]
-})
+export default Widget.Box({ vertical: true }, Volume('speaker'), Volume('microphone')
+)

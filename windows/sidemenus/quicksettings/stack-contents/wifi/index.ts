@@ -7,17 +7,29 @@ import { setupCursorHover } from 'misc/cursorhover'
 
 const { wifi } = await Service.import('network')
 
+type TWifi = {
+  bssid: string,
+  address: string,
+  lastSeen: number,
+  ssid: string,
+  active: boolean,
+  strength: number,
+  frequency: number,
+  iconName: string
+}
+
 const header = Header('Wifi', [ 
   Widget.Button({
     label: 'Settings',
     setup: setupCursorHover,
-    onClicked: () => { },
+    onClicked: () => { }, // TODO: Open wifi settings
   })
 ])
 
-const item = ap => Widget.Button({
+const item = (ap: TWifi) => Widget.Button({
   className: 'wifi-item',
   setup: setupCursorHover,
+  tooltipText: 'Click to connect',
   onClicked: () => {
     if (dependencies('nmcli'))
       sh(`nmcli device wifi connect ${ap.bssid}`)

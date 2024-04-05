@@ -1,7 +1,9 @@
 .bar .media
-  border-bottom-left-radius: $radius
+  border: $border-width solid transparentize($fg, 0.75)
   border-bottom-right-radius: $radius
-  background: transparentize($primary-fg, 0.5)
+  border-bottom-left-radius: $radius
+  border-top: 0
+  background-color: transparentize($bg, 0.25)
   revealer
     padding: $padding calc($padding * 2.5)
   .progress
@@ -13,6 +15,7 @@
     image
       font-size: 0.75rem
   .text
+    color: $fg
     padding: calc($padding * 1.25)
     margin-left: calc($spacing * 0.75)
   .visualizer

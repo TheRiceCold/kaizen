@@ -9,15 +9,13 @@ const WeatherDay = (
   icon: string, 
   temp: string, 
   maxTemp: string
-) => Widget.Box({
-  vpack: 'center',
-  children: [
-    Widget.Label({ className: 'day', label: day }),
-    Widget.Icon({ icon }), 
-    Widget.Label({ className: 'temp', label: temp }), 
-    Widget.Label(maxTemp)
-  ]
-})
+) => Widget.Box(
+  { vpack: 'center' },
+  Widget.Label({ className: 'day', label: day }),
+  Widget.Icon({ icon }), 
+  Widget.Label({ className: 'temp', label: temp }), 
+  Widget.Label(maxTemp)
+)
 
 type TForecastDay = {
   maxtemp_c: number
