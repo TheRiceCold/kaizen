@@ -34,19 +34,29 @@ const notificationIcon = notifications.bind('dnd').as(
   (dnd: boolean) => dnd ? icons.notifications.silent : 'notification-symbolic'
 )
 
-const showMedia = Variable(false)
-
-const sidemenuShow = {
-  datemenu: Variable(false),
-  quicksettings: Variable(false), 
+const showWidget = {
+  popup: {
+    media: Variable(false),
+    colorWheel: Variable(false),
+    drawingTools: Variable(false),
+  },
+  sideleft: {
+    apis: Variable(false),
+  },
+  sideright: {
+    datemenu: Variable(false),
+    quicksettings: Variable(false), 
+  }
 }
 
-globalThis['sidemenuShow'] = (name:string) => sidemenuShow[name].value = !sidemenuShow[name].value
+globalThis['toggleWidget'] = (widget: string, name: string) => {
+  const widgetShown =  showWidget[widget][name]
+  widgetShown.value = !widgetShown.value
+}
 
 export { 
   clock, 
   cpu, ram,
-  showMedia, 
-  sidemenuShow,
+  showWidget,
   notificationIcon,
 }

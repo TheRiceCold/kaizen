@@ -50,7 +50,6 @@ class Color extends Service {
   }
 }
 
-
 export function hslToRgbValues(h, s, l) {
   h /= 360
   s /= 100
@@ -79,6 +78,7 @@ export function hslToRgbValues(h, s, l) {
   b = to255(b)
   return `${Math.round(r)},${Math.round(g)},${Math.round(b)}`
 }
+
 export function hslToHex(h, s, l) {
   h /= 360;
   s /= 100;

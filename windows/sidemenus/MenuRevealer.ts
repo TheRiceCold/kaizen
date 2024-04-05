@@ -1,7 +1,7 @@
 import { type Props as RevealerProps } from 'types/widgets/label'
 
 import options from 'options'
-import { sidemenuShow } from 'lib/variables'
+import { showWidget } from 'lib/variables'
 
 export default (name: string, children) => Widget.Revealer({
   transition: 'slide_down',
@@ -11,7 +11,8 @@ export default (name: string, children) => Widget.Revealer({
     vertical: true, 
     classNames: ['menu-revealer', name] 
   }),
-}).hook(
-  sidemenuShow[name], 
-  (self: RevealerProps) => self.revealChild = sidemenuShow[name].value
-)
+  setup(self: RevealerProps) {
+    const shown = showWidget.sideleft[name] ?? showWidget.sideright[name]
+    self.hook(shown, () => self.revealChild = shown.value)
+  }
+})

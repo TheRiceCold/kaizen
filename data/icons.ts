@@ -18,17 +18,14 @@ export default {
     video: 'video-x-generic-symbolic',
     audio: 'audio-x-generic-symbolic',
   },
-  nix: {
-    nix: "nixos-symbolic",
-  },
-  app: {
-    terminal: "terminal-symbolic",
+  ai: {
+    open_ai: 'open-ai-symbolic',
+    gemini: 'google-gemini-symbolic',
   },
   ui: {
-    cup: 'cup-symbolic',
     pin: 'pin-symbolic',
+    send: 'send-symbolic',
     info: 'info-symbolic',
-    broom: 'broom-symbolic',
     camera: 'camera-symbolic',
     menu: 'open-menu-symbolic',
     toolbars: 'toolbars-symbolic',

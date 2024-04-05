@@ -1,7 +1,9 @@
 import { type BarWidget } from 'windows/bar'
 import { type TWorkspace } from 'windows/bar/widgets/workspaces/LabelStack'
 import { opt } from 'lib/option'
-import { sidemenuShow } from 'lib/variables'
+import { showWidget } from 'lib/variables'
+
+const { datemenu, quicksettings } = showWidget.sideright
 
 export default {
   position: opt<'top' | 'bottom'>('top'),
@@ -20,11 +22,11 @@ export default {
     interval: 5000,
     // DOCS: https://docs.gtk.org/glib/method.DateTime.format.html
     format: opt('%a %b %d  %I:%M'),
-    action: opt(() => sidemenuShow.datemenu.value = !sidemenuShow.datemenu.value),
+    action: opt(() => datemenu.value = !datemenu.value),
   },
   settings: {
     colored: opt(false),
-    action: opt(() => sidemenuShow.quicksettings.value = !sidemenuShow.quicksettings.value),
+    action: opt(() => quicksettings.value = !quicksettings.value),
   },
   launcher: {
     icon: {

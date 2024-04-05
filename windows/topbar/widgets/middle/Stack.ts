@@ -1,9 +1,11 @@
 import Cava from 'misc/cava'
 import options from 'options'
-import { showMedia } from 'lib/variables'
+import { showWidget } from 'lib/variables'
 
 const { width, height } = options.bar.media.visualizer
 const length = options.bar.media.length
+
+const { media: shown } = showWidget.popup
 
 export default (label) => Widget.Stack({
   className: 'stack',
@@ -33,4 +35,4 @@ export default (label) => Widget.Stack({
       })
     })
   },
-}).hook(showMedia, self => self.shown = showMedia ? 'visualizer' : 'song')
+}).hook(shown, self => self.shown = shown ? 'visualizer' : 'song')

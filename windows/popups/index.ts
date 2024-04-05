@@ -12,7 +12,7 @@ const Top = Widget.Window({
   child: Widget.Box({
     vertical: true,
     children: [ Media, Notifications() ],
-    css: `padding: 2px; margin-top: ${options.theme.spacing * 3.5}px;`,
+    css: `padding: 2px; margin-top: ${options.theme.spacing * 4}px;`,
   }),
 })
 
@@ -23,7 +23,7 @@ const Bottom = Widget.Window({
   child: Widget.Box({
     vertical: true,
     css: `padding: 2px;`,
-    children: [ Indicators, /* TODO: Dock */ ],
+    children: [ /* Indicators */, /* TODO: Dock */ ],
   }),
 })
 
