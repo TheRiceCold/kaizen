@@ -12,6 +12,9 @@ export default mkOptions(OPTIONS, {
     gaps: opt(1.5),
     gapsWhenOnly: opt(true),
     inactiveBorder: opt('333333ff'),
+    shade: {
+      blueLight: opt(false)
+    }
   },
 
   ...api,

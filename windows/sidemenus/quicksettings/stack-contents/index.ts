@@ -1,5 +1,4 @@
 import { type BoxProps } from 'types/widgets/box'
-import { notificationIcon } from 'lib/variables'
 import icons from 'data/icons'
 
 import WifiList from './wifi'
