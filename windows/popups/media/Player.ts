@@ -5,23 +5,13 @@ import options from 'options'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
 
-const mpris = await Service.import('mpris')
-const players = mpris.bind('players')
-
-function lengthStr(length: number) {
-  const min = Math.floor(length / 60)
-  const sec = Math.floor(length % 60)
-  const sec0 = sec < 10 ? '0' : ''
-  return `${min}:${sec0}${sec}`
-}
-
-const isRealPlayer = (player: MprisPlayer) => (
-  !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless
-  !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') && // Doesn't have cover art
-  !player.busName.endsWith('.mpd') // Non-instance mpd bus
-)
-
-const Player = (player: MprisPlayer) => {
+export default (player: MprisPlayer) => {
+  function lengthStr(length: number) {
+    const min = Math.floor(length / 60)
+    const sec = Math.floor(length % 60)
+    const sec0 = sec < 10 ? '0' : ''
+    return `${min}:${sec0}${sec}`
+  }
 
   // TODO: Turnable animation, like spicetify
   // reference: https://github.com/spicetify/spicetify-themes/raw/master/Turntable/screenshots/fad.png
@@ -148,9 +138,3 @@ const Player = (player: MprisPlayer) => {
     ),
   )
 }
-
-export default Widget.Box({
-  vertical: true,
-  className: 'media vertical',
-  children: players.as( (p: MprisPlayer[]) => p.map((player: MprisPlayer) => isRealPlayer(player) ? Player(player) : null)),
-})

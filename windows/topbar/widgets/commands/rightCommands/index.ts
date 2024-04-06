@@ -1,5 +1,4 @@
 import Revealer from '../revealer'
-import ScreenTools from 'service/screen'
 import { 
   openKeyMenu, 
   openZoomMenu, 
@@ -8,18 +7,15 @@ import {
   openRecordMenu, 
 } from './menus'
 
+import { toggleWidget } from 'lib/globals'
+
 const systemtray = await Service.import('systemtray')
 
 const commands = [
   {
     label: 'Draw',
     tooltipText: 'gromit-mpx',
-    onClicked: () => {
-      ScreenTools.draw()
-
-      // TODO: Open a popup menu
-      const gromit = systemtray.items.find(i => i.id === 'gromit-mpx')
-    }
+    onClicked: () => toggleWidget('popup', 'drawingTools'),
   },
   { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
 

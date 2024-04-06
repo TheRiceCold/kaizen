@@ -1,22 +1,25 @@
-import { type Props as RevealerProps } from 'types/widgets/label'
+import { type Props as RevealerProps } from 'types/widgets/revealer'
+import { type MprisPlayer } from 'types/service/mpris'
 
 import Player from './Player'
-import options from 'options'
+import PopupRevealer from '../PopupRevealer'
+
 import { showWidget } from 'lib/variables'
 
-const { transition } = options
 const mpris = await Service.import('mpris')
 
-const { media: shown } = showWidget.popup
+const players = mpris.bind('players')
+const state = showWidget.popup.media
 
-const toggleMedia = () => shown.value = (!mpris.getPlayer()) ? false : !shown.value
+const isRealPlayer = (player: MprisPlayer) => (
+  !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless
+  !player.busName.startsWith('org.mpris.MediaPlayer2.playerctld') && // Doesn't have cover art
+  !player.busName.endsWith('.mpd') // Non-instance mpd bus
+)
 
-// INFO: toggle media by running `ags -r 'toggleMedia()'`
-globalThis['toggleMedia'] = toggleMedia
-options.media.action.value = toggleMedia
-
-export default Widget.Revealer({
-  child: Player,
-  transition: 'slide_down',
-  transitionDuration: transition.value,
-}).hook(shown, (self: RevealerProps) => self.revealChild = shown.value)
+export default PopupRevealer({
+  vertical: true,
+  className: 'media',
+  children: players.as((p: MprisPlayer[]) => p.map((player: MprisPlayer) => isRealPlayer(player) ? Player(player) : null)),
+}
+).hook(state, (self: RevealerProps) => self.revealChild = state.value)

@@ -49,11 +49,6 @@ const showWidget = {
   }
 }
 
-globalThis['toggleWidget'] = (widget: string, name: string) => {
-  const widgetShown =  showWidget[widget][name]
-  widgetShown.value = !widgetShown.value
-}
-
 export { 
   clock, 
   cpu, ram,

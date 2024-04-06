@@ -1,4 +1,4 @@
-import { type Props as RevealerProps } from 'types/widgets/label'
+import { type Props as RevealerProps } from 'types/widgets/revealer'
 
 import options from 'options'
 import { showWidget } from 'lib/variables'
