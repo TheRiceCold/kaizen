@@ -12,7 +12,7 @@ const Temp = Widget.Box(
     hpack: 'start',
     vpack: 'center',
     truncate: 'end',
-    label: currentCondition.as(c => !!c['temp_C'] ? c['temp_C'] + '°C' : 'Wait...')
+    label: currentCondition.as(c => c['temp_C'] + '°C')
   }),
   Widget.Icon({ className: 'icon', icon: Weather.bind('icon') })
 )

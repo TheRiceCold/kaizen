@@ -22,7 +22,7 @@ export const Padding = (name: string, {
   vexpand,
   can_focus: false,
   child: Widget.Box({ css }),
-  setup(self: EventBoxProps) {
+  setup(self) {
     self.on('button-press-event', () => App.toggleWindow(name))
   }
 })
@@ -37,8 +37,8 @@ const PopupRevealer = (
     transition,
     child: Widget.Box({ child, className: 'window-content' }),
     transitionDuration: options.transition.bind(),
-    setup (self: RevealerProps) {
-      self.hook(App, ({}, wname: string, visible: boolean) => {
+    setup (self) {
+      self.hook(App, (_, wname: string, visible: boolean) => {
         if (wname === name)
           self.revealChild = visible
       })
@@ -134,7 +134,7 @@ export default ({
   keymode: 'on-demand',
   anchor: ['top', 'bottom', 'right', 'left'],
   child: Layout(name, child, transition)[layout](),
-  setup(self: WindowProps) {
+  setup(self) {
     self.keybind('Escape', () => App.closeWindow(name))
   },
   ...props,

@@ -33,10 +33,10 @@ class WeatherService extends Service {
 
   constructor() {
     super()
-    Utils.interval(900000, this._getWeather.bind(this)) // every 15 min
+    Utils.interval(900000, this.getWeather.bind(this)) // every 15 min
   }
 
-  async _getWeather() {
+  async getWeather() {
     try {
       const result = await Utils.fetch(this._url)
 

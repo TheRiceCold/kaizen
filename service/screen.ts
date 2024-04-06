@@ -5,15 +5,20 @@ const hyprland = await Service.import('hyprland')
 const now = () => imports.GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S')
 
 class ScreenTools extends Service {
-  static { Service.register(this, {}, { timer: [ 'int' ], recording: [ 'boolean' ] }) }
+  static { 
+    Service.register(this, {}, { 
+      timer: [ 'int' ], 
+      recording: [ 'boolean' ],
+    }) 
+  }
 
   #recordings = Utils.HOME + '/Videos/Records'
   #screenshots = Utils.HOME + '/Fotos/Captura'
   #file = ''
   #interval = 0
 
-  recording = false
   timer = 0
+  recording = false
 
   async start() {
     if (!dependencies('slurp', 'wf-recorder')) return
@@ -28,7 +33,7 @@ class ScreenTools extends Service {
     this.changed('recording')
 
     this.timer = 0
-    this.#interval = Utils.interval(1000, () => { this.changed('timer'); this.timer++; })
+    this.#interval = Utils.interval(1000, () => { this.changed('timer'); this.timer++ })
   }
 
   async stop() {
@@ -49,28 +54,6 @@ class ScreenTools extends Service {
       },
     })
   }
-
-  // async screenshot(full = false) {
-  //   if (!dependencies('slurp', 'wayshot')) return
-
-  //   const file = `${this.#screenshots}/${now()}.png`
-  //   Utils.ensureDirectory(this.#screenshots)
-
-  //   const wayshot = `wayshot -f ${file} ${full ? '' : `-s '${await sh('slurp')}'`}`
-  //   await sh(wayshot)
-  //   bash(`wl-copy < ${file}`)
-
-  //   Utils.notify({
-  //     image: file,
-  //     summary: 'Screenshot',
-  //     body: this.#file,
-  //     actions: {
-  //       'Show in Files': () => sh(`yazi ${this.#screenshots}`),
-  //       View: () => sh(`swayimg ${file}`),
-  //       Edit: () => sh(`swappy, -f ${file}`),
-  //     },
-  //   })
-  // }
 
   async record() { Utils.notify('Fucking record') }
 

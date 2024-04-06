@@ -1,9 +1,7 @@
-import { type ButtonProps } from 'types/widgets/button'
+import stackContents, { type TStackItem } from './stack-contents'
+import { Stack } from '.'
 
 import { setupCursorHover } from 'misc/cursorhover'
-
-import { Stack } from '.'
-import stackContents from './stack-contents'
 
 const isActive = Variable('notificationList')
 
@@ -14,13 +12,13 @@ const StackButton = (stackName: string, icon: string) => Widget.Button({
     Stack.shown = stackName
     isActive.value = stackName
   },
-}).hook(isActive, (self: ButtonProps) => self.toggleClassName('active', isActive.value === stackName))
+}).hook(isActive, self => self.toggleClassName('active', isActive.value === stackName))
 
 export default Widget.Box(
   { className: 'control-buttons' },
   Widget.Box({ 
     hexpand: true,
     hpack: 'center',
-    children: stackContents.map((item: TStack) => StackButton(item.name, item.icon))
+    children: stackContents.map((item: TStackItem) => StackButton(item.name, item.icon))
   })
 )

@@ -11,8 +11,8 @@ const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/ai/google_ap
 
 function replaceapidom(URL) {
   if (fileExists(expandTilde(APIDOM_FILE_LOCATION))) {
-    var contents = Utils.readFile(expandTilde(APIDOM_FILE_LOCATION)).trim()
-    var URL = URL.toString().replace('generativelanguage.googleapis.com', contents)
+    const contents = Utils.readFile(expandTilde(APIDOM_FILE_LOCATION)).trim()
+    URL = URL.toString().replace('generativelanguage.googleapis.com', contents)
   }
   return URL
 }
@@ -169,8 +169,8 @@ class GeminiService extends Service {
     stream.read_line_async(0, null,
       (stream, res) => {
         try {
-          const [bytes] = stream.read_line_finish(res);
-          const line = this._decoder.decode(bytes);
+          const [bytes] = stream.read_line_finish(res)
+          const line = this._decoder.decode(bytes)
           if (line == '[{') { // beginning of response
             aiResponse._rawData += '{'
             this.thinking = false
@@ -212,7 +212,7 @@ class GeminiService extends Service {
       ),
     })
 
-    message.request_headers.append('Content-Type', `application/json`)
+    message.request_headers.append('Content-Type', 'application/json')
     message.set_request_body_from_bytes('application/json', new GLib.Bytes(JSON.stringify(body)))
 
     session.send_async(message, GLib.DEFAULT_PRIORITY, null, (_, result) => {

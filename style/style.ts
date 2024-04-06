@@ -24,11 +24,8 @@ const {
 
 const popoverPaddingMultiplier = 1.6
 
-const t = (
-  dark: Opt<any> | string, light: Opt<any> | string
-) => scheme.value === 'dark' ? `${dark}` : `${light}`
-
-const $ = (name: string, value: string | Opt<any>) => `$${name}: ${value}`
+const t = (dark: Opt | string, light: Opt | string) => scheme.value === 'dark' ? `${dark}` : `${light}`
+const $ = (name: string, value: string | Opt) => `$${name}: ${value}`
 
 const variables = () => [
   $('black', colors.black),

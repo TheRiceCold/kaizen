@@ -27,6 +27,6 @@ export default () => {
       self.children = [w, ...self.children]
     }
   }, 'notified')
-  .hook(notifications, remove, 'dismissed')
-  .hook(notifications, remove, 'closed')
+    .hook(notifications, remove, 'dismissed')
+    .hook(notifications, remove, 'closed')
 }

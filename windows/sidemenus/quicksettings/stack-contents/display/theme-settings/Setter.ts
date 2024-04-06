@@ -1,4 +1,3 @@
-import { type RowProps } from './Row'
 import { Opt } from 'lib/option'
 import icons from 'data/icons'
 import Gdk from 'gi://Gdk'
@@ -37,8 +36,8 @@ export default function Setter<T>({
   enums,
   min = 0,
   max = 1000,
-  type = typeof opt.value as RowProps<T>['type'],
-}: RowProps<T>) {
+  type = typeof opt.value,
+}) {
   switch (type) {
     case 'number': return Widget.SpinButton({
       setup(self) {

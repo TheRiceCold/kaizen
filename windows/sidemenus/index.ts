@@ -3,7 +3,7 @@ import DateMenu from './datemenu'
 import QuickSettings from './quicksettings'
 
 const left = Widget.Window({
-  name: `sideleft`,
+  name: 'sideleft',
   className: 'sideleft',
   anchor: ['top', 'left'],
   child: Widget.Box({
@@ -14,7 +14,7 @@ const left = Widget.Window({
 })
 
 const right = Widget.Window({
-  name: `sideright`,
+  name: 'sideright',
   className: 'sideright',
   anchor: ['top', 'right'],
   child: Widget.Box({
@@ -24,4 +24,4 @@ const right = Widget.Window({
   }),
 })
 
-export default [ right ]
+export default [ left, right ]

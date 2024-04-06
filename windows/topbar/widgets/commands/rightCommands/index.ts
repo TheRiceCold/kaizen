@@ -9,8 +9,6 @@ import {
 
 import { toggleWidget } from 'lib/globals'
 
-const systemtray = await Service.import('systemtray')
-
 const commands = [
   {
     label: 'Draw',

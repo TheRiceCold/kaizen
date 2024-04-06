@@ -1,4 +1,3 @@
-import { type Props as RevealerProps } from 'types/widgets/revealer'
 import { type MprisPlayer } from 'types/service/mpris'
 
 import Player from './Player'
@@ -22,4 +21,4 @@ export default PopupRevealer({
   className: 'media',
   children: players.as((p: MprisPlayer[]) => p.map((player: MprisPlayer) => isRealPlayer(player) ? Player(player) : null)),
 }
-).hook(state, (self: RevealerProps) => self.revealChild = state.value)
+).hook(state, self => self.revealChild = state.value)

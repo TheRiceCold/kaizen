@@ -13,18 +13,18 @@ const cpu = Variable(0, {
   poll: [
     2000, 'top -bn 2', 
     out => divide([100, out.split('\n')
-    .find((line: string) => line.includes('Cpu(s)'))
-    .split(/\s+/)[1]
-    .replace(',', '.')])
+      .find((line: string) => line.includes('Cpu(s)'))
+      .split(/\s+/)[1]
+      .replace(',', '.')])
   ],
 })
 
 const ram = Variable(0, {
   poll: [
     2000, 'free', out => divide(out.split('\n')
-    .find((line: string) => line.includes('Mem:'))
-    .split(/\s+/)
-    .splice(1, 2))
+      .find((line: string) => line.includes('Mem:'))
+      .split(/\s+/)
+      .splice(1, 2))
   ],
 })
 

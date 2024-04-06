@@ -5,7 +5,7 @@ const wpConfig = {
   format: 'json',
   image_format: 'jpg',
   index: 'random',
-  mkt: "random" as "en-US" | "ja-JP" | "en-AU" | "en-GB" | "de-DE" | "en-NZ" | "en-CA" | "random",
+  mkt: 'random' as 'en-US' | 'ja-JP' | 'en-AU' | 'en-GB' | 'de-DE' | 'en-NZ' | 'en-CA' | 'random',
 }
 
 const WP = `${Utils.HOME}/.config/background.png`
@@ -43,7 +43,7 @@ class Wallpaper extends Service {
 
   async #fetchBing() {
     const res = await Utils.fetch('https://bing.biturl.top/', {
-        params: wpConfig,
+      params: wpConfig,
     }).then(res => res.text())
 
     if (!res.startsWith('{'))

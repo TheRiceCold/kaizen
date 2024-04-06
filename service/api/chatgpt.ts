@@ -12,8 +12,8 @@ const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/openai_api_d
 
 function replaceapidom(URL) {
   if (fileExists(expandTilde(APIDOM_FILE_LOCATION))) {
-    let contents = Utils.readFile(expandTilde(APIDOM_FILE_LOCATION)).trim()
-    var URL = URL.toString().replace('api.openai.com', contents)
+    const contents = Utils.readFile(expandTilde(APIDOM_FILE_LOCATION)).trim()
+    URL = URL.toString().replace('api.openai.com', contents)
   }
   return URL
 }
@@ -155,7 +155,7 @@ class ChatGPTService extends Service {
         const [bytes] = stream.read_line_finish(res)
         const line = this._decoder.decode(bytes)
         if (line && line != '') {
-          let data = line.substr(6)
+          const data = line.substr(6)
           if (data == '[DONE]') return
           try {
             const result = JSON.parse(data)

@@ -1,5 +1,5 @@
-import { type Props as LabelProps } from 'types/widgets/label'
-import { type Props as SliderProps } from 'types/widgets/slider'
+import { type LabelProps } from 'types/widgets/label'
+import { type SliderProps } from 'types/widgets/slider'
 import { type MprisPlayer } from 'types/service/mpris'
 import options from 'options'
 import icons from 'data/icons'

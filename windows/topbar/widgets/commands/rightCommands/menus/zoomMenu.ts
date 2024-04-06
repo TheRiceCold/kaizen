@@ -1,5 +1,4 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
-import { type ButtonProps } from 'types/widgets/button'
 import Menu from '../../Menu'
 import { sh } from 'lib/utils'
 
@@ -12,4 +11,4 @@ const commands: MenuItemProps[] = [
   { label: '5x', onActivate: () => zoom(5) },
 ]
 
-export default (self: ButtonProps) => Menu(self, commands)
+export default self => Menu(self, commands)

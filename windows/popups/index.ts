@@ -1,13 +1,12 @@
 import Media from './media'
-import Indicators from './indicators'
-import Notifications from './notifications'
 import DrawTools from './draw-tools'
+import Notifications from './notifications'
 
 import options from 'options'
 
 const Top = Widget.Window({
   anchor: ['top'],
-  name: `top-popups`,
+  name: 'top-popups',
   className: 'popups',
   exclusivity: 'ignore',
   child: Widget.Box({
@@ -20,11 +19,11 @@ const Top = Widget.Window({
 const Bottom = Widget.Window({
   anchor: ['bottom'],
   className: 'popups',
-  name: `bottom-popups`,
+  name: 'bottom-popups',
   child: Widget.Box({
     vertical: true,
-    css: `padding: 2px;`,
-    children: [ /* Indicators */, /* TODO: Dock */ ],
+    css: 'padding: 2px;',
+    // children: [ Indicators, Dock ], // TODO:
   }),
 })
 

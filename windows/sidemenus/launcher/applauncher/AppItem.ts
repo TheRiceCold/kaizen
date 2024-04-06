@@ -41,6 +41,6 @@ export default (app: Application) => {
     attribute: { app },
     className: 'app-item',
     child: Widget.Box({ children: [ appicon, textBox ] }),
-    onClicked: () => { App.closeWindow('launcher'); launchApp(app); },
+    onClicked: () => { App.closeWindow('launcher'); launchApp(app) },
   })
 }

@@ -97,7 +97,7 @@ export default ({
     cr.moveTo(lastX, lastY)
     for (let i = 1; i < self.attribute.cavaVar.value.length; i++) {
       const barHeight = h * (self.attribute.cavaVar.value[i] / height)
-      let y = h - barHeight
+      const y = h - barHeight
       cr.curveTo(lastX + w / (bars - 1) / 2, lastY, lastX + w / (bars - 1) / 2, y, i * (w / (bars - 1)), y)
       lastX = i * (w / (bars - 1))
       lastY = y

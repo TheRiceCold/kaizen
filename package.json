@@ -1,6 +1,10 @@
 {
   "name": "ags-dotfiles",
   "author": "Dale Walter Hicban",
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "lint-and-fix": "eslint . --ext .ts --fix"  
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheColdRice/ags-config.git"

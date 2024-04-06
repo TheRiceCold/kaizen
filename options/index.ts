@@ -2,7 +2,6 @@ import { opt, mkOptions } from 'lib/option'
 import windows from './windows'
 import theme from './theme'
 import fonts from './fonts'
-import api from './api'
 
 type TShader = 
   | 'default' 
@@ -21,7 +20,6 @@ export default mkOptions(OPTIONS, {
     shader: opt<TShader>('default')
   },
 
-  ...api,
   ...fonts,
   ...theme,
   ...windows,

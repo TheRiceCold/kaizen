@@ -1,4 +1,3 @@
-import { type RevealerProps } from 'types/widgets/revealer'
 import { type Notification as Notif } from 'types/service/notifications'
 
 import Notification from 'windows/popups/notifications/Notification'
@@ -12,7 +11,7 @@ const Animated = (n: Notif) => Widget.Revealer({
   child: Notification(n),
   transition: 'slide_down',
   transitionDuration: options.transition.value,
-  setup(self: RevealerProps) {
+  setup(self) {
     Utils.timeout(options.transition.value, () => {
       if (!self.is_destroyed) self.revealChild = true
     })

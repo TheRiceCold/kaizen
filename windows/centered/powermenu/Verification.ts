@@ -1,5 +1,3 @@
-import { type ButtonProps } from 'types/widgets/button'
-
 import RevealerWindow from 'windows/RevealerWindow'
 import powermenu from 'service/powermenu'
 
@@ -23,12 +21,11 @@ export default RevealerWindow({
       children: [
         Widget.Button({
           label: 'No',
+          setup: setupCursorHover,
           onClicked: () => App.toggleWindow('verification'),
-          setup: (self: ButtonProps) => self.hook(App, (_, name: string, visible: boolean) => {
-            setupCursorHover(self)
-            if (name === 'verification' && visible)
-              self.grab_focus()
-          }),
+        }).hook(App, (self, name: string, visible: boolean) => {
+          if (name === 'verification' && visible)
+            self.grab_focus()
         }),
         Widget.Button({
           label: 'Yes',

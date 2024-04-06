@@ -7,5 +7,5 @@ export default PopupRevealer({
   vertical: true,
   child: Widget.Label('GROMIT-MPX')
 }).hook(systemTray, (self: RevealerProps) => {
-  self.revealChild = systemTray.items.find((i: any) => i.id === 'gromit-mpx')
+  self.revealChild = systemTray.items.find(i => i.id === 'gromit-mpx')
 })

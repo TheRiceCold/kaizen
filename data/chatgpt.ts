@@ -17,12 +17,12 @@ export const initMessages: Message[] = [
   { role: 'user', content: 'raise volume by 5%', },
   {
     role: 'assistant',
-    content: "## Volume +5```bash\nwpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+\n```\nThis command uses the `wpctl` utility to adjust the volume of the default sink.",
+    content: '## Volume +5```bash\nwpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+\n```\nThis command uses the `wpctl` utility to adjust the volume of the default sink.',
   },
   { role: 'user', content: 'main advantages of the nixos operating system', },
   {
     role: 'assistant',
-    content: "## NixOS advantages\n- **Reproducible**: A config working on one device will also work on another\n- **Declarative**: One config language to rule them all. Effortlessly share them with others.\n- **Reliable**: Per-program software versioning. Mitigates the impact of software breakage", 
+    content: '## NixOS advantages\n- **Reproducible**: A config working on one device will also work on another\n- **Declarative**: One config language to rule them all. Effortlessly share them with others.\n- **Reliable**: Per-program software versioning. Mitigates the impact of software breakage',
   },
   { role: 'user', content: 'whats skeumorphism', },
   {

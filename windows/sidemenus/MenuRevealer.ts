@@ -1,5 +1,3 @@
-import { type Props as RevealerProps } from 'types/widgets/revealer'
-
 import options from 'options'
 import { showWidget } from 'lib/variables'
 
@@ -11,7 +9,7 @@ export default (name: string, children) => Widget.Revealer({
     vertical: true, 
     classNames: ['menu-revealer', name] 
   }),
-  setup(self: RevealerProps) {
+  setup(self) {
     const shown = showWidget.sideleft[name] ?? showWidget.sideright[name]
     self.hook(shown, () => self.revealChild = shown.value)
   }

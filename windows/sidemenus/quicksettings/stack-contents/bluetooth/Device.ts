@@ -1,5 +1,3 @@
-import { type ToggleButtonProps } from 'types/widgets/togglebutton'
-
 import { setupCursorHover } from 'misc/cursorhover'
 import { type TDevice } from '.'
 
@@ -19,7 +17,7 @@ const ToggleButton = (device: TDevice) => Widget.ToggleButton({
   hpack: 'end',
   hexpand: true,
   active: device.connected,
-  setup (self: ToggleButtonProps) { 
+  setup (self) { 
     setupCursorHover(self)
     self.on('notify::active', () => device.setConnection(self.active))
   },

@@ -6,7 +6,7 @@ const streamIconSubstitute = (stream: Stream) => {
   const subs = {
     'spotify': 'spotify',
     'Firefox': 'firefox',
-  };
+  }
   return subs[stream.name] || stream.icon_name
 }
 const MixerItem = (stream: Stream) => Widget.Box(

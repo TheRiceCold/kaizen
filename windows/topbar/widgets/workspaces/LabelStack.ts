@@ -1,5 +1,4 @@
 import { type Props as LabelProps } from 'types/widgets/label'
-import { type Props as StackProps } from 'types/widgets/stack'
 import { capitalize } from 'lib/utils'
 import options from 'options'
 
@@ -38,5 +37,5 @@ const Items = (ws: TWorkspace) => {
 export default Widget.Stack({
   transition: 'slide_left_right',
   children: workspaces.items.bind().as(Items),
-}).hook(hyprland, (self: StackProps) => self.shown = getLabel())
+}).hook(hyprland, self => self.shown = getLabel())
 

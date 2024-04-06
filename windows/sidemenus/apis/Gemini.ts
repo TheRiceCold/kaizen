@@ -9,7 +9,7 @@ const GeminiInfo = Widget.Box({
   children: [
     Widget.Icon({
       hpack: 'center',
-      icon: `google-gemini-symbolic`,
+      icon: 'google-gemini-symbolic',
     }),
     Widget.Label({
       wrap: true,

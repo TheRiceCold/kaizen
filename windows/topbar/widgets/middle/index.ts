@@ -1,5 +1,4 @@
 import { type MprisPlayer } from 'types/service/mpris'
-import { type Props as EventBoxProps } from 'types/widgets/eventbox'
 import PlayIcon from './PlayIcon'
 import Stack from './Stack'
 import options from 'options'
@@ -15,7 +14,7 @@ function getTooltip(player: MprisPlayer) {
   }
 }
 
-let label = Variable('')
+const label = Variable('')
 const stack = Stack(label)
 
 const Revealer = Widget.Revealer({
@@ -24,13 +23,13 @@ const Revealer = Widget.Revealer({
   transitionDuration: options.transition * 1.5,
 })
 
-const update = (self: EventBoxProps) => {
+function update (self) {
   const player = getPlayer()
   const artists = player.track_artists.join(', ')
   // FIX: doesn't hide the revealer when the player(like spotify) is open before ags
   const revealTimeout = () => Utils.timeout(1000, () => Revealer.revealChild = !!player.entry)
 
-  if (!player.entry) { revealTimeout(); return; }
+  if (!player.entry) { revealTimeout(); return }
   if (player.play_back_status === 'Paused') stack.shown = 'song'
 
   self.onPrimaryClick = player.playPause

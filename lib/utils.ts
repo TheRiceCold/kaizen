@@ -65,7 +65,7 @@ function launchApp(app: Application) {
 }
 
 const createSurfaceFromWidget = (widget: Gtk.Widget) => {
-  const cairo = imports.gi.cairo as any
+  const cairo = imports.gi.cairo
   const alloc = widget.get_allocation()
   const surface = new cairo.ImageSurface(
     cairo.Format.ARGB32,

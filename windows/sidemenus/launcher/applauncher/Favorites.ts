@@ -13,8 +13,8 @@ export default Widget.Revealer({
     className: 'quicklaunch',
     children: favorites.bind().as(f =>
       f.map(f => apps.query(f)?.[0])
-      .filter(f => f)
-      .map(AppItem),
+        .filter(f => f)
+        .map(AppItem),
     ),
   }),
   setup: self => self.hook(Entry, () => self.revealChild = !Entry.text, 'notify::text'),

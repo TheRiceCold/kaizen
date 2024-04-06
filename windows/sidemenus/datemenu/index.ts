@@ -42,8 +42,7 @@ const Buttons = Widget.Box({
       Stack.shown = item.name
       isActive.value = item.name
     }
-  })
-  .hook(isActive, (self: ButtonProps) => self.toggleClassName('active', isActive.value === self.label)))
+  }).hook(isActive, (self: ButtonProps) => self.toggleClassName('active', isActive.value === self.label)))
 })
 
 export default MenuRevealer('datemenu', [ Stack, Buttons ])

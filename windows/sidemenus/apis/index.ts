@@ -5,7 +5,7 @@ import gemini from './Gemini'
 import { setupCursorHover } from 'misc/cursorhover'
 import { enableClickthrough } from 'misc/clickthrough'
 
-const { Gtk } = imports.gi;
+const { Gtk } = imports.gi
 const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
 
 export const chatEntry = TextView({
@@ -63,10 +63,10 @@ const chatSendButton = Widget.Button({
   vpack: 'end',
   setup: setupCursorHover,
   child: Widget.Icon(icons.ui.send),
-  onClicked: (self) => {
-    // APIS[currentApiId].sendCommand(chatEntry.get_buffer().text)
-    // chatEntry.get_buffer().set_text('', -1)
-  },
+  // onClicked: (self) => {
+  //  APIS[currentApiId].sendCommand(chatEntry.get_buffer().text)
+  //  chatEntry.get_buffer().set_text('', -1)
+  // },
 })
 
 export default MenuRevealer('apis', [ 

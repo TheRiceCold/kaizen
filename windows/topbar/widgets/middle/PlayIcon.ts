@@ -1,5 +1,4 @@
 import { type Props as CircularProgressProps } from 'types/widgets/circularprogress'
-import { type Props as IconProps } from 'types/widgets/icon'
 import { type MprisPlayer } from 'types/service/mpris'
 import icons from 'data/icons'
 
@@ -10,7 +9,7 @@ export default (player: MprisPlayer) => {
     return prog.value = player.position / player.length
   }
 
-  function iconUpdate (self: IconProps) {
+  function iconUpdate (self) {
     switch (player.play_back_status) {
       case 'Playing': 
         self.icon = icons.mpris.playing

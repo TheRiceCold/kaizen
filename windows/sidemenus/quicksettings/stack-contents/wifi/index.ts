@@ -1,4 +1,3 @@
-import { type BoxProps } from 'types/widgets/box'
 import Header from '../Header'
 
 import icons from 'data/icons'
@@ -41,7 +40,7 @@ const item = (ap: TWifi) => Widget.Button({
       hpack: 'end',
       hexpand: true,
       icon: icons.ui.tick,
-      setup(self: BoxProps) {
+      setup(self) {
         Utils.idle(() => {
           if (!self.is_destroyed) 
             self.visible = ap.active
