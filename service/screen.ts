@@ -1,7 +1,6 @@
 import icons from 'data/icons'
 import { dependencies, sh, bash } from 'lib/utils'
 
-const hyprland = await Service.import('hyprland')
 const now = () => imports.GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S')
 
 class ScreenTools extends Service {
@@ -59,28 +58,9 @@ class ScreenTools extends Service {
 
   async snip() { Utils.notify('Fucking snip') }
 
-  async setDrawFullscreen() {
-    if (!dependencies('gromit-mpx')) return
-
-    Utils.timeout(500, () => {
-      if (hyprland.active.client.class === 'Gromit-mpx') {
-        sh('hyprctl dispatch fullscreen') // FIX: not working the 3rd time
-      } else {
-        this.setDrawFullscreen()
-      }
-    })
-  }
-
-  async draw() {
-    if (!dependencies('gromit-mpx')) return
-
-    bash`pkill gromit-mpx || gromit-mpx`
-    this.setDrawFullscreen()
-  }
-
-  async zoom() {
+  async zoom(amount: string | number = '') {
     if (!dependencies('pypr')) return
-    sh('pypr zoom')
+    sh(`pypr zoom ${amount}`)
   }
 }
 

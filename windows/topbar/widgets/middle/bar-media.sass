@@ -1,9 +1,12 @@
 .bar .media
-  border: $border-width solid transparentize($fg, 0.75)
-  border-bottom-right-radius: $radius
   border-bottom-left-radius: $radius
-  border-top: 0
+  border-bottom-right-radius: $radius
   background-color: transparentize($bg, 0.25)
+
+  &.show-border
+    border: calc($border-width * 0.5) solid transparentize($fg, 0.75)
+    border-top: 0
+
   revealer
     padding: $padding calc($padding * 2.5)
   .progress

@@ -1,5 +1,4 @@
 import { type TrayItem } from 'types/service/systemtray'
-import { ButtonProps } from 'types/widgets/button'
 import BarButton from '../BarButton'
 import options from 'options'
 
@@ -9,9 +8,9 @@ const systemtray = await Service.import('systemtray')
 
 const Item = (item: TrayItem) => BarButton({
   className: 'tray-item',
-  child: Widget.Icon({ icon: item.bind('icon') }),
   tooltipMarkup: item.bind('tooltip_markup'),
-  setup(self: ButtonProps) {
+  child: Widget.Icon({ icon: item.bind('icon') }),
+  setup(self) {
     const menu = item.menu
     if (!menu) return
 
@@ -25,9 +24,8 @@ const Item = (item: TrayItem) => BarButton({
 
     if (id) self.connect('destroy', () => item.menu?.disconnect(id))
   },
-
-  onPrimaryClick: (btn: ButtonProps) => item.menu?.popup_at_widget(btn, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
-  onSecondaryClick: (btn: ButtonProps) => item.menu?.popup_at_widget(btn, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
+  onPrimaryClick: self => item.menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
+  onSecondaryClick: self => item.menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
 })
 
 export default () => Widget.Box().bind('children', systemtray, 'items', items => items.filter(({ id }) => !ignore.value.includes(id)).map(Item))

@@ -95,8 +95,8 @@ export default (player: MprisPlayer) => {
 
   const playPause = Widget.Button({
     className: 'play-pause',
-    onClicked: () => player.playPause(),
     visible: player.bind('can_play'),
+    onClicked: () => player.playPause(),
     child: Widget.Icon({
       icon: player.bind('play_back_status').as((s: string) => {
         switch (s) {

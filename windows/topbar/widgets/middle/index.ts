@@ -27,7 +27,10 @@ function update (self) {
   const player = getPlayer()
   const artists = player.track_artists.join(', ')
   // FIX: doesn't hide the revealer when the player(like spotify) is open before ags
-  const revealTimeout = () => Utils.timeout(1000, () => Revealer.revealChild = !!player.entry)
+  const revealTimeout = () => Utils.timeout(1000, () => {
+    Revealer.revealChild = !!player.entry
+    self.toggleClassName('show-border', !!player.entry)
+  })
 
   if (!player.entry) { revealTimeout(); return }
   if (player.play_back_status === 'Paused') stack.shown = 'song'
