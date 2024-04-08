@@ -1,12 +1,16 @@
+import { type Props as CircularProgressProps } from 'types/widgets/circularprogress'
 import { type MprisPlayer } from 'types/service/mpris'
-import PlayIcon from './PlayIcon'
+
+import PlayerStatusIcon from 'misc/playerStatusIcon'
 import Stack from './Stack'
+
 import options from 'options'
 
 const mpris = await Service.import('mpris')
 const pref = options.media.preferred.value
 
 const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
+
 function getTooltip(player: MprisPlayer) {
   switch (player.play_back_status) {
     case 'Playing': return `Playing on ${player.name}`
@@ -22,6 +26,18 @@ const Revealer = Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: options.transition * 1.5,
 })
+
+const ProgressIcon = (player: MprisPlayer) => {
+  function progressUpdate (prog: CircularProgressProps) {
+    return prog.value = player.position / player.length
+  }
+
+  return Widget.CircularProgress({
+    startAt: 0.75,
+    className: 'progress',
+    child: PlayerStatusIcon(player),
+  }).hook(mpris, progressUpdate).poll(1500, progressUpdate)
+}
 
 function update (self) {
   const player = getPlayer()
@@ -39,7 +55,7 @@ function update (self) {
   self.tooltipText = getTooltip(player)
   label.value = `${artists && artists+' - '} ${player.track_title}`
 
-  Revealer.child.children = [ PlayIcon(player), stack ]
+  Revealer.child.children = [ ProgressIcon(player), stack ]
   revealTimeout()
 }
 

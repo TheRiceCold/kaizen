@@ -1,6 +1,9 @@
 import { type LabelProps } from 'types/widgets/label'
 import { type SliderProps } from 'types/widgets/slider'
 import { type MprisPlayer } from 'types/service/mpris'
+
+import PlayerStatusIcon from 'misc/playerStatusIcon'
+
 import options from 'options'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
@@ -95,17 +98,9 @@ export default (player: MprisPlayer) => {
 
   const playPause = Widget.Button({
     className: 'play-pause',
+    child: PlayerStatusIcon(player),
     visible: player.bind('can_play'),
     onClicked: () => player.playPause(),
-    child: Widget.Icon({
-      icon: player.bind('play_back_status').as((s: string) => {
-        switch (s) {
-          case 'Playing': return icons.mpris.playing
-          case 'Paused':
-          case 'Stopped': return icons.mpris.stopped
-        }
-      }),
-    }),
   })
 
   const prev = Widget.Button({
