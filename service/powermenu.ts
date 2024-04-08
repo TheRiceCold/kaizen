@@ -12,14 +12,14 @@ class PowerMenu extends Service {
     })
   }
 
-  #title = ''
-  #cmd = ''
+  _title = ''
+  _cmd = ''
 
-  get title() { return this.#title }
-  get cmd() { return this.#cmd }
+  get title() { return this._title }
+  get cmd() { return this._cmd }
 
   action(action: Action) {
-    [this.#cmd, this.#title] = {
+    [this._cmd, this._title] = {
       sleep: [ sleep.value, 'Sleep' ],
       reboot: [ reboot.value, 'Reboot' ],
       logout: [ logout.value, 'Log Out' ],

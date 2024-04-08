@@ -1,19 +1,12 @@
-import ScreenTools from 'service/screen'
 import { showWidget } from './variables'
 
 const mpris = await Service.import('mpris')
 
-export const toggleWidget = (widget: string, name: string) => {
+export const toggleWidget = async (widget: string, name: string) => {
   const widgetShown =  showWidget[widget][name]
 
-  if (widget === 'popup') {
-    if (name === 'drawingTools')
-      ScreenTools.draw()
-
-    if (name === 'media')
-      widgetShown.value = (!mpris.getPlayer()) ? false : !widgetShown.value
-
-  } 
+  if (widget === 'popup' && name === 'media')
+    widgetShown.value = (!mpris.getPlayer()) ? false : !widgetShown.value
 
   else widgetShown.value = !widgetShown.value
 }

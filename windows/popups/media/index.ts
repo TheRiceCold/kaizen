@@ -17,8 +17,7 @@ const isRealPlayer = (player: MprisPlayer) => (
 )
 
 export default PopupRevealer({
-  vertical: true,
   className: 'media',
+  reveal: state.bind(),
   children: players.as((p: MprisPlayer[]) => p.map((player: MprisPlayer) => isRealPlayer(player) ? Player(player) : null)),
-}
-).hook(state, self => self.revealChild = state.value)
+})

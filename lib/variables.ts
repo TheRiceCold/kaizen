@@ -38,7 +38,7 @@ const showWidget = {
   popup: {
     media: Variable(false),
     colorWheel: Variable(false),
-    drawingTools: Variable(false),
+    annotation: Variable(false),
   },
   sideleft: {
     apis: Variable(false),

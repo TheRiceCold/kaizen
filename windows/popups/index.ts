@@ -1,6 +1,6 @@
 import Media from './media'
-import DrawTools from './draw-tools'
 import Notifications from './notifications'
+import AnnotationTools from './annotation-tools'
 
 import options from 'options'
 
@@ -11,7 +11,7 @@ const Top = Widget.Window({
   exclusivity: 'ignore',
   child: Widget.Box({
     vertical: true,
-    children: [ DrawTools, Media, Notifications() ],
+    children: [ AnnotationTools, Media, Notifications() ],
     css: `padding: 2px; margin-top: ${options.theme.spacing * 4}px;`,
   }),
 })

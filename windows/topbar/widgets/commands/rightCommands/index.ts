@@ -1,3 +1,4 @@
+import Annotation from 'service/annotation'
 import Revealer from '../revealer'
 import { 
   openKeyMenu, 
@@ -7,13 +8,11 @@ import {
   openRecordMenu, 
 } from './menus'
 
-import { toggleWidget } from 'lib/globals'
-
 const commands = [
   {
     label: 'Draw',
     tooltipText: 'gromit-mpx',
-    onClicked: () => toggleWidget('popup', 'drawingTools'),
+    onClicked: () => Annotation.start(),
   },
   { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
 
