@@ -1,39 +1,46 @@
-import Color, { hslToHex } from 'service/color'
+import Color from 'service/color'
 import { clamp } from 'lib/utils'
 
-const cursorColor = 
-  (Color.xAxis < 40 || (45 <= Color.hue && Color.hue <= 195)) && Color.yAxis > 60 
+const getCursorColor = () => 
+  ((Color.xAxis < 40 || (45 <= Color.hue && Color.hue <= 195)) && Color.yAxis > 60) 
     ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.9)'
 
 const range = Widget.Box({
   className: 'saturation',
   attribute: {
-    update: self => self.setCss(`background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1)), linear-gradient(to right, #ffffff, ${hslToHex(Color.hue, 100, 50)});`)
+    update(self) {
+      const { hue, hslToHex } = Color
+      const bottom = 'linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1))'
+      const right = `linear-gradient(to right, #ffffff, ${hslToHex(hue, 100, 50)})`
+      self.setCss(`background: ${bottom}, ${right};`)
+    }
   },
-  setup: self => self.hook(Color, self.attribute.update, 'hue').hook(Color, self.attribute.update, 'assigned')
+  setup: self => self
+    .hook(Color, self.attribute.update, 'hue')
+    .hook(Color, self.attribute.update, 'assigned')
 })
 
 const cursor = Widget.Box({
-  vpack: 'start',
   hpack: 'start',
-  css: `margin-left: ${8 * Color.xAxis / 100}rem; margin-top: ${8 * (100 - Color.yAxis) / 100}rem;`, 
+  vpack: 'start',
   attribute: {
     update(self) {
       self.setCss(`margin-left: ${8 * Color.xAxis / 100}rem; margin-top: ${8 * (100 - Color.yAxis) / 100}rem;`)
     }
   },
-  setup(self) {
-    self.hook(Color, self.attribute.update, 'sl').hook(Color, self.attribute.update, 'assigned')
-  },
+  setup: self => self
+    .hook(Color, self.attribute.update, 'sl')
+    .hook(Color, self.attribute.update, 'assigned')
+  ,
   child: Widget.Box({
     className: 'saturation-cursor',
-    css: `background-color: ${hslToHex(Color.hue, Color.xAxis, Color.yAxis / (1 + Color.xAxis / 100))}; border-color: ${cursorColor}; `,
     attribute: {
       update(self) {
+        const { hue, xAxis, yAxis, hslToHex } = Color 
         self.setCss(`
-          background-color: ${hslToHex(Color.hue, Color.xAxis, Color.yAxis / (1 + Color.xAxis / 100))};
-          border-color: ${cursorColor};
-        `)
+          border-color: ${getCursorColor()};
+          background-color: ${hslToHex(hue, xAxis, yAxis / (1 + xAxis / 100))};`
+        )
       }
     },
     setup(self) {

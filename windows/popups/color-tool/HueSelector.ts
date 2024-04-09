@@ -28,6 +28,7 @@ const slider = Widget.Box({
 })
 
 export default Widget.EventBox({
+  vexpand: true,
   child: Widget.Overlay({ child: range, overlay: slider }),
   attribute: {
     clicked: false,

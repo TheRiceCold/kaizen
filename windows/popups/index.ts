@@ -9,6 +9,7 @@ const Top = Widget.Window({
   anchor: ['top'],
   name: 'top-popups',
   className: 'popups',
+  keymode: 'on-demand',
   exclusivity: 'ignore',
   child: Widget.Box({
     vertical: true,

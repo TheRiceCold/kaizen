@@ -1,19 +1,21 @@
+import Color from 'service/color'
+
+import icons from 'data/icons'
 import { copy } from 'lib/utils'
 import { setupCursorHover } from 'misc/cursorhover'
-import Color, { hslToHex, hslToRgbValues } from 'service/color'
 
-function update(self) {
-  self.hook(Color, self.attribute.update, 'sl')
-  self.hook(Color, self.attribute.update, 'hue')
-  self.hook(Color, self.attribute.update, 'assigned')
-}
+const update = self => self
+  .hook(Color, self.attribute.update, 'sl')
+  .hook(Color, self.attribute.update, 'hue')
+  .hook(Color, self.attribute.update, 'assigned')
 
 const ColorBox = Widget.Box({
+  vexpand: true,
   setup: update,
   className: 'color-box',
   attribute: {
     update(self) {
-      const { hue, xAxis, yAxis } = Color
+      const { hue, xAxis, yAxis, hslToHex } = Color
       const bgColor = hslToHex(hue, xAxis, yAxis / (1 + xAxis / 100))
       self.setCss(`background-color: ${bgColor};`)
     }
@@ -22,51 +24,59 @@ const ColorBox = Widget.Box({
 
 const CopyButton = (type: 'hex' | 'rgb' | 'hsl') => Widget.Box([
   Widget.Label({ xalign: 0, label: type.toUpperCase()+':' }),
-  Widget.Button({
-    tooltipText: 'Click to copy',
-    setup(self) { update(self); setupCursorHover(self) },
+  Widget.Overlay({
+    setup: update,
     attribute: { 
       update(self) {
-        const { hue, xAxis, yAxis } = Color
+        const { hue, xAxis, yAxis, hslToRgb, hslToHex } = Color
         const x = (1 + xAxis / 100)
 
         const hexLabel = hslToHex(hue, xAxis, yAxis / x)
-        const rgbLabel = hslToRgbValues(hue, xAxis, yAxis / x)
+        const rgbLabel = hslToRgb(hue, xAxis, yAxis / x)
         const hslLabel = `${hue}, ${xAxis}%, ${Math.round(yAxis / x)}%`
 
-        function onCopy(input: string) { copy(input); self.label = 'Copied!' }
+        function onCopy(input: string) { copy(input); self.child.text = 'Copied!' }
 
         switch(type) {
           case 'hex':
-            self.label = hexLabel.toUpperCase()
-            self.onClicked = () => onCopy(hexLabel)
+            self.child.text = hexLabel.toUpperCase()
+            self.overlay.onClicked = () => onCopy(hexLabel)
             break
           case 'rgb':
-            self.label = rgbLabel
-            self.onClicked = () => onCopy(`rgb(${rgbLabel})`)
+            self.child.text = rgbLabel
+            self.overlay.onClicked = () => onCopy(`rgb(${rgbLabel})`)
             break
           case 'hsl':
-            self.label = hslLabel
-            self.onClicked = () => onCopy(`hsl(${hslLabel})`)
+            self.child.text = hslLabel
+            self.overlay.onClicked = () => onCopy(`hsl(${hslLabel})`)
             break
         }
       }
     },
-  }),
+    child: Widget.Entry({ widthChars: 10 }),
+    overlay: Widget.Button({
+      hpack: 'end',
+      setup: setupCursorHover,
+      child: Widget.Label('󰆏'),
+    }),
+  })
 ])
 
 
 export default Widget.Box(
   { className: 'output' },
   Widget.Box(
-    {
-      hexpand: true, 
-      vertical: true,
-      vpack: 'center', 
-    }, 
+    { vertical: true, className: 'copy-buttons' }, 
     CopyButton('hex'),
     CopyButton('rgb'),
     CopyButton('hsl'),
   ),
-  ColorBox, 
+  Widget.Box({ vertical: true },
+    Widget.Button({ 
+      onClicked: Color.pick,
+      setup: setupCursorHover,
+      child: Widget.Icon(icons.ui.colorpicker) 
+    }),
+    ColorBox, // TODO: Apply picked color
+  )
 )
