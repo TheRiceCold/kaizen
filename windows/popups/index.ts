@@ -1,4 +1,5 @@
 import Media from './media'
+import ColorTool from './color-tool'
 import Notifications from './notifications'
 import AnnotationTools from './annotation-tools'
 
@@ -11,7 +12,7 @@ const Top = Widget.Window({
   exclusivity: 'ignore',
   child: Widget.Box({
     vertical: true,
-    children: [ AnnotationTools, Media, Notifications() ],
+    children: [ AnnotationTools, Media, ColorTool, Notifications() ],
     css: `padding: 2px; margin-top: ${options.theme.spacing * 4}px;`,
   }),
 })
@@ -23,7 +24,7 @@ const Bottom = Widget.Window({
   child: Widget.Box({
     vertical: true,
     css: 'padding: 2px;',
-    // children: [ Indicators, Dock ], // TODO:
+    // children: [ Indicators, Keyboard, Dock ], // TODO:
   }),
 })
 

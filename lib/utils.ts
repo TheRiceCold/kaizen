@@ -91,6 +91,8 @@ const capitalize = (word: string) => word.charAt(0).toUpperCase() + word.slice(1
 
 const clamp = (x: number, min: number, max: number) => Math.min(Math.max(x, min), max)
 
+const copy = (input: string) => sh(['wl-copy', input])
+
 export {
   icon,
   bash,
@@ -104,4 +106,5 @@ export {
   expandTilde,
   capitalize,
   clamp,
+  copy,
 }

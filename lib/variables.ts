@@ -37,7 +37,7 @@ const notificationIcon = notifications.bind('dnd').as(
 const showWidget = {
   // TOP
   media: Variable(false),
-  colorwheel: Variable(false),
+  color: Variable(false),
   annotation: Variable(false),
 
   // BOTTOM

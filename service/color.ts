@@ -14,6 +14,11 @@ class Color extends Service {
   _xAxis = 94
   _yAxis = 80
 
+  constructor() {
+    super()
+    this.emit('changed')
+  }
+
   get hue() { return this._hue }
   set hue(value) {
     this._hue = clamp(value, 0, 360)
@@ -21,6 +26,7 @@ class Color extends Service {
     this.emit('picked')
     this.emit('changed')
   }
+
   get xAxis() { return this._xAxis }
   set xAxis(value) {
     this._xAxis = clamp(value, 0, 100)
@@ -28,6 +34,7 @@ class Color extends Service {
     this.emit('picked')
     this.emit('changed')
   }
+
   get yAxis() { return this._yAxis }
   set yAxis(value) {
     this._yAxis = clamp(value, 0, 100)
@@ -35,17 +42,13 @@ class Color extends Service {
     this.emit('picked')
     this.emit('changed')
   }
+
   setColorFromHex(hexString, id) {
     const hsl = hexToHSL(hexString)
     this._hue = hsl.hue
     this._xAxis = hsl.saturation
     this._yAxis = (100 - hsl.saturation / 2) / 100 * hsl.lightness
     this.emit('assigned', id)
-    this.emit('changed')
-  }
-
-  constructor() {
-    super()
     this.emit('changed')
   }
 }

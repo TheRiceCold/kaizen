@@ -1,0 +1,43 @@
+window.popups .color-wheel
+  padding: calc($padding * 3)
+  .output
+    label
+      font-weight: 600
+    button
+      @include button
+      min-width: 8em
+      padding: $padding
+      margin: calc($spacing * 0.5) 0
+      margin-left: $spacing
+      border-radius: calc($radius * 0.25)
+      label
+        font-weight: 500
+
+    .color-box  
+      min-width: 1em
+      margin-left: calc($spacing * 1.25)
+      border-radius: calc($radius * 0.25)
+      
+
+  .hue-wrapper
+    padding: calc($padding * 0.5)
+    .hue
+      min-height: 8em
+      min-width: 0.85em
+      border-radius: calc($radius * 0.25)
+
+  .hue-cursor
+    padding: 2px
+    border-radius: $radius
+    background-color: white
+
+  .saturation
+    min-width: 8em
+    min-height: 8em
+    border-radius: calc($radius * 0.5)
+
+  .saturation-cursor
+    min-width: 0.75em
+    min-height: 0.75em
+    border-radius: 99px
+    border: 0.1em solid white
