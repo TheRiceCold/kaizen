@@ -12,7 +12,7 @@ const {
 
 export default Widget.Box(
   { vertical: true, className: 'general-stack' },
-  Title('General', 'right', 'themes'),
+  Title({ label: 'General', rightTo: 'themes' }),
 
   Wallpaper(),
   Item('Auto generate colorscheme', { opt: autotheme }),

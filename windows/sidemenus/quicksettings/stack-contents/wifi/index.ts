@@ -50,11 +50,14 @@ const item = (ap: TWifi) => Widget.Button({
   ])
 })
 
-export default Widget.Box(
-  { vertical: true, className: 'wifi-list' },
-  header, 
-  Widget.Box({
+const list = Widget.Scrollable({
+  vexpand: true,
+  hscroll: 'never',
+  vscroll: 'automatic',
+  child: Widget.Box({
     vertical: true,
     children: wifi.access_points.map(item)
   })
-)
+})
+
+export default Widget.Box({ vertical: true, className: 'wifi-list' }, header, list)

@@ -1,3 +1,5 @@
+import { bash } from 'lib/utils'
+
 export const TimerSeconds = Variable(0)
 export const TimerMode = Variable('work')
 
@@ -112,7 +114,7 @@ export default Widget.CenterBox({
       }),
       Widget.Button({
         onClicked: () => {
-          Utils.exec(`bash -c 'echo "${TimerSeconds.value},${getCurrentDateTime()},${TimerMode.value}" >> ${App.configDir}/_data/timerhistory.txt'`)
+          bash `echo "${TimerSeconds.value},${getCurrentDateTime()},${TimerMode.value}" >> ${App.configDir}/_data/timerhistory.txt'`
           TimerInterval.stop()
           TimerSeconds.value = 0
         },

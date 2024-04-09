@@ -34,15 +34,16 @@ const header = Header('Bluetooth', [
   }) 
 ])
 
-const list = Widget.Box({
-  vertical: true,
-  children: bluetooth.bind('devices').as(
-    (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device)
-  ),
+const list = Widget.Scrollable({
+  vexpand: true,
+  hscroll: 'never',
+  vscroll: 'automatic',
+  child: Widget.Box({
+    vertical: true,
+    children: bluetooth.bind('devices').as(
+      (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device)
+    ),
+  })
 })
 
-export default Widget.Box({
-  vertical: true,
-  children: [ header, list ],
-  className: 'bluetooth-list',
-})
+export default Widget.Box({ vertical: true, className: 'bluetooth-list' }, header, list)

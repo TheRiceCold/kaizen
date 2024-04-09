@@ -19,7 +19,6 @@ const cursor = Widget.Box({
   css: `margin-left: ${8 * Color.xAxis / 100}rem; margin-top: ${8 * (100 - Color.yAxis) / 100}rem;`, 
   attribute: {
     update(self) {
-      const allocation = range.get_allocation()
       self.setCss(`margin-left: ${8 * Color.xAxis / 100}rem; margin-top: ${8 * (100 - Color.yAxis) / 100}rem;`)
     }
   },
@@ -64,7 +63,7 @@ export default Widget.EventBox({
       self.attribute.setSaturationAndLightness(self, event)
     }).on('button-press-event', (self, event) => {
       if (!(event.get_button()[1] === 1)) return
-      self.attribute.clicked = true;
+      self.attribute.clicked = true
       self.attribute.setSaturationAndLightness(self, event)
     }).on('button-release-event', self => self.attribute.clicked = false)
   } 

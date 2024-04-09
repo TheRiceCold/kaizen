@@ -6,7 +6,7 @@ import CustomThemes from './CustomThemes'
 
 export default Widget.Box(
   { vertical: true, className: 'themes-stack' },
-  Title('Themes', 'left', 'general'),
+  Title({ label: 'Themes', leftTo: 'general', rightTo: 'advanced' }),
   Adjustments,
   DarkColors,
   LightColors,

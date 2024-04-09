@@ -1,7 +1,7 @@
 import Color from 'service/color'
 import { clamp } from 'lib/utils'
 
-const colors = [
+const colorWheel = [
   '#ff6666', 
   '#ffff66', 
   '#66dd66', 
@@ -9,13 +9,13 @@ const colors = [
   '#6666ff', 
   '#ff66ff', 
   '#ff6666',
-];
+].join(', ')
 
 const range = Widget.Box(
   { className: 'hue-wrapper'}, 
   Widget.Box({
     className: 'hue',
-    css: 'background: linear-gradient(to bottom, #ff6666, #ffff66, #66dd66, #66ffff, #6666ff, #ff66ff, #ff6666);',
+    css: `background: linear-gradient(to bottom, ${colorWheel});`,
   })
 )
 
