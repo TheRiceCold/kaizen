@@ -7,7 +7,7 @@ const length = options.bar.media.length
 
 const { media: show } = showWidget
 
-export default (label) => Widget.Stack({
+export default label => Widget.Stack({
   className: 'stack',
   transition: 'slide_up_down',
   children: {
@@ -18,16 +18,17 @@ export default (label) => Widget.Stack({
       label: label.bind(),
       maxWidthChars: length.bind(),
     }),
-    visualizer: Widget.EventBox({
-      /* HACK:
+
+    /* HACK:
        * I don't really need the eventbox widget but,
        * the box widget forces this child show up first
        * no matter how much I enforces it not to by using shown, setup, or hook
        */
+    visualizer: Widget.EventBox({
       hpack: 'center',
       className: 'visualizer',
-      child: label.bind().as(lbl => {
-        const bars = Math.floor(lbl.length * 0.75)
+      child: label.bind().as((label: string) => {
+        const bars = Math.floor(label.length * 0.75)
         return Cava({
           width, height,
           bars: (bars < length.value ? bars : length.value) * width,

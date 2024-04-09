@@ -1,5 +1,4 @@
 export { default as openKeyMenu } from './keyMenu'
 export { default as openSnipMenu } from './snipMenu'
 export { default as openZoomMenu } from './zoomMenu'
-export { default as openColorMenu } from './colorMenu'
 export { default as openRecordMenu } from './recordMenu'

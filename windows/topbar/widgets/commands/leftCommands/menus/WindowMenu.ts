@@ -16,4 +16,4 @@ const commands: MenuItemProps[] = [
   { label: 'Quit', onActivate: () => dispatch('killactive') },
 ]
 
-export default self => Menu(self, commands)
+export const openWindowMenu = self => Menu(self, commands)

@@ -10,4 +10,4 @@ const commands: MenuItemProps[] = [
   { label: 'Debian (Container)', onActivate: () => { } },
 ]
 
-export default self => Menu(self, commands)
+export const openDevMenu = self => Menu(self, commands)

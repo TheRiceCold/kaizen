@@ -1,12 +1,14 @@
 import Annotation from 'service/annotation'
+
 import Revealer from '../revealer'
 import { 
   openKeyMenu, 
   openZoomMenu, 
   openSnipMenu,
-  openColorMenu,
   openRecordMenu, 
 } from './menus'
+
+import { toggleWidget } from 'lib/globals'
 
 const commands = [
   {
@@ -14,11 +16,10 @@ const commands = [
     tooltipText: 'gromit-mpx',
     onClicked: () => Annotation.start(),
   },
-  { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
-
+  { label: 'Colors', onClicked: () => toggleWidget('color')},
+  // { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
   { label: 'Keys ', onClicked: openKeyMenu },
   { label: 'Zoom ', onClicked: openZoomMenu },
-  { label: 'Color ', onClicked: openColorMenu },
   { label: 'Record ', onClicked: openRecordMenu },
   { label: 'Snip ', onClicked: openSnipMenu },
 ]
