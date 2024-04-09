@@ -1,9 +1,11 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
 import Menu from '../../Menu'
 
+import { toggleWidget } from 'lib/globals'
+
 const commands: MenuItemProps[] = [
-  { label: 'Picker', onActivate: () => { } },
-  { label: 'Wheel', onActivate: () => { } } ,
+  { label: 'Pick', onActivate: () => { } },
+  { label: 'Wheel', onActivate: () => toggleWidget('colorwheel') },
 ]
 
 export default self => Menu(self, commands)

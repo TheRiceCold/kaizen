@@ -35,18 +35,19 @@ const notificationIcon = notifications.bind('dnd').as(
 )
 
 const showWidget = {
-  popup: {
-    media: Variable(false),
-    colorWheel: Variable(false),
-    annotation: Variable(false),
-  },
-  sideleft: {
-    apis: Variable(false),
-  },
-  sideright: {
-    datemenu: Variable(false),
-    quicksettings: Variable(false), 
-  }
+  // TOP
+  media: Variable(false),
+  colorwheel: Variable(false),
+  annotation: Variable(false),
+
+  // BOTTOM
+  dock: Variable(false),
+  keyboard: Variable(false),
+
+  // SIDE
+  apis: Variable(false),
+  datemenu: Variable(false),
+  quicksettings: Variable(false), 
 }
 
 export { 

@@ -1,7 +1,9 @@
 import options from 'options'
 import { showWidget } from 'lib/variables'
 
-export default (name: string, children) => Widget.Revealer({
+type menuNames = 'apis' | 'datemenu' | 'quicksettings'
+
+export default (name: menuNames, children) => Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: options.transition.value,
   child: Widget.Box({ 
@@ -10,7 +12,7 @@ export default (name: string, children) => Widget.Revealer({
     classNames: ['menu-revealer', name] 
   }),
   setup(self) {
-    const shown = showWidget.sideleft[name] ?? showWidget.sideright[name]
-    self.hook(shown, () => self.revealChild = shown.value)
+    const show = showWidget[name]
+    self.hook(show, () => self.revealChild = show.value)
   }
 })

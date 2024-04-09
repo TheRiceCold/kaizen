@@ -3,7 +3,7 @@ import { type TWorkspace } from 'windows/bar/widgets/workspaces/LabelStack'
 import { opt } from 'lib/option'
 import { showWidget } from 'lib/variables'
 
-const { datemenu, quicksettings } = showWidget.sideright
+const { datemenu, quicksettings } = showWidget
 
 export default {
   position: opt<'top' | 'bottom'>('top'),

@@ -5,7 +5,7 @@ import { showWidget } from 'lib/variables'
 const { width, height } = options.bar.media.visualizer
 const length = options.bar.media.length
 
-const { media: shown } = showWidget.popup
+const { media: show } = showWidget
 
 export default (label) => Widget.Stack({
   className: 'stack',
@@ -35,4 +35,4 @@ export default (label) => Widget.Stack({
       })
     })
   },
-}).hook(shown, self => self.shown = shown ? 'visualizer' : 'song')
+}).hook(show, self => self.shown = show ? 'visualizer' : 'song')
