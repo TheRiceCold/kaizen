@@ -1,26 +1,22 @@
-{
-  inputs,
-  writeShellScript,
-  system,
-  stdenv,
+{ 
+  inputs, writeShellScript, system, stdenv,
 
-  bun,
-  dart-sass,
+  # Utilities
+  fd, bun, which, dart-sass, wl-clipboard,
 
-  fd,
-  which,
+  # SERVICES
+  # showmethekey  # TODO:
+  hyprpicker,     # Color Picker
+  wl-screenrec,   # Screen Recorder
+  sptlrx,         # Spotify lyrics
+  gromit-mpx,     # Annotation Tool
+  cava,           # Audio Visualizer
+  swww,           # Animated Wallpaper Daemon
+  brightnessctl,  # Read and Control Brightness 
+
   pavucontrol,
-  brightnessctl,
   networkmanager,
   accountsservice,
-
-  swww,            # Animated wallpaper Daemon
-  hyprpicker,      # Color Picker
-  wl-clipboard,    # Clipboard Utility
-  wl-screenrec,    # Screen Recorder
-  gromit-mpx,      # Annotation Tool
-  sptlrx,          # Spotify lyrics
-
   version ? "git"
 } : let
   name = "kaizen";
@@ -33,16 +29,16 @@
     inputs.matugen.packages.${system}.default
     inputs.hyprland.packages.${system}.default
 
-    fd
-    which
-    dart-sass
-    brightnessctl
+    fd which dart-sass wl-clipboard
+
+    cava
     swww
-    gromit-mpx
     sptlrx
-    wl-screenrec
-    wl-clipboard
+    gromit-mpx
     hyprpicker
+    wl-screenrec
+    brightnessctl
+
     pavucontrol
     networkmanager
   ];

@@ -13,5 +13,5 @@ Object.assign(globalThis, {
 })
 
 Utils.ensureDirectory(TMP)
-App.addIcons(`${App.configDir}/assets/icons`)
-App.addIcons(`${App.configDir}/assets/icons/weather`)
+App.addIcons(`${App.configDir}/icons`)
+App.addIcons(`${App.configDir}/icons/weather`)
