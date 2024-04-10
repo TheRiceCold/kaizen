@@ -20,6 +20,6 @@
       kaizen = default;
     });
 
-    homeManagerModules.default = import ./nix/hm-module self;
+    homeManagerModules.default = import ./nix/hm-module.nix self;
   };
 }
