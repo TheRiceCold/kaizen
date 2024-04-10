@@ -1,4 +1,4 @@
-import iconSubstitute from './iconSubstitute'
+import { audioIconSub } from 'lib/utils'
 
 type Type = 'microphone' | 'speaker'
 const audio = await Service.import('audio')
@@ -7,7 +7,7 @@ const Indicator = (type: Type = 'speaker') => Widget.Button({
   vpack: 'center',
   onClicked: () => audio[type].is_muted = !audio[type].is_muted,
   child: Widget.Icon({
-    icon: audio[type].bind('icon_name').as((i: string) => iconSubstitute(i, type)),
+    icon: audio[type].bind('icon_name').as((name: string) => audioIconSub(name || '', type)),
   }),
 })
 
@@ -30,7 +30,9 @@ const Percent = (type: Type = 'speaker') => Widget.Label({
 
 const Volume = (type: Type = 'speaker') => Widget.Box(
   { className: 'slider-box' },
-  Indicator(type), Slider(type), Percent(type)
+  Indicator(type), 
+  Slider(type), 
+  Percent(type)
 )
 
 export default Widget.Box({ vertical: true }, Volume('speaker'), Volume('microphone')

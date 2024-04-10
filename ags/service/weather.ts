@@ -1,9 +1,5 @@
+import keys from 'keys'
 import icons from 'data/icons'
-
-const keys = {
-  OPENAI_API_KEY: '',
-  WEATHER_API_KEY: '',
-}
 
 class WeatherService extends Service {
   static {
@@ -64,7 +60,6 @@ class WeatherService extends Service {
       const timeOfDay = curHour >= sunriseHour && curHour <= sunsetHour + 12 ? 'day' : 'night'
       const getIcon = (code: string) => 'wi-' + icons.weather[timeOfDay][code] || icons.weather['day'][code] || ''
 
-      this.updateProperty('location', location)
       this.updateProperty('icon', getIcon(currentCondition['weatherCode']))
       this.updateProperty('hourly_icons', hourly.map(hour => getIcon(hour['weatherCode'])))
 

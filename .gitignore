@@ -1,6 +1,5 @@
 node_modules/
 types/
 
-keys.ts
 bun.lockb
 package-lock.json

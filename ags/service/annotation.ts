@@ -49,7 +49,7 @@ class Annotation extends Service {
   }
 
   addInput({ device = 'default', input, name }: { device?: string, name: string, input?: InputType | InputType[] }) {
-    this._inputList.push(`"${device}"${input? `[${input}]`: ''} = "${name}";`)
+    this._inputList.push(`"${device}"${input ? `[${input}]`: ''} = "${name}";`)
   }
 
   /* HACK:

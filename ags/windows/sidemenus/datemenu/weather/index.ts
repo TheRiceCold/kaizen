@@ -19,7 +19,11 @@ const Temp = Widget.Box(
 
 const Description = Widget.Label({ 
   className: 'description',
-  label: currentCondition.as(c => c.weatherDesc[0].value) })
+  label: currentCondition.as(c => { 
+    const desc = c.weatherDesc
+    return !!desc ? desc[0].value : ''
+  })
+})
 
 function CurrentCondition() {
   const Label = (name: string, value: string) => Widget.Box({

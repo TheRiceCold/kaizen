@@ -1,7 +1,7 @@
 import { type Stream } from 'types/service/audio'
 
 import icons from 'data/icons'
-import iconSubstitute from './iconSubstitute'
+import { audioIconSub } from 'lib/utils'
 import { setupCursorHover } from 'misc/cursorhover'
 
 type Type = 'microphone' | 'speaker'
@@ -15,7 +15,7 @@ const SinkItem = (type: Type) => (stream: Stream) => Widget.Button({
     { spacing: 5 },
     Widget.Icon({
       tooltipText: stream.icon_name,
-      icon: iconSubstitute(stream.icon_name, type),
+      icon: audioIconSub(stream.icon_name, type),
     }),
     Widget.Label(stream.description?.split(' ').slice(0, 4).join(' ')),
     Widget.Icon({

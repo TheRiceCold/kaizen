@@ -1,4 +1,3 @@
-import { type Props as CircularProgressProps } from 'types/widgets/circularprogress'
 import { type MprisPlayer } from 'types/service/mpris'
 
 import PlayerStatusIcon from 'misc/playerStatusIcon'
@@ -27,32 +26,33 @@ const Revealer = Widget.Revealer({
   transitionDuration: options.transition * 1.5,
 })
 
-const ProgressIcon = (player: MprisPlayer) => {
-  function progressUpdate (prog: CircularProgressProps) {
-    return prog.value = player.position / player.length
+const ProgressIcon = (player: MprisPlayer) => Widget.CircularProgress({
+  startAt: 0.75,
+  className: 'progress',
+  child: PlayerStatusIcon(player),
+  attribute: { update: self => self.value = player.position / player.length },
+  setup(self) {
+    const { update } = self.attribute
+    self.hook(mpris, update).poll(1500, update)
   }
+})
 
-  return Widget.CircularProgress({
-    startAt: 0.75,
-    className: 'progress',
-    child: PlayerStatusIcon(player),
-  }).hook(mpris, progressUpdate).poll(1500, progressUpdate)
-}
-
+// FIX: doesn't hide the revealer when the player(like spotify) is open before ags
 function update (self) {
   const player = getPlayer()
-  const artists = player.track_artists.join(', ')
-  // FIX: doesn't hide the revealer when the player(like spotify) is open before ags
+
   const revealTimeout = () => Utils.timeout(1000, () => {
-    Revealer.revealChild = !!player.entry
-    self.toggleClassName('show-border', !!player.entry)
+    Revealer.revealChild = !!player
+    self.toggleClassName('show-border', !!player)
   })
 
-  if (!player.entry) { revealTimeout(); return }
+  if (!player) { revealTimeout(); return }
   if (player.play_back_status === 'Paused') stack.shown = 'song'
 
   self.onPrimaryClick = player.playPause
   self.tooltipText = getTooltip(player)
+
+  const artists = player.track_artists.join(', ')
   label.value = `${artists && artists+' - '} ${player.track_title}`
 
   Revealer.child.children = [ ProgressIcon(player), stack ]

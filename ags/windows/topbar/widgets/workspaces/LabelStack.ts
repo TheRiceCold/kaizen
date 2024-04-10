@@ -28,7 +28,7 @@ const Items = (ws: TWorkspace) => {
     label: workspace,
     maxWidthChars: 28,
     justification: 'center',
-    css: `margin-right: ${options.theme.spacing};`,
+    css: `margin-right: ${options.theme.spacing}px;`,
   }).hook(hyprland, (self: LabelProps) => self.label = getLabel(false))
 
   return ws.reduce((acc, {label}) => (acc[label] = Label(label), acc), {})

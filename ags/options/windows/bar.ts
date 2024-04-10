@@ -22,14 +22,6 @@ export default {
     colored: opt(false),
     action: opt(() => quicksettings.value = !quicksettings.value),
   },
-  launcher: {
-    icon: {
-      icon: opt(null),
-      colored: opt(true),
-    },
-    action: opt(() => App.toggleWindow('launcher')),
-    label: { colored: opt(true), label: opt(''), },
-  },
   power: {
     action: opt(() => App.toggleWindow('powermenu')),
   },
