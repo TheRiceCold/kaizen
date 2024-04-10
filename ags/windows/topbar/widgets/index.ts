@@ -1,27 +1,11 @@
-import middle from './middle'
-import workspaces from './workspaces'
+export { default as Launcher } from './LauncherButton'
+export { default as Workspaces } from './workspaces'
+export { default as LeftCommands } from './commands/leftCommands'
 
-import tray from './Tray'
-import DateButton from './DateButton'
-import PowerButton from './PowerButton'
-import ControlButton from './ControlButton'
-import LauncherButton from './LauncherButton'
+export { default as Middle } from './middle'
 
-// Command Revealers
-import leftCommands from './commands/leftCommands'
-import rightCommands from './commands/rightCommands'
-
-export default {
-  tray,
-  middle,
-
-  date: DateButton,
-  power: PowerButton,
-  control: ControlButton,
-  launcher: LauncherButton,
-
-  workspaces,
-  leftCommands,
-  rightCommands,
-  expander: () => Widget.Box({ expand: true })
-}
+export { default as RightCommands } from './commands/rightCommands'
+export { default as Tray } from './Tray'
+export { default as Control } from './ControlButton'
+export { default as Date } from './DateButton'
+export { default as Power } from './PowerButton'

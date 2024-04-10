@@ -5,7 +5,7 @@ import BarButton from '../../BarButton'
 
 const dispatch = (arg: string | number) => sh(`hyprctl dispatch workspace ${arg}`)
 
-export default () => Widget.Box([
+export default Widget.Box([
   BarButton({
     window: 'overview',
     className: 'workspaces',

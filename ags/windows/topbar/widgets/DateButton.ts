@@ -11,7 +11,7 @@ const Time = Widget.Label({
   ).bind()
 })
 
-export default () => BarButton({
+export default BarButton({
   child: Time,
   window: 'datemenu',
   className: 'datemenu',

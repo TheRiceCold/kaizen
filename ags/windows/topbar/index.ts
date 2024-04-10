@@ -1,35 +1,17 @@
-import widgets from './widgets'
-import options from 'options'
-
-export type BarWidget = keyof typeof widget
-
-const { start, end } = options.bar.layout
-
-const startWidget = Widget.Box({
-  hpack: 'start',
-  className: 'side-items',
-  children: start.bind().as(items => [
-    ...items.map(item => widgets[item]()),
-    widgets.leftCommands()
-  ])
-})
-
-const endWidget = Widget.Box({
-  hpack: 'end',
-  className: 'side-items',
-  children: end.bind().as(items => [
-    widgets.rightCommands(),
-    ...items.map(item => widgets[item]()),
-  ])
-})
+import { 
+  Launcher, Workspaces, LeftCommands,
+  Middle,
+  RightCommands, Tray, Control, Date, Power
+} from './widgets'
 
 const Content = Widget.CenterBox({
-  startWidget, 
-  centerWidget: widgets.middle(), 
-  endWidget,
   css: 'min-width: 2px; min-height: 2.5rem;',
+  startWidget: Widget.Box({ hpack: 'start', className: 'side-items' }, Launcher, Workspaces, LeftCommands),
+  centerWidget: Middle, 
+  endWidget: Widget.Box({ hpack: 'end', className: 'side-items' }, RightCommands, Tray, Control, Date, Power)
 })
 
+/* NOTE: Maybe add an auto-hide(revealer) option? */
 export default (monitor: number) => Widget.Window({
   child: Content,
   className: 'bar',
@@ -37,5 +19,3 @@ export default (monitor: number) => Widget.Window({
   exclusivity: 'exclusive',
   anchor: [ 'top', 'right', 'left' ],
 })
-
-/* NOTE: Maybe add an auto-hide(revealer) option? */

@@ -1,4 +1,3 @@
-import { type BarWidget } from 'windows/bar'
 import { type TWorkspace } from 'windows/bar/widgets/workspaces/LabelStack'
 import { opt } from 'lib/option'
 import { showWidget } from 'lib/variables'
@@ -6,11 +5,6 @@ import { showWidget } from 'lib/variables'
 const { datemenu, quicksettings } = showWidget
 
 export default {
-  position: opt<'top' | 'bottom'>('top'),
-  layout: {
-    start: opt<BarWidget[]>([ 'launcher', 'workspaces', ]),
-    end: opt<BarWidget[]>([ 'tray', 'control', 'date', 'power' ]),
-  },
   tray: {
     ignore: opt([ 'KDE Connect Indicator' ]),
   },

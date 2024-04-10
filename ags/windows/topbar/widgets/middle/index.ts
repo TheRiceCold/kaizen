@@ -59,7 +59,7 @@ function update (self) {
   revealTimeout()
 }
 
-export default () => Widget.EventBox({
+export default Widget.EventBox({
   vpack: 'start',
   child: Revealer,
   className: 'media',

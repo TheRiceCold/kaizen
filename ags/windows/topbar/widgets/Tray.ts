@@ -28,4 +28,4 @@ const Item = (item: TrayItem) => BarButton({
   onSecondaryClick: self => item.menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
 })
 
-export default () => Widget.Box().bind('children', systemtray, 'items', items => items.filter(({ id }) => !ignore.value.includes(id)).map(Item))
+export default Widget.Box().bind('children', systemtray, 'items', items => items.filter(({ id }) => !ignore.value.includes(id)).map(Item))

@@ -1,4 +1,3 @@
-import { LabelProps } from 'types/widgets/label'
 import BarButton from '../BarButton'
 import options from 'options'
 import { notificationIcon } from 'lib/variables'
@@ -8,7 +7,7 @@ const { wifi } = await Service.import('network')
 
 const battery = await Service.import('battery')
 
-const BatteryIcon = Widget.Label().hook(battery, (self: LabelProps) => {
+const BatteryIcon = Widget.Label().hook(battery, self => {
   const { percent: p, charging, available } = battery
   self.visible = available
   self.toggleClassName('charging', charging)
@@ -18,11 +17,11 @@ const BatteryIcon = Widget.Label().hook(battery, (self: LabelProps) => {
 
 const DND = Widget.Icon({ icon: notificationIcon })
 
-export default () => BarButton({
+export default BarButton({
   window: 'dropmenu',
   onClicked: action.bind(),
-  child: Widget.Box({
-    children: [ DND, Widget.Icon({ icon: wifi.bind('icon_name') }), BatteryIcon ],
-    spacing: options.theme.spacing * 1.75,
-  })
+  child: Widget.Box(
+    { spacing: options.theme.spacing * 1.75 },
+    DND, Widget.Icon({ icon: wifi.bind('icon_name') }), BatteryIcon
+  )
 })

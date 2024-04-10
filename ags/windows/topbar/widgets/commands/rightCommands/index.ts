@@ -24,7 +24,7 @@ const commands = [
   { label: 'Snip ', onClicked: openSnipMenu },
 ]
 
-export default () => Revealer('left', commands)
+export default Revealer('left', commands)
 
 /* NOTE: If there's more command to be added then maybe
  * consider putting everything in one command like "(Screen  )"?

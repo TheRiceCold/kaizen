@@ -15,4 +15,4 @@ const commands = [
   }, // TODO: Create documentation
 ]
 
-export default () => Revealer('right', commands)
+export default Revealer('right', commands)
