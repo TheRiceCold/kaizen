@@ -13,7 +13,7 @@ jobs:
       - uses: oven-sh/setup-bun@v1
 
       - name: Install dependencies
-        run: bun install
+        run: cd desktop && bun install
 
       - name: Lint
         run: bun lint

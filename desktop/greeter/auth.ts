@@ -64,10 +64,8 @@ export default Widget.Box({
           className: 'wallpaper-contrast',
         }),
       ),
-      overlay: Widget.Box({ 
-        vpack: 'end', 
-        vertical: true 
-      }, avatar,
+      overlay: Widget.Box({ vpack: 'end', vertical: true }, 
+        avatar,
         Widget.Box({ hpack: 'center' },
           Widget.Icon(icons.ui.avatar),
           Widget.Label(realName || userName),

@@ -1,16 +1,16 @@
 import { type MprisPlayer } from 'types/service/mpris'
 
-import Player from './Player'
+// import Player from './Player'
 import PopupRevealer from '../PopupRevealer'
 
-import options from 'options'
+// import options from 'options'
 import { showWidget } from 'lib/variables'
 
 const mpris = await Service.import('mpris')
 
 const players = mpris.bind('players')
-const pref = options.media.preferred.value
-const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
+// const pref = options.media.preferred.value
+// const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
 
 const isRealPlayer = (player: MprisPlayer) => (
   !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless

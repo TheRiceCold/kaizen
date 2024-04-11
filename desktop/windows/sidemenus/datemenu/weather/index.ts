@@ -21,7 +21,7 @@ const Description = Widget.Label({
   className: 'description',
   label: currentCondition.as(c => { 
     const desc = c.weatherDesc
-    return !!desc ? desc[0].value : ''
+    return desc ? desc[0].value : ''
   })
 })
 

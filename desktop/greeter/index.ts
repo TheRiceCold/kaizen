@@ -3,7 +3,7 @@ import 'style/style'
 import auth from './auth'
 // import StatusBar from './statusbar'
 
-const { Gtk, GLib } = imports.gi
+const { Gtk } = imports.gi
 const Window = Widget.subclass<typeof Gtk.Window, Gtk.Window.ConstructorProperties>(Gtk.Window)
 
 App.config({
