@@ -20,7 +20,7 @@ const isRealPlayer = (player: MprisPlayer) => (
 
 const Stack = Widget.Stack({
   children: {
-    player: Player(getPlayer()),
+    // player: Player(getPlayer()),
     lyrics: Widget.Box({ }) // TODO:
   }
 })

@@ -1,0 +1,52 @@
+@import '../style/mixins/floating-widget'
+@import '../style/mixins/widget'
+@import '../style/mixins/spacing'
+@import '../style/mixins/unset'
+@import '../style/mixins/a11y-button'
+
+window#greeter
+  color: $fg
+  background-color: lighten($bg, 6%)
+
+  .bar
+    background-color: transparent
+    .date
+      all: unset
+      @include panel-button($flat: true, $reactive: false)
+
+  .auth
+    padding: 0
+    min-width: 400px
+    border-radius: $radius
+    @include floating_widget
+
+    .wallpaper
+      min-height: 220px
+      background-size: cover
+      border-top-left-radius: $radius
+      border-top-right-radius: $radius
+
+    .wallpaper-contrast
+      min-height: 100px
+
+    .avatar
+      min-width: 140px
+      min-height: 140px
+      border-radius: 99px
+      background-size: cover
+      margin-bottom: $spacing
+      box-shadow: 3px 3px 6px 0 $shadow-color
+
+
+    .password
+      entry
+        @include button
+        margin-left: calc($spacing * 0.5)
+        padding: calc($padding * 0.7) $padding
+
+      margin-top: $spacing
+      margin: 0 calc($padding * 4)
+
+    .response-box
+      color: $error-bg
+      margin: $spacing 0
