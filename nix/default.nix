@@ -20,21 +20,22 @@
 } : let
   name = "kaizen";
 
+  matugen = inputs.matugen.packages.${system}.default;
+  hyprland = inputs.hyprland.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
     extraPackages = [ accountsservice ];
   };
 
   dependencies = [
-    inputs.matugen.packages.${system}.default
-    inputs.hyprland.packages.${system}.default
-
     fd which dart-sass wl-clipboard
 
     cava
     swww
     sptlrx
-    gromit-mpx
+    matugen
+    hyprland
     hyprpicker
+    gromit-mpx
     wl-screenrec
     brightnessctl
     networkmanager
@@ -63,9 +64,9 @@
       --external 'gi://*' \
 
       ${bun}/bin/bun build ./greeter \
-        --outfile=greeter.js \
-        --external 'resource://*' \
-        --external 'gi://*' \
+      --outfile=greeter.js \
+      --external 'resource://*' \
+      --external 'gi://*' \
     '';
 
     installPhase = ''
@@ -73,7 +74,6 @@
       cp -r misc $out
       cp -r style $out
       cp -r assets $out
-      cp -r greeter $out
       cp -r windows $out
       cp -f main.js $out/config.js
       cp -f greeter.js $out/greeter.js
