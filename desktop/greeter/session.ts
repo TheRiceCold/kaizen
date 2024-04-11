@@ -8,10 +8,10 @@ declare global {
 }
 
 Object.assign(globalThis, {
+  USER: userName,
   TMP: `${GLib.get_tmp_dir()}/greeter`,
   OPTIONS: '/var/cache/greeter/options.json',
   WALLPAPER: '/var/cache/greeter/background',
-  USER: userName,
 })
 
 Utils.ensureDirectory(TMP)

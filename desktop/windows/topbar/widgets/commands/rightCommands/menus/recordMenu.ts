@@ -4,7 +4,7 @@ import Menu from '../../Menu'
 const commands: MenuItemProps[] = [
   { label: 'Fullscreen', onActivate: () => { } },
   { label: 'Region', onActivate: () => { } },
-  { label: 'Audio Only', onActivate: () => { } },
+  { label: 'Voice', onActivate: () => { } },
   { label: 'Open Files', onActivate: () => { } },
 ]
 
