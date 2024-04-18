@@ -2,17 +2,20 @@
   inputs, writeShellScript, system, stdenv,
 
   # Utilities
-  fd, bun, which, dart-sass, wl-clipboard,
+  fd, bun, which, dart-sass, 
 
   # SERVICES
   cage,
   # showmethekey    # TODO:
   hyprpicker,       # Color Picker
-  wl-screenrec,     # Screen Recorder
   sptlrx,           # Spotify lyrics
+  wl-screenrec,     # Screen Recorder
   gromit-mpx,       # Annotation Tool
   cava,             # Audio Visualizer
   swww,             # Animated Wallpaper Daemon
+  ydotool,          # 
+  cliphist,         # Clipboard History Manager
+  wl-clipboard,     # 
   brightnessctl,    # Read and Control Brightness 
   networkmanager,   #
   accountsservice,  #
@@ -33,7 +36,9 @@
     swww
     sptlrx
     matugen
+    ydotool
     hyprland
+    cliphist
     hyprpicker
     gromit-mpx
     wl-screenrec
