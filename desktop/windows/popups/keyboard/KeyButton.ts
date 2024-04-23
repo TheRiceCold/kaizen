@@ -1,3 +1,4 @@
+import { sh } from 'lib/utils'
 import { setupCursorHover } from 'misc/cursorhover'
 
 class ShiftMode {
@@ -17,7 +18,102 @@ let modsPressed: boolean = false
 let shiftMode = ShiftMode.Off
 let shiftButton
 let rightShiftButton
-let allButtons = []
+let buttons = []
+
+function normalKeyExec(self, buttons, key) {
+  self.connect('pressed', () => sh(`ydotool key ${key.code}:1`).catch(print))
+  self.connect('clicked', () => {
+    sh(`ydotool key ${key.code}:0`).catch(print)
+
+    if (shiftMode == ShiftMode.Normal) {
+      shiftMode = ShiftMode.Off
+      if (typeof shiftButton !== 'undefined') {
+        sh('ydotool key 42:0').catch(print)
+        shiftButton.toggleClassName('key-active', false)
+      }
+      if (typeof rightShiftButton !== 'undefined') {
+        sh('ydotool key 54:0').catch(print)
+        rightShiftButton.toggleClassName('key-active', false)
+      }
+      buttons.forEach(btn => {
+        if (typeof btn.attribute.key.labelShift !== 'undefined') 
+          btn.label = btn.attribute.key.label
+      })
+    }
+  })
+}
+
+function modKeyExec(self, buttons, key) {
+  let pressed = false
+
+  self.connect('pressed', () => { // release
+    if (pressed) {
+      sh(`ydotool key ${key.code}:0`).catch(print)
+      self.toggleClassName('key-active', false)
+      pressed = false
+      if (key.code == 100) { // Alt Gr button
+        buttons.forEach(btn => { 
+          if (typeof btn.attribute.key.labelAlt !== 'undefined') 
+            btn.label = btn.attribute.key.label 
+        })
+      }
+    } else {
+      sh(`ydotool key ${key.code}:1`).catch(print)
+      self.toggleClassName('key-active', true)
+      if (!(key.code == 42 || key.code == 54)) 
+        pressed = true
+      else switch (shiftMode.name) { // This toggles the shift button state
+        case 'Off':
+          shiftMode = ShiftMode.Normal
+          buttons.forEach(btn => { 
+            if (typeof btn.attribute.key.labelShift !== 'undefined') 
+              btn.label = btn.attribute.key.labelShift 
+          })
+          if (typeof shiftButton !== 'undefined')
+            shiftButton.toggleClassName('key-active', true)
+          if (typeof rightShiftButton !== 'undefined')
+            rightShiftButton.toggleClassName('key-active', true)
+          break
+        case 'Normal':
+          shiftMode = ShiftMode.Locked
+          if (typeof shiftButton !== 'undefined') 
+            shiftButton.label = key.labelCaps
+          if (typeof rightShiftButton !== 'undefined') 
+            rightShiftButton.label = key.labelCaps
+          break
+        case 'Locked':
+          shiftMode = ShiftMode.Off;
+          if (typeof shiftButton !== 'undefined') {
+            shiftButton.label = key.label
+            shiftButton.toggleClassName('key-active', false)
+          }
+          if (typeof rightShiftButton !== 'undefined') {
+            rightShiftButton.label = key.label
+            rightShiftButton.toggleClassName('key-active', false)
+          }
+          sh(`ydotool key ${key.code}:0`).catch(print)
+
+          buttons.forEach(btn => { 
+            if (typeof btn.attribute.key.labelShift !== 'undefined') 
+              btn.label = btn.attribute.key.label
+          })
+          break
+      }
+      
+      if (key.code == 100) // Alt Gr button
+        buttons.forEach(btn => { 
+          if (typeof btn.attribute.key.labelAlt !== 'undefined') 
+            btn.label = btn.attribute.key.labelAlt
+        })
+      modsPressed = true
+    }
+  })
+
+  if (key.code == 42) 
+    shiftButton = self
+  else if (key.code == 54) 
+    rightShiftButton = self
+}
 
 export default key => Widget.Button({
   label: key.label,
@@ -26,99 +122,15 @@ export default key => Widget.Button({
   hexpand: ['space', 'expand'].includes(key.shape),
   setup(self) {
     setupCursorHover(self)
+    buttons = buttons.concat(self)
 
-    let pressed = false
-    allButtons = allButtons.concat(self)
-
-    if (key.keytype == 'normal') {
-      self.connect('pressed', () => Utils.execAsync(`ydotool key ${key.keycode}:1`).catch(print))
-      self.connect('clicked', () => {
-        Utils.execAsync(`ydotool key ${key.keycode}:0`).catch(print)
-
-        if (shiftMode == ShiftMode.Normal) {
-          shiftMode = ShiftMode.Off
-          if (typeof shiftButton !== 'undefined') {
-            Utils.execAsync('ydotool key 42:0').catch(print)
-            shiftButton.toggleClassName('osk-key-active', false)
-          }
-          if (typeof rightShiftButton !== 'undefined') {
-            Utils.execAsync('ydotool key 54:0').catch(print)
-            rightShiftButton.toggleClassName('osk-key-active', false)
-          }
-          allButtons.forEach(button => {
-            if (typeof button.attribute.key.labelShift !== 'undefined') 
-              button.label = button.attribute.key.label
-          })
-        }
-      })
-    } else if (key.keytype == 'modkey') {
-      self.connect('pressed', () => { // release
-        if (pressed) {
-          Utils.execAsync(`ydotool key ${key.keycode}:0`).catch(print)
-          self.toggleClassName('osk-key-active', false)
-          pressed = false
-          if (key.keycode == 100) { // Alt Gr button
-            allButtons.forEach(button => { 
-              if (typeof button.attribute.key.labelAlt !== 'undefined') 
-                button.label = button.attribute.key.label 
-            })
-          }
-        } else {
-          Utils.execAsync(`ydotool key ${key.keycode}:1`).catch(print)
-          self.toggleClassName('osk-key-active', true)
-          if (!(key.keycode == 42 || key.keycode == 54)) 
-            pressed = true
-          else switch (shiftMode.name) { // This toggles the shift button state
-            case 'Off':
-              shiftMode = ShiftMode.Normal
-              allButtons.forEach(btn => { 
-                if (typeof btn.attribute.key.labelShift !== 'undefined') 
-                  btn.label = btn.attribute.key.labelShift 
-              })
-              if (typeof shiftButton !== 'undefined')
-                shiftButton.toggleClassName('osk-key-active', true)
-              if (typeof rightShiftButton !== 'undefined')
-                rightShiftButton.toggleClassName('osk-key-active', true)
-              break
-            case 'Normal':
-              shiftMode = ShiftMode.Locked
-              if (typeof shiftButton !== 'undefined') 
-                shiftButton.label = key.labelCaps
-              if (typeof rightShiftButton !== 'undefined') 
-                rightShiftButton.label = key.labelCaps
-              break
-            case 'Locked':
-              shiftMode = ShiftMode.Off;
-              if (typeof shiftButton !== 'undefined') {
-                shiftButton.label = key.label
-                shiftButton.toggleClassName('osk-key-active', false)
-              }
-              if (typeof rightShiftButton !== 'undefined') {
-                rightShiftButton.label = key.label
-                rightShiftButton.toggleClassName('osk-key-active', false)
-              }
-              Utils.execAsync(`ydotool key ${key.keycode}:0`).catch(print)
-
-              allButtons.forEach(btn => { 
-                if (typeof btn.attribute.key.labelShift !== 'undefined') 
-                  btn.label = btn.attribute.key.label
-              })
-              break
-          }
-          
-          if (key.keycode == 100) // Alt Gr button
-            allButtons.forEach(btn => { 
-              if (typeof btn.attribute.key.labelAlt !== 'undefined') 
-                btn.label = btn.attribute.key.labelAlt
-            })
-          modsPressed = true
-        }
-      })
-
-      if (key.keycode == 42) 
-        shiftButton = self
-      else if (key.keycode == 54) 
-        rightShiftButton = self
+    switch(key.type) {
+      case 'normal':
+        normalKeyExec(self, buttons, key)
+        break
+      case 'modkey':
+        modKeyExec(self, buttons, key)
+        break
     }
   }
 })
