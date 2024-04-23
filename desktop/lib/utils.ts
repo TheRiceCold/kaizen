@@ -1,7 +1,7 @@
 import { type Application } from 'ts/types/service/applications'
 import { substitutes } from 'data/icons'
 
-const { GLib } = imports.gi
+const { GLib, Gio } = imports.gi
 
 /** @returns substitute icon || name || fallback icon */
 function icon(name: string | null, fallback = name) {
@@ -81,8 +81,7 @@ const createSurfaceFromWidget = (widget: Gtk.Widget) => {
   return surface
 }
 
-const fileExists = (path: string)  =>
-  imports.gi.Gio.File.new_for_path(path).query_exists(null)
+const fileExists = (path: string)  => Gio.File.new_for_path(path).query_exists(null)
 
 const expandTilde = (path: string) =>
   path.startsWith('~') ? GLib.get_home_dir() + path.slice(1) : path
@@ -121,6 +120,64 @@ const audioIconSub = (item: string, type: 'microphone' | 'speaker') => {
   return microphoneSubstitutes[item] || item
 }
 
+function getAllFiles(dir: string, files = []) {
+  const exists = (path: string) => Gio.File.new_for_path(path).query_exists(null)
+
+  if (!exists(dir)) return []
+  const file = Gio.File.new_for_path(dir)
+  const enumerator = file.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null)
+
+  for (const info of enumerator) {
+    if (info.get_file_type() === Gio.FileType.DIRECTORY) 
+      files.push(getAllFiles(`${dir}/${info.get_name()}`))
+    else 
+      files.push(`${dir}/${info.get_name()}`)
+  }
+
+  return files.flat(1)
+}
+
+function levenshteinDistance(a, b) {
+  if (!a.length) return b.length
+  if (!b.length) return a.length
+
+  const f = Array.from(new Array(a.length + 1), () => new Array(b.length + 1).fill(0))
+
+  for (let i = 0; i <= b.length; i++) f[0][i] = i
+  for (let i = 0; i <= a.length; i++) f[i][0] = i
+
+  for (let i = 1; i <= a.length; i++)
+    for (let j = 1; j <= b.length; j++) {
+      if (a.charAt(i - 1) === b.charAt(j - 1))
+        f[i][j] = f[i-1][j-1]
+      else
+        f[i][j] = Math.min(f[i-1][j-1], Math.min(f[i][j-1], f[i-1][j])) + 1
+    }
+
+  return f[a.length][b.length]
+}
+
+function searchIcons(appClass, files) {
+  appClass = appClass.toLowerCase()
+
+  if (!files.length) { return '' }
+
+  let appro = 0x3f3f3f3f
+  let path = ''
+
+  for (const item of files) {
+    const score = levenshteinDistance(item.split('/').pop().toLowerCase().split('.')[0], appClass)
+
+    if (score < appro) {
+      appro = score
+      path = item
+    }
+  }
+
+  return path
+}
+
+
 export {
   icon,
   bash,
@@ -137,4 +194,8 @@ export {
   copy,
   enableClickThrough,
   audioIconSub,
+
+  // DOCK
+  getAllFiles,
+  searchIcons
 }
