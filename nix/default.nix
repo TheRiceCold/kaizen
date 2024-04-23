@@ -2,47 +2,50 @@
   inputs, writeShellScript, system, stdenv,
 
   # Utilities
-  fd, bun, which, dart-sass, 
+  fd, bun, which, dart-sass,
 
   # SERVICES
   cage,
-  # showmethekey    # TODO:
-  hyprpicker,       # Color Picker
-  sptlrx,           # Spotify lyrics
-  wl-screenrec,     # Screen Recorder
-  gromit-mpx,       # Annotation Tool
-  cava,             # Audio Visualizer
-  swww,             # Animated Wallpaper Daemon
-  ydotool,          # 
-  cliphist,         # Clipboard History Manager
-  wl-clipboard,     # 
-  brightnessctl,    # Read and Control Brightness 
-  networkmanager,   #
-  accountsservice,  #
+  # showmethekey # TODO:
+  hyprpicker,
+  sptlrx,
+  wl-screenrec,
+  gromit-mpx,
+  cava,
+  swww,
+  ydotool,
+  cliphist,
+  wl-clipboard,
+  brightnessctl,
+  networkmanager,
+  accountsservice,
   version ? "git"
 } : let
   name = "kaizen";
 
-  matugen = inputs.matugen.packages.${system}.default;
+  matugen = inputs.matugen.packages.${system}.default; # Color Generation tool
   hyprland = inputs.hyprland.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
     extraPackages = [ accountsservice ];
   };
 
   dependencies = [
-    fd which dart-sass wl-clipboard
+    fd 
+    which 
+    dart-sass 
 
-    cava
-    swww
-    sptlrx
-    matugen
-    ydotool
-    hyprland
-    cliphist
-    hyprpicker
-    gromit-mpx
-    wl-screenrec
-    brightnessctl
+    wl-clipboard    # Command-line copy/paste utilities for Wayland
+    cava            # Audio Visualizer
+    swww            # Animated Wallpaper Daemon
+    sptlrx          # Spotify Lyrics
+    matugen         # Color generation tool
+    ydotool         # Generic command-line automation tool
+    hyprland        # Dynamic tiling manager Wayland compositor
+    cliphist        # Clipboard History Manager
+    hyprpicker      # Wayland Color Picker
+    gromit-mpx      # Annotation Tool
+    wl-screenrec    # High Performance Screen Recorder
+    brightnessctl   # Read and Control Brightness
     networkmanager
   ];
 

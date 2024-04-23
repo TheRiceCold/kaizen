@@ -14,7 +14,6 @@ class ShiftMode {
   }
 }
 
-let modsPressed: boolean = false
 let shiftMode = ShiftMode.Off
 let shiftButton
 let rightShiftButton
@@ -82,7 +81,7 @@ function modKeyExec(self, buttons, key) {
             rightShiftButton.label = key.labelCaps
           break
         case 'Locked':
-          shiftMode = ShiftMode.Off;
+          shiftMode = ShiftMode.Off
           if (typeof shiftButton !== 'undefined') {
             shiftButton.label = key.label
             shiftButton.toggleClassName('key-active', false)
