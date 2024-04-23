@@ -8,6 +8,8 @@ import options from 'options'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
 
+const { media } = options.popups
+
 export default (player: MprisPlayer) => {
   function lengthStr(length: number) {
     const min = Math.floor(length / 60)
@@ -24,7 +26,7 @@ export default (player: MprisPlayer) => {
     css: Utils.merge([
       player.bind('cover_path'),
       player.bind('track_cover_url'),
-      options.media.coverSize.bind(),
+      media.coverSize.bind(),
     ], (path: string, url: string, size: number) => `
       min-width: ${size}px;
       min-height: ${size}px;
@@ -91,7 +93,7 @@ export default (player: MprisPlayer) => {
     className: 'icon',
     tooltipText: player.identity || '',
     icon: Utils.merge(
-      [ player.bind('entry'), options.media.monochromeIcon.bind() ],
+      [ player.bind('entry'), media.monochromeIcon.bind() ],
       (e: string, s: string) => icon(`${e}${s ? '-symbolic' : ''}`, icons.fallback.audio)
     ),
   })

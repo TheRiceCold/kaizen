@@ -1,13 +1,13 @@
 import { opt } from 'lib/option'
 import bar from './bar'
-import media from './media'
+import popups from './popups'
 import launcher from './launcher'
 import sideleft from './sideleft'
 import sideright from './sideright'
 
 export default {
   bar: {...bar},
-  media: {...media},
+  popups: {...popups},
   launcher: {...launcher},
   sideleft: {...sideleft},
   sideright: {...sideright},

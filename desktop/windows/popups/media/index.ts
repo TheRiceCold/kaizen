@@ -9,7 +9,8 @@ import { showWidget } from 'lib/variables'
 const mpris = await Service.import('mpris')
 
 const players = mpris.bind('players')
-// const pref = options.media.preferred.value
+// const { media } = options.popups
+// const pref = media.preferred.value
 // const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
 
 const isRealPlayer = (player: MprisPlayer) => (
