@@ -1,16 +1,27 @@
-###### *<div align=right><sub>Last nix update: april 23, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: april 24, 2024</sub></div>*
 
-<h1 align=center>
-  Kaizen<br />
-</h1>
-
-> [!INFO]
-> The japanese word "kaizen" is a philosophy to improve continuously and change for the better.
+<center>
+  <h1>Kaizen<br />
+    <a href='https://nixos.org'>
+      <img src='https://img.shields.io/badge/NixOS-unstable-blue.svg?style=for-the-badge&labelColor=1b1e28&logo=NixOS&logoColor=add7ff&color=add7ff'>
+    </a>
+    <a href='https://github.com/TheRiceCold/kaizen'>
+      <img src='https://img.shields.io/github/languages/code-size/thericecold/kaizen?color=5de4c7&labelColor=1b1e28&style=for-the-badge&logo=github&logoColor=5de4c7'>
+    </a>
+    <a href='https://github.com/TheRiceCold/kaizen/stargazers'>
+      <img src='https://img.shields.io/github/stars/thericecold/kaizen?color=fcc5e9&labelColor=1b1e28&style=for-the-badge&logo=starship&logoColor=fcc5e9'>
+    </a>
+  </h1>
+  <p>The japanese word "kaizen" is a philosophy to improve continuously and change for the better.</p>
+</center>
 
 A linux desktop environment configuration using [Aylur's Gtk Shell][ags]. This configuration is designed to improve workflow with useful development tools.
 
 ## ▶️ Showcase
-**Status Bar** - Includes window options, audio visualizer/player and screen tools like Draw, Colors, Keys, Record, Snip, etc. <br />
+**Status Bar** - Includes window options(left), audio visualizer/player(middle) and screen tools(right) like draw, colors, recorder, keys, etc.
+
+<img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' />
+
 **Quicksettings** - Includes Tabs for Notifications, Wifi, Bluetooth, Audio Control and Display options. <br />
 **Date Menu (WIP)** - Includes Tabs for Calendar, Weather/Forecast, Agenda/Todo List, Timer and Events. <br />
 **AI Tools (WIP)** - OpenAI ChatGPT and Google Gemini (for now) <br />
@@ -42,13 +53,13 @@ exec-once = kaizen
 
 ### Nix
 ---
-- **Try it without installing**
+- Try it without installing
 ``nix run github:thericecold/kaizen``
 
-- **Nix flake profile install**
+- Nix flake profile install
 ``nix profile install github:thericecold/kaizen``
 
-- **Flake Input Installation**
+- Flake Input Installation
 
     ``flake.nix``
     ``` nix
