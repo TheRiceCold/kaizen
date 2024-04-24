@@ -17,20 +17,65 @@
 
 A linux desktop environment configuration using [Aylur's Gtk Shell][ags]. This configuration is designed to improve workflow with useful development tools.
 
-## ▶️ Showcase
-**Status Bar** - Includes window options(left), audio visualizer/player(middle) and screen tools(right) like draw, colors, recorder, keys, etc.
+## 🔥 Widgets
 
-<img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' />
+<details>
+  <summary>
+    <b>Status Bar</b> - Features a variety commands for windows options, screentools, music player, popup tools, etc.
+  </summary>
+  <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' />
+</details>
 
-**Quicksettings** - Includes Tabs for Notifications, Wifi, Bluetooth, Audio Control and Display options. <br />
-**Date Menu (WIP)** - Includes Tabs for Calendar, Weather/Forecast, Agenda/Todo List, Timer and Events. <br />
-**AI Tools (WIP)** - OpenAI ChatGPT and Google Gemini (for now) <br />
-**Shortcuts/Cheatsheet** <br />
-**Power/Session Menu** <br />
-**Lockscreen (WIP)** <br />
-**Overview (TODO)** <br />
- 
-## 🍳 How to cook?
+<details>
+  <summary>
+    <b>Quicksettings</b> - Includes Tabs for Notifications, Wifi, Bluetooth, Audio Control and Display options.
+  </summary>
+  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+</details>
+
+<details>
+  <summary>
+    <b>Date Menu</b>(WIP) - Includes Tabs for Calendar, Weather/Forecast, Agenda/Todo List, Timer and Events.
+  </summary>
+  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+</details>
+
+<details>
+  <summary>
+    <b>AI Tools</b>(WIP) - OpenAI ChatGPT and Google Gemini (for now).
+  </summary>
+  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+</details>
+
+<details>
+  <summary>
+    <b>Cheatsheet/Shortcuts</b>
+  </summary>
+  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+</details>
+
+<details>
+  <summary>
+    <b>Power/Sesion Menu</b>
+  </summary>
+  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+</details>
+
+<details>
+  <summary>
+    <b>Lockscreen</b>(WIP)
+  </summary>
+  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+</details>
+
+<details>
+  <summary>
+    <b>Overview</b>(WIP) - Show workspaces and windows
+  </summary>
+  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+</details>
+
+## 🫕 How to cook?
 ### Manual Installation
 #### Dependencies
 - [Cava] - Audio visualizer
@@ -51,7 +96,7 @@ ags -c ~/.config/ags/config.js
 exec-once = kaizen
 ```
 
-### Nix
+### ❄️ Nix
 ---
 - Try it without installing
 ``nix run github:thericecold/kaizen``
@@ -91,6 +136,21 @@ exec-once = kaizen
        programs.kaizen.enable = true;
     }
     ```
+
+
+## 🪟 Toggling widgets and windows
+Toggle the widgets with keyboard shortcuts
+> [!NOTE]
+> Replace "ags" with "kaizen" if you installed this using nix
+
+Example: `~/.config/hypr/hyprland.conf`
+``` conf
+bind=SUPER, f4, ags -t powermenu # Window
+bind=SUPER, m, ags -r "toggleMedia('media');" # Widget
+```
+windows: powermenu, shortcuts, overview, launcher
+widgets: quicksettings, apis, media, colors, datemenu, keyboard, dock
+
 
 ## 🙏 Acknowledgements
 - [Joey Mckur](https://github.com/aylur/dotfiles) Developer of Ags
