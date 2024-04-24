@@ -1,19 +1,17 @@
 ###### *<div align=right><sub>Last nix update: april 24, 2024</sub></div>*
 
-<center>
-  <h1>Kaizen<br />
-    <a href='https://nixos.org'>
-      <img src='https://img.shields.io/badge/NixOS-unstable-blue.svg?style=for-the-badge&labelColor=1b1e28&logo=NixOS&logoColor=add7ff&color=add7ff'>
-    </a>
-    <a href='https://github.com/TheRiceCold/kaizen'>
-      <img src='https://img.shields.io/github/languages/code-size/thericecold/kaizen?color=5de4c7&labelColor=1b1e28&style=for-the-badge&logo=github&logoColor=5de4c7'>
-    </a>
-    <a href='https://github.com/TheRiceCold/kaizen/stargazers'>
-      <img src='https://img.shields.io/github/stars/thericecold/kaizen?color=fcc5e9&labelColor=1b1e28&style=for-the-badge&logo=starship&logoColor=fcc5e9'>
-    </a>
-  </h1>
-  <p>The japanese word "kaizen" is a philosophy to improve continuously and change for the better.</p>
-</center>
+<h1 align=center>Kaizen<br />
+  <a href='https://nixos.org'>
+    <img src='https://img.shields.io/badge/NixOS-unstable-blue.svg?style=for-the-badge&labelColor=1b1e28&logo=NixOS&logoColor=add7ff&color=add7ff'>
+  </a>
+  <a href='https://github.com/TheRiceCold/kaizen'>
+    <img src='https://img.shields.io/github/languages/code-size/thericecold/kaizen?color=5de4c7&labelColor=1b1e28&style=for-the-badge&logo=github&logoColor=5de4c7'>
+  </a>
+  <a href='https://github.com/TheRiceCold/kaizen/stargazers'>
+    <img src='https://img.shields.io/github/stars/thericecold/kaizen?color=fcc5e9&labelColor=1b1e28&style=for-the-badge&logo=starship&logoColor=fcc5e9'>
+  </a>
+</h1>
+<p align=center>The japanese word "kaizen" is a philosophy to improve continuously and change for the better.</p>
 
 A linux desktop environment configuration using [Aylur's Gtk Shell][ags]. This configuration is designed to improve workflow with useful development tools.
 
