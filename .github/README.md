@@ -17,6 +17,8 @@ A linux desktop environment configuration using [Aylur's Gtk Shell][ags]. This c
 
 ## 🔥 Showcase
 
+https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
+
 ### Widgets
 <details>
   <summary>
