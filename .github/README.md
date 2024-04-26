@@ -15,8 +15,9 @@
 
 A linux desktop environment configuration using [Aylur's Gtk Shell][ags]. This configuration is designed to improve workflow with useful development tools.
 
-## 🔥 Widgets
+## 🔥 Showcase
 
+### Widgets
 <details>
   <summary>
     <b>Status Bar</b> - Features a variety commands for windows options, screentools, music player, popup tools, etc.
@@ -91,7 +92,7 @@ ags -c ~/.config/ags/config.js
 
 **Add this line to `.config/hypr/hyprland.conf` to execute on startup**
 ```
-exec-once = kaizen
+exec-once = ags
 ```
 
 ### ❄️ Nix
@@ -146,12 +147,12 @@ Example: `~/.config/hypr/hyprland.conf`
 bind=SUPER, f4, ags -t powermenu # Window
 bind=SUPER, m, ags -r "toggleMedia('media');" # Widget
 ```
-windows: powermenu, shortcuts, overview, launcher
+windows: powermenu, shortcuts, overview, launcher <br/>
 widgets: quicksettings, apis, media, colors, datemenu, keyboard, dock
 
 
 ## 🙏 Acknowledgements
-- [Joey Mckur](https://github.com/aylur/dotfiles) Developer of Ags
+- [Joey Mckur](https://github.com/aylur/dotfiles) Developer/Owner of Ags
 - [end-4](https://github.com/end-4/dots-hyprland) Widget Ideas and AI tools
 
 [ags]: https://github.com/aylur/ags
