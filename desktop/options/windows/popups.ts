@@ -9,13 +9,10 @@ export default {
   },
 
   dock: {
+    enabled: false,
     pinnedApps: ['firefox', 'spotify', 'vesktop', 'nautilus', 'bottles', 'blender', 'krita', 'neovide'],
     trigger: ['client-added', 'client-removed'], // client_added, client_move, workspace_active, client_active
     searchPinnedAppIcons: opt(false), // Try to search for the correct icon if the app class isn't an icon name
-    autoHide: [
-      { trigger: 'client-added', interval: 500 },
-      { trigger: 'client-removed', interval: 500 },
-    ],
     icons: {
       // Find the window's icon by its class with levenshteinDistance
       // The file names are processed at startup, so if there

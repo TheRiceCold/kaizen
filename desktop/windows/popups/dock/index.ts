@@ -14,15 +14,15 @@ const hyprland = await Service.import('hyprland')
 
 const Content = Widget.Box(
   { className: 'dock-bg' },
-  PinnedApps,
-  Widget.Separator({ vertical: true }),
-  Taskbar,
   Widget.Button({
     className: 'app-btn',
     setup: setupCursorHover,
     child: Widget.Icon('pin-symbolic'),
     onClicked: () => isPinned = !isPinned
   }),
+  PinnedApps,
+  Widget.Separator({ vertical: true }),
+  Taskbar,
 )
 
 const Revealer = Widget.Revealer({
@@ -43,16 +43,11 @@ const Revealer = Widget.Revealer({
 
       if (flag) clearTimes()
 
-      const hidden = dock.autoHide.find(e => e['trigger'] === trigger)
-
-      if (hidden) {
-        const id = Utils.timeout(hidden.interval, () => {
-          if (!isPinned) 
-            self.revealChild = false
-          timers = timers.filter(e => e !== id)
-        })
-        timers.push(id)
-      }
+      const id = Utils.timeout(options.transition, () => {
+        if (!isPinned) self.revealChild = false
+        timers = timers.filter(e => e !== id)
+      })
+      timers.push(id)
     }
 
     self
