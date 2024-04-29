@@ -6,6 +6,7 @@
 
   # SERVICES
   cage,
+  gtk3,
   # showmethekey # TODO:
   hyprpicker,
   sptlrx,
@@ -34,7 +35,7 @@
     which 
     dart-sass 
 
-    wl-clipboard    # Command-line copy/paste utilities for Wayland
+    gtk3
     cava            # Audio Visualizer
     swww            # Animated Wallpaper Daemon
     sptlrx          # Spotify Lyrics
@@ -44,6 +45,7 @@
     cliphist        # Clipboard History Manager
     hyprpicker      # Wayland Color Picker
     gromit-mpx      # Annotation Tool
+    wl-clipboard    # Command-line copy/paste utilities for Wayland
     wl-screenrec    # High Performance Screen Recorder
     brightnessctl   # Read and Control Brightness
     networkmanager

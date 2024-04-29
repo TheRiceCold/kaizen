@@ -1,6 +1,9 @@
-###### *<div align=right><sub>Last nix update: april 24, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: april 29, 2024</sub></div>*
 
-<h1 align=center>Kaizen<br />
+<h1 align=center>
+  <img src='https://github.com/thericecold/dots/blob/main/assets/ibu-circle.png' width='150px'/>
+
+  Kaizen<br />
   <a href='https://nixos.org'>
     <img src='https://img.shields.io/badge/NixOS-unstable-blue.svg?style=for-the-badge&labelColor=1b1e28&logo=NixOS&logoColor=add7ff&color=add7ff'>
   </a>
@@ -10,6 +13,11 @@
   <a href='https://github.com/TheRiceCold/kaizen/stargazers'>
     <img src='https://img.shields.io/github/stars/thericecold/kaizen?color=fcc5e9&labelColor=1b1e28&style=for-the-badge&logo=starship&logoColor=fcc5e9'>
   </a>
+
+  **[<kbd> <br> Overview <br> </kbd>](#-overview)** 
+  **[<kbd> <br> Installation <br> </kbd>](#-how-to-cook-installation)** 
+  **[<kbd> <br> Acknowledgements&nbsp; <br> </kbd>](#-Acknowledgements)**
+
 </h1>
 <p align=center>The japanese word "kaizen" is a philosophy to improve continuously and change for the better.</p>
 
@@ -78,7 +86,10 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 
 ## 🫕 How to cook?
 ### Manual Installation
+> [!NOTE]
+> This list may be incomplete, so please check the packages inside the 'default.nix' file.
 #### Dependencies
+- Utilities: [bun], [dart-sass], [fd], [gtk3]
 - [Cava] - Audio visualizer
 - [Gromit-mpx] - Annotation Tool
 - [Matugen] - Color generation tool
@@ -157,10 +168,14 @@ widgets: quicksettings, apis, media, colors, datemenu, keyboard, dock
 - [Joey Mckur](https://github.com/aylur/dotfiles) Developer/Owner of Ags
 - [end-4](https://github.com/end-4/dots-hyprland) Widget Ideas and AI tools
 
+[gtk3]: https://docs.gtk.org/gtk3
+[bun]: https://github.com/oven-sh/bun
+[fd]: https://github.com/sharkdp/fd
 [ags]: https://github.com/aylur/ags
 [swww]: https://github.com/LGFae/swww
 [cava]: https://github.com/karlstav/cava
 [matugen]: https://github.com/InioX/matugen
+[dart-sass]: https://github.com/sass/dart-sass
 [hyprland]: https://github.com/hyprwm/Hyprland
 [gromit-mpx]: https://github.com/bk138/gromit-mpx
 [hyprpicker]: https://github.com/hyprwm/hyprpicker
