@@ -107,7 +107,7 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 </details>
 
 <details>
-  <summary><b>Lockscreen(WIP)</b></summary>
+  <summary><b>Lockscreen (WIP)</b></summary>
 </details>
 <details>
   <summary><b>Login Manager/Greeter (TODO)</b></summary>
@@ -131,7 +131,7 @@ bind=SUPER, m, ags -r "toggleWidget('media');" # Widget
 ## 🫕 How to cook?
 ### Manual Installation
 > [!NOTE]
-> This list may be incomplete, so please check the packages inside the default.nix file.
+> This list may be incomplete, so please check the packages inside the `default.nix` file.
 #### Dependencies
 - Utilities: [bun], [dart-sass], [fd], [gtk3]
 - [Cava] - Audio visualizer
@@ -149,9 +149,9 @@ ags -c ~/.config/ags/config.js
 
 **Add this line `exec-once = ags` to `.config/hypr/hyprland.conf` to execute on startup.**
 
-
-### ❄️ Nix
 ---
+
+### ❄️ Nix Installation
 - Try it without installing `nix run github:thericecold/kaizen`
 - Nix flake profile install `nix profile install github:thericecold/kaizen`
 - Flake Input Installation
