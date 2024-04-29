@@ -15,7 +15,7 @@
   </a>
 
   **[<kbd> <br> Overview <br> </kbd>](#-overview)** 
-  **[<kbd> <br> Installation <br> </kbd>](#-how-to-cook-installation)** 
+  **[<kbd> <br> Installation <br> </kbd>](#-how-to-cook)** 
   **[<kbd> <br> Acknowledgements&nbsp; <br> </kbd>](#-Acknowledgements)**
 
 </h1>
@@ -27,67 +27,111 @@ A linux desktop environment configuration using [Aylur's Gtk Shell][ags]. This c
 
 https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
 
-### Widgets
+### 🪟 Windows
+
 <details>
-  <summary>
-    <b>Status Bar</b> - Features a variety commands for windows options, screentools, music player, popup tools, etc.
-  </summary>
-  <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' />
+  <summary><b>Status Bar</b></summary>
+
+- **Right Buttons**
+  - Logo Icon: Toggles launcher window
+  - Workspace: Toggles workspaces overview window
+  - Extend Button
+    - Window Options
+      - Fullscreen, Toggle Float, Center Layout, Quit
+      - Floats Only: Pin and Center
+    - Developer Tools
+      - API Tools: Opens API Tools Side Menu
+      - Waydroid: Starts Waydroid. [view my setup]()
+      - Debian: Starts Debian Container. [view my setup]()
+      - Windows 11: Opens Windows 11 VM. [view my setup]()
+    - Shortcuts: Opens shortcuts window.
+    - Help: Opens the wiki page.
+- **Left Buttons**: 
+  - Extend Button
+    - Draw: Starts annotation/drawing tool.
+    - Colors: Toggles color popup widget.
+    - Keys: Key/keyboard options.
+    - Zoom: Zoom toggle options.
+    - Record: Screen record options.
+    - Snip: Screenshot options.
+  - System Tray Applications
+  - Control Button: Toggles quicksettings side menu widget
+  - Date Button: Toggles Date sidemenu widget
+  - Power Button: Opens Powermenu window 
+- **Middle Status**: 
+  > [!NOTE] Click to open Media player popup and scroll up/down to switch between player and visualizer.
+
 </details>
 
 <details>
-  <summary>
-    <b>Quicksettings</b> - Includes Tabs for Notifications, Wifi, Bluetooth, Audio Control and Display options.
-  </summary>
-  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+  <summary><b>Popups</b></summary>
+  <ul>
+    <li><b>Dock(dock)</b></li>
+    <li><b>Keyboard(keyboard)</b></li>
+    <li><b>Indicator</b></li>
+    <li><b>Color Tool(color)</b></li>
+    <li><b>Media Player(media)</b></li>
+    <li><b>Notifications</b></li>
+    <li><b>Annotation Tools(annotation)</b></li>
+  </ul>
 </details>
 
 <details>
-  <summary>
-    <b>Date Menu</b>(WIP) - Includes Tabs for Calendar, Weather/Forecast, Agenda/Todo List, Timer and Events.
-  </summary>
-  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+  <summary><b>Fullscreen</b></summary>
+
+- **Overview**
+- **Shortcuts**
+- **Power Menu**
+
 </details>
 
 <details>
-  <summary>
-    <b>AI Tools</b>(WIP) - OpenAI ChatGPT and Google Gemini (for now).
-  </summary>
-  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+  <summary><b>Side Menus</b></summary>
+
+- **API Tools (apis)**
+  - Google Gemini
+  - OpenAI ChatGPT
+- **Date menu (date)**: 
+  - Calendar
+  - Weather and Forecast
+  - Agenda/Todo List
+  - Pomodoro
+  - Events
+- **Quick settings (quicksettings)**: 
+  - Notification List 
+  - Wifi List
+  - Bluetooth List,
+  - Sound and Audio Settings
+  - Display Settings
+
 </details>
 
 <details>
-  <summary>
-    <b>Cheatsheet/Shortcuts</b>
-  </summary>
-  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
+  <summary><b>Lockscreen(WIP)</b></summary>
+</details>
+<details>
+  <summary><b>Login Manager/Greeter (TODO)</b></summary>
 </details>
 
-<details>
-  <summary>
-    <b>Power/Sesion Menu</b>
-  </summary>
-  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
-</details>
+#### How to toggle?
+> [!NOTE] 
+> use "ags" instead of "kaizen" if you installed this manually<br/>
+> The contents of `Side Menus` and `Popups` window with parenthesis are the `<widget-name>`
 
-<details>
-  <summary>
-    <b>Lockscreen</b>(WIP)
-  </summary>
-  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
-</details>
+Toggle a window: `kaizen -t <window-name>`
 
-<details>
-  <summary>
-    <b>Overview</b>(WIP) - Show workspaces and windows
-  </summary>
-  <!-- <img src='https://github.com/TheRiceCold/kaizen/blob/main/screenshots/status-bar.gif' /> -->
-</details>
+Toggle a widget: `kaizen -r "toggleWidget('<widget-name>');"`
+
+Example: `~/.config/hypr/hyprland.conf`
+``` conf
+bind=SUPER, f4, ags -t powermenu # Window
+bind=SUPER, m, ags -r "toggleWidget('media');" # Widget
+```
 
 ## 🫕 How to cook?
 ### Manual Installation
 > [!NOTE]
-> This list may be incomplete, so please check the packages inside the 'default.nix' file.
+> This list may be incomplete, so please check the packages inside the default.nix file.
 #### Dependencies
 - Utilities: [bun], [dart-sass], [fd], [gtk3]
 - [Cava] - Audio visualizer
@@ -103,22 +147,16 @@ cp -r kaizen/desktop ~/.config/ags
 ags -c ~/.config/ags/config.js
 ```
 
-**Add this line to `.config/hypr/hyprland.conf` to execute on startup**
-```
-exec-once = ags
-```
+**Add this line `exec-once = ags` to `.config/hypr/hyprland.conf` to execute on startup.**
+
 
 ### ❄️ Nix
 ---
-- Try it without installing
-``nix run github:thericecold/kaizen``
-
-- Nix flake profile install
-``nix profile install github:thericecold/kaizen``
-
+- Try it without installing `nix run github:thericecold/kaizen`
+- Nix flake profile install `nix profile install github:thericecold/kaizen`
 - Flake Input Installation
 
-    ``flake.nix``
+    `flake.nix`
     ``` nix
     {
       inputs = {    
@@ -141,28 +179,13 @@ exec-once = ags
       };
     }
     ```
-    ``home.nix``
+    `home.nix`
     ``` nix
     { kaizen, ... }: {
        imports = [ kaizen.homeManagerModules.default; ]; 
        programs.kaizen.enable = true;
     }
     ```
-
-
-## 🪟 Toggling widgets and windows
-Toggle the widgets with keyboard shortcuts
-> [!NOTE]
-> Replace "ags" with "kaizen" if you installed this using nix
-
-Example: `~/.config/hypr/hyprland.conf`
-``` conf
-bind=SUPER, f4, ags -t powermenu # Window
-bind=SUPER, m, ags -r "toggleMedia('media');" # Widget
-```
-windows: powermenu, shortcuts, overview, launcher <br/>
-widgets: quicksettings, apis, media, colors, datemenu, keyboard, dock
-
 
 ## 🙏 Acknowledgements
 - [Joey Mckur](https://github.com/aylur/dotfiles) Developer/Owner of Ags
