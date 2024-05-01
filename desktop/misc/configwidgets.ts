@@ -1,4 +1,7 @@
 import { setupCursorHover } from './cursorhover'
+import options from 'options'
+
+const { transition } = options
 
 export const ConfigToggle = ({
   icon, 
@@ -95,18 +98,18 @@ export const ConfigSegmentedSelection = ({
       const selectedIcon = Widget.Revealer({
         transition: 'slide_right',
         revealChild: id == initIndex,
+        transitionDuration: transition,
         child: Widget.Icon('check-symbolic'),
-        transitionDuration: options.transition.value,
       })
 
       return Widget.Button({
         setup: setupCursorHover,
         className: `segment-btn ${id == initIndex ? 'segment-btn-enabled' : ''}`,
-        child: Widget.Box({
-          hpack: 'center',
-          className: 'spacing-h-5',
-          children: [ selectedIcon, Widget.Label(option.name) ]
-        }),
+        child: Widget.Box(
+          { hpack: 'center' },
+          selectedIcon, 
+          Widget.Label(option.name)
+        ),
         onClicked(self) {
           const kids = widget.get_children()
           kids[lastSelected].toggleClassName('segment-btn-enabled', false)
