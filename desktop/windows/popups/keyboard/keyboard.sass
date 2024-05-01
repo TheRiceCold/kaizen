@@ -1,39 +1,36 @@
 @mixin key
-  padding: $padding
-  margin: calc($spacing * 0.25)
+  margin: calc($spacing * 0.15)
+  padding: calc($padding * 1.25)
   border-radius: calc($radius * 0.5)
-  border: 1px solid transparentize($primary-bg, 0.75)
-  background-color: transparentize($primary-fg, 0.75)
+  background-color: transparentize($primary-fg, 0.5)
+  &:hover, &:focus
+    color: $bg 
+    font-weight: 500
+    background-color: $primary-bg
+  &:active, &-active
+    background-color: $primary-fg
   label
-    font-size: 1.1em
+    font-size: 1.15em
 
 window.popups .keyboard .body
-  padding: $padding
   separator 
-    padding: calc($padding * 0.25)
-    margin: 0 calc($spacing * 0.75)
+    margin: 0 $spacing
+    padding: calc($padding * 0.1)
     background-color: transparentize($primary-fg, 0.5)
   .key
     @include key
-    &:hover, &:focus
-      background-color: $bg
-    &:active, &-active
-      background-color: $primary-fg
-
   .key-empty
     border: 0
     background-color: transparent
   .key-tab
-    padding: 0 calc($padding * 1.75)
-  .key-caps
-    padding: 0 calc($padding * 2.25)
+    padding: 0 calc($padding * 2.5)
   .key-shift
-    padding: 0 calc($padding * 2.75)
+    padding: 0 calc($padding * 4)
   .key-control
     padding: 0 calc($padding * 1.5)
 
   .control-button
     @include key
-    font-weight: 500
+    border: 0
     padding: calc($padding * 1.5)
     margin-bottom: calc($spacing * 0.5)
