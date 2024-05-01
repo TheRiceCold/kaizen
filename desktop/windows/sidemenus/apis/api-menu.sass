@@ -1,5 +1,20 @@
 window.sideleft .apis
   padding: $padding
+  .chat-textarea
+    padding: calc($padding * 1.25)
+    .chat-entry
+      min-width: 0
+      min-height: 1.25em
+      border-radius: $radius
+    .chat-send
+      border-radius: calc($radius * 0.5)
+      image
+        padding: $padding
+        font-size: 1.25em
+    .chat-placeholder
+      color: $fg
+      margin-left: $spacing
+
   button
     @include button
     padding: $padding

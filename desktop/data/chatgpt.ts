@@ -1,9 +1,44 @@
-type Message = {
+type TMessage = {
   content: string,
   role: 'user' | 'assistant',
 }
 
-export const initMessages: Message[] = [
+export const providers = { // There's this list hmm https://github.com/zukixa/cool-ai-stuff/
+  openai: {
+    name: 'OpenAI',
+    logo_name: 'openai-symbolic',
+    description: 'Official OpenAI API.\nPricing: Free for the first $5 or 3 months, whichever is less.',
+    base_url: 'https://api.openai.com/v1/chat/completions',
+    key_get_url: 'https://platform.openai.com/api-keys',
+    key_file: 'openai_key.txt',
+  },
+  oxygen: {
+    name: 'Oxygen',
+    logo_name: 'ai-oxygen-symbolic',
+    description: 'An API from Tornado Softwares\nPricing: Free: 100/day\nRequires you to join their Discord for a key',
+    base_url: 'https://app.oxyapi.uk/v1/chat/completions',
+    key_get_url: 'https://discord.com/invite/kM6MaCqGKA',
+    key_file: 'oxygen_key.txt',
+  },
+  zukijourney: {
+    name: 'zukijourney',
+    logo_name: 'ai-zukijourney',
+    description: 'An API from @zukixa on GitHub.\nNote: Keys are IP-locked so it\'s buggy sometimes\nPricing: Free: 10/min, 800/day.\nRequires you to join their Discord for a key',
+    base_url: 'https://zukijourney.xyzbot.net/v1/chat/completions',
+    key_get_url: 'https://discord.com/invite/Y4J6XXnmQ6',
+    key_file: 'zuki_key.txt',
+  },
+  zukijourney_roleplay: {
+    name: 'zukijourney (roleplay)',
+    logo_name: 'ai-zukijourney',
+    description: 'An API from @zukixa on GitHub.\nNote: Keys are IP-locked so it\'s buggy sometimes\nPricing: Free: 10/min, 800/day.\nRequires you to join their Discord for a key',
+    base_url: 'https://zukijourney.xyzbot.net/unf/chat/completions',
+    key_get_url: 'https://discord.com/invite/Y4J6XXnmQ6',
+    key_file: 'zuki_key.txt',
+  },
+}
+
+export const initMessages: TMessage[] = [
   {
     role: 'user',
     content: "You are an assistant on a sidebar of a Wayland Linux desktop. Please always use a casual tone when answering your questions, unless requested otherwise or making writing suggestions. These are the steps you should take to respond to the user's queries:\n1. If it's a writing- or grammar-related question or a sentence in quotation marks, Please point out errors and correct when necessary using underlines, and make the writing more natural where appropriate without making too major changes. If you're given a sentence in quotes but is grammatically correct, explain briefly concepts that are uncommon.\n2. If it's a question about system tasks, give a bash command in a code block with very brief explanation for each command\n3. Otherwise, when asked to summarize information or explaining concepts, you are encouraged to use bullet points and headings. Use casual language and be short and concise. \nThanks!",

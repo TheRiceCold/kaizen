@@ -1,23 +1,32 @@
-import Soup from 'gi://Soup?version=3.0'
 import { initMessages } from 'data/gemini'
-import { fileExists, expandTilde } from 'lib/utils'
+import { bash, fileExists } from 'lib/utils'
 
-const { GLib } = imports.gi
+import options from 'options'
+
+const { GLib, Soup } = imports.gi
+
+const HISTORY_DIR = `${GLib.get_user_cache_dir()}/ags/user/ai/chats/`
+const HISTORY_FILENAME = 'gemini.txt'
+const HISTORY_PATH = HISTORY_DIR + HISTORY_FILENAME
+
+if (!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`)) {
+  bash`touch ${GLib.get_user_config_dir()}/gemini_history.json`
+  Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print)
+}
 
 Utils.exec(`mkdir -p ${GLib.get_user_cache_dir()}/ags/user/ai`)
-
 const KEY_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/ai/google_key.txt`
 const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/ai/google_api_dom.txt`
 
 function replaceapidom(URL) {
-  if (fileExists(expandTilde(APIDOM_FILE_LOCATION))) {
-    const contents = Utils.readFile(expandTilde(APIDOM_FILE_LOCATION)).trim()
+  if (fileExists(APIDOM_FILE_LOCATION)) {
+    const contents = Utils.readFile(APIDOM_FILE_LOCATION).trim()
     URL = URL.toString().replace('generativelanguage.googleapis.com', contents)
   }
   return URL
 }
 
-const CHAT_MODELS = ['gemini-pro']
+const CHAT_MODELS = [ 'gemini-pro' ]
 const ONE_CYCLE_COUNT = 3
 
 class GeminiMessage extends Service {
@@ -28,17 +37,16 @@ class GeminiMessage extends Service {
         content: ['string'],
         thinking: ['boolean'],
         done: ['boolean'],
-      }
-    )
+      })
   }
 
   _role = ''
   _parts = [{ text: '' }]
-  _thinking = false
+  _thinking
   _done = false
   _rawData = ''
 
-  constructor(role, content, thinking = false, done = false) {
+  constructor(role, content, thinking = true, done = false) {
     super()
     this._role = role
     this._parts = [{ text: content }]
@@ -50,14 +58,19 @@ class GeminiMessage extends Service {
   set rawData(value) { this._rawData = value }
 
   get done() { return this._done }
-  set done(isDone) { this._done = isDone; this.notify('done') }
+  set done(isDone) { 
+    this._done = isDone; this.notify('done') 
+  }
 
   get role() { return this._role }
-  set role(role) { this._role = role; this.emit('changed') }
+  set role(role) { 
+    this._role = role; this.emit('changed') 
+  }
 
   get content() {
     return this._parts.map(part => part.text).join()
   }
+
   set content(content) {
     this._parts = [{ text: content }]
     this.notify('content')
@@ -66,11 +79,13 @@ class GeminiMessage extends Service {
 
   get parts() { return this._parts }
 
-  get label() { return this._parserState.parsed + this._parserState.stack.join('') }
+  get label() { 
+    return this._parserState.parsed + this._parserState.stack.join('') 
+  }
 
   get thinking() { return this._thinking }
-  set thinking(thinking) {
-    this._thinking = thinking
+  set thinking(value) {
+    this._thinking = value
     this.notify('thinking')
     this.emit('changed')
   }
@@ -85,13 +100,17 @@ class GeminiMessage extends Service {
   }
 
   parseSection() {
-    if(this._thinking) {
-      this._thinking = false
-      this._parts[0].text= ''
+    if (this._thinking) {
+      this.thinking = false
+      this._parts[0].text = ''
     }
     const parsedData = JSON.parse(this._rawData)
-    const delta = parsedData.candidates[0].content.parts[0].text
-    this._parts[0].text += delta
+    if (!parsedData.candidates)
+      this._parts[0].text += `Blocked: ${parsedData.promptFeedback.blockReason}`
+    else {
+      const delta = parsedData.candidates[0].content.parts[0].text
+      this._parts[0].text += delta
+    }
     this.notify('content')
     this._rawData = ''
   }
@@ -107,24 +126,26 @@ class GeminiService extends Service {
     })
   }
 
-  _assistantPrompt = true
-  _messages = []
+  _assistantPrompt = options.ai.enhancements
   _cycleModels = true
-  _requestCount = 0
-  _temperature = 0.9
-  _modelIndex = 0
+  _usingHistory = options.ai.useHistory
   _key = ''
+  _requestCount = 0
+  _safe = true
+  _temperature = options.ai.defaultTemperature
+  _messages = []
+  _modelIndex = 0
   _decoder = new TextDecoder()
 
   constructor() {
     super()
 
-    if (fileExists(expandTilde(KEY_FILE_LOCATION)))
-      this._key = Utils.readFile(expandTilde(KEY_FILE_LOCATION)).trim()
-    else
-      this.emit('hasKey', false)
+    if (fileExists(KEY_FILE_LOCATION)) this._key = Utils.readFile(KEY_FILE_LOCATION).trim()
+    else this.emit('hasKey', false)
 
-    this._messages = this._assistantPrompt ? [...initMessages] : []
+    if (this._usingHistory) this.loadHistory()
+    else this._messages = this._assistantPrompt ? [...initMessages] : []
+
     this.emit('initialized')
   }
 
@@ -134,19 +155,29 @@ class GeminiService extends Service {
   get key() { return this._key }
   set key(keyValue) {
     this._key = keyValue
-    Utils.writeFile(this._key, expandTilde(KEY_FILE_LOCATION))
+    Utils.writeFile(this._key, KEY_FILE_LOCATION)
       .then(this.emit('hasKey', true))
-      .catch(err => print(err))
+      .catch(print)
   }
 
   get cycleModels() { return this._cycleModels }
   set cycleModels(value) {
     this._cycleModels = value
-    if (!value)
+    if (!value) 
       this._modelIndex = 0
     else
       this._modelIndex = (this._requestCount - (this._requestCount % ONE_CYCLE_COUNT)) % CHAT_MODELS.length
   }
+
+  get useHistory() { return this._usingHistory }
+  set useHistory(value) {
+    if (value && !this._usingHistory) 
+      this.loadHistory()
+    this._usingHistory = value
+  }
+
+  get safe() { return this._safe }
+  set safe(value) { this._safe = value }
 
   get temperature() { return this._temperature }
   set temperature(value) { this._temperature = value }
@@ -154,73 +185,109 @@ class GeminiService extends Service {
   get messages() { return this._messages }
   get lastMessage() { return this._messages[this._messages.length - 1] }
 
+  saveHistory() {
+    bash`mkdir -p ${HISTORY_DIR} && touch ${HISTORY_PATH}`
+    Utils.writeFile(JSON.stringify(this._messages.map(msg => {
+      const m = { role: msg.role, parts: msg.parts }
+      return m
+    })), HISTORY_PATH)
+  }
+
+  loadHistory() {
+    this._messages = []
+    this.appendHistory()
+    this._usingHistory = true
+  }
+
+  appendHistory() {
+    if (fileExists(HISTORY_PATH)) {
+      const readfile = Utils.readFile(HISTORY_PATH)
+      JSON.parse(readfile).forEach(element => this.addMessage(element.role, element.parts[0].text))
+    }
+    else this._messages = this._assistantPrompt ? [...initMessages] : []
+  }
+
   clear() {
     this._messages = this._assistantPrompt ? [...initMessages] : []
+    if (this._usingHistory) this.saveHistory()
     this.emit('clear')
   }
 
-  get assistantPrompt() { return this._assistantPrompt }
+  get assistantPrompt() { 
+    return this._assistantPrompt 
+  }
+
   set assistantPrompt(value) {
     this._assistantPrompt = value
-    this._messages = value ? [...initMessages] : []
+    if (value) 
+      this._messages = [...initMessages]
+    else this._messages = []
   }
 
   readResponse(stream, aiResponse) {
-    stream.read_line_async(0, null,
-      (stream, res) => {
-        try {
-          const [bytes] = stream.read_line_finish(res)
-          const line = this._decoder.decode(bytes)
-          if (line == '[{') { // beginning of response
-            aiResponse._rawData += '{'
-            this.thinking = false
-          }
-          else if (line == ',\u000d' || line == ']') // end of stream pulse
-            aiResponse.parseSection()
-          else // Normal content
-            aiResponse._rawData += line
+    stream.read_line_async(0, null, (stream, res) => {
+      try {
+        const [bytes] = stream.read_line_finish(res)
+        const line = this._decoder.decode(bytes)
 
-          this.readResponse(stream, aiResponse)
-        } catch {
-          aiResponse.done = true
-          return
-        }
-      })
+        if (line == '[{') {
+          aiResponse._rawData += '{'
+          this.thinking = false
+        } else if (line == ',\u000d' || line == ']') 
+          aiResponse.parseSection()
+        else 
+          aiResponse._rawData += line
+
+        this.readResponse(stream, aiResponse)
+      } catch {
+        aiResponse.done = true
+        if (this._usingHistory) this.saveHistory()
+        return
+      }
+    })
   }
 
   addMessage(role, message) {
-    this._messages.push(new GeminiMessage(role, message))
+    this._messages.push(new GeminiMessage(role, message, false))
     this.emit('newMsg', this._messages.length - 1)
   }
 
   send(msg) {
-    this._messages.push(new GeminiMessage('user', msg))
+    this._messages.push(new GeminiMessage('user', msg, false))
     this.emit('newMsg', this._messages.length - 1)
     const aiResponse = new GeminiMessage('model', 'thinking...', true, false)
 
     const body = {
-      contents: this._messages.map(msg => ({ role: msg.role, parts: msg.parts })),
-      generationConfig: { temperature: this._temperature }
+      contents: this._messages.map(msg => { 
+        const m = { 
+          role: msg.role, 
+          parts: msg.parts 
+        } 
+        return m 
+      }),
+      safetySettings: this._safe ? [] : [
+        // { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
+        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE', },
+        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE', },
+        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE', },
+        // { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
+      ],
+      generationConfig: {
+        temperature: this._temperature,
+      }
     }
-
-    const session = new Soup.Session()
+    const proxyResolver = new Gio.SimpleProxyResolver({ 'default-proxy': options.ai.proxyUrl })
+    const session = new Soup.Session({ 'proxy-resolver': proxyResolver })
     const message = new Soup.Message({
       method: 'POST',
-      uri: GLib.Uri.parse(
-        replaceapidom(`https://generativelanguage.googleapis.com/v1/models/${this.modelName}:streamGenerateContent?key=${this._key}`),
-        GLib.UriFlags.NONE
-      ),
+      uri: GLib.Uri.parse(replaceapidom(`https://generativelanguage.googleapis.com/v1/models/${this.modelName}:streamGenerateContent?key=${this._key}`), GLib.UriFlags.NONE),
     })
-
     message.request_headers.append('Content-Type', 'application/json')
     message.set_request_body_from_bytes('application/json', new GLib.Bytes(JSON.stringify(body)))
 
     session.send_async(message, GLib.DEFAULT_PRIORITY, null, (_, result) => {
       const stream = session.send_finish(result)
-      this.readResponse(new imports.gi.Gio.DataInputStream({
-        close_base_stream: true,
-        base_stream: stream
-      }), aiResponse)
+      this.readResponse(new Gio.DataInputStream({ close_base_stream: true, base_stream: stream }), aiResponse)
     })
 
     this._messages.push(aiResponse)
@@ -235,3 +302,4 @@ class GeminiService extends Service {
 }
 
 export default new GeminiService()
+

@@ -9,7 +9,7 @@ type TProps = {
   transition: 'slide_down' | 'slide_up'
 }
 
-export const MarginRevealer = ({
+export default ({
   transition = 'slide_down',
   child,
   revealChild,
@@ -59,35 +59,4 @@ export const MarginRevealer = ({
 
   child.toggleClassName(`${revealChild ? showClass : hideClass}`, true)
   return widget
-}
-
-export const DoubleRevealer = ({
-  transition1 = 'slide_right',
-  transition2 = 'slide_left',
-  duration1 = 150,
-  duration2 = 150,
-  child,
-  revealChild,
-  ...props
-}) => {
-  const r2 = Widget.Revealer({
-    child,
-    revealChild: revealChild,
-    transition: transition2,
-    transitionDuration: duration2,
-  })
-
-  const r1 = Widget.Revealer({
-    transition: transition1,
-    transitionDuration: duration1,
-    revealChild: revealChild,
-    child: r2,
-    ...props,
-  })
-
-  r1.toggleRevealChild = (value) => {
-    r1.revealChild = value
-    r2.revealChild = value
-  }
-  return r1
 }

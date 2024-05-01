@@ -4,51 +4,56 @@
   # Utilities
   fd, bun, which, dart-sass,
 
+  gtksourceview3,
+  # accountsservice,
+
   # SERVICES
+  # vte,
   cage,
-  gtk3,
-  # showmethekey # TODO:
-  hyprpicker,
-  sptlrx,
-  wl-screenrec,
-  gromit-mpx,
   cava,
   swww,
+  # brotab,
+  # sptlrx,
   ydotool,
   cliphist,
+  gromit-mpx,
+  hyprpicker,
+  # showmethekey, # TODO:
   wl-clipboard,
+  wl-screenrec,
   brightnessctl,
   networkmanager,
-  accountsservice,
   version ? "git"
 } : let
   name = "kaizen";
 
-  matugen = inputs.matugen.packages.${system}.default; # Color Generation tool
+  matugen = inputs.matugen.packages.${system}.default;
   hyprland = inputs.hyprland.packages.${system}.default;
+  gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
-    extraPackages = [ accountsservice ];
+    extraPackages = [ gtksourceview3 ];
   };
 
   dependencies = [
     fd 
     which 
     dart-sass 
-
-    gtk3
-    cava            # Audio Visualizer
-    swww            # Animated Wallpaper Daemon
-    sptlrx          # Spotify Lyrics
-    matugen         # Color generation tool
-    ydotool         # Generic command-line automation tool
-    hyprland        # Dynamic tiling manager Wayland compositor
-    cliphist        # Clipboard History Manager
-    hyprpicker      # Wayland Color Picker
-    gromit-mpx      # Annotation Tool
-    wl-clipboard    # Command-line copy/paste utilities for Wayland
-    wl-screenrec    # High Performance Screen Recorder
-    brightnessctl   # Read and Control Brightness
+  
+    cava              # Audio Visualizer
+    swww              # Animated Wallpaper Daemon
+    # brotab
+    # sptlrx            # Spotify Lyrics
+    matugen           # Color generation tool
+    ydotool           # Generic command-line automation tool
+    hyprland          # Dynamic tiling manager Wayland compositor
+    cliphist          # Clipboard History Manager
+    hyprpicker        # Wayland Color Picker
+    gromit-mpx        # Annotation Tool
+    wl-clipboard      # Command-line copy/paste utilities for Wayland
+    wl-screenrec      # High Performance Screen Recorder
+    brightnessctl     # Read and Control Brightness
     networkmanager
+    gtk-session-lock  # GTK3 screen lockers using ext-session-lock-v1 protocol
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
