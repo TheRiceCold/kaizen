@@ -63,10 +63,9 @@ const Instructions = Widget.Box([
 const Settings = MarginRevealer({
   revealChild: true,
   transition: 'slide_down',
-  extraSetup: (self) => self
-    .hook(GPTService, (self) => Utils.timeout(200, () => self.attribute.hide()), 'newMsg')
-    .hook(GPTService, (self) => Utils.timeout(200, () => self.attribute.show()), 'clear'),
-
+  extraSetup: self => self
+    .hook(GPTService, self => Utils.timeout(200, () => self.attribute.hide()), 'newMsg')
+    .hook(GPTService, self => Utils.timeout(200, () => self.attribute.show()), 'clear'),
   child: Widget.Box({
     vertical: true,
     className: 'sidebar-chat-settings',
@@ -80,7 +79,7 @@ const Settings = MarginRevealer({
           { value: 1.0, name: 'Creative' },
         ],
         initIndex: 2,
-        onChange: (value) => (GPTService.temperature = value),
+        onChange: value => (GPTService.temperature = value),
       }),
       Widget.Box({
         hpack: 'fill',

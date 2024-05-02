@@ -1,4 +1,4 @@
-import { currentTab, stackItems } from './Content'
+import { currentTab } from './Content'
 import GeminiSendMessage from './gemini/SendMessage'
 import GPTSendMessage from './gpt/SendMessage'
 
@@ -10,7 +10,7 @@ const CommandButton = (command: string) => Widget.Button({
   setup: setupCursorHover,
 }).hook(currentTab, self => {
   const cmd = self.attribute.command
-  self.onClicked = () => (stackItems[currentTab.value] === 0) 
+  self.onClicked = () => currentTab.value === 'gemini'
     ? GeminiSendMessage(cmd) : GPTSendMessage(cmd)
 })
 

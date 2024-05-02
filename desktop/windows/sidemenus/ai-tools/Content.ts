@@ -1,22 +1,26 @@
 import GPTView from './gpt/View'
 import GeminiView from './gemini/View'
+import { ChatPlaceholder } from './Textbox'
 
+import { capitalize } from 'lib/utils'
 import { setupCursorHover } from 'misc/cursorhover'
 
 export const currentTab = Variable('gemini')
 
 export const stackItems = [
   { 
-    name: 'Gemini',
+    name: 'gemini',
     content: GeminiView,
     icon: 'google-gemini-symbolic',
     tooltipText: 'Assistant (Gemini Pro)',
+    placeholderText: 'Message Gemini...',
   },
   {
-    name: 'ChatGPT',
+    name: 'chatGPT',
     content: GPTView,
     icon: 'openai-symbolic',
     tooltipText: 'Assistant (GPTs)',
+    placeholderText: 'Message the model...',
   }
 ]
 
@@ -31,10 +35,17 @@ export const Stack = Widget.Stack({
 })
 
 const Button = ({ icon, name, ...props }) => Widget.Button({
-  child: Widget.Box([ Widget.Label(name), Widget.Icon(icon) ]),
-  onClicked: () => currentTab.value = name,
-  setup: setupCursorHover,
+  child: Widget.Box([ 
+    Widget.Label(capitalize(name)), 
+    Widget.Icon(icon) 
+  ]),
   attribute: { name },
+  onClicked() {
+    const stackItem = stackItems.find(item => item.name === name)
+    ChatPlaceholder.label = stackItem.placeholderText
+    currentTab.value = name
+  },
+  setup: setupCursorHover,
   ...props
 }).hook(currentTab, self => { 
   const isActive = currentTab.value === self.attribute.name
@@ -46,7 +57,9 @@ const TabButtons = Widget.Box(
   Widget.Box({
     hexpand: true,
     hpack: 'center',
-    children: stackItems.map(({ content: _, ...props }) => Button(props))
+    children: stackItems.map(({ 
+      content: _1, placeholderText: _2, ...props 
+    }) => Button(props))
   })
 )
 
