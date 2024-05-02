@@ -4,7 +4,7 @@ import GPTService from 'service/api/gpt'
 import GPTSendMessage from './gpt/SendMessage'
 import GeminiSendMessage from './gemini/SendMessage'
 
-import { APIS, currentApi } from '.'
+import { stackItems, currentTab } from './Content'
 
 import { setupCursorHover } from 'misc/cursorhover'
 import { enableClickThrough } from 'lib/utils'
@@ -18,10 +18,10 @@ const chatSendButton = Widget.Button({
   className: 'chat-send',
   setup: setupCursorHover,
   child: Widget.Icon(icons.ui.send),
-}).hook(currentApi, self => {
+}).hook(currentTab, self => {
   const cmd = ChatEntry.get_buffer().text
 
-  self.onClicked = () => (APIS[currentApi.value] === 0) 
+  self.onClicked = () => (stackItems[currentTab.value] === 0) 
     ? GeminiSendMessage(cmd) : GPTSendMessage(cmd)
 
   ChatEntry.get_buffer().set_text('', -1)
@@ -38,11 +38,11 @@ export const ChatEntry = TextView({
       self.grab_focus()
   })
   .hook(GPTService, self => {
-    if (APIS[currentApi.value] !== 'gpt') return
+    if (stackItems[currentTab.value] !== 'gpt') return
     self.placeholderText = GPTService.key.length > 0 ? 'Message the model...' : 'Enter API Key...'
   }, 'hasKey')
   .hook(Gemini, (self) => {
-    if (APIS[currentApi.value] !== 'gemini') return
+    if (stackItems[currentTab.value] !== 'gemini') return
     self.placeholderText = Gemini.key.length > 0 ? 'Message Gemini...' : 'Enter Google AI API Key...'
   }, 'hasKey')
 
@@ -51,7 +51,7 @@ export const ChatPlaceholder = Widget.Label({
   vpack: 'center',
   label: 'Enter Message',
   className: 'chat-placeholder',
-}).hook(currentApi, self => self.label = APIS[currentApi.value].placeholderText)
+}).hook(currentTab, self => self.label = stackItems[currentTab.value].placeholderText)
 
 export default Widget.Box(
   { className: 'chat-textarea' },
