@@ -14,7 +14,7 @@ const Info = Widget.Box(
   Widget.Icon({
     hpack: 'center',
     icon: 'openai-symbolic',
-    className: 'sidebar-chat-welcome-logo',
+    className: 'welcome-logo',
   }),
   Widget.Label({
     wrap: true,
@@ -32,8 +32,7 @@ const Info = Widget.Box(
     Widget.Button({
       label: 'info',
       setup: setupCursorHoverInfo,
-      tooltipText:
-        'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.\n\nPrivacy: OpenAI claims they do not use your data\nwhen you use their API. Idk about others.',
+      tooltipText: 'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.\n\nPrivacy: OpenAI claims they do not use your data\nwhen you use their API. Idk about others.',
     }),
   ),
 )
@@ -99,7 +98,4 @@ const Settings = MarginRevealer({
   }),
 })
 
-export default Widget.Box(
-  { vexpand: true },
-  Widget.Box({ vpack: 'center', vertical: true }, Info, Instructions, Settings),
-)
+export default Widget.Box({ vertical: true }, Info, Instructions, Settings)

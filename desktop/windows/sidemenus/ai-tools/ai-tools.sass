@@ -1,17 +1,18 @@
 window.sideleft .ai-tools
+  min-width: 400px
+  min-height: 700px
   padding: $padding
-  .content
+  .tab-buttons
     padding: $padding
+    font-size: 1.15em
+    border-bottom: 1px solid transparentize($fg, 0.75)
     image
-      font-size: 1.5em
-      padding: $padding
+      margin: 0 calc($spacing * 0.5)
+
   .chat-textarea
-    padding: calc($padding * 1.25)
-    .chat-entry
-      min-width: 0
-      min-height: 1.25em
-      border-radius: $radius
+    margin: $spacing
     .chat-send
+      background: transparent
       border-radius: calc($radius * 0.5)
       image
         padding: $padding
@@ -19,6 +20,11 @@ window.sideleft .ai-tools
     .chat-placeholder
       color: $fg
       margin-left: $spacing
+
+  .welcome-logo
+    min-width: 3em
+    min-height: 3em
+    font-size: 2.5em
 
   button
     @include button

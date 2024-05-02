@@ -6,7 +6,7 @@ type TMessage = {
 export const providers = { // There's this list hmm https://github.com/zukixa/cool-ai-stuff/
   openai: {
     name: 'OpenAI',
-    logo_name: 'openai-symbolic',
+    logoName: 'openai-symbolic',
     description: 'Official OpenAI API.\nPricing: Free for the first $5 or 3 months, whichever is less.',
     base_url: 'https://api.openai.com/v1/chat/completions',
     key_get_url: 'https://platform.openai.com/api-keys',
@@ -14,7 +14,7 @@ export const providers = { // There's this list hmm https://github.com/zukixa/co
   },
   oxygen: {
     name: 'Oxygen',
-    logo_name: 'ai-oxygen-symbolic',
+    logoName: 'oxygen-symbolic',
     description: 'An API from Tornado Softwares\nPricing: Free: 100/day\nRequires you to join their Discord for a key',
     base_url: 'https://app.oxyapi.uk/v1/chat/completions',
     key_get_url: 'https://discord.com/invite/kM6MaCqGKA',
@@ -22,7 +22,7 @@ export const providers = { // There's this list hmm https://github.com/zukixa/co
   },
   zukijourney: {
     name: 'zukijourney',
-    logo_name: 'ai-zukijourney',
+    logoName: 'ai-zukijourney',
     description: 'An API from @zukixa on GitHub.\nNote: Keys are IP-locked so it\'s buggy sometimes\nPricing: Free: 10/min, 800/day.\nRequires you to join their Discord for a key',
     base_url: 'https://zukijourney.xyzbot.net/v1/chat/completions',
     key_get_url: 'https://discord.com/invite/Y4J6XXnmQ6',
@@ -30,7 +30,7 @@ export const providers = { // There's this list hmm https://github.com/zukixa/co
   },
   zukijourney_roleplay: {
     name: 'zukijourney (roleplay)',
-    logo_name: 'ai-zukijourney',
+    logoName: 'ai-zukijourney',
     description: 'An API from @zukixa on GitHub.\nNote: Keys are IP-locked so it\'s buggy sometimes\nPricing: Free: 10/min, 800/day.\nRequires you to join their Discord for a key',
     base_url: 'https://zukijourney.xyzbot.net/unf/chat/completions',
     key_get_url: 'https://discord.com/invite/Y4J6XXnmQ6',

@@ -13,6 +13,7 @@ const Info = Widget.Box(
   { vertical: true },
   Widget.Icon({
     hpack: 'center',
+    className: 'welcome-logo',
     icon: 'google-gemini-symbolic',
   }),
   Widget.Label({

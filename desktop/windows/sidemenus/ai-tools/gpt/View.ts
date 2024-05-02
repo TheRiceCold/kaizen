@@ -11,28 +11,19 @@ const { Gtk } = imports.gi
 
 const ProviderSwitcher = () => {
   const ProviderChoice = (id, provider) => {
-    const providerSelected = Widget.Icon({
-      icon: 'check-symbolic',
-    }).hook(
-      GPTService,
-      (self) => self.toggleClassName('invisible', GPTService.providerID !== id),
-      'providerChanged',
-    )
+    const providerSelected = Widget.Icon({ icon: 'check-symbolic' })
+      .hook(GPTService, self => self.toggleClassName('invisible', GPTService.providerID !== id), 'providerChanged')
 
     return Widget.Button({
       tooltipText: provider.description,
       onClicked() {
         GPTService.providerID = id
         providerList.revealChild = false
-        indicatorChevron.icon = 'expand_more'
+        indicatorChevron.icon = icons.ui.arrow.down
       },
       child: Widget.Box([
-        Widget.Icon({ icon: provider['logo_name'] }),
-        Widget.Label({
-          xalign: 0,
-          hexpand: true,
-          label: provider.name,
-        }),
+        Widget.Icon(provider.logoName),
+        Widget.Label({ xalign: 0, hexpand: true, label: provider.name }),
         providerSelected,
       ]),
       setup: setupCursorHover,

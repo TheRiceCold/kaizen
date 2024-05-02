@@ -15,9 +15,8 @@ export const ConfigToggle = ({
 }) => {
   const enabled = Variable(initValue)
   const toggleIcon = Widget.Label({
-    className: `icon-material txt-bold ${enabled.value ? '' : 'txt-poof'}`,
     label: `${enabled.value ? 'check' : ''}`,
-  }).hook(enabled, (self) => {
+  }).hook(enabled, self => {
     self.toggleClassName('switch-fg-toggling-false', false)
     if (!enabled.value) {
       self.label = ''
