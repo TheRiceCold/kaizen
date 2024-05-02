@@ -5,7 +5,7 @@ import { sh } from 'lib/utils'
 import { toggleWidget } from 'lib/globals'
 
 const commands: MenuItemProps[] = [
-  { label: 'API tools', onActivate: () => toggleWidget('apis') },
+  { label: 'AI tools', onActivate: () => toggleWidget('ai-tools') },
   { label: 'Waydroid', onActivate: () => sh('waydroid first-launch') },
   { label: 'Windows 11 (VM)', onActivate: () => { } },
   { label: 'Debian (Container)', onActivate: () => { } },

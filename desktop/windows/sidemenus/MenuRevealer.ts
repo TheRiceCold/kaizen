@@ -1,7 +1,7 @@
 import options from 'options'
 import { showWidget } from 'lib/variables'
 
-type menuNames = 'apis' | 'datemenu' | 'quicksettings'
+type menuNames = 'ai-tools' | 'datemenu' | 'quicksettings'
 
 export default (name: menuNames, children) => Widget.Revealer({
   transition: 'slide_down',

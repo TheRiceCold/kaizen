@@ -1,4 +1,4 @@
-import Apis from './apis'
+import AiTools from './ai-tools'
 import DateMenu from './datemenu'
 import QuickSettings from './quicksettings'
 
@@ -9,7 +9,7 @@ const left = Widget.Window({
   child: Widget.Box({
     vertical: true,
     css: 'padding: 2px;',
-    children: [ Apis ]
+    children: [ AiTools ]
   }),
 })
 

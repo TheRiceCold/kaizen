@@ -45,8 +45,8 @@ const showWidget = {
   keyboard: Variable(false),
 
   // SIDE
-  apis: Variable(false),
   datemenu: Variable(false),
+  'ai-tools': Variable(false),
   quicksettings: Variable(false), 
 }
 
