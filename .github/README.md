@@ -1,4 +1,4 @@
-###### *<div align=right><sub>Last nix update: april 29, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: may 2, 2024</sub></div>*
 
 <h1 align=center>
   <img src='https://github.com/thericecold/dots/blob/main/assets/ibu-circle.png' width='150px'/>
@@ -19,9 +19,14 @@
   **[<kbd> <br> Acknowledgements&nbsp; <br> </kbd>](#-Acknowledgements)**
 
 </h1>
-<p align=center>The japanese word "kaizen" is a philosophy to improve continuously and change for the better.</p>
+<p align=center>
+  A linux desktop environment configuration using <a href='https://github.com/aylur/ags'>Aylur's Gtk Shell</a>.<br/>
+  The japanese word <b>kaizen</b> is a philosophy to improve continuously and change for the better.<br />
+</p>
 
-A linux desktop environment configuration using [Aylur's Gtk Shell][ags]. This configuration is designed to improve workflow with useful development tools.
+<p align=center>
+  This configuration is designed to improve daily workflow with an intuitive and minimal design that includes smart widgets and powerful development tools.
+</p>
 
 ## 🔥 Showcase
 
@@ -41,7 +46,7 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
       - Floats Only: Pin and Center
     - Developer Tools
       - API Tools: Opens API Tools Side Menu
-      - Waydroid: Starts Waydroid. [view my setup]()
+      - Android: Starts and opens BlissOS VM. [view my setup]()
       - Debian: Starts Debian Container. [view my setup]()
       - Windows 11: Opens Windows 11 VM. [view my setup]()
     - Shortcuts: Opens shortcuts window.
@@ -182,8 +187,26 @@ ags -c ~/.config/ags/config.js
     `home.nix`
     ``` nix
     { kaizen, ... }: {
-       imports = [ kaizen.homeManagerModules.default; ]; 
-       programs.kaizen.enable = true;
+      imports = [ kaizen.homeManagerModules.default; ]; 
+      programs.kaizen = {
+        enable = true;
+        # // TODO:
+        # options = {
+        #   theme = {
+        #     gaps = 1.5;
+        #     padding = 4;
+        #     radius = 16;
+        #     blur-size = 4;
+        #     shadows = true;
+        #     border-width = 1;
+        #     colorscheme = "poimandres";
+        #   };
+        #   font =  {
+        #     size = 10;
+        #     name = "Ubuntu Nerd Font";
+        #   };
+        # };
+      };
     }
     ```
 
