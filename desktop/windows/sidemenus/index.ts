@@ -1,27 +1,22 @@
 import AiTools from './ai-tools'
-import DateMenu from './datemenu'
+// import DateMenu from './datemenu'
 import QuickSettings from './quicksettings'
 
-const left = Widget.Window({
-  name: 'sideleft',
-  className: 'sideleft',
-  anchor: ['top', 'left'],
+type TDirection = 'left' | 'right'
+
+const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
+  name: `side${dir}`,
+  anchor: ['top', dir],
+  className: `side${dir}`,
+  keymode: 'on-demand',
   child: Widget.Box({
-    vertical: true,
-    css: 'padding: 2px;',
-    children: [ AiTools ]
-  }),
+    children,
+    vertical: true, 
+    css: 'padding: 2px;', 
+  })
 })
 
-const right = Widget.Window({
-  name: 'sideright',
-  className: 'sideright',
-  anchor: ['top', 'right'],
-  child: Widget.Box({
-    vertical: true,
-    css: 'padding: 2px;',
-    children: [ QuickSettings, DateMenu ]
-  }),
-})
-
-export default [ left, right ]
+export default [
+  Sidemenu('left', AiTools),
+  Sidemenu('right', QuickSettings, /* DateMenu */),
+]

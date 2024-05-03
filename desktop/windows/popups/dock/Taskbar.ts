@@ -1,12 +1,12 @@
 import AppButton from './AppButton'
 import options from 'options'
-import { getAllFiles, searchIcons } from 'lib/utils'
+import { sh, getAllFiles, searchIcons } from 'lib/utils'
 
 const cachePath = new Map()
 const { dock } = options.popups
 const hyprland = await Service.import('hyprland')
 const icon_files = dock.icons.searchPaths.map(e => getAllFiles(e)).flat(1)
-const focus = ({ address }) => Utils.execAsync(`hyprctl dispatch focuswindow address:${address}`).catch(print)
+const focus = ({ address }) => sh(`hyprctl dispatch focuswindow address:${address}`)
 
 function substitute(str: string) {
   const subs = [
