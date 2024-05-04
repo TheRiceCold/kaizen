@@ -1,4 +1,4 @@
-import { type Props as LabelProps } from 'types/widgets/label'
+import { type LabelProps } from 'types/widgets/label'
 import { capitalize } from 'lib/utils'
 import options from 'options'
 

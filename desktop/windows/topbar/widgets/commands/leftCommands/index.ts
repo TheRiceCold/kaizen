@@ -1,4 +1,4 @@
-import Revealer from '../revealer'
+import Revealer from '../Revealer'
 
 import { openDevMenu } from './menus/DevMenu'
 import { openWindowMenu } from './menus/WindowMenu'

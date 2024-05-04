@@ -40,7 +40,7 @@ const range = (length: number, start = 1) => Array.from({ length }, (_, i) => i 
 
 function forMonitors(widget: (monitor: number) => Gtk.Window) {
   const n = imports.gi.Gdk.Display.get_default().get_n_monitors() || 1
-  return range(n, 0).map(widget).flat(1)
+  return range(n, 0).flatMap(widget)
 }
 
 /** @returns true if all of the `bins` are found */

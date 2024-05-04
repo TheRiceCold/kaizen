@@ -4,7 +4,7 @@ import GeminiService from 'service/api/gemini'
 import GPTSendMessage from './gpt/SendMessage'
 import GeminiSendMessage from './gemini/SendMessage'
 
-import { stackItems, currentTab } from './Content'
+import { currentTab } from './Content'
 
 import { setupCursorHover } from 'misc/cursorhover'
 import { enableClickThrough } from 'lib/utils'

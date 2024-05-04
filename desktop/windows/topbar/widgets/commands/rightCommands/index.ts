@@ -1,6 +1,6 @@
 import Annotation from 'service/annotation'
 
-import Revealer from '../revealer'
+import Revealer from '../Revealer'
 import { 
   openKeyMenu, 
   openZoomMenu, 

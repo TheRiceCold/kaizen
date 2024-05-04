@@ -8,10 +8,9 @@ const commands: MenuItemProps[] = [
   { label: 'Fullscreen', onActivate: () => dispatch('fullscreen')},
   { label: 'Toggle float', onActivate: () => dispatch('togglefloating') },
   { label: 'Center Layout', onActivate: () => sh('pypr layout_center toggle') },
+  { label: 'Center (Float)', onActivate: () => dispatch('centerwindow') },
+  { label: 'Pin (Float)', onActivate: () => dispatch('pin') },
   { label: 'Quit', onActivate: () => dispatch('killactive') },
-  { label: 'Floats Only' },
-  { label: 'Pin', onActivate: () => dispatch('pin') },
-  { label: 'Center', onActivate: () => dispatch('centerwindow') },
 ]
 
 export const openWindowMenu = self => Menu(self, commands)
