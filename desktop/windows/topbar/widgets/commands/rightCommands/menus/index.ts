@@ -1,4 +1,4 @@
-export { default as openKeyMenu } from './keyMenu'
-export { default as openSnipMenu } from './snipMenu'
-export { default as openZoomMenu } from './zoomMenu'
-export { default as openRecordMenu } from './recordMenu'
+export { default as openKeyMenu } from './KeyMenu'
+export { default as openSnipMenu } from './SnipMenu'
+export { default as openZoomMenu } from './ZoomMenu'
+export { default as openRecordMenu } from './RecordMenu'

@@ -1,10 +1,18 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
+import screenTools from 'service/screen'
+
 import Menu from '../../Menu'
-import { sh } from 'lib/utils'
+
+import { capitalize } from 'lib/utils'
+
+const recorder = (option: 'region' | 'fullscreen') => ({
+  label: capitalize(option),
+  onActivate: () => screenTools.recorder(option)
+})
 
 const commands: MenuItemProps[] = [
-  { label: 'Fullscreen', onActivate: () => sh(`wl-screenrec --audio -f /home/${Utils.USER}/Videos/screenrec.mp4`) },
-  { label: 'Region', onActivate: () => { } },
+  recorder('fullscreen'),
+  recorder('region'),
   { label: 'Voice', onActivate: () => { } },
   { label: 'Open Files', onActivate: () => { } },
 ]

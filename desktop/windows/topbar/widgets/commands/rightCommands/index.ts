@@ -1,5 +1,6 @@
 import Annotation from 'service/annotation'
 
+import screenTools from 'service/screen'
 import Revealer from '../Revealer'
 import { 
   openKeyMenu, 
@@ -20,7 +21,26 @@ const commands = [
   // { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
   { label: 'Keys ', onClicked: openKeyMenu },
   { label: 'Zoom ', onClicked: openZoomMenu },
-  { label: 'Record ', onClicked: openRecordMenu },
+  {
+    label: Utils.merge([
+      screenTools.bind('timer'),
+      screenTools.bind('isRecording')
+    ], (time, isRecording) => {
+      if (!isRecording) return 'Record '
+      const sec = time % 60
+      const min = Math.floor(time / 60)
+      return `Record: ${min}:${sec < 10 ? '0' + sec : sec}`
+    }),
+    onClicked(self) {
+      if (!screenTools.isRecording) 
+        openRecordMenu(self)
+      else {
+        screenTools.recorder('stop')
+        self.label = 'Record '
+      }
+    },
+    tooltipText: screenTools.bind('isRecording').as(isRecording => isRecording ? 'Click to stop' : ''),
+  },
   { label: 'Snip ', onClicked: openSnipMenu },
 ]
 

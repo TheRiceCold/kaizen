@@ -1,13 +1,13 @@
 import icons from 'data/icons'
 import { dependencies, sh, bash } from 'lib/utils'
 
-const now = () => imports.GLib.DateTime.new_now_local().format('%Y-%m-%d_%H-%M-%S')
+const { GLib } = imports.gi
 
 class ScreenTools extends Service {
   static { 
     Service.register(this, {}, { 
       timer: [ 'int' ], 
-      recording: [ 'boolean' ],
+      isRecording: [ 'boolean' ],
     }) 
   }
 
@@ -17,31 +17,37 @@ class ScreenTools extends Service {
   #interval = 0
 
   timer = 0
-  recording = false
+  isRecording = false
 
-  async start() {
-    if (!dependencies('slurp', 'wf-recorder')) return
+  async recorder(option: 'region' | 'fullscreen' | 'stop' = 'region') {
+    if (!dependencies('slurp', 'wl-screenrec')) return
 
-    if (this.recording) return
+    if (this.isRecording && option === 'stop') 
+      this.recorderStop()
+    else if (!this.isRecording) {
+      const dateFormat = '%Y-%m-%d_%H-%M-%S'
+      const now = GLib.DateTime.new_now_local().format(dateFormat)
 
-    Utils.ensureDirectory(this.#recordings)
-    this.#file = `${this.#recordings}/${now()}.mp4`
-    sh(`wf-recorder -g ${await sh('slurp')} -f ${this.#file} --pixel-format yuv420p`)
+      Utils.ensureDirectory(this.#recordings)
+      this.#file = `${this.#recordings}/${now}.mp4`
+      if (option === 'fullscreen')
+        sh(`wl-screenrec -f ${this.#file}`)
+      if (option === 'region')
+        sh(`wl-screenrec -g "${await sh('slurp')}" -f ${this.#file}`)
 
-    this.recording = true
-    this.changed('recording')
+      this.isRecording = true
+      this.changed('isRecording')
 
-    this.timer = 0
-    this.#interval = Utils.interval(1000, () => { this.changed('timer'); this.timer++ })
+      this.timer = 0
+      this.#interval = Utils.interval(1000, () => { this.changed('timer'); this.timer++ })
+    }
   }
 
-  async stop() {
-    if (!this.recording) return
-
-    await bash('killall -INT wf-recorder')
-    this.recording = false
-    this.changed('recording')
-    imports.GLib.source_remove(this.#interval)
+  async recorderStop() {
+    await bash`killall -USR1 wl-screenrec`
+    this.isRecording = false
+    this.changed('isRecording')
+    GLib.source_remove(this.#interval)
 
     Utils.notify({
       summary: 'Screenrecord',
@@ -53,8 +59,6 @@ class ScreenTools extends Service {
       },
     })
   }
-
-  async record() { Utils.notify('Fucking record') }
 
   async snip() { Utils.notify('Fucking snip') }
 

@@ -20,9 +20,9 @@
   hyprpicker,
   # showmethekey, # TODO:
   wl-clipboard,
-  wl-screenrec,
   brightnessctl,
   networkmanager,
+  slurp, wl-screenrec,
   version ? "git"
 } : let
   name = "kaizen";
@@ -50,6 +50,7 @@
     hyprpicker        # Wayland Color Picker
     gromit-mpx        # Annotation Tool
     wl-clipboard      # Command-line copy/paste utilities for Wayland
+    slurp             # Region Selector
     wl-screenrec      # High Performance Screen Recorder
     brightnessctl     # Read and Control Brightness
     networkmanager
