@@ -2,7 +2,7 @@ import options from 'options'
 import Notification from './Notification'
 
 const { timeout } = Utils
-const { transition, bar } = options
+const { transition } = options
 const notifications = await Service.import('notifications')
 
 export default (id: number) => {

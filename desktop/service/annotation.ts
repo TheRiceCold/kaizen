@@ -118,6 +118,7 @@ class Annotation extends Service {
     } catch(err) { logError(err) }
   }
   
+  readonly pin = () => sh('hyprctl dispatch pin')
   readonly quit = () => this.action('quit')
   readonly redo = () => this.action('redo')
   readonly undo = () => this.action('undo')

@@ -59,7 +59,7 @@ class ScreenTools extends Service {
     })
   }
 
-  async snip(full: boolean = true) { 
+  async screenshot(full: boolean = true) { 
     if (!dependencies('slurp', 'grim')) return
 
     const file = `${this.#screenshots}/${now}.png`
