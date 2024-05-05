@@ -73,6 +73,20 @@ class ScreenTools extends Service {
     }
 
     bash`wl-copy < ${file}`
+
+    Utils.notify({
+      image: file,
+      summary: 'Screenshot',
+      body: file,
+      actions: {
+        'Show in Files': () => sh(`xdg-open ${this.#screenshots}`),
+        View: () => sh(`xdg-open ${file}`),
+        Edit: () => {
+          if (dependencies('swappy'))
+            sh(`swappy -f ${file}`)
+        },
+      },
+    })
   }
 
   async zoom(amount: string | number = '') {

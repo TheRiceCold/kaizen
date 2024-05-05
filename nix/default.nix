@@ -12,7 +12,6 @@
   cage,
   cava,
   swww,
-  grim,
   # brotab,
   # sptlrx,
   ydotool,
@@ -23,7 +22,9 @@
   wl-clipboard,
   brightnessctl,
   networkmanager,
-  slurp, wl-screenrec,
+  swappy,
+  slurp, grim,
+  wl-screenrec,
   version ? "git"
 } : let
   name = "kaizen";
@@ -52,6 +53,7 @@
     gromit-mpx        # Annotation Tool
     grim
     slurp             # Region Selector
+    swappy
     wl-screenrec      # High Performance Screen Recorder
     wl-clipboard      # Command-line copy/paste utilities for Wayland
     brightnessctl     # Read and Control Brightness

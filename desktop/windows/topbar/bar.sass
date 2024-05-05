@@ -44,7 +44,7 @@
 menu
   padding: 0
   border-radius: calc($radius * 0.5)
-  background-color: transparentize($bg, 0.25)
+  background-color: transparentize($bg, 0.5)
   menuitem
     label, image
       color: $fg
@@ -53,3 +53,6 @@ menu
       background: $primary-bg
       label
         color: $bg
+    &:last-child
+      border-bottom-left-radius: calc($radius * 0.5)
+      border-bottom-right-radius: calc($radius * 0.5)

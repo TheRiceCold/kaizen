@@ -1,10 +1,11 @@
-import { type MenuItemProps } from 'types/widgets/menuitem'
 import Menu from '../../Menu'
 import screenTools from 'service/screen'
 
-const commands: MenuItemProps[] = [
-  { label: 'Fullscreen', onActivate: () => screenTools.snip(true) },
-  { label: 'Region', onActivate: () => screenTools.snip(false) },
-]
+const snip = (label: string, full: boolean) => ({ 
+  label, onActivate: () => screenTools.screenshot(full) 
+})
 
-export default self => Menu(self, commands)
+export default self => Menu(self, [
+  snip('Fullscreen', true), 
+  snip('Region', false),
+])
