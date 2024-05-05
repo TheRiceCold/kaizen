@@ -2,6 +2,8 @@ import icons from 'data/icons'
 import { dependencies, sh, bash } from 'lib/utils'
 
 const { GLib } = imports.gi
+const dateFormat = '%Y-%m-%d_%H-%M-%S'
+const now = GLib.DateTime.new_now_local().format(dateFormat)
 
 class ScreenTools extends Service {
   static { 
@@ -25,9 +27,6 @@ class ScreenTools extends Service {
     if (this.isRecording && option === 'stop') 
       this.recorderStop()
     else if (!this.isRecording) {
-      const dateFormat = '%Y-%m-%d_%H-%M-%S'
-      const now = GLib.DateTime.new_now_local().format(dateFormat)
-
       Utils.ensureDirectory(this.#recordings)
       this.#file = `${this.#recordings}/${now}.mp4`
       if (option === 'fullscreen')
@@ -60,7 +59,21 @@ class ScreenTools extends Service {
     })
   }
 
-  async snip() { Utils.notify('Fucking snip') }
+  async snip(full: boolean = true) { 
+    if (!dependencies('slurp', 'grim')) return
+
+    const file = `${this.#screenshots}/${now}.png`
+    Utils.ensureDirectory(this.#screenshots)
+
+    if (full) await sh(`grim ${file}`)
+    else {
+      const size = await sh('slurp')
+      if (!size) return
+      await sh(`grim -g "${size}" ${file}`)
+    }
+
+    bash`wl-copy < ${file}`
+  }
 
   async zoom(amount: string | number = '') {
     if (!dependencies('pypr')) return

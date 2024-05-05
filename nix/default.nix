@@ -12,6 +12,7 @@
   cage,
   cava,
   swww,
+  grim,
   # brotab,
   # sptlrx,
   ydotool,
@@ -49,9 +50,10 @@
     cliphist          # Clipboard History Manager
     hyprpicker        # Wayland Color Picker
     gromit-mpx        # Annotation Tool
-    wl-clipboard      # Command-line copy/paste utilities for Wayland
+    grim
     slurp             # Region Selector
     wl-screenrec      # High Performance Screen Recorder
+    wl-clipboard      # Command-line copy/paste utilities for Wayland
     brightnessctl     # Read and Control Brightness
     networkmanager
     gtk-session-lock  # GTK3 screen lockers using ext-session-lock-v1 protocol

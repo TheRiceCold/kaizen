@@ -9,7 +9,7 @@ const wpConfig = {
 }
 
 const WP = `${Utils.HOME}/.config/background`
-const Cache = `${Utils.HOME}/Pictures/Wallpaper/Bing`
+const Cache = `${Utils.HOME}/Fotos/Wallpaper/Bing`
 
 class Wallpaper extends Service {
   static {
@@ -19,8 +19,7 @@ class Wallpaper extends Service {
   #blockMonitor = false
 
   #wallpaper() {
-    if (!dependencies('swww'))
-      return
+    if (!dependencies('swww')) return
 
     sh('hyprctl cursorpos').then(pos => {
       sh([

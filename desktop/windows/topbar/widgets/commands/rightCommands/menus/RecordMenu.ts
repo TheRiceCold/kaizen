@@ -5,16 +5,16 @@ import Menu from '../../Menu'
 
 import { capitalize } from 'lib/utils'
 
-const recorder = (option: 'region' | 'fullscreen') => ({
-  label: capitalize(option),
-  onActivate: () => screenTools.recorder(option)
+const recorder = (option: 'region' | 'fullscreen', audio: boolean = false) => ({
+  onActivate: () => screenTools.recorder(option),
+  label: `${capitalize(option)}${audio ? ' (Audio)' : ''}`,
 })
 
 const commands: MenuItemProps[] = [
-  recorder('fullscreen'),
   recorder('region'),
-  { label: 'Voice', onActivate: () => { } },
-  { label: 'Open Files', onActivate: () => { } },
+  recorder('fullscreen'),
+  recorder('region', true),
+  recorder('fullscreen', true),
 ]
 
 export default self => Menu(self, commands)
