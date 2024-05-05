@@ -23,10 +23,12 @@
         padding: calc($padding * 0.4) calc($padding * 0.8)
       .colored
         color: $primary-bg
-      .error
-        color: #C76598
-      .charging
-        color: #58D9BD
+      .battery
+        font-size: 1.25em
+        &.error
+          color: #C76598
+        &.charging
+          color: #58D9BD
 
     &:first-child // Left
       .bar-button:first-child

@@ -9,8 +9,8 @@ export default (id: number) => {
   const n = notifications.getNotification(id)!
   const widget = Notification(n)
   const transitionRevealer = {
+    transition: 'slide_down',
     transitionDuration: transition.value,
-    transition: bar.position.bind().as(pos => pos === 'top' ? 'slide_down' : 'slide_up'),
   }
 
   const inner = Widget.Revealer({ child: widget, ...transitionRevealer })

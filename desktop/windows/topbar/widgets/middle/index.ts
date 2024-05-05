@@ -1,4 +1,5 @@
 import { type MprisPlayer } from 'types/service/mpris'
+import { setupCursorHover } from 'misc/cursorhover'
 
 import PlayerStatusIcon from 'misc/playerStatusIcon'
 import Stack from './Stack'
@@ -63,6 +64,7 @@ export default Widget.EventBox({
   vpack: 'start',
   child: Revealer,
   className: 'media',
+  setup: setupCursorHover,
   onSecondaryClick: () => { },
   onScrollUp: () => stack.shown = 'song',
   onScrollDown: () => stack.shown = 'visualizer',

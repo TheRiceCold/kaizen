@@ -7,7 +7,9 @@ const { wifi } = await Service.import('network')
 
 const battery = await Service.import('battery')
 
-const BatteryIcon = Widget.Label().hook(battery, self => {
+const BatteryIcon = Widget.Label({
+  className: 'battery',
+}).hook(battery, self => {
   const { percent: p, charging, available } = battery
   self.visible = available
   self.toggleClassName('charging', charging)

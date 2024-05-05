@@ -2,11 +2,7 @@ import { bash, dependencies, sh } from 'lib/utils'
 import { type Opt } from 'lib/option'
 import options from 'options'
 
-const deps = [
-  'font',
-  'theme',
-  'bar.position',
-]
+const deps = [ 'font', 'theme' ]
 
 const {
   dark,
@@ -58,7 +54,6 @@ const variables = () => [
   $('font-name', options.font.default.name),
   $('font-size', `${options.font.default.size}pt`),
 
-  $('bar-position', options.bar.position),
   $('hyprland-gaps-multiplier', options.hyprland.gaps),
 ]
 
