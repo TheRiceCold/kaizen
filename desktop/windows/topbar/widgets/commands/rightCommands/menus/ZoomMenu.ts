@@ -8,8 +8,7 @@ const commands: MenuItemProps[] = [
   { label: 'Toggle', onActivate: () => zoom() },
   { label: '2x', onActivate: () => zoom(2) } ,
   { label: '3x', onActivate: () => zoom(3) } ,
-  { label: '4x', onActivate: () => zoom(4) },
-  { label: '5x', onActivate: () => zoom(5) },
+  { label: 'Custom', onActivate: () => {} },
 ]
 
 export default self => Menu(self, commands)

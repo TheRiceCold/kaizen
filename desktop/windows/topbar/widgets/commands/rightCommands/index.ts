@@ -21,6 +21,7 @@ const commands = [
   // { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
   { label: 'Keys ', onClicked: openKeyMenu },
   { label: 'Zoom ', onClicked: openZoomMenu },
+  { label: 'Snip ', onClicked: openSnipMenu },
   {
     label: Utils.merge([
       screenTools.bind('timer'),
@@ -41,7 +42,6 @@ const commands = [
     },
     tooltipText: screenTools.bind('isRecording').as(isRecording => isRecording ? 'Click to stop' : ''),
   },
-  { label: 'Snip ', onClicked: openSnipMenu },
 ]
 
 export default Revealer('left', commands)

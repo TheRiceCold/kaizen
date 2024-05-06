@@ -16,7 +16,10 @@ const Top = Widget.Window({
   child: Widget.Box({ 
     vertical: true, 
     css: `padding: 2px; margin-top: ${options.theme.spacing * 4}px;` 
-  }, AnnotationTools, Media, ColorTool, Notifications()),
+  }, 
+  AnnotationTools, 
+  Media, ColorTool, 
+  Notifications()),
 })
 
 const Bottom = Widget.Window({

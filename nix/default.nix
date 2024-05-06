@@ -1,5 +1,6 @@
 { 
-  inputs, writeShellScript, system, stdenv,
+  inputs, system, stdenv,
+  writeShellScript, 
 
   # Utilities
   fd, bun, which, dart-sass,
@@ -31,7 +32,7 @@
 
   matugen = inputs.matugen.packages.${system}.default;
   hyprland = inputs.hyprland.packages.${system}.default;
-  gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
+  # gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
     extraPackages = [ gtksourceview3 ];
   };
@@ -58,7 +59,7 @@
     wl-clipboard      # Command-line copy/paste utilities for Wayland
     brightnessctl     # Read and Control Brightness
     networkmanager
-    gtk-session-lock  # GTK3 screen lockers using ext-session-lock-v1 protocol
+    # gtk-session-lock  # GTK3 screen lockers using ext-session-lock-v1 protocol
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
