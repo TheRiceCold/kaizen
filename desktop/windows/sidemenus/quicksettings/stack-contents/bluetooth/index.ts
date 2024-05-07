@@ -1,7 +1,7 @@
 import Header from '../Header'
 import Device from './Device'
 
-import { sh } from 'lib/utils'
+import { sh, dependencies } from 'lib/utils'
 import { setupCursorHover } from 'misc/cursorhover'
 
 const bluetooth = await Service.import('bluetooth')
@@ -30,7 +30,10 @@ const header = Header('Bluetooth', [
   Widget.Button({
     label: 'Settings',
     setup: setupCursorHover,
-    onClicked: () => sh('blueman-manager')
+    onClicked() {
+      if (dependencies('blueman-manager'))
+        sh('blueman-manager')
+    }
   }) 
 ])
 

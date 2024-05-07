@@ -1,5 +1,5 @@
 import AiTools from './ai-tools'
-// import DateMenu from './datemenu'
+import DateMenu from './datemenu'
 import QuickSettings from './quicksettings'
 
 type TDirection = 'left' | 'right'
@@ -18,5 +18,5 @@ const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
 
 export default [
   Sidemenu('left', AiTools),
-  Sidemenu('right', QuickSettings, /* DateMenu */),
+  Sidemenu('right', QuickSettings, DateMenu),
 ]

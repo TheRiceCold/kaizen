@@ -21,7 +21,10 @@ const header = Header('Wifi', [
   Widget.Button({
     label: 'Settings',
     setup: setupCursorHover,
-    onClicked: () => sh('wpa_gui') 
+    onClicked() {
+      if(dependencies('wpa_gui'))
+        sh('wpa_gui')
+    }
   })
 ])
 
@@ -29,7 +32,7 @@ const item = (ap: TWifi) => Widget.Button({
   className: 'wifi-item',
   setup: setupCursorHover,
   tooltipText: 'Click to connect',
-  onClicked: () => {
+  onClicked() {
     if (dependencies('nmcli'))
       sh(`nmcli device wifi connect ${ap.bssid}`)
   },

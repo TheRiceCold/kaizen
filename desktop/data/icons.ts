@@ -22,6 +22,12 @@ export default {
     open_ai: 'open-ai-symbolic',
     gemini: 'google-gemini-symbolic',
   },
+  nix: {
+    nix: 'nix-snowflake-symbolic',
+  },
+  app: {
+    terminal: 'terminal-symbolic',
+  },
   ui: {
     pin: 'pin-symbolic',
     send: 'send-symbolic',

@@ -1,7 +1,7 @@
 import { type ButtonProps } from 'types/widgets/button'
 
 import timer from './timer'
-import weather from './weather'
+// import weather from './weather'
 import MenuRevealer from '../MenuRevealer'
 import { setupCursorHover } from 'misc/cursorhover'
 
@@ -17,10 +17,10 @@ const stackItems = [
       children: [ Widget.Calendar({ hexpand: true }) ],
     }),
   },
-  { name: 'weather', content: weather },
-  { name: 'agenda', content: Widget.Box([ ]) },
+  { name: 'weather', content: /* weather */ Widget.Box() },
+  { name: 'agenda', content: Widget.Box() },
   { name: 'timer', content: timer },
-  { name: 'events', content: Widget.Box([ ]) },
+  { name: 'events', content: Widget.Box() },
 ]
 
 const Stack = Widget.Stack({
