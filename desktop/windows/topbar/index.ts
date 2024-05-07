@@ -11,11 +11,10 @@ const Content = Widget.CenterBox({
   endWidget: Widget.Box({ hpack: 'end', className: 'side-items' }, RightCommands, Tray, Control, Date, Power)
 })
 
-/* NOTE: Maybe add an auto-hide(revealer) option? */
-export default (monitor: number) => Widget.Window({
+export default Widget.Window({
   child: Content,
-  className: 'bar',
-  name: `bar${monitor}`,
+  name: 'topbar',
+  className: 'topbar',
   exclusivity: 'exclusive',
   anchor: [ 'top', 'right', 'left' ],
 })
