@@ -20,10 +20,39 @@ const buttons = [
   { label: 'Quit', onClicked: quit },
 ]
 
+const ToolsInfo = Widget.Revealer({
+  child: Widget.Box(
+    { vertical: true, className: 'info' },
+    Widget.Label('Line: Hold Shift'),
+    Widget.Label('Arrow: Hold Ctrl'),
+    Widget.Label('Secondary Color: Hold Alt'),
+    Widget.Label('Rectangle: Middle Click'),
+    Widget.Label('Eraser: Right Click'),
+  )
+})
+
 export default PopupRevealer({ 
-  // reveal: Annotation.bind('active'), // TODO: abstraction
+  vertical: true,
   hpack: 'center',
   className: 'annotation-tool',
   reveal: hyprland.active.client.bind('class').as((c: string) => c === 'Gromit-mpx'),
-  children: buttons.map(props => Widget.Button({ setup: setupCursorHover, ...props })),
+  children: [
+    Widget.Box({
+      className: 'control-buttons',
+      children: buttons.map(props => Widget.Button({ setup: setupCursorHover, ...props })),
+    }),
+    Widget.Box(
+      { vertical: true },
+      ToolsInfo,
+      Widget.Button({
+        hexpand: true,
+        setup: setupCursorHover,
+        label: 'View brushes ',
+        onClicked(self) {
+          ToolsInfo.revealChild = !ToolsInfo.revealChild
+          self.label = ToolsInfo.revealChild ? 'Hide Tools ' : 'View Tools '
+        }
+      })
+    )
+  ]
 })

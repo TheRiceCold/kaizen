@@ -15,7 +15,7 @@ export default mkOptions(OPTIONS, {
 
   hyprland: {
     gaps: opt(1.5),
-    gapsWhenOnly: opt(true),
+    gapsWhenOnly: opt(false),
     inactiveBorder: opt('333333ff'),
     shader: opt<TShader>('default')
   },

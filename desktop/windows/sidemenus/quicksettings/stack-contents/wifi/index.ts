@@ -21,7 +21,7 @@ const header = Header('Wifi', [
   Widget.Button({
     label: 'Settings',
     setup: setupCursorHover,
-    onClicked: () => { }, // TODO: Open wifi settings
+    onClicked: () => sh('wpa_gui') 
   })
 ])
 
