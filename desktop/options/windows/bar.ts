@@ -6,7 +6,7 @@ const { datemenu, quicksettings } = showWidget
 
 export default {
   tray: {
-    ignore: opt([ 'KDE Connect Indicator' ]),
+    ignore: opt([ 'KDE Connect Indicator', 'gromit-mpx' ]),
   },
   media: {
     length: opt(40),

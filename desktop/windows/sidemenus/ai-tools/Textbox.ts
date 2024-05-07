@@ -9,13 +9,11 @@ import { currentTab } from './Content'
 import { setupCursorHover } from 'misc/cursorhover'
 import { enableClickThrough } from 'lib/utils'
 import icons from 'data/icons'
-import options from 'options/theme'
 
 const { Gtk } = imports.gi
-const { scheme, radius } = options.theme
 const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
 
-const chatSendButton = Widget.Button({
+const ChatSendButton = Widget.Button({
   vpack: 'end',
   className: 'chat-send',
   setup: setupCursorHover,
@@ -37,15 +35,18 @@ export const ChatPlaceholder = Widget.Label({
   className: 'chat-placeholder',
 })
 
+export const ChatPlaceholderRevealer = Widget.Revealer({
+  revealChild: true,
+  transition: 'crossfade',
+  child: ChatPlaceholder,
+  setup: enableClickThrough,
+})
+
 export const ChatEntry = TextView({
   hexpand: true,
   acceptsTab: false,
+  className: 'chat-entry',
   wrapMode: Gtk.WrapMode.WORD_CHAR,
-  css: `
-    opacity: 0.5;
-    border-radius: ${radius};
-    color: ${options.theme[scheme].fg};
-    background-color: ${options.theme[scheme].bg};`
 })
   .hook(GPTService, self => {
     if (currentTab.value !== 'chatGPT') return
@@ -58,20 +59,30 @@ export const ChatEntry = TextView({
       ? 'Message Gemini...' : 'Enter Google AI API Key...'
   }, 'hasKey')
 
+ChatEntry.get_buffer().connect('changed', (buffer) => {
+  const bufferText = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), true)
+  ChatSendButton.toggleClassName('sidebar-chat-send-available', bufferText.length > 0)
+  ChatPlaceholderRevealer.revealChild = (bufferText.length == 0)
+  if (buffer.get_line_count() > 1 || bufferText.length > 30) {
+    // ChatEntryWrapper.toggleClassName('sidebar-chat-wrapper-extended', true)
+    ChatEntry.set_valign(Gtk.Align.FILL)
+    ChatPlaceholder.set_valign(Gtk.Align.FILL)
+  }
+  else {
+    // ChatEntryWrapper.toggleClassName('sidebar-chat-wrapper-extended', false)
+    ChatEntry.set_valign(Gtk.Align.CENTER)
+    ChatPlaceholder.set_valign(Gtk.Align.CENTER)
+  }
+})
 
 export default Widget.Box(
   { vpack: 'center', className: 'chat-textarea' }, 
   Widget.Overlay({
     passThrough: true,
     child: Widget.Scrollable({
+      child: ChatEntry,
       hscroll: 'never',
       vscroll: 'always',
-      child: ChatEntry,
     }),
-    overlay: Widget.Revealer({
-      revealChild: true,
-      transition: 'crossfade',
-      child: ChatPlaceholder,
-      setup: enableClickThrough,
-    }),
-  }), chatSendButton)
+    overlay: ChatPlaceholderRevealer  
+  }), ChatSendButton)

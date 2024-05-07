@@ -16,9 +16,7 @@ const Item = (item: TrayItem) => BarButton({
 
     const id = item.menu?.connect('popped-up', () => {
       self.toggleClassName('active')
-      menu.connect('notify::visible', () => {
-        self.toggleClassName('active', menu.visible)
-      })
+      menu.connect('notify::visible', () => self.toggleClassName('active', menu.visible))
       menu.disconnect(id!)
     })
 

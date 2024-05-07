@@ -10,16 +10,24 @@ window.sideleft .ai-tools
       margin: 0 calc($spacing * 0.5)
 
   .chat-textarea
-    margin: $spacing
+    margin-top: $spacing
+    margin-bottom: $spacing
+    margin-left: calc($spacing * 1.25)
+    *
+      background-color: transparent
+    .chat-entry
+      color: $fg
+      border-radius: $radius
+      padding: calc($padding * 3)
+      background-color: transparentize($bg, 0.5)
     .chat-send
-      background: transparent
       border-radius: calc($radius * 0.5)
       image
         padding: $padding
         font-size: 1.25em
     .chat-placeholder
       color: $fg
-      margin-left: $spacing
+      margin-left: calc($spacing * 1.5)
 
   .welcome-logo
     min-width: 3em
