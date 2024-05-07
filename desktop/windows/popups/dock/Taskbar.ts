@@ -61,7 +61,7 @@ export default Widget.Box({
         if (path === '') path = substitute(appClass)
         const newButton = AppButton({
           icon: path,
-          onClicked: () => focus(client),
+          onClicked() { focus(client) },
           tooltipText: `${client.title} (${appClass})`,
         })
         newButton.attribute.workspace = client.workspace.id
@@ -91,8 +91,8 @@ export default Widget.Box({
         path = substitute(appClass)
       const newButton = AppButton({
         icon: path,
+        onClicked() { focus(newClient) },
         tooltipText: `${newClient.title} (${appClass})`,
-        onClicked: () => focus(newClient),
       })
       newButton.attribute.workspace = newClient.workspace.id
       box.attribute.map.set(address, newButton)

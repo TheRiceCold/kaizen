@@ -10,9 +10,9 @@ export default Widget.Box([
     window: 'overview',
     className: 'workspaces',
     label: options.bar.workspaces.label.value,
-    onScrollUp: () => dispatch('m+1'),
-    onScrollDown: () => dispatch('m-1'),
-    onClicked: () => App.toggleWindow('overview'),
+    onScrollUp() { dispatch('m+1') },
+    onScrollDown() { dispatch('m-1') },
+    onClicked() { App.toggleWindow('overview') },
   }),
   LabelStack
 ])

@@ -15,7 +15,7 @@ export default Widget.Box(
       setup: setupCursorHover,
       tooltipText: 'Click to toggle',
       label: scheme.bind().as((s: string) => `Color mode: ${s}`),
-      onClicked: () => scheme.value = (scheme.value === 'dark') ? 'light' : 'dark',
+      onClicked() { scheme.value = (scheme.value === 'dark') ? 'light' : 'dark' },
     }),
   ]),
   Widget.Box({ vertical: true }, Brightness, ThemeSettings)

@@ -31,7 +31,9 @@ const ProgressIcon = (player: MprisPlayer) => Widget.CircularProgress({
   startAt: 0.75,
   className: 'progress',
   child: PlayerStatusIcon(player),
-  attribute: { update: self => self.value = player.position / player.length },
+  attribute: { 
+    update: self => self.value = player.position / player.length 
+  },
   setup(self) {
     const { update } = self.attribute
     self.hook(mpris, update).poll(1500, update)
@@ -65,7 +67,7 @@ export default Widget.EventBox({
   child: Revealer,
   className: 'media',
   setup: setupCursorHover,
-  onSecondaryClick: () => { },
-  onScrollUp: () => stack.shown = 'song',
-  onScrollDown: () => stack.shown = 'visualizer',
+  onSecondaryClick() { },
+  onScrollUp() { stack.shown = 'song' },
+  onScrollDown() { stack.shown = 'visualizer' },
 }).hook(mpris, update)

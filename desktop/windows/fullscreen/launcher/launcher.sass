@@ -5,7 +5,9 @@ window#launcher
   background-color: transparentize($primary-fg, 0.85)
   .launcher
     @include floating_widget
+    border: 1px solid $primary-bg
     border-radius: calc($radius * 0.75)
+    background-color: transparentize($bg, 0.75)
 
     .quicklaunch
       @include spacing
@@ -14,10 +16,11 @@ window#launcher
         padding: $padding
 
     entry
-      @include button
+      border: 0
+      font-size: 1.1em
       margin: $spacing
-      padding: $padding
-      border-radius: calc($radius * 0.75)
+      padding: calc($padding * 2)
+      border-radius: calc($radius * 0.5)
 
       selection
         background-color: transparent
@@ -61,9 +64,6 @@ window#launcher
 
         .description
           color: transparentize($primary-bg, 0.4)
-
-        image
-          -gtk-icon-shadow: 2px 2px $primary-bg
 
       &:active
         border-radius: $radius

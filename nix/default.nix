@@ -9,12 +9,12 @@
   # accountsservice,
 
   # SERVICES
-  # vte,
+  vte,
   cage,
   cava,
   swww,
   # brotab,
-  # sptlrx,
+  sptlrx,
   ydotool,
   cliphist,
   gromit-mpx,
@@ -34,7 +34,7 @@
   hyprland = inputs.hyprland.packages.${system}.default;
   # gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
-    extraPackages = [ gtksourceview3 ];
+    extraPackages = [ vte gtksourceview3 ];
   };
 
   dependencies = [
@@ -45,7 +45,7 @@
     cava              # Audio Visualizer
     swww              # Animated Wallpaper Daemon
     # brotab
-    # sptlrx            # Spotify Lyrics
+    sptlrx            # Spotify Lyrics
     matugen           # Color generation tool
     ydotool           # Generic command-line automation tool
     hyprland          # Dynamic tiling manager Wayland compositor

@@ -5,7 +5,7 @@ const audio = await Service.import('audio')
 
 const Indicator = (type: Type = 'speaker') => Widget.Button({
   vpack: 'center',
-  onClicked: () => audio[type].is_muted = !audio[type].is_muted,
+  onClicked() { audio[type].is_muted = !audio[type].is_muted },
   child: Widget.Icon({
     icon: audio[type].bind('icon_name').as((name: string) => audioIconSub(name || '', type)),
   }),
@@ -14,7 +14,7 @@ const Indicator = (type: Type = 'speaker') => Widget.Button({
 const Slider = (type: Type = 'speaker') => Widget.Slider({
   hexpand: true,
   drawValue: false,
-  onChange: ({ value, dragging }) => {
+  onChange({ value, dragging }) {
     if (dragging) {
       audio[type].volume = value
       audio[type].is_muted = false

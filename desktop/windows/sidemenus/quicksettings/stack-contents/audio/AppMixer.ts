@@ -34,9 +34,9 @@ const MixerItem = (stream: Stream) => Widget.Box(
       ]),
       Widget.Slider({
         hexpand: true,
-        draw_value: false,
+        drawValue: false,
         value: stream.bind('volume'),
-        onChange: ({ value }) => stream.volume = value,
+        onChange({ value }) { stream.volume = value },
       }),
     ],
   }),

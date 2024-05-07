@@ -23,7 +23,7 @@ const header = Header('Bluetooth', [
   Widget.Button({
     setup: setupCursorHover,
     tooltipText: 'Click to toggle',
-    onClicked: () => bluetooth.enabled = !bluetooth.enabled,
+    onClicked() { bluetooth.enabled = !bluetooth.enabled },
     label: bluetooth.bind('enabled').as((p: boolean) => `Status: ${p ? 'enabled' : 'disabled'}`),
   }),
 

@@ -1,17 +1,19 @@
 import { type MprisPlayer } from 'types/service/mpris'
 
-// import Player from './Player'
+import Lyrics from './Lyrics'
+import Player from './Player'
 import PopupRevealer from '../PopupRevealer'
 
-// import options from 'options'
+import options from 'options'
 import { showWidget } from 'lib/variables'
 
 const mpris = await Service.import('mpris')
 
 const players = mpris.bind('players')
-// const { media } = options.popups
-// const pref = media.preferred.value
-// const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
+
+const { media } = options.popups
+const pref = media.preferred.value
+const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
 
 const isRealPlayer = (player: MprisPlayer) => (
   !player.busName.startsWith('org.mpris.MediaPlayer2.firefox') && // Firefox mpris dbus is useless
@@ -21,8 +23,8 @@ const isRealPlayer = (player: MprisPlayer) => (
 
 const Stack = Widget.Stack({
   children: {
-    // player: Player(getPlayer()),
-    lyrics: Widget.Box({ }) // TODO:
+    player: Player(getPlayer()),
+    lyrics: Lyrics,
   }
 })
 

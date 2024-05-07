@@ -16,7 +16,7 @@ export default Widget.Box({
       Widget.Button({
         setup: setupCursorHover,
         tooltipText: 'Click to toggle',
-        onClicked: () => notifications.dnd = !notifications.dnd, 
+        onClicked() { notifications.dnd = !notifications.dnd },
         label: notifications.bind('dnd').as(p => `Status: ${p ? 'silent' : 'active'}`),
       }),
 

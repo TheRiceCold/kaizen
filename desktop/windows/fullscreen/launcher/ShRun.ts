@@ -13,7 +13,7 @@ function Item(bin: string) {
     Widget.Button({
       child: Widget.Label({ label: bin, hpack: 'start' }),
       className: 'sh-item',
-      onClicked()  {
+      onClicked() {
         Utils.execAsync(bin)
         App.closeWindow('launcher')
       },

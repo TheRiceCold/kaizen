@@ -7,7 +7,6 @@ import * as AppLauncher from './AppLauncher'
 import RevealerWindow, { Padding } from 'windows/RevealerWindow'
 
 import options from 'options'
-import icons from 'data/icons'
 
 const { width, margin } = options.launcher
 const isnix = nix.available
@@ -56,8 +55,7 @@ function Launcher() {
 
   const entry = Widget.Entry({
     hexpand: true,
-    primary_icon_name: icons.ui.search,
-    onAccept: ({ text }) => {
+    onAccept({ text }) {
       if (text?.startsWith(':nx'))
         nix.run(text.substring(3))
       else if (text?.startsWith(':sh'))

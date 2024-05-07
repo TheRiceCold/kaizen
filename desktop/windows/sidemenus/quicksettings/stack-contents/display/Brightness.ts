@@ -5,7 +5,7 @@ const BrightnessSlider = Widget.Slider({
   hexpand: true,
   drawValue: false,
   value: brightness.bind('screen'),
-  onChange: ({ value }) => brightness.screen = value,
+  onChange({ value }) { brightness.screen = value },
 })
 
 const Percent = Widget.Label({

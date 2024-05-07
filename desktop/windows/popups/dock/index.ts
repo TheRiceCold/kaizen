@@ -18,7 +18,7 @@ const Content = Widget.Box(
     className: 'app-btn',
     setup: setupCursorHover,
     child: Widget.Icon('pin-symbolic'),
-    onClicked: () => isPinned = !isPinned
+    onClicked() { isPinned = !isPinned }
   }),
   PinnedApps,
   Widget.Separator({ vertical: true }),

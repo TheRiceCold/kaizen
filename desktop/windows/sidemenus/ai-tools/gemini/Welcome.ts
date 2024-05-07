@@ -31,8 +31,7 @@ const Info = Widget.Box(
     Widget.Button({
       label: 'info',
       setup: setupCursorHoverInfo,
-      tooltipText:
-        "Uses gemini-pro.\nNot affiliated, endorsed, or sponsored by Google.\n\nPrivacy: Chat messages aren't linked to your account,\n    but will be read by human reviewers to improve the model.",
+      tooltipText: "Uses gemini-pro.\nNot affiliated, endorsed, or sponsored by Google.\n\nPrivacy: Chat messages aren't linked to your account,\n    but will be read by human reviewers to improve the model.",
     }),
   ),
 )
@@ -42,6 +41,7 @@ const Instructions = Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: options.transition.value,
   child: Widget.Button({
+    setup: setupCursorHover,
     child: Widget.Label({
       wrap: true,
       useMarkup: true,
@@ -50,8 +50,7 @@ const Instructions = Widget.Revealer({
       label: 'A Google AI API key is required\nYou can grab one <u>here</u>, then enter it below',
       // setup: self => self.set_markup("This is a <a href=\"https://www.github.com\">test link</a>")
     }),
-    setup: setupCursorHover,
-    onClicked: () => bash`xdg-open https://makersuite.google.com/app/apikey &`,
+    onClicked() { bash`xdg-open https://makersuite.google.com/app/apikey &` },
   }),
 }).hook(GeminiService, self => self.revealChild = GeminiService.key.length == 0, 'hasKey')
 
@@ -75,7 +74,7 @@ const Settings = MarginRevealer({
           { value: 0.5, name: 'Balanced' },
           { value: 1.0, name: 'Creative' },
         ],
-        onChange: value => GeminiService.temperature = value,
+        onChange(value) { GeminiService.temperature = value },
       }),
       Widget.Box({
         vertical: true,
@@ -86,21 +85,21 @@ const Settings = MarginRevealer({
             icon: 'model_training',
             name: 'Enhancements',
             initValue: GeminiService.assistantPrompt,
-            onChange: (self, newValue) => GeminiService.assistantPrompt = newValue,
+            onChange(_, newValue) { GeminiService.assistantPrompt = newValue },
             desc: "Tells Gemini:\n- It's a Linux sidebar assistant\n- Be brief and use bullet points",
           }),
           ConfigToggle({
             icon: 'shield',
             name: 'Safety',
             initValue: GeminiService.safe,
-            onChange: (self, newValue) => GeminiService.safe = newValue,
+            onChange(_, newValue) { GeminiService.safe = newValue },
             desc: 'When turned off, tells the API (not the model) \nto not block harmful/explicit content',
           }),
           ConfigToggle({
             icon: 'history',
             name: 'History',
             initValue: GeminiService.useHistory,
-            onChange: (self, newValue) => GeminiService.useHistory = newValue,
+            onChange(_, newValue) { GeminiService.useHistory = newValue },
             desc: "Saves chat history\nMessages in previous chats won't show automatically, but they are there",
           }),
         ],

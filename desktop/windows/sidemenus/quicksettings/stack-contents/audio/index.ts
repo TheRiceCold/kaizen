@@ -13,7 +13,7 @@ export default Widget.Box(
     Widget.Button({
       label: 'Settings',
       setup: setupCursorHover,
-      onClicked: () => sh('pavucontrol')
+      onClicked() { sh('pavucontrol') }
     }) 
   ]),
   Widget.Box({ vertical: true, }, VolumeSliders, AppMixer, SinkSelector)

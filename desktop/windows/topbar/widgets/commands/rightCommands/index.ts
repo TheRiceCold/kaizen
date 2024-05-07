@@ -17,7 +17,7 @@ const commands = [
     tooltipText: 'gromit-mpx',
     onClicked: () => Annotation.start(),
   },
-  { label: 'Colors', onClicked: () => toggleWidget('color')},
+  { label: 'Colors', onClicked() { toggleWidget('color') } },
   // { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
   { label: 'Keys ', onClicked: openKeyMenu },
   { label: 'Zoom ', onClicked: openZoomMenu },

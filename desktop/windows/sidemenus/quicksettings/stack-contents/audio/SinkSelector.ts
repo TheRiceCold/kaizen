@@ -10,7 +10,7 @@ const audio = await Service.import('audio')
 const SinkItem = (type: Type) => (stream: Stream) => Widget.Button({
   setup: setupCursorHover,
   className: 'sink-button',
-  onClicked: () => audio[type] = stream,
+  onClicked() { audio[type] = stream },
   child: Widget.Box(
     { spacing: 5 },
     Widget.Icon({

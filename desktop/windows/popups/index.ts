@@ -1,4 +1,4 @@
-import Dock from './dock'
+// import Dock from './dock'
 import Media from './media'
 import Keyboard from './keyboard'
 import ColorTool from './color-tool'
@@ -28,7 +28,7 @@ const Bottom = Widget.Window({
   name: 'bottom-popups',
   child: Widget.Box(
     { vertical: true, css: 'padding: 2px;' },
-    /* Indicators, */ Keyboard, Dock,
+    /* Indicators, */ Keyboard, /* Dock */
   ),
 })
 

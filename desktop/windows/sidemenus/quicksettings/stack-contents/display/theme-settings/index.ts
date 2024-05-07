@@ -15,18 +15,16 @@ const Stack = Widget.Stack({
 })
 
 // IDK why this doesn't work using arrow function.
-export function Title ({
-  label, 
-  leftTo,
-  rightTo,
-}: { label: string, leftTo?: StackNameType, rightTo?: StackNameType }) {
-
+export function Title (
+  { label, leftTo, rightTo }: 
+  { label: string, leftTo?: StackNameType, rightTo?: StackNameType }
+) {
   const Button = (dir: string, gotoStack: StackNameType) => Widget.Button({ 
     hpack: 'end', 
     hexpand: true, 
     setup: setupCursorHover,
     child: Widget.Icon(icons.ui.arrow[dir]),
-    onClicked: () => Stack.shown = gotoStack,
+    onClicked() { Stack.shown = gotoStack },
   })
 
   return  Widget.Box(

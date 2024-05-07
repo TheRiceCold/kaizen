@@ -16,13 +16,13 @@ function EnumSetter(opt: Opt<string>, values: string[]) {
 
   const next = Widget.Button({
     setup: setupCursorHover,
-    onClicked: () => step(+1),
+    onClicked() { step(+1) },
     child: Widget.Icon(icons.ui.arrow.right),
   })
 
   const prev = Widget.Button({
     setup: setupCursorHover,
-    onClicked: () => step(-1),
+    onClicked() { step(-1) },
     child: Widget.Icon(icons.ui.arrow.left),
   })
 

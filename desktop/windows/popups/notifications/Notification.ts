@@ -98,7 +98,7 @@ export default (notification: Notification) => {
           hexpand: true,
           label: action.label,
           className: 'action-button',
-          onClicked: () => notification.invoke(action.id),
+          onClicked() { notification.invoke(action.id) },
         })),
       }),
     }),

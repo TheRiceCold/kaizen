@@ -22,7 +22,7 @@ export default RevealerWindow({
         Widget.Button({
           label: 'No',
           setup: setupCursorHover,
-          onClicked: () => App.toggleWindow('verification'),
+          onClicked() { App.toggleWindow('verification') },
         }).hook(App, (self, name: string, visible: boolean) => {
           if (name === 'verification' && visible)
             self.grab_focus()
@@ -30,7 +30,7 @@ export default RevealerWindow({
         Widget.Button({
           label: 'Yes',
           setup: setupCursorHover,
-          onClicked: () => Utils.exec(powermenu.cmd),
+          onClicked() { Utils.exec(powermenu.cmd) },
         }),
       ],
     }),

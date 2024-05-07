@@ -9,7 +9,7 @@ const { layout, labels } = options.powermenu
 
 const SysButton = (action: Action, label: string) => Widget.Button({
   setup: setupCursorHover,
-  onClicked: () => powermenu.action(action),
+  onClicked() { powermenu.action(action) },
   child: Widget.Box(
     { vertical: true, className: 'system-button' },
     Widget.Icon(icons.powermenu[action]),

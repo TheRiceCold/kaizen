@@ -47,11 +47,10 @@ const Instructions = Widget.Box([
         useMarkup: true,
         justify: Gtk.Justification.CENTER,
         className: 'txt sidebar-chat-welcome-txt',
-        label:
-          'An API key is required\nYou can grab one <u>here</u>, then enter it below',
+        label: 'An API key is required\nYou can grab one <u>here</u>, then enter it below',
       }),
       setup: setupCursorHover,
-      onClicked: () => bash`xdg-open ${GPTService.getKeyUrl}`,
+      onClicked() { bash`xdg-open ${GPTService.getKeyUrl}` },
     }),
   }).hook(
     GPTService,
@@ -79,7 +78,7 @@ const Settings = MarginRevealer({
           { value: 1.0, name: 'Creative' },
         ],
         initIndex: 2,
-        onChange: value => (GPTService.temperature = value),
+        onChange(value) { (GPTService.temperature = value) }
       }),
       Widget.Box({
         hpack: 'fill',
@@ -89,7 +88,7 @@ const Settings = MarginRevealer({
           name: 'Enhancements',
           icon: 'model_training',
           initValue: GPTService.assistantPrompt,
-          onChange: (self, newValue) => (GPTService.assistantPrompt = newValue),
+          onChange(_, newValue) { (GPTService.assistantPrompt = newValue) },
           desc: "Tells the model:\n- It's a Linux sidebar assistant\n- Be brief and use bullet points",
         }),
       }),

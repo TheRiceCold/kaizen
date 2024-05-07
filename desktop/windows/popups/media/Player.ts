@@ -7,6 +7,7 @@ import PlayerStatusIcon from 'misc/playerStatusIcon'
 import options from 'options'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
+import { setupCursorHover } from 'misc/cursorhover'
 
 const { media } = options.popups
 
@@ -53,9 +54,9 @@ export default (player: MprisPlayer) => {
   const positionSlider = Widget.Slider({
     drawValue: false,
     className: 'position',
-    onChange: ({ value }) => player.position = value * player.length,
+    onChange({ value }) { player.position = value * player.length },
     setup(self: SliderProps) {
-      const update = () => {
+      function update() {
         const { length, position } = player
         self.visible = length > 0
         self.value = length > 0 ? position / length : 0
@@ -100,18 +101,21 @@ export default (player: MprisPlayer) => {
 
   const playPause = Widget.Button({
     className: 'play-pause',
+    setup: setupCursorHover,
     child: PlayerStatusIcon(player),
     visible: player.bind('can_play'),
     onClicked: () => player.playPause(),
   })
 
   const prev = Widget.Button({
+    setup: setupCursorHover,
     onClicked: () => player.previous(),
     visible: player.bind('can_go_prev'),
     child: Widget.Icon(icons.mpris.prev),
   })
 
   const next = Widget.Button({
+    setup: setupCursorHover,
     onClicked: () => player.next(),
     visible: player.bind('can_go_next'),
     child: Widget.Icon(icons.mpris.next),
