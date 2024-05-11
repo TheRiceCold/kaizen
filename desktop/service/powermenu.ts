@@ -33,9 +33,7 @@ class PowerMenu extends Service {
     App.openWindow('verification')
   }
 
-  readonly shutdown = () => {
-    this.action('shutdown')
-  }
+  readonly shutdown = () => this.action('shutdown')
 }
 
 export default new PowerMenu

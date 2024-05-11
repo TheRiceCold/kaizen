@@ -7,10 +7,10 @@ import { setupCursorHoverInfo } from 'misc/cursorhover'
 const commands = [
   { label: 'Window ', onClicked: openWindowMenu, },
   { label: 'Developer Tools ', onClicked: openDevMenu },
-  { label: 'Shortcuts', onClicked: () => App.openWindow('shortcuts') },
+  { label: 'Shortcuts', onClicked() { App.openWindow('shortcuts') } },
   { 
     label: 'Help', 
-    onClicked: () =>  { },
+    onClicked() { },
     setup: setupCursorHoverInfo,
   }, // TODO: Create documentation
 ]

@@ -5,9 +5,9 @@ window#launcher
   background-color: transparentize($primary-fg, 0.85)
   .launcher
     @include floating_widget
+    background-color: $bg
     border: 1px solid $primary-bg
     border-radius: calc($radius * 0.75)
-    background-color: transparentize($bg, 0.75)
 
     .quicklaunch
       @include spacing
@@ -48,10 +48,10 @@ window#launcher
 
       label
         transition: $transition
-
         &.title
           color: $fg
-
+          font-size: 1.1em
+          margin-bottom: calc($spacing * 0.25)
         &.description
           color: transparentize($fg, 0.3)
 
@@ -61,21 +61,19 @@ window#launcher
       &:hover, &:focus
         .title
           color: $primary-bg
-
         .description
           color: transparentize($primary-bg, 0.4)
 
       &:active
-        border-radius: $radius
+        border-radius: calc($radius * 0.5)
         background-color: transparentize($primary-bg, 0.5)
         box-shadow: inset 0 0 0 $border-width $border-color
-
         .title
           color: $fg
 
     button.help, button.nix-item
       @include button($flat: true, $reactive: false)
-      padding: 0 ($padding * 0.5)
+      padding: 0 calc($padding * 0.5)
 
       label
         color: $fg
@@ -84,7 +82,6 @@ window#launcher
       .name
         font-size: 1.2em
         font-weight: bold
-
       .description
         color: transparentize($fg, 0.3)
 
@@ -98,7 +95,7 @@ window#launcher
 
     button.sh-item
       @include button($flat: true, $reactive: false)
-      padding: 0 ($padding * .5)
+      padding: 0 calc($padding * 0.5)
 
       color: $fg
       transition: $transition

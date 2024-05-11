@@ -7,6 +7,7 @@ import * as AppLauncher from './AppLauncher'
 import RevealerWindow, { Padding } from 'windows/RevealerWindow'
 
 import options from 'options'
+import icons from 'data/icons'
 
 const { width, margin } = options.launcher
 const isnix = nix.available
@@ -55,6 +56,7 @@ function Launcher() {
 
   const entry = Widget.Entry({
     hexpand: true,
+    primaryIconName: icons.ui.search,
     onAccept({ text }) {
       if (text?.startsWith(':nx'))
         nix.run(text.substring(3))
@@ -85,7 +87,6 @@ function Launcher() {
   })
 
   function focus() {
-    entry.text = 'Search'
     entry.set_position(-1)
     entry.select_region(0, -1)
     entry.grab_focus()

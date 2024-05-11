@@ -34,8 +34,8 @@ const Revealer = (
 ) => Widget.Box({ css: 'padding: 1px;' },
   Widget.Revealer({
     transition,
-    child: Widget.Box({ child, className: 'window-content' }),
     transitionDuration: options.transition.bind(),
+    child: Widget.Box({ child, className: 'window-content' }),
     setup (self) {
       self.hook(App, (_, wname: string, visible: boolean) => {
         if (wname === name)

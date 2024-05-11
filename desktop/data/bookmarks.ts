@@ -1,10 +1,10 @@
-type Bookmark = {
-  url: string,
-  icon: string,
-  label: string,
+interface IBookmark {
+  url: string
+  icon: string
+  label: string
 }
 
-const bookmarks: Bookmark[] = [
+const bookmarks: IBookmark[] = [
   {
     icon: 'github',
     label: 'My GitHub',

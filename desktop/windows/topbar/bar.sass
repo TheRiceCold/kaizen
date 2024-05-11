@@ -4,23 +4,21 @@
 
   .side-items
     @include floating-widget
-    border-radius: $radius
-    padding: calc($padding * 0.5)
-    margin: 0 calc($spacing * 0.75 * $hyprland-gaps-multiplier)
+    padding: calc($padding * 0.75)
+    margin-bottom: $hyprland-gaps-multiplier
     margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
 
     .bar-button
-      @include accs-button($flat: true)
-      > *
-        margin: calc($spacing * 0.3)
-        border-radius: calc($radius * 0.5)
-      label, image
+      border-radius: $radius
+      padding: calc($padding * 0.25) calc($padding * 0.6)
+      &:active, &.on, &.active, &:checked
+        @include button-active
+      label
         color: $fg
         font-weight: bold
-      &:not(.flat)
-        @include accs-button($flat: false)
-      > *
-        padding: calc($padding * 0.4) calc($padding * 0.8)
+      image
+        margin-top: 2px
+        margin-left: 2px
       .battery
         font-size: 1.25em
         &.error

@@ -4,20 +4,7 @@ import options from 'options'
 const d = new Date()
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-const WeatherDay = (
-  day: string, 
-  icon: string, 
-  temp: string, 
-  maxTemp: string
-) => Widget.Box(
-  { vpack: 'center' },
-  Widget.Label({ className: 'day', label: day }),
-  Widget.Icon({ icon }), 
-  Widget.Label({ className: 'temp', label: temp }), 
-  Widget.Label(maxTemp)
-)
-
-type TForecastDay = {
+interface IForecastDay {
   maxtemp_c: number
   maxtemp_f: number
   mintemp_c: number
@@ -39,12 +26,25 @@ type TForecastDay = {
   uv: number
 }
 
+const WeatherDay = (
+  day: string,
+  icon: string,
+  temp: string,
+  maxTemp: string
+) => Widget.Box(
+  { vpack: 'center' },
+  Widget.Label({ className: 'day', label: day }),
+  Widget.Icon({ icon }),
+  Widget.Label({ className: 'temp', label: temp }),
+  Widget.Label(maxTemp)
+)
+
 export default Widget.Box({
   vertical: true,
   vpack: 'center',
   className: 'forecast',
   spacing: options.theme.spacing * 0.75,
-  children: Weather.bind('forecast_days').as((days: TForecastDay[]) => days.map((w: TForecastDay, index: number) => {
+  children: Weather.bind('forecast_days').as((days: IForecastDay[]) => days.map((w: IForecastDay, index: number) => {
     const day = d.getDay() + index + 1
     return WeatherDay(
       weekdays[day > 6 ? 0 : day],

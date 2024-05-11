@@ -10,6 +10,7 @@ const commands: MenuItemProps[] = [
   { label: 'Center Layout', onActivate: () => sh('pypr layout_center toggle') },
   { label: 'Center (Float)', onActivate: () => dispatch('centerwindow') },
   { label: 'Pin (Float)', onActivate: () => dispatch('pin') },
+  { label: 'Scratch', onActivate: () => dispatch('pypr attach') },
   { label: 'Quit', onActivate: () => dispatch('killactive') },
 ]
 

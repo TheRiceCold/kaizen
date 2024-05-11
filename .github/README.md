@@ -1,4 +1,4 @@
-###### *<div align=right><sub>Last nix update: may 2, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: may 10, 2024</sub></div>*
 
 <h1 align=center>
   <img src='https://github.com/thericecold/dots/blob/main/assets/ibu-circle.png' width='150px'/>
@@ -63,7 +63,7 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
   - Control Button: Toggles quicksettings side menu widget
   - Date Button: Toggles Date sidemenu widget
   - Power Button: Opens Powermenu window 
-- **Middle Status**: 
+- **Middle Status**:
   > [!NOTE] Click to open Media player popup and scroll up/down to switch between player and visualizer.
 
 </details>
