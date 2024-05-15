@@ -30,7 +30,7 @@ export default RevealerWindow({
         Widget.Button({
           label: 'Yes',
           setup: setupCursorHover,
-          onClicked() { Utils.exec(powermenu.cmd) },
+          onClicked: powermenu.exec,
         }),
       ],
     }),

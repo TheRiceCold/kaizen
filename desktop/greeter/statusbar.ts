@@ -8,8 +8,8 @@ const { scheme } = options.theme
 
 const poweroff = BarButton({
   className: 'powermenu',
+  onClicked() { Utils.exec('shutdown now') },
   child: Widget.Icon(icons.powermenu.shutdown),
-  onClicked: () => Utils.exec('shutdown now'),
 })
 
 const date = BarButton({

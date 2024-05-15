@@ -6,8 +6,7 @@ export type Action = 'sleep' | 'reboot' | 'logout' | 'shutdown'
 
 class PowerMenu extends Service {
   static {
-    Service.register(this, {}, {
-      title: [ 'string' ],
+    Service.register(this, {}, { title: [ 'string' ],
       cmd: [ 'string' ],
     })
   }
@@ -34,6 +33,10 @@ class PowerMenu extends Service {
   }
 
   readonly shutdown = () => this.action('shutdown')
+  readonly exec = () => {
+    App.closeWindow('verification')
+    Utils.exec(this._cmd)
+  }
 }
 
 export default new PowerMenu

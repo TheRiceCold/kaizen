@@ -15,7 +15,7 @@ const Top = Widget.Window({
   exclusivity: 'ignore',
   child: Widget.Box({ 
     vertical: true, 
-    css: `padding: 2px; margin-top: ${options.theme.spacing * 4}px;` 
+    css: `padding: 2px; margin-top: ${options.theme.spacing * 5}px;`
   }, 
   AnnotationTools, 
   Media, ColorTool, 

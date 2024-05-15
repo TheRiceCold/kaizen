@@ -24,7 +24,7 @@ export default (player: MprisPlayer) => {
   const cover = Widget.Box({
     vpack: 'start',
     className: 'cover',
-    css: Utils.merge([
+    css: !!player ? Utils.merge([
       player.bind('cover_path'),
       player.bind('track_cover_url'),
       media.coverSize.bind(),
@@ -32,7 +32,7 @@ export default (player: MprisPlayer) => {
       min-width: ${size}px;
       min-height: ${size}px;
       background-image: url('${path || url}');
-    `),
+    `) : '',
   })
 
   const title = Widget.Label({

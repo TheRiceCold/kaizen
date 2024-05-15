@@ -59,7 +59,7 @@ const list = Widget.Scrollable({
   vscroll: 'automatic',
   child: Widget.Box({
     vertical: true,
-    children: wifi.access_points.map(item)
+    children: wifi.access_points.sort((a, b) => b.strength - a.strength).slice(0, 10).map(item)
   })
 })
 
