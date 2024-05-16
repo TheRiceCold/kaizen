@@ -7,7 +7,7 @@ import Stack from './Stack'
 import options from 'options'
 
 const mpris = await Service.import('mpris')
-const pref = options.popups.media.preferred.value
+const pref = options.popups.player.preferred.value
 
 const getPlayer = () => mpris.getPlayer(pref) || mpris.players[0] || null
 

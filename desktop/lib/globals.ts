@@ -4,13 +4,13 @@ const mpris = await Service.import('mpris')
 
 export const toggleWidget = async (
   name: 
-    | 'media' | 'color' | 'annotation' | 'keyboard'
+    | 'player' | 'color' | 'annotation' | 'keyboard'
     | 'apis' | 'datemenu' | 'quicksettings'
 ) => {
   const widgetShown =  showWidget[name]
 
   switch(name) {
-    case 'media':
+    case 'player':
       widgetShown.value = (!mpris.getPlayer()) ? false : !widgetShown.value
       break
     default: 

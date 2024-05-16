@@ -1,7 +1,7 @@
 import { opt } from 'lib/option'
 
 export default {
-  media: {
+  player: {
     coverSize: opt(100),
     preferred: opt('spotify'),
     monochromeIcon: opt(true),

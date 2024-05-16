@@ -5,7 +5,7 @@ import { showWidget } from 'lib/variables'
 const { width, height } = options.bar.media.visualizer
 const length = options.bar.media.length
 
-const { media: show } = showWidget
+const { player: show } = showWidget
 
 export default label => Widget.Stack({
   className: 'stack',

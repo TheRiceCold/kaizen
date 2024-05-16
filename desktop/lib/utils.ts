@@ -177,7 +177,6 @@ function searchIcons(appClass, files) {
   return path
 }
 
-
 export {
   icon,
   bash,
