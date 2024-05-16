@@ -31,10 +31,9 @@
   name = "kaizen";
 
   matugen = inputs.matugen.packages.${system}.default;
-  hyprland = inputs.hyprland.packages.${system}.default;
-  # gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
+  gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
-    extraPackages = [ vte gtksourceview3 ];
+    extraPackages = [ vte gtksourceview3 gtk-session-lock ];
   };
 
   dependencies = [
@@ -48,7 +47,6 @@
     sptlrx            # Spotify Lyrics
     matugen           # Color generation tool
     ydotool           # Generic command-line automation tool
-    hyprland          # Dynamic tiling manager Wayland compositor
     cliphist          # Clipboard History Manager
     hyprpicker        # Wayland Color Picker
     gromit-mpx        # Annotation Tool

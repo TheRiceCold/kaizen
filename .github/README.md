@@ -112,8 +112,10 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 </details>
 
 <details>
-  <summary><b>Lockscreen (WIP)</b></summary>
+  <summary><b>Lockscreen</b></summary>
+  <img src='https://github.com/thericecold/dots/blob/main/assets/screenshots/lockscreen.jpg' />
 </details>
+
 <details>
   <summary><b>Login Manager/Greeter (TODO)</b></summary>
 </details>
