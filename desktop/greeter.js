@@ -1,5 +1,5 @@
 const main = '/tmp/ags/greeter.js'
-const entry = `${App.configDir}/greeter/greeter.ts`
+const entry = `${App.configDir}/windows/greeter/main.ts`
 
 try {
   await Utils.execAsync([

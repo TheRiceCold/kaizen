@@ -1,5 +1,4 @@
 import './session'
-import 'style/style'
 import auth from './auth'
 // import StatusBar from './statusbar'
 

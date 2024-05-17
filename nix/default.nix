@@ -57,19 +57,23 @@
     wl-clipboard      # Command-line copy/paste utilities for Wayland
     brightnessctl     # Read and Control Brightness
     networkmanager
-    # gtk-session-lock  # GTK3 screen lockers using ext-session-lock-v1 protocol
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
 
-  greeter = writeShellScript "greeter" ''
+  greeter = writeShellScript "kaizen-dm" ''
     export PATH=$PATH:${addBins dependencies}
     ${cage}/bin/cage -ds -m last ${ags}/bin/ags -- -c ${config}/greeter.js
   '';
 
+  lockscreen = writeShellScript "kaizen-lock" ''
+    export PATH=$PATH:${addBins dependencies}
+    ${ags}/bin/ags -b kaizen-lock -c ${config}/lockscreen.js
+  '';
+
   desktop = writeShellScript name ''
     export PATH=$PATH:${addBins dependencies}
-    ${ags}/bin/ags -b ${name} -c ${config}/config.js $@
+    ${ags}/bin/ags -b ${name} -c ${config}/config.js
   '';
 
   config = stdenv.mkDerivation {
@@ -82,7 +86,12 @@
       --external 'resource://*' \
       --external 'gi://*' \
 
-      ${bun}/bin/bun build ./greeter \
+      ${bun}/bin/bun build ./windows/lockscreen/main.ts \
+      --outfile=lockscreen.js \
+      --external 'resource://*' \
+      --external 'gi://*' \
+
+      ${bun}/bin/bun build ./windows/greeter/main.ts \
       --outfile=greeter.js \
       --external 'resource://*' \
       --external 'gi://*' \
@@ -96,6 +105,7 @@
       cp -r windows $out
       cp -f main.js $out/config.js
       cp -f greeter.js $out/greeter.js
+      cp -f lockscreen.js $out/lockscreen.js
     '';
   };
 in stdenv.mkDerivation {
@@ -106,6 +116,7 @@ in stdenv.mkDerivation {
     mkdir -p $out/bin
     cp -r . $out
     cp ${desktop} $out/bin/${name}
-    cp ${greeter} $out/bin/greeter
+    cp ${greeter} $out/bin/${name}-dm
+    cp ${lockscreen} $out/bin/${name}-lock
   '';
 }

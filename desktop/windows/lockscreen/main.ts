@@ -1,89 +1,15 @@
 import 'lib/session'
-import 'style/style'
 import Lock from 'gi://GtkSessionLock'
 
-import Clock from './Clock'
+import Container from './Container'
 
 const { Gdk, Gtk } = imports.gi
 
-const lock = Lock.prepare_lock()
-const windows = []
-
-function unlock() {
-  for (const win of windows)
-    win.window.child.children[0].revealChild = false
-
-  Utils.timeout(500, () => {
-    lock.unlock_and_destroy()
-    windows.forEach(w => w.window.destroy())
-    Gdk.Display.get_default()?.sync()
-    App.quit()
-  })
-}
-
-const Bar = Widget.CenterBox({
-  startWidget: Widget.Box([
-    Widget.Box([ ]),
-  ]),
-  endWidget: Widget.Box({ hpack: 'end' }, Clock)
-})
-
-const LoginBox = Widget.Box([
-  Widget.Box({
-    spacing: 16,
-    vertical: true,
-    vpack: 'center',
-    hpack: 'center',
-    children: [
-      Widget.Box({ hpack: 'center', className: 'avatar' }),
-      Widget.Box(
-        { vertical: true, className: 'entry-box' },
-        Widget.Label('Enter password:'),
-        Widget.Separator(),
-        Widget.Entry({
-          xalign: 0.5,
-          hpack: 'center',
-          visibility: false,
-          placeholderText: 'password',
-          onAccept(self) {
-            self.sensitive = false
-            Utils.authenticate(self.text ?? '')
-              .then(() => unlock())
-              .catch(e => {
-                self.text = ''
-                self.parent.children[0].label = e.message
-                self.sensitive = true
-              })
-          }
-        }).on('realize', (entry) => entry.grab_focus()),
-      )
-    ]
-  })
-])
-
-const LockWindow = () => new Gtk.Window({
-  child: Widget.Box([
-    Widget.Revealer({
-      revealChild: false,
-      transition: 'crossfade',
-      transitionDuration: 500,
-      child: Widget.Box(
-        { vertical: true, className: 'lock-container' },
-        Bar,
-        Widget.Overlay({
-          child: LoginBox,
-          // overlays: [
-          //   SessionBoxTooltip(),
-          //   MprisCorner()
-          // ]
-        })
-      )
-    }).on('realize', self => Utils.idle(() => self.revealChild = true))
-  ])
-})
+export const windows = []
+export const lock = Lock.prepare_lock()
 
 function createWindow(monitor) {
-  const window = LockWindow()
+  const window = new Gtk.Window({ child: Container })
   const win = {window, monitor}
   windows.push(win)
   return win
