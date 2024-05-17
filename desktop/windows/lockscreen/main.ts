@@ -2,11 +2,14 @@ import 'lib/session'
 import Lock from 'gi://GtkSessionLock'
 
 import Container from './Container'
+import options from 'options'
 
 const { Gdk, Gtk } = imports.gi
 
+const { scheme } = options.theme
 export const windows = []
 export const lock = Lock.prepare_lock()
+export const fontColor = options.theme[scheme].fg
 
 function createWindow(monitor) {
   const window = new Gtk.Window({ child: Container })

@@ -2,8 +2,6 @@ import options from 'options'
 import icons from 'data/icons'
 import { setupCursorHover } from 'misc/cursorhover'
 
-const { image, size } = options.sideright.profile.avatar
-
 const ChangeButtonRevealer = Widget.Revealer({ child: Widget.Icon(icons.ui.camera) })
 
 export default Widget.EventBox({
@@ -20,14 +18,16 @@ export default Widget.EventBox({
       }) 
     ],
     child: Widget.Box({
-      css: Utils.merge(
-        [ image.bind(), size.bind() ], (img: string, size: number) => `
+      css: Utils.merge([
+        options.avatar.bind(),
+        options.sideright.profile.avatar.bind(),
+      ], (img: string, size: number) => `
         min-width: ${size}px;
         min-height: ${size}px;
         background-image: url('${img}');
         background-size: cover;`),
     }),
   }),
-  onHover: () => ChangeButtonRevealer.revealChild = true,
-  onHoverLost: () => ChangeButtonRevealer.revealChild = false,
+  onHover() { ChangeButtonRevealer.revealChild = true },
+  onHoverLost() { ChangeButtonRevealer.revealChild = false },
 })

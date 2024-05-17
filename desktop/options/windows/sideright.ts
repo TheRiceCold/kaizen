@@ -2,11 +2,8 @@ import { opt } from 'lib/option'
 
 export default {
   width: opt(380),
+  avatarSize: opt(80),
   profile: {
-    avatar: {
-      image: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
-      size: opt(80),
-    },
     clock: {
       interval: 5000,
       // DOCS: https://docs.gtk.org/glib/method.DateTime.format.html

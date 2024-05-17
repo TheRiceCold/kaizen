@@ -1,6 +1,7 @@
+import BarButton from '../BarButton'
+
 import options from 'options'
 import { clock } from 'lib/variables'
-import BarButton from '../BarButton'
 
 const { interval, format, action } = options.bar.datemenu
 

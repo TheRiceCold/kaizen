@@ -12,12 +12,13 @@ type TShader =
 export default mkOptions(OPTIONS, {
   autotheme: opt(true),
   transition: opt(200),
+  avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
 
   hyprland: {
     gaps: opt(1.5),
     gapsWhenOnly: opt(false),
     inactiveBorder: opt('333333ff'),
-    shader: opt<TShader>('default')
+    shader: opt<TShader>('default'),
   },
 
   ai: {

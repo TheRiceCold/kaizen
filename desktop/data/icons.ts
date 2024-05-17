@@ -42,7 +42,6 @@ export default {
     search: 'system-search-symbolic',
     settings: 'emblem-system-symbolic',
     warning: 'dialog-warning-symbolic',
-    lock: 'system-lock-screen-symbolic',
     colorpicker: 'color-select-symbolic',
     arrow: {
       right: 'pan-end-symbolic',
@@ -86,6 +85,7 @@ export default {
     screen: 'display-brightness-symbolic'
   },
   powermenu: {
+    lock: 'system-lock-screen-symbolic',
     sleep: 'weather-clear-night-symbolic',
     reboot: 'system-reboot-symbolic',
     logout: 'system-log-out-symbolic',
