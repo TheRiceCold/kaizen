@@ -13,7 +13,7 @@ export default PopupRevealer({
   child: Widget.Stack({
     children: {
       player: Player,
-      lyrics: Lyrics,
+      lyrics: Lyrics(),
     }
   }),
   reveal: showWidget.player.bind().as(

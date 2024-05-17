@@ -20,7 +20,7 @@ export default Widget.EventBox({
     child: Widget.Box({
       css: Utils.merge([
         options.avatar.bind(),
-        options.sideright.profile.avatar.bind(),
+        options.sideright.avatarSize.bind(),
       ], (img: string, size: number) => `
         min-width: ${size}px;
         min-height: ${size}px;
