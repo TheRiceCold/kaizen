@@ -78,31 +78,36 @@
 
   config = stdenv.mkDerivation {
     inherit name;
-    src = ../desktop;
+    src = ../ags;
 
     buildPhase = ''
-      ${bun}/bin/bun build ./main.ts \
+      ${bun}/bin/bun build ./desktop/main.ts \
       --outfile main.js \
       --external 'resource://*' \
       --external 'gi://*' \
 
-      ${bun}/bin/bun build ./windows/lockscreen/main.ts \
-      --outfile=lockscreen.js \
+      ${bun}/bin/bun build ./lockscreen/main.ts \
+      --outfile lockscreen.js \
       --external 'resource://*' \
       --external 'gi://*' \
 
-      ${bun}/bin/bun build ./windows/greeter/main.ts \
-      --outfile=greeter.js \
+      ${bun}/bin/bun build ./greeter/main.ts \
+      --outfile greeter.js \
       --external 'resource://*' \
       --external 'gi://*' \
     '';
 
     installPhase = ''
       mkdir -p $out
+
+      cp -r css $out
       cp -r misc $out
-      cp -r style $out
       cp -r assets $out
-      cp -r windows $out
+
+      cp -r desktop $out
+      cp -r greeter $out
+      cp -r lockscreen $out
+
       cp -f main.js $out/config.js
       cp -f greeter.js $out/greeter.js
       cp -f lockscreen.js $out/lockscreen.js
