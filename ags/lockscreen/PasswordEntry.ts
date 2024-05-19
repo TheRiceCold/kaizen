@@ -27,10 +27,4 @@ export default Widget.Entry({
   hpack: 'center',
   visibility: false,
   placeholderText: 'password',
-  css: `
-  border: 0;
-  opacity: 0.9;
-  font-size: 2em;
-  min-width: 350px;
-  background-color: transparent;`,
 }).on('realize', entry => entry.grab_focus())

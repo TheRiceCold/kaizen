@@ -74,8 +74,8 @@ async function resetCss() {
     await bash`sass ${sass} ${css}`
 
     App.applyCss(css, true)
-  } catch (error) {
-    error instanceof Error ? logError(error) : console.error(error)
+  } catch (err) {
+    err instanceof Error ? logError(error) : console.error(err)
   }
 }
 

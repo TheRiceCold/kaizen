@@ -1,0 +1,35 @@
+$font-color: transparentize($fg, 0.25)
+
+.lockscreen
+  color: $font-color
+  background-size: cover
+  background-position: center
+  .avatar
+    min-width: 20em
+    min-height: 20em
+    border-radius: 999px
+    background-size: cover
+    background-position: center
+    border: 4px solid $font-color
+
+  .clock-content
+    label:first-child     // date
+      opacity: 0.8
+      font-size: 1.75em 
+      color: $font-color
+    label:last-child      // time
+      font-size: 8em
+      color: $font-color
+
+  .welcome-text
+    opacity: 0.9
+    margin: 1em 0
+    font-size: 2em
+    color: $font-color
+  entry
+    border: 0
+    opacity: 0.9
+    font-size: 2em
+    min-width: 350px
+    caret-color: transparent
+    background-color: transparent

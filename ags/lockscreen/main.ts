@@ -1,5 +1,7 @@
-import 'lib/session'
 import Lock from 'gi://GtkSessionLock'
+
+import 'lib/session'
+import 'css/style'
 
 import Container from './Container'
 import options from 'options'

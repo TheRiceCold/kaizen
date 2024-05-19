@@ -8,11 +8,10 @@ window.popups .annotation-tool
     border-bottom-left-radius: $radius
     border-bottom-right-radius: $radius
     border-top: 1px solid transparentize($fg, 0.5)
-    &:hover
-      color: $bg
-      background-color: $primary-bg
     label
       font-size: 1em
+    &:hover
+      color: $primary-bg
 
   .info
     margin-bottom: $spacing
@@ -26,3 +25,6 @@ window.popups .annotation-tool
       border-radius: calc($radius * 0.5)
       label
         font-size: 1.15em
+      &:hover
+        color: $bg
+        background-color: $primary-bg
