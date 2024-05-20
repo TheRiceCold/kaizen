@@ -1,8 +1,7 @@
 const { GLib, Gtk, Vte } = imports.gi
+const Terminal = Widget.subclass(Vte.Terminal, 'AgsVteTerminal')
 
 export default () => {
-  const Terminal = Widget.subclass(Vte.Terminal, 'AgsVteTerminal')
-
   const terminal = Terminal({ className: 'terminal', name: 'lyrics-terminal' })
 
   // HACK: style context is only accessable after the widget was added to the

@@ -20,7 +20,7 @@ export default Widget.Box({
 }).hook(mpris, self => {
   const player = mpris.getPlayer(preferred.value) || null
   if (!player) return
-  const url = player['cover_path'] || player['track_cover_url']
+  const url = player['cover-path'] || player['track-cover-url']
 
   // TODO: Turnable animation, like spicetify
   // reference: https://github.com/spicetify/spicetify-themes/raw/master/Turntable/screenshots/fad.png
@@ -38,7 +38,7 @@ export default Widget.Box({
     truncate: 'end',
     maxWidthChars: 30,
     className: 'title',
-    label: player['track_title']
+    label: player['track-title']
   })
 
   const playerIcon = Widget.Icon({
@@ -58,7 +58,7 @@ export default Widget.Box({
     truncate: 'end',
     maxWidthChars: 20,
     className: 'artist',
-    label: player['track_artists'].join(', ')
+    label: player['track-artists'].join(', ')
   })
 
   const positionSlider = Widget.Slider({
@@ -105,21 +105,21 @@ export default Widget.Box({
     className: 'play-pause',
     setup: setupCursorHover,
     child: PlayerStatusIcon(player),
-    visible: player.bind('can_play'),
+    visible: player.bind('can-play'),
     onClicked() { player.playPause() },
   })
 
   const prev = Widget.Button({
     setup: setupCursorHover,
     onClicked() { player.previous() },
-    visible: player.bind('can_go_prev'),
+    visible: player.bind('can-go-prev'),
     child: Widget.Icon(icons.mpris.prev),
   })
 
   const next = Widget.Button({
     setup: setupCursorHover,
     onClicked() { player.next() },
-    visible: player.bind('can_go_next'),
+    visible: player.bind('can-go-next'),
     child: Widget.Icon(icons.mpris.next),
   })
 

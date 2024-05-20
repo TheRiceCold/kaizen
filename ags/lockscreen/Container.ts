@@ -4,7 +4,7 @@ import { capitalize } from 'lib/utils'
 import options from 'options'
 
 const bgImage = `${Utils.HOME}/.config/background`
-const time = Variable('', { poll: [10000, ['date', '+%I:%M']] })
+const time = Variable('', { poll: [10000, ['time', '+%I:%M']] })
 const date = Variable('', { poll: [900000, ['date', '+%A, %b %d']] })
 
 const Clock = Widget.Box(
