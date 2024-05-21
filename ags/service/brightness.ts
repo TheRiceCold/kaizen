@@ -9,7 +9,10 @@ const kbd = await bash`ls -w1 /sys/class/leds | head -1`
 
 class Brightness extends Service {
   static {
-    Service.register(this, {}, { screen: ['float', 'rw'], kbd: ['int', 'rw'] })
+    Service.register(this, {}, {
+      screen: ['float', 'rw'],
+      kbd: ['int', 'rw']
+    })
   }
 
   #kbdMax = get(`--device ${kbd} max`)

@@ -2,38 +2,38 @@
 import Media from './media'
 import Keyboard from './keyboard'
 import ColorTool from './color-tool'
+import Indicators from './indicator'
 import Notifications from './notifications'
 import AnnotationTools from './annotation-tools'
 
 import options from 'options'
+const { spacing } = options.theme
 
-const Top = Widget.Window({
-  anchor: ['top'],
-  name: 'top-popups',
+const popupWindow = ({
+  children, position,
+  marginMultiplier = 1,
+}: { position: 'top' | 'bottom' }) => Widget.Window({
+  anchor: [position],
   keymode: 'on-demand',
   exclusivity: 'ignore',
-  className: 'top-popups',
+  name: `${position}-popups`,
+  className: `${position}-popups`,
   child: Widget.Box({
+    children,
     vertical: true,
-    css: `padding: 2px; margin-top: ${options.theme.spacing * 5}px;`
-  },
-  Media,
-  ColorTool,
-  AnnotationTools,
-  Notifications()),
+    css: `padding: 2px; margin-${position}: ${spacing * marginMultiplier};`,
+  })
 })
 
-const Bottom = Widget.Window({
-  anchor: ['bottom'],
-  name: 'bottom-popups',
-  className: 'bottom-popups',
-  child: Widget.Box(
-    {
-      vertical: true,
-      css: `padding: 2px; margin-bottom: ${options.theme.spacing}px;`
-    },
-    /* Indicators, */ Keyboard, /* Dock */
-  ),
-})
+export default [
+  popupWindow({
+    position: 'top',
+    marginMultiplier: 6,
+    children: [ Media, ColorTool, AnnotationTools, Notifications() ]
+  }),
 
-export default [ Top, Bottom ]
+  popupWindow({
+    position: 'bottom',
+    children: [ Indicators, Keyboard, /* Dock */ ]
+  })
+]
