@@ -4,12 +4,16 @@
 
   .side-items
     @include floating-widget
+    margin: 0 $spacing
     padding: calc($padding * 0.75)
     margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
 
     .bar-button
       border-radius: $radius
-      padding: calc($padding * 0.25) calc($padding * 0.6)
+      padding: calc($padding * 0.25) calc($padding * 1.25)
+      &:hover
+        label, image
+          color: $primary-bg
       &:active, &.on, &.active, &:checked
         @include button-active
       label
@@ -37,10 +41,11 @@
         margin-right: calc($spacing * 0.5)
 
 menu
-  padding: 0
+  background-color: $bg
   border-radius: calc($radius * 0.5)
-  background-color: transparentize($bg, 0.5)
   menuitem
+    padding: calc($padding * 1.25) calc($padding * 2)
+    border-bottom: 1px solid transparentize($fg, 0.75)
     label, image
       color: $fg
       font-weight: bold
@@ -48,6 +53,10 @@ menu
       background: $primary-bg
       label
         color: $bg
+    &:first-child
+      border-top-left-radius: calc($radius * 0.5)
+      border-top-right-radius: calc($radius * 0.5)
     &:last-child
+      border: 0
       border-bottom-left-radius: calc($radius * 0.5)
       border-bottom-right-radius: calc($radius * 0.5)
