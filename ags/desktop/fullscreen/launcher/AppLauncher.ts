@@ -74,7 +74,10 @@ export const Favorites = () => Widget.Revealer({
       Widget.Separator(),
       Widget.Box({
         className: 'quicklaunch horizontal',
-        children: fs.map(f => query(f)?.[0]).map(QuickAppButton),
+        setup(self) {
+          if (Array.isArray(fs))
+            self.children = fs.map(f => query(f)?.[0]).map(QuickAppButton)
+        }
       })
     ])),
   }),
