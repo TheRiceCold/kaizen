@@ -3,7 +3,7 @@ import options from 'options'
 export default ({
   transition = 'slide_down',
   className = '',
-  reveal,
+  reveal = false,
   ...props
 }) => Widget.Revealer({
   revealChild: reveal,

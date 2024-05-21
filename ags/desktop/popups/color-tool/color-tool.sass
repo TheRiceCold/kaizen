@@ -14,17 +14,18 @@ window.top-popups .color-wheel
       button
         background-color: transparent
       entry
-        min-width: 8em
-        font-weight: 600
+        background-color: transparentize($primary-fg, 0.25)
         border-radius: calc($radius * 0.5)
         margin: calc($spacing * 0.5) 0
         margin-left: $spacing
+        padding: $padding
+        min-width: 8.5em
+        font-weight: 600
 
     .color-box  
       min-width: 1em
       margin-left: calc($spacing * 1.25)
       border-radius: calc($radius * 0.25)
-      
 
   .hue-wrapper
     padding: calc($padding * 0.5)
@@ -40,7 +41,7 @@ window.top-popups .color-wheel
   .saturation
     min-width: 8em
     min-height: 8em
-    border: 1px solid $primary-bg
+    border: 2px solid $primary-bg
     border-radius: calc($radius * 0.5)
 
   .saturation-cursor

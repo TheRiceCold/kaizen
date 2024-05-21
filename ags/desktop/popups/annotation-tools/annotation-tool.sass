@@ -1,7 +1,7 @@
 window.top-popups .annotation-tool
   label
-    font-size: 1.25em
-    margin: calc($spacing * 0.5) 0
+    font-size: 1.15em
+    padding: calc($padding * 1) 0
   button
     border: 0
     background-color: transparent
@@ -10,6 +10,7 @@ window.top-popups .annotation-tool
     border-top: 1px solid transparentize($fg, 0.5)
     label
       font-size: 1em
+      font-weight: 500
     &:hover
       color: $primary-bg
 
@@ -17,9 +18,11 @@ window.top-popups .annotation-tool
     margin-bottom: $spacing
 
   .control-buttons
-    padding: calc($padding * 2)
+    padding: $padding
+    margin-bottom: calc($spacing * 0.5)
     button
       color: $primary-bg
+      padding: 0 calc($padding * 2)
       border: 1px solid $primary-bg
       margin: 0 calc($spacing * 0.5)
       border-radius: calc($radius * 0.5)
