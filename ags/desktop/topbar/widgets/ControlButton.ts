@@ -2,8 +2,9 @@ import BarButton from '../BarButton'
 
 import options from 'options'
 import icons from 'data/icons'
+import { showWidget } from 'lib/variables'
+const { quicksettings } = showWidget
 
-const { action } = options.bar.settings
 const { wifi } = await Service.import('network')
 const battery = await Service.import('battery')
 const notifications = await Service.import('notifications')
@@ -24,8 +25,10 @@ const DND = Widget.Icon().bind(
 )
 
 export default BarButton({
-  window: 'dropmenu',
-  onClicked: action.bind(),
+  onClicked(self) {
+    quicksettings.value = !quicksettings.value
+    self.toggleClassName('active', quicksettings.value)
+  },
   child: Widget.Box(
     { spacing: options.theme.spacing * 1.75 },
     DND, Widget.Icon({ icon: wifi.bind('icon_name') }), BatteryIcon

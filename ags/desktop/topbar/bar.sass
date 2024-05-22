@@ -10,12 +10,10 @@
     .bar-button
       border-radius: $radius
       margin: 0 calc($spacing * 0.25)
-      padding: calc($padding * 0.25) calc($padding * 0.75)
-      &:hover
+      padding: calc($padding * 0.25) calc($padding * 1.25)
+      &:hover, &:active, &.on, &.active, &:checked
         label, image
           color: $primary-bg
-      &:active, &.on, &.active, &:checked
-        @include button-active
       .battery
         &.error
           color: #C76598
@@ -23,11 +21,11 @@
           color: #58D9BD
 
     .launcher-button
-      padding: 0 calc($padding * 0.5)
+      padding: 0 calc($padding * 0.75)
       label
         font-size: 1.25em
     .power-button
-      padding: 0 calc($padding * 0.75)
+      padding: 0 calc($padding * 1.25)
       label
         font-size: 0.9em
 

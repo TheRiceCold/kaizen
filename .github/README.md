@@ -136,6 +136,7 @@ bind=SUPER, m, ags -r "toggleWidget('media');" # Widget
 ```
 
 ## 🫕 How to cook?
+
 ### Manual Installation
 > [!NOTE]
 > This list may be incomplete, so please check the packages inside the `default.nix` file.
@@ -148,6 +149,14 @@ bind=SUPER, m, ags -r "toggleWidget('media');" # Widget
 - [Swww] - Animated Wallpaper Daemon
 - [Aylur's Gtk Shell][ags] - A customizable and extensive shell
 - [Hyprland] - Dynamic Tiling Manager Wayland Compositor
+
+#### Theme
+- **GTK:** Matcha Dark Sea
+- **Icon Theme:** White Sur
+- **Cursor:** Bibata Modern Ice
+- **Font:** Ubuntu Nerd Font Regular
+
+#### Setup
 ``` bash
 git clone https://github.com/thericecold/kaizen
 cp -r kaizen/desktop ~/.config/ags
