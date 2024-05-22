@@ -13,12 +13,11 @@ const { width, margin } = options.launcher
 const isnix = nix.available
 
 function Launcher() {
-  const favs = AppLauncher.Favorites()
-  const applauncher = AppLauncher.Launcher()
   const sh = ShRun.ShRun()
   const shicon = ShRun.Icon()
   const nix = NixRun.NixRun()
   const nixload = NixRun.Spinner()
+  const applauncher = AppLauncher.Launcher()
 
   const HelpButton = (cmd: string, desc: string | Binding<string>) => Widget.Box(
     { vertical: true },
@@ -48,9 +47,9 @@ function Launcher() {
     child: Widget.Box(
       { vertical: true },
       HelpButton('sh', 'run a binary'),
-      isnix ? HelpButton('nx', options.launcher.nix.pkgs.bind().as(pkg =>
-        `run a nix package from ${pkg}`,
-      )) : Widget.Box(),
+      isnix ? HelpButton('nx',
+        options.launcher.nix.pkgs.bind().as(pkg => `run a nix package from ${pkg}`)
+      ) : Widget.Box(),
     ),
   })
 
@@ -70,7 +69,6 @@ function Launcher() {
     },
     onChange({ text }) {
       text ||= ''
-      favs.revealChild = text === ''
       help.revealChild = text.split(' ').length === 1 && text?.startsWith(':')
 
       if (text?.startsWith(':nx'))
@@ -90,7 +88,6 @@ function Launcher() {
     entry.set_position(-1)
     entry.select_region(0, -1)
     entry.grab_focus()
-    favs.revealChild = true
   }
 
   const layout = Widget.Box({
@@ -100,11 +97,7 @@ function Launcher() {
     css: width.bind().as(v => `min-width: ${v}pt;`),
     children: [
       Widget.Box([entry, nixload, shicon]),
-      favs,
-      help,
-      applauncher,
-      nix,
-      sh,
+      help, applauncher, nix, sh,
     ],
   }).hook(App, (self, win, visible) => {
     if (win !== 'launcher') return

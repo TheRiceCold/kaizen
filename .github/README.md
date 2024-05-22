@@ -1,4 +1,4 @@
-###### *<div align=right><sub>Last nix update: may 10, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: may 22, 2024</sub></div>*
 
 <h1 align=center>
   <img src='https://github.com/thericecold/dots/blob/main/assets/ibu-circle.png' width='150px'/>

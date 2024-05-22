@@ -14,17 +14,7 @@ export default {
     max: opt(16),
   },
   apps: {
-    iconSize: opt(62),
     max: opt(6),
-    favorites: opt([
-      'firefox',
-      'spotify',
-      'discord',
-      'neovide',
-      'godot',
-      'krita',
-      'blender',
-      'inkscape',
-    ]),
+    iconSize: opt(62),
   },
 }
