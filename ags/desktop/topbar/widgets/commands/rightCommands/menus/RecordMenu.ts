@@ -8,7 +8,7 @@ const recorder = (
   audio: boolean = false
 ) => ({
   onActivate: () => screenTools.recorder(option),
-  label: `${capitalize(option)}${audio ? ' (Audio)' : ''}`,
+  label: `${capitalize(option)}${audio ? ' | Audio' : ''}`,
 })
 
 export default self => Menu(self, [

@@ -1,11 +1,37 @@
-export { default as Launcher } from './LauncherButton'
-export { default as Workspaces } from './workspaces'
-export { default as LeftCommands } from './commands/leftCommands'
+import BarButton from '../BarButton'
 
-export { default as Middle } from './middle'
+import options from 'options'
+import { clock } from 'lib/variables'
 
-export { default as RightCommands } from './commands/rightCommands'
+const { interval, format, action } = options.bar.datemenu
+
+export const Launcher = BarButton({
+  label: '󰚀',
+  window: 'launcher',
+  className: 'launcher-button',
+  onClicked() { App.toggleWindow('launcher') },
+})
+
+export const Power = BarButton({
+  label: '',
+  window: 'powermenu',
+  className: 'power-button',
+  onClicked: options.bar.power.action.bind(),
+})
+
+export const Date = BarButton({
+  window: 'datemenu',
+  className: 'datemenu',
+  onClicked: action.bind(),
+  label: Utils.derive(
+    [clock(interval), format],
+    (c, f) => c.format(f) || ''
+  ).bind(),
+})
+
 export { default as Tray } from './Tray'
+export { default as Middle } from './middle'
+export { default as Workspaces } from './workspaces'
 export { default as Control } from './ControlButton'
-export { default as Date } from './DateButton'
-export { default as Power } from './PowerButton'
+export { default as LeftCommands } from './commands/leftCommands'
+export { default as RightCommands } from './commands/rightCommands'

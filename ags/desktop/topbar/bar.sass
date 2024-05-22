@@ -1,7 +1,6 @@
 .topbar
-  *
+  label
     font-weight: bold
-
   .side-items
     @include floating-widget
     margin: 0 $spacing
@@ -10,24 +9,27 @@
 
     .bar-button
       border-radius: $radius
-      padding: calc($padding * 0.25) calc($padding * 1.25)
+      margin: 0 calc($spacing * 0.25)
+      padding: calc($padding * 0.25) calc($padding * 0.75)
       &:hover
         label, image
           color: $primary-bg
       &:active, &.on, &.active, &:checked
         @include button-active
-      label
-        color: $fg
-        font-weight: bold
-      image
-        margin-top: 2px
-        margin-left: 2px
       .battery
-        font-size: 1.25em
         &.error
           color: #C76598
         &.charging
           color: #58D9BD
+
+    .launcher-button
+      padding: 0 calc($padding * 0.5)
+      label
+        font-size: 1.25em
+    .power-button
+      padding: 0 calc($padding * 0.75)
+      label
+        font-size: 0.9em
 
     &:first-child // Left
       .bar-button:first-child

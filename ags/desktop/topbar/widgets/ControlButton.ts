@@ -1,23 +1,27 @@
 import BarButton from '../BarButton'
+
 import options from 'options'
-import { notificationIcon } from 'lib/variables'
+import icons from 'data/icons'
 
 const { action } = options.bar.settings
 const { wifi } = await Service.import('network')
-
 const battery = await Service.import('battery')
+const notifications = await Service.import('notifications')
 
-const BatteryIcon = Widget.Label({
+const BatteryIcon = Widget.Icon({
   className: 'battery',
+  icon: battery.bind('icon_name'),
+  visible: battery.bind('available'),
 }).hook(battery, self => {
-  const { percent: p, charging, available } = battery
-  self.visible = available
+  const { percent: p, charging } = battery
   self.toggleClassName('charging', charging)
   self.toggleClassName('error', p < 20 && !charging)
-  self.label = (p < 10) ? ' ' : (p < 30) ? ' ' : (p < 60) ? ' ' : (p < 90) ? ' ' : ' '
 })
 
-const DND = Widget.Icon({ icon: notificationIcon })
+const DND = Widget.Icon().bind(
+  'icon', notifications, 'dnd',
+  dnd => dnd ? icons.notifications.silent : 'notification-symbolic'
+)
 
 export default BarButton({
   window: 'dropmenu',

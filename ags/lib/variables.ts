@@ -1,5 +1,3 @@
-import icons from 'data/icons'
-
 const { GLib } = imports.gi
 
 const divide = ([total, free]) => free / total
@@ -28,12 +26,6 @@ const ram = Variable(0, {
   ],
 })
 
-const notifications = await Service.import('notifications')
-
-const notificationIcon = notifications.bind('dnd').as(
-  (dnd: boolean) => dnd ? icons.notifications.silent : 'notification-symbolic'
-)
-
 const showWidget = {
   // TOP
   player: Variable(false),
@@ -54,5 +46,4 @@ export {
   clock,
   cpu, ram,
   showWidget,
-  notificationIcon,
 }
