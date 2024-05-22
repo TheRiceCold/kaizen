@@ -7,8 +7,8 @@ export default {
   margin: opt(80),
   maxItem: opt(5),
   nix: {
-    pkgs: opt('nixpkgs/nixos-unstable'),
     max: opt(8),
+    pkgs: opt('nixpkgs/nixos-unstable'),
   },
   sh: {
     max: opt(16),

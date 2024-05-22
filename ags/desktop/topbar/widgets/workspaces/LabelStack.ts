@@ -1,40 +1,31 @@
-import { type LabelProps } from 'types/widgets/label'
 import { capitalize } from 'lib/utils'
 import options from 'options'
 
-export type TWorkspace = {
-  label: string
-  gerund: string
-}
-
-const { workspaces } = options.bar
 const hyprland = await Service.import('hyprland')
 
-const getLabel = (isStack: bool = true) => {
+function getId() {
   const { active } = hyprland
   const id = active.workspace.id - 1
+  return id.toString()
+}
+
+const Label = (num: number) => Widget.Label({
+  maxWidthChars: 28,
+  label: num.toString(),
+  justification: 'center',
+}).hook(hyprland, self => {
+  const { active } = hyprland
   const client = active.client.class
-  const subs = workspaces.substitutes
-
-  const ws = workspaces.items.value[id]
-  const win = client in subs ? subs[client] : capitalize(client)
-  const withWindow = client.length > 0 ? `${capitalize(ws.gerund)} ${win}` : capitalize(ws.label)
-
-  return isStack ? ws.label : withWindow
-}
-
-const Items = (ws: TWorkspace) => {
-  const Label = (workspace: string) => Widget.Label({
-    label: workspace,
-    maxWidthChars: 28,
-    justification: 'center',
-  }).hook(hyprland, (self: LabelProps) => self.label = getLabel(false))
-
-  return ws.reduce((acc, {label}) => (acc[label] = Label(label), acc), {})
-}
+  self.label = client.length > 0 ? `${getId()} | ${capitalize(client)}` : getId()
+})
 
 export default Widget.Stack({
   transition: 'slide_left_right',
-  children: workspaces.items.bind().as(Items),
-}).hook(hyprland, self => self.shown = getLabel())
+  children: options.workspaces.num.bind().as(
+    (number: number) => Array(number)
+      .fill(null)
+      .map((_, i) => i)
+      .reduce((acc, num) => (acc[num] = Label(num), acc), {})
+  ),
+}).hook(hyprland, self => self.shown = getId())
 

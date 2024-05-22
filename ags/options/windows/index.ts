@@ -12,10 +12,12 @@ export default {
   sideleft: {...sideleft},
   sideright: {...sideright},
 
-  overview: {
-    scale: opt(9),
-    workspaces: opt(5),
-    monochromeIcon: opt(true),
+  workspaces: {
+    num: opt(5),
+    overview: {
+      scale: opt(9),
+      monochromeIcon: opt(true),
+    },
   },
 
   powermenu: {

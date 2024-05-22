@@ -1,4 +1,3 @@
-import { type TWorkspace } from 'windows/bar/widgets/workspaces/LabelStack'
 import { opt } from 'lib/option'
 import { showWidget } from 'lib/variables'
 
@@ -24,20 +23,6 @@ export default {
   },
   power: {
     action: opt(() => App.toggleWindow('powermenu')),
-  },
-  workspaces: {
-    label: opt('Workspace: '),
-    items: opt<TWorkspace[]>([
-      { label: 'work', gerund: 'working in' },
-      { label: 'explore', gerund: 'exploring in', only: [ 'firefox' ] },
-      { label: 'listen', gerund: 'listening in', only: [ 'Spotify' ] },
-      { label: 'communicate', gerund: 'communicating in', only: [ 'vesktop' ] },
-      { label: 'virtual', gerund: 'virtualized |', only: [] },
-      { label: 'extra', gerund: '' }
-    ]),
-    substitutes: {
-      foot: 'Terminal (Foot)'
-    }
   },
   profilemenu: {
     action: opt(() => App.toggleWindow('profilemenu')),
