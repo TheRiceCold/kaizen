@@ -13,7 +13,7 @@ export default Widget.EventBox({
       Widget.FileChooserButton({
         className: 'file-choose',
         onFileSet({ uri }) {
-          image.value = uri!.replace('file://', '') as T
+          options.avatar.value = uri!.replace('file://', '') as T
         }
       })
     ],

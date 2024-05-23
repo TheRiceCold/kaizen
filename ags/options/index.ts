@@ -21,6 +21,11 @@ export default mkOptions(OPTIONS, {
     shader: opt<TShader>('default'),
   },
 
+  wallpaper: {
+    market: opt<import('service/wallpaper').Market>('random'),
+    resolution: opt<import('service/wallpaper').Resolution>(1920),
+  },
+
   ai: {
     defaultGPTProvider: opt('openai'),
     defaultTemperature: opt(0.9),

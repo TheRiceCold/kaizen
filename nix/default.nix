@@ -1,6 +1,6 @@
-{ 
+{
   inputs, system, stdenv,
-  writeShellScript, 
+  writeShellScript,
 
   # Utilities
   fd, bun, which, dart-sass,
@@ -37,10 +37,10 @@
   };
 
   dependencies = [
-    fd 
-    which 
-    dart-sass 
-  
+    fd
+    which
+    dart-sass
+
     cava              # Audio Visualizer
     swww              # Animated Wallpaper Daemon
     # brotab
