@@ -4,7 +4,6 @@ import general from './general'
 import advanced from './advanced'
 
 import icons from 'data/icons'
-import { setupCursorHover } from 'misc/cursorhover'
 
 type StackNameType = 'general' | 'themes' | 'advanced'
 
@@ -22,7 +21,7 @@ export function Title (
   const Button = (dir: string, gotoStack: StackNameType) => Widget.Button({
     hpack: 'end',
     hexpand: true,
-    setup: setupCursorHover,
+    cursor: 'pointer',
     child: Widget.Icon(icons.ui.arrow[dir]),
     onClicked() { Stack.shown = gotoStack },
   })
@@ -48,8 +47,8 @@ export function Item(label: string, props) {
     }),
     Widget.Button({
       vpack: 'center',
+      cursor: 'pointer',
       className: 'reset',
-      setup: setupCursorHover,
       onClicked: () => props.opt.reset(),
       child: Widget.Icon(icons.ui.refresh),
       sensitive: props.opt.bind().as(v => v !== props.opt.initial),

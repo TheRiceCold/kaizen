@@ -1,6 +1,5 @@
 import icons from 'data/icons'
 import { Opt } from 'lib/option'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const { Gdk } = imports.gi
 
@@ -15,13 +14,13 @@ function EnumSetter(opt: Opt<string>, values: string[]) {
   }
 
   const next = Widget.Button({
-    setup: setupCursorHover,
+    cursor: 'pointer',
     onClicked() { step(+1) },
     child: Widget.Icon(icons.ui.arrow.right),
   })
 
   const prev = Widget.Button({
-    setup: setupCursorHover,
+    cursor: 'pointer',
     onClicked() { step(-1) },
     child: Widget.Icon(icons.ui.arrow.left),
   })
@@ -41,8 +40,8 @@ export default function Setter<T>({
 }) {
   switch (type) {
     case 'number': return Widget.SpinButton({
+      cursor: 'pointer',
       setup(self) {
-        setupCursorHover(self)
         self.set_range(min, max)
         self.set_increments(1, 5)
         self.on('value-changed', () => opt.value = self.value as T)
@@ -58,7 +57,7 @@ export default function Setter<T>({
       setup: self => self.hook(opt, () => self.text = opt.value as string),
     })
     case 'enum': return EnumSetter(opt as unknown as Opt<string>, enums!)
-    case 'boolean': return Widget.ToggleButton({ setup: setupCursorHover })
+    case 'boolean': return Widget.ToggleButton({ cursor: 'pointer' })
       .on('notify::active', self => opt.value = self.active as T)
       .hook(opt, self => {
         const val = opt.value as boolean
@@ -67,15 +66,15 @@ export default function Setter<T>({
       })
 
     case 'img': return Widget.FileChooserButton({
-      setup: setupCursorHover,
+      cursor: 'pointer',
       onFileSet: ({ uri }) => { opt.value = uri!.replace('file://', '') as T}
     })
 
     case 'font': return Widget.FontButton({
       useSize: false,
       showSize: false,
+      cursor: 'pointer',
       setup(self) {
-        setupCursorHover(self)
         self.hook(opt, () => self.font = opt.value as string)
           .on('font-set', ({ font }) => opt.value = font!
             .split(' ').slice(0, -1).join(' ') as T)
@@ -83,7 +82,7 @@ export default function Setter<T>({
     })
 
     case 'color': return Widget.ColorButton({
-      setup: setupCursorHover,
+      cursor: 'pointer',
       className: 'color-button',
     }).hook(opt, self => {
       const rgba = new Gdk.RGBA()

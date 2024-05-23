@@ -37,7 +37,7 @@ export default Widget.Box({
 
             self.toggleClassName('notrunning', !running)
             self.toggleClassName('focused', hyprland.active.client.address == running.address)
-            self.setTooltipText(running ? running.title : app.name)
+            // self.setTooltipText(running ? running.title : app.name)
           }, 'notify::clients')
         },
       })

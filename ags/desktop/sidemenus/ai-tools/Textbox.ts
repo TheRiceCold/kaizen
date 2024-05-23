@@ -6,7 +6,6 @@ import GeminiSendMessage from './gemini/SendMessage'
 
 import { currentTab } from './Content'
 
-import { setupCursorHover } from 'misc/cursorhover'
 import { enableClickThrough } from 'lib/utils'
 import icons from 'data/icons'
 
@@ -15,8 +14,8 @@ const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
 
 const ChatSendButton = Widget.Button({
   vpack: 'end',
+  cursor: 'pointer',
   className: 'chat-send',
-  setup: setupCursorHover,
   child: Widget.Icon(icons.ui.send),
 }).hook(currentTab, () => {
   const buffer = ChatEntry.get_buffer()

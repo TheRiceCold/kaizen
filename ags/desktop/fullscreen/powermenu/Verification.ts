@@ -1,8 +1,6 @@
 import RevealerWindow from 'desktop/RevealerWindow'
 import powermenu from 'service/powermenu'
 
-import { setupCursorHover } from 'misc/cursorhover'
-
 export default RevealerWindow({
   name: 'verification',
   transition: 'crossfade',
@@ -21,7 +19,7 @@ export default RevealerWindow({
       children: [
         Widget.Button({
           label: 'No',
-          setup: setupCursorHover,
+          cursor: 'pointer',
           onClicked() { App.toggleWindow('verification') },
         }).hook(App, (self, name: string, visible: boolean) => {
           if (name === 'verification' && visible)
@@ -29,7 +27,7 @@ export default RevealerWindow({
         }),
         Widget.Button({
           label: 'Yes',
-          setup: setupCursorHover,
+          cursor: 'pointer',
           onClicked: powermenu.exec,
         }),
       ],

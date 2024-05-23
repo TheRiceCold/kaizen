@@ -1,8 +1,7 @@
 import ListRevealer from './ListRevealer'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const Theme = (img: string, label: string) => Widget.Button({
-  setup: setupCursorHover,
+  cursor: 'pointer',
   className: 'theme-button',
   child: Widget.Label({ label, hexpand: true }),
   css: `

@@ -3,7 +3,6 @@ import { launchApp, icon } from 'lib/utils'
 
 import options from 'options'
 import icons from 'data/icons'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const apps = await Service.import('applications')
 const { query } = apps
@@ -55,9 +54,9 @@ function AppItem(app: Application) {
   })
 
   return Widget.Button({
+    cursor: 'pointer',
     attribute: { app },
     className: 'app-item',
-    setup: setupCursorHover,
     child: Widget.Box([appicon, textBox]),
     onClicked() {
       App.closeWindow('launcher')

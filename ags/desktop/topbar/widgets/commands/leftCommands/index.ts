@@ -2,7 +2,6 @@ import Revealer from '../Revealer'
 
 import { openDevMenu } from './menus/DevMenu'
 import { openWindowMenu } from './menus/WindowMenu'
-import { setupCursorHoverInfo } from 'misc/cursorhover'
 
 const commands = [
   { label: 'Window ', onClicked: openWindowMenu, },
@@ -11,7 +10,7 @@ const commands = [
   {
     label: 'Help',
     onClicked() { },
-    setup: setupCursorHoverInfo,
+    cursor: 'pointer',
   }, // TODO: Create documentation
 ]
 

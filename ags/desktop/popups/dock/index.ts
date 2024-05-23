@@ -1,7 +1,6 @@
 import PinnedApps from './PinnedApps'
 import Taskbar from './Taskbar'
 import options from 'options'
-import { setupCursorHover } from 'misc/cursorhover'
 
 let timers = []
 let isPinned = false
@@ -15,8 +14,8 @@ const hyprland = await Service.import('hyprland')
 const Content = Widget.Box(
   { className: 'dock-bg' },
   Widget.Button({
+    cursor: 'pointer',
     className: 'app-btn',
-    setup: setupCursorHover,
     child: Widget.Icon('pin-symbolic'),
     onClicked() { isPinned = !isPinned }
   }),
@@ -65,10 +64,7 @@ export default Widget.EventBox({
     Revealer.revealChild = true
     clearTimes()
   },
-  setup(self) {
-    self.on('leave-notify-event', () => {
-      if (!isPinned) Revealer.revealChild = false
-      clearTimes()
-    })
-  }
+}).on('leave-notify-event', () => {
+  if (!isPinned) Revealer.revealChild = false
+  clearTimes()
 })

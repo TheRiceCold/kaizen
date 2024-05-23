@@ -1,13 +1,11 @@
 import stackContents, { type TStackItem } from './stack-contents'
 import { Stack } from '.'
 
-import { setupCursorHover } from 'misc/cursorhover'
-
 const isActive = Variable('notificationList')
 
 const StackButton = (stackName: string, icon: string) => Widget.Button({
+  cursor: 'pointer',
   child: Widget.Icon({ icon }),
-  setup: setupCursorHover,
   onClicked() {
     Stack.shown = stackName
     isActive.value = stackName

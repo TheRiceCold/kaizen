@@ -5,7 +5,6 @@ import PlayerStatusIcon from 'misc/playerStatusIcon'
 import options from 'options'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const mpris = await Service.import('mpris')
 const {
@@ -102,22 +101,22 @@ export default Widget.Box({
   })
 
   const playPause = Widget.Button({
+    cursor: 'pointer',
     className: 'play-pause',
-    setup: setupCursorHover,
     child: PlayerStatusIcon(player),
     visible: player.bind('can-play'),
     onClicked() { player.playPause() },
   })
 
   const prev = Widget.Button({
-    setup: setupCursorHover,
+    cursor: 'pointer',
     onClicked() { player.previous() },
     visible: player.bind('can-go-prev'),
     child: Widget.Icon(icons.mpris.prev),
   })
 
   const next = Widget.Button({
-    setup: setupCursorHover,
+    cursor: 'pointer',
     onClicked() { player.next() },
     visible: player.bind('can-go-next'),
     child: Widget.Icon(icons.mpris.next),

@@ -3,7 +3,6 @@ import keyboardLayout from 'data/keyboard'
 
 import { sh, bash } from 'lib/utils'
 import { toggleWidget } from 'lib/globals'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const kbLayout = keyboardLayout['qwerty_full']
 
@@ -12,7 +11,7 @@ const ControlButton = (
   onClicked: () => void
 ) => Widget.Button({
   onClicked,
-  setup: setupCursorHover,
+  cursor: 'pointer',
   child: Widget.Label(label),
   className: 'control-button',
 })

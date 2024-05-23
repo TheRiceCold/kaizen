@@ -1,6 +1,5 @@
 import GeminiService from 'service/api/gemini'
 
-import { setupCursorHover, setupCursorHoverInfo } from 'misc/cursorhover'
 import { ConfigToggle, ConfigSegmentedSelection } from 'misc/configwidgets'
 import MarginRevealer from 'misc/marginrevealer'
 
@@ -30,7 +29,7 @@ const Info = Widget.Box(
     }),
     Widget.Button({
       label: 'info',
-      setup: setupCursorHoverInfo,
+      cursor: 'help',
       tooltipText: "Uses gemini-pro.\nNot affiliated, endorsed, or sponsored by Google.\n\nPrivacy: Chat messages aren't linked to your account,\n    but will be read by human reviewers to improve the model.",
     }),
   ),
@@ -41,7 +40,7 @@ const Instructions = Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: options.transition.value,
   child: Widget.Button({
-    setup: setupCursorHover,
+    cursor: 'pointer',
     child: Widget.Label({
       wrap: true,
       useMarkup: true,

@@ -1,6 +1,5 @@
 import GPTService from 'service/api/gpt'
 
-import { setupCursorHover, setupCursorHoverInfo } from 'misc/cursorhover'
 import { ConfigToggle, ConfigSegmentedSelection } from 'misc/configwidgets'
 import MarginRevealer from 'misc/marginrevealer'
 
@@ -31,7 +30,7 @@ const Info = Widget.Box(
     }),
     Widget.Button({
       label: 'info',
-      setup: setupCursorHoverInfo,
+      cursor: 'help',
       tooltipText: 'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.\n\nPrivacy: OpenAI claims they do not use your data\nwhen you use their API. Idk about others.',
     }),
   ),
@@ -49,7 +48,7 @@ const Instructions = Widget.Box([
         className: 'txt sidebar-chat-welcome-txt',
         label: 'An API key is required\nYou can grab one <u>here</u>, then enter it below',
       }),
-      setup: setupCursorHover,
+      cursor: 'pointer',
       onClicked() { bash`xdg-open ${GPTService.getKeyUrl}` },
     }),
   }).hook(

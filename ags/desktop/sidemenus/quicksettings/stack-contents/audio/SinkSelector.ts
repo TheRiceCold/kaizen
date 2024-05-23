@@ -2,13 +2,12 @@ import { type Stream } from 'types/service/audio'
 
 import icons from 'data/icons'
 import { audioIconSub } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 type Type = 'microphone' | 'speaker'
 const audio = await Service.import('audio')
 
 const SinkItem = (type: Type) => (stream: Stream) => Widget.Button({
-  setup: setupCursorHover,
+  cursor: 'pointer',
   className: 'sink-button',
   onClicked() { audio[type] = stream },
   child: Widget.Box(

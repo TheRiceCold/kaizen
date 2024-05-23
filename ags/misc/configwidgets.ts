@@ -1,4 +1,3 @@
-import { setupCursorHover } from './cursorhover'
 import options from 'options'
 
 const { transition } = options
@@ -63,8 +62,8 @@ export const ConfigToggle = ({
     },
     child: widgetContent,
     onClicked: (self) => self.attribute.toggle(self),
+    cursor: 'pointer',
     setup(self) {
-      setupCursorHover(self)
       self.connect('pressed', () => { // mouse down
         toggleIcon.toggleClassName('txt-poof', true)
         toggleIcon.toggleClassName('switch-fg-true', false)
@@ -102,7 +101,7 @@ export const ConfigSegmentedSelection = ({
       })
 
       return Widget.Button({
-        setup: setupCursorHover,
+        cursor: 'pointer',
         className: `segment-btn ${id == initIndex ? 'segment-btn-enabled' : ''}`,
         child: Widget.Box(
           { hpack: 'center' },

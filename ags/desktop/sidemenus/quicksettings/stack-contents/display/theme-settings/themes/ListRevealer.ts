@@ -1,4 +1,3 @@
-import { setupCursorHover } from 'misc/cursorhover'
 import icons from 'data/icons'
 import options from 'options'
 
@@ -12,7 +11,7 @@ export default (label: string, content) => {
   return Widget.Box(
     { vertical: true },
     Widget.Button({
-      setup: setupCursorHover,
+      cursor: 'pointer',
       className: 'list-button',
       child: Widget.Box([
         Widget.Label({ label, xalign: 0 }),

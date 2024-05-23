@@ -3,7 +3,6 @@ import GeminiView from './gemini/View'
 import { ChatPlaceholder } from './Textbox'
 
 import { capitalize } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 export const currentTab = Variable('gemini')
 
@@ -35,17 +34,17 @@ export const Stack = Widget.Stack({
 })
 
 const Button = ({ icon, name, ...props }) => Widget.Button({
+  cursor: 'pointer',
+  attribute: { name },
   child: Widget.Box([
     Widget.Label(capitalize(name)),
     Widget.Icon(icon)
   ]),
-  attribute: { name },
   onClicked() {
     const stackItem = stackItems.find(item => item.name === name)
     ChatPlaceholder.label = stackItem.placeholderText
     currentTab.value = name
   },
-  setup: setupCursorHover,
   ...props
 }).hook(currentTab, self => {
   const isActive = currentTab.value === self.attribute.name

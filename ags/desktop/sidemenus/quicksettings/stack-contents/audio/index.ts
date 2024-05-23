@@ -5,7 +5,6 @@ import SinkSelector from './SinkSelector'
 import VolumeSliders from './VolumeSliders'
 
 import { sh } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const buttons = [
   { label: 'Equalizer', exec: 'easyeffects' },
@@ -17,7 +16,7 @@ export default Widget.Box(
   Header('Volume', buttons.map(({ label, exec }) =>
     Widget.Button({
       label,
-      setup: setupCursorHover,
+      cursor: 'pointer',
       onClicked() { sh(exec) }
     })
   )),

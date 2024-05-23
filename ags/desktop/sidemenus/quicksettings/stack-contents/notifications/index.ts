@@ -2,7 +2,6 @@ import Header from '../Header'
 import Content from './Content'
 
 import options from 'options'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const notifications = await Service.import('notifications')
 const notifs = notifications.bind('notifications')
@@ -14,7 +13,7 @@ export default Widget.Box({
   children: [
     Header('Notifications', [
       Widget.Button({
-        setup: setupCursorHover,
+        cursor: 'pointer',
         tooltipText: 'Click to toggle',
         onClicked() { notifications.dnd = !notifications.dnd },
         label: notifications.bind('dnd').as(p => `Status: ${p ? 'silent' : 'active'}`),
@@ -22,7 +21,7 @@ export default Widget.Box({
 
       Widget.Button({
         label: 'Clear',
-        setup: setupCursorHover,
+        cursor: 'pointer',
         onClicked: notifications.clear,
         visible: notifs.as(n => n.length > 0),
       })

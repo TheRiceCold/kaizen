@@ -1,11 +1,10 @@
 import options from 'options'
 import icons from 'data/icons'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const ChangeButtonRevealer = Widget.Revealer({ child: Widget.Icon(icons.ui.camera) })
 
 export default Widget.EventBox({
-  setup: setupCursorHover,
+  cursor: 'pointer',
   child: Widget.Overlay({
     className: 'avatar',
     overlays: [

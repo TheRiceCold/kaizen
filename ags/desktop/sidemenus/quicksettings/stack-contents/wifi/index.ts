@@ -2,7 +2,6 @@ import Header from '../Header'
 
 import icons from 'data/icons'
 import { dependencies, sh } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const { wifi } = await Service.import('network')
 
@@ -20,7 +19,7 @@ type TWifi = {
 const header = Header('Wifi', [
   Widget.Button({
     label: 'Settings',
-    setup: setupCursorHover,
+    cursor: 'pointer',
     onClicked() {
       if(dependencies('wpa_gui'))
         sh('wpa_gui')
@@ -29,8 +28,8 @@ const header = Header('Wifi', [
 ])
 
 const item = (ap: TWifi) => Widget.Button({
+  cursor: 'pointer',
   className: 'wifi-item',
-  setup: setupCursorHover,
   tooltipText: 'Click to connect',
   onClicked() {
     if (dependencies('nmcli'))

@@ -68,6 +68,7 @@ export default (notification: Notification) => {
               }),
               Widget.Button({
                 vpack: 'start',
+                cursor: 'pointer',
                 className: 'close-button',
                 onClicked: notification.close,
                 child: Widget.Icon('window-close-symbolic'),

@@ -2,7 +2,6 @@ import Header from '../Header'
 import Device from './Device'
 
 import { sh, dependencies } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const bluetooth = await Service.import('bluetooth')
 export type TDevice = {
@@ -21,7 +20,7 @@ export type TDevice = {
 
 const header = Header('Bluetooth', [
   Widget.Button({
-    setup: setupCursorHover,
+    cursor: 'pointer',
     tooltipText: 'Click to toggle',
     onClicked() { bluetooth.enabled = !bluetooth.enabled },
     label: bluetooth.bind('enabled').as((p: boolean) => `Status: ${p ? 'enabled' : 'disabled'}`),
@@ -29,7 +28,7 @@ const header = Header('Bluetooth', [
 
   Widget.Button({
     label: 'Settings',
-    setup: setupCursorHover,
+    cursor: 'pointer',
     onClicked() {
       if (dependencies('blueman-manager'))
         sh('blueman-manager')

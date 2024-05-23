@@ -1,4 +1,3 @@
-import { setupCursorHover } from 'misc/cursorhover'
 import { type TDevice } from '.'
 
 const bluetooth = await Service.import('bluetooth')
@@ -16,14 +15,12 @@ function Battery (device: TDevice) {
 const ToggleButton = (device: TDevice) => Widget.ToggleButton({
   hpack: 'end',
   hexpand: true,
+  cursor: 'pointer',
   active: device.connected,
-  setup(self) {
-    setupCursorHover(self)
-    self.on('notify::active', () => device.setConnection(self.active))
-  },
   sensitive: bluetooth.bind('enabled'),
   visible: device.bind('connecting').as((p: boolean) => !p),
   label: device.bind('connected').as((c: boolean) => c ? 'Connected' : 'Connect'),
+  setup(self) { self.on('notify::active', () => device.setConnection(self.active)) },
   tooltipText: bluetooth.bind('enabled').as((p: boolean) => p ? '' : 'Bluetooth is disabled'),
 })
 

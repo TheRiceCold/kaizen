@@ -1,4 +1,3 @@
-import { setupCursorHover } from 'misc/cursorhover'
 import { type ButtonProps } from 'types/widgets/button'
 
 type TProps = ButtonProps & {
@@ -6,8 +5,8 @@ type TProps = ButtonProps & {
 }
 
 export default ({ window = '', setup, ...props }: TProps) => Widget.Button({
-  setup (self) {
-    setupCursorHover(self)
+  cursor: 'pointer',
+  setup(self) {
     let open = false
 
     self.toggleClassName('bar-button')

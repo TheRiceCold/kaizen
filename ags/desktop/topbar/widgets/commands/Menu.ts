@@ -1,14 +1,13 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
 import { type ButtonProps } from 'types/widgets/button'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const { Gdk } = imports.gi
 
 export default (self: ButtonProps, commands: MenuItemProps[]) => {
   const menu = Widget.Menu({
     children: commands.map(({ label, ...props }) => Widget.MenuItem({
-      setup: setupCursorHover,
       child: Widget.Label({ label, hpack: 'center' }),
+      cursor: 'pointer',
       ...props
     }))
   })

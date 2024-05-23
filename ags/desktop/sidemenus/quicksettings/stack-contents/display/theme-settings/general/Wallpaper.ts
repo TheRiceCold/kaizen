@@ -1,5 +1,4 @@
 import wallpaper from 'service/wallpaper'
-import { setupCursorHover } from 'misc/cursorhover'
 
 export default Widget.Box(
   { className: 'wallpaper' },
@@ -19,7 +18,7 @@ export default Widget.Box(
       }),
       Widget.Button({
         label: 'Random',
-        setup: setupCursorHover,
+        cursor: 'pointer',
         onClicked: wallpaper.random
       }),
     ])

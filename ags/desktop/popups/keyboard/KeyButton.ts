@@ -1,5 +1,4 @@
 import { sh } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 class ShiftMode {
   static Off = new ShiftMode('Off')
@@ -116,11 +115,11 @@ function modKeyExec(self, buttons, key) {
 
 export default key => Widget.Button({
   label: key.label,
+  cursor: 'pointer',
   attribute: { key: key },
   className: `key key-${key.shape}`,
   hexpand: ['space', 'expand'].includes(key.shape),
   setup(self) {
-    setupCursorHover(self)
     buttons = buttons.concat(self)
 
     switch(key.type) {

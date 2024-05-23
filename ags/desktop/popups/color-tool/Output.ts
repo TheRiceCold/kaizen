@@ -2,7 +2,6 @@ import Color from 'service/color'
 
 import icons from 'data/icons'
 import { copy } from 'lib/utils'
-import { setupCursorHover } from 'misc/cursorhover'
 
 const update = self => self
   .hook(Color, self.attribute.update, 'sl')
@@ -56,7 +55,7 @@ const CopyButton = (type: 'hex' | 'rgb' | 'hsl') => Widget.Box([
     child: Widget.Entry({ widthChars: 10 }),
     overlay: Widget.Button({
       hpack: 'end',
-      setup: setupCursorHover,
+      cursor: 'pointer',
       child: Widget.Label('󰆏'),
     }),
   })
@@ -73,8 +72,8 @@ export default Widget.Box(
   ),
   Widget.Box({ vertical: true },
     Widget.Button({
+      cursor: 'pointer',
       onClicked: Color.pick,
-      setup: setupCursorHover,
       child: Widget.Icon(icons.ui.colorpicker)
     }),
     ColorBox, // TODO: Apply picked color

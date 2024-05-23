@@ -1,5 +1,4 @@
 import GPTService from 'service/api/gpt'
-import { setupCursorHover } from 'misc/cursorhover'
 
 import Welcome from './Welcome'
 import { ChatEntry } from '../Textbox'
@@ -15,6 +14,7 @@ const ProviderSwitcher = () => {
       .hook(GPTService, self => self.toggleClassName('invisible', GPTService.providerID !== id), 'providerChanged')
 
     return Widget.Button({
+      cursor: 'pointer',
       tooltipText: provider.description,
       onClicked() {
         GPTService.providerID = id
@@ -26,12 +26,12 @@ const ProviderSwitcher = () => {
         Widget.Label({ xalign: 0, hexpand: true, label: provider.name }),
         providerSelected,
       ]),
-      setup: setupCursorHover,
     })
   }
 
   const indicatorChevron = Widget.Icon(icons.ui.arrow.down)
   const indicatorButton = Widget.Button({
+    cursor: 'pointer',
     tooltipText: 'Select ChatGPT-compatible API provider',
     child: Widget.Box([
       Widget.Icon('cloud-symbolic'),
@@ -53,7 +53,6 @@ const ProviderSwitcher = () => {
         ? icons.ui.arrow.up
         : icons.ui.arrow.down
     },
-    setup: setupCursorHover,
   })
 
   const providerList = Widget.Revealer({

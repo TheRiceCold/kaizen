@@ -2,8 +2,6 @@ import Annotation from 'service/annotation'
 
 import PopupRevealer from '../PopupRevealer'
 
-import { setupCursorHover } from 'misc/cursorhover'
-
 const { undo, redo, pin, clear, quit } = Annotation
 const hyprland = await Service.import('hyprland')
 
@@ -39,14 +37,14 @@ export default PopupRevealer({
   children: [
     Widget.Box({
       className: 'control-buttons',
-      children: buttons.map(props => Widget.Button({ setup: setupCursorHover, ...props })),
+      children: buttons.map(props => Widget.Button({ cursor: 'pointer', ...props })),
     }),
     Widget.Box(
       { vertical: true },
       ToolsInfo,
       Widget.Button({
         hexpand: true,
-        setup: setupCursorHover,
+        cursor: 'pointer',
         label: 'View brushes ',
         onClicked(self) {
           ToolsInfo.revealChild = !ToolsInfo.revealChild

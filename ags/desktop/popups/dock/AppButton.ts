@@ -1,5 +1,4 @@
 import options from 'options'
-import { setupCursorHover } from 'misc/cursorhover'
 
 export default ({ icon, ...props }) => Widget.Revealer({
   revealChild: false,
@@ -8,6 +7,7 @@ export default ({ icon, ...props }) => Widget.Revealer({
   transitionDuration: options.transition,
   child: Widget.Button({
     ...props,
+    cursor: 'pointer',
     className: 'app-btn app-btn-animate',
     child: Widget.Box({
       child: Widget.Overlay({
@@ -23,6 +23,5 @@ export default ({ icon, ...props }) => Widget.Revealer({
         }),
       }),
     }),
-    setup: setupCursorHover,
   })
 })
