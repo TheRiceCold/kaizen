@@ -1,7 +1,9 @@
 import { type Application } from 'ts/types/service/applications'
 import { substitutes } from 'data/icons'
+import options from 'options'
 
 const { GLib, Gio } = imports.gi
+const mpris = await Service.import('mpris')
 
 /** @returns substitute icon || name || fallback icon */
 function icon(name: string | null, fallback = name) {
@@ -177,6 +179,11 @@ function searchIcons(appClass, files) {
   return path
 }
 
+function getPlayer() {
+  const pref = options.popups.player.preferred.value
+  return mpris.getPlayer(pref) || null
+}
+
 export {
   icon,
   bash,
@@ -194,7 +201,9 @@ export {
   enableClickThrough,
   audioIconSub,
 
+  getPlayer,
+
   // DOCK
   getAllFiles,
-  searchIcons
+  searchIcons,
 }

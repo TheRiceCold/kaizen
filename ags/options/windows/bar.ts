@@ -5,7 +5,7 @@ export default {
     ignore: opt([ 'KDE Connect Indicator', 'gromit-mpx' ]),
   },
   media: {
-    length: opt(40),
+    length: opt(36),
     visualizer: { width: opt(8), height: opt(24) },
   },
   datemenu: {

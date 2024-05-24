@@ -3,14 +3,13 @@
     font-weight: bold
   .side-items
     @include floating-widget
-    margin: 0 $spacing
-    padding: calc($padding * 0.75)
+    margin: 0 calc($spacing * 1.25)
+    border: 1px solid transparentize($primary-bg, 0.5)
     margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
 
     .bar-button
+      padding: 0 $padding
       border-radius: $radius
-      margin: 0 calc($spacing * 0.25)
-      padding: calc($padding * 0.25) calc($padding * 1.25)
       &:hover, &:active, &.on, &.active, &:checked
         label, image
           color: $primary-bg
@@ -21,11 +20,11 @@
           color: #58D9BD
 
     .launcher-button
-      padding: 0 calc($padding * 0.75)
+      padding: 0
       label
         font-size: 1.25em
     .power-button
-      padding: 0 calc($padding * 1.25)
+      padding: 0 calc($padding * 0.5)
       label
         font-size: 0.9em
 

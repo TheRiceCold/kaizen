@@ -34,7 +34,7 @@ export const Date = BarButton({
 })
 
 export { default as Tray } from './Tray'
-export { default as Middle } from './middle'
+export { default as Indicator } from './indicator'
 export { default as Workspaces } from './workspaces'
 export { default as Control } from './ControlButton'
 export { default as LeftCommands } from './commands/leftCommands'
