@@ -7,10 +7,10 @@ export default ({
   ...props
 }) => Widget.Revealer({
   revealChild: reveal,
+  transition,
+  transitionDuration: options.transition,
   child: Widget.Box({
     ...props,
     classNames: ['popup-revealer', className],
   }),
-  transition,
-  transitionDuration: options.transition,
 })
