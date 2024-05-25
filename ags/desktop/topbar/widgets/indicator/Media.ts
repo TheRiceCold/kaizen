@@ -16,38 +16,31 @@ function getLabel(player) {
   } else return ''
 }
 
-export const playing = Widget.Box([
-  Widget.CircularProgress({
-    startAt: 0.75,
-    className: 'progress',
-  }).hook(mpris, self => {
-    const player = getPlayer()
-    if (!player) return
+export const playing = Widget.Box({ hpack: 'center' }).hook(mpris, self => {
+  const player = getPlayer()
+  if (!player) return
 
-    self.child = PlayerStatusIcon(player)
-    self.poll(1000, () => self.value = player.position / player.length)
-  }),
-  Widget.Label({
-    className: 'media-title',
-    maxWidthChars: length.bind(),
-  }).hook(mpris, self => {
-    const player = getPlayer()
-    if (player) self.label = getLabel(player)
-  })
-])
+  self.children = [
+    Widget.CircularProgress({
+      startAt: 0.75,
+      className: 'progress',
+      child: PlayerStatusIcon(player),
+    }).poll(1000, self => self.value = player.position / player.length),
+    Widget.Label({
+      label: getLabel(player),
+      maxWidthChars: length.bind(),
+    })
+  ]
+})
 
-/* HACK:
- * I don't really need the eventbox widget but,
- * the box widget forces this child show up first
- * no matter how much I enforces it not to by using shown, setup, or hook
-*/
-export const visualizer = Widget.EventBox({
+export const visualizer = Widget.Box({
   hpack: 'center',
   className: 'visualizer',
 }).hook(mpris, self => {
+  if (!getPlayer()) return
   sh('pkill cava')
   const limit = length.value
-  const size = getLabel(getPlayer()).length
+  const size = Math.round(getLabel(getPlayer()).length * 0.8)
   self.child = Cava({
     width, height,
     bars: (size < limit ? size : limit) * width,

@@ -10,17 +10,16 @@
   revealer
     padding: calc($padding * 1.25) calc($padding * 2.5)
   .progress
-    font-size: 3px
-    min-width: 24px
-    min-height: 24px
+    font-size: 4px
+    min-width: 32px
+    min-height: 32px
     color: $primary-bg
     background-color: transparentize($primary-bg, 0.75)
     image
-      font-size: 4.5em
-  .media-title
-    color: $fg
-    padding: calc($padding * 1.25)
-    margin-left: calc($spacing * 0.75)
+      font-size: 4em
+    + label 
+      margin-left: calc($spacing * 0.75)
+
   .visualizer
     padding: 0 $spacing
     .cava

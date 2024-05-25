@@ -9,8 +9,8 @@ const commands = [
   { label: 'Shortcuts', onClicked() { App.openWindow('shortcuts') } },
   {
     label: 'Help',
+    cursor: 'help',
     onClicked() { },
-    cursor: 'pointer',
   }, // TODO: Create documentation
 ]
 

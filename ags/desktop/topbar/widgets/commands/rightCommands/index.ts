@@ -15,10 +15,10 @@ const commands = [
   {
     label: 'Draw',
     tooltipText: 'gromit-mpx',
-    onClicked: () => Annotation.start(),
+    onClicked() { Annotation.start() },
   },
-  { label: 'Colors', onClicked() { toggleWidget('color') } },
-  // { label: 'Mirror', onClicked: () => { }  }, // TODO: implement using wl-mirror
+  { label: 'Color', onClicked() { toggleWidget('color') } },
+  // { label: 'Mirror', onClicked() { }  }, // TODO: implement using wl-mirror
   { label: 'Keys ', onClicked: openKeyMenu },
   { label: 'Zoom ', onClicked: openZoomMenu },
   { label: 'Snip ', onClicked: openSnipMenu },
