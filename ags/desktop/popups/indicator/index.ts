@@ -4,23 +4,28 @@ import brightness from 'service/brightness'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
 
-const DELAY = 2500
+const DELAY = 1000
 const audio = await Service.import('audio')
+const hyprland = await Service.import('hyprland')
 let mute = audio.microphone.stream?.is_muted ?? false
 
 let count = 0
 function show(value: number, icon: string) {
-  revealer.revealChild = true
-  Icon.icon = icon
-  ProgressBar.value = value < 1 ? value: 1
+  const activeClient = hyprland.clients.find(c => c.address === hyprland.active.client.address)
+  if (activeClient.fullscreen && activeClient.fullscreenMode === 0) {
+    revealer.revealChild = true
+    Icon.icon = icon
+    ProgressBar.value = value < 1 ? value: 1
 
-  count++
-  Utils.timeout(DELAY, () => {
-    count--
+    count++
+    Utils.timeout(DELAY, () => {
+      count--
 
-    if (count === 0)
-      revealer.revealChild = false
-  })
+      if (count === 0)
+        revealer.revealChild = false
+    })
+  }
+  else revealer.revealChild = false
 }
 
 const Icon = Widget.Icon()
@@ -31,7 +36,7 @@ const revealer = PopupRevealer({
   hpack: 'center',
   className: 'indicator',
   transition: 'slide_up',
-  children: [ Icon, ProgressBar ]
+  children: [ Icon, ProgressBar ],
 })
   .hook(brightness, () => show(
     brightness.screen,
@@ -43,7 +48,7 @@ const revealer = PopupRevealer({
   ), 'notify::kbd')
   .hook(audio.speaker, () => show(
     audio.speaker.volume,
-    icon(audio.speaker.icon_name || '', icons.audio.type.speaker),
+    icon(icons.audio.type.speaker),
   ), 'notify::volume')
   .hook(audio.microphone, () => Utils.idle(() => {
     if (mute !== audio.microphone.stream?.is_muted) {

@@ -13,9 +13,9 @@ const popupWindow = ({
   children, position,
   marginMultiplier = 1,
 }: { position: 'top' | 'bottom' }) => Widget.Window({
+  layer: 'overlay',
   anchor: [position],
   keymode: 'on-demand',
-  exclusivity: 'ignore',
   name: `${position}-popups`,
   className: `${position}-popups`,
   child: Widget.Box({
