@@ -120,4 +120,5 @@ export default RevealerWindow({
   layout: 'top',
   name: 'launcher',
   child: Launcher(),
+  keymode: 'exclusive',
 })
