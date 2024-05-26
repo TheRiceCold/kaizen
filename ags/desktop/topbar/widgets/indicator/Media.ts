@@ -12,7 +12,8 @@ const { length, visualizer: {width, height} } = options.bar.media
 function getLabel(player) {
   if (player) {
     const artists = player['track-artists'].join(', ')
-    return `${artists && artists+' - '} ${player['track-title']}`
+    const label = `${artists && artists+' - '} ${player['track-title']}`
+    return label.substr(0, length.value)
   } else return ''
 }
 
@@ -26,10 +27,7 @@ export const playing = Widget.Box({ hpack: 'center' }).hook(mpris, self => {
       className: 'progress',
       child: PlayerStatusIcon(player),
     }).poll(1000, self => self.value = player.position / player.length),
-    Widget.Label({
-      label: getLabel(player),
-      maxWidthChars: length.bind(),
-    })
+    Widget.Label(getLabel(player))
   ]
 })
 
