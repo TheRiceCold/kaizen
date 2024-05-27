@@ -3,11 +3,7 @@ import options from 'options'
 
 const hyprland = await Service.import('hyprland')
 
-function getId() {
-  const { active } = hyprland
-  const id = active.workspace.id - 1
-  return id.toString()
-}
+const getId = () => hyprland.active.workspace.id.toString()
 
 const Label = (num: number) => Widget.Label({
   maxWidthChars: 28,
@@ -24,8 +20,7 @@ export default Widget.Stack({
   children: options.workspaces.num.bind().as(
     (number: number) => Array(number)
       .fill(null)
-      .map((_, i) => i)
+      .map((_, i) => i+1)
       .reduce((acc, num) => (acc[num] = Label(num), acc), {})
   ),
 }).hook(hyprland, self => self.shown = getId())
-

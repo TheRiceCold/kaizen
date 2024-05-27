@@ -4,6 +4,7 @@ import Stack from './Stack'
 
 import options from 'options'
 import icons from 'data/icons'
+import { showWidget } from 'lib/variables'
 import { capitalize, getPlayer } from 'lib/utils'
 
 const stack = Stack
@@ -16,6 +17,7 @@ function revealTimeout(timeout: number = 1000) {
   showBorder(true)
   const player = getPlayer()
   revealer.revealChild = true
+  showWidget.indicator.value = true
 
   count++
   Utils.timeout(timeout, () => {
@@ -25,6 +27,7 @@ function revealTimeout(timeout: number = 1000) {
     if (player)
       stack.shown = 'playing'
     else {
+      showWidget.indicator.value = false
       revealer.revealChild = false
       showBorder(false)
     }
@@ -44,9 +47,6 @@ function indicatorUpdate(
   type: 'brightness' | 'volume' | 'microphone',
   value: number,
 ) {
-  stack.shown = type
-  revealer.revealChild = true
-
   stack.children[type].children = [
     Widget.CircularProgress({
       startAt: 0.75,
@@ -59,6 +59,7 @@ function indicatorUpdate(
     }),
     Widget.Label(`${capitalize(type)}: ${Math.round(value * 100)}%`),
   ]
+  stack.shown = type
   revealTimeout()
 }
 

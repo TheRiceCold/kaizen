@@ -12,7 +12,7 @@ const { length, visualizer: {width, height} } = options.bar.media
 function getLabel(player) {
   if (player) {
     const artists = player['track-artists'].join(', ')
-    const label = `${artists && artists+' - '} ${player['track-title']}`
+    const label = `${artists && artists} - ${player['track_title']}`
     return label.substr(0, length.value)
   } else return ''
 }
@@ -38,7 +38,7 @@ export const visualizer = Widget.Box({
   if (!getPlayer()) return
   sh('pkill cava')
   const limit = length.value
-  const size = Math.round(getLabel(getPlayer()).length * 0.8)
+  const size = Math.round(getLabel(getPlayer()).length * 0.9)
   self.child = Cava({
     width, height,
     bars: (size < limit ? size : limit) * width,
