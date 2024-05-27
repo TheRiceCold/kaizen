@@ -1,6 +1,7 @@
 import { type ButtonProps } from 'types/widgets/button'
 
 import timer from './timer'
+import Calendar from './calendar'
 // import weather from './weather'
 import MenuRevealer from '../MenuRevealer'
 
@@ -8,17 +9,10 @@ import options from 'options'
 
 export const activeStack = Variable('calendar')
 const stackItems = [
-  {
-    // TODO: replace with better design
-    name: 'calendar',
-    content: Widget.Box({
-      className: 'calendar',
-      children: [ Widget.Calendar({ hexpand: true }) ],
-    }),
-  },
+  { name: 'calendar', content: Calendar() },
   { name: 'weather', content: /* weather */ Widget.Box() },
   { name: 'agenda', content: Widget.Box() },
-  { name: 'timer', content: timer },
+  { name: 'timer', content: /* timer */ Widget.Box() },
   { name: 'events', content: Widget.Box() },
 ]
 
