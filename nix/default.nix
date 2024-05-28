@@ -14,7 +14,7 @@
   cava,
   swww,
   # brotab,
-  sptlrx,
+  # sptlrx,
   ydotool,
   cliphist,
   gromit-mpx,
@@ -43,8 +43,6 @@
 
     cava              # Audio Visualizer
     swww              # Animated Wallpaper Daemon
-    # brotab
-    sptlrx            # Spotify Lyrics
     matugen           # Color generation tool
     ydotool           # Generic command-line automation tool
     cliphist          # Clipboard History Manager

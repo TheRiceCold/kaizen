@@ -12,6 +12,7 @@ let mute = audio.microphone.stream?.is_muted ?? false
 let count = 0
 function show(value: number, icon: string) {
   const activeClient = hyprland.clients.find(c => c.address === hyprland.active.client.address)
+  if (!activeClient) return
   if (activeClient.fullscreen && activeClient.fullscreenMode === 0) {
     revealer.revealChild = true
     Icon.icon = icon
