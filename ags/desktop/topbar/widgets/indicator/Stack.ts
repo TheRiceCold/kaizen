@@ -7,9 +7,9 @@ export default Widget.Stack({
   className: 'stack',
   transition: 'slide_up_down',
   children: {
-    brightness: Widget.Box({ hpack: 'center' }),
-    microphone: Widget.Box({ hpack: 'center' }),
-    volume: Widget.Box({ hpack: 'center' }),
+    brightness: Widget.Box(),
+    microphone: Widget.Box(),
+    volume: Widget.Box(),
     ...Media,
   },
 }).hook(show, self => self.shown = show ? 'visualizer' : 'playing')

@@ -1,11 +1,11 @@
 import brightness from 'service/brightness'
 
 import Stack from './Stack'
+import IconLabel from './IconLabel'
 
 import options from 'options'
-import icons from 'data/icons'
+import { getPlayer } from 'lib/utils'
 import { showWidget } from 'lib/variables'
-import { capitalize, getPlayer } from 'lib/utils'
 
 const stack = Stack
 const audio = await Service.import('audio')
@@ -34,31 +34,10 @@ function revealTimeout(timeout: number = 1000) {
   })
 }
 
-function playerUpdate() {
-  const player = getPlayer()
-  if (!player) { revealTimeout(500); return }
-
-  if (player['play-back-status'] !== 'Playing')
-    stack.shown = 'playing'
-  revealTimeout(500)
-}
-
-function indicatorUpdate(
-  type: 'brightness' | 'volume' | 'microphone',
-  value: number,
-) {
-  stack.children[type].children = [
-    Widget.CircularProgress({
-      startAt: 0.75,
-      className: 'progress',
-      value: (value < 1) ? value : 1,
-      child: Widget.Icon(
-        (type === 'volume') ? icons.audio.type.speaker :
-          (type === 'brightness') ? icons.brightness.indicator :
-            icons.audio.mic.high)
-    }),
-    Widget.Label(`${capitalize(type)}: ${Math.round(value * 100)}%`),
-  ]
+function indicatorUpdate(type, value) {
+  const item = stack.children[type]
+  item.children = IconLabel(type, value)
+  item.hpack = 'center'
   stack.shown = type
   revealTimeout()
 }
@@ -68,7 +47,14 @@ const revealer = Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: options.transition * 1.5,
 })
-  .hook(mpris, playerUpdate)
+  .hook(mpris, () => {
+    const player = getPlayer()
+    if (!player) { revealTimeout(500); return }
+
+    if (player['play-back-status'] !== 'Playing')
+      stack.shown = 'playing'
+    revealTimeout(500)
+  })
   .hook(audio.microphone, () => { })
   .hook(brightness, () => indicatorUpdate('brightness', brightness.kbd), 'notify::kbd')
   .hook(brightness, () => indicatorUpdate('brightness', brightness.screen), 'notify::screen')
