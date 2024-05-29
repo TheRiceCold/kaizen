@@ -1,7 +1,7 @@
-###### *<div align=right><sub>Last nix update: may 22, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: may 29, 2024</sub></div>*
 
 <h1 align=center>
-  <img src='https://github.com/thericecold/dots/blob/main/assets/ibu-circle.png' width='150px'/>
+  <img src='https://github.com/thericecold/kaizen/blob/main/.github/logo.png' width='150px'/>
 
   Kaizen<br />
   <a href='https://nixos.org'>
@@ -24,9 +24,13 @@
   The japanese word <b>kaizen</b> is a philosophy to improve continuously and change for the better.<br />
 </p>
 
+<hr />
+
 <p align=center>
-  This configuration is designed to improve daily workflow with an intuitive and minimal design that includes smart widgets and powerful development tools.
+  This configuration is designed to improve daily workflow and productivity with an intuitive minimal design that includes smart widgets and powerful development tools.
 </p>
+
+<br />
 
 ## 🔥 Showcase
 
@@ -35,23 +39,25 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 ### 🪟 Windows
 
 <details>
-  <summary><b>Status Bar</b></summary>
+  <summary><b>Topbar</b></summary>
 
-- **Right Buttons**
+- **Left Buttons**
   - Logo Icon: Toggles launcher window
   - Workspace: Toggles workspaces overview window
+  - Dashboard: Toggles dashboard
   - Extend Button
     - Window Options
       - Fullscreen, Toggle Float, Center Layout, Quit
       - Floats Only: Pin and Center
     - Developer Tools
-      - API Tools: Opens API Tools Side Menu
-      - Android: Starts and opens BlissOS VM. [view my setup]()
-      - Debian: Starts Debian Container. [view my setup]()
+      - Terminal: Toggles scratchpad terminal.
+      - AI Tools: Opens API Tools Side Menu.
       - Windows 11: Opens Windows 11 VM. [view my setup]()
-    - Shortcuts: Opens shortcuts window.
-    - Help: Opens the wiki page.
-- **Left Buttons**: 
+- **Middle Indicator and Searchbar**:
+  - Indicates brightness, audio and mic Adjustment. 
+  - Also shows current song playing in Spotify, and visualizer when **Popup Media** is open.
+  - Overview and search applications and workspace management
+- **Right Buttons**:
   - Extend Button
     - Draw: Starts annotation/drawing tool.
     - Colors: Toggles color popup widget.
@@ -63,27 +69,26 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
   - Control Button: Toggles quicksettings side menu widget
   - Date Button: Toggles Date sidemenu widget
   - Power Button: Opens Powermenu window 
-- **Middle Status**:
-  > [!NOTE] Click to open Media player popup and scroll up/down to switch between player and visualizer.
 
 </details>
 
 <details>
   <summary><b>Popups</b></summary>
   <ul>
-    <li><b>Dock(dock)</b></li>
-    <li><b>Keyboard(keyboard)</b></li>
     <li><b>Indicator</b></li>
-    <li><b>Color Tool(color)</b></li>
-    <li><b>Media Player(media)</b></li>
     <li><b>Notifications</b></li>
-    <li><b>Annotation Tools(annotation)</b></li>
+    <li><b>Dock (dock)</b></li>
+    <li><b>Color Tool (color)</b></li>
+    <li><b>Media Player (media)</b></li>
+    <li><b>Keyboard (keyboard)</b></li>
+    <li><b>Annotation Tools (annotation)</b></li>
   </ul>
 </details>
 
 <details>
   <summary><b>Fullscreen</b></summary>
 
+- **Launcher**
 - **Overview**
 - **Shortcuts**
 - **Power Menu**
@@ -112,6 +117,22 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 </details>
 
 <details>
+  <summary><b>Background</b></summary>
+
+- **Menu Item Options**:
+  - Terminal: Opens Terminal
+  - Browser: Opens Browser
+  - Files: Opens File Manager
+  - Refresh: Refresh Hyprland
+  - Dashboard: Opens Dashboard Window
+  - Tools
+    - Draw: Runs annotation tool
+    - Keyboard: Toggle Keyboard Popup
+    - Color Wheel: Toggle Color Wheel Popup
+
+</details>
+
+<details>
   <summary><b>Lockscreen</b></summary>
   <img src='https://github.com/thericecold/dots/blob/main/assets/screenshots/lockscreen.jpg' />
 </details>
@@ -121,7 +142,7 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 </details>
 
 #### How to toggle?
-> [!NOTE] 
+> [!NOTE]
 > use "ags" instead of "kaizen" if you installed this manually<br/>
 > The contents of `Side Menus` and `Popups` window with parenthesis are the `<widget-name>`
 

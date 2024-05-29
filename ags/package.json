@@ -1,5 +1,5 @@
 {
-  "name": "ags-dotfiles",
+  "name": "kaizen",
   "author": "Dale Walter Hicban",
   "scripts": {
     "lint": "eslint . --ext .ts",
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheColdRice/ags-config.git"
+    "url": "git+https://github.com/TheColdRice/kaizen.git"
   },
   "devDependencies": {
     "@girs/accountsservice-1.0": "^1.0.0-3.2.7",

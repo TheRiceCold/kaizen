@@ -48,9 +48,9 @@
     cliphist          # Clipboard History Manager
     hyprpicker        # Wayland Color Picker
     gromit-mpx        # Annotation Tool
-    grim
+    grim              # Screenshot tool
     slurp             # Region Selector
-    swappy
+    swappy            # Annotation gui made in gtk
     wl-screenrec      # High Performance Screen Recorder
     wl-clipboard      # Command-line copy/paste utilities for Wayland
     brightnessctl     # Read and Control Brightness

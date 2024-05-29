@@ -1,8 +1,8 @@
 import { type ButtonProps } from 'types/widgets/button'
 
-import timer from './timer'
+// import timer from './timer'
 import Calendar from './calendar'
-// import weather from './weather'
+import weather from './weather'
 import MenuRevealer from '../MenuRevealer'
 
 import options from 'options'
@@ -10,7 +10,7 @@ import options from 'options'
 export const activeStack = Variable('calendar')
 const stackItems = [
   { name: 'calendar', content: Calendar() },
-  { name: 'weather', content: /* weather */ Widget.Box() },
+  { name: 'weather', content: weather },
   { name: 'agenda', content: Widget.Box() },
   { name: 'timer', content: /* timer */ Widget.Box() },
   { name: 'events', content: Widget.Box() },
