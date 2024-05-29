@@ -28,9 +28,11 @@ const ram = Variable(0, {
 
 const showWidget = {
   // TOP
+  indicator: Variable(false),
+  annotation: Variable(false),
   player: Variable(false),
   color: Variable(false),
-  annotation: Variable(false),
+
 
   // BOTTOM
   dock: Variable(false),

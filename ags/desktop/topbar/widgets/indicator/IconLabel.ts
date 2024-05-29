@@ -1,5 +1,3 @@
-import PlayerStatusIcon from 'misc/playerStatusIcon'
-
 import icons from 'data/icons'
 import { capitalize, getPlayer } from 'lib/utils'
 
@@ -18,7 +16,10 @@ export default (
       Widget.CircularProgress({
         startAt: 0.75,
         className: 'progress',
-        child: PlayerStatusIcon(player),
+        child: Widget.Icon().bind(
+          'icon', player, 'play-back-status',
+          status => icons.mpris[status.toLowerCase()]
+        )
       }).poll(1000, self => self.value = player.position / player.length),
       Widget.Label(value)
     ]

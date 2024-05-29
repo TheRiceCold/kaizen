@@ -13,8 +13,9 @@ export default items => {
     })
 
     const Progress = Widget.CircularProgress({
-      value: obj.type.bind(),
+      startAt: 0.75,
       className: 'progress',
+      value: obj.type.bind(),
       child: Widget.Icon(obj.icon),
     })
 

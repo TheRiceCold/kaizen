@@ -1,7 +1,3 @@
-import { type LabelProps } from 'types/widgets/label'
-
-import PlayerStatusIcon from 'misc/playerStatusIcon'
-
 import options from 'options'
 import icons from 'data/icons'
 import { icon } from 'lib/utils'
@@ -84,7 +80,7 @@ export default Widget.Box({
   const positionLabel = Widget.Label({
     hpack: 'start',
     className: 'position',
-    setup(self: LabelProps) {
+    setup(self) {
       function update(_: unknown, time?: number) {
         self.label = lengthStr(time || player.position)
       }
@@ -103,9 +99,12 @@ export default Widget.Box({
   const playPause = Widget.Button({
     cursor: 'pointer',
     className: 'play-pause',
-    child: PlayerStatusIcon(player),
     visible: player.bind('can-play'),
     onClicked() { player.playPause() },
+    child: Widget.Icon().bind(
+      'icon', player, 'play-back-status',
+      status => icons.mpris[status.toLowerCase()]
+    ),
   })
 
   const prev = Widget.Button({
