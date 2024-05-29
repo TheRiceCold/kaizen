@@ -1,5 +1,5 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
-import Menu from '../../Menu'
+import Menu from '../Menu'
 import { sh } from 'lib/utils'
 
 import { toggleWidget } from 'lib/globals'

@@ -1,5 +1,5 @@
 import { type MenuItemProps } from 'types/widgets/menuitem'
-import Menu from '../../Menu'
+import Menu from '../Menu'
 import { sh } from 'lib/utils'
 
 const dispatch = (cmd: string) => sh(`hyprctl dispatch ${cmd}`)

@@ -40,8 +40,8 @@
         margin-right: calc($spacing * 0.5)
 
 menu
-  background-color: $bg
   border-radius: calc($radius * 0.5)
+  background-color: transparentize($bg, 0.15)
   menuitem
     padding: calc($padding * 1.25) calc($padding * 2)
     border-bottom: 1px solid transparentize($fg, 0.75)
@@ -49,9 +49,7 @@ menu
       color: $fg
       font-weight: bold
     &:hover
-      background: $primary-bg
-      label
-        color: $bg
+      background: $primary-fg
     &:first-child
       border-top-left-radius: calc($radius * 0.5)
       border-top-right-radius: calc($radius * 0.5)
