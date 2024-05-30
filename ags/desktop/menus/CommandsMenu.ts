@@ -16,6 +16,7 @@ const Item = (label, onActivate) => Widget.MenuItem({
 export default event => {
   return Widget.Menu({
     children: [
+      Item('Refresh', () => sh('pkill ags & ags')),
       Widget.MenuItem({
         child: Widget.Label('Open '),
         submenu: Widget.Menu({
@@ -72,8 +73,6 @@ export default event => {
           ],
         }),
       }),
-      Item('Refresh', () => sh('pkill ags & ags')),
-      Item('Help', () => {}), // TODO: Create documentation
     ]
   }).popup_at_pointer(event)
 }

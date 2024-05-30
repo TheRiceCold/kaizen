@@ -12,7 +12,7 @@ const Label = (num: number) => Widget.Label({
 }).hook(hyprland, self => {
   const { active } = hyprland
   const client = active.client.class
-  self.label = client.length > 0 ? `${getId()} | ${capitalize(client)}` : getId()
+  self.label = client.length > 0 ? `${getId()}: ${capitalize(client)} ` : getId()
 })
 
 export default Widget.Stack({

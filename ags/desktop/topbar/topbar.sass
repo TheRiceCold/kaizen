@@ -4,34 +4,30 @@
   .side-items
     @include floating-widget
     margin: 0 calc($spacing * 1.25)
+    padding: calc($padding * 1.5) calc($padding * 2)
     border: 1px solid transparentize($primary-bg, 0.5)
     margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
 
     .bar-button
       padding: 0 $padding
       border-radius: $radius
+      margin: 0 calc($spacing * 0.25)
       &:hover, &:active, &.on, &.active, &:checked
-        label, image
-          color: $primary-bg
+        color: $bg
+        background-color: $primary-bg
+      &.launcher-button 
+        padding: 0 calc($padding * 0.5)
+        label
+          font-size: 1.25em
+      &.power-button label
+        font-size: 0.9em
       .battery
         &.error
           color: #C76598
         &.charging
           color: #58D9BD
 
-    .launcher-button
-      padding: 0
-      label
-        font-size: 1.25em
-    .power-button
-      padding: 0 calc($padding * 0.5)
-      label
-        font-size: 0.9em
-
-    &:first-child
-      .bar-button:first-child
-        margin-left: calc($spacing * 0.5)
-      separator
-        margin-left: calc($spacing * 0.5)
-    &:last-child .bar-button:last-child
-        margin-right: calc($spacing * 0.5)
+    separator
+      padding: 1px
+      margin: 0 $spacing
+      background-color: transparentize($fg, 0.75)
