@@ -28,32 +28,10 @@
       label
         font-size: 0.9em
 
-    &:first-child // Left
+    &:first-child
       .bar-button:first-child
         margin-left: calc($spacing * 0.5)
       separator
         margin-left: calc($spacing * 0.5)
-    &:last-child // right
-      .bar-button:last-child
+    &:last-child .bar-button:last-child
         margin-right: calc($spacing * 0.5)
-      separator
-        margin-right: calc($spacing * 0.5)
-
-menu
-  border-radius: calc($radius * 0.5)
-  background-color: transparentize($bg, 0.15)
-  menuitem
-    padding: calc($padding * 1.25) calc($padding * 2)
-    border-bottom: 1px solid transparentize($fg, 0.75)
-    label, image
-      color: $fg
-      font-weight: bold
-    &:hover
-      background: $primary-fg
-    &:first-child
-      border-top-left-radius: calc($radius * 0.5)
-      border-top-right-radius: calc($radius * 0.5)
-    &:last-child
-      border: 0
-      border-bottom-left-radius: calc($radius * 0.5)
-      border-bottom-right-radius: calc($radius * 0.5)
