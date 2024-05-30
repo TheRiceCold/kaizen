@@ -39,9 +39,9 @@ export default event => {
               child: Widget.Label('Recorder'),
               submenu: Widget.Menu({
                 children: [
-                  Item('Region', () => screenTools.recorder('region')),
+                  Item('Region', () => screenTools.recorder()),
                   Item('Fullscreen', () => screenTools.recorder('fullscreen')),
-                  Item('Region | Audio', () => screenTools.recorder('region')), // TODO:
+                  Item('Region | Audio', () => screenTools.recorder()), // TODO:
                   Item('Fullscreen | Audio', () => screenTools.recorder('fullscreen')), // TODO:
                 ]
               })

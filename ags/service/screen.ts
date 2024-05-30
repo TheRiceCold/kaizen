@@ -19,14 +19,16 @@ class ScreenTools extends Service {
   #interval = 0
 
   timer = 0
-  isRecording = false
+  _isRecording = false
+
+  get isRecording() { return this._isRecording }
 
   async recorder(option: 'region' | 'fullscreen' | 'stop' = 'region') {
     if (!dependencies('slurp', 'wl-screenrec')) return
 
-    if (this.isRecording && option === 'stop')
+    if (this._isRecording && option === 'stop')
       this.recorderStop()
-    else if (!this.isRecording) {
+    else if (!this._isRecording) {
       Utils.ensureDirectory(this.#recordings)
       this.#file = `${this.#recordings}/${now}.mp4`
       if (option === 'fullscreen')
@@ -34,8 +36,8 @@ class ScreenTools extends Service {
       if (option === 'region')
         sh(`wl-screenrec -g "${await sh('slurp')}" -f ${this.#file}`)
 
-      this.isRecording = true
-      this.changed('isRecording')
+      this._isRecording = true
+      this.changed('_isRecording')
 
       this.timer = 0
       this.#interval = Utils.interval(1000, () => { this.changed('timer'); this.timer++ })
@@ -43,9 +45,9 @@ class ScreenTools extends Service {
   }
 
   async recorderStop() {
-    await bash`killall -USR1 wl-screenrec`
-    this.isRecording = false
-    this.changed('isRecording')
+    sh('pkill wl-screenrec')
+    this._isRecording = false
+    this.changed('_isRecording')
     GLib.source_remove(this.#interval)
 
     Utils.notify({

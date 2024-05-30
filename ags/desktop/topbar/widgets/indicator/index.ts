@@ -1,3 +1,4 @@
+import screenTools from 'service/screen'
 import brightness from 'service/brightness'
 
 import Stack from './Stack'
@@ -14,8 +15,9 @@ const showBorder = show => revealer.parent.toggleClassName('show-border', show)
 
 let count = 0
 function revealTimeout(timeout: number = 1000) {
-  showBorder(true)
   const player = getPlayer()
+
+  showBorder(true)
   revealer.revealChild = true
   showWidget.indicator.value = true
 
@@ -24,7 +26,9 @@ function revealTimeout(timeout: number = 1000) {
     count--
     if (count !== 0) return
 
-    if (player)
+    if (screenTools.isRecording)
+      stack.shown = 'recorder'
+    else if (player)
       stack.shown = 'playing'
     else {
       showWidget.indicator.value = false
@@ -47,14 +51,8 @@ const revealer = Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: options.transition * 1.5,
 })
-  .hook(mpris, () => {
-    const player = getPlayer()
-    if (!player) { revealTimeout(500); return }
-
-    if (player['play-back-status'] !== 'Playing')
-      stack.shown = 'playing'
-    revealTimeout(500)
-  })
+  .hook(mpris, () => revealTimeout(500))
+  .hook(screenTools, () => revealTimeout(500))
   .hook(audio.microphone, () => { })
   .hook(brightness, () => indicatorUpdate('brightness', brightness.kbd), 'notify::kbd')
   .hook(brightness, () => indicatorUpdate('brightness', brightness.screen), 'notify::screen')
