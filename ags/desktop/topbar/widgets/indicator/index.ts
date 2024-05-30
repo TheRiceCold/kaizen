@@ -12,15 +12,15 @@ const stack = Stack
 const audio = await Service.import('audio')
 const mpris = await Service.import('mpris')
 
+function reveal(value: boolean) {
+  revealer.revealChild = value
+  showWidget.indicator.value = value
+  revealer.parent.toggleClassName('show-border', value)
+}
+
 let count = 0
 function revealTimeout(timeout: number = 1000) {
   const player = getPlayer()
-
-  function reveal(value: boolean) {
-    revealer.revealChild = value
-    showWidget.indicator.value = value
-    revealer.parent.toggleClassName('show-border', value)
-  }
 
   count++
   Utils.timeout(timeout, () => {
@@ -42,6 +42,7 @@ function indicatorUpdate(type, value) {
   item.children = IconLabel(type, value)
   item.hpack = 'center'
   stack.shown = type
+  reveal(true)
   revealTimeout()
 }
 
