@@ -11,30 +11,29 @@ import { showWidget } from 'lib/variables'
 const stack = Stack
 const audio = await Service.import('audio')
 const mpris = await Service.import('mpris')
-const showBorder = show => revealer.parent.toggleClassName('show-border', show)
 
 let count = 0
 function revealTimeout(timeout: number = 1000) {
   const player = getPlayer()
 
-  showBorder(true)
-  revealer.revealChild = true
-  showWidget.indicator.value = true
+  function reveal(value: boolean) {
+    revealer.revealChild = value
+    showWidget.indicator.value = value
+    revealer.parent.toggleClassName('show-border', value)
+  }
 
   count++
   Utils.timeout(timeout, () => {
     count--
     if (count !== 0) return
 
-    if (screenTools.isRecording)
+    if (screenTools.isRecording) {
       stack.shown = 'recorder'
-    else if (player)
+      reveal(true)
+    } else if (player) {
       stack.shown = 'playing'
-    else {
-      showWidget.indicator.value = false
-      revealer.revealChild = false
-      showBorder(false)
-    }
+      reveal(true)
+    } else reveal(false)
   })
 }
 
