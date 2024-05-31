@@ -4,7 +4,7 @@ export default {
   position: opt<'left' | 'center' | 'right'>('left'),
   iconSize: opt(48),
   width: opt(0),
-  margin: opt(80),
+  margin: opt(40),
   maxItem: opt(5),
   nix: {
     max: opt(8),

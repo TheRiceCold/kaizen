@@ -18,6 +18,10 @@ export default {
       scale: opt(9),
       monochromeIcon: opt(true),
     },
+    substitutes: opt({
+      'vesktop': 'discord',
+      'org.gnome.Nautilus': 'files',
+    })
   },
 
   powermenu: {
