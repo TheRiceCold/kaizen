@@ -1,12 +1,7 @@
 import BarButton from '../BarButton'
 
 import options from 'options'
-import { clock } from 'lib/variables'
 import { showWidget } from 'lib/variables'
-import { openRunMenu } from './menus/RunMenu'
-import { openWindowMenu } from './menus/WindowMenu'
-
-const { interval, format } = options.bar.datemenu
 
 export const LauncherButton = BarButton({
   label: '󰚀',
@@ -27,20 +22,6 @@ export const DashboardButton = BarButton({
   window: 'dashboard',
   onClicked() { App.toggleWindow('dashboard') }
 })
-export const RunButton = BarButton({ label: 'Run', onClicked: openRunMenu })
-export const WindowButton = BarButton({ label: 'Window', onClicked: openWindowMenu })
-
-export const DateButton = BarButton({
-  className: 'datemenu',
-  onClicked(self) {
-    toggleWidget('datemenu')
-    self.toggleClassName('active', showWidget.datemenu.value)
-  },
-  label: Utils.derive(
-    [clock(interval), format],
-    (c, f) => c.format(f) || ''
-  ).bind(),
-})
 
 export const PowerButton = BarButton({
   label: '',
@@ -51,5 +32,8 @@ export const PowerButton = BarButton({
 
 export { default as Tray } from './Tray'
 export { default as Indicator } from './indicator'
+export { default as RunButton } from './RunButton'
 export { default as Workspaces } from './Workspaces'
+export { default as DateButton } from './DateButton'
+export { default as WindowButton } from './WindowButton'
 export { default as ControlButton } from './ControlButton'

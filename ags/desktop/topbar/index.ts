@@ -20,8 +20,8 @@ const startWidget = Widget.Box(
   Widget.Separator({ vertical: true }),
   AiButton,
   DashboardButton,
-  RunButton,
   WindowButton,
+  RunButton,
 )
 
 const Content = Widget.CenterBox({
@@ -30,10 +30,7 @@ const Content = Widget.CenterBox({
   centerWidget: Indicator,
   endWidget: Widget.Box(
     { hpack: 'end', className: 'side-items' },
-    Tray,
-    ControlButton,
-    DateButton,
-    PowerButton,
+    Tray, ControlButton, DateButton, PowerButton,
   )
 })
 

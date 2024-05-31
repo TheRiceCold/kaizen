@@ -12,9 +12,11 @@ const Label = (num: number) => Widget.Label({
   label: num.toString(),
   justification: 'center',
 }).hook(hyprland, self => {
+  const subs = options.workspaces.substitutes.value
   const { active } = hyprland
   const client = active.client.class
-  self.label = client.length > 0 ? `${getId()}: ${capitalize(client)} ` : getId()
+  self.label = (client.length > 0) ?
+    `${getId()}:  ${capitalize((client in subs) ? subs[client] : client)} ` : getId()
 })
 
 const WorkspaceStack = Widget.Stack({
