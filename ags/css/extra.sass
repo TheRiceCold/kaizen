@@ -30,9 +30,10 @@ tooltip
     border: $border-width solid $popover-border-color
 
 menu
-  padding: $padding
-  border-radius: calc($radius * 0.5)
   background-color: transparentize($bg, 0.15)
+  border-radius: calc($radius * 0.5)
+  border-top-left-radius: 0
+  padding: $padding
   menuitem
     padding: calc($padding * 1.25) calc($padding * 2)
     border-bottom: 1px solid transparentize($fg, 0.75)

@@ -23,11 +23,17 @@ window.sideright .datemenu
       &-othermonth
         opacity: 0.5
     .header
-      .date label
-        font-size: 1.25em
-        margin: $spacing calc($spacing * 8)
-      .monthshift-btn label
-        font-size: 1em
+      .date
+        label
+          font-size: 1.25em
+          margin: $spacing calc($spacing * 8)
+        &:hover label
+          color: $primary-bg
+      .monthshift-btn
+        label
+          font-size: 1em
+        &:hover label
+          color: $primary-bg
     .weekdays
       padding: 0 calc($padding * 4)
       margin-bottom: calc($spacing * 0.5)
