@@ -1,10 +1,10 @@
 import {
   LauncherButton,
-  WorkspaceButton,
+  Workspaces,
   AiButton,
+  DashboardButton,
   RunButton,
   WindowButton,
-  HelpButton,
   Indicator,
   Tray,
   ControlButton,
@@ -16,34 +16,34 @@ import { CommandsMenu } from 'desktop/menus'
 const startWidget = Widget.Box(
   { hpack: 'start', className: 'side-items' },
   LauncherButton,
-  WorkspaceButton,
+  Workspaces,
   Widget.Separator({ vertical: true }),
   AiButton,
+  DashboardButton,
   RunButton,
   WindowButton,
-  HelpButton
 )
 
-const Content = Widget.EventBox({
-  onSecondaryClick: (_, event) => CommandsMenu(event),
-  child: Widget.CenterBox({
-    css: 'min-width: 2px; min-height: 2.5rem;',
-    startWidget,
-    centerWidget: Indicator,
-    endWidget: Widget.Box(
-      { hpack: 'end', className: 'side-items' },
-      Tray,
-      ControlButton,
-      DateButton,
-      PowerButton,
-    )
-  })
+const Content = Widget.CenterBox({
+  css: 'min-width: 2px; min-height: 2.5rem;',
+  startWidget,
+  centerWidget: Indicator,
+  endWidget: Widget.Box(
+    { hpack: 'end', className: 'side-items' },
+    Tray,
+    ControlButton,
+    DateButton,
+    PowerButton,
+  )
 })
 
 export default Widget.Window({
   name: 'topbar',
-  child: Content,
   className: 'topbar',
   exclusivity: 'exclusive',
   anchor: [ 'top', 'right', 'left' ],
+  child: Widget.EventBox({
+    child: Content,
+    onSecondaryClick(_, event) { CommandsMenu(event) },
+  }),
 })

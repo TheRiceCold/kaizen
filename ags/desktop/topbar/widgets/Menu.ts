@@ -6,7 +6,7 @@ const { Gdk } = imports.gi
 export default (self: ButtonProps, commands: MenuItemProps[]) => {
   const menu = Widget.Menu({
     children: commands.map(({ label, ...props }) => Widget.MenuItem({
-      child: Widget.Label({ label, hpack: 'center' }),
+      child: Widget.Label({ label, hpack: 'start' }),
       cursor: 'pointer',
       ...props
     }))

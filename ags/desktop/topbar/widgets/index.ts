@@ -22,10 +22,13 @@ export const AiButton = BarButton({
     self.toggleClassName('active', showWidget['ai-tools'].value)
   },
 })
-
+export const DashboardButton = BarButton({
+  label: 'Dashboard',
+  window: 'dashboard',
+  onClicked() { App.toggleWindow('dashboard') }
+})
 export const RunButton = BarButton({ label: 'Run', onClicked: openRunMenu })
 export const WindowButton = BarButton({ label: 'Window', onClicked: openWindowMenu })
-export const HelpButton = BarButton({ label: 'Help', cursor: 'help' })
 
 export const DateButton = BarButton({
   className: 'datemenu',
@@ -48,5 +51,5 @@ export const PowerButton = BarButton({
 
 export { default as Tray } from './Tray'
 export { default as Indicator } from './indicator'
-export { default as WorkspaceButton } from './workspaces'
+export { default as Workspaces } from './Workspaces'
 export { default as ControlButton } from './ControlButton'

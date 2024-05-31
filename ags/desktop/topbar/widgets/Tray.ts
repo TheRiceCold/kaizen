@@ -10,6 +10,12 @@ const Item = (item: TrayItem) => BarButton({
   className: 'tray-item',
   tooltipMarkup: item.bind('tooltip_markup'),
   child: Widget.Icon({ icon: item.bind('icon') }),
+  attribute: {
+    openMenu: self => item.menu?.popup_at_widget(
+      self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
+  },
+  onPrimaryClick: self => self.attribute.openMenu(self),
+  onSecondaryClick: self => self.attribute.openMenu(self),
   setup(self) {
     const menu = item.menu
     if (!menu) return
@@ -22,8 +28,9 @@ const Item = (item: TrayItem) => BarButton({
 
     if (id) self.connect('destroy', () => item.menu?.disconnect(id))
   },
-  onPrimaryClick: self => item.menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
-  onSecondaryClick: self => item.menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null),
 })
 
-export default Widget.Box().bind('children', systemtray, 'items', items => items.filter(({ id }) => !ignore.value.includes(id)).map(Item))
+export default Widget.Box().bind(
+  'children', systemtray, 'items',
+  items => items.filter(({ id }) => !ignore.value.includes(id)).map(Item)
+)

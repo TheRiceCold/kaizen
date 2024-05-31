@@ -4,7 +4,7 @@
   .side-items
     @include floating-widget
     margin: 0 calc($spacing * 1.25)
-    padding: calc($padding * 1.5) calc($padding * 2)
+    padding: calc($padding * 1.5) calc($padding * 2.5)
     border: 1px solid transparentize($primary-bg, 0.5)
     margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
 
@@ -15,7 +15,7 @@
       &:hover, &:active, &.on, &.active, &:checked
         color: $bg
         background-color: $primary-bg
-      &.launcher-button 
+      &.launcher-button
         padding: 0 calc($padding * 0.5)
         label
           font-size: 1.25em

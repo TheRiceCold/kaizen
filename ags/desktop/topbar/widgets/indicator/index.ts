@@ -12,7 +12,8 @@ const stack = Stack
 const audio = await Service.import('audio')
 const mpris = await Service.import('mpris')
 
-function reveal(value: boolean) {
+function reveal(show: string, value: boolean) {
+  if (show) stack.shown = show
   revealer.revealChild = value
   showWidget.indicator.value = value
   revealer.parent.toggleClassName('show-border', value)
@@ -27,13 +28,11 @@ function revealTimeout(timeout: number = 1000) {
     count--
     if (count !== 0) return
 
-    if (screenTools.isRecording) {
-      stack.shown = 'recorder'
-      reveal(true)
-    } else if (player) {
-      stack.shown = 'playing'
-      reveal(true)
-    } else reveal(false)
+    if (screenTools.isRecording)
+      reveal('recorder', true)
+    else if (player)
+      reveal('playing', true)
+    else reveal('', false)
   })
 }
 
@@ -41,8 +40,7 @@ function indicatorUpdate(type, value) {
   const item = stack.children[type]
   item.children = IconLabel(type, value)
   item.hpack = 'center'
-  stack.shown = type
-  reveal(true)
+  reveal(type, true)
   revealTimeout()
 }
 
