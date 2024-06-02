@@ -1,4 +1,3 @@
-import keys from 'keys'
 import icons from 'data/icons'
 
 class WeatherService extends Service {
@@ -22,6 +21,7 @@ class WeatherService extends Service {
   _weather_data = {}
   _current_condition = {}
   _url = 'http://wttr.in/?format=j1'
+  _forecast_url = 'https://api.open-meteo.com/v1/forecast?'
   _decoder = new TextDecoder()
 
   get icon() { return this._icon }
@@ -44,7 +44,6 @@ class WeatherService extends Service {
 
       const area = data['nearest_area'][0]
       const region = area['region'][0]['value']
-      const location = `${area['latitude']},${area['longitude']}`
 
       const hourly = data['weather'][0]['hourly']
       const astronomy = data['weather'][0]['astronomy'][0]
@@ -63,10 +62,19 @@ class WeatherService extends Service {
       this.updateProperty('icon', getIcon(currentCondition['weatherCode']))
       this.updateProperty('hourly_icons', hourly.map(hour => getIcon(hour['weatherCode'])))
 
-      const getForecast = await Utils.fetch(`http://api.weatherapi.com/v1/forecast.json?key=${keys['WEATHER_API_KEY']}&q=${location}&days=7`)
-      const forecastData = await getForecast.json()
-      this.updateProperty('forecast_days', forecastData['forecast']['forecastday'].map(forecast => forecast.day))
-
+      const forecastDaily = 'weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min'
+      const forecastHourly = 'temperature_2m,relative_humidity_2m,wind_speed_10m'
+      // DOCS: https://open-meteo.com/en/docs
+      const getForecast = await Utils.fetch(
+        `${this._forecast_url}latitude=${area['latitude']}&longitude=${area['longitude']}&daily=${forecastDaily}&hourly=${forecastHourly}`
+      )
+      const { daily }= await getForecast.json()
+      this.updateProperty('forecast_days', daily['time'].map((time, index) => ({
+        day: new Date(time).getDay(),
+        icon: getIcon(daily['weather_code'][index]),
+        temp: (daily['temperature_2m_max'][index] + daily['temperature_2m_min'][index]) / 2,
+        feelsLike: (daily['apparent_temperature_max'][index] + daily['apparent_temperature_min'][index]) / 2,
+      })))
     } catch (err) { logError(err) }
   }
 }
