@@ -1,13 +1,13 @@
 import Calendar from './calendar'
-import weather from './weather'
+import Weather from './weather'
 import MenuRevealer from '../MenuRevealer'
 
 import options from 'options'
 
 export const activeStack = Variable('calendar')
 const stackItems = [
-  { name: 'calendar', content: Calendar() },
-  { name: 'weather', content: weather },
+  { name: 'calendar', content: Calendar },
+  { name: 'weather', content: Weather },
 ]
 
 const Stack = Widget.Stack({

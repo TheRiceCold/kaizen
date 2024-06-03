@@ -7,20 +7,20 @@ const { Gio, GLib, Gtk, GtkSource } = imports.gi
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`
 const USERNAME = GLib.get_user_name()
 
-function loadCustomColorScheme(filePath) {
-  const file = Gio.File.new_for_path(filePath)
-  const [success] = file.load_contents(null)
+// function loadCustomColorScheme(filePath) {
+//   const file = Gio.File.new_for_path(filePath)
+//   const [success] = file.load_contents(null)
 
-  if (!success) {
-    logError('Failed to load the XML file.')
-    return
-  }
+//   if (!success) {
+//     logError('Failed to load the XML file.')
+//     return
+//   }
 
-  // Parse the XML content and set the Style Scheme
-  const schemeManager = GtkSource.StyleSchemeManager.get_default()
-  schemeManager.append_search_path(file.get_parent().get_path())
-}
-loadCustomColorScheme(`${App.configDir}/assets/themes/sourceviewtheme.xml`)
+//   // Parse the XML content and set the Style Scheme
+//   const schemeManager = GtkSource.StyleSchemeManager.get_default()
+//   schemeManager.append_search_path(file.get_parent().get_path())
+// }
+// loadCustomColorScheme(`${App.configDir}/assets/themes/sourceviewtheme.xml`)
 
 function substituteLang(str) {
   const subs = [
@@ -58,9 +58,9 @@ const TextBlock = (content = '') => Widget.Label({
   className: 'sidebar-chat-txtblock sidebar-chat-txt',
 })
 
-Utils.execAsync(['bash', '-c', `rm ${LATEX_DIR}/*`])
+Utils.execAsync(['bash', '-c', `rm -rf ${LATEX_DIR}/*`])
   .then(() => Utils.execAsync(['bash', '-c', `mkdir -p ${LATEX_DIR}`]))
-  .catch(() => { })
+  .catch(print)
 
 const Latex = (content = '') => {
   const latexViewArea = Widget.Box({
@@ -296,5 +296,6 @@ export const SystemMessage = (content, commandName) => {
       messageContentBox,
     )
   )
+
   return thisMessage
 }

@@ -20,9 +20,9 @@ export default items => {
     })
 
     return Widget.EventBox({
+      onHover() { Stack.shown = 'label' },
+      onHoverLost() { Stack.shown = 'value' },
       child: Widget.Box([ Progress, Stack ]),
-      onHover: () => Stack.shown = 'label',
-      onHoverLost: () => Stack.shown = 'value',
     })
   }
 

@@ -1,4 +1,4 @@
-// import AiTools from './ai-tools'
+import AiTools from './ai-tools'
 import DateMenu from './datemenu'
 import QuickSettings from './quicksettings'
 
@@ -17,6 +17,6 @@ const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
 })
 
 export default [
-  // Sidemenu('left', AiTools),
+  Sidemenu('left', AiTools),
   Sidemenu('right', QuickSettings, DateMenu),
 ]

@@ -14,7 +14,7 @@ export const ConfigToggle = ({
 }) => {
   const enabled = Variable(initValue)
   const toggleIcon = Widget.Label({
-    label: `${enabled.value ? 'check' : ''}`,
+    label: `${enabled.value ? '' : ''}`,
   }).hook(enabled, self => {
     self.toggleClassName('switch-fg-toggling-false', false)
     if (!enabled.value) {
@@ -22,7 +22,7 @@ export const ConfigToggle = ({
       self.toggleClassName('txt-poof', true)
     }
     else Utils.timeout(1, () => {
-      toggleIcon.label = 'check'
+      toggleIcon.label = ''
       toggleIcon.toggleClassName('txt-poof', false)
     })
   })
@@ -46,7 +46,7 @@ export const ConfigToggle = ({
     tooltipText: desc,
     className: 'configtoggle-box',
     children: [
-      (icon !== undefined ? Widget.Icon(icon) : null),
+      (icon !== undefined ? Widget.Label(icon) : null),
       (name !== undefined ? Widget.Label(name) : null),
       expandWidget ? Widget.Box({ hexpand: true }) : null,
       toggleButton,
@@ -94,10 +94,10 @@ export const ConfigSegmentedSelection = ({
     className: 'segment-container',
     children: options.map((option, id) => {
       const selectedIcon = Widget.Revealer({
+        child: Widget.Label(''),
         transition: 'slide_right',
         revealChild: id == initIndex,
         transitionDuration: transition,
-        child: Widget.Icon('check-symbolic'),
       })
 
       return Widget.Button({

@@ -10,7 +10,7 @@ const { Gtk } = imports.gi
 
 const ProviderSwitcher = () => {
   const ProviderChoice = (id, provider) => {
-    const providerSelected = Widget.Icon({ icon: 'check-symbolic' })
+    const providerSelected = Widget.Label('')
       .hook(GPTService, self => self.toggleClassName('invisible', GPTService.providerID !== id), 'providerChanged')
 
     return Widget.Button({
@@ -34,7 +34,7 @@ const ProviderSwitcher = () => {
     cursor: 'pointer',
     tooltipText: 'Select ChatGPT-compatible API provider',
     child: Widget.Box([
-      Widget.Icon('cloud-symbolic'),
+      Widget.Label(''),
       Widget.Label({
         xalign: 0,
         hexpand: true,
