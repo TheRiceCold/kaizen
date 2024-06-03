@@ -7,7 +7,7 @@ import options from 'options'
 export const activeStack = Variable('calendar')
 const stackItems = [
   { name: 'calendar', content: Calendar() },
-  { name: 'weather', content: child: weather },
+  { name: 'weather', content: weather },
 ]
 
 const Stack = Widget.Stack({
