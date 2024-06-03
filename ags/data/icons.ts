@@ -128,61 +128,36 @@ export default {
     dark: 'dark-mode-symbolic',
     light: 'light-mode-symbolic'
   },
-  weather: {
-    day: {
-      '113': 'sunny',
-      '116': 'partly-cloudy',
-      '119': 'cloudy',
-      '122': 'very-cloudy',
-      '143': 'fog',
-      '176': 'light-showers',
-      '179': 'light-sleet-showers',
-      '182': 'light-sleet',
-      '185': 'light-sleet',
-      '200': 'thundery-showers',
-      '227': 'light-snow',
-      '230': 'heavy-snow',
-      '248': 'fog',
-      '260': 'fog',
-      '263': 'light-showers',
-      '266': 'light-rain',
-      '281': 'light-sleet',
-      '284': 'light-sleet',
-      '293': 'light-rain',
-      '296': 'light-rain',
-      '299': '\uf019', //"HeavyShowers",
-      '302': '\uf019', //"HeavyRain",
-      '305': '\uf019', //"HeavyShowers",
-      '308': '\uf019', //"HeavyRain",
-      '311': 'light-sleet',
-      '314': 'light-sleet',
-      '317': 'light-sleet',
-      '320': 'light-snow',
-      '323': 'light-snow-showers',
-      '326': 'light-snow-showers',
-      '329': 'heavy-snow',
-      '332': 'heavy-snow',
-      '335': 'heavy-snow-showers',
-      '338': 'heavy-snow',
-      '350': 'light-sleet',
-      '353': 'light-showers',
-      '356': '\uf019', //"HeavyShowers",
-      '359': '\uf019', //"HeavyRain",
-      '362': 'light-sleet-showers',
-      '365': 'light-sleet-showers',
-      '368': '\uf017', //"LightSnowShowers",
-      '371': '\uf017', //"HeavySnowShowers",
-      '374': '\uf0b5', //"LightSleetShowers",
-      '377': '\uf0b5', //"LightSleet",
-      '386': '\uf01e', //"ThunderyShowers",
-      '389': '\uf01e', //"ThunderyHeavyRain",
-      '392': '\uf01e', //"ThunderySnowShowers",
-      '395': '\uf01b', //"HeavySnowShowers",
-    },
-    night: {
-      '113': '\uf02e', // Night
-      '116': 'night-partly-cloudy',
-      '119': 'night-partly-cloudy',
-    }
+  weatherCodes: {
+    0: { day: 'sunny', night: 'clear' },
+    1: { day: 'sunny', night: 'clear' },
+    2: { day: 'partly_cloudy', night: 'partly_cloudy_night' },
+    3: { day: 'cloudy', night: 'cloudy' },
+    45:{ day: 'foggy', night: 'foggy_night' },
+    48: { day: 'foggy', night: 'foggy_night' },
+    51: { day: 'drizzle', night: 'drizzle' }, // Light
+    53: { day: 'drizzle', night: 'drizzle' },
+    55: { day: 'drizzle', night: 'drizzle' }, // Heavy
+    56: { day: 'drizzle', night: 'drizzle' }, // Light Frezzing
+    57: { day: 'drizzle', night: 'drizzle' }, // Frezzing
+    61: { day: 'rain', night: 'rain' }, // Light
+    63: { day: 'rain', night: 'rain' },
+    65: { day: 'rain', night: 'rain' }, // Heavy
+    66: { day: 'rain', night: 'rain' }, // Light Freezing
+    67: { day: 'rain', night: 'rain' }, // Freezing
+    71: { day: 'snow', night: 'snow' }, // Light
+    73: { day: 'snow', night: 'snow' },
+    75: { day: 'snow', night: 'snow' }, // Heavy
+    77: { day: 'snow', night: 'snow' }, // Grains
+    80: { day: 'showers', night: 'showers' }, // Light
+    81: { day: 'showers', night: 'showers' },
+    82: { day: 'heavy_showers', night: 'heavy_showers' },
+    85: { day: 'snow', night: 'snow' }, // Light Snow Showers
+    86: { day: 'snow', night: 'snow', }, // Snow Showers
+    95: { day: 'thunderstorm', night: 'thunderstorm_night' },
+    96: { day: 'thunderstorm', night: 'thunderstorm_night' }, // Light With Hail
+    99: { day: 'thunderstorm', night: 'thunderstorm_night' }, // With Hail
+    113: { day: 'sunny', night: 'clear' },
+    176: { day: 'showers', night: 'showers' },
   }
 }
