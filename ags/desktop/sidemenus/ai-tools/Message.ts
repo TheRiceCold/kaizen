@@ -3,7 +3,7 @@ import md2pango from 'misc/md2pango'
 import options from 'options'
 import { sh } from 'lib/utils'
 
-const { Gio, GLib, Gtk, GtkSource } = imports.gi
+const { /* Gio, */ GLib, Gtk, GtkSource } = imports.gi
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`
 const USERNAME = GLib.get_user_name()
 

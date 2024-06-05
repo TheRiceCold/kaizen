@@ -135,11 +135,11 @@ export default {
     3: { day: 'cloudy', night: 'cloudy' },
     45:{ day: 'foggy', night: 'foggy_night' },
     48: { day: 'foggy', night: 'foggy_night' },
-    51: { day: 'drizzle', night: 'drizzle' }, // Light
-    53: { day: 'drizzle', night: 'drizzle' },
-    55: { day: 'drizzle', night: 'drizzle' }, // Heavy
-    56: { day: 'drizzle', night: 'drizzle' }, // Light Frezzing
-    57: { day: 'drizzle', night: 'drizzle' }, // Frezzing
+    51: { day: 'drizzle', night: 'drizzle_night' }, // Light
+    53: { day: 'drizzle', night: 'drizzle_night' },
+    55: { day: 'heavy_drizzle', night: 'heavy_drizzle_night' }, // Heavy
+    56: { day: 'drizzle', night: 'drizzle_night' }, // Light Frezzing
+    57: { day: 'drizzle', night: 'drizzle_night' }, // Frezzing
     61: { day: 'rain', night: 'rain' }, // Light
     63: { day: 'rain', night: 'rain' },
     65: { day: 'rain', night: 'rain' }, // Heavy
