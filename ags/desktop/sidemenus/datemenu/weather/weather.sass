@@ -1,33 +1,49 @@
 window.sideright .datemenu
   .current-condition
+    @include floating_widget
+    padding: $padding calc($padding * 6)
+    .details
+      padding: 0 $padding
     label
-      font-size: 1.15em
+      font-weight: 500
+    .region
+      font-size: 1.75em
+      margin-bottom: calc($spacing * 0.5)
     image
-      font-size: 6em
+      font-size: 4em
       padding: $padding
       + label
+        font-size: 2.5em
         font-weight: 600
-        font-size: 1.5em
-    label
-      padding: $padding 0
-    .region
-      font-size: 1.25em
+    .details label
+      padding: calc($padding * 0.75)
 
   .forecast
-    margin-top: calc($spacing * 1.5)
+    label
+      font-weight: 500
+    .title
+      font-size: 1.15em
+      margin: 0 calc($spacing * 2) calc($spacing * 0.5)
+    &:first-child
+      label:first-child
+        font-size: 1.25em
+      image
+        font-size: 2.5em
+      button
+        padding: calc($padding * 0.25) $padding
     button
       @include button
       border-radius: 0
-      padding: $padding calc($padding * 2)
       background-color: transparent
-    label
-      font-size: 1.15em
-      margin-bottom: calc($spacing * 0.75)
+      border-left: 1px solid transparentize($fg, 0.75)
+      padding: calc($padding * 0.25) calc($padding * 1.5)
       &:first-child
-        font-weight: 500
+        border-left: 0
+    label
+      font-size: 1em
+      margin-bottom: calc($spacing * 0.5)
+      &:first-child
+        font-size: 1.15em
     image
       font-size: 2.25em
       margin-bottom: $spacing
-      padding: calc($padding * 2) calc($padding * 0.25)
-      border-top: 1px solid transparentize($fg, 0.5)
-      border-bottom: 1px solid transparentize($fg, 0.5)

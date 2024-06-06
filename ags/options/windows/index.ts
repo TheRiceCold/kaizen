@@ -21,6 +21,9 @@ export default {
     substitutes: opt({
       'vesktop': 'discord',
       'org.gnome.Nautilus': 'files',
+      '.blueman-manager-wrapped': 'blueman',
+      '.blueman-sendto-wrapped': 'blueman-send',
+      '.blueman-adapters-wrapped': 'blueman-adapters',
     })
   },
 
