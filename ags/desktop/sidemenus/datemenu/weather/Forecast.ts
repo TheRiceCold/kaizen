@@ -28,18 +28,23 @@ const Daily = Widget.Box({
   )
 })
 
-const Hourly = Widget.Box(
+/* HACK:
+  * IDK why but I f*cking hate adding eventbox everytime a
+  * widget to forces itself to show up first in the stack.
+*/
+const Hourly = Widget.EventBox({ child: Widget.Box(
   { className: 'forecast', vertical: true, hexpand: true },
   Widget.Box(
     { className: 'title' },
     Widget.EventBox({
       cursor: 'pointer',
-      child: Widget.Label('Go back'),
+      child: Widget.Label('Back to Daily Forecast'),
       onPrimaryClick() { Stack.shown = 'daily' }
     }),
     Widget.Label({
       xalign: 1,
       hexpand: true,
+      className: 'date',
       label: Utils.merge([
         CurrentDay.bind(),
         Weather.bind('hourly_forecast')
@@ -67,7 +72,7 @@ const Hourly = Widget.Box(
         })) : [])
     })
   })
-)
+) })
 
 const Stack = Widget.Stack({
   transition: 'slide_up_down',
