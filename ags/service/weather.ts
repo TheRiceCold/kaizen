@@ -7,7 +7,8 @@ class WeatherService extends Service {
         icon: ['string'],
         region: ['string'],
         astronomy: ['string'],
-        forecast_days: ['array'],
+        'daily-forecast': ['array'],
+        'hourly-forecast': ['array'],
         'weather-data': ['jsobject'],
         'current-condition': ['jsobject'],
       })
@@ -17,8 +18,9 @@ class WeatherService extends Service {
   _icon = ''
   _region = ''
   _astronomy = ''
-  _forecast_days = []
   _weather_data = {}
+  _daily_forecast = []
+  _hourly_forecast = []
   _current_condition = {}
   _decoder = new TextDecoder()
   _url = 'http://wttr.in/?format=j1'
@@ -28,7 +30,8 @@ class WeatherService extends Service {
   get region() { return this._region }
   get astronomy() { return this._astronomy }
   get weather_data() { return this._weather_data }
-  get forecast_days() { return this._forecast_days }
+  get daily_forecast() { return this._daily_forecast }
+  get hourly_forecast() { return this._hourly_forecast }
   get current_condition() { return this._current_condition }
 
   constructor() {
@@ -57,23 +60,50 @@ class WeatherService extends Service {
       const sunsetHour = astronomy['sunset'].split(':')[0]
       const sunriseHour = astronomy['sunrise'].split(':')[0]
       const timeOfDay = curHour >= sunriseHour && curHour <= sunsetHour + 12 ? 'day' : 'night'
-      const getIcon = code => icons.weatherCodes[code][timeOfDay]
+      const getIcon = code => {
+        // console.dir(code)
+        return icons.weatherCodes[code][timeOfDay]
+      }
 
       this.updateProperty('icon', getIcon(currentCondition['weatherCode']))
 
-      const forecastHourly = 'temperature_2m,relative_humidity_2m,wind_speed_10m'
-      const forecastDaily = 'weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min'
+      const forecastHourly = 'weather_code,temperature_2m,relative_humidity_2m,wind_speed_10m,apparent_temperature'
+      const forecastDaily = 'weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,sunrise,sunset'
       // DOCS: https://open-meteo.com/en/docs
       const getForecast = await Utils.fetch(
         `${this._forecast_url}latitude=${area['latitude']}&longitude=${area['longitude']}&daily=${forecastDaily}&hourly=${forecastHourly}`
       )
-      const { daily }= await getForecast.json()
-      this.updateProperty('forecast_days', daily['time'].map((time, index) => ({
-        day: new Date(time).getDay(),
-        icon: getIcon(daily['weather_code'][index]),
-        temp: (daily['temperature_2m_max'][index] + daily['temperature_2m_min'][index]) / 2,
-        feelsLike: (daily['apparent_temperature_max'][index] + daily['apparent_temperature_min'][index]) / 2,
-      })))
+      const { daily, hourly } = await getForecast.json()
+      this.updateProperty('daily_forecast', daily['time'].map(
+        (time, index) => ({
+          day: new Date(time).getDay(),
+          min: daily['temperature_2m_min'][index],
+          max: daily['temperature_2m_max'][index],
+          icon: getIcon(daily['weather_code'][index]),
+          windSpeed: daily['wind_speed_10m_max'][index],
+          sunrise: daily['sunrise'][index],
+          sunset: daily['sunset'][index],
+        })
+      ))
+
+      const hourlyForecast = [], hoursByDay = []
+      for (let i = 0; i < hourly['time'].length; i++) {
+        hoursByDay.push({
+          time: hourly['time'][i],
+          temp: hourly['temperature_2m'][i],
+          windSpeed: hourly['wind_speed_10m'][i],
+          icon: getIcon(hourly['weather_code'][i]),
+          humidity: hourly['relative_humidity_2m'][i],
+          feelsLike: hourly['apparent_temperature'][i],
+        })
+
+        if (hourly['time'][i].includes('23:00')) {
+          hourlyForecast.push([...hoursByDay])
+          hoursByDay = []
+        }
+      }
+
+      this.updateProperty('hourly_forecast', hourlyForecast)
     } catch (err) { logError(err) }
   }
 }
