@@ -158,6 +158,14 @@ export default {
     96: { day: 'thunderstorm', night: 'thunderstorm_night' }, // Light With Hail
     99: { day: 'thunderstorm', night: 'thunderstorm_night' }, // With Hail
     113: { day: 'sunny', night: 'clear' },
+    116: { day: 'partly_cloudy', night: 'partly_cloudy_night' },
+    119: { day: 'cloudy', night: 'cloudy' },
+    122: { day: 'cloudy', night: 'cloudy' },
+    143:{ day: 'foggy', night: 'foggy_night' },
     176: { day: 'showers', night: 'showers' },
+    179: { day: 'showers', night: 'showers' }, // Light Sleet Showers
+    200: { day: 'thunderstorm', night: 'thunderstorm_night' }, // Thundery Showers
+    353: { day: 'showers', night: 'showers' }, // Light
+    356: { day: 'heavy_showers', night: 'heavy_showers' },
   }
 }

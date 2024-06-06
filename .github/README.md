@@ -1,4 +1,4 @@
-###### *<div align=right><sub>Last nix update: may 29, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: June 6, 2024</sub></div>*
 
 <h1 align=center>
   <img src='https://github.com/thericecold/kaizen/blob/main/.github/logo.png' width='150px'/>

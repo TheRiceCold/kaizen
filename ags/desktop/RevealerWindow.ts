@@ -132,8 +132,5 @@ export default ({
   keymode: 'on-demand',
   anchor: ['top', 'bottom', 'right', 'left'],
   child: Layout(name, child, transition)[layout](),
-  setup(self) {
-    self.keybind('Escape', () => App.closeWindow(name))
-  },
   ...props,
-})
+}).keybind('Escape', () => App.closeWindow(name))

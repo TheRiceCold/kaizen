@@ -9,8 +9,7 @@ const clock = (interval: number = 5000) => Variable(
 
 const cpu = Variable(0, {
   poll: [
-    2000, 'top -bn 2',
-    out => divide([100, out.split('\n')
+    2000, 'top -bn 2', out => divide([100, out.split('\n')
       .find((line: string) => line.includes('Cpu(s)'))
       .split(/\s+/)[1]
       .replace(',', '.')])
@@ -33,15 +32,15 @@ const showWidget = {
   player: Variable(false),
   color: Variable(false),
 
-
   // BOTTOM
   dock: Variable(false),
   keyboard: Variable(false),
 
   // SIDE
-  datemenu: Variable(false),
-  'ai-tools': Variable(false),
   quicksettings: Variable(false),
+  datemenu: Variable(false),
+
+  'ai-tools': Variable(false),
 }
 
 export {
