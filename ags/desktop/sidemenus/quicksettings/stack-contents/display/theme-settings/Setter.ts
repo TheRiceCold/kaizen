@@ -49,12 +49,12 @@ export default function Setter<T>({
       },
     })
     case 'float': case 'object': return Widget.Entry({
-      onAccept: self => opt.value = JSON.parse(self.text || ''),
-      setup: self => self.hook(opt, () => self.text = JSON.stringify(opt.value)),
+      onAccept(self) { opt.value = JSON.parse(self.text || '') },
+      setup(self) { self.hook(opt, () => self.text = JSON.stringify(opt.value)) },
     })
     case 'string': return Widget.Entry({
-      onAccept: self => opt.value = self.text as T,
-      setup: self => self.hook(opt, () => self.text = opt.value as string),
+      onAccept(self) { opt.value = self.text as T },
+      setup(self) { self.hook(opt, () => self.text = opt.value as string) },
     })
     case 'enum': return EnumSetter(opt as unknown as Opt<string>, enums!)
     case 'boolean': return Widget.ToggleButton({ cursor: 'pointer' })
@@ -67,7 +67,7 @@ export default function Setter<T>({
 
     case 'img': return Widget.FileChooserButton({
       cursor: 'pointer',
-      onFileSet: ({ uri }) => { opt.value = uri!.replace('file://', '') as T}
+      onFileSet({ uri }) { opt.value = uri!.replace('file://', '') as T }
     })
 
     case 'font': return Widget.FontButton({

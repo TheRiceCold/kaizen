@@ -1,5 +1,5 @@
 import { Item } from '..'
-import ListRevealer from './ListRevealer'
+import ListRevealer from '../../../ListRevealer'
 
 import options from 'options'
 

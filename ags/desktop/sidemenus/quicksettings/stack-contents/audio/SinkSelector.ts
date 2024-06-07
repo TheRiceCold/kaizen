@@ -1,4 +1,5 @@
 import { type Stream } from 'types/service/audio'
+import ListRevealer from '../ListRevealer'
 
 import icons from 'data/icons'
 import { audioIconSub } from 'lib/utils'
@@ -32,15 +33,10 @@ const SinkSelector = (type: Type) => Widget.Box({ vertical: true })
     self.children = Array.from(audio[`${type}s`].values()).map(SinkItem(type))
   }, 'stream-removed')
 
-export default Widget.Box(
+export default ListRevealer('Sink Selector', Widget.Box(
   { vertical: true },
-  Widget.Label({
-    xalign: 0,
-    className: 'title',
-    label: 'Sink Selector',
-  }),
   Widget.Label({ className: 'sub-title', label: 'Speakers', xalign: 0 }),
   SinkSelector('speaker'),
   Widget.Label({ className: 'sub-title', label: 'Microphones', xalign: 0 }),
   SinkSelector('microphone'),
-)
+))

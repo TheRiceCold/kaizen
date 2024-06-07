@@ -2,19 +2,10 @@ window.sideright .quicksettings .stack-list
   .display-options .theme-settings
     button
       @include button
-      padding: $padding calc($padding * 1.5) 
-      &.reset
-        margin-left: $spacing
+      padding: $padding
+      margin-left: $spacing
     entry
       background: transparentize($bg, 0.5)
-      + button
-        margin: 0 2px 
-        border-radius: calc($radius * 0.25)
-        background: transparentize($bg, 0.5)
-        + button
-          border-radius: calc($radius * 0.25)
-          background: transparentize($bg, 0.5)
-
     .title
       margin: $spacing
       margin-bottom: calc($spacing * 0.5)

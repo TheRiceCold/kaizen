@@ -9,7 +9,7 @@ export default (label: string, content) => {
   })
 
   return Widget.Box(
-    { vertical: true },
+    { vertical: true, className: 'list-revealer' },
     Widget.Button({
       cursor: 'pointer',
       className: 'list-button',

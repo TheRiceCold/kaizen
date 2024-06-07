@@ -1,4 +1,4 @@
-import ListRevealer from './ListRevealer'
+import ListRevealer from '../../../ListRevealer'
 
 const Theme = (img: string, label: string) => Widget.Button({
   cursor: 'pointer',
