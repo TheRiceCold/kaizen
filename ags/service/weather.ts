@@ -60,10 +60,7 @@ class WeatherService extends Service {
       const sunsetHour = astronomy['sunset'].split(':')[0]
       const sunriseHour = astronomy['sunrise'].split(':')[0]
       const timeOfDay = curHour >= sunriseHour && curHour <= sunsetHour + 12 ? 'day' : 'night'
-      const getIcon = code => {
-        // console.dir(code)
-        return icons.weatherCodes[code][timeOfDay]
-      }
+      const getIcon = (code, time = '') => icons.weatherCodes[code][time ? time : timeOfDay]
 
       this.updateProperty('icon', getIcon(currentCondition['weatherCode']))
 
@@ -74,32 +71,53 @@ class WeatherService extends Service {
         `${this._forecast_url}latitude=${area['latitude']}&longitude=${area['longitude']}&daily=${forecastDaily}&hourly=${forecastHourly}`
       )
       const { daily, hourly } = await getForecast.json()
+
       this.updateProperty('daily_forecast', daily['time'].map(
-        (time, index) => ({
-          day: new Date(time).getDay(),
-          min: daily['temperature_2m_min'][index],
-          max: daily['temperature_2m_max'][index],
-          icon: getIcon(daily['weather_code'][index]),
-          windSpeed: daily['wind_speed_10m_max'][index],
-          sunrise: daily['sunrise'][index],
-          sunset: daily['sunset'][index],
-        })
+        (time, index) => {
+          /* NOTE:
+            * I tried adding the right timezone paramater but I'm still not sure
+            * why I have to subtract 16(sunrise) and 4(sunset) to get accurate hour
+          */
+          function getSun(type, index, subtract = 16) {
+            const hour = Number(daily['sun'+type][index].slice(11, 16).split(':')[0]) - subtract
+            const min = daily['sun'+type][index].slice(14, 16)
+            return hour+':'+min
+          }
+          return ({
+            sunrise: getSun('rise', index),
+            sunset: getSun('set', index, 4),
+            day: new Date(time).getDay(),
+            min: daily['temperature_2m_min'][index],
+            max: daily['temperature_2m_max'][index],
+            windSpeed: daily['wind_speed_10m_max'][index],
+            icon: getIcon(daily['weather_code'][index]),
+          })
+        }
       ))
 
-      const hourlyForecast = [], hoursByDay = []
-      for (let i = 0; i < hourly['time'].length; i++) {
+      let hoursByDay = []
+      const hourlyForecast = []
+      for (let day = 0, i = 0; i < hourly['time'].length; i++) {
+        const iconType = () => {
+          const hour = Number(hourly['time'][i].slice(11, 13))
+          const sunrise = Number(daily['sunrise'][day].slice(11, 13)) - 16
+          const sunset = Number(daily['sunset'][day].slice(11, 13)) + 8
+          return (hour >= sunrise && hour <= sunset) ? 'day' : 'night'
+        }
+
         hoursByDay.push({
           time: hourly['time'][i],
           temp: hourly['temperature_2m'][i],
           windSpeed: hourly['wind_speed_10m'][i],
-          icon: getIcon(hourly['weather_code'][i]),
           humidity: hourly['relative_humidity_2m'][i],
           feelsLike: hourly['apparent_temperature'][i],
+          icon: getIcon(hourly['weather_code'][i], iconType()),
         })
 
         if (hourly['time'][i].includes('23:00')) {
           hourlyForecast.push([...hoursByDay])
           hoursByDay = []
+          day++
         }
       }
 

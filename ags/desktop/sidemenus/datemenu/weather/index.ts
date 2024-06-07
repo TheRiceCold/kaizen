@@ -26,7 +26,7 @@ const CurrentCondition = Widget.Box(
       .bind('label', Weather, 'current_condition', getDescription)
       .bind('css', Weather, 'current_condition', condition => {
         const desc = getDescription(condition)
-        return desc.length < 16 ? 'font-size: 1.25em;' : 'font-size: 1.5em;'
+        return desc.length < 16 ? 'font-size: 1.15em;' : 'font-size: 1.25em;'
       })
   ),
   Widget.Box(
@@ -37,9 +37,12 @@ const CurrentCondition = Widget.Box(
       vpack: 'center',
       className: 'details'
     },
-    Widget.Label({ label: getCurrentCondition('', 'winddir16Point') }),
     Widget.Label({ label: getCurrentCondition('', 'humidity', '%') }),
     Widget.Label({ label: getCurrentCondition('', 'windspeedKmph', ' km/h') }),
+    Widget.Label().bind(
+      'label', Weather, 'current_condition',
+      c => c ? ` ${c['winddirDegree']}° (${c['winddir16Point']})` : ''
+    ),
     Widget.Label({ label: getAstronomy('sunrise') }),
     Widget.Label({ label: getAstronomy('sunset') }),
   ),

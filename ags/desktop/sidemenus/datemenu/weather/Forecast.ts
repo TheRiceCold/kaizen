@@ -19,10 +19,10 @@ const Daily = Widget.Box({
         Widget.Label({ label: weekdays[day.day].substr(0, 3) }),
         Widget.Icon(day.icon),
         Widget.Label(': '+day.windSpeed),
+        Widget.Label(` ${day.sunrise}`),
+        Widget.Label(` ${day.sunset}`),
         Widget.Label(`min: ${Math.round(day.min)}°`),
         Widget.Label(`max: ${Math.round(day.max)}°`),
-        // Widget.Label(` ${day.sunrise.slice(11, 16)}`),
-        // Widget.Label(` ${day.sunset.slice(11, 16)}`),
       )
     }))
   )

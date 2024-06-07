@@ -165,6 +165,10 @@ export default {
     176: { day: 'showers', night: 'showers' },
     179: { day: 'showers', night: 'showers' }, // Light Sleet Showers
     200: { day: 'thunderstorm', night: 'thunderstorm_night' }, // Thundery Showers
+    263: { day: 'showers', night: 'showers' }, // Light
+    266: { day: 'rain', night: 'rain' }, // Light
+    293: { day: 'rain', night: 'rain' }, // Light
+    296: { day: 'rain', night: 'rain' }, // Light
     353: { day: 'showers', night: 'showers' }, // Light
     356: { day: 'heavy_showers', night: 'heavy_showers' },
   }
