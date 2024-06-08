@@ -7,7 +7,6 @@ const { Gio, GLib, Soup } = imports.gi
 // We're using many models to not be restricted to 3 messages per minute.
 // The whole chat will be sent every request anyway.
 Utils.exec(`mkdir -p ${GLib.get_user_cache_dir()}/ags/user/ai`)
-const CHAT_MODELS = ['gpt-3.5-turbo-1106', 'gpt-3.5-turbo', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo-0613']
 
 class GPTMessage extends Service {
   static {
@@ -82,18 +81,17 @@ class GPTService extends Service {
   _temperature = options.ai.defaultTemperature.value
   _currentProvider = options.ai.defaultGPTProvider.value
   _messages = []
-  _modelIndex = 0
   _key = ''
-  _key_file_location = `${GLib.get_user_cache_dir()}/ags/user/ai/${providers[this._currentProvider]['key_file']}`
-  _url = GLib.Uri.parse(providers[this._currentProvider]['base_url'], GLib.UriFlags.NONE)
+  _key_file_location = `${GLib.get_user_cache_dir()}/ags/user/ai/${providers[this._currentProvider].keyFile}`
+  _url = GLib.Uri.parse(providers[this._currentProvider].baseUrl, GLib.UriFlags.NONE)
 
   _decoder = new TextDecoder()
 
   _initChecks() {
-    this._key_file_location = `${GLib.get_user_cache_dir()}/ags/user/ai/${providers[this._currentProvider]['key_file']}`
+    this._key_file_location = `${GLib.get_user_cache_dir()}/ags/user/ai/${providers[this._currentProvider].keyFile}`
     if (fileExists(this._key_file_location)) this._key = Utils.readFile(this._key_file_location).trim()
     else this.emit('hasKey', false)
-    this._url = GLib.Uri.parse(providers[this._currentProvider]['base_url'], GLib.UriFlags.NONE)
+    this._url = GLib.Uri.parse(providers[this._currentProvider].baseUrl, GLib.UriFlags.NONE)
   }
 
   constructor() {
@@ -106,8 +104,8 @@ class GPTService extends Service {
     this.emit('initialized')
   }
 
-  get modelName() { return CHAT_MODELS[this._modelIndex] }
-  get getKeyUrl() { return providers[this._currentProvider]['key_get_url'] }
+  get modelName() { return providers[this._currentProvider].model }
+  get getKeyUrl() { return providers[this._currentProvider].keyGetUrl }
   get providerID() { return this._currentProvider }
   set providerID(value) {
     this._currentProvider = value
@@ -180,19 +178,12 @@ class GPTService extends Service {
   send(msg) {
     this._messages.push(new GPTMessage('user', msg, false, true))
     this.emit('newMsg', this._messages.length - 1)
-    const aiResponse = new GPTMessage('assistant', 'thinking...', true, false)
+    const aiResponse = new GPTMessage('assistant', '', true, false)
 
     const body = {
-      model: CHAT_MODELS[this._modelIndex],
-      messages: this._messages.map(msg => {
-        const m = {
-          role: msg.role,
-          content: msg.content
-        }
-        return m
-      }),
+      model: providers[this._currentProvider]['model'],
+      messages: this._messages.map(msg => ({ role: msg.role, content: msg.content })),
       temperature: this._temperature,
-      // temperature: 2, // <- Nuts
       stream: true,
     }
 

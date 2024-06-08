@@ -58,14 +58,10 @@ class GeminiMessage extends Service {
   set rawData(value) { this._rawData = value }
 
   get done() { return this._done }
-  set done(isDone) {
-    this._done = isDone; this.notify('done')
-  }
+  set done(isDone) { this._done = isDone; this.notify('done') }
 
   get role() { return this._role }
-  set role(role) {
-    this._role = role; this.emit('changed')
-  }
+  set role(role) { this._role = role; this.emit('changed') }
 
   get content() {
     return this._parts.map(part => part.text).join()
@@ -258,13 +254,7 @@ class GeminiService extends Service {
     const aiResponse = new GeminiMessage('model', 'thinking...', true, false)
 
     const body = {
-      contents: this._messages.map(msg => {
-        const m = {
-          role: msg.role,
-          parts: msg.parts
-        }
-        return m
-      }),
+      contents: this._messages.map(msg => ({ role: msg.role, parts: msg.parts })),
       safetySettings: this._safe ? [] : [
         // { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
         { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE', },
@@ -302,4 +292,3 @@ class GeminiService extends Service {
 }
 
 export default new GeminiService()
-

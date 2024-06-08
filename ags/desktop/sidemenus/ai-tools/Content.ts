@@ -17,7 +17,7 @@ export const stackItems = [
   {
     name: 'chatGPT',
     content: GPTView,
-    icon: 'openai-symbolic',
+    icon: 'gpt-symbolic',
     tooltipText: 'Assistant (GPTs)',
     placeholderText: 'Message the model...',
   }

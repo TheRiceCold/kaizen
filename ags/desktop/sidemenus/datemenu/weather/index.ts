@@ -1,4 +1,4 @@
-import Weather from 'service/weather'
+import Weather from 'service/api/weather'
 
 import Forecast from './Forecast'
 
