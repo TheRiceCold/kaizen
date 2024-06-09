@@ -1,15 +1,15 @@
 import GeminiService from 'service/api/gemini'
-import { markdownTest } from 'misc/md2pango'
+
 import { ChatMessage, SystemMessage } from '../Message'
 
-const MODEL_NAME = 'Gemini'
+import { markdownTest } from 'misc/md2pango'
 
 const ChatContent = Widget.Box({ vertical: true }).hook(
   GeminiService,
   (box, id) => {
     const message = GeminiService.messages[id]
     if (!message) return
-    box.add(ChatMessage(message, MODEL_NAME))
+    box.add(ChatMessage(message, 'Gemini'))
   },
   'newMsg',
 )
@@ -23,10 +23,10 @@ function clearChat() {
   }
 }
 
-export default (text) => {
+export default text => {
   if (text.length == 0) return
 
-  if (GeminiService.key.length == 0) {
+  if (GeminiService.key.length === 0) {
     GeminiService.key = text
     ChatContent.add(SystemMessage(`Key saved to\n\`${GeminiService.keyPath}\``, 'API Key'))
     text = ''
@@ -38,7 +38,8 @@ export default (text) => {
     else if (text.startsWith('/load')) {
       clearChat()
       GeminiService.loadHistory()
-    } else if (text.startsWith('/model'))
+    }
+    else if (text.startsWith('/model'))
       ChatContent.add(SystemMessage(`Currently using \`${GeminiService.modelName}\``, '/model'))
     else if (text.startsWith('/prompt')) {
       const firstSpaceIndex = text.indexOf(' ')
@@ -48,7 +49,7 @@ export default (text) => {
       else GeminiService.addMessage('user', prompt)
     } else if (text.startsWith('/key')) {
       const parts = text.split(' ')
-      if (parts.length == 1)
+      if (parts.length === 1)
         ChatContent.add(SystemMessage(`Key stored in:\n\`${GeminiService.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``, '/key'))
       else {
         GeminiService.key = parts[1]

@@ -17,16 +17,15 @@ const ChatSendButton = Widget.Button({
   cursor: 'pointer',
   className: 'chat-send',
   child: Widget.Icon(icons.ui.send),
-}).hook(currentTab, () => {
-  const buffer = ChatEntry.get_buffer()
-  const cmd = buffer.text
-  if (currentTab.value === 'gemini')
-    GeminiSendMessage(cmd)
-  else
-    GPTSendMessage(cmd)
-  buffer.set_text('', -1)
+  onClicked() {
+    const text = ChatEntry.get_buffer().text
+    if (currentTab.value === 'gemini')
+      GeminiSendMessage(text)
+    else
+      GPTSendMessage(text)
+    ChatEntry.get_buffer().set_text('', -1)
+  }
 })
-
 export const ChatPlaceholder = Widget.Label({
   hpack: 'start',
   vpack: 'center',

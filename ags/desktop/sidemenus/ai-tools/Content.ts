@@ -2,6 +2,7 @@ import GPTView from './gpt/View'
 import GeminiView from './gemini/View'
 import { ChatPlaceholder } from './Textbox'
 
+import options from 'options'
 import { capitalize } from 'lib/utils'
 
 export const currentTab = Variable('gemini')
@@ -27,6 +28,7 @@ export const Stack = Widget.Stack({
   className: 'stack-list',
   shown: currentTab.bind(),
   transition: 'slide_left_right',
+  transitionDuration: options.transition,
   children: stackItems.reduce((acc, item) => {
     acc[item.name] = item.content
     return acc

@@ -9,6 +9,16 @@ window.sideleft .ai-tools
     image
       margin: 0 calc($spacing * 0.5)
 
+  .chat-message
+    padding: $padding calc($padding * 4)
+    border-bottom: 1px solid transparentize($fg, 0.75)
+    .chat-name
+      font-size: 1.15em
+      margin: $spacing 0
+      border-radius: $radius
+      background-color: $primary-fg
+      padding: $padding calc($padding * 2)
+
   .chat-textarea
     margin-top: $spacing
     margin-bottom: $spacing
@@ -30,9 +40,8 @@ window.sideleft .ai-tools
       margin-left: calc($spacing * 1.5)
 
   .welcome-logo
-    min-width: 3em
-    min-height: 3em
-    font-size: 2.5em
+    font-size: 4em
+    margin: calc($spacing * 2)
 
   button
     @include button

@@ -4,15 +4,14 @@ import { ChatMessage } from '../Message'
 import Welcome from './Welcome'
 
 const { Gtk } = imports.gi
-const MODEL_NAME = 'Gemini'
 
 const ChatContent = Widget.Box({
   vertical: true,
 }).hook(GeminiService, (self, id) => {
   const message = GeminiService.messages[id]
   if (!message) return
-  self.add(ChatMessage(message, MODEL_NAME))
-})
+  self.add(ChatMessage(message, 'Gemini'))
+}, 'newMsg')
 
 export default Widget.Box([
   Widget.Scrollable({
@@ -31,14 +30,10 @@ export default Widget.Box([
       })
       // Always scroll to bottom with new content
       const adjustment = self.get_vadjustment()
-      adjustment.connect('changed', () =>
-        Utils.timeout(1, () => {
-          if (!ChatEntry.hasFocus) return
-          adjustment.set_value(
-            adjustment.get_upper() - adjustment.get_page_size(),
-          )
-        }),
-      )
+      adjustment.connect('changed', () => Utils.timeout(1, () => {
+        if(!ChatEntry.hasFocus) return
+        adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
+      }))
     },
   }),
 ])

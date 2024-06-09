@@ -3,7 +3,7 @@ import { bash, fileExists } from 'lib/utils'
 
 import options from 'options'
 
-const { GLib, Soup } = imports.gi
+const { Gio, GLib, Soup } = imports.gi
 
 const HISTORY_DIR = `${GLib.get_user_cache_dir()}/ags/user/ai/chats/`
 const HISTORY_FILENAME = 'gemini.txt'
@@ -266,7 +266,7 @@ class GeminiService extends Service {
         temperature: this._temperature,
       }
     }
-    const proxyResolver = new Gio.SimpleProxyResolver({ 'default-proxy': options.ai.proxyUrl })
+    const proxyResolver = new Gio.SimpleProxyResolver({ 'default-proxy': options.ai.proxyUrl.value })
     const session = new Soup.Session({ 'proxy-resolver': proxyResolver })
     const message = new Soup.Message({
       method: 'POST',

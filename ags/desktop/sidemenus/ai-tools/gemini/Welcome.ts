@@ -12,8 +12,8 @@ const Info = Widget.Box(
   { vertical: true },
   Widget.Icon({
     hpack: 'center',
+    icon: 'gemini-logo',
     className: 'welcome-logo',
-    icon: 'google-gemini-symbolic',
   }),
   Widget.Label({
     wrap: true,
@@ -36,7 +36,6 @@ const Info = Widget.Box(
 )
 
 const Instructions = Widget.Revealer({
-  revealChild: true,
   transition: 'slide_down',
   transitionDuration: options.transition.value,
   child: Widget.Button({
@@ -44,14 +43,13 @@ const Instructions = Widget.Revealer({
     child: Widget.Label({
       wrap: true,
       useMarkup: true,
-      className: 'sidebar-chat-welcome-txt',
       justify: Gtk.Justification.CENTER,
+      className: 'sidebar-chat-welcome-txt',
       label: 'A Google AI API key is required\nYou can grab one <u>here</u>, then enter it below',
-      // setup: self => self.set_markup("This is a <a href=\"https://www.github.com\">test link</a>")
     }),
     onClicked() { bash`xdg-open https://makersuite.google.com/app/apikey &` },
   }),
-}).hook(GeminiService, self => self.revealChild = GeminiService.key.length == 0, 'hasKey')
+}).hook(GeminiService, self => self.revealChild = GeminiService.key.length === 0, 'hasKey')
 
 const Settings = MarginRevealer({
   revealChild: true,

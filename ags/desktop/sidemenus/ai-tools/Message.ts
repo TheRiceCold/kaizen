@@ -3,24 +3,9 @@ import md2pango from 'misc/md2pango'
 import options from 'options'
 import { sh } from 'lib/utils'
 
-const { /* Gio, */ GLib, Gtk, GtkSource } = imports.gi
+const { GLib, Gtk, GtkSource } = imports.gi
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`
 const USERNAME = GLib.get_user_name()
-
-// function loadCustomColorScheme(filePath) {
-//   const file = Gio.File.new_for_path(filePath)
-//   const [success] = file.load_contents(null)
-
-//   if (!success) {
-//     logError('Failed to load the XML file.')
-//     return
-//   }
-
-//   // Parse the XML content and set the Style Scheme
-//   const schemeManager = GtkSource.StyleSchemeManager.get_default()
-//   schemeManager.append_search_path(file.get_parent().get_path())
-// }
-// loadCustomColorScheme(`${App.configDir}/assets/themes/sourceviewtheme.xml`)
 
 function substituteLang(str) {
   const subs = [
@@ -34,7 +19,7 @@ function substituteLang(str) {
 
 const HighlightedCode = (content, lang) => {
   const buffer = new GtkSource.Buffer()
-  const sourceView = new GtkSource.View({ buffer: buffer, wrap_mode: Gtk.WrapMode.NONE })
+  const sourceView = new GtkSource.View({ buffer, wrap_mode: Gtk.WrapMode.NONE })
 
   const langManager = GtkSource.LanguageManager.get_default()
   const displayLang = langManager.get_language(substituteLang(lang)) // Set your preferred language
@@ -101,13 +86,15 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#0000
         })
       }
     },
-    setup: self => self.attribute.render(self, content).catch(print)
+    setup(self) { self.attribute.render(self, content).catch(print) }
   })
 
-  const wholeThing = Widget.Box({
+  return Widget.Box({
     className: 'sidebar-chat-latex',
     attribute: {
-      updateText: text => latexViewArea.attribute.render(latexViewArea, text).catch(print)
+      updateText(text) {
+        latexViewArea.attribute.render(latexViewArea, text).catch(print)
+      }
     },
     child: Widget.Scrollable({
       vscroll: 'never',
@@ -115,10 +102,9 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#0000
       child: latexViewArea
     })
   })
-  return wholeThing
 }
 
-const CodeBlock = (content = '', lang = 'txt') => {
+function CodeBlock(content = '', lang = 'txt') {
   if (lang == 'tex' || lang == 'latex')
     return Latex(content)
 
@@ -132,7 +118,7 @@ const CodeBlock = (content = '', lang = 'txt') => {
     Widget.Button({
       className: 'sidebar-chat-codeblock-topbar-btn',
       child: Widget.Box([
-        Widget.Icon('content_copy'),
+        Widget.Label('󰆏'),
         Widget.Label({ label: 'Copy' })
       ]),
       onClicked() {
@@ -146,11 +132,11 @@ const CodeBlock = (content = '', lang = 'txt') => {
   // Source view
   const sourceView = HighlightedCode(content, lang)
 
-  const codeBlock = Widget.Box({
+  return Widget.Box({
     vertical: true,
     className: 'sidebar-chat-codeblock',
     attribute: {
-      updateText: text => sourceView.get_buffer().set_text(text, -1)
+      updateText(text) { sourceView.get_buffer().set_text(text, -1) }
     },
     children: [
       topBar,
@@ -164,8 +150,6 @@ const CodeBlock = (content = '', lang = 'txt') => {
       )
     ]
   })
-
-  return codeBlock
 }
 
 const Divider = Widget.Box({ className: 'sidebar-chat-divider' })
@@ -257,8 +241,8 @@ export const ChatMessage = (message, modelName = 'Model') => {
     shown: message.thinking ? 'thinking' : 'message',
   })
 
-  const thisMessage = Widget.Box(
-    { className: 'sidebar-chat-message' },
+  return Widget.Box(
+    { className: 'chat-message' },
     Widget.Box(
       { vertical: true },
       Widget.Label({
@@ -267,35 +251,26 @@ export const ChatMessage = (message, modelName = 'Model') => {
         hpack: 'start',
         useMarkup: true,
         label: (message.role == 'user' ? USERNAME : modelName),
-        className: `txt txt-bold sidebar-chat-name sidebar-chat-name-${message.role == 'user' ? 'user' : 'bot'}`,
+        className: `chat-name chat-name-${message.role == 'user' ? 'user' : 'bot'}`,
       }),
-      Wiget.Box({ className: 'sidebar-chat-messagearea' }, messageArea)
+      messageArea
     )
       .hook(message, () => messageArea.shown = message.thinking ? 'thinking' : 'message', 'notify::thinking')
       .hook(message, () => messageContentBox.attribute.fullUpdate(messageContentBox, message.content, message.role != 'user'), 'notify::content')
       .hook(message, () => messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false), 'notify::done')
   )
-
-  return thisMessage
 }
 
-export const SystemMessage = (content, commandName) => {
-  const messageContentBox = MessageContent(content)
-
-  const thisMessage = Widget.Box(
-    { className: 'sidebar-chat-message' },
-    Widget.Box(
-      { vertical: true },
-      Widget.Label({
-        xalign: 0,
-        wrap: true,
-        hpack: 'start',
-        label: `System  •  ${commandName}`,
-        className: 'sidebar-chat-name sidebar-chat-name-system',
-      }),
-      messageContentBox,
-    )
+export const SystemMessage = (content, commandName) => Widget.Box(
+  { className: 'chat-message' },
+  Widget.Box(
+    { vertical: true },
+    Widget.Label({
+      xalign: 0,
+      wrap: true,
+      hpack: 'start',
+      label: `System  •  ${commandName}`,
+    }),
+    MessageContent(content)
   )
-
-  return thisMessage
-}
+)

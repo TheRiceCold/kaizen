@@ -8,8 +8,7 @@ const CommandButton = (command: string) => Widget.Button({
   attribute: { command },
 }).hook(currentTab, self => {
   const cmd = self.attribute.command
-  self.onClicked = () => currentTab.value === 'gemini'
-    ? GeminiSendMessage(cmd) : GPTSendMessage(cmd)
+  self.onClicked = () => currentTab.value === 'gemini' ? GeminiSendMessage(cmd) : GPTSendMessage(cmd)
 })
 
 export default Widget.Box(
