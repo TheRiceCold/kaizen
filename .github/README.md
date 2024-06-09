@@ -162,7 +162,7 @@ bind=SUPER, m, ags -r "toggleWidget('media');" # Widget
 > [!NOTE]
 > This list may be incomplete, so please check the packages inside the `default.nix` file.
 #### Dependencies
-- Utilities: [bun], [dart-sass], [fd], [gtk3]
+- Utilities: [esbuild], [dart-sass], [fd], [gtk3]
 - [Cava] - Audio visualizer
 - [Gromit-mpx] - Annotation Tool
 - [Matugen] - Color generation tool
@@ -247,9 +247,9 @@ ags -c ~/.config/ags/config.js
 - [end-4](https://github.com/end-4/dots-hyprland) Widget Ideas and AI tools
 
 [gtk3]: https://docs.gtk.org/gtk3
-[bun]: https://github.com/oven-sh/bun
 [fd]: https://github.com/sharkdp/fd
 [ags]: https://github.com/aylur/ags
+[esbuild]: https://esbuild.github.io
 [swww]: https://github.com/LGFae/swww
 [cava]: https://github.com/karlstav/cava
 [matugen]: https://github.com/InioX/matugen

@@ -1,14 +1,13 @@
 const main = '/tmp/ags/greeter.js'
-const entry = `${App.configDir}/windows/greeter/main.ts`
 
 try {
-  await Utils.execAsync([
-    'bun', 'build', entry,
-    '--outfile', main,
-    '--external', 'resource://*',
-    '--external', 'gi://*',
-    '--external', 'file://*',
-  ])
+  await Utils.execAsync(`
+    esbuild --bundle ${App.configDir}/windows/desktop/main.ts \
+    --format=esm \
+    --outfile=${main} \
+    --external:resource://\* \
+    --external:gi://\* \
+  `)
   await import(`file://${main}`)
 } catch (error) {
   console.error(error)

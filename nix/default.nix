@@ -3,7 +3,7 @@
   writeShellScript,
 
   # Utilities
-  fd, bun, which, dart-sass,
+  fd, esbuild, which, dart-sass,
 
   gtksourceview3,
   # accountsservice,
@@ -19,6 +19,7 @@
   cliphist,
   gromit-mpx,
   hyprpicker,
+  pop-launcher,
   # showmethekey, # TODO:
   wl-clipboard,
   brightnessctl,
@@ -79,20 +80,26 @@
     src = ../ags;
 
     buildPhase = ''
-      ${bun}/bin/bun build ./desktop/main.ts \
-      --outfile main.js \
-      --external 'resource://*' \
-      --external 'gi://*' \
+      ${esbuild}/bin/esbuild \
+      --bundle ./desktop/main.ts \
+      --outfile=main.js \
+      --format=esm \
+      --external:resource://\* \
+      --external:gi://\* \
 
-      ${bun}/bin/bun build ./lockscreen/main.ts \
-      --outfile lockscreen.js \
-      --external 'resource://*' \
-      --external 'gi://*' \
+      ${esbuild}/bin/esbuild \
+      --bundle ./lockscreen/main.ts \
+      --outfile=lockscreen.js \
+      --format=esm \
+      --external:resource://\* \
+      --external:gi://\* \
 
-      ${bun}/bin/bun build ./greeter/main.ts \
-      --outfile greeter.js \
-      --external 'resource://*' \
-      --external 'gi://*' \
+      ${esbuild}/bin/esbuild \
+      --bundle ./greeter/main.ts \
+      --outfile=greeter.js \
+      --format=esm \
+      --external:resource://\* \
+      --external:gi://\* \
     '';
 
     installPhase = ''
