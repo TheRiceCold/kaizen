@@ -9,7 +9,7 @@ import { currentTab } from './Content'
 import { enableClickThrough } from 'lib/utils'
 import icons from 'data/icons'
 
-const { Gdk, Gtk } = imports.gi
+const { Gtk } = imports.gi
 const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
 
 const ChatSendButton = Widget.Button({

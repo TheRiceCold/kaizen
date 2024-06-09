@@ -84,19 +84,14 @@ const ProviderSwitcher = () => {
   })
 }
 
-export const chatContent = Widget.Box({ vertical: true }).hook(
+export const ChatContent = Widget.Box({ vertical: true }).hook(
   GPTService,
-  (box, id) => {
+  (self, id) => {
     const message = GPTService.messages[id]
     if (!message) return
-    box.add(
-      ChatMessage(
-        message,
-        `Model (${GPTService.providers[GPTService.providerID]['name']})`,
-      ),
-    )
+    self.add(ChatMessage(message, `Model (${GPTService.providers[GPTService.providerID]['name']})`))
   },
-  'newMsg',
+  'newMsg'
 )
 
 export default Widget.Box(
@@ -105,7 +100,7 @@ export default Widget.Box(
   Widget.Scrollable({
     vexpand: true,
     className: 'sidebar-chat-viewport',
-    child: Widget.Box({ vertical: true }, Welcome, chatContent),
+    child: Widget.Box({ vertical: true }, Welcome, ChatContent),
     setup(scrolledWindow) {
       // Show scrollbar
       scrolledWindow.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
