@@ -9,7 +9,7 @@ import { currentTab } from './Content'
 import { enableClickThrough } from 'lib/utils'
 import icons from 'data/icons'
 
-const { Gtk } = imports.gi
+const { Gdk, Gtk } = imports.gi
 const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
 
 const ChatSendButton = Widget.Button({
@@ -59,8 +59,8 @@ export const ChatEntry = TextView({
 
 ChatEntry.get_buffer().connect('changed', (buffer) => {
   const bufferText = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), true)
-  ChatSendButton.toggleClassName('sidebar-chat-send-available', bufferText.length > 0)
-  ChatPlaceholderRevealer.revealChild = (bufferText.length == 0)
+  ChatSendButton.toggleClassName('chat-send-available', bufferText.length > 0)
+  ChatPlaceholderRevealer.revealChild = bufferText.length === 0
   if (buffer.get_line_count() > 1 || bufferText.length > 30) {
     // ChatEntryWrapper.toggleClassName('sidebar-chat-wrapper-extended', true)
     ChatEntry.set_valign(Gtk.Align.FILL)

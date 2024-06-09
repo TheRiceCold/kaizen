@@ -54,9 +54,10 @@ const Instructions = Widget.Revealer({
 const Settings = MarginRevealer({
   revealChild: true,
   transition: 'slide_down',
-  extraSetup: self => self
-    .hook(GeminiService, self => Utils.timeout(200, () => self.attribute.hide()), 'newMsg')
-    .hook(GeminiService, self => Utils.timeout(200, () => self.attribute.show()), 'clear'),
+  extraSetup(self) {
+    self.hook(GeminiService, () => Utils.timeout(200, self.attribute.hide), 'newMsg')
+    self.hook(GeminiService, () => Utils.timeout(200, self.attribute.show), 'clear')
+  },
   child: Widget.Box({
     vertical: true,
     className: 'sidebar-chat-settings',
@@ -74,8 +75,8 @@ const Settings = MarginRevealer({
         onChange(value) { GeminiService.temperature = value },
       }),
       Widget.Box({
-        vertical: true,
         hpack: 'fill',
+        vertical: true,
         className: 'sidebar-chat-settings-toggles',
         children: [
           ConfigToggle({

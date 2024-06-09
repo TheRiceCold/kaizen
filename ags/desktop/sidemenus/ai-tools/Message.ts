@@ -1,7 +1,7 @@
 import md2pango from 'misc/md2pango'
 
 import options from 'options'
-import { sh } from 'lib/utils'
+import { sh, bash } from 'lib/utils'
 
 const { GLib, Gtk, GtkSource } = imports.gi
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`
@@ -17,20 +17,18 @@ function substituteLang(str) {
   return str
 }
 
-const HighlightedCode = (content, lang) => {
+function HighlightedCode(content, lang) {
   const buffer = new GtkSource.Buffer()
-  const sourceView = new GtkSource.View({ buffer, wrap_mode: Gtk.WrapMode.NONE })
-
   const langManager = GtkSource.LanguageManager.get_default()
   const displayLang = langManager.get_language(substituteLang(lang)) // Set your preferred language
-  if (displayLang)
-    buffer.set_language(displayLang)
+
+  if (displayLang) buffer.set_language(displayLang)
 
   const schemeManager = GtkSource.StyleSchemeManager.get_default()
   buffer.set_style_scheme(schemeManager.get_scheme('custom'))
   buffer.set_text(content, -1)
 
-  return sourceView
+  return new GtkSource.View({ buffer, wrap_mode: Gtk.WrapMode.NONE })
 }
 
 const TextBlock = (content = '') => Widget.Label({
@@ -44,7 +42,7 @@ const TextBlock = (content = '') => Widget.Label({
 })
 
 Utils.execAsync(['bash', '-c', `rm -rf ${LATEX_DIR}/*`])
-  .then(() => Utils.execAsync(['bash', '-c', `mkdir -p ${LATEX_DIR}`]))
+  .then(() => bash`mkdir -p ${LATEX_DIR}`)
   .catch(print)
 
 const Latex = (content = '') => {
@@ -76,7 +74,7 @@ sed -i 's/fill="rgb(0%, 0%, 0%)"/style="fill:#000000"/g' ${outFilePath}
 sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#000000'}"/g' ${outFilePath}
 `
         Utils.writeFile(renderScript, scriptFilePath).catch(print)
-        Utils.exec(`chmod a+x ${scriptFilePath}`)
+        sh(`chmod a+x ${scriptFilePath}`)
         Utils.timeout(100, () => {
           Utils.exec(`bash ${scriptFilePath}`)
           Gtk.IconTheme.get_default().append_search_path(LATEX_DIR)
@@ -114,7 +112,7 @@ function CodeBlock(content = '', lang = 'txt') {
       label: lang,
       className: 'sidebar-chat-codeblock-topbar-txt',
     }),
-    Box({ hexpand: true }),
+    Widget.Box({ hexpand: true }),
     Widget.Button({
       className: 'sidebar-chat-codeblock-topbar-btn',
       child: Widget.Box([
@@ -143,9 +141,9 @@ function CodeBlock(content = '', lang = 'txt') {
       Widget.Box(
         { className: 'sidebar-chat-codeblock-code' },
         Widget.Scrollable({
+          child: sourceView,
           vscroll: 'never',
           hscroll: 'automatic',
-          child: sourceView,
         })
       )
     ]
@@ -178,6 +176,7 @@ const MessageContent = (content) => {
             const kids = self.get_children()
             const lastLabel = kids[kids.length - 1]
             const blockContent = lines.slice(lastProcessed, index).join('\n')
+
             if (!inCode) {
               lastLabel.label = md2pango(blockContent)
               contentBox.add(CodeBlock('', codeBlockRegex.exec(line)[1]))

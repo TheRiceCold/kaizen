@@ -1,25 +1,32 @@
 import GeminiService from 'service/api/gemini'
 
-import { ChatMessage, SystemMessage } from '../Message'
+import { ChatContent } from './View'
+import { SystemMessage } from '../Message'
 
 import { markdownTest } from 'misc/md2pango'
 
-const ChatContent = Widget.Box({ vertical: true }).hook(
-  GeminiService,
-  (box, id) => {
-    const message = GeminiService.messages[id]
-    if (!message) return
-    box.add(ChatMessage(message, 'Gemini'))
-  },
-  'newMsg',
-)
-
-function clearChat() {
+function clear() {
   GeminiService.clear()
   const children = ChatContent.get_children()
-  for (let i = 0; i < children.length; i++) {
-    const child = children[i]
-    child.destroy()
+  children.forEach(child => child.destroy())
+}
+
+function prompt(text) {
+  const firstSpaceIndex = text.indexOf(' ')
+  const prompt = text.slice(firstSpaceIndex + 1)
+  if (firstSpaceIndex === -1 || prompt.length < 1)
+    ChatContent.add(SystemMessage('Usage: `/prompt MESSAGE`', '/prompt'))
+  else
+    GeminiService.addMessage('user', prompt)
+}
+
+function updateKey(text) {
+  const parts = text.split(' ')
+  if (parts.length === 1)
+    ChatContent.add(SystemMessage(`Key stored in:\n\`${GeminiService.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``, '/key'))
+  else {
+    GeminiService.key = parts[1]
+    ChatContent.add(SystemMessage(`Updated API Key at\n\`${GeminiService.keyPath}\``, '/key'))
   }
 }
 
@@ -34,29 +41,22 @@ export default text => {
   }
 
   if (text.startsWith('/')) {
-    if (text.startsWith('/clear')) clearChat()
+    if (text.startsWith('/clear'))
+      clear()
     else if (text.startsWith('/load')) {
-      clearChat()
+      clear()
       GeminiService.loadHistory()
     }
     else if (text.startsWith('/model'))
       ChatContent.add(SystemMessage(`Currently using \`${GeminiService.modelName}\``, '/model'))
-    else if (text.startsWith('/prompt')) {
-      const firstSpaceIndex = text.indexOf(' ')
-      const prompt = text.slice(firstSpaceIndex + 1)
-      if (firstSpaceIndex == -1 || prompt.length < 1)
-        ChatContent.add(SystemMessage('Usage: `/prompt MESSAGE`', '/prompt'))
-      else GeminiService.addMessage('user', prompt)
-    } else if (text.startsWith('/key')) {
-      const parts = text.split(' ')
-      if (parts.length === 1)
-        ChatContent.add(SystemMessage(`Key stored in:\n\`${GeminiService.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``, '/key'))
-      else {
-        GeminiService.key = parts[1]
-        ChatContent.add(SystemMessage(`Updated API Key at\n\`${GeminiService.keyPath}\``, '/key'))
-      }
-    } else if (text.startsWith('/test'))
+    else if (text.startsWith('/prompt'))
+      prompt(text)
+    else if (text.startsWith('/key'))
+      updateKey(text)
+    else if (text.startsWith('/test'))
       ChatContent.add(SystemMessage(markdownTest, 'Markdown test'))
-    else ChatContent.add(SystemMessage('Invalid command.', 'Error'))
-  } else GeminiService.send(text)
+    else
+      ChatContent.add(SystemMessage('Invalid command.', 'Error'))
+  }
+  else GeminiService.send(text)
 }
