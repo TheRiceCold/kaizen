@@ -26,7 +26,7 @@ function replaceapidom(URL) {
   return URL
 }
 
-const CHAT_MODELS = [ 'gemini-pro' ]
+const CHAT_MODELS = [ 'gemini-1.5-flash' ]
 const ONE_CYCLE_COUNT = 3
 
 class GeminiMessage extends Service {
@@ -122,13 +122,13 @@ class GeminiService extends Service {
     })
   }
 
-  _assistantPrompt = options.ai.enhancements
+  _assistantPrompt = options.ai.enhancements.value
   _cycleModels = true
-  _usingHistory = options.ai.useHistory
+  _usingHistory = options.ai.useHistory.value
   _key = ''
   _requestCount = 0
   _safe = true
-  _temperature = options.ai.defaultTemperature
+  _temperature = options.ai.defaultTemperature.value
   _messages = []
   _modelIndex = 0
   _decoder = new TextDecoder()
@@ -136,8 +136,10 @@ class GeminiService extends Service {
   constructor() {
     super()
 
-    if (fileExists(KEY_FILE_LOCATION)) this._key = Utils.readFile(KEY_FILE_LOCATION).trim()
-    else this.emit('hasKey', false)
+    if (fileExists(KEY_FILE_LOCATION))
+      this._key = Utils.readFile(KEY_FILE_LOCATION).trim()
+    else
+      this.emit('hasKey', false)
 
     if (this._usingHistory) this.loadHistory()
     else this._messages = this._assistantPrompt ? [...initMessages] : []
@@ -209,9 +211,7 @@ class GeminiService extends Service {
     this.emit('clear')
   }
 
-  get assistantPrompt() {
-    return this._assistantPrompt
-  }
+  get assistantPrompt() { return this._assistantPrompt }
 
   set assistantPrompt(value) {
     this._assistantPrompt = value
@@ -256,15 +256,13 @@ class GeminiService extends Service {
     const body = {
       contents: this._messages.map(msg => ({ role: msg.role, parts: msg.parts })),
       safetySettings: this._safe ? [] : [
-        // { category: "HARM_CATEGORY_DEROGATORY", threshold: "BLOCK_NONE", },
-        { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE', },
-        { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE', },
+        // { category: 'HARM_CATEGORY_DEROGATORY', threshold: 'BLOCK_NONE', },
+        // { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE', },
+        // { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE', },
         { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE', },
-        // { category: "HARM_CATEGORY_UNSPECIFIED", threshold: "BLOCK_NONE", },
+        // { category: 'HARM_CATEGORY_UNSPECIFIED', threshold: 'BLOCK_NONE', },
       ],
-      generationConfig: {
-        temperature: this._temperature,
-      }
+      generationConfig: { temperature: this._temperature }
     }
     const proxyResolver = new Gio.SimpleProxyResolver({ 'default-proxy': options.ai.proxyUrl.value })
     const session = new Soup.Session({ 'proxy-resolver': proxyResolver })
