@@ -12,12 +12,42 @@ window.sideleft .ai-tools
   .chat-message
     padding: $padding calc($padding * 4)
     border-bottom: 1px solid transparentize($fg, 0.75)
-    .chat-name
+    &:last-child
+      border-bottom: 0
+    label
       font-size: 1.15em
+      margin-bottom: $spacing
+    .chat-name
+      font-size: 1.25em
       margin: $spacing 0
       border-radius: $radius
       background-color: $primary-fg
       padding: $padding calc($padding * 2)
+
+  .chat-codeblock
+    background-color: $bg
+    border-radius: $radius
+    border: 1px solid transparentize($fg, 0.75)
+    .topbar
+      margin-bottom: $spacing
+      border-top-left-radius: $radius
+      border-top-right-radius: $radius
+      padding: $padding calc($padding * 2)
+      border-bottom: 1px solid transparentize($fg, 0.75)
+      label
+        all: unset
+        font-weight: 600
+        font-size: 1.25em
+        margin-left: $spacing
+      button
+        @include button
+        margin-right: calc($spacing * 0.5)
+        border-radius: calc($radius * 0.5)
+        padding: $padding calc($padding * 1.5)
+        label
+          all: unset
+    .code
+      padding: calc($padding * 2)
 
   .chat-textarea
     margin-top: $spacing

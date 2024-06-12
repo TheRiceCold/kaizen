@@ -1,7 +1,5 @@
-import GPTService from 'service/api/gpt'
 import GeminiService from 'service/api/gemini'
 
-import GPTSendMessage from './gpt/SendMessage'
 import GeminiSendMessage from './gemini/SendMessage'
 
 import { currentTab } from './Content'
@@ -19,10 +17,7 @@ const ChatSendButton = Widget.Button({
   child: Widget.Icon(icons.ui.send),
   onClicked() {
     const text = ChatEntry.get_buffer().text
-    if (currentTab.value === 'gemini')
-      GeminiSendMessage(text)
-    else
-      GPTSendMessage(text)
+    GeminiSendMessage(text)
     ChatEntry.get_buffer().set_text('', -1)
   }
 })
@@ -46,11 +41,6 @@ export const ChatEntry = TextView({
   className: 'chat-entry',
   wrapMode: Gtk.WrapMode.WORD_CHAR,
 })
-  .hook(GPTService, self => {
-    if (currentTab.value !== 'chatGPT') return
-    self.placeholderText = GPTService.key.length > 0
-      ? 'Message the model...' : 'Enter API Key...'
-  }, 'hasKey')
   .hook(GeminiService, self => {
     if (currentTab.value !== 'gemini') return
     self.placeholderText = GeminiService.key.length > 0
@@ -62,12 +52,10 @@ ChatEntry.get_buffer().connect('changed', (buffer) => {
   ChatSendButton.toggleClassName('chat-send-available', bufferText.length > 0)
   ChatPlaceholderRevealer.revealChild = bufferText.length === 0
   if (buffer.get_line_count() > 1 || bufferText.length > 30) {
-    // ChatEntryWrapper.toggleClassName('sidebar-chat-wrapper-extended', true)
     ChatEntry.set_valign(Gtk.Align.FILL)
     ChatPlaceholder.set_valign(Gtk.Align.FILL)
   }
   else {
-    // ChatEntryWrapper.toggleClassName('sidebar-chat-wrapper-extended', false)
     ChatEntry.set_valign(Gtk.Align.CENTER)
     ChatPlaceholder.set_valign(Gtk.Align.CENTER)
   }

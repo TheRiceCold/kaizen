@@ -1,7 +1,3 @@
-// Converts from Markdown to Pango. This does not support code blocks.
-// For illogical-impulse, code blocks are treated separately, in their own GtkSourceView widgets.
-// Partly inherited from https://github.com/ubunatic/md2pango
-
 const monospaceFonts = 'JetBrains Mono NF, JetBrains Mono Nerd Font, JetBrains Mono NL, SpaceMono NF, SpaceMono Nerd Font, monospace'
 
 const replacements = {

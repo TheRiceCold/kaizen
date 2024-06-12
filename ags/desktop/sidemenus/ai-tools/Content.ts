@@ -1,4 +1,3 @@
-import GPTView from './gpt/View'
 import GeminiView from './gemini/View'
 import { ChatPlaceholder } from './Textbox'
 
@@ -15,13 +14,6 @@ export const stackItems = [
     tooltipText: 'Assistant (Gemini Pro)',
     placeholderText: 'Message Gemini...',
   },
-  {
-    name: 'chatGPT',
-    content: GPTView,
-    icon: 'gpt-symbolic',
-    tooltipText: 'Assistant (GPTs)',
-    placeholderText: 'Message the model...',
-  }
 ]
 
 export const Stack = Widget.Stack({

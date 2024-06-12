@@ -1,16 +1,31 @@
+// import GtkSource from 'gi://GtkSource?version=3.0'
 import md2pango from 'misc/md2pango'
 
 import options from 'options'
 import { sh, bash } from 'lib/utils'
 
-const { GLib, Gtk, GtkSource } = imports.gi
+const { Gio, GLib, Gtk, GtkSource } = imports.gi
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`
 const USERNAME = GLib.get_user_name()
 
+function loadCustomColorScheme(filePath) {
+  const file = Gio.File.new_for_path(filePath)
+  const [success] = file.load_contents(null)
+
+  if (!success) {
+    logError('Failed to load the XML file.')
+    return
+  }
+
+  const schemeManager = GtkSource.StyleSchemeManager.get_default()
+  schemeManager.append_search_path(file.get_parent().get_path())
+}
+loadCustomColorScheme(App.configDir+'/assets/themes/sourceviewtheme.xml')
+
 function substituteLang(str) {
   const subs = [
-    { from: 'javascript', to: 'js' },
     { from: 'bash', to: 'sh' },
+    { from: 'javascript', to: 'js' },
   ]
   for (const { from, to } of subs)
     if (from === str) return to
@@ -20,13 +35,15 @@ function substituteLang(str) {
 function HighlightedCode(content, lang) {
   const buffer = new GtkSource.Buffer()
   const langManager = GtkSource.LanguageManager.get_default()
-  const displayLang = langManager.get_language(substituteLang(lang)) // Set your preferred language
+  const displayLang = langManager.get_language(substituteLang(lang))
 
-  if (displayLang) buffer.set_language(displayLang)
+  if (displayLang)
+    buffer.set_language(displayLang)
+
+  buffer.set_text(content, -1)
 
   const schemeManager = GtkSource.StyleSchemeManager.get_default()
   buffer.set_style_scheme(schemeManager.get_scheme('custom'))
-  buffer.set_text(content, -1)
 
   return new GtkSource.View({ buffer, wrap_mode: Gtk.WrapMode.NONE })
 }
@@ -38,7 +55,7 @@ const TextBlock = (content = '') => Widget.Label({
   label: content,
   useMarkup: true,
   selectable: true,
-  className: 'sidebar-chat-txtblock sidebar-chat-txt',
+  className: 'chat-txtblock chat-txt',
 })
 
 Utils.execAsync(['bash', '-c', `rm -rf ${LATEX_DIR}/*`])
@@ -71,12 +88,12 @@ const Latex = (content = '') => {
 text=$(cat ${filePath} | sed 's/$/ \\\\\\\\/g' | sed 's/&=/=/g')
 LaTeX -headless -input="$text" -output=${outFilePath} -textsize=${fontSize * 1.1} -padding=0 -maxwidth=${latexViewArea.get_allocated_width() * 0.85}
 sed -i 's/fill="rgb(0%, 0%, 0%)"/style="fill:#000000"/g' ${outFilePath}
-sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#000000'}"/g' ${outFilePath}
+sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="#ffffff"/g' ${outFilePath}
 `
         Utils.writeFile(renderScript, scriptFilePath).catch(print)
         sh(`chmod a+x ${scriptFilePath}`)
         Utils.timeout(100, () => {
-          Utils.exec(`bash ${scriptFilePath}`)
+          sh(`bash ${scriptFilePath}`)
           Gtk.IconTheme.get_default().append_search_path(LATEX_DIR)
 
           self.child?.destroy()
@@ -88,7 +105,7 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#0000
   })
 
   return Widget.Box({
-    className: 'sidebar-chat-latex',
+    className: 'chat-latex',
     attribute: {
       updateText(text) {
         latexViewArea.attribute.render(latexViewArea, text).catch(print)
@@ -103,54 +120,45 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="${darkMode.value ? '#ffffff' : '#0000
 }
 
 function CodeBlock(content = '', lang = 'txt') {
-  if (lang == 'tex' || lang == 'latex')
+  if (lang === 'tex' || lang === 'latex')
     return Latex(content)
 
-  const topBar = Widget.Box(
-    { className: 'sidebar-chat-codeblock-topbar' },
+  const SourceView = HighlightedCode(content, lang)
+
+  const TopBar = Widget.Box(
+    { className: 'topbar' },
     Widget.Label({
+      xalign: 0,
       label: lang,
-      className: 'sidebar-chat-codeblock-topbar-txt',
+      hexpand: true,
     }),
-    Widget.Box({ hexpand: true }),
     Widget.Button({
-      className: 'sidebar-chat-codeblock-topbar-btn',
-      child: Widget.Box([
-        Widget.Label('󰆏'),
-        Widget.Label({ label: 'Copy' })
-      ]),
+      cursor: 'pointer',
+      child: Widget.Label({ vpack: 'center', label: '󰆏' }),
       onClicked() {
-        const buffer = sourceView.get_buffer()
+        const buffer = SourceView.get_buffer()
         const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false)
-        sh(`wl-copy ${copyContent}`)
+        sh('wl-copy '+copyContent)
       },
     })
   )
 
-  // Source view
-  const sourceView = HighlightedCode(content, lang)
-
   return Widget.Box({
     vertical: true,
-    className: 'sidebar-chat-codeblock',
-    attribute: {
-      updateText(text) { sourceView.get_buffer().set_text(text, -1) }
-    },
+    className: 'chat-codeblock',
     children: [
-      topBar,
+      TopBar,
       Widget.Box(
-        { className: 'sidebar-chat-codeblock-code' },
-        Widget.Scrollable({
-          child: sourceView,
-          vscroll: 'never',
-          hscroll: 'automatic',
-        })
+        { className: 'code', homogeneous: true },
+        Widget.Scrollable({ vscroll: 'never', child: SourceView })
       )
-    ]
+    ],
+    attribute: {
+      updateText(text) { SourceView.get_buffer().set_text(text, -1) }
+    },
   })
 }
 
-const Divider = Widget.Box({ className: 'sidebar-chat-divider' })
 
 const MessageContent = (content) => {
   const contentBox = Widget.Box({
@@ -196,7 +204,6 @@ const MessageContent = (content) => {
             const lastLabel = kids[kids.length - 1]
             const blockContent = lines.slice(lastProcessed, index).join('\n')
             lastLabel.label = md2pango(blockContent)
-            contentBox.add(Divider)
             contentBox.add(TextBlock())
             lastProcessed = index + 1
           }
@@ -221,12 +228,12 @@ const MessageContent = (content) => {
 
 export const ChatMessage = (message, modelName = 'Model') => {
   const TextSkeleton = (extraClassName = '') => Widget.Box({
-    className: `sidebar-chat-message-skeletonline ${extraClassName}`,
+    className: `chat-message-skeletonline ${extraClassName}`,
   })
   const messageContentBox = MessageContent(message.content)
   const messageLoadingSkeleton = Widget.Box({
     vertical: true,
-    children: Array.from({ length: 3 }, (_, id) => TextSkeleton(`sidebar-chat-message-skeletonline-offset${id}`)),
+    children: Array.from({ length: 3 }, (_, id) => TextSkeleton(`chat-message-skeletonline-offset${id}`)),
   })
 
   const messageArea = Widget.Stack({

@@ -15,11 +15,7 @@ const Info = Widget.Box(
     icon: 'gemini-logo',
     className: 'welcome-logo',
   }),
-  Widget.Label({
-    wrap: true,
-    label: 'Assistant (Gemini Pro)',
-    justify: Gtk.Justification.CENTER,
-  }),
+  Widget.Label('Gemini'),
   Widget.Box(
     { hpack: 'center' },
     Widget.Label({
@@ -43,8 +39,8 @@ const Instructions = Widget.Revealer({
     child: Widget.Label({
       wrap: true,
       useMarkup: true,
+      className: 'chat-welcome-txt',
       justify: Gtk.Justification.CENTER,
-      className: 'sidebar-chat-welcome-txt',
       label: 'A Google AI API key is required\nYou can grab one <u>here</u>, then enter it below',
     }),
     onClicked() { bash`xdg-open https://makersuite.google.com/app/apikey &` },
@@ -60,7 +56,7 @@ const Settings = MarginRevealer({
   },
   child: Widget.Box({
     vertical: true,
-    className: 'sidebar-chat-settings',
+    className: 'chat-settings',
     children: [
       ConfigSegmentedSelection({
         hpack: 'center',
@@ -77,7 +73,7 @@ const Settings = MarginRevealer({
       Widget.Box({
         hpack: 'fill',
         vertical: true,
-        className: 'sidebar-chat-settings-toggles',
+        className: 'toggles',
         children: [
           ConfigToggle({
             icon: '',
