@@ -42,11 +42,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1717131421,
-        "narHash": "sha256-kmwFKBYXhcmJj0lzJoRqf77x/4Cz1vOopGKHwd7Dr3c=",
+        "lastModified": 1717865727,
+        "narHash": "sha256-/fregl2SLoTX0c2WIs+uHq2sUQGPgle1sBhY5hhWFtc=",
         "owner": "iniox",
         "repo": "matugen",
-        "rev": "0e5186ec951745fa45c5eab7ba8328e412d6c8f4",
+        "rev": "3379c7947df34a14493e036b2e2a4202b7f201db",
         "type": "github"
       },
       "original": {
@@ -105,11 +105,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1717196966,
-        "narHash": "sha256-yZKhxVIKd2lsbOqYd5iDoUIwsRZFqE87smE2Vzf6Ck0=",
+        "lastModified": 1717974879,
+        "narHash": "sha256-GTO3C88+5DX171F/gVS3Qga/hOs/eRMxPFpiHq2t+D8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "57610d2f8f0937f39dbd72251e9614b1561942d8",
+        "rev": "c7b821ba2e1e635ba5a76d299af62821cbcb09f3",
         "type": "github"
       },
       "original": {

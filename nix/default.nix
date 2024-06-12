@@ -5,7 +5,7 @@
   # Utilities
   fd, esbuild, which, dart-sass,
 
-  gtksourceview3,
+  gtksourceview4,
   # accountsservice,
 
   # SERVICES
@@ -23,7 +23,6 @@
   # showmethekey, # TODO:
   wl-clipboard,
   brightnessctl,
-  networkmanager,
   swappy,
   slurp, grim,
   wl-screenrec,
@@ -34,7 +33,7 @@
   matugen = inputs.matugen.packages.${system}.default;
   gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
-    extraPackages = [ vte gtksourceview3 gtk-session-lock ];
+    extraPackages = [ vte gtksourceview4 gtk-session-lock ];
   };
 
   dependencies = [
@@ -55,7 +54,6 @@
     wl-screenrec      # High Performance Screen Recorder
     wl-clipboard      # Command-line copy/paste utilities for Wayland
     brightnessctl     # Read and Control Brightness
-    networkmanager
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
