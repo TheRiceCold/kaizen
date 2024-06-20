@@ -1,14 +1,6 @@
 .topbar .indicator
-  border-bottom-left-radius: $radius
-  border-bottom-right-radius: $radius
-  background-color: transparentize($bg, 0.25)
-
-  &.show-border
-    border: 1px solid transparentize($primary-bg, 0.5)
-    border-top: 0
-
   revealer
-    padding: calc($padding * 1.25) calc($padding * 2.5)
+    padding: $padding calc($padding * 1.5)
     .record-time label
       font-size: 1.25em
 
@@ -23,18 +15,16 @@
         color: $error-bg
 
   .progress
-    font-size: 4px
-    min-width: 32px
-    min-height: 32px
+    min-width: 28px
+    min-height: 28px
+    font-size: 0.2rem
     color: $primary-bg
     background-color: transparentize($primary-bg, 0.75)
     image
-      font-size: 4em
+      font-size: 1.15rem
     + label
-      margin-left: calc($spacing * 0.75)
+      margin-left: $spacing
 
-  .visualizer
-    padding: 0 $spacing
-    .cava
-      min-width: 100px
-      color: $primary-bg
+  .visualizer .cava
+    min-width: 100px
+    color: $primary-bg

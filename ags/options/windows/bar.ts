@@ -11,7 +11,7 @@ export default {
   datemenu: {
     interval: 5000,
     // DOCS: https://docs.gtk.org/glib/method.DateTime.format.html
-    format: opt('%a %b %d  %I:%M'),
+    format: opt('%a %d %b %I:%M %p'),
   },
   power: {
     action: opt(() => App.toggleWindow('powermenu')),

@@ -46,6 +46,6 @@ export default {
     shadows: opt(true),
     padding: opt(4),
     spacing: opt(8),
-    radius: opt(16),
+    radius: opt(0),
   },
 }

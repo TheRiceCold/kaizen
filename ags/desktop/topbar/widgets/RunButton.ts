@@ -1,6 +1,6 @@
 import BarButton from '../BarButton'
 
-import { sh } from 'lib/utils'
+import { sh, dependencies } from 'lib/utils'
 
 const { Gdk } = imports.gi
 
@@ -15,6 +15,11 @@ const openMenu = button => Widget.Menu({
     { label: ' Files', onActivate() { sh('nautilus') } },
     { label: '󰖟 Browser', onActivate() { sh('firefox') } },
     { label: ' Terminal', onActivate() { sh('pypr toggle term') } },
+    {
+      label: ' Calculator',
+      onActivate() { sh('gnome-calculator') },
+      visible: () => dependencies('gnome-calculator'),
+    },
     { label: ' Windows 11', onActivate() { } },
   ].map(Item)
 }).popup_at_widget(button, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)

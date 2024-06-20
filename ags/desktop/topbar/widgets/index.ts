@@ -1,6 +1,5 @@
 import BarButton from '../BarButton'
 
-import options from 'options'
 import { showWidget } from 'lib/variables'
 
 export const LauncherButton = BarButton({
@@ -17,17 +16,18 @@ export const AiButton = BarButton({
     self.toggleClassName('active', showWidget['ai-tools'].value)
   },
 })
+
 export const DashboardButton = BarButton({
   label: 'Dashboard',
   window: 'dashboard',
   onClicked() { App.toggleWindow('dashboard') }
 })
 
-export const PowerButton = BarButton({
-  label: '',
-  window: 'powermenu',
-  className: 'power-button',
-  onClicked: options.bar.power.action.bind(),
+export const KeysButton = BarButton({
+  label: 'Keys',
+  window: 'shortcuts',
+  tooltipText: 'Toggle keybind shortcuts',
+  onClicked() { App.toggleWindow('shortcuts') }
 })
 
 export { default as Tray } from './Tray'

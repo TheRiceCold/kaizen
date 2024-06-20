@@ -1,33 +1,31 @@
 .topbar
-  label
-    font-weight: bold
+  background-color: $bg
   .side-items
-    @include floating-widget
-    margin: 0 calc($spacing * 1.25)
-    padding: calc($padding * 1.5) calc($padding * 2.5)
-    border: 1px solid transparentize($primary-bg, 0.5)
-    margin-top: calc($spacing * 0.5 * $hyprland-gaps-multiplier)
-
-    .bar-button
+    padding: 0 calc($padding * 2)
+  label
+    font-weight: 500
+  .bar-button
+    border-radius: $radius
+    margin: 0 calc($spacing * 0.5)
+    &:hover, &:active, &.on, &.active, &:checked
+      color: $primary-bg
+    &.launcher-button
+      padding-right: 0
+      padding-left: 0.25rem
+      label
+        font-size: 1.25rem
+    .battery
+      &.error
+        color: #C76598
+      &.charging
+        color: #58D9BD
+    &:last-child
       padding: 0 $padding
-      border-radius: $radius
-      margin: 0 calc($spacing * 0.25)
-      &:hover, &:active, &.on, &.active, &:checked
-        color: $bg
-        background-color: $primary-bg
-      &.launcher-button
-        padding: 0 calc($padding * 0.5)
-        label
-          font-size: 1.25em
-      &.power-button label
-        font-size: 0.9em
-      .battery
-        &.error
-          color: #C76598
-        &.charging
-          color: #58D9BD
 
-    separator
-      padding: 1px
-      margin: 0 $spacing
-      background-color: transparentize($fg, 0.75)
+  .control-button image:nth-child(2)
+    margin: 0 0.75rem
+
+  separator
+    padding: 1px
+    margin: $spacing calc($spacing * 0.5)
+    background-color: transparentize($primary-bg, 0.75)

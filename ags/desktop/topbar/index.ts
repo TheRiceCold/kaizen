@@ -4,12 +4,12 @@ import {
   AiButton,
   DashboardButton,
   RunButton,
+  KeysButton,
   WindowButton,
   Indicator,
   Tray,
   ControlButton,
   DateButton,
-  PowerButton,
 } from './widgets'
 import { CommandsMenu } from 'desktop/menus'
 
@@ -19,18 +19,27 @@ const startWidget = Widget.Box(
   Workspaces,
   Widget.Separator({ vertical: true }),
   AiButton,
-  DashboardButton,
-  WindowButton,
   RunButton,
+  DashboardButton,
+  KeysButton,
+  WindowButton,
 )
 
 const Content = Widget.CenterBox({
   css: 'min-width: 2px; min-height: 2.5rem;',
   startWidget,
-  centerWidget: Indicator,
+  centerWidget: Widget.Box([
+    Widget.Separator({ vertical: true }),
+    Indicator,
+    Widget.Separator({ vertical: true }),
+  ]),
   endWidget: Widget.Box(
     { hpack: 'end', className: 'side-items' },
-    Tray, ControlButton, DateButton, PowerButton,
+    Tray,
+    Widget.Separator({ vertical: true }),
+    ControlButton,
+    Widget.Separator({ vertical: true }),
+    DateButton,
   )
 })
 
