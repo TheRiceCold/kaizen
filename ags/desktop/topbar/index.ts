@@ -19,8 +19,8 @@ const startWidget = Widget.Box(
   Workspaces,
   Widget.Separator({ vertical: true }),
   AiButton,
-  RunButton,
   DashboardButton,
+  RunButton,
   KeysButton,
   WindowButton,
 )
@@ -28,11 +28,7 @@ const startWidget = Widget.Box(
 const Content = Widget.CenterBox({
   css: 'min-width: 2px; min-height: 2.5rem;',
   startWidget,
-  centerWidget: Widget.Box([
-    Widget.Separator({ vertical: true }),
-    Indicator,
-    Widget.Separator({ vertical: true }),
-  ]),
+  centerWidget: Indicator,
   endWidget: Widget.Box(
     { hpack: 'end', className: 'side-items' },
     Tray,
