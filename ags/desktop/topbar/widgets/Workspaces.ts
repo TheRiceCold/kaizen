@@ -3,7 +3,7 @@ import BarButton from '../BarButton'
 import options from 'options'
 import { capitalize } from 'lib/utils'
 
-const { num, substitutes } = options
+const { num, substitutes } = options.workspaces
 const hyprland = await Service.import('hyprland')
 const getId = () => hyprland.active.workspace.id.toString()
 

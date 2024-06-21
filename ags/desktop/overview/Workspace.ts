@@ -3,10 +3,9 @@ import Window from './Window'
 import options from 'options'
 
 const { Gdk, Gtk } = imports.gi
-const { workspaces } = options.overview
+const { scale } = options.workspaces
 
 const hyprland = await Service.import('hyprland')
-const scale = (size: number) => (workspaces.scale.value / 100) * size
 const dispatch = (args: string) => hyprland.messageAsync('dispatch '+args)
 const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)]
 
@@ -33,7 +32,7 @@ export default (id: number) => {
       .forEach(c => {
         const x = c.at[0] - (hyprland.getMonitor(c.monitor)?.x || 0)
         const y = c.at[1] - (hyprland.getMonitor(c.monitor)?.y || 0)
-        c.mapped && fixed.put(Window(c), scale(x), scale(y))
+        c.mapped && fixed.put(Window(c), (scale.value / 100) * x, (scale.value / 100) * y)
       })
     fixed.show_all()
   }
@@ -41,12 +40,12 @@ export default (id: number) => {
   return Widget.Box({
     vpack: 'center',
     className: 'workspace',
-    css: workspaces.scale.bind().as(v => `
+    css: scale.bind().as(v => `
       min-width: ${(v / 100) * size(id).w}px;
       min-height: ${(v / 100) * size(id).h}px;
     `),
     setup(self) {
-      self.hook(options.workspaces.scale, update)
+      self.hook(scale, update)
       self.hook(hyprland, update, 'notify::clients')
       self.hook(hyprland.active.client, update)
       self.hook(hyprland.active.workspace, () => self.toggleClassName('active', hyprland.active.workspace.id === id))
