@@ -1,0 +1,26 @@
+window#overview
+  border: 1px solid transparentize($primary-bg, 0.75)
+  background-color: transparentize($bg, 0.25)
+  .overview
+    padding: calc($padding * 2)
+    .workspace
+      margin: 0 calc($spacing * 1.5)
+      &.active > widget
+        border-color: $primary-bg
+      > widget
+        @include widget
+        border-radius: if($radius == 0, 0, $radius + $padding)
+        &:hover
+          background-color: $hover-bg
+        &:drop(active)
+          border-color: $primary-bg
+
+    .client
+      @include button
+      margin: $padding
+      border-radius: $radius
+      &.hidden
+        @include hidden
+        transition: 0
+      image
+        font-size: 2rem

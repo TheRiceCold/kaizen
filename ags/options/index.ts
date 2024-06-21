@@ -42,6 +42,19 @@ export default mkOptions(OPTIONS, {
     visualizer: { width: opt(8), height: opt(24) },
   },
 
+  workspaces: {
+    num: opt(10),
+    scale: opt(8),
+    monochromeIcon: opt(false),
+    substitutes: opt({
+      'vesktop': 'discord',
+      'org.gnome.Nautilus': 'files',
+      '.blueman-manager-wrapped': 'blueman',
+      '.blueman-sendto-wrapped': 'blueman-send',
+      '.blueman-adapters-wrapped': 'blueman-adapters',
+    })
+  },
+
   ...fonts,
   ...theme,
   ...windows,

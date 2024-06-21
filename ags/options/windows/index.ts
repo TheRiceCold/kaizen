@@ -12,21 +12,6 @@ export default {
   sideleft: {...sideleft},
   sideright: {...sideright},
 
-  workspaces: {
-    num: opt(5),
-    overview: {
-      scale: opt(9),
-      monochromeIcon: opt(true),
-    },
-    substitutes: opt({
-      'vesktop': 'discord',
-      'org.gnome.Nautilus': 'files',
-      '.blueman-manager-wrapped': 'blueman',
-      '.blueman-sendto-wrapped': 'blueman-send',
-      '.blueman-adapters-wrapped': 'blueman-adapters',
-    })
-  },
-
   powermenu: {
     sleep: opt('systemctl suspend'),
     reboot: opt('systemctl reboot'),

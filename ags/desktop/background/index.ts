@@ -1,5 +1,5 @@
-import { RoundedCorner } from 'misc/roundedcorner'
 import { CommandsMenu } from 'desktop/menus'
+import { RoundedCorner } from 'misc/roundedcorner'
 import options from 'options'
 
 const { radius } = options.theme
@@ -7,7 +7,6 @@ const { radius } = options.theme
 export default [
   Widget.Window({
     layer: 'top',
-    visible: true,
     name: 'cornertl',
     exclusivity: 'normal',
     anchor: ['top', 'left'],
