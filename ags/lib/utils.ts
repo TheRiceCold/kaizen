@@ -180,7 +180,7 @@ function searchIcons(appClass, files) {
 }
 
 function getPlayer() {
-  const pref = options.popups.player.preferred.value
+  const pref = options.player.preferred.value
   return mpris.getPlayer(pref) || null
 }
 

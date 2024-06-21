@@ -45,9 +45,13 @@ function indicatorUpdate(type, value) {
 }
 
 const revealer = Widget.Revealer({
-  child: Widget.Box([ stack ]),
   transition: 'slide_down',
   transitionDuration: options.transition * 1.5,
+  child: Widget.Box([
+    Widget.Separator({ vertical: true }),
+    stack,
+    Widget.Separator({ vertical: true }),
+  ]),
 })
   .hook(mpris, () => revealTimeout(500))
   .hook(screenTools, () => revealTimeout(500))

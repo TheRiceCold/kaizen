@@ -35,6 +35,13 @@ export default mkOptions(OPTIONS, {
     proxyUrl: opt(null), // Can be "socks5://127.0.0.1:9050" or "http://127.0.0.1:8080" for example. Leave it blank if you don't need it.
   },
 
+  player: {
+    length: opt(32),
+    coverSize: opt(100),
+    preferred: opt('spotify'),
+    visualizer: { width: opt(8), height: opt(24) },
+  },
+
   ...fonts,
   ...theme,
   ...windows,

@@ -1,31 +1,28 @@
-window.top-popups
-  .media-player
-    .terminal
-      background: $bg
-    .player
-      .cover
-        @if $shadows
-          box-shadow: 2px 2px 2px 0 $shadow-color
-        border-radius: $radius
-        background-size: cover
-        background-position: center
-        border: 2px solid $primary-bg
-        margin-right: calc($spacing * 1.5)
-      button
-        @include button($flat: true)
-        padding: $padding
-        &.play-pause
-          margin: 0 $spacing
-        image
-          font-size: 1.2em
-      .title
-        font-weight: 500
-        font-size: 1.15em
-      .artist
-        margin-top: 2px
-        color: transparentize($fg, 0.25)
-      scale
-        trough
-          border: none
-          margin-bottom: calc($spacing * 0.5)
-        @include slider($width: 0.25em, $slider: false, $gradient: linear-gradient($primary-bg, $primary-bg))
+window.top-popups .media-player
+  .player
+    .cover
+      @if $shadows
+        box-shadow: 2px 2px 2px 0 $shadow-color
+      border-radius: $radius
+      background-size: cover
+      background-position: center
+      border: 2px solid $primary-bg
+      margin-right: calc($spacing * 1.5)
+    button
+      @include button($flat: true)
+      padding: $padding
+      &.play-pause
+        margin: 0 $spacing
+      image
+        font-size: 1.25rem
+    .title
+      color: $fg
+      font-size: 1.15rem
+    .artist
+      margin-top: 2px
+      color: transparentize($fg, 0.25)
+    scale
+      trough
+        border: none
+        margin-bottom: calc($spacing * 0.5)
+      @include slider($width: 0.25rem, $slider: false, $gradient: linear-gradient($primary-bg, $primary-bg))

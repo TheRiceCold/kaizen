@@ -20,7 +20,7 @@ const popupWindow = (position: 'top' | 'bottom', children) => Widget.Window({
     css: 'padding: 2px;',
   }),
   margins: showWidget.indicator.bind().as(
-    shown => shown && (position === 'top') ? [48] : [0]
+    shown => shown && (position === 'top') ? [36] : [0]
   ),
 })
 

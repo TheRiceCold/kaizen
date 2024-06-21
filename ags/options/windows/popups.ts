@@ -1,11 +1,11 @@
 import { opt } from 'lib/option'
 
 export default {
-  player: {
-    coverSize: opt(100),
-    preferred: opt('spotify'),
-    monochromeIcon: opt(true),
-    position: opt<'left' | 'center' | 'right'>('center'),
+  pomodoro: {
+    // set by minutes
+    focus: opt(25),
+    shortBreak: opt(5),
+    longBreak: opt(15),
   },
 
   dock: {

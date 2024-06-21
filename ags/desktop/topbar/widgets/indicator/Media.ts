@@ -5,7 +5,7 @@ import options from 'options'
 import { sh, getPlayer } from 'lib/utils'
 
 const mpris = await Service.import('mpris')
-const { length, visualizer: {width, height} } = options.bar.media
+const { length, visualizer: {width, height} } = options.player
 
 function getLabel(player) {
   if (player) {

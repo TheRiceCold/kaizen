@@ -1,18 +1,10 @@
 import options from 'options'
 import icons from 'data/icons'
-import { icon } from 'lib/utils'
 
 const mpris = await Service.import('mpris')
-const {
-  preferred,
-  coverSize,
-  monochromeIcon,
-} = options.popups.player
+const { preferred, coverSize, length } = options.player
 
-export default Widget.Box({
-  vexpand: false,
-  className: 'player',
-}).hook(mpris, self => {
+export default Widget.Box({ vexpand: false, className: 'player' }).hook(mpris, self => {
   const player = mpris.getPlayer(preferred.value) || null
   if (!player) return
   const url = player['cover-path'] || player['track-cover-url']
@@ -31,21 +23,9 @@ export default Widget.Box({
   const title = Widget.Label({
     hpack: 'start',
     truncate: 'end',
-    maxWidthChars: 30,
     className: 'title',
-    label: player['track-title']
-  })
-
-  const playerIcon = Widget.Icon({
-    hexpand: true,
-    hpack: 'end',
-    vpack: 'start',
-    className: 'icon',
-    tooltipText: player.identity || '',
-    icon: Utils.merge(
-      [ player.bind('entry'), monochromeIcon.bind() ],
-      (e: string, s: string) => icon(`${e}${s ? '-symbolic' : ''}`, icons.fallback.audio)
-    ),
+    label: player['track-title'],
+    maxWidthChars: length.bind(),
   })
 
   const artist = Widget.Label({
@@ -122,9 +102,9 @@ export default Widget.Box({
   })
 
   self.children = [
-    cover, Widget.Box({ vertical: true },
-      Widget.Box([ title, playerIcon ]),
-      artist,
+    cover, Widget.Box(
+      { hexpand: true, vertical: true },
+      title, artist,
       Widget.Box({ vexpand: true }),
       positionSlider,
       Widget.CenterBox({

@@ -1,14 +1,16 @@
 .topbar
-  background-color: $bg
+  background-color: transparentize($bg, 0.25)
   .side-items
     padding: 0 calc($padding * 2)
-  label
+  label, image
+    color: $fg
     font-weight: 500
   .bar-button
     border-radius: $radius
     margin: 0 calc($spacing * 0.5)
     &:hover, &:active, &.on, &.active, &:checked
-      color: $primary-bg
+      label, image
+        color: $primary-bg
     &.launcher-button
       padding-right: 0
       padding-left: 0.25rem
