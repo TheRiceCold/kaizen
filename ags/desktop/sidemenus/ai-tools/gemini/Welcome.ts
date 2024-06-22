@@ -8,29 +8,6 @@ import { bash } from 'lib/utils'
 
 const { Gtk } = imports.gi
 
-const Info = Widget.Box(
-  { vertical: true },
-  Widget.Icon({
-    hpack: 'center',
-    icon: 'gemini-logo',
-    className: 'welcome-logo',
-  }),
-  Widget.Label('Gemini'),
-  Widget.Box(
-    { hpack: 'center' },
-    Widget.Label({
-      wrap: true,
-      label: 'Powered by Google',
-      justify: Gtk.Justification.CENTER,
-    }),
-    Widget.Button({
-      label: 'info',
-      cursor: 'help',
-      tooltipText: "Uses gemini-pro.\nNot affiliated, endorsed, or sponsored by Google.\n\nPrivacy: Chat messages aren't linked to your account,\n    but will be read by human reviewers to improve the model.",
-    }),
-  ),
-)
-
 const Instructions = Widget.Revealer({
   transition: 'slide_down',
   transitionDuration: options.transition.value,
@@ -59,10 +36,10 @@ const Settings = MarginRevealer({
     className: 'chat-settings',
     children: [
       ConfigSegmentedSelection({
+        initIndex: 2,
         hpack: 'center',
         name: 'Randomness',
         desc: "Gemini's temperature value.\n  Precise = 0\n  Balanced = 0.5\n  Creative = 1",
-        initIndex: 2,
         options: [
           { value: 0.0, name: 'Precise' },
           { value: 0.5, name: 'Balanced' },
@@ -102,4 +79,11 @@ const Settings = MarginRevealer({
   })
 })
 
-export default Widget.Box({ vpack: 'center', vertical: true }, Info, Instructions, Settings)
+export default Widget.Box(
+  { vpack: 'center', vertical: true },
+  Widget.Icon({
+    hpack: 'center',
+    icon: 'gemini-logo',
+    className: 'welcome-logo',
+  }), Instructions, Settings
+)
