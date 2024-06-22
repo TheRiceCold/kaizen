@@ -15,19 +15,19 @@ class Brightness extends Service {
     })
   }
 
-  #kbdMax = get(`--device ${kbd} max`)
-  #kbd = get(`--device ${kbd} get`)
-  #screenMax = get('max')
-  #screen = get('get') / get('max')
+  _kbdMax = get(`--device ${kbd} max`)
+  _kbd = get(`--device ${kbd} get`)
+  _screenMax = get('max')
+  _screen = get('get') / get('max')
 
-  get kbd() { return this.#kbd }
-  get screen() { return this.#screen }
+  get kbd() { return this._kbd }
+  get screen() { return this._screen }
 
   set kbd(value) {
-    if (value < 0 || value > this.#kbdMax) return
+    if (value < 0 || value > this._kbdMax) return
 
     sh(`brightnessctl -d ${kbd} s ${value} -q`).then(() => {
-      this.#kbd = value
+      this._kbd = value
       this.changed('kbd')
     })
   }
@@ -37,7 +37,7 @@ class Brightness extends Service {
     if (percent > 1) percent = 1
 
     sh(`brightnessctl set ${Math.floor(percent * 100)}% -q`).then(() => {
-      this.#screen = percent
+      this._screen = percent
       this.changed('screen')
     })
   }
@@ -50,13 +50,13 @@ class Brightness extends Service {
 
     Utils.monitorFile(screenPath, async f => {
       const v = await Utils.readFileAsync(f)
-      this.#screen = Number(v) / this.#screenMax
+      this._screen = Number(v) / this._screenMax
       this.changed('screen')
     })
 
     Utils.monitorFile(kbdPath, async f => {
       const v = await Utils.readFileAsync(f)
-      this.#kbd = Number(v) / this.#kbdMax
+      this._kbd = Number(v) / this._kbdMax
       this.changed('kbd')
     })
   }
