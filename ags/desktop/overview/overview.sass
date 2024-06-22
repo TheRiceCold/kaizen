@@ -1,7 +1,11 @@
 window#overview
-  border: 1px solid transparentize($primary-bg, 0.75)
   background-color: transparentize($bg, 0.25)
+  border-top: 1px solid transparentize($primary-bg, 0.75)
   .overview
+    label
+      font-size: 2rem
+      font-weight: 500
+      color: transparentize($fg, 0.75)
     padding: calc($padding * 2)
     .workspace
       margin: 0 calc($spacing * 1.5)
@@ -9,7 +13,7 @@ window#overview
         border-color: $primary-bg
       > widget
         @include widget
-        border-radius: if($radius == 0, 0, $radius + $padding)
+        border-radius: $radius
         &:hover
           background-color: $hover-bg
         &:drop(active)
@@ -22,5 +26,3 @@ window#overview
       &.hidden
         @include hidden
         transition: 0
-      image
-        font-size: 2rem

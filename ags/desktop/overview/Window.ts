@@ -5,44 +5,42 @@ import icons from 'data/icons'
 import { createSurfaceFromWidget, icon } from 'lib/utils'
 
 const { Gdk, Gtk } = imports.gi
+const { scale } = options.workspaces
 
-const { monochromeIcon, scale } = options.workspaces
-const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)]
 const hyprland = await Service.import('hyprland')
 const apps = await Service.import('applications')
+
 const dispatch = (args: string) => hyprland.messageAsync(`dispatch ${args}`)
+const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)]
 
-export default ({ address, size: [w, h], class: c, title }: Client) => Widget.Button({
+export default ({
+  address,
+  size: [w, h],
+  class: c,
+  title
+}: Client) => Widget.Button({
   className: 'client',
-  attribute: { address },
-  tooltip_text: `${title}`,
+  tooltipText: `${title}`,
   child: Widget.Icon({
-    css: scale.bind().as(v => `
-      min-width: ${(v / 100) * w}px;
-      min-height: ${(v / 100) * h}px;
+    css: scale.bind().as(s => `
+      font-size: ${s * 0.2}rem;
+      min-width: ${s * 0.01 * w}px;
+      min-height: ${s * 0.01 * h}px;
     `),
-    icon: monochromeIcon.bind().as(m => {
-      const app = apps.list.find(app => app.match(c))
-      if (!app)
-        return icons.fallback.executable + (m ? '-symbolic' : '')
-
-      return icon(
-        app.icon_name + (m ? '-symbolic' : ''),
-        icons.fallback.executable + (m ? '-symbolic' : ''),
-      )
-    }),
+    icon: icon(apps.list.find(app => app.match(c)).icon_name, icons.fallback.executable),
   }),
-  onSecondaryClick() { dispatch(`closewindow address:${address}`) },
+  onSecondaryClick() {
+    dispatch('closewindow address:'+address) },
   onClicked() {
-    dispatch(`focuswindow address:${address}`)
+    dispatch('focuswindow address:'+address)
     App.closeWindow('overview')
   },
-  setup: btn => btn
+  setup: self => self
     .on('drag-data-get', (_w, _c, data) => data.set_text(address, address.length))
     .on('drag-begin', (_, context) => {
-      Gtk.drag_set_icon_surface(context, createSurfaceFromWidget(btn))
-      btn.toggleClassName('hidden', true)
+      Gtk.drag_set_icon_surface(context, createSurfaceFromWidget(self))
+      self.toggleClassName('hidden', true)
     })
-    .on('drag-end', () => btn.toggleClassName('hidden', false))
-    .drag_source_set(Gdk.ModifierType.BUTTON1_MASK, TARGET, Gdk.DragAction.COPY),
+    .on('drag-end', () => self.toggleClassName('hidden', false))
+    .drag_source_set(Gdk.ModifierType.BUTTON1_MASK, TARGET, Gdk.DragAction.COPY)
 })

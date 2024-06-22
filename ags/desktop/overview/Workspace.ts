@@ -63,7 +63,10 @@ export default (id: number) => {
           dispatch(`movetoworkspacesilent ${id},address:${address}`)
         })
       },
-      child: fixed,
+      child: Widget.Overlay({
+        overlay: fixed,
+        child: Widget.Label(id.toString()),
+      }),
     }),
   })
 }
