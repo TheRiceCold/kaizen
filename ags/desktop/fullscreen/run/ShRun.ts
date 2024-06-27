@@ -5,18 +5,12 @@ const iconVisible = Variable(false)
 
 function Item(bin: string) {
   return Widget.Box(
-    {
-      vertical: true,
-      attribute: { bin },
-    },
+    { vertical: true },
     Widget.Separator(),
     Widget.Button({
-      child: Widget.Label({ label: bin, hpack: 'start' }),
       className: 'sh-item',
-      onClicked() {
-        Utils.execAsync(bin)
-        App.closeWindow('launcher')
-      },
+      child: Widget.Label({ label: bin, hpack: 'start' }),
+      onClicked() { Utils.execAsync(bin); App.closeWindow('run') },
     }),
   )
 }

@@ -43,7 +43,7 @@ function Item(pkg: Nixpkg) {
         className: 'nix-item',
         onClicked() {
           nix.run(pkg.name)
-          App.closeWindow('launcher')
+          App.closeWindow('run')
         },
       },
       Widget.Box(

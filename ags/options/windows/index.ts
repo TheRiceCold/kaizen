@@ -1,16 +1,19 @@
 import { opt } from 'lib/option'
+
 import bar from './bar'
+import run from './run'
 import popups from './popups'
-import launcher from './launcher'
 import sideleft from './sideleft'
 import sideright from './sideright'
+import dashboard from './dashboard'
 
 export default {
   bar: {...bar},
+  run: {...run},
   popups: {...popups},
-  launcher: {...launcher},
   sideleft: {...sideleft},
   sideright: {...sideright},
+  dashboard: {...dashboard},
 
   powermenu: {
     sleep: opt('systemctl suspend'),

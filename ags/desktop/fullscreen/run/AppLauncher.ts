@@ -6,15 +6,12 @@ import icons from 'data/icons'
 
 const apps = await Service.import('applications')
 const { query } = apps
-const { iconSize, favorites, max: appsMax } = options.launcher.apps
+const { iconSize, favorites, max: appsMax } = options.run.apps
 
 const QuickAppButton = (app: Application) => Widget.Button({
   hexpand: true,
   tooltipText: app.name,
-  onClicked() {
-    App.closeWindow('launcher')
-    launchApp(app)
-  },
+  onClicked() { App.closeWindow('run'); launchApp(app) },
   child: Widget.Icon({
     size: iconSize.bind(),
     icon: icon(app.icon_name, icons.fallback.executable),
@@ -58,10 +55,7 @@ function AppItem(app: Application) {
     attribute: { app },
     className: 'app-item',
     child: Widget.Box([appicon, textBox]),
-    onClicked() {
-      App.closeWindow('launcher')
-      launchApp(app)
-    },
+    onClicked() { App.closeWindow('run'); launchApp(app) },
   })
 }
 

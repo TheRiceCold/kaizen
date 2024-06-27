@@ -1,5 +1,5 @@
 import { type Binding } from 'lib/utils'
-import nix from 'service/nix'
+import Nix from 'service/nix'
 
 import * as ShRun from './ShRun'
 import * as NixRun from './NixRun'
@@ -9,10 +9,9 @@ import RevealerWindow, { Padding } from 'desktop/RevealerWindow'
 import options from 'options'
 import icons from 'data/icons'
 
-const { width, margin } = options.launcher
-const isnix = nix.available
+const { width, margin, nix: { pkgs: nixPkgs } } = options.run
 
-function Launcher() {
+function Run() {
   const sh = ShRun.ShRun()
   const shicon = ShRun.Icon()
   const nix = NixRun.NixRun()
@@ -47,8 +46,8 @@ function Launcher() {
     child: Widget.Box(
       { vertical: true },
       HelpButton('sh', 'run a binary'),
-      isnix ? HelpButton('nx',
-        options.launcher.nix.pkgs.bind().as(pkg => `run a nix package from ${pkg}`)
+      Nix.available ? HelpButton('nx',
+        nixPkgs.bind().as(pkg => `run a nix package from ${pkg}`)
       ) : Widget.Box(),
     ),
   })
@@ -64,7 +63,7 @@ function Launcher() {
       else
         applauncher.launchFirst()
 
-      App.toggleWindow('launcher')
+      App.toggleWindow('run')
       entry.text = ''
     },
     onChange({ text }) {
@@ -93,14 +92,14 @@ function Launcher() {
   const layout = Widget.Box({
     vpack: 'start',
     vertical: true,
-    className: 'launcher',
+    className: 'layout',
     css: width.bind().as(v => `min-width: ${v}pt;`),
     children: [
       Widget.Box([entry, nixload, shicon]),
       help, applauncher, nix, sh,
     ],
   }).hook(App, (self, win, visible) => {
-    if (win !== 'launcher') return
+    if (win !== 'run') return
 
     entry.text = ''
     if (visible) focus()
@@ -117,8 +116,8 @@ function Launcher() {
 }
 
 export default RevealerWindow({
+  name: 'run',
+  child: Run(),
   layout: 'top',
-  name: 'launcher',
-  child: Launcher(),
   keymode: 'exclusive',
 })

@@ -3,7 +3,6 @@ import icons from 'data/icons'
 import options from 'options'
 
 const { GLib } = imports.gi
-const MAX = options.launcher.sh.max
 const BINS = `${Utils.CACHE_DIR}/binaries`
 
 async function ls(path: string) {
@@ -21,7 +20,7 @@ async function reload() {
 async function query(filter: string) {
   if (!dependencies('fzf')) return [] as string[]
 
-  return bash(`cat ${BINS} | fzf -f ${filter} | head -n ${MAX}`)
+  return bash`cat ${BINS} | fzf -f ${filter} | head -n ${options.run.sh.max}`
     .then(str => Array.from(new Set(str.split('\n').filter(i => i)).values()))
     .catch(err => { print(err); return [] })
 }

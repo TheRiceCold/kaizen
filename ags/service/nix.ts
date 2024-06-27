@@ -2,10 +2,9 @@ import icons from 'data/icons'
 import { bash, dependencies } from 'lib/utils'
 import options from 'options'
 
+const { max, pkgs } = options.run.nix
 const CACHE = `${Utils.CACHE_DIR}/nixpkgs`
 const PREFIX = 'legacyPackages.x86_64-linux.'
-const MAX = options.launcher.nix.max
-const nixpkgs = options.launcher.nix.pkgs
 
 export type Nixpkg = {
   name: string
@@ -40,19 +39,19 @@ class Nix extends Service {
       return this
 
     this.#updateList()
-    nixpkgs.connect('changed', this.#updateList)
+    pkgs.connect('changed', this.#updateList)
   }
 
   query = async (filter: string) => {
     if (!dependencies('fzf', 'nix') || !this.#ready)
       return [] as string[]
 
-    return bash(`cat ${CACHE} | fzf -f ${filter} -e | head -n ${MAX} `)
+    return bash(`cat ${CACHE} | fzf -f ${filter} -e | head -n ${max} `)
       .then(str => str.split('\n').filter(i => i))
   }
 
   nix(cmd: string, bin: string, args: string) {
-    return Utils.execAsync(`nix ${cmd} ${nixpkgs}#${bin} --impure ${args}`)
+    return Utils.execAsync(`nix ${cmd} ${pkgs}#${bin} --impure ${args}`)
   }
 
   run = async (input: string) => {
