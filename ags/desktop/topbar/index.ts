@@ -1,11 +1,10 @@
 import {
-  LauncherButton,
+  LogoButton,
   Workspaces,
   AiButton,
-  DashboardButton,
   RunButton,
-  KeysButton,
   WindowButton,
+  ShortcutsButton,
   Indicator,
   Tray,
   ControlButton,
@@ -15,14 +14,13 @@ import { CommandsMenu } from 'desktop/menus'
 
 const startWidget = Widget.Box(
   { hpack: 'start', className: 'side-items' },
-  LauncherButton,
+  LogoButton,
   Workspaces,
   Widget.Separator({ vertical: true }),
   AiButton,
-  DashboardButton,
   RunButton,
-  KeysButton,
   WindowButton,
+  ShortcutsButton,
 )
 
 const Content = Widget.CenterBox({
@@ -41,6 +39,7 @@ const Content = Widget.CenterBox({
 
 export default Widget.Window({
   name: 'topbar',
+  keymode: 'none',
   className: 'topbar',
   exclusivity: 'exclusive',
   anchor: [ 'top', 'right', 'left' ],

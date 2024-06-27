@@ -45,7 +45,7 @@ export default mkOptions(OPTIONS, {
   workspaces: {
     num: opt(10),
     scale: opt(8),
-    monochromeIcon: opt(false),
+    showNumber: opt(true),
     substitutes: opt({
       'vesktop': 'discord',
       'org.gnome.Nautilus': 'files',

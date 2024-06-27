@@ -2,29 +2,28 @@ import BarButton from '../BarButton'
 
 import { showWidget } from 'lib/variables'
 
-export const LauncherButton = BarButton({
+export const LogoButton = BarButton({
   label: '󰚀',
-  window: 'launcher',
+  window: 'dashboard',
   className: 'launcher-button',
-  onClicked() { App.toggleWindow('launcher') },
+  onClicked() { App.toggleWindow('dashboard') },
 })
 
 export const AiButton = BarButton({
-  label: 'AI',
+  label: 'Ask',
   onClicked(self) {
-    toggleWidget('ai-tools')
-    self.toggleClassName('active', showWidget['ai-tools'].value)
+    toggleWidget('ask')
+    self.toggleClassName('active', showWidget['ask'].value)
   },
 })
 
-export const DashboardButton = BarButton({
-  label: 'Dashboard',
-  window: 'dashboard',
-  onClicked() { App.toggleWindow('dashboard') }
+export const RunButton = BarButton({
+  label: 'Run', window: 'run',
+  onClicked() { App.toggleWindow('run') },
 })
 
-export const KeysButton = BarButton({
-  label: 'Keys',
+export const ShortcutsButton = BarButton({
+  label: 'Shortcuts',
   window: 'shortcuts',
   tooltipText: 'Toggle keybind shortcuts',
   onClicked() { App.toggleWindow('shortcuts') }
@@ -32,7 +31,6 @@ export const KeysButton = BarButton({
 
 export { default as Tray } from './Tray'
 export { default as Indicator } from './indicator'
-export { default as RunButton } from './RunButton'
 export { default as Workspaces } from './Workspaces'
 export { default as DateButton } from './DateButton'
 export { default as WindowButton } from './WindowButton'
