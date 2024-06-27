@@ -1,10 +1,10 @@
-import Launcher from './launcher'
+import Run from './run'
 import Shortcuts from './shortcuts'
 import Powermenu from './powermenu'
 import Verification from './powermenu/Verification'
 
 export default [
-  Launcher,
+  Run,
   Powermenu,
   Shortcuts,
   Verification,
