@@ -1,14 +1,15 @@
-import AiTools from './ai-tools'
+import Ask from './ask'
 import DateMenu from './datemenu'
 import QuickSettings from './quicksettings'
 
 type TDirection = 'left' | 'right'
 
 const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
+  layer: 'overlay',
   name: `side${dir}`,
+  keymode: 'on-demand',
   anchor: ['top', dir],
   className: `side${dir}`,
-  keymode: 'on-demand',
   child: Widget.Box({
     children,
     vertical: true,
@@ -17,6 +18,6 @@ const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
 })
 
 export default [
-  Sidemenu('left', AiTools),
+  Sidemenu('left', Ask),
   Sidemenu('right', QuickSettings, DateMenu),
 ]

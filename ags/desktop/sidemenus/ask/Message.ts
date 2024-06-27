@@ -58,9 +58,7 @@ const TextBlock = (content = '') => Widget.Label({
   className: 'chat-txtblock chat-txt',
 })
 
-Utils.execAsync(['bash', '-c', `rm -rf ${LATEX_DIR}/*`])
-  .then(() => bash`mkdir -p ${LATEX_DIR}`)
-  .catch(print)
+bash`rm -rf ${LATEX_DIR}/*`.then(() => bash`mkdir -p ${LATEX_DIR}`).catch(logError)
 
 const Latex = (content = '') => {
   const latexViewArea = Widget.Box({
@@ -108,7 +106,7 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="#ffffff"/g' ${outFilePath}
     className: 'chat-latex',
     attribute: {
       updateText(text) {
-        latexViewArea.attribute.render(latexViewArea, text).catch(print)
+        latexViewArea.attribute.render(latexViewArea, text).catch(logError)
       }
     },
     child: Widget.Scrollable({

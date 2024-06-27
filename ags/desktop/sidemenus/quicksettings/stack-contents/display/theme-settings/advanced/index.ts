@@ -5,12 +5,18 @@ import ListRevealer from '../../../ListRevealer'
 
 import options from 'options'
 
+const { workspaces } = options
 const { focus, shortBreak, longBreak } = options.popups.pomodoro
 const { crypto, quotes, player, system, weather } = options.lockscreen
 
 export default Widget.Box(
   { vertical: true, className: 'advanced-stack' },
   Title({ label: 'Advanced', leftTo: 'themes', rightTo: 'general' }),
+  ListRevealer('Workspaces', Widget.Box(
+    { vertical: true },
+    Item('Number of workspace', { opt: workspaces.num }),
+    Item('Scale', { opt: workspaces.scale }),
+  )),
   ListRevealer('Lockscreen Widgets', Widget.Box(
     { vertical: true },
     Item('Crypto', { opt: crypto }),
@@ -25,5 +31,4 @@ export default Widget.Box(
     Item('Short Break Minutes', { opt: shortBreak }),
     Item('Long Break Minutes', { opt: longBreak }),
   )),
-  ListRevealer('API keys', Widget.Box({ vertical: true })),
 )

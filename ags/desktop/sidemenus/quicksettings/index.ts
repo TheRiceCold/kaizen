@@ -6,7 +6,7 @@ import stackContents, { type TStackItem } from './stack-contents'
 
 export const Stack = Widget.Stack({
   className: 'stack-list',
-  transition: 'slide_down',
+  transition: 'slide_left_right',
   children: stackContents.reduce((acc, item: TStackItem) => {
     acc[item.name] = item.content
     return acc

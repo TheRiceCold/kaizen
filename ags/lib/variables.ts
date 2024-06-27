@@ -40,7 +40,7 @@ const showWidget = {
   quicksettings: Variable(false),
   datemenu: Variable(false),
 
-  'ai-tools': Variable(false),
+  ask: Variable(false),
 }
 
 export {
