@@ -1,0 +1,47 @@
+window#dashboard
+  background-color: transparentize($bg, 0.5)
+  border-top: 1px solid transparentize($fg, 0.75)
+  .dashboard
+    > .header
+      .avatar
+        padding-left: 100px
+        padding-bottom: 75px
+        .container
+          border-radius: $radius
+          .image
+            background: $primary-bg
+            border: $border-width solid $primary-bg
+        revealer image
+          border-radius: $radius
+          background-color: transparentize($primary-fg, 0.75)
+        .file-choose button // HACK: hides everything inside filechooserbutton
+          border: 0
+          background-color: transparent
+          box
+            border: 0
+            padding: 99px
+            background-color: transparent
+            label, image
+              font-size: 0
+      .cover
+        min-height: 200px
+        margin-bottom: 50px
+        + label
+          padding: 1.5rem
+          font-size: 2rem
+          font-weight: 500
+          padding-left: 100px
+
+    .content
+      margin: 0 100px
+      .tab-bar
+        min-width: 200px
+        background-color: transparentize($bg, 0.5)
+        button
+          padding: 1.5rem
+          margin-left: 45px
+          label
+            font-size: 1.25rem
+          .active
+            color: $bg
+            background-color: $primary-bg
