@@ -1,4 +1,15 @@
 window#dashboard
   .dashboard .content
     .home .section
+      padding: 16px
       border-bottom: 1px solid
+      .clock
+        @include floating_widget
+        margin: 0
+        .date
+          font-weight: 500
+        .time
+          font-size: 4rem
+          font-weight: 700
+          &:last-child
+            border-top: 1px solid transparentize($fg, 0.75)

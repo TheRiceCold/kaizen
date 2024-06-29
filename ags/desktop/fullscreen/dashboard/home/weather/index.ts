@@ -20,12 +20,12 @@ const Stack = Widget.Stack({
   className: 'current-condition',
   transitionDuration: options.transition,
   children: {
-    main: Widget.Box({ vpack: 'center', vertical: true },
+    main: Widget.Box({ vertical: true },
       Widget.Label({ className: 'region' }).bind('label', Weather, 'region', r => ' '+r),
-      Widget.Box({ hpack: 'center' },
+      Widget.Box([
         Widget.Icon().bind('icon', Weather, 'icon'),
         Widget.Label({ label: getCurrentCondition('', 'temp_C', '°') }),
-      ),
+      ]),
       Widget.Label({ wrap: true, maxWidthChars: 16, className: 'description' })
         .bind('label', Weather, 'current_condition', getDescription)
         .bind('css', Weather, 'current_condition', condition => {
@@ -33,26 +33,23 @@ const Stack = Widget.Stack({
           return desc.length < 16 ? 'font-size: 1rem;' : 'font-size: 1.15rem;'
         })
     ),
-    details: Widget.Box({
-      vertical: true,
-      vpack: 'center',
-      className: 'details',
-      children: [
-        Widget.Label({ label: getCurrentCondition('', 'humidity', '%') }),
-        Widget.Label({ label: getCurrentCondition('', 'windspeedKmph', ' km/h') }),
-        Widget.Label().bind(
-          'label', Weather, 'current_condition',
-          c => c ? ` ${c['winddirDegree']}° (${c['winddir16Point']})` : ''
-        ),
-        Widget.Label({ label: getAstronomy('sunrise') }),
-        Widget.Label({ label: getAstronomy('sunset') }),
-      ]
-    })
+    details: Widget.Box(
+      { vertical: true, className: 'details' },
+      Widget.Label({ label: getCurrentCondition('', 'humidity', '%') }),
+      Widget.Label({ label: getCurrentCondition('', 'windspeedKmph', ' km/h') }),
+      Widget.Label().bind(
+        'label', Weather, 'current_condition',
+        c => c ? ` ${c['winddirDegree']}° (${c['winddir16Point']})` : ''
+      ),
+      Widget.Label({ label: getAstronomy('sunrise') }),
+      Widget.Label({ label: getAstronomy('sunset') }),
+    )
   }
 })
 
 const CurrentCondition = Widget.EventBox({
   child: Stack,
+  vpack: 'center',
   cursor: 'pointer',
   onHover() { Stack.shown = 'details' },
   onHoverLost() { Stack.shown = 'main' },
