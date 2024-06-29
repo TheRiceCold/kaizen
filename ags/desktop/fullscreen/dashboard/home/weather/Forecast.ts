@@ -5,7 +5,6 @@ const CurrentDay = Variable(0)
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 const Daily = Widget.Box({
-  hpack: 'center',
   className: 'forecast',
   children: Weather.bind('daily_forecast').as(
     days => days.map((day, index) => Widget.Button({

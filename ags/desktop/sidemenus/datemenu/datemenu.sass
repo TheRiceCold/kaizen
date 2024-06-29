@@ -8,3 +8,36 @@ window.sideright .datemenu
         color: transparentize($fg, 0.25)
     button.active label
         color: $primary-bg
+
+  .calendar
+    .calendar-btn
+      min-width: 2.5rem
+      min-height: 2.5rem
+      margin: calc($spacing * 0.15) calc($spacing * 0.75)
+      label
+        font-size: 1.15em
+      &-today
+        font-weight: bold
+        color: $primary-bg
+        border: 1px solid $primary-bg
+      &-othermonth
+        opacity: 0.5
+    .header
+      .date
+        label
+          font-size: 1.5em
+          margin: $spacing calc($spacing * 8)
+        &:hover label
+          color: $primary-bg
+      .monthshift-btn
+        label
+          font-size: 1em
+        &:hover label
+          color: $primary-bg
+    .weekdays
+      padding: 0 calc($padding * 4)
+      margin-bottom: calc($spacing * 0.5)
+      border: 1px solid transparentize($fg, 0.75)
+    .body
+      padding: 0 calc($padding * 4)
+      margin-bottom: calc($spacing * 0.5)

@@ -1,35 +1,48 @@
-import Calendar from './calendar'
-import Weather from './weather'
 import MenuRevealer from '../MenuRevealer'
 
-import options from 'options'
+import Header, { calendarJson } from './Header'
 
-export const activeStack = Variable('calendar')
-const stackItems = [
-  { name: 'calendar', content: Calendar },
-  { name: 'weather', content: Weather },
-]
+const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]
 
-const Stack = Widget.Stack({
-  transition: 'slide_left_right',
-  children: stackItems.reduce((acc, item) => {
-    acc[item.name] = item.content
-    return acc
-  }, {})
-})
-
-const Buttons = Widget.Box({
+const CalendarDay = (day, today) => Widget.Button({
   hpack: 'center',
-  className: 'buttons',
-  spacing: options.theme.spacing * 1.5,
-  children: stackItems.map(item => Widget.Button({
-    label: item.name,
-    cursor: 'pointer',
-    onClicked() {
-      Stack.shown = item.name
-      activeStack.value = item.name
-    }
-  }).hook(activeStack, self => self.toggleClassName('active', activeStack.value === self.label)))
+  label: String(day),
+  className: `calendar-btn ${
+    (today === 1)
+      ? 'calendar-btn-today'
+      : (today === -1)
+        ? 'calendar-btn-othermonth' : '' }`,
 })
 
-export default MenuRevealer('datemenu', [ Stack, Buttons ])
+export function addCalendarChildren(box, calendarJson) {
+  const children = box.get_children()
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i]
+    child.destroy()
+  }
+  box.children = calendarJson.map(row => Widget.Box({
+    children: row.map(day => CalendarDay(day.day, day.today)),
+  }))
+}
+
+export const CalendarDays = Widget.Box({
+  hexpand: true,
+  vertical: true,
+  className: 'body',
+  setup(self) { addCalendarChildren(self, calendarJson) }
+})
+
+export default MenuRevealer('datemenu', Widget.Box({
+  vertical: true,
+  hpack: 'center',
+  className: 'calendar',
+  children: [
+    Header,
+    Widget.Box({
+      hexpand: true,
+      className: 'weekdays',
+      children: weekDays.map(day => CalendarDay(day, 0))
+    }),
+    CalendarDays
+  ]
+}))

@@ -1,5 +1,7 @@
 import wallpaper from 'service/wallpaper'
 
+import Home from './home'
+
 import Avatar from './Avatar'
 import options from 'options'
 import { capitalize } from 'lib/utils'
@@ -7,7 +9,7 @@ import { capitalize } from 'lib/utils'
 const { bio } = options.dashboard
 
 const stackItems = [
-  { name: 'home', icon: '', content: Widget.Box() },
+  { name: 'home', icon: '', content: Home },
   { name: 'ledger', icon: '', content: Widget.Box() },
   { name: 'events', icon: '', content: Widget.Box() },
   { name: 'tasks', icon: '', content: Widget.Box() },
@@ -82,7 +84,7 @@ const Main = Widget.Scrollable({
     { vertical: true, className: 'main' },
     Header,
     Widget.Label({ xalign: 0, label: bio.bind(), className: 'bio' }),
-    // Stack
+    Stack
   )
 })
 

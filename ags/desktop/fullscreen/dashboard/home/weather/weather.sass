@@ -1,22 +1,21 @@
-window.sideright .datemenu
+window#dashboard .weather
   .current-condition
-    @include floating_widget
-    padding: $padding calc($padding * 6)
+    padding: 0 calc($padding * 4)
     .details
       padding: 0 $padding
+      label
+        font-size: 1.15rem
+        padding: calc($padding * 0.75)
     label
       font-weight: 500
     .region
-      font-size: 1.75em
-      margin-bottom: calc($spacing * 0.5)
+      font-size: 1.5em
     image
-      font-size: 4em
+      font-size: 4rem
       padding: $padding
       + label
-        font-size: 2.5em
+        font-size: 2rem
         font-weight: 600
-    .details label
-      padding: calc($padding * 0.75)
 
   .forecast
     label
@@ -36,10 +35,8 @@ window.sideright .datemenu
       @include button
       border-radius: 0
       background-color: transparent
-      border-left: 1px solid transparentize($fg, 0.75)
+      border-right: 1px solid transparentize($fg, 0.75)
       padding: calc($padding * 0.25) calc($padding * 1.5)
-      &:first-child
-        border-left: 0
     label
       font-size: 1em
       margin-bottom: calc($spacing * 0.5)
