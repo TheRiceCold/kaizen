@@ -1,23 +1,23 @@
 import options from 'options'
 import icons from 'data/icons'
+import { getPlayer } from 'lib/utils'
 
 const mpris = await Service.import('mpris')
-const { preferred, coverSize, length } = options.player
+const { coverSize, length } = options.popups.player
 
-export default Widget.Box({ vexpand: false, className: 'player' }).hook(mpris, self => {
-  const player = mpris.getPlayer(preferred.value) || null
+export default Widget.Box({className: 'player'}).hook(mpris, self => {
+  const player = getPlayer()
   if (!player) return
   const url = player['cover-path'] || player['track-cover-url']
 
   // TODO: Turnable animation, like spicetify
   // reference: https://github.com/spicetify/spicetify-themes/raw/master/Turntable/screenshots/fad.png
   const cover = Widget.Box({
-    vpack: 'start',
     className: 'cover',
     css: `
-    min-width: ${coverSize}px;
-    min-height: ${coverSize}px;
-    background-image: url('${url}');`
+      min-width: ${coverSize}px;
+      min-height: ${coverSize}px;
+      background-image: url('${url}');`
   })
 
   const title = Widget.Label({
@@ -73,13 +73,11 @@ export default Widget.Box({ vexpand: false, className: 'player' }).hook(mpris, s
     hpack: 'end',
     className: 'length',
     label: player.bind('length').as(lengthStr),
-    visible: player.bind('length').as((l: number) => l > 0),
   })
 
   const playPause = Widget.Button({
     cursor: 'pointer',
     className: 'play-pause',
-    visible: player.bind('can-play'),
     onClicked() { player.playPause() },
     child: Widget.Icon().bind(
       'icon', player, 'play-back-status',
@@ -90,14 +88,12 @@ export default Widget.Box({ vexpand: false, className: 'player' }).hook(mpris, s
   const prev = Widget.Button({
     cursor: 'pointer',
     onClicked() { player.previous() },
-    visible: player.bind('can-go-prev'),
     child: Widget.Icon(icons.mpris.prev),
   })
 
   const next = Widget.Button({
     cursor: 'pointer',
     onClicked() { player.next() },
-    visible: player.bind('can-go-next'),
     child: Widget.Icon(icons.mpris.next),
   })
 

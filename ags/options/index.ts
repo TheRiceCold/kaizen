@@ -36,8 +36,6 @@ export default mkOptions(OPTIONS, {
   },
 
   player: {
-    length: opt(32),
-    coverSize: opt(100),
     preferred: opt('spotify'),
     visualizer: { width: opt(8), height: opt(24) },
   },
@@ -49,6 +47,7 @@ export default mkOptions(OPTIONS, {
     substitutes: opt({
       'vesktop': 'discord',
       'org.gnome.Nautilus': 'files',
+      'notion-app-enhanced': 'notion',
       '.blueman-manager-wrapped': 'blueman',
       '.blueman-sendto-wrapped': 'blueman-send',
       '.blueman-adapters-wrapped': 'blueman-adapters',

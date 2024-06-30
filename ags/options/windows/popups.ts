@@ -1,6 +1,10 @@
 import { opt } from 'lib/option'
 
 export default {
+  player: {
+    length: opt(32),
+    coverSize: opt(100),
+  },
   pomodoro: {
     // set by minutes
     focus: opt(25),
