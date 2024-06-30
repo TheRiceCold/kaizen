@@ -7,7 +7,6 @@ type TDirection = 'left' | 'right'
 const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
   layer: 'overlay',
   name: `side${dir}`,
-  keymode: 'on-demand',
   anchor: ['top', dir],
   className: `side${dir}`,
   child: Widget.Box({

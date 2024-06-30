@@ -3,4 +3,4 @@ import Textbox from './Textbox'
 import Commands from './Commands'
 import MenuRevealer from '../MenuRevealer'
 
-export default MenuRevealer('ask', [Content, Commands, Textbox])
+export default MenuRevealer('ask', Content, Commands, Textbox)
