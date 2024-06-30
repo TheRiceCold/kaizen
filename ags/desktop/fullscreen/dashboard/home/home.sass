@@ -2,14 +2,26 @@ window#dashboard
   .dashboard .content
     .home .section
       padding: 16px
-      border-bottom: 1px solid
-      .clock
+      border-bottom: 1px solid transparentize($fg, 0.75)
+      .player > box, .clock
         @include floating_widget
         margin: 0
-        .date
-          font-weight: 500
-        .time
-          font-size: 4rem
-          font-weight: 700
-          &:last-child
-            border-top: 1px solid transparentize($fg, 0.75)
+
+      .player
+        &:hover, &:focus
+          border: 2px solid $primary-bg
+        .controls
+          margin-top: $spacing
+          button:hover
+            color: $primary-bg
+          image
+            font-size: 2rem
+            padding: 0 $padding
+
+      .clock .date
+        font-weight: 500
+      .clock .time
+        font-size: 4rem
+        font-weight: 700
+        &:last-child
+          border-top: 1px solid transparentize($fg, 0.75)
