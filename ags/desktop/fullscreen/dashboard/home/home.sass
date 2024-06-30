@@ -3,20 +3,19 @@ window#dashboard
     .home .section
       padding: 16px
       border-bottom: 1px solid transparentize($fg, 0.75)
-      .player > box, .clock
+      .github, .player > box, .clock > box
         @include floating_widget
         margin: 0
-
-      .player
         &:hover, &:focus
           border: 2px solid $primary-bg
-        .controls
-          margin-top: $spacing
-          button:hover
-            color: $primary-bg
-          image
-            font-size: 2rem
-            padding: 0 $padding
+
+      .player .controls
+        margin-top: $spacing
+        button:hover
+          color: $primary-bg
+        image
+          font-size: 2rem
+          padding: 0 $padding
 
       .clock .date
         font-weight: 500

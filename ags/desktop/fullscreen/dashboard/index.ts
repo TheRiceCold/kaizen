@@ -39,7 +39,6 @@ const SideMenu = Widget.Revealer({
   transition: 'slide_right',
   transitionDuration: options.transition,
   child: Widget.Box({
-    vexpand: true,
     vertical: true,
     className: 'sidemenu',
     children: Array.from({ length: stackItems.length }, (_, i) => i).map(TabButton)
