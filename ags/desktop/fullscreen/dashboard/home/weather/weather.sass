@@ -1,4 +1,6 @@
 window#dashboard .weather
+  @include floating-widget
+  margin: 0
   .current-condition
     .details
       padding: 0 $padding
@@ -34,7 +36,6 @@ window#dashboard .weather
       @include button
       border-radius: 0
       background-color: transparent
-      border-right: 1px solid transparentize($fg, 0.75)
       padding: calc($padding * 0.25) calc($padding * 1.5)
     label
       font-size: 1em

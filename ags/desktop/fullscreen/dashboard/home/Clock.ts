@@ -6,15 +6,12 @@ const date = Variable('', { poll: [8000, "date '+%d %b %A'"] })
 
 export default Widget.EventBox({
   cursor: 'pointer',
-  child: Widget.Box({
-    vertical: true,
-    className: 'clock',
-    children: [
-      Widget.Label({ className: 'date' }).bind('label', date),
-      Widget.Label({ className: 'time', label: hour.bind().as(h => h+'') }),
-      Widget.Label({ className: 'time', label: minute.bind().as(m => m+'') })
-    ]
-  }),
+  className: 'clock',
+  child: Widget.Box({ vertical: true },
+    Widget.Label({ className: 'date' }).bind('label', date),
+    Widget.Label({ className: 'time', label: hour.bind().as(h => h+'') }),
+    Widget.Label({ className: 'time', label: minute.bind().as(m => m+'') })
+  ),
   onPrimaryClick() {
     showWidget.datemenu.value = !showWidget.datemenu.value
   },

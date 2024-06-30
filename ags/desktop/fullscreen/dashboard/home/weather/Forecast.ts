@@ -31,47 +31,47 @@ const Daily = Widget.Box({
   * IDK why but I f*cking hate adding eventbox everytime a
   * widget to forces itself to show up first in the stack.
 */
-const Hourly = Widget.EventBox({ child: Widget.Box(
-  { className: 'forecast', vertical: true, hexpand: true },
-  Widget.Box(
-    { className: 'title' },
-    Widget.EventBox({
-      cursor: 'pointer',
-      child: Widget.Label('Back to Daily Forecast'),
-      onPrimaryClick() { Stack.shown = 'daily' }
-    }),
-    Widget.Label({
-      xalign: 1,
-      hexpand: true,
-      className: 'date',
-      label: Utils.merge([
-        CurrentDay.bind(),
-        Weather.bind('hourly_forecast')
-      ], (day, forecast) => `Date: ${forecast[day] ? forecast[day][0].time.slice(0, 10) : ''}`)
+const Hourly = Widget.EventBox({
+  child: Widget.Box(
+    { className: 'forecast', vertical: true },
+    Widget.Box(
+      { className: 'title' },
+      Widget.EventBox({
+        cursor: 'pointer',
+        child: Widget.Label('Back to Daily Forecast'),
+        onPrimaryClick() { Stack.shown = 'daily' }
+      }),
+      Widget.Label({
+        xalign: 1,
+        className: 'date',
+        label: Utils.merge([
+          CurrentDay.bind(),
+          Weather.bind('hourly_forecast')
+        ], (day, forecast) => `Date: ${forecast[day] ? forecast[day][0].time.slice(0, 10) : ''}`)
+      })
+    ),
+    Widget.Scrollable({
+      vscroll: 'never',
+      hscroll: 'always',
+      child: Widget.Box({
+        hpack: 'center',
+        children: Utils.merge(
+          [ CurrentDay.bind(), Weather.bind('hourly_forecast') ],
+          (day, forecast) => forecast[day] ? forecast[day].map(hour => Widget.Button({
+            cursor: 'pointer',
+            child: Widget.Box(
+              { vertical: true },
+              Widget.Label(hour.time.slice(11, 16)),
+              Widget.Icon(hour.icon),
+              Widget.Label(` ${Math.round(hour.temp)}°`),
+              Widget.Label(` ${hour.humidity}%`),
+              Widget.Label(` ${hour.windSpeed} km/h`),
+            )
+          })) : [])
+      })
     })
-  ),
-  Widget.Scrollable({
-    hexpand: true,
-    vscroll: 'never',
-    hscroll: 'always',
-    child: Widget.Box({
-      hpack: 'center',
-      children: Utils.merge(
-        [ CurrentDay.bind(), Weather.bind('hourly_forecast') ],
-        (day, forecast) => forecast[day] ? forecast[day].map(hour => Widget.Button({
-          cursor: 'pointer',
-          child: Widget.Box(
-            { vertical: true },
-            Widget.Label(hour.time.slice(11, 16)),
-            Widget.Icon(hour.icon),
-            Widget.Label(` ${Math.round(hour.temp)}°`),
-            Widget.Label(` ${hour.humidity}%`),
-            Widget.Label(` ${hour.windSpeed} km/h`),
-          )
-        })) : [])
-    })
-  })
-) })
+  )
+})
 
 const Stack = Widget.Stack({
   transition: 'slide_up_down',
