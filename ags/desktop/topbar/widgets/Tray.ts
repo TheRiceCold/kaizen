@@ -3,7 +3,7 @@ import BarButton from '../BarButton'
 import options from 'options'
 
 const { Gdk } = imports.gi
-const { ignore } = options.bar.tray
+const { ignore } = options.topbar.tray
 const systemtray = await Service.import('systemtray')
 
 const Item = (item: TrayItem) => BarButton({

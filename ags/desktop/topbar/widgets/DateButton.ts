@@ -5,7 +5,7 @@ import { clock } from 'lib/variables'
 import { showWidget } from 'lib/variables'
 const { datemenu } = showWidget
 
-const { interval, format } = options.bar.datemenu
+const { interval, format } = options.topbar.datemenu
 
 export default BarButton({
   window: 'datemenu',

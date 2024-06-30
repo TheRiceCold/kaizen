@@ -16,8 +16,8 @@ const Client = (num: number) => Widget.Label({
   const { active } = hyprland
   const subs = substitutes.value
   const client = active.client.class
-  self.label = (client.length > 0) ?
-    getId()+': '+capitalize((client in subs) ? subs[client] : client) : getId()
+  const sub = (client in subs) ? subs[client] : client
+  self.label = (client.length > 0) ? getId()+': '+capitalize(sub) : getId()
 })
 
 const Workspace = Widget.Stack({
@@ -35,6 +35,5 @@ export default Widget.Box([
     window: 'overview',
     label: 'Workspace',
     onClicked() { App.toggleWindow('overview') },
-  }),
-  Workspace
+  }), Workspace
 ])
