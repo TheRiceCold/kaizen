@@ -1,6 +1,9 @@
 import { opt } from 'lib/option'
 
 export default {
+  media: {
+    length: opt(32),
+  },
   tray: {
     ignore: opt([ 'KDE Connect Indicator', 'gromit-mpx' ]),
   },

@@ -1,15 +1,15 @@
 import { opt } from 'lib/option'
 
-import bar from './bar'
 import run from './run'
+import topbar from './topbar'
 import popups from './popups'
 import sideleft from './sideleft'
 import sideright from './sideright'
 import dashboard from './dashboard'
 
 export default {
-  bar: {...bar},
   run: {...run},
+  topbar: {...topbar},
   popups: {...popups},
   sideleft: {...sideleft},
   sideright: {...sideright},
