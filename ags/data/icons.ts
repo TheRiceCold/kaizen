@@ -128,48 +128,4 @@ export default {
     dark: 'dark-mode-symbolic',
     light: 'light-mode-symbolic'
   },
-  weatherCodes: {
-    0: { day: 'sunny', night: 'clear' },
-    1: { day: 'sunny', night: 'clear' },
-    2: { day: 'partly_cloudy', night: 'partly_cloudy_night' },
-    3: { day: 'cloudy', night: 'cloudy' },
-    45:{ day: 'foggy', night: 'foggy_night' },
-    48: { day: 'foggy', night: 'foggy_night' },
-    51: { day: 'drizzle', night: 'drizzle_night' }, // Light
-    53: { day: 'drizzle', night: 'drizzle_night' },
-    55: { day: 'heavy_drizzle', night: 'heavy_drizzle_night' }, // Heavy
-    56: { day: 'drizzle', night: 'drizzle_night' }, // Light Frezzing
-    57: { day: 'drizzle', night: 'drizzle_night' }, // Frezzing
-    61: { day: 'rain', night: 'rain' }, // Light
-    63: { day: 'rain', night: 'rain' },
-    65: { day: 'rain', night: 'rain' }, // Heavy
-    66: { day: 'rain', night: 'rain' }, // Light Freezing
-    67: { day: 'rain', night: 'rain' }, // Freezing
-    71: { day: 'snow', night: 'snow' }, // Light
-    73: { day: 'snow', night: 'snow' },
-    75: { day: 'snow', night: 'snow' }, // Heavy
-    77: { day: 'snow', night: 'snow' }, // Grains
-    80: { day: 'showers', night: 'showers' }, // Light
-    81: { day: 'showers', night: 'showers' },
-    82: { day: 'heavy_showers', night: 'heavy_showers' },
-    85: { day: 'snow', night: 'snow' }, // Light Snow Showers
-    86: { day: 'snow', night: 'snow', }, // Snow Showers
-    95: { day: 'thunderstorm', night: 'thunderstorm_night' },
-    96: { day: 'thunderstorm', night: 'thunderstorm_night' }, // Light With Hail
-    99: { day: 'thunderstorm', night: 'thunderstorm_night' }, // With Hail
-    113: { day: 'sunny', night: 'clear' },
-    116: { day: 'partly_cloudy', night: 'partly_cloudy_night' },
-    119: { day: 'cloudy', night: 'cloudy' },
-    122: { day: 'cloudy', night: 'cloudy' },
-    143:{ day: 'foggy', night: 'foggy_night' },
-    176: { day: 'showers', night: 'showers' },
-    179: { day: 'showers', night: 'showers' }, // Light Sleet Showers
-    200: { day: 'thunderstorm', night: 'thunderstorm_night' }, // Thundery Showers
-    263: { day: 'showers', night: 'showers' }, // Light
-    266: { day: 'rain', night: 'rain' }, // Light
-    293: { day: 'rain', night: 'rain' }, // Light
-    296: { day: 'rain', night: 'rain' }, // Light
-    353: { day: 'showers', night: 'showers' }, // Light
-    356: { day: 'heavy_showers', night: 'heavy_showers' },
-  }
 }
