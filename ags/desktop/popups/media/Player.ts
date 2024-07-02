@@ -3,40 +3,39 @@ import icons from 'data/icons'
 import { getPlayer } from 'lib/utils'
 
 const mpris = await Service.import('mpris')
-const { coverSize, length } = options.popups.player
+const { length } = options.popups.player
 
-export default Widget.Box({className: 'player'}).hook(mpris, self => {
+const Title = Widget.Label({
+  hpack: 'start',
+  truncate: 'end',
+  className: 'title',
+  maxWidthChars: length.bind(),
+}).hook(mpris, self => {
   const player = getPlayer()
   if (!player) return
-  const url = player['cover-path'] || player['track-cover-url']
+  self.label = player['track-title']
+})
 
-  // TODO: Turnable animation, like spicetify
-  // reference: https://github.com/spicetify/spicetify-themes/raw/master/Turntable/screenshots/fad.png
-  const cover = Widget.Box({
-    className: 'cover',
-    css: `
-      min-width: ${coverSize}px;
-      min-height: ${coverSize}px;
-      background-image: url('${url}');`
-  })
+const Artist = Widget.Label({
+  hpack: 'start',
+  truncate: 'end',
+  maxWidthChars: 20,
+  className: 'artist',
+}).hook(mpris, self => {
+  const player = getPlayer()
+  if (!player) return
+  self.label = player['track-artists'].join(', ')
+})
 
-  const title = Widget.Label({
-    hpack: 'start',
-    truncate: 'end',
-    className: 'title',
-    label: player['track-title'],
-    maxWidthChars: length.bind(),
-  })
+export default Widget.Box({
+  hexpand: true,
+  vertical: true,
+  className: 'player',
+}).hook(mpris, self => {
+  const player = getPlayer()
+  if (!player) return
 
-  const artist = Widget.Label({
-    hpack: 'start',
-    truncate: 'end',
-    maxWidthChars: 20,
-    className: 'artist',
-    label: player['track-artists'].join(', ')
-  })
-
-  const positionSlider = Widget.Slider({
+  const Slider = Widget.Slider({
     drawValue: false,
     onChange({ value }) { player.position = value * player.length },
     setup(self) {
@@ -98,17 +97,12 @@ export default Widget.Box({className: 'player'}).hook(mpris, self => {
   })
 
   self.children = [
-    cover, Widget.Box(
-      { hexpand: true, vertical: true },
-      title, artist,
-      Widget.Box({ vexpand: true }),
-      positionSlider,
-      Widget.CenterBox({
-        className: 'footer horizontal',
-        startWidget: positionLabel,
-        centerWidget: Widget.Box([ prev, playPause, next ]),
-        endWidget: lengthLabel,
-      }),
-    )
+    Title, Artist, Slider,
+    Widget.CenterBox({
+      className: 'footer horizontal',
+      startWidget: positionLabel,
+      centerWidget: Widget.Box([ prev, playPause, next ]),
+      endWidget: lengthLabel,
+    }),
   ]
 })

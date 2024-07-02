@@ -10,7 +10,6 @@ import { showWidget } from 'lib/variables'
 const popupWindow = (position: 'top' | 'bottom', children) => Widget.Window({
   layer: 'overlay',
   anchor: [position],
-  keymode: 'on-demand',
   exclusivity: 'ignore',
   name: `${position}-popups`,
   className: `${position}-popups`,
