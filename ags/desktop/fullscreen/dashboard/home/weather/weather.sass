@@ -1,47 +1,68 @@
+$border: 1px solid transparentize($fg, 0.75)
+
 window#dashboard .weather
   @include floating-widget
   margin: 0
+  padding: 0
   .current-condition
-    .details
-      padding: 0 $padding
-      label
-        font-size: 1.15rem
-        padding: calc($padding * 0.75)
+    padding: 1rem
     label
-      font-weight: 500
+      padding: 0.5rem
+      font-size: 1.15rem
     .region
-      font-size: 1.5em
+      font-size: 2em
+      font-weight: 500
+    .description
+      font-weight: 500
+      margin-bottom: 0.75rem
+    .sun
+      border-bottom: $border
     image
-      font-size: 4rem
-      padding: $padding
+      font-size: 5rem
+      margin: 0.5rem 0
       + label
-        font-size: 2rem
         font-weight: 600
+        font-size: 2.5rem
 
   .forecast
-    label
-      font-weight: 500
-    .title
-      *
-        font-size: 0.9em
-      .date
-        font-size: 1.15em
-      margin: 0 calc($spacing * 1.5) calc($spacing * 0.5)
-    &:first-child
-      label:first-child
-        font-size: 1.15em
+    button:hover label
+      color: $primary-bg
+    .daily, .hourly > .content
       button
-        padding: 0 $padding
-    button
-      @include button
-      border-radius: 0
-      background-color: transparent
-      padding: calc($padding * 0.25) calc($padding * 1.5)
-    label
-      font-size: 1em
-      margin-bottom: calc($spacing * 0.5)
-      &:first-child
-        font-size: 1.15em
-    image
-      font-size: 2.25em
-      margin-bottom: calc($spacing * 0.5)
+        border-left: $border
+        &:hover
+          background-color: transparentize($primary-fg, 0.5)
+        .day, .hour
+          margin-top: 1rem
+          font-weight: 600
+          font-size: 1.5rem
+        image
+          font-size: 3rem
+          padding: 1.25rem 2rem
+          margin-bottom: 0.75rem
+          border-bottom: $border
+        label
+          font-size: 1.15rem
+          margin-bottom: 0.5rem
+
+    .hourly
+      .header
+        padding: 1rem
+        border-left: $border
+        .back-btn
+          margin-right: 16rem
+        label
+          font-weight: 500
+          font-size: 1.5rem
+      > .content
+        border: 0
+        margin: 0
+        padding: 0
+        border-left: $border
+        button
+          &:first-child
+            border-left: 0
+          border-top: $border
+          image
+            font-size: 4rem
+            padding: 1rem 2rem
