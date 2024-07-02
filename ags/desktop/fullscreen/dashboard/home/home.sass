@@ -3,19 +3,31 @@ window#dashboard
     .home .section
       padding: 16px
       border-bottom: 1px solid transparentize($fg, 0.75)
-      .github, .player > box, .clock > box
+      .github, .player, .clock
         @include floating_widget
         margin: 0
         &:hover, &:focus
           border: 2px solid $primary-bg
-
-      .player .controls
-        margin-top: $spacing
-        button:hover
-          color: $primary-bg
-        image
-          font-size: 2rem
-          padding: 0 $padding
+        > box
+          padding: 1rem
+      .player
+        .cover
+          background-size: cover
+          background-position: center
+        .controls
+          margin-top: $spacing
+          button
+            label
+              font-size: 1rem
+            &.active
+              color: $primary-bg
+            &:first-child, &:last-child
+              margin: 0 1rem
+            &:last-child label
+              font-size: 1.25rem
+          image
+            font-size: 2rem
+            padding: 0 $padding
 
       .clock .date
         font-weight: 500
@@ -24,3 +36,5 @@ window#dashboard
         font-weight: 700
         &:last-child
           border-top: 1px solid transparentize($fg, 0.75)
+      .github
+        padding: 1rem

@@ -6,8 +6,9 @@ const contribData = Variable()
 const contribCount = Variable(0)
 const { username } = options.dashboard.github
 
-const url = 'https://github-contributions.vercel.app/api/v1/'+username.value
-Utils.execAsync(['curl', url]).then(x => {
+Utils.execAsync([
+  'curl', `https://github-contributions.vercel.app/api/v1/${username.value}`.toLowerCase()
+]).then(x => {
   const out = JSON.parse(x)
 
   const daysLeftInYear = 365 - Number(Utils.exec('date +%j'))
@@ -19,9 +20,9 @@ Utils.execAsync(['curl', url]).then(x => {
   contribCount.value = _contribCount
 }).catch(err => print(err))
 
-// Create one contrib square
 const ContribBox = (intensity = 0) => Widget.DrawingArea({
   className: 'intensity-'+intensity,
+  tooltipText: intensity.toString(),
   setup(self) {
     const styles = self.get_style_context()
     const fg = styles.get_background_color(Gtk.StateFlags.NORMAL)
@@ -64,11 +65,14 @@ const ContribGrid = Grid({
   self.show_all()
 })
 
-export default Widget.Box(
-  { vertical: true, className: 'github' },
-  Widget.Label({
-    className: 'header',
-    label: contribCount.bind().as(v => ` | ${v} total lifetime contributions`)
-  }),
-  ContribGrid,
-)
+export default Widget.Box({
+  vertical: true,
+  className: 'github',
+  visible: contribCount.bind(),
+  children: [
+    Widget.Label({
+      className: 'header',
+      label: Utils.merge([username.bind(), contribCount.bind()], (u, c) => ` ${u} | ${c} total lifetime contributions`)
+    }), ContribGrid
+  ]
+})
