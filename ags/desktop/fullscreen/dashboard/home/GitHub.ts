@@ -21,8 +21,6 @@ Utils.execAsync(['curl', url]).then(x => {
 
 // Create one contrib square
 const ContribBox = (intensity = 0) => Widget.DrawingArea({
-  hpack: 'center',
-  vpack: 'center',
   className: 'intensity-'+intensity,
   setup(self) {
     const styles = self.get_style_context()
