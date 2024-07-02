@@ -2,12 +2,13 @@
 @use 'sass:color'
 
 window#run .layout
+  margin-top: $spacing
   border-radius: calc($radius * 0.75)
-  background-color: transparentize($bg, 0.5)
+  background-color: transparentize($bg, 0.25)
   border: 1px solid transparentize($primary-bg, 0.5)
 
   entry
-    font-size: 1.1em
+    font-size: 1rem
     padding: calc($padding * 3)
     image
       margin-right: $spacing
@@ -35,12 +36,13 @@ window#run .layout
       transition: $transition
       &.title
         color: $fg
-        font-size: 1.1em
+        font-size: 1.15rem
         margin-bottom: calc($spacing * 0.25)
       &.description
         color: transparentize($fg, 0.3)
 
     image
+      font-size: 4rem
       margin-right: $spacing
       transition: $transition
 
@@ -65,7 +67,7 @@ window#run .layout
       transition: $transition
 
     .name
-      font-size: 1.2em
+      font-size: 1.2rem
       font-weight: bold
     .description
       color: transparentize($fg, 0.3)
