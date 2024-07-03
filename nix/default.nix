@@ -2,29 +2,39 @@
   inputs, system, stdenv,
   writeShellScript,
 
-  # Utilities
-  fd, esbuild, which, dart-sass,
+  # UTILITIES
+  fd, which,
 
+  # BUNDLERS/COMPILERS
+  esbuild, dart-sass,
+
+  vte,
   gtksourceview4,
   # accountsservice,
 
   # SERVICES
-  vte,
   cage,
   cava,
   swww,
+  gvfs,
   # brotab,
   # sptlrx,
   ydotool,
   cliphist,
   gromit-mpx,
   hyprpicker,
-  pop-launcher,
   # showmethekey, # TODO:
   wl-clipboard,
   brightnessctl,
+
+  # Dashboard
+  ledger,
+  gcalcli,
+
+  # ScreenTools
+  grim,
+  slurp,
   swappy,
-  slurp, grim,
   wl-screenrec,
   version ? "git"
 } : let
@@ -42,18 +52,21 @@
     dart-sass
 
     cava              # Audio Visualizer
+    gvfs              # Virtual Filesystem support library
     swww              # Animated Wallpaper Daemon
     matugen           # Color generation tool
     ydotool           # Generic command-line automation tool
     cliphist          # Clipboard History Manager
     hyprpicker        # Wayland Color Picker
     gromit-mpx        # Annotation Tool
+    wl-clipboard      # Command-line copy/paste utilities for Wayland
+    brightnessctl     # Read and Control Brightness
+
+    # ScreenTools
     grim              # Screenshot tool
     slurp             # Region Selector
     swappy            # Annotation gui made in gtk
     wl-screenrec      # High Performance Screen Recorder
-    wl-clipboard      # Command-line copy/paste utilities for Wayland
-    brightnessctl     # Read and Control Brightness
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
