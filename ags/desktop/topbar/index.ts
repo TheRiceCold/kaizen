@@ -10,7 +10,7 @@ import {
   ControlButton,
   DateButton,
 } from './widgets'
-import { CommandsMenu } from 'desktop/menus'
+import DropdownMenu from 'desktop/dropdowns/background'
 
 const startWidget = Widget.Box(
   { hpack: 'start', className: 'side-items' },
@@ -45,6 +45,6 @@ export default Widget.Window({
   anchor: [ 'top', 'right', 'left' ],
   child: Widget.EventBox({
     child: Content,
-    onSecondaryClick(_, event) { CommandsMenu(event) },
+    onSecondaryClick(_, event) { DropdownMenu(event) },
   }),
 })

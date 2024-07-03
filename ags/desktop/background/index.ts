@@ -1,4 +1,4 @@
-import { CommandsMenu } from 'desktop/menus'
+import DropdownMenu from 'desktop/dropdowns/background'
 import { RoundedCorner } from 'misc/roundedcorner'
 import options from 'options'
 
@@ -21,7 +21,7 @@ export default [
     focusable: false,
     name: 'bgoverlay',
     anchor: ['top', 'bottom', 'left', 'right'],
-    child: Widget.EventBox({ onSecondaryClick: (_, event) => CommandsMenu(event) }),
+    child: Widget.EventBox({ onSecondaryClick: (_, event) => DropdownMenu(event) }),
   }),
 
   Widget.Window({
