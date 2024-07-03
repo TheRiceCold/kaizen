@@ -6,11 +6,7 @@ export default RevealerWindow({
   transition: 'crossfade',
   child: Widget.Box(
     { vertical: true, className: 'verification' },
-    Widget.Box(
-      { vertical: true, className: 'text-box' },
-      Widget.Label({ className: 'title', label: powermenu.bind('title') }),
-      Widget.Label({ className: 'desc', label: 'Are you sure?' }),
-    ),
+    Widget.Label({ className: 'title', label: powermenu.bind('title') }),
     Widget.Box({
       vpack: 'end',
       vexpand: true,
