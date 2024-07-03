@@ -1,4 +1,3 @@
-import { type BoxProps } from 'types/widgets/box'
 import icons from 'data/icons'
 
 import WifiList from './wifi'
@@ -6,12 +5,6 @@ import AudioList from './audio'
 import DisplayOptions from './display'
 import BluetoothList from './bluetooth'
 import NotificationList from './notifications'
-
-export type TStackItem = {
-  name: string,
-  icon: string,
-  content: BoxProps
-}
 
 export default [
   {
