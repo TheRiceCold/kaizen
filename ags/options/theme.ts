@@ -1,6 +1,16 @@
 import { opt } from 'lib/option'
 
+type TShader =
+  | 'default'
+  | 'blue light'
+  | 'grayscale'
+  | 'invert'
+
 export default {
+  autotheme: opt(true),
+  transition: opt(200),
+  avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
+
   theme: {
     dark: {
       primary: {
@@ -47,5 +57,24 @@ export default {
     padding: opt(4),
     spacing: opt(8),
     radius: opt(0),
+  },
+
+  hyprland: {
+    gaps: opt(1.5),
+    gapsWhenOnly: opt(false),
+    inactiveBorder: opt('333333ff'),
+    shader: opt<TShader>('default'),
+  },
+
+  wallpaper: {
+    market: opt<import('service/wallpaper').Market>('random'),
+    resolution: opt<import('service/wallpaper').Resolution>(1920),
+  },
+
+  font: {
+    default: {
+      size: opt(10),
+      name: opt('Ubuntu Nerd Font'),
+    },
   },
 }

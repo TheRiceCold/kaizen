@@ -1,51 +1,51 @@
 import { opt } from 'lib/option'
-
-import run from './run'
-import topbar from './topbar'
-import popups from './popups'
-import sideleft from './sideleft'
-import sideright from './sideright'
 import dashboard from './dashboard'
 
 export default {
-  run: {...run},
-  topbar: {...topbar},
-  popups: {...popups},
-  sideleft: {...sideleft},
-  sideright: {...sideright},
   dashboard: {...dashboard},
+
+  sideright: { width: opt(380) },
+  topbar: {
+    tray: {
+      ignore: opt([ 'KDE Connect Indicator', 'gromit-mpx' ]),
+    },
+    datemenu: {
+      interval: 5000,
+      format: opt('%a %d %b %I:%M %p'),
+    },
+  },
+
+  run: {
+    position: opt<'left' | 'center' | 'right'>('left'),
+    iconSize: opt(48),
+    width: opt(0),
+    margin: opt(40),
+    maxItem: opt(5),
+    nix: {
+      max: opt(8),
+      pkgs: opt('nixpkgs/nixos-unstable'),
+    },
+    sh: {
+      max: opt(16),
+    },
+    apps: {
+      max: opt(6),
+      iconSize: opt(62),
+    },
+  },
+
+  lockscreen: {
+    player: opt(true),
+    quotes: opt(true),
+    weather: opt(true),
+    crypto: opt(true),
+    system: opt(true),
+  },
 
   powermenu: {
     sleep: opt('systemctl suspend'),
     reboot: opt('systemctl reboot'),
     logout: opt('pkill Hyprland'),
     shutdown: opt('shutdown now'),
-    layout: opt<'line' | 'box'>('line'),
-    labels: opt(true),
-  },
-
-  datemenu: {
-    position: opt<'left' | 'center' | 'right'>('right'),
-  },
-
-  indicators: {
-    progress: {
-      vertical: opt(false),
-      pack: {
-        h: opt<'start' | 'center' | 'end'>('center'),
-        v: opt<'start' | 'center' | 'end'>('start'),
-      },
-    },
-    microphone: {
-      pack: {
-        h: opt<'start' | 'center' | 'end'>('center'),
-        v: opt<'start' | 'center' | 'end'>('end'),
-      },
-    },
-  },
-
-  notifications: {
-    width: opt(440),
-    blacklist: opt(['Spotify']),
   },
 }

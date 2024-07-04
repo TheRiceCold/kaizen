@@ -60,7 +60,7 @@ function getOptions(object: object, path = ''): Opt[] {
   })
 }
 
-export function mkOptions<T extends object>(cacheFile: string, object: T) {
+export function create<T extends object>(cacheFile: string, object: T) {
   for (const opt of getOptions(object))
     opt.init(cacheFile)
 
