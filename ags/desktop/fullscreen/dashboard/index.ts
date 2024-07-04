@@ -10,7 +10,8 @@ const { bio } = options.dashboard
 
 const stackItems = [
   { name: 'home', icon: '', content: Home },
-  { name: 'ledger', icon: '', content: Widget.Box() },
+  { name: 'reads', icon: '', content: Widget.Box() },
+  { name: 'budget', icon: '', content: Widget.Box() },
   { name: 'events', icon: '', content: Widget.Box() },
   { name: 'tasks', icon: '', content: Widget.Box() },
   { name: 'goals', icon: '', content: Widget.Box() },
@@ -27,21 +28,24 @@ const Stack = Widget.Stack({
 })
 
 const TabButton = index => Widget.Button({
+  hpack: 'start',
   cursor: 'pointer',
   onClicked() { Stack.shown = stackItems[index].name },
-  child: Widget.Label({
-    xalign: 0,
-    label: stackItems[index].icon+'  '+capitalize(stackItems[index].name),
-  })
+  label: stackItems[index].icon+'  '+capitalize(stackItems[index].name),
 })
 
-const SideMenu = Widget.Revealer({
+const Sidebar = Widget.Revealer({
   transition: 'slide_right',
   transitionDuration: options.transition,
   child: Widget.Box({
     vertical: true,
-    className: 'sidemenu',
-    children: Array.from({ length: stackItems.length }, (_, i) => i).map(TabButton)
+    className: 'sidebar',
+    children: [
+      Widget.Label({
+        className: 'user',
+        label: `${capitalize(Utils.USER)}'s Dashboard`
+      })
+    ].concat(Array.from({ length: stackItems.length }, (_, i) => i).map(TabButton))
   })
 })
 
@@ -51,7 +55,7 @@ const MenuButton = Widget.Button({
   vpack: 'start',
   cursor: 'pointer',
   className: 'menu-button',
-  onClicked() { SideMenu.revealChild = !SideMenu.revealChild }
+  onClicked() { Sidebar.revealChild = !Sidebar.revealChild }
 })
 
 const Header = Widget.Overlay({
@@ -69,8 +73,8 @@ const Header = Widget.Overlay({
     }),
     Widget.Label({
       xalign: 0,
-      className: 'user-welcome',
-      label: `${capitalize(Utils.USER)}'s Dashboard`
+      className: 'title',
+      label: `Good morning, ${capitalize(Utils.USER)}`
     })
   )
 })
@@ -92,5 +96,5 @@ export default Widget.Window({
   name: 'dashboard',
   keymode: 'on-demand',
   anchor: ['top', 'bottom', 'right', 'left'],
-  child: Widget.Box({ className: 'dashboard', hexpand: true }, SideMenu, Main)
+  child: Widget.Box({ className: 'dashboard', hexpand: true }, Sidebar, Main)
 }).keybind('Escape', () => App.closeWindow('dashboard'))
