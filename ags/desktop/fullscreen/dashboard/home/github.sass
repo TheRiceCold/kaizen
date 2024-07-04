@@ -18,8 +18,12 @@
   background-color: $primary-bg
   min-width: 0.8rem
 
-window#dashboard .dashboard .github
-  .header
-    color: $fg
-    font-size: 1.25rem
-    margin-bottom: $spacing
+window#dashboard .dashboard
+  .content .github
+    @include floating_widget
+    padding: 1rem
+    margin: 0
+    .header
+      color: $fg
+      font-size: 1.25rem
+      margin-bottom: $spacing

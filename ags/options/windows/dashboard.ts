@@ -1,7 +1,7 @@
 import { opt } from 'lib/option'
 
 export default {
-  github: { username: opt('TheRiceCold') },
+  githubUser: opt('TheRiceCold'),
   photo: opt(`/home/${Utils.USER}/photo-sample.jpg`),
   tasks: { directory: opt(`/home/${Utils.USER}/tasks`) },
   bio: opt('~ What we do in life, echoes in eternity ~'),
@@ -37,5 +37,4 @@ export default {
       { label: 'Virtual Machine Manager', name: 'virt-manager' },
     ]
   ]),
-
 }
