@@ -20,9 +20,8 @@ const Stack = Widget.Stack({
   }, {}),
 })
 
-const StackButton = (stackName: string, icon: string) => Widget.Button({
-  cursor: 'pointer',
-  child: Widget.Icon(icon),
+const StackButton = (stackName: string, label: string) => Widget.Button({
+  label, cursor: 'pointer',
   onClicked() {
     Stack.shown = stackName
     isActive.value = stackName
@@ -33,8 +32,8 @@ const Buttons = Widget.Box(
   { className: 'control-buttons' },
   Widget.Box({
     hexpand: true, hpack: 'center',
-    children: items.map((item: ItemType) => StackButton(item.name, item.icon))
+    children: items.map((item: ItemType) => StackButton(item.name, item.label))
   })
 )
 
-export default MenuRevealer('quicksettings', Buttons, Stack)
+export default MenuRevealer('quicksettings', Stack, Buttons)

@@ -1,11 +1,12 @@
 window.sideright .quicksettings
   .control-buttons
-    padding-bottom: calc($padding * 2.5)
-    border-bottom: 1px solid transparentize($fg, 0.75)
+    padding: calc($padding * 2.5)
+    border-top: 1px solid transparentize($fg, 0.75)
     button
       @include button
+      font-weight: 500
       margin: 0 calc($spacing * 0.5)
       padding: $padding calc($padding * 1.5)
-      image 
+      image
         color: $fg
         font-size: 1.25em
