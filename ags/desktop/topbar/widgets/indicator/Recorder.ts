@@ -5,9 +5,8 @@ const IconStack = Widget.Stack({
   transition: 'slide_up_down',
   transitionDuration: options.transition,
   children: {
-    hoverLost: Widget.Label({ xalign: 0, label: '' }),
-    hover: Widget.Button({
-      xalign: 0,
+    recording: Widget.Label({ label: '' }),
+    stop: Widget.Button({
       label: '',
       cursor: 'pointer',
       tooltipText: 'Click to stop',
@@ -16,19 +15,17 @@ const IconStack = Widget.Stack({
   }
 })
 
+const Timer = Widget.Label().bind(
+  'label', screenTools, 'timer', time => {
+    const sec = time % 60
+    const min = Math.floor(time / 60)
+    return `${min}:${sec < 10 ? '0' + sec : sec}`
+  })
+
 export default Widget.EventBox({
+  hpack: 'center',
   className: 'recorder',
-  onHover() { IconStack.shown = 'hover' },
-  onHoverLost() { IconStack.shown = 'hoverLost' },
-  child: Widget.Box([
-    IconStack,
-    Widget.Label({
-      hpack: 'end', hexpand: true,
-      label: screenTools.bind('timer').as(time => {
-        const sec = time % 60
-        const min = Math.floor(time / 60)
-        return `${min}:${sec < 10 ? '0' + sec : sec}`
-      })
-    })
-  ]),
+  child: Widget.Box([IconStack, Timer]),
+  onHover() { IconStack.shown = 'stop' },
+  onHoverLost() { IconStack.shown = 'recording' },
 })

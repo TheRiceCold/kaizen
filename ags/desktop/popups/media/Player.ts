@@ -3,7 +3,7 @@ import icons from 'data/icons'
 import { getPlayer } from 'lib/utils'
 
 const mpris = await Service.import('mpris')
-const { length } = options.popups.player
+const length = options.player.titleLength.popup
 
 const Title = Widget.Label({
   hpack: 'start',
