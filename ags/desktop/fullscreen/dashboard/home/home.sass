@@ -1,40 +1,24 @@
-window#dashboard
-  .dashboard .content
-    .home .section
-      padding: 16px
-      border-bottom: 1px solid transparentize($fg, 0.75)
-      .github, .player, .clock
-        @include floating_widget
-        margin: 0
-        &:hover, &:focus
-          border: 2px solid $primary-bg
-        > box
-          padding: 1rem
-      .player
-        .cover
-          background-size: cover
-          background-position: center
-        .controls
-          margin-top: $spacing
-          button
-            label
-              font-size: 1rem
-            &.active
-              color: $primary-bg
-            &:first-child, &:last-child
-              margin: 0 1rem
-            &:last-child label
-              font-size: 1.25rem
-          image
-            font-size: 2rem
-            padding: 0 $padding
-
-      .clock .date
-        font-weight: 500
-      .clock .time
-        font-size: 4rem
-        font-weight: 700
-        &:last-child
-          border-top: 1px solid transparentize($fg, 0.75)
-      .github
-        padding: 1rem
+window#dashboard .dashboard 
+  .content .home .section
+    padding: 1rem
+    border-bottom: 1px solid transparentize($fg, 0.75)
+    .system
+      @include floating-widget
+      margin: 0
+      padding: 0
+      > box:last-child .item
+        margin-top: 0
+      .item
+        margin: 1rem
+        .progress
+          font-size: 6px
+          min-width: 56px
+          min-height: 56px
+          color: $primary-bg
+          background-color: transparentize($primary-bg, 0.75)
+        .icon
+          font-size: 1.75rem
+        .value
+          font-weight: 500
+          margin-top: 0.5rem
+          font-size: 1.15rem

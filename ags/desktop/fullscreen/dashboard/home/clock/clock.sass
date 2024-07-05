@@ -1,0 +1,16 @@
+$border: 1px solid transparentize($fg, 0.75)
+window#dashboard .dashboard .content
+  .home .section .clock
+    @include floating-widget
+    margin: 0
+    &:hover
+      color: $primary-bg
+    .date
+      padding: 0 1rem
+      font-weight: 500
+    .time
+      font-weight: 700
+      margin: 0.25rem 0
+      font-size: 4.25rem
+      &:last-child
+        border-top: $border

@@ -7,7 +7,7 @@ const date = Variable('', { poll: [8000, "date '+%d %b %A'"] })
 export default Widget.EventBox({
   cursor: 'pointer',
   className: 'clock',
-  child: Widget.Box({ vertical: true },
+  child: Widget.Box({ vpack: 'center', vertical: true },
     Widget.Label({ className: 'date' }).bind('label', date),
     Widget.Label({ className: 'time', label: hour.bind().as(h => h+'') }),
     Widget.Label({ className: 'time', label: minute.bind().as(m => m+'') })
