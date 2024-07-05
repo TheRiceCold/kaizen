@@ -315,4 +315,8 @@ export default {
     icon: 'heavy_showers',
     description: ''
   },
+  386: {
+    icon: 'thunderstorm',
+    description: ''
+  },
 }

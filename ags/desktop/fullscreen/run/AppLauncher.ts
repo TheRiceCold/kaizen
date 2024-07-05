@@ -11,7 +11,10 @@ const { iconSize, favorites, max: appsMax } = options.run.apps
 const QuickAppButton = (app: Application) => Widget.Button({
   hexpand: true,
   tooltipText: app.name,
-  onClicked() { App.closeWindow('run'); launchApp(app) },
+  onClicked() {
+    App.closeWindow('run')
+    launchApp(app)
+  },
   child: Widget.Icon({
     size: iconSize.bind(),
     icon: icon(app.icon_name, icons.fallback.executable),

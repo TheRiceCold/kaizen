@@ -19,10 +19,9 @@ export default {
     ],
 
     [
-      'neovide',
-      'insomnia',
-      { label: 'Android Studio', name: 'android-studio' },
+      'zed', 'neovide', 'insomnia',
       { label: 'godot', name: 'godot4' },
+      { label: 'Android Studio', name: 'android-studio' },
     ],
 
     [

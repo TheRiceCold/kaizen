@@ -120,9 +120,10 @@ export default {
     next: 'media-skip-forward-symbolic',
   },
   system: {
-    cpu: 'org.gnome.SystemMonitor-symbolic',
-    ram: 'drive-harddisk-solidstate-symbolic',
+    ram: 'memory-symbolic',
     temp: 'temperature-symbolic',
+    cpu: 'org.gnome.SystemMonitor-symbolic',
+    storage: 'drive-harddisk-solidstate-symbolic',
   },
   color: {
     dark: 'dark-mode-symbolic',
