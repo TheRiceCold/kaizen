@@ -2,7 +2,7 @@ import options from 'options'
 
 const { sleep, reboot, logout, shutdown } = options.powermenu
 
-export type Action = 'sleep' | 'reboot' | 'logout' | 'shutdown'
+export type Action = 'sleep' | 'reboot' | 'logout' | 'shutdown' | 'lock'
 
 class PowerMenu extends Service {
   static {
