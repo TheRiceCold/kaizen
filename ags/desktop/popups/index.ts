@@ -1,4 +1,3 @@
-// import Dock from './dock'
 import Media from './media'
 import Keyboard from './keyboard'
 import ColorTool from './color-tool'
@@ -7,7 +6,7 @@ import Notifications from './notifications'
 import AnnotationTools from './annotation-tools'
 import { showWidget } from 'lib/variables'
 
-const popupWindow = (position: 'top' | 'bottom', children) => Widget.Window({
+const popupWindow = (position: 'top' | 'bottom', ...children) => Widget.Window({
   layer: 'overlay',
   anchor: [position],
   exclusivity: 'ignore',
@@ -24,11 +23,6 @@ const popupWindow = (position: 'top' | 'bottom', children) => Widget.Window({
 })
 
 export default [
-  popupWindow('top', [
-    AnnotationTools,
-    ColorTool,
-    Media,
-    Notifications()
-  ]),
-  popupWindow('bottom', [ Indicators, Keyboard, /* Dock */ ]),
+  popupWindow('top', AnnotationTools, ColorTool, Media, Notifications()),
+  popupWindow('bottom', Indicators, Keyboard),
 ]
