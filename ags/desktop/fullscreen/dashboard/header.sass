@@ -1,7 +1,21 @@
 window#dashboard .dashboard .header
+  .cover
+    margin-bottom: 75px // INFO: pushes down the avatar
+  .menu-button
+    margin-top: 8px
+    margin-left: 12px
+    padding: calc($padding * 2)
+    background-color: transparentize($bg, 0.25)
+    label
+      color: $fg
+      font-size: 1.5rem
+  .title
+    font-size: 2rem
+    font-weight: 500
+    margin-left: 100px
   .avatar
     margin-left: 100px
-    margin-bottom: 50px
+    margin-bottom: 48px
     .container
       border-radius: $radius
     revealer image
@@ -16,18 +30,3 @@ window#dashboard .dashboard .header
         background-color: transparent
         label, image
           font-size: 0
-  .cover
-    margin-bottom: 50px
-  .menu-button
-    margin-top: 8px
-    margin-left: 12px
-    padding: calc($padding * 2)
-    background-color: transparentize($bg, 0.25)
-    label
-      color: $fg
-      font-size: 1.5rem
-  .title
-    font-size: 2rem
-    font-weight: 500
-    margin-top: 25px
-    margin-left: 100px

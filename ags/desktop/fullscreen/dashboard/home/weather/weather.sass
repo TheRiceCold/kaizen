@@ -1,29 +1,4 @@
-$border: 1px solid transparentize($fg, 0.75)
-
 window#dashboard .weather
-  @include floating-widget
-  margin: 0
-  padding: 0
-  .current-condition
-    padding: 1rem
-    label
-      padding: 0.5rem
-      font-size: 1.15rem
-    .region
-      font-size: 2em
-      font-weight: 500
-    .description
-      font-weight: 500
-      margin-bottom: 0.75rem
-    .sun
-      border-bottom: $border
-    image
-      font-size: 5rem
-      margin: 0.5rem 0
-      + label
-        font-weight: 600
-        font-size: 2.5rem
-
   .forecast
     button:hover label
       color: $primary-bg

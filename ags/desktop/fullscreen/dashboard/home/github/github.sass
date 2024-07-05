@@ -20,10 +20,12 @@
 
 window#dashboard .dashboard
   .content .github
-    @include floating-widget
-    padding: 1rem
     margin: 0
+    border: $border
     .header
       color: $fg
+      padding: 0.5rem
       font-size: 1.25rem
-      margin-bottom: $spacing
+      border-bottom: $border
+    .contrib-container
+      padding: 1rem

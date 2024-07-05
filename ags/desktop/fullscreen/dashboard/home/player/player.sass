@@ -1,10 +1,11 @@
 window#dashboard .dashboard .content .player
-  @include floating-widget
-  margin: 0
   > box
     padding: 1rem
+    border: $border
+    background-color: transparentize($bg, 0.5)
   &:hover
     border: 1px solid $primary-bg
+    background-color: $primary-fg
   .cover
     button
       padding: 0.5rem

@@ -1,18 +1,19 @@
 window#dashboard .dashboard .content
   .home .section .time-progress
-    @include floating-widget
     margin: 0
+    padding: 1rem
+    border: $border
     box
       padding: 0.5rem
     label
       font-weight: 500
     progressbar
-      min-height: 108px
+      min-height: 100px
       margin-bottom: 1rem
       trough
         min-width: 20px
         border-radius: $radius
-        border: 1px solid $primary-bg
+        border: 1px solid transparentize($fg, 0.5)
       progress
         min-width: 16px
         margin-bottom: 2px
