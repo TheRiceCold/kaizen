@@ -40,7 +40,7 @@ class WeatherService extends Service {
 
   constructor() {
     super()
-    Utils.interval(1800000, this.getWeather.bind(this)) // every 30 min
+    Utils.interval(1_800_000, this.getWeather.bind(this)) // every 30 min
   }
 
   async getWeather() {

@@ -1,19 +1,21 @@
 import Weather from 'service/api/weather'
 
-const Region = Widget.Label({ className: 'region' }).bind('label', Weather, 'region', r => ' '+r)
+const Region = Widget.Label({ className: 'region' }).bind('label', Weather, 'region')
 
 function Description() {
-  const getDescription = condition => condition.weatherDesc ? condition.weatherDesc[0].value : ''
+  const getDescription = condition => condition.weatherDesc
+    ? condition.weatherDesc[0].value : ''
 
   return Widget.Label({
     wrap: true,
-    maxWidthChars: 24,
+    maxWidthChars: 20,
+    justification: 'center',
     className: 'description',
+    css: Weather.bind('current_condition').as(
+      c => (getDescription(c).length > 20)
+        ? 'font-size: 1.25rem;' : 'font-size: 1.5rem;'
+    ),
     label: Weather.bind('current_condition').as(getDescription),
-    css: Weather.bind('current_condition').as(condition => {
-      const description = getDescription(condition)
-      return description.length < 24 ? 'font-size: 1.5rem;' : 'font-size: 1.75rem;'
-    })
   })
 }
 
@@ -23,35 +25,41 @@ const IconAndTemp = Widget.Box(
   Widget.Label().bind('label', Weather, 'current_condition', c => c['temp_C']+'°C'),
 )
 
-const Sun = Widget.Box(
-  { className: 'sun', hpack: 'center' },
+const Sun = Widget.Box({ hpack: 'center' },
   Widget.Label({
     tooltipText: 'Sunrise',
-    label: Weather.bind('astronomy').as(a => ` ${a['sunrise']} |`),
+    label: Weather.bind('astronomy').as(a => ` ${a['sunrise']}`),
   }),
+  Widget.Separator({vertical: true}),
   Widget.Label({
     tooltipText: 'Sunset',
     label: Weather.bind('astronomy').as(a => ` ${a['sunset']}`),
   })
 )
 
-const Details = Widget.Box([
+const Air = Widget.Box([
   Widget.Label({
     tooltipText: 'Humidity',
-    label: Weather.bind('current_condition').as(c => ` ${c['humidity']}% |`)
+    label: Weather.bind('current_condition').as(c => ` ${c['humidity']}%`)
   }),
+  Widget.Separator({vertical: true}),
   Widget.Label({
     tooltipText: 'Wind Speed',
-    label: Weather.bind('current_condition').as(c => ` ${c['windspeedKmph']} km/h |`)
+    label: Weather.bind('current_condition').as(c => ` ${c['windspeedKmph']} km/h`)
   }),
+  Widget.Separator({vertical: true}),
   Widget.Label({
     tooltipText: 'Wind Direction',
     label: Weather.bind('current_condition').as(c => ` ${c['winddirDegree']}° (${c['winddir16Point']})`)
   }),
 ])
 
+const Details = Widget.Box({ vertical: true, className: 'details' }, Sun, Air)
+
 export default Widget.Box({
+  vpack: 'end',
   vertical: true,
+  hpack: 'center',
   className: 'current-condition',
-  children: [Region, IconAndTemp, Description(), Sun, Details]
+  children: [Region, IconAndTemp, Description(), Details]
 })
