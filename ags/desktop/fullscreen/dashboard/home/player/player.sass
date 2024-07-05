@@ -1,0 +1,44 @@
+window#dashboard .dashboard .content .player
+  @include floating-widget
+  margin: 0
+  > box
+    padding: 1rem
+  &:hover
+    border: 1px solid $primary-bg
+  .cover
+    button
+      padding: 0.5rem
+      color: transparentize($fg, 0.25)
+      image
+        font-size: 1.5rem
+      &:hover
+        color: $primary-bg
+    > box
+      background-size: cover
+      background-position: center
+  .volume box
+    min-width: 4rem
+    margin-left: 1rem
+    margin-top: 0.5rem
+    scale
+      @include slider
+      min-height: 12rem
+    label
+      font-weight: 500
+      font-size: 1.15rem
+      margin-top: 0.5rem
+
+  .controls
+    margin-top: $spacing
+    button
+      label
+        font-size: 1rem
+      &.active
+        color: $primary-bg
+      &:first-child, &:last-child
+        margin: 0 1rem
+      &:last-child label
+        font-size: 1.25rem
+    image
+      font-size: 2rem
+      padding: 0 $padding
