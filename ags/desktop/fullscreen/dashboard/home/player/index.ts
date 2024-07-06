@@ -15,6 +15,9 @@ const Volume = Widget.Revealer({
   transitionDuration: options.transition,
   child: audio.bind('apps').as(apps => {
     const spotify = apps.find(app => app.description.toLowerCase() === 'spotify')
+
+    if (!spotify) return Widget.Box()
+
     return Widget.Box(
       { vertical: true },
       Widget.Slider({
