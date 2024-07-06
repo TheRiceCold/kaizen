@@ -9,7 +9,7 @@ export default {
     tray: {
       ignore: opt([ 'KDE Connect Indicator', 'gromit-mpx' ]),
     },
-    datemenu: {
+    date: {
       interval: 5000,
       format: opt('%a %d %b %I:%M %p'),
     },

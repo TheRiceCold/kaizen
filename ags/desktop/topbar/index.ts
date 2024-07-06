@@ -4,37 +4,34 @@ import {
   AiButton,
   RunButton,
   WindowButton,
-  ShortcutsButton,
+  // ShortcutsButton,
   Indicator,
   Tray,
-  ControlButton,
+  QuickSettingsButton,
   DateButton,
 } from './widgets'
 import DropdownMenu from 'desktop/dropdowns/background'
+
+const Separator = Widget.Separator({ vertical: true })
 
 const startWidget = Widget.Box(
   { hpack: 'start', className: 'side-items' },
   LogoButton,
   Workspaces,
-  Widget.Separator({ vertical: true }),
+  Separator,
   AiButton,
   RunButton,
   WindowButton,
-  ShortcutsButton,
+  /* ShortcutsButton, */
 )
+
+const endWidget = Widget.Box(
+  { hpack: 'end', className: 'side-items' },
+  Tray, Separator, QuickSettingsButton, Separator, DateButton)
 
 const Content = Widget.CenterBox({
   css: 'min-width: 2px; min-height: 2.5rem;',
-  startWidget,
-  centerWidget: Indicator,
-  endWidget: Widget.Box(
-    { hpack: 'end', className: 'side-items' },
-    Tray,
-    Widget.Separator({ vertical: true }),
-    ControlButton,
-    Widget.Separator({ vertical: true }),
-    DateButton,
-  )
+  startWidget, centerWidget: Indicator, endWidget
 })
 
 export default Widget.Window({

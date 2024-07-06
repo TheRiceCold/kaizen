@@ -3,16 +3,15 @@ import BarButton from '../BarButton'
 import options from 'options'
 import { clock } from 'lib/variables'
 import { showWidget } from 'lib/variables'
-const { datemenu } = showWidget
 
-const { interval, format } = options.topbar.datemenu
+const { calendar } = showWidget
+const { interval, format } = options.topbar.date
 
 export default BarButton({
-  window: 'datemenu',
   className: 'datemenu',
   onClicked(self) {
-    datemenu.value = !datemenu.value
-    self.toggleClassName('active', datemenu.value)
+    calendar.value = !calendar.value
+    self.toggleClassName('active', calendar.value)
   },
   label: Utils.derive(
     [clock(interval), format],
