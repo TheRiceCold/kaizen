@@ -1,5 +1,5 @@
 import Ask from './ask'
-import DateMenu from './datemenu'
+import Calendar from './calendar'
 import QuickSettings from './quicksettings'
 
 type TDirection = 'left' | 'right'
@@ -9,14 +9,10 @@ const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
   name: `side${dir}`,
   anchor: ['top', dir],
   className: `side${dir}`,
-  child: Widget.Box({
-    children,
-    vertical: true,
-    css: 'padding: 2px;',
-  })
+  child: Widget.Box({ children, vertical: true, css: 'padding: 2px;' })
 })
 
 export default [
   Sidemenu('left', Ask),
-  Sidemenu('right', QuickSettings, DateMenu),
+  Sidemenu('right', Calendar, QuickSettings),
 ]

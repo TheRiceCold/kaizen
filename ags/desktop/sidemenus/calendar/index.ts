@@ -32,7 +32,7 @@ export const CalendarDays = Widget.Box({
   setup(self) { addCalendarChildren(self, calendarJson) }
 })
 
-export default MenuRevealer('datemenu', Widget.Box({
+export default MenuRevealer('calendar', Widget.Box({
   vertical: true,
   hpack: 'center',
   className: 'calendar',
