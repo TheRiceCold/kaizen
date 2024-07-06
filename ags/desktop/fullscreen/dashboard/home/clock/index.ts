@@ -13,6 +13,6 @@ export default Widget.EventBox({
     Widget.Label({ className: 'time', label: minute.bind().as(m => m+'') })
   ),
   onPrimaryClick() {
-    showWidget.datemenu.value = !showWidget.datemenu.value
+    showWidget.calendar.value = !showWidget.calendar.value
   },
 })

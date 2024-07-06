@@ -5,7 +5,7 @@ const mpris = await Service.import('mpris')
 export const toggleWidget = async (
   name:
     | 'player' | 'color' | 'annotation' | 'keyboard'
-    | 'apis' | 'datemenu' | 'quicksettings'
+    | 'ask' | 'calendar' | 'quicksettings'
 ) => {
   const widgetShown =  showWidget[name]
 

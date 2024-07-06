@@ -28,21 +28,18 @@ export function addCalendarChildren(box, calendarJson) {
 export const CalendarDays = Widget.Box({
   hexpand: true,
   vertical: true,
+  hpack: 'center',
   className: 'body',
   setup(self) { addCalendarChildren(self, calendarJson) }
 })
 
-export default MenuRevealer('calendar', Widget.Box({
-  vertical: true,
-  hpack: 'center',
-  className: 'calendar',
-  children: [
-    Header,
-    Widget.Box({
-      hexpand: true,
-      className: 'weekdays',
-      children: weekDays.map(day => CalendarDay(day, 0))
-    }),
-    CalendarDays
-  ]
-}))
+export default MenuRevealer('calendar',
+  Header,
+  Widget.Box({
+    hexpand: true,
+    hpack: 'center',
+    className: 'weekdays',
+    children: weekDays.map(day => CalendarDay(day, 0))
+  }),
+  CalendarDays
+)
