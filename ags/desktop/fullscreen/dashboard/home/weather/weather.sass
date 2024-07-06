@@ -1,43 +1,42 @@
-window#dashboard .weather
-  .forecast
-    button:hover label
-      color: $primary-bg
-    .daily, .hourly > .content
-      button
-        border-left: $border
-        &:hover
-          background-color: transparentize($primary-fg, 0.5)
-        .day, .hour
-          margin-top: 1rem
-          font-weight: 600
-          font-size: 1.5rem
-        image
-          font-size: 3rem
-          padding: 1.25rem 2rem
-          margin-bottom: 0.75rem
-          border-bottom: $border
-        label
-          font-size: 1.15rem
-          margin-bottom: 0.5rem
+window#dashboard .weather .forecast
+  button:hover label
+    color: $primary-bg
+  .daily, .hourly > .content
+    button
+      border-left: $border
+      &:hover
+        background-color: transparentize($primary-fg, 0.5)
+      .day, .hour
+        margin-top: 1rem
+        font-weight: 600
+        font-size: 1.5rem
+      image
+        font-size: 3rem
+        padding: 1.25rem 2rem
+        margin-bottom: 0.75rem
+        border-bottom: $border
+      label
+        font-size: 1.15rem
+        margin-bottom: 0.5rem
 
-    .hourly
-      .header
-        padding: 1rem
-        border-left: $border
-        .back-btn
-          margin-right: 16rem
-        label
-          font-weight: 500
-          font-size: 1.5rem
-      > .content
-        border: 0
-        margin: 0
-        padding: 0
-        border-left: $border
-        button
-          &:first-child
-            border-left: 0
-          border-top: $border
-          image
-            font-size: 4rem
-            padding: 1rem 2rem
+  .hourly
+    .header
+      padding: 1rem
+      border-left: $border
+      .back-btn
+        margin-right: 16rem
+      label
+        font-weight: 500
+        font-size: 1.5rem
+    > .content
+      border: 0
+      margin: 0
+      padding: 0
+      border-left: $border
+      button
+        &:first-child
+          border-left: 0
+        border-top: $border
+        image
+          font-size: 4rem
+          padding: 1rem 2rem

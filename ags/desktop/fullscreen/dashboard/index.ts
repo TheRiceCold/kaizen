@@ -10,16 +10,16 @@ const { bio } = options.dashboard
 
 const stackItems = [
   { name: 'home', icon: '', content: Home },
+  { name: 'tasks', icon: '', content: Widget.Box() },
   { name: 'reads', icon: '', content: Widget.Box() },
   { name: 'budget', icon: '', content: Widget.Box() },
   { name: 'events', icon: '', content: Widget.Box() },
-  { name: 'tasks', icon: '', content: Widget.Box() },
   { name: 'goals', icon: '', content: Widget.Box() },
   { name: 'life', icon: '', content: Widget.Box() },
 ]
 
 const Stack = Widget.Stack({
-  className: 'content',
+  className: 'page',
   transition: 'slide_up_down',
   children: stackItems.reduce((acc, item) => {
     acc[item.name] = item.content
@@ -79,22 +79,13 @@ const Header = Widget.Overlay({
   )
 })
 
-const Main = Widget.Scrollable({
-  hexpand: true,
-  hscroll: 'never',
-  vscroll: 'automatic',
-  child: Widget.Box(
-    { vertical: true, className: 'main' },
-    Header,
-    Widget.Label({ xalign: 0, label: bio.bind(), className: 'bio' }),
-    Stack
-  )
-})
+const Bio = Widget.Label({ xalign: 0, label: bio.bind(), className: 'bio' })
+const Main = Widget.Box({ vertical: true, className: 'main' }, Header, Bio, Stack)
 
 export default Widget.Window({
   visible: false,
   name: 'dashboard',
   keymode: 'on-demand',
   anchor: ['top', 'bottom', 'right', 'left'],
-  child: Widget.Box({ className: 'dashboard', hexpand: true }, Sidebar, Main)
+  child: Widget.Box({ className: 'dashboard' }, Sidebar, Main)
 }).keybind('Escape', () => App.closeWindow('dashboard'))

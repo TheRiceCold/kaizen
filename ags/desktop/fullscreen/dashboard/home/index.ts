@@ -17,8 +17,11 @@ const Section = (...children) => Widget.Box({
   className: 'section',
 })
 
-export default Widget.Box(
-  { vertical: true, className: 'home' },
-  Section(Apps, Player, Weather, Session),
-  Section(Clock, TimeProgress, Quote, GitHub, /* System */)
+export default Widget.Scrollable(
+  { hexpand: true, vexpand: true },
+  Widget.Box(
+    { vertical: true, className: 'home' },
+    Section(Apps, Player, Weather, Session),
+    Section(Clock, TimeProgress, Quote, GitHub, /* System */)
+  )
 )
