@@ -16,7 +16,11 @@ export default {
 
   player: {
     preferred: opt('spotify'),
-    visualizer: { width: opt(8), height: opt(24) },
+    visualizer: {
+      width: opt(8),
+      height: opt(24),
+      smooth: opt(true),
+    },
     titleLength: {
       popup: opt(36),
       topbar: opt(32),

@@ -6,7 +6,7 @@ import { sh, getPlayer } from 'lib/utils'
 
 const mpris = await Service.import('mpris')
 const {
-  visualizer: {width, height},
+  visualizer: { width, height, smooth },
   titleLength: { topbar : length },
 } = options.player
 
@@ -25,16 +25,15 @@ export const playing = Widget.Box().hook(mpris, self => {
   self.children = IconLabel('player', getLabel(player))
 })
 
-export const visualizer = Widget.Box({
-  hpack: 'center',
-  className: 'visualizer',
-}).hook(mpris, self => {
+export const visualizer = Widget.Box(
+  { hpack: 'center', className: 'visualizer' }
+).hook(mpris, self => {
   if (!getPlayer()) return
   sh('pkill cava')
   const limit = length.value
   const size = Math.round(getLabel(getPlayer()).length * 0.9)
   self.child = Cava({
-    width, height,
+    smooth, width, height,
     bars: (size < limit ? size : limit) * width,
   })
 })
