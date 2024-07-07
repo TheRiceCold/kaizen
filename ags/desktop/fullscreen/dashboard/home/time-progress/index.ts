@@ -1,8 +1,6 @@
 import { capitalize } from 'lib/utils'
 
-const now = new Date()
-
-function yearProgress() {
+function yearProgress(now) {
   const start = new Date(now.getFullYear(), 0, 1)
   const end = new Date(now.getFullYear() + 1, 0, 1)
   const total = end - start
@@ -10,7 +8,7 @@ function yearProgress() {
   return elapsed / total
 }
 
-function monthProgress() {
+function monthProgress(now) {
   const start = new Date(now.getFullYear(), now.getMonth(), 1)
   const end = new Date(now.getFullYear(), now.getMonth() + 1, 1)
   const total = end - start
@@ -18,7 +16,7 @@ function monthProgress() {
   return elapsed / total
 }
 
-function weekProgress() {
+function weekProgress(now) {
   const startOfWeek = new Date(now)
 
   startOfWeek.setDate(now.getDate() - now.getDay())
@@ -33,7 +31,7 @@ function weekProgress() {
   return elapsedWeekTime / totalWeekTime
 }
 
-function dayProgress() {
+function dayProgress(now) {
   const start = new Date(now)
   start.setHours(0, 0, 0, 0)
 
@@ -45,38 +43,36 @@ function dayProgress() {
   return elapsed / total
 }
 
-function ProgressBar(time: 'day' | 'week' | 'month' | 'year') {
-  const getValue = () => {
-    switch(time) {
-      case 'day': return dayProgress()
-      case 'week': return weekProgress()
-      case 'month': return monthProgress()
-      case 'year': return yearProgress()
+const ProgressBar = (time: 'day' | 'week' | 'month' | 'year') => Widget.Box({
+  vertical: true,
+  attribute: {
+    getValue(now) {
+      switch(time) {
+        case 'day': return dayProgress(now)
+        case 'week': return weekProgress(now)
+        case 'month': return monthProgress(now)
+        case 'year': return yearProgress(now)
+      }
     }
-  }
-
-  return Widget.Box(
-    { vertical: true },
+  },
+}).poll(900_000, self => { // every 15 minutes
+  const value = self.attribute.getValue(new Date())
+  self.children = [
     Widget.ProgressBar({
+      value,
       vertical: true,
       inverted: true,
       hpack: 'center',
-      value: getValue()
     }),
-    Widget.Label(Math.floor(getValue() * 100)+'%'),
+    Widget.Label(Math.floor(value * 100)+'%'),
     Widget.Label(capitalize(time)),
-  )
-}
+  ]
+})
 
-export default Widget.Box({
-  className: 'time-progress',
-  attribute: {
-    updateChildren: () => [
-      ProgressBar('year'),
-      ProgressBar('month'),
-      ProgressBar('week'),
-      ProgressBar('day'),
-    ]
-  }
-}).poll(1800000, self => self.children = self.attribute.updateChildren()) // Every 30mins
-
+export default Widget.Box(
+  { className: 'time-progress' },
+  ProgressBar('year'),
+  ProgressBar('month'),
+  ProgressBar('week'),
+  ProgressBar('day'),
+)
