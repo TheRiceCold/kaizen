@@ -1,8 +1,8 @@
 import weatherData from 'data/weather'
 
-function getIcon (code: number, dayTime: 'day' | 'night') {
+function getIcon(code: number, dayTime: 'day' | 'night') {
   const icon = weatherData[code].icon
-  return (icon === 'sunny') ? 'clear'
+  return (icon === 'sunny' && dayTime !== 'day') ? 'clear'
     : (icon.includes('continuous') || dayTime === 'day')
       ? icon : icon+'_night'
 }
@@ -40,7 +40,7 @@ class WeatherService extends Service {
 
   constructor() {
     super()
-    Utils.interval(1_800_000, this.getWeather.bind(this)) // every 30 min
+    Utils.interval(900_000, this.getWeather.bind(this)) // every 15 min
   }
 
   async getWeather() {
