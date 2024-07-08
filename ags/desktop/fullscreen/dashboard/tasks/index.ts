@@ -3,7 +3,7 @@ import TaskWarrior from 'service/taskwarrior'
 
 const Task = data => Widget.Button({
   cursor: 'pointer',
-  classNames: ['task-btn', data.urgency > 6 && 'urgent'],
+  classNames: ['task-btn', data.urgency > 6 ? 'urgent' : ''],
   child: Widget.Box([
     Widget.Label(data.description),
     Widget.Box({ hexpand: true }),

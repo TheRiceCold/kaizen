@@ -1,10 +1,10 @@
 import { opt } from 'lib/option'
 
 export default {
+  tasksDirectory: opt(''),
   githubUser: opt('TheRiceCold'),
   photo: opt(`/home/${Utils.USER}/photo-sample.jpg`),
   bio: opt('~ What we do in life, echoes in eternity ~'),
-  tasksDirectory: opt(`/home/${Utils.USER}/tasks`),
   player: {
     length: opt(32),
     coverSize: opt(200),
