@@ -60,8 +60,8 @@ class WeatherService extends Service {
       this.updateProperty('current_condition', currentCondition)
 
       const curHour = new Date().getHours()
-      const sunsetHour = astronomy['sunset'].split(':')[0]
-      const sunriseHour = astronomy['sunrise'].split(':')[0]
+      const sunsetHour = Number(astronomy['sunset'].split(':')[0])
+      const sunriseHour = Number(astronomy['sunrise'].split(':')[0])
       const dayTime = (curHour >= sunriseHour && curHour <= sunsetHour + 12) ? 'day' : 'night'
 
       this.updateProperty('icon', getIcon(currentCondition['weatherCode'], dayTime))
