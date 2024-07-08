@@ -4,6 +4,7 @@ import {
   AiButton,
   RunButton,
   WindowButton,
+  SessionButton,
   // ShortcutsButton,
   Indicator,
   Tray,
@@ -22,6 +23,7 @@ const startWidget = Widget.Box(
   AiButton,
   RunButton,
   WindowButton,
+  SessionButton,
   /* ShortcutsButton, */
 )
 

@@ -1,7 +1,6 @@
 import Apps from './apps'
 import Player from './player'
 import Weather from './weather'
-import Session from './session'
 
 import Clock from './clock'
 import Quote from './quote'
@@ -21,7 +20,7 @@ export default Widget.Scrollable(
   { hexpand: true, vexpand: true },
   Widget.Box(
     { vertical: true, className: 'home' },
-    Section(Apps, Player, Weather, Session),
+    Section(Apps, Player, Weather),
     Section(Clock, TimeProgress, Quote, GitHub, /* System */)
   )
 )
