@@ -30,6 +30,7 @@
   # Dashboard
   ledger,
   gcalcli,
+  taskwarrior,
 
   # ScreenTools
   grim,
