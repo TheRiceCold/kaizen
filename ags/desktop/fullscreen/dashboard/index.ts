@@ -1,6 +1,7 @@
 import wallpaper from 'service/wallpaper'
 
 import Home from './home'
+import Tasks from './tasks'
 
 import Avatar from './Avatar'
 import options from 'options'
@@ -10,8 +11,8 @@ const { bio } = options.dashboard
 
 const stackItems = [
   { name: 'home', icon: '', content: Home },
-  { name: 'tasks', icon: '', content: Widget.Box() },
-  { name: 'reads', icon: '', content: Widget.Box() },
+  { name: 'tasks', icon: '', content: Tasks },
+  { name: 'journal', icon: '', content: Widget.Box() },
   { name: 'budget', icon: '', content: Widget.Box() },
   { name: 'events', icon: '', content: Widget.Box() },
   { name: 'goals', icon: '', content: Widget.Box() },
@@ -35,11 +36,11 @@ const TabButton = index => Widget.Button({
 })
 
 const Sidebar = Widget.Revealer({
+  className: 'sidebar',
   transition: 'slide_right',
   transitionDuration: options.transition,
   child: Widget.Box({
     vertical: true,
-    className: 'sidebar',
     children: [
       Widget.Label({
         className: 'user',

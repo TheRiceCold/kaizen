@@ -3,8 +3,8 @@ import { opt } from 'lib/option'
 export default {
   githubUser: opt('TheRiceCold'),
   photo: opt(`/home/${Utils.USER}/photo-sample.jpg`),
-  tasks: { directory: opt(`/home/${Utils.USER}/tasks`) },
   bio: opt('~ What we do in life, echoes in eternity ~'),
+  tasksDirectory: opt(`/home/${Utils.USER}/tasks`),
   player: {
     length: opt(32),
     coverSize: opt(200),

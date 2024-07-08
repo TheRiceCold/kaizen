@@ -1,0 +1,36 @@
+window#dashboard .dashboard
+  .tasks .content
+    border: $border
+    min-width: 1200px
+    margin-left: 1.25rem
+    background-color: $bg
+    .list
+      .task-btn
+        padding: 1rem
+        label
+          font-size: 1.25rem
+          &:last-child
+            color: transparentize($fg, 0.25)
+        &:hover label
+          color: $primary-bg
+    > .header
+      padding: 1rem 1rem 0.5rem 1rem
+      label
+        font-size: 2rem
+    .progress
+      background-color: $bg
+      border-bottom: $border
+      label
+        font-size: 1.15rem
+        margin: 0 0 0.6rem 1rem
+        color: transparentize($fg, 0.25)
+      progressbar
+        padding: 0 1rem 1rem 1rem
+        trough
+          min-width: 16px
+          border-radius: $radius
+          background-color: transparentize($fg, 0.75)
+        progress
+          min-width: 16px
+          border-radius: $radius
+          background-color: $primary-bg

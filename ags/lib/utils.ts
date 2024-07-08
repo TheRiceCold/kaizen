@@ -83,7 +83,7 @@ const createSurfaceFromWidget = (widget: Gtk.Widget) => {
   return surface
 }
 
-const fileExists = (path: string)  => Gio.File.new_for_path(path).query_exists(null)
+const fileExists = (path: string) => Gio.File.new_for_path(path).query_exists(null)
 
 const expandTilde = (path: string) =>
   path.startsWith('~') ? GLib.get_home_dir() + path.slice(1) : path
