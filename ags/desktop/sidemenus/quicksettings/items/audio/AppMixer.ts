@@ -1,4 +1,5 @@
 import { type Stream } from 'types/service/audio'
+import ListRevealer from '../ListRevealer'
 
 const audio = await Service.import('audio')
 
@@ -40,14 +41,8 @@ const MixerItem = (stream: Stream) => Widget.Box(
   }),
 )
 
-export default Widget.Box({
-  vertical: true,
-  visible: audio.bind('apps').as((a: Stream[]) => a.length > 0),
-  children: [
-    Widget.Label({ xalign: 0, className: 'title', label: 'App Mixer' }),
-    Widget.Box({
-      vertical: true,
-      children: audio.bind('apps').as((a: Stream[]) => a.map(MixerItem)),
-    })
-  ]
-})
+export default ListRevealer('App Mixer',
+  Widget.Box({ vertical: true })
+    .bind('children', audio, 'apps', ((a: Stream[]) => a.map(MixerItem))),
+  { visible: audio.bind('apps').as((a: Stream[]) => a.length > 0) }
+)
