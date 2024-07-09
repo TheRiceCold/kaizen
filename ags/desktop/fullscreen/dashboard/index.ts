@@ -7,8 +7,6 @@ import Avatar from './Avatar'
 import options from 'options'
 import { capitalize } from 'lib/utils'
 
-const { bio } = options.dashboard
-
 const stackItems = [
   { name: 'home', icon: '', content: Home },
   { name: 'tasks', icon: '', content: Tasks },
@@ -63,25 +61,20 @@ const Header = Widget.Overlay({
   passThrough: true,
   className: 'header',
   overlays: [ MenuButton, Avatar ],
-  child: Widget.Box({ vertical: true },
+  child: Widget.Box(
+    { className: 'cover', vertical: true },
     Widget.Box({
-      className: 'cover',
+      className: 'cover-img',
       css: wallpaper.bind('wallpaper').as(
         (wp: string) => `
         min-height: 200px;
         background-size: cover;
         background-image: url('${wp}');`)
     }),
-    Widget.Label({
-      xalign: 0,
-      className: 'title',
-      label: `Good morning, ${capitalize(Utils.USER)}`
-    })
   )
 })
 
-const Bio = Widget.Label({ xalign: 0, label: bio.bind(), className: 'bio' })
-const Main = Widget.Box({ vertical: true, className: 'main' }, Header, Bio, Stack)
+const Main = Widget.Box({ vertical: true, className: 'main' }, Header, Stack)
 
 export default Widget.Window({
   visible: false,
