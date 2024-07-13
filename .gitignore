@@ -1,5 +1,7 @@
 node_modules/
 types/
 
+result
+
 bun.lockb
 package-lock.json
