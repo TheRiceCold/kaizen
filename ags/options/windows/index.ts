@@ -2,12 +2,12 @@ import { opt } from 'lib/option'
 import dashboard from './dashboard'
 
 export default {
-  dashboard: {...dashboard},
+  dashboard: { ...dashboard },
 
   sideright: { width: opt(380) },
   topbar: {
     tray: {
-      ignore: opt([ 'KDE Connect Indicator', 'gromit-mpx' ]),
+      ignore: opt(['KDE Connect Indicator', 'gromit-mpx']),
     },
     date: {
       interval: 5000,
@@ -32,6 +32,7 @@ export default {
       max: opt(6),
       iconSize: opt(62),
     },
+    execCmd: opt(''),
   },
 
   lockscreen: {

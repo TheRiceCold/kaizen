@@ -5,3 +5,13 @@ result
 
 bun.lockb
 package-lock.json
+# Devenv
+.devenv*
+devenv.local.nix
+.envrc
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml

@@ -9,7 +9,7 @@ declare global {
 Object.assign(globalThis, {
   USER: GLib.get_user_name(),
   TMP: `${GLib.get_tmp_dir()}/ags`,
-  OPTIONS: `${GLib.get_user_cache_dir()}/ags/options.json`,
+  OPTIONS: `${GLib.get_user_data_dir()}/ags/config.json`,
 })
 
 Utils.ensureDirectory(TMP)
