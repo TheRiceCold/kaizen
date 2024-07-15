@@ -12,6 +12,8 @@ Object.assign(globalThis, {
   OPTIONS: `${GLib.get_user_data_dir()}/ags/config.json`,
 })
 
+console.log(OPTIONS)
+
 Utils.ensureDirectory(TMP)
 App.addIcons(`${App.configDir}/assets/icons`)
 App.addIcons(`${App.configDir}/assets/icons/weather`)

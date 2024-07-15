@@ -24,12 +24,9 @@ export const AiButton: Button = BarButton({
 export const RunButton = BarButton({
   label: 'Run', window: 'run',
   onClicked() {
-    let cmd = options.run.execCmd
+    const cmd = options.run.execCmd.value
     if (cmd.length > 0) {
-      Utils.execAsync(['bash', '-c', cmd]).catch((err: any) => {
-        console.error(cmd, err)
-        return ''
-      })
+      sh.run(cmd)
     } else {
       App.toggleWindow('run')
     }
