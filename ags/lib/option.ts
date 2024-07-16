@@ -1,8 +1,18 @@
 import { Variable } from 'resource:///com/github/Aylur/ags/variable.js'
-import options from 'options'
 
 type OptProps = {
   persistent?: boolean
+}
+
+function getValueFromPath(obj, path) {
+  const keys = path.split('.').filter(key => key)
+  return keys.reduce((acc, key) => {
+    const index = Number(key)
+    if (!isNaN(index)) {
+      return acc && acc[index] !== undefined ? acc[index] : undefined
+    }
+    return acc && acc[key] !== undefined ? acc[key] : undefined
+  }, obj)
 }
 
 export class Opt<T = unknown> extends Variable<T> {
@@ -20,9 +30,14 @@ export class Opt<T = unknown> extends Variable<T> {
   toString() { return `${this.value}` }
   toJSON() { return `opt:${this.value}` }
 
+  getValue = (): T => {
+    return super.getValue()
+  }
+
   init(cacheFile: string) {
-    const cacheV = JSON.parse(Utils.readFile(cacheFile) || '{}')[this.id]
-    if (cacheV !== undefined) this.value = cacheV
+    const cacheV = getValueFromPath(JSON.parse(Utils.readFile(cacheFile) || '{}'), this.id)
+    if (cacheV !== undefined)
+      this.value = cacheV
 
     this.connect('changed', () => {
       const cache = JSON.parse(Utils.readFile(cacheFile) || '{}')
@@ -32,7 +47,8 @@ export class Opt<T = unknown> extends Variable<T> {
   }
 
   reset() {
-    if (this.persistent) return
+    if (this.persistent)
+      return
 
     if (JSON.stringify(this.value) !== JSON.stringify(this.initial)) {
       this.value = this.initial
@@ -60,7 +76,8 @@ function getOptions(object: object, path = ''): Opt[] {
   })
 }
 
-export function create<T extends object>(cacheFile: string, object: T) {
+export function mkOptions<T extends object>(cacheFile: string, object: T) {
+  // PERF:this could have some serious improvements
   for (const opt of getOptions(object))
     opt.init(cacheFile)
 
@@ -85,7 +102,8 @@ export function create<T extends object>(cacheFile: string, object: T) {
     [opt, ...list] = getOptions(object),
     id = opt?.reset(),
   ): Promise<Array<string>> {
-    if (!opt) return sleep().then(() => [])
+    if (!opt)
+      return sleep().then(() => [])
 
     return id
       ? [id, ...(await sleep(50).then(() => reset(list)))]
@@ -99,11 +117,10 @@ export function create<T extends object>(cacheFile: string, object: T) {
       return (await reset()).join('\n')
     },
     handler(deps: string[], callback: () => void) {
-      for (const opt of getOptions(options)) {
+      for (const opt of getOptions(object)) {
         if (deps.some(i => opt.id.startsWith(i)))
           opt.connect('changed', callback)
       }
     },
   })
 }
-

@@ -14,5 +14,5 @@ import Fullscreen from './fullscreen'
 
 App.config({
   onConfigParsed: init,
-  windows: [ Overview, TopBar ].concat(Popups, SideMenus, Fullscreen, Background),
+  windows: [Overview, TopBar].concat(Popups, SideMenus, Fullscreen, Background),
 })

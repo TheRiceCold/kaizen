@@ -7,7 +7,7 @@ import { sh, getPlayer } from 'lib/utils'
 const mpris = await Service.import('mpris')
 const {
   visualizer: { width, height, smooth },
-  titleLength: { topbar : length },
+  titleLength: { topbar: length },
 } = options.player
 
 function getLabel(player) {

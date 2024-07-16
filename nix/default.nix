@@ -26,6 +26,7 @@
   # showmethekey, # TODO:
   wl-clipboard,
   brightnessctl,
+  hyprshade,
 
   # Dashboard
   ledger,
@@ -62,6 +63,7 @@
     gromit-mpx        # Annotation Tool
     wl-clipboard      # Command-line copy/paste utilities for Wayland
     brightnessctl     # Read and Control Brightness
+    hyprshade         # Hyprland shade configuration tool
 
     # ScreenTools
     grim              # Screenshot tool

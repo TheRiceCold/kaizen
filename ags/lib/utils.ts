@@ -45,15 +45,25 @@ function forMonitors(widget: (monitor: number) => Gtk.Window) {
   return range(n, 0).flatMap(widget)
 }
 
-/** @returns true if all of the `bins` are found */
-function dependencies(...bins: string[]) {
-  const missing = bins.filter(bin => !Utils.exec(`which ${bin}`))
 
-  if (missing.length > 0)
+/**
+ * @returns true if all of the `bins` are found
+ */
+function dependencies(...bins: string[]) {
+  const missing = bins.filter(bin => Utils.exec({
+    cmd: `which ${bin}`,
+    out: () => false,
+    err: () => true,
+  }))
+
+  if (missing.length > 0) {
+    console.warn(Error(`missing dependencies: ${missing.join(', ')}`))
     Utils.notify(`missing dependencies: ${missing.join(', ')}`)
+  }
 
   return missing.length === 0
 }
+
 
 /** run app detached */
 function launchApp(app: Application) {
@@ -94,7 +104,7 @@ const clamp = (x: number, min: number, max: number) => Math.min(Math.max(x, min)
 
 const copy = (input: string) => sh(['wl-copy', input])
 
-function enableClickThrough(self){
+function enableClickThrough(self) {
   const dummyRegion = new imports.gi.cairo.Region()
   self.input_shape_combine_region(dummyRegion)
 }
@@ -151,9 +161,9 @@ function levenshteinDistance(a, b) {
   for (let i = 1; i <= a.length; i++)
     for (let j = 1; j <= b.length; j++) {
       if (a.charAt(i - 1) === b.charAt(j - 1))
-        f[i][j] = f[i-1][j-1]
+        f[i][j] = f[i - 1][j - 1]
       else
-        f[i][j] = Math.min(f[i-1][j-1], Math.min(f[i][j-1], f[i-1][j])) + 1
+        f[i][j] = Math.min(f[i - 1][j - 1], Math.min(f[i][j - 1], f[i - 1][j])) + 1
     }
 
   return f[a.length][b.length]

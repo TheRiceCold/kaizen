@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [ "ES2022" ],
+    "lib": [ "dom", "ES2022" ],
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "allowJs": true,
@@ -12,6 +12,7 @@
     "baseUrl": ".",
     "typeRoots": [ "./types", "./node_modules/@girs" ],
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution":"node",
   }
 }
