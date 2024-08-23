@@ -8,11 +8,18 @@ import TopBar from './topbar'
 import Overview from './overview'
 
 import Popups from './popups'
+import Dialogs from './dialogs'
 import SideMenus from './sidemenus'
 import Background from './background'
 import Fullscreen from './fullscreen'
 
 App.config({
   onConfigParsed: init,
-  windows: [Overview, TopBar].concat(Popups, SideMenus, Fullscreen, Background),
+  windows: [ TopBar, Overview ].concat(
+    Popups,
+    Dialogs,
+    SideMenus,
+    Fullscreen,
+    Background,
+  ),
 })
