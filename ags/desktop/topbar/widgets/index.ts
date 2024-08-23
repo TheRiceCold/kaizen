@@ -21,15 +21,19 @@ export const AiButton: Button = BarButton({
   },
 })
 
+export const SettingsButton = BarButton({
+  label: 'Settings',
+  onClicked() { App.openWindow('settings-dialog') },
+})
+
 export const RunButton = BarButton({
   label: 'Run', window: 'run',
   onClicked() {
     const cmd = options.run.execCmd.value
-    if (cmd.length > 0) {
+    if (cmd.length > 0)
       sh.run(cmd)
-    } else {
+    else
       App.toggleWindow('run')
-    }
   },
 })
 

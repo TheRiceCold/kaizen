@@ -22,7 +22,7 @@ const Item = (action: Action) => Widget.MenuItem({
 })
 
 export default BarButton({
-  label: 'Session',
+  label: '',
   onClicked: self => Widget.Menu({
     children: [
       Item('lock'),
