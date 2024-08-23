@@ -1,6 +1,10 @@
 import BarButton from '../BarButton'
 
+import options from 'options'
+
 import { showWidget } from 'lib/variables'
+import { toggleWidget } from 'lib/globals'
+import sh from 'service/sh'
 
 export const LogoButton = BarButton({
   label: '󰚀',
@@ -9,9 +13,9 @@ export const LogoButton = BarButton({
   onClicked() { App.toggleWindow('dashboard') },
 })
 
-export const AiButton = BarButton({
+export const AiButton: Button = BarButton({
   label: 'Ask',
-  onClicked(self) {
+  onClicked(self: typeof BarButton) {
     toggleWidget('ask')
     self.toggleClassName('active', showWidget['ask'].value)
   },
@@ -19,7 +23,14 @@ export const AiButton = BarButton({
 
 export const RunButton = BarButton({
   label: 'Run', window: 'run',
-  onClicked() { App.toggleWindow('run') },
+  onClicked() {
+    const cmd = options.run.execCmd.value
+    if (cmd.length > 0) {
+      sh.run(cmd)
+    } else {
+      App.toggleWindow('run')
+    }
+  },
 })
 
 export const ShortcutsButton = BarButton({
