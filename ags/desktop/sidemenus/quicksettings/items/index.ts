@@ -1,6 +1,5 @@
 import WifiList from './wifi'
 import AudioList from './audio'
-import DisplayOptions from './display'
 import BluetoothList from './bluetooth'
 import NotificationList from './notifications'
 
@@ -25,9 +24,4 @@ export default [
     name: 'audioList',
     content: AudioList,
   },
-  {
-    label: 'Settings',
-    name: 'displayOptions',
-    content: DisplayOptions,
-  }
 ]
