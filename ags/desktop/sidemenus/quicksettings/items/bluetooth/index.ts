@@ -40,12 +40,9 @@ const list = Widget.Scrollable({
   vexpand: true,
   hscroll: 'never',
   vscroll: 'automatic',
-  child: Widget.Box({
-    vertical: true,
-    children: bluetooth.bind('devices').as(
-      (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device)
-    ),
-  })
+  child: Widget.Box({ vertical: true })
+    .bind('children', bluetooth, 'devices',
+      (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device))
 })
 
 export default Widget.Box({ vertical: true, className: 'bluetooth-list' }, header, list)

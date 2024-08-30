@@ -77,8 +77,8 @@ export default Widget.Scrollable({
   vscroll: 'automatic',
   className: 'notification-scrollable',
   child: Widget.Box({
-    className: 'notification-list vertical',
     vertical: true,
+    className: 'notification-list vertical',
     children: [ NotificationList(), Placeholder ],
   }),
 })

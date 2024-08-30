@@ -1,11 +1,11 @@
 window.sideright .quicksettings .stack-list
   padding: $padding
   .header
-    margin: calc($spacing * 1) calc($spacing * 0.5)
+    margin: $spacing calc($spacing * 0.5)
 
     > label
       font-weight: 500
-      font-size: 1.25em
+      font-size: 1.25rem
       margin-left: calc($radius * 0.5)
 
     button
@@ -14,13 +14,29 @@ window.sideright .quicksettings .stack-list
       label
         font-weight: 500
 
-  .list-revealer button
-    @include list-revealer-button
+  .list-revealer
+    margin-top: 0.5rem
+    .sub-title
+      margin: 0.5rem 0
+      font-size: 1.15rem
+    .sink-button
+      all: unset
+      padding: 0.5rem
+    .list-button
+      padding: $padding
+      background-color: transparent
+      border-bottom: 1px solid transparentize($fg, 0.75)
+      label
+        font-size: 1.25rem
+      &:hover
+        background: none
+        label, image
+          color: $primary-bg
 
   .slider-box
     padding: $padding
     label
-      font-size: 1.05em
+      font-size: 1.05rem
     button
       @include button($flat: true)
       padding: calc($padding * 0.5)
