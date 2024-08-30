@@ -1,12 +1,39 @@
 window#dashboard .dashboard .quote
-  padding: 1rem
-  button label
-    font-size: 1rem
-  .text
-    padding: 0.5rem
-    font-size: 1.25rem
-  .icon
-    font-size: 2.5rem
-  .name
-    margin-top: 1rem
-    font-size: 1.15rem
+  border: $border
+  .current-quote
+    padding: 1rem
+    .header-buttons
+      button + label
+        font-size: 1.25rem
+      button label
+        font-size: 1rem
+    .text
+      padding: 0.5rem
+      font-size: 1.25rem
+    .icon
+      font-size: 2.5rem
+    .name
+      margin-top: 1rem
+      font-size: 1.15rem
+
+  .filter-header
+    border-bottom: $border
+    > label
+      font-size: 1.15rem
+    .apply-btn
+      @include button
+      margin: 0.5rem 0
+      font-weight: 500
+      border-radius: 0.75rem
+      padding: 0.25rem 0.75rem
+  .filter box
+    padding: 0 0.5rem
+    .checkbox label
+      font-size: 1.15rem
+    .list
+      margin-top: 2.75rem
+      padding: 0.5rem 0
+      &:last-child
+        border-left: $border
+      button
+        padding: 0.15rem 0
