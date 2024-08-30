@@ -4,11 +4,11 @@ import { sh, dependencies } from './utils'
 
 export default function init() {
   wallpaper.connect('changed', () => matugen())
-  options.autotheme.connect('changed', () => matugen())
+  options.theme.auto.connect('changed', () => matugen())
 }
 
 function animate(...setters: Array<() => void>) {
-  const delay = options.transition.value / 2
+  const delay = options.transition.value * 0.5
   setters.forEach((fn, i) => Utils.timeout(delay * i, fn))
 }
 
