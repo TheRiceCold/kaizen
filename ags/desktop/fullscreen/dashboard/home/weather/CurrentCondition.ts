@@ -54,12 +54,17 @@ const Air = Widget.Box([
   }),
 ])
 
-const Details = Widget.Box({ vertical: true, className: 'details' }, Sun, Air)
-
-export default Widget.Box({
+const Details = Widget.Box({
   vpack: 'end',
   vertical: true,
+  className: 'details',
+  children: [Sun, Air],
+})
+
+export default Widget.Box({
+  vertical: true,
   hpack: 'center',
+  homogeneous: true,
   className: 'current-condition',
   children: [Region, IconAndTemp, Description(), Details]
 })

@@ -4,8 +4,9 @@ import { launchApp, icon, capitalize } from 'lib/utils'
 
 const applications = await Service.import('applications')
 
-function AppButton(app) {
-
+function AppButton(a) {
+  const isObj = typeof a === 'object'
+  const app = applications.query(isObj ? a.name : a)?.[0]
   const iconName = isObj && ('icon' in a) ? a.icon : app.icon_name
 
   return Widget.Button({
@@ -21,7 +22,7 @@ function AppButton(app) {
         wrap: true,
         maxWidthChars: 8,
         justification: 'center',
-        label: capitalize(isObj ? a.label : a)
+        label: capitalize(isObj ? a.label: a)
       })
     ),
   })
@@ -33,9 +34,7 @@ const Column = apps => Widget.Scrollable({
   vscroll: 'automatic',
   child: Widget.Box({
     vertical: true,
-    children: apps.map(app => applications.query(app)?.[0])
-      .filter(app => app)
-      .map(AppButton)
+    children: apps.map(AppButton)
   })
 })
 

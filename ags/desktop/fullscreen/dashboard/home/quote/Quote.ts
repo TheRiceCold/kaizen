@@ -51,7 +51,7 @@ const Content = [
   Widget.Label({
     wrap: true,
     className: 'text',
-    maxWidthChars: 40,
+    maxWidthChars: 48,
     justification: 'center',
     label: currentQuote.bind().as(v => v.quote),
   }),

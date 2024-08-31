@@ -3,8 +3,8 @@ import Player from './player'
 import Weather from './weather'
 
 import Clock from './clock'
-import Quote from './quote'
 import GitHub from './github'
+import Quote from './quote'
 // import System from './System'
 import TimeProgress from './time-progress'
 
