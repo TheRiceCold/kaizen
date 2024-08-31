@@ -19,9 +19,13 @@ window.settings-dialog
       border-radius: calc($radius * 0.75)
 
   .header
+    padding: 1rem
+    border-bottom: 1px solid transparentize($fg, 0.5)
     .pager
-      @include spacing(0.5)
-      padding: $padding
+      font-weight: 500
+      image
+        font-size: 1.15rem
+        margin-right: 0.25rem
 
   .page
     .page-content
@@ -29,6 +33,7 @@ window.settings-dialog
       padding: calc($padding * 2)
 
   .group
+    margin-bottom: 1rem
     .group-title
       color: $primary-bg
       margin-bottom: calc($spacing * 0.5)

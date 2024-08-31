@@ -11,10 +11,11 @@ const Header = Widget.CenterBox({
   startWidget: Widget.Button({
     hpack: 'start',
     vpack: 'start',
+    cursor: 'pointer',
     className: 'reset',
     tooltipText: 'Reset',
     onClicked: options.reset,
-    child: Widget.Icon(icons.ui.refresh),
+    child: Widget.Label('Reset'),
   }),
   centerWidget: Widget.Box({
     className: 'pager horizontal',
@@ -28,6 +29,7 @@ const Header = Widget.CenterBox({
   endWidget: Widget.Button({
     hpack: 'end',
     vpack: 'start',
+    cursor: 'pointer',
     className: 'close',
     child: Widget.Icon(icons.ui.close),
     onClicked() { App.closeWindow('settings-dialog') },

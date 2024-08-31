@@ -11,6 +11,7 @@ const {
   font,
   theme: {
     widget,
+    auto, scheme,
     radius, blur,
     shadows, border,
     padding, spacing,
@@ -22,7 +23,16 @@ const {
 } = options
 
 export default Page('General', icons.ui.settings,
-  Group('', Wallpaper as ReturnType<typeof Row>),
+  Group('',
+    Wallpaper as ReturnType<typeof Row>,
+    Item({ opt: auto, title: 'Auto Generate Color Scheme' }),
+    Item({
+      opt: scheme,
+      type: 'enum',
+      title: 'Color Scheme',
+      enums: ['dark', 'light'],
+    }),
+  ),
   Group('Hyprland',
     Item({ opt: gaps, title: 'Gaps' }),
     Item({ opt: shadows, title: 'Shadows' }),

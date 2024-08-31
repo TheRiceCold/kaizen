@@ -16,7 +16,7 @@ export async function matugen(
   type: 'image' | 'color' = 'image',
   arg = wallpaper.wallpaper,
 ) {
-  if (!options.autotheme.value || !dependencies('matugen'))
+  if (!options.theme.auto.value || !dependencies('matugen'))
     return
 
   const colors = await sh(`matugen --dry-run -j hex ${type} ${arg}`)
