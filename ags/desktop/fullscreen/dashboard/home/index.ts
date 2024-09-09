@@ -1,14 +1,9 @@
 import Apps from './apps'
+import Time from './time'
+import GitHub from './github'
 import Player from './player'
 import Weather from './weather'
-
-import Clock from './clock'
-import GitHub from './github'
-import Quote from './quote'
-// import System from './System'
-import TimeProgress from './time-progress'
-
-// import Photo from '../Photo'
+import Knowledge from './knowledge'
 
 import options from 'options'
 import { capitalize } from 'lib/utils'
@@ -33,8 +28,9 @@ const Content = Widget.Scrollable(
   { hexpand: true, vexpand: true },
   Widget.Box(
     { vertical: true },
-    Section(Apps, Player, Weather),
-    Section(Clock, TimeProgress, Quote, GitHub, /* System */)
+    Section(Weather, Player, Apps),
+    Section(Time, Knowledge),
+    Section(GitHub),
   )
 )
 

@@ -43,7 +43,7 @@ function dayProgress(now) {
   return elapsed / total
 }
 
-const ProgressBar = (time: 'day' | 'week' | 'month' | 'year') => Widget.Box({
+export default (time: 'day' | 'week' | 'month' | 'year') => Widget.Box({
   vertical: true,
   attribute: {
     getValue(now) {
@@ -69,10 +69,3 @@ const ProgressBar = (time: 'day' | 'week' | 'month' | 'year') => Widget.Box({
   ]
 })
 
-export default Widget.Box(
-  { className: 'time-progress' },
-  ProgressBar('year'),
-  ProgressBar('month'),
-  ProgressBar('week'),
-  ProgressBar('day'),
-)

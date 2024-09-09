@@ -1,11 +1,25 @@
-window#dashboard .dashboard
-  .home .time-progress
+window#dashboard .home .time-widget
+  .clock
+    color: $fg
+    &:hover
+      color: $primary-bg
+    .date
+      padding: 0 1rem
+      font-weight: 500
+    .time
+      font-weight: 700
+      margin: 0.25rem 0
+      font-size: 4.25rem
+      &:last-child
+        border-top: $border
+  .progress
     margin: 0
     padding: 1rem
-    border: $border
+    border-left: $border
     box
       padding: 0.5rem
     label
+      color: $fg
       font-weight: 500
     progressbar
       min-height: 100px
