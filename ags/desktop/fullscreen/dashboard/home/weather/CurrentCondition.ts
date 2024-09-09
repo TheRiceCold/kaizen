@@ -13,7 +13,7 @@ function Description() {
     className: 'description',
     css: Weather.bind('current_condition').as(
       c => (getDescription(c).length > 20)
-        ? 'font-size: 1.25rem;' : 'font-size: 1.5rem;'
+        ? 'font-size: 1.15rem;' : 'font-size: 1.25rem;'
     ),
     label: Weather.bind('current_condition').as(getDescription),
   })

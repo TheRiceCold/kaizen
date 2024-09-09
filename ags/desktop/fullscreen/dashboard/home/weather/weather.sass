@@ -3,42 +3,31 @@ window#dashboard .weather .forecast
     color: $primary-bg
   .daily, .hourly > .content
     button
-      border-left: $border
       &:hover
         background-color: transparentize($primary-fg, 0.5)
       .day, .hour
-        margin-top: 1rem
-        font-weight: 600
         font-size: 1.5rem
       image
         font-size: 3rem
-        padding: 1.25rem 2rem
-        margin-bottom: 0.75rem
-        border-bottom: $border
+        padding: 1rem 0
       label
         font-size: 1.15rem
-        margin-bottom: 0.5rem
+        padding: 0.25rem 1rem
 
   .hourly
-    .header
-      padding: 0.75rem 1rem
-      border-left: $border
-      .back-btn
-        margin-right: 16rem
-        label
-          font-size: 1rem
-      label
-        font-weight: 500
-        font-size: 1.25rem
-    > .content
-      border: 0
-      margin: 0
-      padding: 0
-      border-left: $border
-      button
-        &:first-child
-          border-left: 0
-        border-top: $border
-        image
-          font-size: 4rem
-          padding: 1.5rem 2rem
+    .current-date, .back-btn label
+      padding: 1rem
+      font-weight: 500
+      font-size: 1.15rem
+    .current-date
+      font-size: 1.25rem
+    > .content button
+      padding: 2rem 0
+      margin-top: 2rem
+      &:last-child
+        border-right: 0
+      image
+        font-size: 3.25rem
+      &:hover
+        color: $fg
+        background-color: transparent

@@ -6,22 +6,24 @@ import ForecastStack from './Forecast'
   * widget to forces itself to show up first in the stack.
 */
 export default currentDay => {
-  const Header = Widget.Box({ className: 'header' },
-    Widget.Button({
-      label: '',
-      cursor: 'pointer',
-      className: 'back-btn',
-      onPrimaryClick() { ForecastStack.shown = 'daily' }
-    }),
-    Widget.Label({
-      xalign: 1,
-      className: 'date',
-      label: Utils.merge([
-        currentDay.bind(),
-        Weather.bind('hourly_forecast')
-      ], (day, forecast) => `Date: ${forecast[day] ? forecast[day][0].time.slice(0, 10) : ''}`)
-    })
-  )
+  const BackButton = Widget.Button({
+    label: '',
+    vpack: 'start',
+    hpack: 'start',
+    cursor: 'pointer',
+    className: 'back-btn',
+    onPrimaryClick() { ForecastStack.shown = 'daily' }
+  })
+
+  const DateLabel = Widget.Label({
+    vpack: 'start',
+    hpack: 'center',
+    className: 'current-date',
+    label: Utils.merge([
+      currentDay.bind(),
+      Weather.bind('hourly_forecast')
+    ], (day, forecast) => `Date: ${forecast[day] ? forecast[day][0].time.slice(0, 10) : ''}`)
+  })
 
   const Content = Widget.Scrollable({
     vscroll: 'never',
@@ -29,6 +31,7 @@ export default currentDay => {
     className: 'content',
     child: Widget.Box({
       hpack: 'center',
+      vpack: 'center',
       children: Utils.merge(
         [ currentDay.bind(), Weather.bind('hourly_forecast') ],
         (day, forecast) => forecast[day] ? forecast[day].map(hour => Widget.Button({
@@ -60,7 +63,9 @@ export default currentDay => {
     })
   })
 
-  return Widget.EventBox({
-    child: Widget.Box({ className: 'hourly', vertical: true }, Header, Content)
+  return Widget.Overlay({
+    child: Content,
+    className: 'hourly',
+    overlays: [ BackButton, DateLabel ],
   })
 }

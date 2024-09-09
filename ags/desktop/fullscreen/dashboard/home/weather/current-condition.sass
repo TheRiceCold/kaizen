@@ -1,14 +1,16 @@
 window#dashboard .weather .current-condition
+  border-right: $border
   separator
     background-color: transparentize($fg, 0.75)
   .region
     font-size: 2rem
     font-weight: 500
   image
-    font-size: 5rem
+    padding: 0 1rem
+    font-size: 4rem
     + label
       font-weight: 600
-      font-size: 2.5rem
+      font-size: 2.25rem
   .description
     font-weight: 500
   .details
@@ -18,6 +20,5 @@ window#dashboard .weather .current-condition
     box:first-child label
       padding: 0.5rem 1.25rem
     label
-      font-weight: 500
       font-size: 1.15rem
       padding: 0.5rem 0.75rem
