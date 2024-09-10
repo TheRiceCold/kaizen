@@ -6,6 +6,14 @@ import { showWidget } from 'lib/variables'
 import { toggleWidget } from 'lib/globals'
 import sh from 'service/sh'
 
+const systemtray = await Service.import('systemtray')
+
+export const TraySeparator = Widget.Separator({
+  vertical: true,
+  visible: systemtray.bind('items').as(items => items.length > 0)
+})
+// .bind('visible', systemtray, 'items', items => items.length > 0)
+
 export const LogoButton = BarButton({
   label: '󰚀',
   window: 'dashboard',
@@ -23,7 +31,10 @@ export const AiButton: Button = BarButton({
 
 export const SettingsButton = BarButton({
   label: 'Settings',
-  onClicked() { App.openWindow('settings-dialog') },
+  onClicked() {
+    App.closeWindow('dashboard')
+    App.openWindow('settings-dialog')
+  },
 })
 
 export const RunButton = BarButton({

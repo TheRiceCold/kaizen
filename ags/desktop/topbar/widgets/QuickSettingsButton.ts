@@ -8,28 +8,36 @@ const { wifi } = await Service.import('network')
 const battery = await Service.import('battery')
 const notifications = await Service.import('notifications')
 
-const BatteryIcon = Widget.Icon({
-  className: 'battery',
-  icon: battery.bind('icon_name'),
-  visible: battery.bind('available'),
-}).hook(battery, self => {
-  const { percent: p, charging } = battery
+const BatteryIcon = Widget.Icon({ className: 'battery' }).hook(battery, self => {
+  const { percent: p, charging, available } = battery
+
+  self.visible = available
+  self.tooltipText = p+'%'
+  self.icon = battery['icon_name']
   self.toggleClassName('charging', charging)
   self.toggleClassName('error', p < 20 && !charging)
 })
 
-const DND = Widget.Icon().bind(
-  'icon', notifications, 'dnd',
-  dnd => dnd ? icons.notifications.silent : 'notification-symbolic'
-)
+const NetworkIcon = Widget.Icon().bind('icon', wifi, 'icon_name')
+
+const DNDIcon = Widget.Overlay({
+  className: 'notifications',
+  child: Widget.Icon({
+    icon: notifications.bind('dnd')
+      .as(dnd => icons.notifications[dnd ? 'silent' : 'default']),
+    className: notifications.bind('notifications')
+      .as(n => n.length > 0 ? 'active' : '')
+  }),
+  overlay: Widget.Label({
+    hpack: 'end', vpack: 'end',
+    visible: notifications.bind('notifications').as(n => n.length > 0),
+    label: notifications.bind('notifications').as(n => n.length.toString()),
+  })
+})
 
 export default BarButton({
   className: 'control-button',
-  child: Widget.Box([
-    BatteryIcon,
-    Widget.Icon().bind('icon', wifi, 'icon_name'),
-    DND,
-  ]),
+  child: Widget.Box([ BatteryIcon, NetworkIcon, DNDIcon ]),
   onClicked(self) {
     quicksettings.value = !quicksettings.value
     self.toggleClassName('active', quicksettings.value)

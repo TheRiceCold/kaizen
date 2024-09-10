@@ -28,7 +28,7 @@ function revealTimeout(timeout: number = 1000) {
     count--
     if (count !== 0) return
 
-    if (screenTools.isRecording)
+    if (screenTools._isRecording)
       reveal('recorder', true)
     else if (player)
       reveal('playing', true)
@@ -45,20 +45,10 @@ function indicatorUpdate(type, value) {
 }
 
 const revealer = Widget.Revealer({
+  child: stack,
   transition: 'slide_down',
   transitionDuration: options.transition * 1.5,
-  child: Widget.Box([
-    Widget.Separator({ vertical: true }),
-    stack,
-    Widget.Separator({ vertical: true }),
-  ]),
 })
-  .hook(mpris, () => revealTimeout(500))
-  .hook(screenTools, () => revealTimeout(500))
-  .hook(audio.microphone, () => { })
-  .hook(brightness, () => indicatorUpdate('brightness', brightness.kbd), 'notify::kbd')
-  .hook(brightness, () => indicatorUpdate('brightness', brightness.screen), 'notify::screen')
-  .hook(audio.speaker, () => indicatorUpdate('volume', audio.speaker.volume), 'notify::volume')
 
 export default Widget.Box({
   vpack: 'start',
@@ -66,3 +56,9 @@ export default Widget.Box({
   cursor: 'pointer',
   className: 'indicator',
 })
+  .hook(mpris, () => revealTimeout(500))
+  .hook(screenTools, () => revealTimeout(500))
+  .hook(audio.microphone, () => { }) // TODO:
+  .hook(brightness, () => indicatorUpdate('brightness', brightness.kbd), 'notify::kbd')
+  .hook(brightness, () => indicatorUpdate('brightness', brightness.screen), 'notify::screen')
+  .hook(audio.speaker, () => indicatorUpdate('volume', audio.speaker.volume), 'notify::volume')

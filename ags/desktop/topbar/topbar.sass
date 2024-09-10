@@ -14,22 +14,33 @@
       label, image
         color: $primary-bg
     &.launcher-button
-      padding-right: 0
-      padding-left: 0.25rem
+      margin-right: 0.5rem
       label
         font-size: 1.25rem
+    &:last-child
+      margin-left: 0.75rem
     .battery
       &.error
         color: #C76598
       &.charging
         color: #58D9BD
-    &:last-child
-      padding: 0 $padding
 
-  .control-button image:nth-child(2)
-    margin: 0 0.75rem
+  .datemenu
+    padding: 0 0.25rem
+  .control-button
+    padding: 0 0.25rem
+    image:nth-child(2)
+      margin: 0 0.75rem
+    .notifications
+      image &.active
+        color: $primary-bg
+        padding-right: 1rem
+      label
+        font-weight: 600
+        font-size: 0.75rem
+        color: $primary-bg
 
   separator
     padding: 1px
-    margin: $spacing calc($spacing * 0.5)
-    background-color: transparentize($primary-bg, 0.75)
+    margin: 0.75rem 0.25rem
+    background-color: transparentize($fg, 0.75)

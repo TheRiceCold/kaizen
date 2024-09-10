@@ -7,7 +7,7 @@ import {
   SessionButton,
   SettingsButton,
   Indicator,
-  Tray,
+  Tray, TraySeparator,
   QuickSettingsButton,
   DateButton,
 } from './widgets'
@@ -16,6 +16,7 @@ import DropdownMenu from 'desktop/dropdowns/background'
 const startWidget = Widget.Box(
   { hpack: 'start', className: 'side-items' },
   LogoButton,
+  Widget.Separator({ vertical: true }),
   Workspaces,
   Widget.Separator({ vertical: true }),
   AiButton,
@@ -26,10 +27,11 @@ const startWidget = Widget.Box(
 
 const endWidget = Widget.Box(
   { hpack: 'end', className: 'side-items' },
-  Tray,
+  Tray, TraySeparator,
   QuickSettingsButton,
   Widget.Separator({ vertical: true }),
   DateButton,
+  Widget.Separator({ vertical: true }),
   SessionButton
 )
 
