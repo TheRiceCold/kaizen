@@ -20,26 +20,24 @@ const BatteryIcon = Widget.Icon({ className: 'battery' }).hook(battery, self => 
 
 const NetworkIcon = Widget.Icon().bind('icon', wifi, 'icon_name')
 
-const DNDIcon = Widget.Overlay({
-  className: 'notifications',
-  child: Widget.Icon({
-    icon: notifications.bind('dnd')
-      .as(dnd => icons.notifications[dnd ? 'silent' : 'default']),
-    className: notifications.bind('notifications')
-      .as(n => n.length > 0 ? 'active' : '')
-  }),
-  overlay: Widget.Label({
-    hpack: 'end', vpack: 'end',
-    visible: notifications.bind('notifications').as(n => n.length > 0),
-    label: notifications.bind('notifications').as(n => n.length.toString()),
-  })
+const DNDIcon = Widget.Box({ className: 'notifications' }).hook(notifications, self => {
+  const { dnd, notifications: notifs } = notifications
+  const hasNotifs = notifs.length > 0
+
+  const Label = Widget.Label(notifs.length+'')
+  const Icon = Widget.Icon(icons.notifications[dnd ? 'silent' : 'default'])
+
+  self.children = [ Icon, Label ]
+
+  Label.visible = hasNotifs
+  Icon.toggleClassName('active', hasNotifs)
 })
 
 export default BarButton({
   className: 'control-button',
-  child: Widget.Box([ BatteryIcon, NetworkIcon, DNDIcon ]),
   onClicked(self) {
     quicksettings.value = !quicksettings.value
     self.toggleClassName('active', quicksettings.value)
   },
+  child: Widget.Box([ BatteryIcon, NetworkIcon, DNDIcon ]),
 })
