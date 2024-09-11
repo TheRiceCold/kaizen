@@ -1,5 +1,7 @@
 import { opt } from 'lib/option'
 
+import { facts, quotes, verses, questions } from 'data/knowledge'
+
 export default {
   tasksDirectory: opt(''),
   githubUser: opt('TheRiceCold'),
@@ -19,7 +21,7 @@ export default {
     ],
 
     [
-      'zed', 'neovide', 'insomnia',
+      'zed', 'neovide', 'postman',
       { label: 'godot', name: 'godot4' },
       { label: 'Android Studio', name: 'android-studio' },
     ],
@@ -36,4 +38,24 @@ export default {
       { label: 'Virtual Machine Manager', name: 'virt-manager' },
     ]
   ]),
+
+  knowledge: {
+    quotes: {
+      hidden: opt([]),
+      data: opt(quotes),
+    },
+    verses: {
+      hidden: opt([]),
+      data: opt(verses),
+    },
+    facts: {
+      hidden: opt([]),
+      data: opt(facts),
+    },
+    questions: {
+      hidden: opt([]),
+      data: opt(questions),
+    },
+  }
+
 }

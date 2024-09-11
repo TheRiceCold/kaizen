@@ -1,13 +1,6 @@
 import { opt } from 'lib/option'
 
-import quotes from 'data/quotes'
-
 export default {
-  quotes: {
-    hidden: opt([]),
-    data: opt(quotes),
-  },
-
   ai: {
     defaultGPTProvider: opt('openai'),
     defaultTemperature: opt(0.9),
