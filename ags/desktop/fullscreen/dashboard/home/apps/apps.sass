@@ -1,8 +1,10 @@
 window#dashboard .dashboard .apps
-  min-height: 260px
+  padding: 0.5rem
+  background-color: transparentize($bg, 0.5)
   button
     &:hover
       color: $primary-bg
+      background-color: transparentize($primary-fg, 0.25)
     label
       font-weight: 500
       font-size: 1.25rem
@@ -10,4 +12,3 @@ window#dashboard .dashboard .apps
       font-size: 4rem
     box
       padding: 0.5rem 1rem
-      border-left: $border

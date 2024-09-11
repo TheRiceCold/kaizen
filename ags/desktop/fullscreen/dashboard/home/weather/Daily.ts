@@ -34,7 +34,7 @@ export default currentDay => Widget.Box({
         }),
         Widget.Label({
           tooltipText: 'Wind Speed',
-          label: ': '+day.windSpeed
+          label: `: ${day.windSpeed} km/h`
         }),
       )
     }))

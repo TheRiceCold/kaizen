@@ -1,11 +1,9 @@
 window#dashboard .dashboard .player
   &:hover
-    border: 1px solid $primary-bg
-    background-color: $primary-fg
+    background-color: transparentize($primary-fg, 0.5)
   > box
     padding: 1rem
     border: $border
-    background-color: transparentize($bg, 0.5)
     .cover
       button
         padding: 0.5rem
