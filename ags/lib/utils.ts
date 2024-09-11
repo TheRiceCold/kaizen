@@ -203,6 +203,8 @@ function findCommonElement(array1, array2) {
   return false
 }
 
+const uniqueArray = arr => arr.filter((item, pos) => arr.indexOf(item) === pos)
+
 export {
   icon,
   bash,
@@ -211,6 +213,7 @@ export {
   forMonitors,
   dependencies,
   launchApp,
+  uniqueArray,
   findCommonElement,
   createSurfaceFromWidget,
   fileExists,
