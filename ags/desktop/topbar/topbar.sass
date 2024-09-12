@@ -2,8 +2,14 @@
   background-color: transparentize($bg, 0.5)
   .side-items
     padding: 0 calc($padding * 2)
-  .workspace-client
-    margin-right: calc($spacing * 0.5)
+    .workspaces
+      padding-left: 0.25rem
+      .client
+        > label, button
+          margin: 0
+        button
+          margin-left: 0.5rem
+
   label, image
     color: $fg
     font-weight: 500

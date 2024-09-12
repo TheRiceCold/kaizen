@@ -2,9 +2,9 @@ import BarButton from '../BarButton'
 
 import options from 'options'
 
+import { sh } from 'lib/utils'
 import { showWidget } from 'lib/variables'
 import { toggleWidget } from 'lib/globals'
-import sh from 'service/sh'
 
 const systemtray = await Service.import('systemtray')
 
@@ -12,7 +12,6 @@ export const TraySeparator = Widget.Separator({
   vertical: true,
   visible: systemtray.bind('items').as(items => items.length > 0)
 })
-// .bind('visible', systemtray, 'items', items => items.length > 0)
 
 export const LogoButton = BarButton({
   label: '󰚀',
@@ -42,7 +41,7 @@ export const RunButton = BarButton({
   onClicked() {
     const cmd = options.run.execCmd.value
     if (cmd.length > 0)
-      sh.run(cmd)
+      sh(cmd)
     else
       App.toggleWindow('run')
   },
@@ -57,8 +56,7 @@ export const ShortcutsButton = BarButton({
 
 export { default as Tray } from './Tray'
 export { default as Indicator } from './indicator'
-export { default as Workspaces } from './Workspaces'
+export { default as Workspaces } from './workspaces'
 export { default as DateButton } from './DateButton'
-export { default as WindowButton } from './WindowButton'
 export { default as SessionButton } from './SessionButton'
 export { default as QuickSettingsButton } from './QuickSettingsButton'

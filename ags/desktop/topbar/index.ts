@@ -3,7 +3,6 @@ import {
   Workspaces,
   AiButton,
   RunButton,
-  WindowButton,
   SessionButton,
   SettingsButton,
   Indicator,
@@ -21,7 +20,6 @@ const startWidget = Widget.Box(
   Widget.Separator({ vertical: true }),
   AiButton,
   RunButton,
-  WindowButton,
   SettingsButton,
 )
 
