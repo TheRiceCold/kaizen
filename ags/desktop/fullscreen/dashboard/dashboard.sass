@@ -1,31 +1,31 @@
 $border: 1px solid transparentize($fg, 0.75)
 
-window#dashboard
-  color: $fg
-  background-color: transparentize($bg, 0.15)
-  .dashboard
-    .page
-      margin: 1rem 100px
-    > .sidebar
-      > box
-        min-width: 250px
-        border-right: 1px solid transparentize($fg, 0.75)
-      .user
-        padding: 0.75rem
-        font-weight: 500
-        font-size: 1.15rem
-        margin-bottom: 1rem
-        border-top: 1px solid transparentize($fg, 0.75)
-        border-bottom: 1px solid transparentize($fg, 0.75)
-      button
-        padding: 0.75rem
-        padding-left: 75px
-        label
-          font-size: 1.5rem
-        &:hover
-          color: $primary-bg
+window#dashboard .dashboard
+  .page
+    margin: 1rem 100px
+  > .sidebar
+    > box
+      min-width: 200px
+      background-color: transparentize($bg, 0.25)
+      border-right: 1px solid transparentize($fg, 0.75)
+    .user
+      font-weight: 500
+      padding: 1.5rem 0
+      font-size: 1.15rem
+    button
+      padding: 0.75rem
+      &.active
+        color: $primary-bg
+        border-left: 0.25rem solid $primary-bg
+      label
+        font-size: 1.5rem
+        margin-left: 3rem
+      &:hover
+        color: $primary-bg
 
-    .main .header
+  .main
+    background-color: transparentize($bg, 0.25)
+    .header
       .cover
         padding-bottom: 50px
       .avatar
@@ -45,11 +45,10 @@ window#dashboard
             label, image
               font-size: 0
 
-      .menu-button
-        margin-top: 8px
-        margin-left: 12px
-        padding: calc($padding * 2)
-        background-color: transparentize($bg, 0.25)
-        label
-          color: $fg
-          font-size: 1.5rem
+    .menu-button
+      padding: 0.5rem
+      margin: 1rem 0 0 1rem
+      background-color: transparentize($bg, 0.75)
+      label
+        color: $fg
+        font-size: 1.5rem
