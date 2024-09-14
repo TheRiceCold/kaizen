@@ -1,10 +1,6 @@
 import Weather from 'service/api/weather'
 import ForecastStack from './Forecast'
 
-/* HACK:
-  * IDK why but I f*cking hate adding eventbox everytime a
-  * widget to forces itself to show up first in the stack.
-*/
 export default currentDay => {
   const BackButton = Widget.Button({
     label: '',

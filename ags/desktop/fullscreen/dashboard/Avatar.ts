@@ -1,7 +1,7 @@
 import options from 'options'
 import icons from 'data/icons'
 
-const ChangeButtonRevealer = Widget.Revealer({ child: Widget.Icon(icons.ui.camera) })
+const ChangeButtonRevealer = Widget.Revealer({}, Widget.Icon(icons.ui.camera))
 
 const Image = Widget.Overlay({
   child: Widget.Box({
@@ -28,11 +28,9 @@ export default Widget.Box(
   Widget.EventBox({
     vpack: 'end',
     hpack: 'start',
-    child: Image,
     cursor: 'pointer',
     className: 'container',
-    // TODO: onPrimaryClick() { App.closeWindow('dashboard') },
     onHover() { ChangeButtonRevealer.revealChild = true },
     onHoverLost() { ChangeButtonRevealer.revealChild = false },
-  })
+  }, Image)
 )

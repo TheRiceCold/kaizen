@@ -16,7 +16,7 @@ const IconStack = Widget.Stack({
 })
 
 const Timer = Widget.Label().bind(
-  'label', screenTools, 'timer', time => {
+  'label', screenTools, 'timer', (time: number) => {
     const sec = time % 60
     const min = Math.floor(time / 60)
     return `${min}:${sec < 10 ? '0' + sec : sec}`

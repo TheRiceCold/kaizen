@@ -54,7 +54,7 @@ export default (id: number) => {
       expand: true,
       onPrimaryClick() {
         App.closeWindow('overview')
-        dispatch('workspace '+id)
+        dispatch(`workspace ${id}`)
       },
       setup(self) {
         self.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY)

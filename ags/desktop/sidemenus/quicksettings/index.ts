@@ -9,9 +9,10 @@ type ItemType = {
   content: BoxProps
 }
 
-const isActive = Variable('notificationList')
+const activeTab = Variable('notificationList')
 
 const Stack = Widget.Stack({
+  shown: activeTab.bind(),
   className: 'stack-list',
   transition: 'slide_left_right',
   children: items.reduce((acc, item: ItemType) => {
@@ -22,11 +23,10 @@ const Stack = Widget.Stack({
 
 const StackButton = (stackName: string, label: string) => Widget.Button({
   label, cursor: 'pointer',
-  onClicked() {
-    Stack.shown = stackName
-    isActive.value = stackName
-  },
-}).hook(isActive, self => self.toggleClassName('active', isActive.value === stackName))
+  onClicked() { activeTab.value = stackName },
+}).hook(activeTab, self => {
+  self.toggleClassName('active', activeTab.value === stackName)
+})
 
 const Buttons = Widget.Box(
   { className: 'control-buttons' },

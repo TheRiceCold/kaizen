@@ -71,8 +71,7 @@ export default (notification: Notification) => {
                 cursor: 'pointer',
                 className: 'close-button',
                 onClicked: notification.close,
-                child: Widget.Icon('window-close-symbolic'),
-              }),
+              }, Widget.Icon('window-close-symbolic')),
             ],
           }),
           Widget.Label({

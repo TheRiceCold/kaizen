@@ -14,13 +14,13 @@ const ChatSendButton = Widget.Button({
   vpack: 'end',
   cursor: 'pointer',
   className: 'chat-send',
-  child: Widget.Icon(icons.ui.send),
   onClicked() {
     const text = ChatEntry.get_buffer().text
     GeminiSendMessage(text)
     ChatEntry.get_buffer().set_text('', -1)
   }
-})
+}, Widget.Icon(icons.ui.send))
+
 export const ChatPlaceholder = Widget.Label({
   hpack: 'start',
   vpack: 'center',
@@ -31,9 +31,8 @@ export const ChatPlaceholder = Widget.Label({
 export const ChatPlaceholderRevealer = Widget.Revealer({
   revealChild: true,
   transition: 'crossfade',
-  child: ChatPlaceholder,
   setup: enableClickThrough,
-})
+}, ChatPlaceholder)
 
 export const ChatEntry = TextView({
   hexpand: true,
@@ -65,10 +64,6 @@ export default Widget.Box(
   { vpack: 'center', className: 'chat-textarea' },
   Widget.Overlay({
     passThrough: true,
-    child: Widget.Scrollable({
-      child: ChatEntry,
-      hscroll: 'never',
-      vscroll: 'always',
-    }),
-    overlay: ChatPlaceholderRevealer
+    overlay: ChatPlaceholderRevealer,
+    child: Widget.Scrollable({ hscroll: 'never', vscroll: 'always' }, ChatEntry),
   }), ChatSendButton)

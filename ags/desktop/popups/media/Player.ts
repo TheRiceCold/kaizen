@@ -78,23 +78,20 @@ export default Widget.Box({
     cursor: 'pointer',
     className: 'play-pause',
     onClicked() { player.playPause() },
-    child: Widget.Icon().bind(
-      'icon', player, 'play-back-status',
-      status => icons.mpris[status.toLowerCase()]
-    ),
-  })
+  }, Widget.Icon().bind(
+    'icon', player, 'play-back-status',
+    status => icons.mpris[status.toLowerCase()]
+  ))
 
   const prev = Widget.Button({
     cursor: 'pointer',
     onClicked() { player.previous() },
-    child: Widget.Icon(icons.mpris.prev),
-  })
+  }, Widget.Icon(icons.mpris.prev))
 
   const next = Widget.Button({
     cursor: 'pointer',
     onClicked() { player.next() },
-    child: Widget.Icon(icons.mpris.next),
-  })
+  }, Widget.Icon(icons.mpris.next))
 
   self.children = [
     Title, Artist, Slider,

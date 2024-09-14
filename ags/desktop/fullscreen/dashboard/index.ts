@@ -57,9 +57,7 @@ const MenuButton = Widget.Button({
   vpack: 'start',
   cursor: 'pointer',
   className: 'menu-button',
-  onClicked() {
-    Sidebar.revealChild = !Sidebar.revealChild
-  }
+  onClicked() { Sidebar.revealChild = !Sidebar.revealChild }
 })
 
 const Dashboard = Widget.Box(

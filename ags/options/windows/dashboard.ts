@@ -21,7 +21,7 @@ export default {
     ],
 
     [
-      'zed', 'neovide', 'postman',
+      'zed', 'neovide',
       { label: 'godot', name: 'godot4' },
       { label: 'Android Studio', name: 'android-studio' },
     ],

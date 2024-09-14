@@ -18,8 +18,7 @@ const Volume = Widget.Revealer({
 
     if (!spotify) return Widget.Box()
 
-    return Widget.Box(
-      { vertical: true },
+    return Widget.Box({ vertical: true },
       Widget.Slider({
         vertical: true,
         inverted: true,
@@ -35,11 +34,9 @@ const Volume = Widget.Revealer({
 const Cover = Widget.Overlay({
   className: 'cover',
   overlay: Widget.Button({
-    hpack: 'end',
-    vpack: 'start',
-    child: Widget.Icon(icons.audio.type.speaker),
+    hpack: 'end', vpack: 'start',
     onClicked() { Volume.revealChild = !Volume.revealChild }
-  }),
+  }, Widget.Icon(icons.audio.type.speaker)),
   child: Widget.Box({
     attribute: { update(self) {
       const player = getPlayer()
@@ -64,29 +61,25 @@ const Controls = Widget.Box(
     self.onClicked = player.shuffle
     self.toggleClassName('active', player['shuffle-status'])
   }),
-  Widget.Button({
-    cursor: 'pointer',
-    child: Widget.Icon(icons.mpris.prev)
-  }).hook(mpris, self => {
-    const player = getPlayer()
-    if (!player) return
-    self.onClicked = player.previous
-  }),
-  Widget.Button({ cursor: 'pointer', child: Widget.Icon() }).hook(mpris, self => {
+  Widget.Button({ cursor: 'pointer' }, Widget.Icon(icons.mpris.prev))
+    .hook(mpris, self => {
+      const player = getPlayer()
+      if (!player) return
+      self.onClicked = player.previous
+    }),
+  Widget.Button({ cursor: 'pointer' }, Widget.Icon()).hook(mpris, self => {
     const player = getPlayer()
     if (!player) return
     const status = player['play-back-status'].toLowerCase()
     self.child.icon = icons.mpris[status]
     self.onClicked = player.playPause
   }),
-  Widget.Button({
-    cursor: 'pointer',
-    child: Widget.Icon(icons.mpris.next)
-  }).hook(mpris, self => {
-    const player = getPlayer()
-    if (!player) return
-    self.onClicked = player.next
-  }),
+  Widget.Button({ cursor: 'pointer' }, Widget.Icon(icons.mpris.next))
+    .hook(mpris, self => {
+      const player = getPlayer()
+      if (!player) return
+      self.onClicked = player.next
+    }),
   Widget.Button({ cursor: 'pointer' }).hook(mpris, self => {
     const player = getPlayer()
     if (!player) return

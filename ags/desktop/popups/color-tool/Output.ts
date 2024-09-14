@@ -54,9 +54,9 @@ const CopyButton = (type: 'hex' | 'rgb' | 'hsl') => Widget.Box([
     },
     child: Widget.Entry({ widthChars: 10 }),
     overlay: Widget.Button({
+      label: '󰆏',
       hpack: 'end',
       cursor: 'pointer',
-      child: Widget.Label('󰆏'),
     }),
   })
 ])
@@ -64,18 +64,13 @@ const CopyButton = (type: 'hex' | 'rgb' | 'hsl') => Widget.Box([
 
 export default Widget.Box(
   { className: 'output' },
-  Widget.Box(
-    { vertical: true, className: 'copy-buttons' },
-    CopyButton('hex'),
-    CopyButton('rgb'),
-    CopyButton('hsl'),
-  ),
+  Widget.Box({
+    vertical: true,
+    className: 'copy-buttons',
+    children: [CopyButton('hex'), CopyButton('rgb'), CopyButton('hsl')]
+  }),
   Widget.Box({ vertical: true },
-    Widget.Button({
-      cursor: 'pointer',
-      onClicked: Color.pick,
-      child: Widget.Icon(icons.ui.colorpicker)
-    }),
+    Widget.Button({ cursor: 'pointer', onClicked: Color.pick }, Widget.Icon(icons.ui.colorpicker)),
     ColorBox, // TODO: Apply picked color
   )
 )

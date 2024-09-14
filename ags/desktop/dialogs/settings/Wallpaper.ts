@@ -1,9 +1,9 @@
 import wallpaper from 'service/wallpaper'
 
 export default Widget.Box(
-  { className: 'wallpaper' },
+  { className: 'wallpaper', homogeneous: true },
   Widget.Box(
-    { vertical: true },
+    { vertical: true, hpack: 'start' },
     Widget.Label({
       xalign: 0,
       vpack: 'start',
@@ -23,8 +23,8 @@ export default Widget.Box(
       }),
     ])
   ),
-  Widget.Box({ hexpand: true }),
   Widget.Box({
+    hpack: 'end',
     className: 'preview',
     css: wallpaper.bind('wallpaper').as((wp: string) => `
       min-height: 80px;
