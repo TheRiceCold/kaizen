@@ -57,36 +57,3 @@ window#run .layout
       box-shadow: inset 0 0 0 $border-width $border-color
       .title
         color: $fg
-
-  button.help, button.nix-item
-    @include button($flat: true, $reactive: false)
-    padding: 0 calc($padding * 0.5)
-
-    label
-      color: $fg
-      transition: $transition
-
-    .name
-      font-size: 1.2rem
-      font-weight: bold
-    .description
-      color: transparentize($fg, 0.3)
-
-    &:hover, &:focus
-      label
-        text-shadow: $text-shadow
-      .name, .version
-        color: $primary-bg
-      .description
-        color: transparentize($primary-bg, 0.3)
-
-  button.sh-item
-    @include button($flat: true, $reactive: false)
-    padding: 0 calc($padding * 0.5)
-
-    color: $fg
-    transition: $transition
-
-    &:hover, &:focus
-      color: $primary-bg
-      text-shadow: $text-shadow

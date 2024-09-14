@@ -1,18 +1,25 @@
 .topbar
+  color: $fg
+  font-weight: 500
   background-color: transparentize($bg, 0.5)
+
+  separator
+    padding: 1px
+    margin: 0.75rem 0.25rem
+    background-color: transparentize($fg, 0.75)
+
   .side-items
     padding: 0 calc($padding * 2)
     .workspaces
       padding-left: 0.25rem
+      > button
+        margin: 0 0.5rem
       .client
         > label, button
           margin: 0
         button
           margin-left: 0.5rem
 
-  label, image
-    color: $fg
-    font-weight: 500
   .bar-button
     border-radius: $radius
     margin: 0 calc($spacing * 0.5)
@@ -20,9 +27,11 @@
       label, image
         color: $primary-bg
     &.launcher-button
-      margin-right: 0.5rem
+      margin-right: 0.75rem
       label
-        font-size: 1.25rem
+        font-size: 1.5rem
+    &:first-child
+      margin-right: 0.75rem
     &:last-child
       margin-left: 0.75rem
     .battery
@@ -39,8 +48,3 @@
       padding: 0 0.75rem
     image.active, label
       color: $primary-bg
-
-  separator
-    padding: 1px
-    margin: 0.75rem 0.25rem
-    background-color: transparentize($fg, 0.75)
