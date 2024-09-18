@@ -6,14 +6,12 @@ export default <T>(
   ...groups: ReturnType<typeof Group<T>>[]
 ) => Widget.Box({
   className: 'page',
-  attribute: { name, icon },
-  child: Widget.Scrollable({
-    css: 'min-height: 300px;',
-    child: Widget.Box({
-      vexpand: true,
-      vertical: true,
-      children: groups,
-      className: 'page-content',
-    }),
+  attribute: {name, icon},
+}, Widget.Scrollable({ css: 'min-height: 300px;' },
+  Widget.Box({
+    vexpand: true,
+    vertical: true,
+    children: groups,
+    className: 'page-content',
   }),
-})
+))

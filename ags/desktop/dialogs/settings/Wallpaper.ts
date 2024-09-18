@@ -12,7 +12,7 @@ export default Widget.Box(
     }),
     Widget.Box([
       Widget.FileChooserButton({
-        onFileSet({ uri }) {
+        onFileSet({uri}) {
           wallpaper.set(uri!.replace('file://', ''))
         },
       }),

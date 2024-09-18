@@ -19,13 +19,30 @@ window.settings-dialog
       border-radius: calc($radius * 0.75)
 
   .header
-    padding: 1rem
-    border-bottom: 1px solid transparentize($fg, 0.5)
+    border-bottom: 1px solid transparentize($fg, 0.75)
+    > box:first-child
+      border-right: 1px solid transparentize($fg, 0.75)
+      button
+        padding: 0.75rem
+        &:hover
+          background-color: $primary-fg
+    > button:last-child
+      border-left: 1px solid transparentize($fg, 0.75)
+      padding: 0.75rem
+      &:hover
+        background-color: $error-fg
+
     .pager
       font-weight: 500
-      image
-        font-size: 1.15rem
-        margin-right: 0.25rem
+      button
+        margin: 0 0.5rem
+        &.active
+          color: $primary-bg
+        &:hover
+          color: $primary-bg
+        image
+          font-size: 1.15rem
+          margin-right: 0.25rem
 
   .page
     .page-content

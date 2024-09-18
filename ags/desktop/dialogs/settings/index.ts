@@ -1,36 +1,37 @@
-import { DialogWindow } from '..'
+import {DialogWindow} from '..'
 
 import options from 'options'
 import pages from './pages'
 import icons from 'data/icons'
-import { sh } from 'lib/utils'
+import {sh} from 'lib/utils'
 
 const current = Variable(pages[0].attribute.name)
 
 const Header = Widget.CenterBox({
   className: 'header',
-  startWidget: Widget.Box([
+  startWidget: Widget.Box(
+    {hpack: 'start'},
+    Widget.Button({
+      label: '󰓾', cursor: 'pointer',
+      onClicked() { sh('kaizen -i') },
+    }),
     Widget.Button({
       cursor: 'pointer',
       className: 'reset',
       tooltipText: 'Reset',
       onClicked: options.reset,
-    }, Widget.Label('Reset')),
-    Widget.Button({
-      cursor: 'pointer',
-      child: Widget.Label('Inspect'),
-      onClicked() { sh('kaizen -i') },
-    }),
-  ]),
+    }, Widget.Icon(icons.ui.refresh))),
+
   centerWidget: Widget.Box({
     className: 'pager horizontal',
     children: pages.map(({ attribute: { name, icon } }) => Widget.Button({
       xalign: 0,
+      cursor: 'pointer',
       onClicked() { current.value = name },
-      child: Widget.Box([ Widget.Icon(icon), Widget.Label(name) ]),
       className: current.bind().as(v => `${v === name ? 'active' : ''}`),
-    })),
+    }, Widget.Box([ Widget.Icon(icon), Widget.Label(name) ]))),
   }),
+
   endWidget: Widget.Button({
     hpack: 'end',
     cursor: 'pointer',

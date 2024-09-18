@@ -1,7 +1,7 @@
 import icons from 'data/icons'
-import { Opt } from 'lib/option'
+import {Opt} from 'lib/option'
 
-const { Gdk } = imports.gi
+const {Gdk} = imports.gi
 
 function EnumSetter(opt: Opt<string>, values: string[]) {
   const lbl = Widget.Label({ label: opt.bind().as(v => `${v}`) })
