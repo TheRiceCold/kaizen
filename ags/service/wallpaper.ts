@@ -3,24 +3,22 @@ import options from 'options'
 
 export type Resolution = 1920 | 1366 | 3840
 export type Market =
-    | 'random' | 'en-US' | 'ja-JP' | 'en-AU'
-    | 'en-GB' | 'de-DE' | 'en-NZ' | 'en-CA'
+  | 'random' | 'en-US' | 'ja-JP' | 'en-AU'
+  | 'en-GB' | 'de-DE' | 'en-NZ' | 'en-CA'
 
 const WP = `${Utils.HOME}/.config/background`
 const Cache = `${Utils.HOME}/Fotos/Wallpaper/Bing`
 
 class Wallpaper extends Service {
   static {
-    Service.register(this, {}, {
-      wallpaper: ['string']
-    })
+    Service.register(this, {}, { wallpaper: ['string'] })
   }
 
   #blockMonitor = false
 
   #wallpaper() {
     if (!dependencies('swww')) return
-    sh('swww img --invert-y --transition-type grow '+WP)
+    sh('swww img --invert-y --transition-type grow ' + WP)
       .then(() => this.changed('wallpaper'))
   }
 

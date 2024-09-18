@@ -17,9 +17,8 @@ const popupWindow = (position: 'top' | 'bottom', ...children) => Widget.Window({
     vertical: true,
     css: 'padding: 2px;',
   }),
-  margins: showWidget.indicator.bind().as(
-    shown => shown && (position === 'top') ? [36] : [0]
-  ),
+  margins: showWidget.indicator.bind()
+    .as((shown: boolean) => shown && (position === 'top') ? [36] : [0]),
 })
 
 export default [

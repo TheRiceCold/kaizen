@@ -1,3 +1,4 @@
+import { ButtonLabel } from 'widgets'
 import Header from '../Header'
 import Device from './Device'
 
@@ -16,33 +17,24 @@ export type TDevice = {
   trusted: boolean,
   type: string,
   connecting: boolean
+  setConnection: (active: boolean) => void
 }
 
 const header = Header('Bluetooth', [
-  Widget.Button({
-    cursor: 'pointer',
-    tooltipText: 'Click to toggle',
-    onClicked() { bluetooth.enabled = !bluetooth.enabled },
-    label: bluetooth.bind('enabled').as((p: boolean) => `Status: ${p ? 'enabled' : 'disabled'}`),
-  }),
+  ButtonLabel(
+    bluetooth.bind('enabled').as((p: boolean) => `Status: ${p ? 'enabled' : 'disabled'}`),
+    () => bluetooth.enabled = !bluetooth.enabled,
+    { tooltipText: 'Click to toggle' }),
 
-  Widget.Button({
-    label: 'Settings',
-    cursor: 'pointer',
-    onClicked() {
-      if (dependencies('blueman-manager'))
-        sh('blueman-manager')
-    }
-  })
+  ButtonLabel('Settings', () => { if (dependencies('blueman-manager')) sh('blueman-manager') })
 ])
 
 const list = Widget.Scrollable({
   vexpand: true,
   hscroll: 'never',
   vscroll: 'automatic',
-  child: Widget.Box({ vertical: true })
-    .bind('children', bluetooth, 'devices',
-      (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device))
-})
+}, Widget.Box({ vertical: true }).bind(
+  'children', bluetooth, 'devices',
+  (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device)))
 
 export default Widget.Box({ vertical: true, className: 'bluetooth-list' }, header, list)

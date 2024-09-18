@@ -15,28 +15,23 @@ function AppButton(a) {
       App.closeWindow('dashboard')
       launchApp(app)
     },
-    child: Widget.Box(
-      { vertical: true },
-      Widget.Icon(icon(iconName, icons.fallback.executable)),
-      Widget.Label({
-        wrap: true,
-        maxWidthChars: 8,
-        justification: 'center',
-        label: capitalize(isObj ? a.label: a)
-      })
-    ),
-  })
+  }, Widget.Box(
+    { vertical: true },
+    Widget.Icon(icon(iconName, icons.fallback.executable)),
+    Widget.Label({
+      wrap: true,
+      maxWidthChars: 8,
+      justification: 'center',
+      label: capitalize(isObj ? a.label: a)
+    })
+  ))
 }
 
 const Column = apps => Widget.Scrollable({
   hscroll: 'never',
   className: 'column',
   vscroll: 'automatic',
-  child: Widget.Box({
-    vertical: true,
-    children: apps.map(AppButton)
-  })
-})
+}, Widget.Box({ vertical: true, children: apps.map(AppButton) }))
 
 export default Widget.Box({
   className: 'apps',

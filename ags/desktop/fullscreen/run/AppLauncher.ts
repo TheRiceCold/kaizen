@@ -6,20 +6,7 @@ import icons from 'data/icons'
 
 const apps = await Service.import('applications')
 const { query } = apps
-const { iconSize, favorites, max: appsMax } = options.run.apps
-
-const QuickAppButton = (app: Application) => Widget.Button({
-  hexpand: true,
-  tooltipText: app.name,
-  onClicked() {
-    App.closeWindow('run')
-    launchApp(app)
-  },
-  child: Widget.Icon({
-    size: iconSize.bind(),
-    icon: icon(app.icon_name, icons.fallback.executable),
-  }),
-})
+const { iconSize, max: appsMax } = options.run.apps
 
 function AppItem(app: Application) {
   const title = Widget.Label({
@@ -42,10 +29,7 @@ function AppItem(app: Application) {
     label: app.description || '',
   })
 
-  const appicon = Widget.Icon({
-    size: iconSize.bind(),
-    icon: icon(app.icon_name, icons.fallback.executable),
-  })
+  const appicon = Widget.Icon(icon(app.icon_name, icons.fallback.executable)).bind('size', iconSize)
 
   const textBox = Widget.Box({
     vertical: true,
@@ -57,27 +41,9 @@ function AppItem(app: Application) {
     cursor: 'pointer',
     attribute: { app },
     className: 'app-item',
-    child: Widget.Box([appicon, textBox]),
     onClicked() { App.closeWindow('run'); launchApp(app) },
-  })
+  }, Widget.Box([appicon, textBox]))
 }
-
-export const Favorites = () => Widget.Revealer({
-  visible: favorites.bind().as(f => f.length > 0),
-  child: Widget.Box({
-    vertical: true,
-    children: favorites.bind().as(favs => favs.flatMap(fs => [
-      Widget.Separator(),
-      Widget.Box({
-        className: 'quicklaunch horizontal',
-        setup(self) {
-          if (Array.isArray(fs))
-            self.children = fs.map(f => query(f)?.[0]).map(QuickAppButton)
-        }
-      })
-    ])),
-  }),
-})
 
 export function Launcher() {
   const applist = Variable(query(''))
@@ -85,18 +51,18 @@ export function Launcher() {
 
   const SeparatedAppItem = (app: Application) => Widget.Revealer(
     { attribute: { app } },
-    Widget.Box({ vertical: true }, Widget.Separator(), AppItem(app)),
+    Widget.Box({vertical: true}, Widget.Separator(), AppItem(app)),
   )
 
   const list = Widget.Box({
     vertical: true,
-    children: applist.bind().as(list => list.map(SeparatedAppItem))
+    children: applist.bind().as((list: Application[]) => list.map(SeparatedAppItem))
   }).hook(apps, () => applist.value = query(''), 'notify::frequents')
 
   return Object.assign(list, {
     filter(text: string | null) {
       first = query(text || '')[0]
-      list.children.reduce((i, item) => {
+      list.children.reduce((i: number, item: typeof Widget.Revealer) => {
         if (!text || i >= appsMax.value) {
           item.revealChild = false
           return i

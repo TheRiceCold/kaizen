@@ -9,15 +9,14 @@ const notifications = await Service.import('notifications')
 const notifs = notifications.bind('notifications')
 
 const Animated = (n: Notif) => Widget.Revealer({
-  child: Notification(n),
   transition: 'slide_down',
   transitionDuration: options.transition.value,
-  setup(self) {
+  setup(self: Widget.Revealer) {
     Utils.timeout(options.transition.value, () => {
       if (!self.is_destroyed) self.revealChild = true
     })
   }
-})
+}, Notification(n))
 
 const NotificationList = () => {
   const map: Map<number, ReturnType<typeof Animated>> = new Map
@@ -65,20 +64,14 @@ const Placeholder = Widget.Box({
   hpack: 'center',
   className: 'placeholder',
   visible: notifs.as(n => n.length === 0),
-  children: [
-    Widget.Icon(icons.notifications.silent),
-    Widget.Label('Your inbox is empty'),
-  ],
-})
+}, Widget.Icon(icons.notifications.silent), Widget.Label('Your inbox is empty'))
 
 export default Widget.Scrollable({
   vexpand: true,
   hscroll: 'never',
   vscroll: 'automatic',
   className: 'notification-scrollable',
-  child: Widget.Box({
-    vertical: true,
-    className: 'notification-list vertical',
-    children: [ NotificationList(), Placeholder ],
-  }),
-})
+}, Widget.Box({
+  vertical: true,
+  className: 'notification-list vertical'
+}, NotificationList(), Placeholder))

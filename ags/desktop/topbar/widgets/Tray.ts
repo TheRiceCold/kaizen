@@ -1,22 +1,26 @@
+import { type ButtonProps } from 'types/widgets/button'
 import { type TrayItem } from 'types/service/systemtray'
 import BarButton from '../BarButton'
-import options from 'options'
 
 const { Gdk } = imports.gi
-const { ignore } = options.topbar.tray
 const systemtray = await Service.import('systemtray')
 
 const Item = (item: TrayItem) => BarButton({
   className: 'tray-item',
   tooltipMarkup: item.bind('tooltip_markup'),
-  child: Widget.Icon({ icon: item.bind('icon') }),
+  child: Widget.Icon().bind('icon', item, 'icon'),
   attribute: {
-    openMenu: self => item.menu?.popup_at_widget(
-      self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
+    openMenu(self: ButtonProps) {
+      item.menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
+    }
   },
-  onPrimaryClick: self => self.attribute.openMenu(self),
-  onSecondaryClick: self => self.attribute.openMenu(self),
-  setup(self) {
+  onPrimaryClick(self: ButtonProps) {
+    self.attribute.openMenu(self)
+  },
+  onSecondaryClick(self: ButtonProps) {
+    self.attribute.openMenu(self)
+  },
+  setup(self: ButtonProps) {
     const menu = item.menu
     if (!menu) return
 
@@ -32,5 +36,5 @@ const Item = (item: TrayItem) => BarButton({
 
 export default Widget.Box().bind(
   'children', systemtray, 'items',
-  items => items.filter(({ id }) => !ignore.value.includes(id)).map(Item)
+  items => items.filter(({ id }) => !options.topbar.tray.ignore.value.includes(id)).map(Item)
 )

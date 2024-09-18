@@ -12,7 +12,7 @@ const Workspace = Widget.Stack({
       .fill(null).map((_, i) => i+1)
       .reduce((acc, i) => (acc[i] = Client(i), acc), {})
   ),
-  shown: hyprland.active.workspace.bind('id').as(id => id.toString())
+  shown: hyprland.active.workspace.bind('id').as((id: number) => id.toString())
 })
 
 export default Widget.Box(

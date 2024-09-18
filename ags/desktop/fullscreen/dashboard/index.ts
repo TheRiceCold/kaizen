@@ -1,4 +1,7 @@
+import { type ButtonProps } from 'types/widgets/button'
 import wallpaper from 'service/wallpaper'
+
+import { ButtonLabel } from 'widgets'
 
 import Home from './home'
 import Tasks from './tasks'
@@ -29,11 +32,11 @@ const Stack = Widget.Stack({
   }, {}),
 })
 
-const TabButton = (i: number)=> Widget.Button({
-  xalign: 0, cursor: 'pointer',
-  onClicked() { activePage.value = pages[i].name },
-  child: Widget.Label(`${pages[i].icon}  ${capitalize(pages[i].name)}`),
-}).hook(activePage, self => {
+const TabButton = (i: number) => ButtonLabel(
+  `${pages[i].icon}  ${capitalize(pages[i].name)}`,
+  () => activePage.value = pages[i].name,
+  { xalign: 0 },
+).hook(activePage, (self: ButtonProps) => {
   self.toggleClassName('active', pages[i].name === activePage.value)
 })
 
@@ -51,14 +54,9 @@ const Sidebar = Widget.Revealer({
   )
 })
 
-const MenuButton = Widget.Button({
-  label: '󰍜',
-  hpack: 'start',
-  vpack: 'start',
-  cursor: 'pointer',
-  className: 'menu-button',
-  onClicked() { Sidebar.revealChild = !Sidebar.revealChild }
-})
+const SidebarButton = ButtonLabel('󰍜', () => {
+  Sidebar.revealChild = !Sidebar.revealChild
+}, { hpack: 'start', vpack: 'start', className: 'sidebar-button' })
 
 const Dashboard = Widget.Box(
   { className: 'dashboard' }, Sidebar,
@@ -67,7 +65,7 @@ const Dashboard = Widget.Box(
     Widget.Overlay({
       passThrough: true,
       className: 'header',
-      overlays: [ MenuButton, Avatar ],
+      overlays: [ SidebarButton, Avatar ],
       child: Widget.Box(
         { className: 'cover', vertical: true },
         Widget.Box({

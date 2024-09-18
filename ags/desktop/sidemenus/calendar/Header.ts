@@ -1,10 +1,13 @@
+import { type ButtonProps } from 'types/widgets/button'
+
+import { ButtonLabel } from 'widgets'
 import { addCalendarChildren, CalendarDays } from '.'
 import { getCalendarLayout } from 'misc/calendarlayout'
 
 let monthshift = 0
 export let calendarJson = getCalendarLayout(undefined, true)
 
-function getDateInXMonthsTime(x) {
+function getDateInXMonthsTime(x: number) {
   const currentDate = new Date() // Get the current date
   let targetMonth = currentDate.getMonth() + x // Calculate the target month
   let targetYear = currentDate.getFullYear() // Get the current year
@@ -22,8 +25,8 @@ function getDateInXMonthsTime(x) {
   return targetDate
 }
 
-function shiftCalendarXMonths(x) {
-  if (x == 0) monthshift = 0
+function shiftCalendarXMonths(x: number) {
+  if (x === 0) monthshift = 0
   else monthshift += x
 
   let newDate
@@ -33,29 +36,24 @@ function shiftCalendarXMonths(x) {
   const year = newDate.getFullYear()
   const month = newDate.toLocaleString('default', { month: 'long' })
   calendarJson = getCalendarLayout(newDate, (monthshift === 0))
-  calendarMonthYear.label = month+' '+year
+  calendarMonthYear.label = `${month} ${year}`
   addCalendarChildren(CalendarDays, calendarJson)
 }
 
-const calendarMonthYear =Widget.Button({
+const calendarMonthYear = Widget.Button({
   cursor: 'pointer',
   className: 'date',
   onClicked() { shiftCalendarXMonths(0) },
-  setup(self) {
+  setup(self: ButtonProps) {
     const year = new Date().getFullYear()
     const month = new Date().toLocaleString('default', { month: 'long' })
     self.label = month+' '+year
   }
 })
 
-const Button = (icon, shiftValue) => Widget.Button({
-  label: icon,
-  cursor: 'pointer',
-  className: 'monthshift-btn',
-  onClicked() { shiftCalendarXMonths(shiftValue) },
-})
+const Button = (
+  icon: string,
+  shiftValue: number
+) => ButtonLabel(icon, () => shiftCalendarXMonths(shiftValue), { className: 'monthshift-btn' })
 
-export default Widget.Box(
-  { className: 'header', hpack: 'center' },
-  Button('', -1), calendarMonthYear, Button('', 1),
-)
+export default Widget.Box({className: 'header', hpack: 'center'}, Button('', -1), calendarMonthYear, Button('', 1))

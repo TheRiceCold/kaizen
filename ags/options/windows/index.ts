@@ -1,4 +1,4 @@
-import { opt } from 'lib/option'
+import {opt} from 'lib/option'
 import dashboard from './dashboard'
 
 export default {
@@ -22,13 +22,6 @@ export default {
     width: opt(0),
     margin: opt(40),
     maxItem: opt(5),
-    nix: {
-      max: opt(8),
-      pkgs: opt('nixpkgs/nixos-unstable'),
-    },
-    sh: {
-      max: opt(16),
-    },
     apps: {
       max: opt(6),
       iconSize: opt(62),

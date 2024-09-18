@@ -1,11 +1,10 @@
+import { ButtonLabel } from 'widgets'
+
 import items from '../items'
 import { capitalize } from 'lib/utils'
 
-const MoveButton = (dir: 'next' | 'prev', tab) => Widget.Button({
-  cursor: 'pointer',
-  label: (dir === 'next') ? '' : '',
-  visible: tab.bind().as(t => t !== 'filter'),
-  onClicked() {
+const MoveButton = (dir: 'next' | 'prev', tab) => ButtonLabel(
+  (dir === 'next') ? '' : '', () => {
     const currentIndex = items.findIndex(item => item.title === tab.value)
     const lastIndex = items.length - 2 // To exclude filter tab
 
@@ -26,8 +25,7 @@ const MoveButton = (dir: 'next' | 'prev', tab) => Widget.Button({
         tab.value = items[0].title
         break
     }
-  },
-})
+  }, { visible: tab.bind().as((t: string) => t !== 'filter') })
 
 export default (tab, lastTab) => Widget.Box(
   { className: 'tabs' },

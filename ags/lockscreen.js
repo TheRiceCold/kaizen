@@ -1,5 +1,4 @@
 const main = '/tmp/ags/lockscreen.js'
-const entry = `${App.configDir}/windows/lockscreen/main.ts`
 
 try {
   await Utils.execAsync(`

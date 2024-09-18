@@ -6,14 +6,11 @@ const audio = await Service.import('audio')
 const Indicator = (type: Type = 'speaker') => Widget.Button({
   vpack: 'center',
   onClicked() { audio[type].is_muted = !audio[type].is_muted },
-  child: Widget.Icon({
-    icon: audio[type].bind('icon_name').as((name: string) => audioIconSub(name || '', type)),
-  }),
-})
+}, Widget.Icon()
+  .bind('icon', audio[type], 'icon_name', (name: string) => audioIconSub(name || '', type)))
 
 const Slider = (type: Type = 'speaker') => Widget.Slider({
-  hexpand: true,
-  drawValue: false,
+  hexpand: true, drawValue: false,
   onChange({ value, dragging }) {
     if (dragging) {
       audio[type].volume = value
@@ -24,9 +21,8 @@ const Slider = (type: Type = 'speaker') => Widget.Slider({
   className: audio[type].bind('is_muted').as((m: boolean) => m ? 'muted' : ''),
 })
 
-const Percent = (type: Type = 'speaker') => Widget.Label({
-  label: audio[type].bind('volume').as((v: number) => `${Math.floor(v * 100)}%`)
-})
+const Percent = (type: Type = 'speaker') => Widget.Label()
+  .bind('label', audio[type], 'volume', (v: number) => `${Math.floor(v * 100)}%`)
 
 const Volume = (type: Type = 'speaker') => Widget.Box(
   { className: 'slider-box' },

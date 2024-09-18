@@ -15,10 +15,9 @@ const mpris = await Service.import('mpris')
 // })
 
 export default PopupRevealer({
-  child: Player,
   className: 'media-player',
   reveal: showWidget.player.bind().as((show: boolean) => getPlayer() && show)
-}).hook(mpris, () => {
+}, Player).hook(mpris, () => {
   if (!getPlayer())
     showWidget.player.value = false
 })

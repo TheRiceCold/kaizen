@@ -1,17 +1,15 @@
 import screenTools from 'service/screen'
+
+import { ButtonLabel } from 'widgets'
+
 import options from 'options'
 
 const IconStack = Widget.Stack({
   transition: 'slide_up_down',
   transitionDuration: options.transition,
   children: {
-    recording: Widget.Label({ label: '' }),
-    stop: Widget.Button({
-      label: '',
-      cursor: 'pointer',
-      tooltipText: 'Click to stop',
-      onClicked() { screenTools.recorder('stop') },
-    }),
+    recording: Widget.Label(''),
+    stop: ButtonLabel('', () => screenTools.recorder('stop'), { tooltipText: 'Click to stop' }),
   }
 })
 
@@ -25,7 +23,6 @@ const Timer = Widget.Label().bind(
 export default Widget.EventBox({
   hpack: 'center',
   className: 'recorder',
-  child: Widget.Box([IconStack, Timer]),
   onHover() { IconStack.shown = 'stop' },
   onHoverLost() { IconStack.shown = 'recording' },
-})
+}, Widget.Box([IconStack, Timer]))

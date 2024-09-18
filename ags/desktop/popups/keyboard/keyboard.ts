@@ -3,32 +3,23 @@ import keyboardLayout from 'data/keyboard'
 
 import { sh, bash } from 'lib/utils'
 import { toggleWidget } from 'lib/globals'
+import { ButtonLabel } from 'widgets'
 
 const kbLayout = keyboardLayout['qwerty_full']
-
-const ControlButton = (
-  label: string,
-  onClicked: () => void
-) => Widget.Button({
-  onClicked,
-  cursor: 'pointer',
-  child: Widget.Label(label),
-  className: 'control-button',
-})
 
 export default Widget.Box(
   { className: 'body' },
   Widget.Box(
     { vertical: true },
-    ControlButton('󰌏', () => {
+    ButtonLabel('󰌏', () => {
       sh([
         'ydotool', 'key',
         ...Array.from(Array(249).keys()).map(code => `${code}:0`)
       ]).then(console.log('[OSK] Released all keys')).catch(print)
       toggleWidget('keyboard')
-    }),
-    ControlButton(kbLayout['name_short'], () => { }),
-    ControlButton('󰅍', () => {
+    }, { className: 'control-button' }),
+    ButtonLabel(kbLayout['name_short'], () => { }),
+    ButtonLabel('󰅍', () => {
       bash`pkill fuzzel || cliphist list | fuzzel --no-fuzzy --dmenu | cliphist decode | wl-copy`
     })
   ),

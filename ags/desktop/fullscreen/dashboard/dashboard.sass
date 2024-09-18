@@ -1,8 +1,6 @@
 $border: 1px solid transparentize($fg, 0.75)
 
 window#dashboard .dashboard
-  .page
-    margin: 1rem 100px
   > .sidebar
     > box
       min-width: 200px
@@ -30,24 +28,18 @@ window#dashboard .dashboard
         padding-bottom: 50px
       .avatar
         margin-left: 100px
-        .container
+        .image
           border-radius: $radius
-        revealer image
-          border-radius: $radius
-          background-color: transparentize($primary-fg, 0.75)
         .file-choose button // HACK: hides everything inside filechooserbutton
-          border: 0
-          background-color: transparent
           box
-            border: 0
-            padding: 99px
-            background-color: transparent
-            label, image
-              font-size: 0
+            padding: 999px
+          label, image
+            font-size: 0
 
-    .menu-button
-      padding: 0.5rem
+    .sidebar-button
       margin: 1rem 0 0 1rem
+      border-radius: $radius
+      padding: 0.5rem 0.65rem
       background-color: transparentize($bg, 0.75)
       label
         color: $fg

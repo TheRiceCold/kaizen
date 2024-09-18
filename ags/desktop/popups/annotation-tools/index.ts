@@ -1,22 +1,29 @@
+import { type ButtonProps } from 'types/widgets/button'
+
 import Annotation from 'service/annotation'
 
+import { ButtonLabel } from 'widgets'
 import PopupRevealer from '../PopupRevealer'
 
 const { undo, redo, pin, clear, quit } = Annotation
 const hyprland = await Service.import('hyprland')
 
-const buttons = [
-  { label: 'Undo', onClicked: undo },
-  { label: 'Redo', onClicked: redo },
-  {
-    label: 'Pin',
-    onClicked(self) {
-      pin(); self.label = self.label === 'Pin' ? 'Unpin' : 'Pin'
-    }
-  },
-  { label: 'Clear', onClicked: clear },
-  { label: 'Quit', onClicked: quit },
-]
+const ActionButtons = Widget.Box({
+  className: 'control-buttons',
+  children: [
+    { label: 'Undo', onClicked: undo },
+    { label: 'Redo', onClicked: redo },
+    {
+      label: 'Pin',
+      onClicked(self: ButtonProps) {
+        pin()
+        self.label = self.label === 'Pin' ? 'Unpin' : 'Pin'
+      }
+    },
+    { label: 'Clear', onClicked: clear },
+    { label: 'Quit', onClicked: quit },
+  ].map(props => ButtonLabel(props.label, props.onClicked)),
+})
 
 const ToolsInfo = Widget.Revealer({
   child: Widget.Box(
@@ -34,23 +41,9 @@ export default PopupRevealer({
   hpack: 'center',
   className: 'annotation-tool',
   reveal: hyprland.active.client.bind('class').as((c: string) => c === 'Gromit-mpx'),
-  children: [
-    Widget.Box({
-      className: 'control-buttons',
-      children: buttons.map(props => Widget.Button({ cursor: 'pointer', ...props })),
-    }),
-    Widget.Box(
-      { vertical: true },
-      ToolsInfo,
-      Widget.Button({
-        hexpand: true,
-        cursor: 'pointer',
-        label: 'View brushes ',
-        onClicked(self) {
-          ToolsInfo.revealChild = !ToolsInfo.revealChild
-          self.label = ToolsInfo.revealChild ? 'Hide Tools ' : 'View Tools '
-        }
-      })
-    )
-  ]
-})
+}, ActionButtons, Widget.Box({vertical: true},
+  ToolsInfo, ButtonLabel('View brushes ', (self: ButtonProps) => {
+    ToolsInfo.revealChild = !ToolsInfo.revealChild
+    self.label = ToolsInfo.revealChild ? 'Hide Tools ' : 'View Tools '
+  }, {hexpand: true})
+))

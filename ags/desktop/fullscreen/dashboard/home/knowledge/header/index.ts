@@ -1,25 +1,18 @@
+import { ButtonLabel } from 'widgets'
 import TabTitle from './TabTitle'
 import RandomizeButton from '../RandomizeButton'
 import { ApplyButton } from '../FilterTab'
 
 const LeftButton = (tab, lastTab) => Widget.Box(
   { hpack: 'start' },
-  Widget.Button({
-    label: '',
-    cursor: 'pointer',
+  ButtonLabel('', () => {
+    lastTab.value = tab.value
+    tab.value = 'filter'
+  }, {
     tooltipText: 'Filter Options',
-    visible: tab.bind().as(t => t !== 'filter'),
-    onClicked() {
-      lastTab.value = tab.value
-      tab.value = 'filter'
-    }
+    visible: tab.bind().as((t: string) => t !== 'filter'),
   }),
-  Widget.Button({
-    label: '',
-    cursor: 'pointer',
-    onClicked() { tab.value = lastTab.value },
-    visible: tab.bind().as(t => t === 'filter'),
-  })
+  ButtonLabel('', () => tab.value = lastTab.value, { visible: tab.bind().as((t: string) => t === 'filter') })
 )
 
 export default (tab, lastTab) => Widget.CenterBox({

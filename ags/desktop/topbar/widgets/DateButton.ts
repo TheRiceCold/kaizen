@@ -1,3 +1,4 @@
+import { type ButtonProps } from 'types/widgets/button'
 import BarButton from '../BarButton'
 
 import options from 'options'
@@ -9,12 +10,12 @@ const { interval, format } = options.topbar.date
 
 export default BarButton({
   className: 'datemenu',
-  onClicked(self) {
+  onClicked(self: ButtonProps) {
     calendar.value = !calendar.value
     self.toggleClassName('active', calendar.value)
   },
   label: Utils.derive(
     [clock(interval), format],
-    (c, f) => c.format(f) || ''
+    (c, f: string) => c.format(f) || ''
   ).bind(),
 })

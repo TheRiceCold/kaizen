@@ -1,4 +1,5 @@
 import { type Notification } from 'types/service/notifications'
+import { ButtonLabel, ButtonIcon } from 'widgets'
 import icons from 'data/icons'
 
 const time = (time: number, format = '%H:%M') => imports.gi.GLib.DateTime.new_from_unix_local(time).format(format)
@@ -31,12 +32,11 @@ const NotificationIcon = ({ app_entry, app_icon, image }: Notification) => {
     hexpand: false,
     className: 'icon',
     css: 'min-width: 78px; min-height: 78px;',
-    child: Widget.Icon({
-      icon, size: 58,
-      hpack: 'center', hexpand: true,
-      vpack: 'center', vexpand: true,
-    }),
-  })
+  }, Widget.Icon({
+    icon, size: 58,
+    hpack: 'center', hexpand: true,
+    vpack: 'center', vexpand: true,
+  }))
 }
 
 export default (notification: Notification) => {
@@ -44,65 +44,57 @@ export default (notification: Notification) => {
     className: 'content',
     children: [
       NotificationIcon(notification),
-      Widget.Box({
-        hexpand: true,
-        vertical: true,
-        children: [
-          Widget.Box({
-            children: [
-              Widget.Label({
-                xalign: 0,
-                wrap: true,
-                hexpand: true,
-                truncate: 'end',
-                use_markup: true,
-                maxWidthChars: 24,
-                className: 'title',
-                justification: 'left',
-                label: notification.summary.trim(),
-              }),
-              Widget.Label({
-                vpack: 'start',
-                className: 'time',
-                label: time(notification.time),
-              }),
-              Widget.Button({
-                vpack: 'start',
-                cursor: 'pointer',
-                className: 'close-button',
-                onClicked: notification.close,
-              }, Widget.Icon('window-close-symbolic')),
-            ],
-          }),
-          Widget.Label({
-            xalign: 0,
-            wrap: true,
-            hexpand: true,
-            use_markup: true,
-            maxWidthChars: 24,
-            justification: 'left',
-            className: 'description',
-            label: notification.body.trim(),
-          }),
-        ],
-      }),
+      Widget.Box(
+        { hexpand: true, vertical: true },
+        Widget.Box({
+          children: [
+            Widget.Label({
+              xalign: 0,
+              wrap: true,
+              hexpand: true,
+              truncate: 'end',
+              use_markup: true,
+              maxWidthChars: 24,
+              className: 'title',
+              justification: 'left',
+              label: notification.summary.trim(),
+            }),
+            Widget.Label({
+              vpack: 'start',
+              className: 'time',
+              label: time(notification.time),
+            }),
+            ButtonIcon(
+              'window-close-symbolic',
+              notification.close,
+              { vpack: 'start', className: 'close-button' }),
+          ],
+        }),
+        Widget.Label({
+          xalign: 0,
+          wrap: true,
+          hexpand: true,
+          use_markup: true,
+          maxWidthChars: 24,
+          justification: 'left',
+          className: 'description',
+          label: notification.body.trim(),
+        }),
+      ),
     ],
   })
 
-  const actionsbox = notification.actions.length > 0 ? Widget.Revealer({
-    transition: 'slide_down',
-    child: Widget.EventBox({
+  const actionsbox = notification.actions.length > 0 ? Widget.Revealer(
+    { transition: 'slide_down' },
+    Widget.EventBox({
       child: Widget.Box({
         className: 'actions horizontal',
-        children: notification.actions.map(action => Widget.Button({
-          hexpand: true,
-          label: action.label,
-          className: 'action-button',
-          onClicked() { notification.invoke(action.id) },
-        })),
+        children: notification.actions.map(action => ButtonLabel(
+          action.label,
+          () => notification.invoke(action.id),
+          { hexpand: true, className: 'action-button' })),
       }),
-    }),
-  }) : null
+    })) : null
 
   const eventbox = Widget.EventBox({
     vexpand: false,
@@ -123,8 +115,5 @@ export default (notification: Notification) => {
     }),
   })
 
-  return Widget.Box({
-    child: eventbox,
-    className: `notification ${notification.urgency}`,
-  })
+  return Widget.Box({ className: `notification ${notification.urgency}` }, eventbox)
 }

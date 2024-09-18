@@ -1,3 +1,5 @@
+// DOCS: https://gist.github.com/dawnvoh/a1f513123f7b6a42577d
+
 export default {
   0: {
     icon: 'sunny', // night = 'clear',
@@ -259,34 +261,17 @@ export default {
     icon: 'thunderstorm',
     description: ''
   },
-  113: {
-    icon: 'sunny',
-    description: '',
-  },
-  116: {
-    icon: 'partly_cloudy',
-    description: '',
-  },
-  119: {
-    icon: 'cloudy',
-    description: '',
-  },
-  122: {
-    icon: 'cloudy',
-    description: '',
-  },
+  113: { icon: 'sunny', description: 'Sunny' },
+  116: { icon: 'partly_cloudy', description: 'Partly Cloudy' },
+  119: { icon: 'cloudy', description: 'Cloudy' },
+  122: { icon: 'foggy', description: 'Overcast' },
   143:{
     icon: 'foggy',
     description: '',
   },
-  176: {
-    icon: 'showers',
-    description: '',
-  },
-  179: {
-    icon: 'showers',
-    description: ''
-  },
+  179: { icon: 'snow', description: 'Patchy snow nearby' },
+  182: { icon: '', description: 'Patchy sleet nearby' },
+  185: { icon: 'drizzle_freeze', description: 'Patchy freezing drizzle nearby' },
   200: {
     icon: 'thunderstorm',
     description: ''
@@ -307,6 +292,10 @@ export default {
     icon: 'rain',
     description: ''
   },
+  299: { icon: 'showers', description: 'Moderate rain at times' },
+  302: { icon: 'showers', description: 'Moderate rain' },
+  305: { icon: 'rain', description: 'Heavy rain at times' },
+  308: { icon: 'rain', description: 'Heavy rain' },
   353: {
     icon: 'showers',
     description: ''

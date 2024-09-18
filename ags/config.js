@@ -8,7 +8,6 @@ try {
     --external:resource://\* \
     --external:gi://\* \
   `)
-
   await import(`file://${main}`)
 } catch (err) {
   console.error(err)

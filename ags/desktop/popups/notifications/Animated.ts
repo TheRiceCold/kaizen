@@ -13,9 +13,9 @@ export default (id: number) => {
     transitionDuration: transition.value,
   }
 
-  const inner = Widget.Revealer({ child: widget, ...transitionRevealer })
-  const outer = Widget.Revealer({ child: inner, ...transitionRevealer })
-  const box = Widget.Box({ hpack: 'end', child: outer })
+  const inner = Widget.Revealer({ ...transitionRevealer }, widget)
+  const outer = Widget.Revealer({ ...transitionRevealer }, inner)
+  const box = Widget.Box({ hpack: 'end' }, outer)
 
   Utils.idle(() => {
     outer.revealChild = true

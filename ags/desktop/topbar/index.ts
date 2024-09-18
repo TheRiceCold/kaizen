@@ -45,7 +45,6 @@ export default Widget.Window({
   exclusivity: 'exclusive',
   anchor: [ 'top', 'right', 'left' ],
   child: Widget.EventBox({
-    child: Content,
     onSecondaryClick(_, event) { DropdownMenu(event) },
-  }),
+  }, Content),
 })

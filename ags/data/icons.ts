@@ -34,6 +34,7 @@ export default {
     info: 'info-symbolic',
     camera: 'camera-symbolic',
     menu: 'open-menu-symbolic',
+    palette: 'palette-symbolic',
     toolbars: 'toolbars-symbolic',
     close: 'window-close-symbolic',
     link: 'external-link-symbolic',

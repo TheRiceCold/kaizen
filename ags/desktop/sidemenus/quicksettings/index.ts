@@ -1,11 +1,13 @@
 import { type BoxProps } from 'types/widgets/box'
 
 import MenuRevealer from '../MenuRevealer'
+import { ButtonLabel } from 'widgets'
+
 import items from './items'
 
 type ItemType = {
   name: string,
-  icon: string,
+  label: string,
   content: BoxProps
 }
 
@@ -21,19 +23,14 @@ const Stack = Widget.Stack({
   }, {}),
 })
 
-const StackButton = (stackName: string, label: string) => Widget.Button({
-  label, cursor: 'pointer',
-  onClicked() { activeTab.value = stackName },
-}).hook(activeTab, self => {
-  self.toggleClassName('active', activeTab.value === stackName)
-})
-
-const Buttons = Widget.Box(
-  { className: 'control-buttons' },
-  Widget.Box({
-    hexpand: true, hpack: 'center',
-    children: items.map((item: ItemType) => StackButton(item.name, item.label))
-  })
-)
-
-export default MenuRevealer('quicksettings', Stack, Buttons)
+export default MenuRevealer('quicksettings', Stack,
+  Widget.Box({ className: 'control-buttons' },
+    Widget.Box({
+      hexpand: true, hpack: 'center',
+      children: items.map(({ name, label }: ItemType) =>
+        ButtonLabel(label, () => activeTab.value = name)
+          .hook(activeTab, self => {
+            self.toggleClassName('active', activeTab.value === name)
+          }))
+    })
+  ))

@@ -13,8 +13,7 @@ export const Keybinds = Widget.Box({
         css: 'font-size: 1.5em;',
         label: `${category.icon} ${category.name}`
       }),
-      Widget.Box(
-        { vertical: false },
+      Widget.Box([
         Widget.Box({
           vertical: true,
           homogeneous: true,
@@ -34,7 +33,7 @@ export const Keybinds = Widget.Box({
             label: keybinds.action,
           }))
         })
-      )
+      ])
     ))
   })),
 })
@@ -43,9 +42,5 @@ export const Keybinds = Widget.Box({
 export default RevealerWindow({
   name: 'shortcuts',
   className: 'shortcuts',
-  child: Widget.Box({
-    vertical: true,
-    className: 'container',
-    children: [ Header, Keybinds ]
-  })
+  child: Widget.Box({ vertical: true, className: 'container' }, Header, Keybinds)
 })

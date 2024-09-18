@@ -1,14 +1,14 @@
+import { type ButtonProps } from 'types/widgets/button'
+
+import { ButtonLabel } from 'widgets'
 import GeminiSendMessage from './gemini/SendMessage'
 
-const CommandButton = (command: string) => Widget.Button({
-  label: command,
-  cursor: 'pointer',
-  attribute: { command },
-  onClicked(self) {
+const CommandButton = (command: string) => ButtonLabel(
+  command,
+  (self: ButtonProps) => {
     const cmd = self.attribute.command
     GeminiSendMessage(cmd)
-  }
-})
+  }, { attribute: { command } })
 
 export default Widget.Box(
   { hpack: 'end' },

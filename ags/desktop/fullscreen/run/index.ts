@@ -35,22 +35,22 @@ const Run =  Widget.Box(
   { vertical: true, css: 'padding: 1px;' },
   Padding('applauncher', {
     vexpand: false,
-    css: margin.bind().as(v => `min-height: ${v}pt;`),
+    css: margin.bind().as((v: number) => `min-height: ${v}pt;`),
   }),
 
   Widget.Box({
     vpack: 'start',
     vertical: true,
     className: 'layout',
-    children: [ entry, applauncher ],
-    css: width.bind().as(v => `min-width: ${v}pt;`),
-  }).hook(App, (_, win, visible) => {
-    if (win !== 'run') return
+    css: width.bind().as((v: number) => `min-width: ${v}pt;`),
+  }, entry, applauncher)
+    .hook(App, (_, win: string, visible: boolean) => {
+      if (win !== 'run') return
 
-    entry.text = ''
-    if (visible)
-      entry.attribute.focus()
-  })
+      entry.text = ''
+      if (visible)
+        entry.attribute.focus()
+    })
 )
 
 export default RevealerWindow({

@@ -10,28 +10,33 @@ import { capitalize } from 'lib/utils'
 
 const { bio } = options.dashboard
 
-const Section = (...children) => Widget.Box({
-  children,
-  spacing: 16,
-  className: 'section',
+const greetTime = Variable('morning', { // every 10 min
+  poll: [600_000, () => {
+    const date = new Date()
+    const hour = date.getHours()
+    return hour < 12 ? 'morning' :
+      hour <= 18 && hour >= 12 ? 'afternoon' : 'evening'
+  }]
 })
 
-const Greeter = Widget.Label({
-  xalign: 0,
-  className: 'greeter',
-  label: `Good morning, ${capitalize(Utils.USER)}`
-})
-
-const Bio = Widget.Label({ xalign: 0, label: bio.bind(), className: 'bio' })
-
-const Content = Widget.Scrollable(
-  { hexpand: true, vexpand: true },
-  Widget.Box(
-    { vertical: true },
+const Section = (...children) => Widget.Box({ children, className: 'section' })
+const Content = Widget.Scrollable({ vexpand: true },
+  Widget.Box({ hpack: 'center', vertical: true },
     Section(Weather, Player, Apps),
     Section(Time, Knowledge),
     Section(GitHub),
-  )
-)
+  ))
 
-export default Widget.Box({ className: 'home', vertical: true }, Greeter, Bio, Content)
+export default Widget.Box({
+  hexpand: true,
+  vertical: true,
+  className: 'home',
+  children: [
+    Widget.Label({
+      xalign: 0, className: 'greeter',
+      label: greetTime.bind().as((g: string) => `Good ${g}, ${capitalize(Utils.USER)}`)
+    }),
+    Widget.Label({ xalign: 0, className: 'bio', label: bio.bind() }),
+    Content
+  ]
+})

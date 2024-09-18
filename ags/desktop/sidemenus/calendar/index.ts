@@ -30,7 +30,9 @@ export const CalendarDays = Widget.Box({
   vertical: true,
   hpack: 'center',
   className: 'body',
-  setup(self) { addCalendarChildren(self, calendarJson) }
+  setup(self: typeof Widget.Box) {
+    addCalendarChildren(self, calendarJson)
+  }
 })
 
 export default MenuRevealer('calendar',

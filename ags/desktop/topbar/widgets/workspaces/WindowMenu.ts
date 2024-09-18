@@ -1,15 +1,16 @@
+import { type ButtonProps } from 'types/widgets/button'
 import { sh } from 'lib/utils'
 
 const { Gdk } = imports.gi
 const dispatch = (cmd: string) => sh(`hyprctl dispatch ${cmd}`)
 
-const Item = ({ label, onActivate }) => Widget.MenuItem({
+const Item = ({label, onActivate}) => Widget.MenuItem({
   onActivate,
   cursor: 'pointer',
   child: Widget.Label({ label, hpack: 'center' }),
 })
 
-export default button => Widget.Menu({
+export default (button: ButtonProps) => Widget.Menu({
   children: [
     { label: 'Fullscreen', onActivate() { dispatch('fullscreen') } },
     { label: 'Toggle float', onActivate() { dispatch('togglefloating') } },

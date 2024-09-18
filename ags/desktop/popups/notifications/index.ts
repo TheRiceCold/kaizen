@@ -14,7 +14,7 @@ export default () => {
     hpack: 'end',
     vertical: true,
     css: options.notifications.width.bind().as(w => `min-width: ${w}px;`),
-  }).hook(notifications, (self, id: number) => {
+  }).hook(notifications, (self: typeof Widget.Box, id: number) => {
     if (id !== undefined) {
       if (map.has(id))
         remove(null, id)

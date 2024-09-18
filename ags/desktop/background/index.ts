@@ -10,7 +10,7 @@ export default [
     name: 'cornertl',
     exclusivity: 'normal',
     anchor: ['top', 'left'],
-    visible: radius.bind().as(r => r > 0),
+    visible: radius.bind().as((r: number) => r > 0),
     child: RoundedCorner('topleft', { className: 'corner' }),
   }),
 
@@ -29,7 +29,7 @@ export default [
     name: 'cornertr',
     exclusivity: 'normal',
     anchor: ['top', 'right'],
-    visible: radius.bind().as(r => r > 0),
+    visible: radius.bind().as((r: number) => r > 0),
     child: RoundedCorner('topright', { className: 'corner' }),
   }),
 ]

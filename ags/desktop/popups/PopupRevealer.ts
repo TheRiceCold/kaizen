@@ -5,12 +5,11 @@ export default ({
   className = '',
   reveal = false,
   ...props
-}) => Widget.Revealer({
+}, ...children) => Widget.Revealer({
   revealChild: reveal,
   transition,
   transitionDuration: options.transition,
-  child: Widget.Box({
-    ...props,
-    classNames: ['popup-revealer', className],
-  }),
-})
+}, Widget.Box({
+  ...props,
+  classNames: ['popup-revealer', className],
+}, ...children))

@@ -1,3 +1,4 @@
+import { type ButtonProps } from 'types/widgets/button'
 import powermenu, { type Action } from 'service/powermenu'
 import BarButton from '../BarButton'
 
@@ -23,7 +24,7 @@ const Item = (action: Action) => Widget.MenuItem({
 
 export default BarButton({
   label: '',
-  onClicked: self => Widget.Menu({
+  onClicked: (self: ButtonProps) => Widget.Menu({
     children: [
       Item('lock'),
       Item('sleep'),

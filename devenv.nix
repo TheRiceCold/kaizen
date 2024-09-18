@@ -10,13 +10,13 @@
   # https://devenv.sh/scripts/
   scripts.hello.exec = "echo hello from $GREET";
 
-  enterShell = ''
+  enterShell = /* sh */ ''
     hello
     git --version
   '';
 
   # https://devenv.sh/tests/
-  enterTest = ''
+  enterTest = /* sh */ ''
     echo "Running tests"
     git --version | grep "2.42.0"
   '';
@@ -25,14 +25,15 @@
   # services.postgres.enable = true;
 
   # https://devenv.sh/languages/
-  
-  languages.javascript = {
-    enable = true;
-    bun.enable = true;
-    bun.install.enable = true;
-  };
-  languages.typescript.enable = true;
 
+  languages = {
+    javascript = {
+      enable = true;
+      bun.enable = true;
+      bun.install.enable = true;
+    };
+    typescript.enable = true;
+  };
 
   # https://devenv.sh/pre-commit-hooks/
   # pre-commit.hooks.shellcheck.enable = true;

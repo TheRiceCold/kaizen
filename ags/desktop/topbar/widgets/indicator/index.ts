@@ -4,7 +4,6 @@ import brightness from 'service/brightness'
 import Stack from './Stack'
 import IconLabel from './IconLabel'
 
-import options from 'options'
 import { getPlayer } from 'lib/utils'
 import { showWidget } from 'lib/variables'
 
@@ -28,7 +27,10 @@ function revealTimeout(timeout: number = 1000) {
     count--
     if (count !== 0) return
 
-    if (screenTools._isRecording)
+    // Prioritization order: Zoom, Pomodoro, Recorder, Player
+    if (screenTools._isZoomed)
+      reveal('zoom', true)
+    else if (screenTools._isRecording)
       reveal('recorder', true)
     else if (player)
       reveal('playing', true)
@@ -36,7 +38,7 @@ function revealTimeout(timeout: number = 1000) {
   })
 }
 
-function indicatorUpdate(type, value) {
+function indicatorUpdate(type: 'brightness' | 'volume', value: number) {
   const item = stack.children[type]
   item.children = IconLabel(type, value)
   item.hpack = 'center'
@@ -44,16 +46,11 @@ function indicatorUpdate(type, value) {
   revealTimeout()
 }
 
-const revealer = Widget.Revealer({
-  child: stack,
-  transition: 'slide_down',
-  transitionDuration: options.transition * 1.5,
-})
+const revealer = Widget.Revealer({transition: 'slide_down'}, stack)
 
 export default Widget.Box({
   vpack: 'start',
   child: revealer,
-  cursor: 'pointer',
   className: 'indicator',
 })
   .hook(mpris, () => revealTimeout(500))

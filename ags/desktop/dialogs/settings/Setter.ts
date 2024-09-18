@@ -1,3 +1,5 @@
+import { ButtonIcon } from 'widgets'
+
 import icons from 'data/icons'
 import {Opt} from 'lib/option'
 
@@ -13,17 +15,8 @@ function EnumSetter(opt: Opt<string>, values: string[]) {
     )
   }
 
-  const next = Widget.Button({
-    cursor: 'pointer',
-    onClicked() { step(+1) },
-    child: Widget.Icon(icons.ui.arrow.right),
-  })
-
-  const prev = Widget.Button({
-    cursor: 'pointer',
-    onClicked() { step(-1) },
-    child: Widget.Icon(icons.ui.arrow.left),
-  })
+  const next = ButtonIcon(icons.ui.arrow.left, () => step(+1))
+  const prev = ButtonIcon(icons.ui.arrow.left, () => step(-1))
 
   return Widget.Box({
     className: 'enum-setter',

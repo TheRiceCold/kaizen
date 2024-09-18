@@ -50,23 +50,18 @@ export default (id: number) => {
       self.hook(hyprland.active.client, update)
       self.hook(hyprland.active.workspace, () => self.toggleClassName('active', hyprland.active.workspace.id === id))
     },
-    child: Widget.EventBox({
-      expand: true,
-      onPrimaryClick() {
-        App.closeWindow('overview')
-        dispatch(`workspace ${id}`)
-      },
-      setup(self) {
-        self.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY)
-        self.connect('drag-data-received', (_w, _c, _x, _y, data) => {
-          const address = new TextDecoder().decode(data.get_data())
-          dispatch(`movetoworkspacesilent ${id},address:${address}`)
-        })
-      },
-      child: Widget.Overlay({
-        overlay: fixed,
-        child: Widget.Label(id.toString()),
-      }),
-    }),
-  })
+  }, Widget.EventBox({
+    expand: true,
+    onPrimaryClick() {
+      App.closeWindow('overview')
+      dispatch(`workspace ${id}`)
+    },
+    setup(self) {
+      self.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY)
+      self.connect('drag-data-received', (_w, _c, _x, _y, data) => {
+        const address = new TextDecoder().decode(data.get_data())
+        dispatch(`movetoworkspacesilent ${id},address:${address}`)
+      })
+    },
+  }, Widget.Overlay({ overlay: fixed }, Widget.Label(id.toString()))))
 }

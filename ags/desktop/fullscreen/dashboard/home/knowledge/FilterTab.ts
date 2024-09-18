@@ -1,22 +1,20 @@
+import { ButtonLabel } from 'widgets'
+import { randomize } from './RandomizeButton'
+
 import items from './items'
 import options from 'options'
 import { uniqueArray } from 'lib/utils'
-import { randomize } from './RandomizeButton'
 
 let hiddenList = []
 const opts = options.dashboard.knowledge
 
-export const ApplyButton = (tab, lastTab) => Widget.Button({
-  label: 'Apply',
-  cursor: 'pointer',
-  className: 'apply-btn',
-  visible: tab.bind().as(t => t === 'filter'),
-  onClicked() {
+export const ApplyButton = (tab, lastTab) => ButtonLabel(
+  'Apply', () => {
     randomize(lastTab)
     tab.value = lastTab.value
     opts[lastTab.value].hidden.value = uniqueArray(hiddenList)
-  }
-})
+  }, { className: 'apply-btn', visible: tab.bind().as((t: string) => t === 'filter') }
+)
 
 const Checkbox = (label, lastTab) => Widget.ToggleButton({
   xalign: 0,

@@ -1,3 +1,5 @@
+import { ButtonIcon } from 'widgets'
+
 import options from 'options'
 import icons from 'data/icons'
 import { getPlayer } from 'lib/utils'
@@ -10,7 +12,7 @@ const Title = Widget.Label({
   truncate: 'end',
   className: 'title',
   maxWidthChars: length.bind(),
-}).hook(mpris, self => {
+}).hook(mpris, (self: typeof Widget.Label)  => {
   const player = getPlayer()
   if (!player) return
   self.label = player['track-title']
@@ -21,7 +23,7 @@ const Artist = Widget.Label({
   truncate: 'end',
   maxWidthChars: 20,
   className: 'artist',
-}).hook(mpris, self => {
+}).hook(mpris, (self: typeof Widget.Label) => {
   const player = getPlayer()
   if (!player) return
   self.label = player['track-artists'].join(', ')
@@ -31,14 +33,14 @@ export default Widget.Box({
   hexpand: true,
   vertical: true,
   className: 'player',
-}).hook(mpris, self => {
+}).hook(mpris, (self: typeof Widget.Box) => {
   const player = getPlayer()
   if (!player) return
 
   const Slider = Widget.Slider({
     drawValue: false,
     onChange({ value }) { player.position = value * player.length },
-    setup(self) {
+    setup(self: typeof Widget.Slider) {
       function update() {
         const { length, position } = player
         self.value = length > 0 ? position / length : 0
@@ -59,7 +61,7 @@ export default Widget.Box({
   const positionLabel = Widget.Label({
     hpack: 'start',
     className: 'position',
-    setup(self) {
+    setup(self: typeof Widget.Label) {
       function update(_: unknown, time?: number) {
         self.label = lengthStr(time || player.position)
       }
@@ -74,24 +76,11 @@ export default Widget.Box({
     label: player.bind('length').as(lengthStr),
   })
 
-  const playPause = Widget.Button({
-    cursor: 'pointer',
-    className: 'play-pause',
-    onClicked() { player.playPause() },
-  }, Widget.Icon().bind(
-    'icon', player, 'play-back-status',
-    status => icons.mpris[status.toLowerCase()]
-  ))
+  const playPause = ButtonIcon(player.bind('play-back-status')
+    .as((status: string) => icons.mpris[status.toLowerCase()]), player.playPause)
 
-  const prev = Widget.Button({
-    cursor: 'pointer',
-    onClicked() { player.previous() },
-  }, Widget.Icon(icons.mpris.prev))
-
-  const next = Widget.Button({
-    cursor: 'pointer',
-    onClicked() { player.next() },
-  }, Widget.Icon(icons.mpris.next))
+  const prev = ButtonIcon(icons.mpris.prev, player.previous)
+  const next = ButtonIcon(icons.mpris.next, player.next)
 
   self.children = [
     Title, Artist, Slider,

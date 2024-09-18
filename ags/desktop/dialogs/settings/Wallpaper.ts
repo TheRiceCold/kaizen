@@ -1,4 +1,5 @@
 import wallpaper from 'service/wallpaper'
+import { ButtonLabel } from 'widgets'
 
 export default Widget.Box(
   { className: 'wallpaper', homogeneous: true },
@@ -16,21 +17,14 @@ export default Widget.Box(
           wallpaper.set(uri!.replace('file://', ''))
         },
       }),
-      Widget.Button({
-        label: 'Random',
-        cursor: 'pointer',
-        onClicked: wallpaper.random
-      }),
+      ButtonLabel('Random', wallpaper.random),
     ])
   ),
-  Widget.Box({
-    hpack: 'end',
-    className: 'preview',
-    css: wallpaper.bind('wallpaper').as((wp: string) => `
+  Widget.Box({hpack: 'end', className: 'preview'})
+    .bind('css', wallpaper, 'wallpaper', (wp: string) => `
       min-height: 80px;
       min-width: 140px;
       background: url('${wp}');
       background-size: contain, cover;
     `),
-  }),
 )

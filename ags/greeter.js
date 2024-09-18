@@ -9,9 +9,7 @@ try {
     --external:gi://\* \
   `)
   await import(`file://${main}`)
-} catch (error) {
-  console.error(error)
+} catch (err) {
+  console.error(err)
   App.quit()
 }
-
-export { }

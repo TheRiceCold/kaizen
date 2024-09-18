@@ -43,14 +43,11 @@ const response = Widget.Label({
   className: 'response',
 })
 
-const revealer = Widget.Revealer({
-  transition: 'slide_down', child: response,
-})
+const revealer = Widget.Revealer({ transition: 'slide_down' }, response)
 
 export default Widget.Box({
   vertical: true,
   className: 'auth',
-  attribute: { password },
   children: [
     Widget.Overlay({
       child: Widget.Box(

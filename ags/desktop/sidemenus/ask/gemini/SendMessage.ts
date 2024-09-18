@@ -3,7 +3,7 @@ import GeminiService from 'service/api/gemini'
 import { ChatContent } from './View'
 import { SystemMessage } from '../Message'
 
-import { markdownTest } from 'misc/md2pango'
+import {markdownTest} from 'misc/md2pango'
 
 function clear() {
   GeminiService.clear()
@@ -11,7 +11,7 @@ function clear() {
   children.forEach(child => child.destroy())
 }
 
-function prompt(text) {
+function prompt(text: string) {
   const firstSpaceIndex = text.indexOf(' ')
   const prompt = text.slice(firstSpaceIndex + 1)
   if (firstSpaceIndex === -1 || prompt.length < 1)
@@ -20,7 +20,7 @@ function prompt(text) {
     GeminiService.addMessage('user', prompt)
 }
 
-function updateKey(text) {
+function updateKey(text: string) {
   const parts = text.split(' ')
   if (parts.length === 1)
     ChatContent.add(SystemMessage(`Key stored in:\n\`${GeminiService.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``, '/key'))
@@ -30,8 +30,8 @@ function updateKey(text) {
   }
 }
 
-export default text => {
-  if (text.length == 0) return
+export default (text: string) => {
+  if (text.trim() === '') return
 
   if (GeminiService.key.length === 0) {
     GeminiService.key = text

@@ -37,8 +37,7 @@ const revealer = PopupRevealer({
   hpack: 'center',
   className: 'indicator',
   transition: 'slide_up',
-  children: [ Icon, ProgressBar ],
-})
+}, Icon, ProgressBar)
   .hook(brightness, () => show(
     brightness.screen,
     icons.brightness.screen,

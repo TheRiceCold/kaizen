@@ -1,7 +1,7 @@
-const Item = (label, activate) => Widget.MenuItem({
+const Item = (label: string, activate) => Widget.MenuItem({
   cursor: 'pointer',
   child: Widget.Label({ hpack: 'start', label }),
-  setup(self) {
+  setup(self: typeof Widget.MenuItem) {
     if (Array.isArray(activate))
       self.submenu = Widget.Menu({ children: activate })
     else

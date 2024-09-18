@@ -1,25 +1,21 @@
-const Icon = icon => (icon !== null) && Widget.Label({
-  label: icon,
-  className: 'icon',
-})
+const Icon = (icon: string) =>
+  (icon !== null) && Widget.Label({
+    label: icon,
+    className: 'icon',
+  })
 
 export default (
   className: string,
   icon: string,
-  label,
+  label: string,
   ...children
-) => Widget.Box({
-  vertical: true,
-  classNames: ['content', className],
-  children: [
-    Icon(icon),
-    Widget.Label({
-      label,
-      wrap: true,
-      vpack: 'center',
-      className: 'text',
-      maxWidthChars: 48,
-      justification: 'center',
-    }), ...children
-  ]
-})
+) => Widget.Box(
+  { vertical: true, classNames: ['content', className] },
+  Icon(icon), Widget.Label({
+    label,
+    wrap: true,
+    vpack: 'center',
+    className: 'text',
+    maxWidthChars: 48,
+    justification: 'center',
+  }), ...children)

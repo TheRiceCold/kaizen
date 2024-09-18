@@ -1,32 +1,18 @@
 window#dashboard .dashboard
   .page .home
+    .greeter, .bio
+      font-weight: 500
+      margin-left: 100px
     .greeter
       font-size: 2rem
-      font-weight: 500
-      margin-bottom: 0.5rem
+      padding: 0.5rem 0
     .bio
-      font-weight: 500
       font-size: 1.15rem
-      margin-bottom: 1.5rem
+      margin-bottom: 2rem
       color: transparentize($fg, 0.25)
     .section
       margin-bottom: 1rem
       > box
+        margin: 0 0.5rem
         border: $border
-      .system
-        > box:last-child .item
-          margin-top: 0
-        .item
-          margin: 1rem
-          .progress
-            font-size: 6px
-            min-width: 56px
-            min-height: 56px
-            color: $primary-bg
-            background-color: transparentize($primary-bg, 0.75)
-          .icon
-            font-size: 1.75rem
-          .value
-            font-weight: 500
-            margin-top: 0.5rem
-            font-size: 1.15rem
+        border-radius: $radius

@@ -1,3 +1,5 @@
+import { ButtonLabel } from 'widgets'
+
 import items from './items'
 import options from 'options'
 import { findCommonElement } from 'lib/utils'
@@ -23,10 +25,8 @@ export function randomize(tab) {
   item.currentValue.value = list[Math.floor(Math.random() * list.length)]
 }
 
-export default tab => Widget.Button({
-  label: '',
-  cursor: 'pointer',
-  tooltipText: 'Randomize',
-  onClicked() { randomize(tab) },
-  visible: tab.bind().as(t => t !== 'filter'),
-})
+export default tab => ButtonLabel(
+  '', () => randomize(tab), {
+    tooltipText: 'Randomize',
+    visible: tab.bind().as((t: string) => t !== 'filter'),
+  })

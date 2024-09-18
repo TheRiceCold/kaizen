@@ -6,7 +6,7 @@ type TProps = ButtonProps & {
 
 export default ({ window = '', setup, ...props }: TProps) => Widget.Button({
   cursor: 'pointer',
-  setup(self) {
+  setup(self: TProps) {
     let open = false
 
     self.toggleClassName('bar-button')

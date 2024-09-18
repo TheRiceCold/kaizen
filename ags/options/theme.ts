@@ -56,12 +56,12 @@ export default {
     shadows: opt(true),
     padding: opt(4),
     spacing: opt(8),
-    radius: opt(0),
+    radius: opt(16),
   },
 
   hyprland: {
     gaps: opt(1.5),
-    gapsWhenOnly: opt(false),
+    gapsWhenOnly: opt(true),
     inactiveBorder: opt('333333ff'),
     shader: opt<TShader>('default'),
   },

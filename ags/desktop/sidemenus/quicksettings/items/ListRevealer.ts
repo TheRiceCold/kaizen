@@ -6,17 +6,19 @@ export default (label: string, content, props = {}) => {
     cursor: 'pointer',
     className: 'list-button',
     onClicked() { Revealer.revealChild = !Revealer.revealChild },
-    child: Widget.Box([
-      Widget.Label({ label, xalign: 0 }),
-      Widget.Icon({ hexpand: true, hpack: 'end', icon: icons.ui.arrow.down }),
-    ]),
-  })
+  }, Widget.Box([
+    Widget.Label({ label, xalign: 0 }),
+    Widget.Icon({ hexpand: true, hpack: 'end', icon: icons.ui.arrow.down }),
+  ]))
 
   const Revealer = Widget.Revealer({
-    child: content,
     transition: 'slide_down',
     transitionDuration: options.transition,
-  })
+  }, content)
 
-  return Widget.Box({ className: 'list-revealer', vertical: true, ...props }, Button, Revealer)
+  return Widget.Box({
+    className: 'list-revealer',
+    vertical: true,
+    ...props
+  }, Button, Revealer)
 }

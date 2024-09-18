@@ -1,15 +1,12 @@
 import Weather from 'service/api/weather'
 import ForecastStack from './Forecast'
+import { ButtonLabel } from 'widgets'
 
 export default currentDay => {
-  const BackButton = Widget.Button({
-    label: '',
-    vpack: 'start',
-    hpack: 'start',
-    cursor: 'pointer',
-    className: 'back-btn',
-    onPrimaryClick() { ForecastStack.shown = 'daily' }
-  })
+  const BackButton = ButtonLabel(
+    '', () => ForecastStack.shown = 'daily',
+    { vpack: 'start', hpack: 'start', className: 'back-btn' },
+  )
 
   const DateLabel = Widget.Label({
     vpack: 'start',
@@ -60,8 +57,7 @@ export default currentDay => {
   })
 
   return Widget.Overlay({
-    child: Content,
     className: 'hourly',
     overlays: [ BackButton, DateLabel ],
-  })
+  }, Content)
 }

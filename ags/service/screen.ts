@@ -9,6 +9,7 @@ class ScreenTools extends Service {
   static {
     Service.register(this, {}, {
       timer: [ 'int' ],
+      isZoomed: [ 'boolean' ],
       isRecording: [ 'boolean' ],
     })
   }
@@ -19,6 +20,7 @@ class ScreenTools extends Service {
   #interval = 0
 
   timer = 0
+  _isZoomed = false
   _isRecording = false
 
   get isRecording() { return this._isRecording }
@@ -82,11 +84,8 @@ class ScreenTools extends Service {
       body: file,
       actions: {
         'Show in Files': () => sh(`xdg-open ${this.#screenshots}`),
-        View: () => sh(`xdg-open ${file}`),
-        Edit: () => {
-          if (dependencies('swappy'))
-            sh(`swappy -f ${file}`)
-        },
+        View() { sh(`xdg-open ${file}`) },
+        Edit() { if (dependencies('swappy')) sh(`swappy -f ${file}`) },
       },
     })
   }
@@ -94,6 +93,8 @@ class ScreenTools extends Service {
   async zoom(amount: string | number = '') {
     if (!dependencies('pypr')) return
     sh(`pypr zoom ${amount}`)
+    this._isZoomed = !this._isZoomed
+    this.changed('_isZoomed')
   }
 }
 

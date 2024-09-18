@@ -1,3 +1,5 @@
+import { type ButtonProps } from 'types/widgets/button'
+
 import GeminiView from './gemini/View'
 import { ChatPlaceholder } from './Textbox'
 
@@ -29,19 +31,16 @@ export const Stack = Widget.Stack({
 
 const Button = ({ icon, name, ...props }) => Widget.Button({
   cursor: 'pointer',
-  attribute: { name },
-  child: Widget.Box([
-    Widget.Label(capitalize(name)),
-    Widget.Icon(icon)
-  ]),
   onClicked() {
     const stackItem = stackItems.find(item => item.name === name)
-    ChatPlaceholder.label = stackItem.placeholderText
+    ChatPlaceholder.label = stackItem && stackItem.placeholderText
     currentTab.value = name
-  },
-  ...props
-}).hook(currentTab, self => {
-  const isActive = currentTab.value === self.attribute.name
+  }, ...props
+}, Widget.Box([
+  Widget.Label(capitalize(name)),
+  Widget.Icon(icon)
+])).hook(currentTab, (self: ButtonProps) => {
+  const isActive = currentTab.value === name
   self.toggleClassName('active', isActive)
 })
 

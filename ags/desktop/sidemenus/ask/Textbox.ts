@@ -1,5 +1,6 @@
 import GeminiService from 'service/api/gemini'
 
+import { ButtonIcon } from 'widgets'
 import GeminiSendMessage from './gemini/SendMessage'
 
 import { currentTab } from './Content'
@@ -10,16 +11,11 @@ import icons from 'data/icons'
 const { Gtk } = imports.gi
 const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
 
-const ChatSendButton = Widget.Button({
-  vpack: 'end',
-  cursor: 'pointer',
-  className: 'chat-send',
-  onClicked() {
-    const text = ChatEntry.get_buffer().text
-    GeminiSendMessage(text)
-    ChatEntry.get_buffer().set_text('', -1)
-  }
-}, Widget.Icon(icons.ui.send))
+const ChatSendButton = ButtonIcon(icons.ui.send, () => {
+  const text = ChatEntry.get_buffer().text
+  GeminiSendMessage(text)
+  ChatEntry.get_buffer().set_text('', -1)
+}, { vpack: 'end', className: 'chat-send' })
 
 export const ChatPlaceholder = Widget.Label({
   hpack: 'start',
@@ -39,12 +35,11 @@ export const ChatEntry = TextView({
   acceptsTab: false,
   className: 'chat-entry',
   wrapMode: Gtk.WrapMode.WORD_CHAR,
-})
-  .hook(GeminiService, self => {
-    if (currentTab.value !== 'gemini') return
-    self.placeholderText = GeminiService.key.length > 0
-      ? 'Message Gemini...' : 'Enter Google AI API Key...'
-  }, 'hasKey')
+}).hook(GeminiService, self => {
+  if (currentTab.value !== 'gemini') return
+  self.placeholderText = GeminiService.key.length > 0
+    ? 'Message Gemini...' : 'Enter Google AI API Key...'
+}, 'hasKey')
 
 ChatEntry.get_buffer().connect('changed', (buffer) => {
   const bufferText = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), true)
@@ -66,4 +61,5 @@ export default Widget.Box(
     passThrough: true,
     overlay: ChatPlaceholderRevealer,
     child: Widget.Scrollable({ hscroll: 'never', vscroll: 'always' }, ChatEntry),
-  }), ChatSendButton)
+  },
+  ), ChatSendButton)

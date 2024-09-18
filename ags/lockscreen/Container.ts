@@ -37,12 +37,10 @@ export default Widget.Box([
     revealChild: false,
     transition: 'crossfade',
     transitionDuration: 500,
-    child: Widget.Box(
-      {
-        hexpand: true,
-        child: Content,
-        className: 'lockscreen',
-        css: `background-image: url('${bgImage}');`
-      })
-  }).on('realize', self => Utils.idle(() => self.revealChild = true))
+  }, Widget.Box({
+    hexpand: true,
+    child: Content,
+    className: 'lockscreen',
+    css: `background-image: url('${bgImage}');`
+  })).on('realize', self => Utils.idle(() => self.revealChild = true))
 ])
