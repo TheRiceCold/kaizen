@@ -2,9 +2,10 @@ import weatherData from 'data/weather'
 
 function getIcon(code: number, dayTime: 'day' | 'night') {
   const icon = weatherData[code].icon
+
   return (icon === 'sunny' && dayTime !== 'day') ? 'clear'
-    : (icon.includes('continuous') || dayTime === 'day')
-      ? icon : icon+'_night'
+    : (icon.includes('continuous') || dayTime === 'day' || icon === 'foggy_cloud')
+      ? icon : icon + '_night'
 }
 
 class WeatherService extends Service {
@@ -77,15 +78,16 @@ class WeatherService extends Service {
 
       this.updateProperty('daily_forecast', daily['time'].map(
         (time, index) => {
-          /* NOTE:
+          /* INFO:
             * I tried adding the right timezone paramater but I'm still not sure
             * why I have to subtract 16(sunrise) and 4(sunset) to get accurate hour
           */
           function getSun(type, index, subtract = 16) {
-            const hour = Number(daily['sun'+type][index].slice(11, 16).split(':')[0]) - subtract
-            const min = daily['sun'+type][index].slice(14, 16)
-            return hour+':'+min
+            const hour = Number(daily['sun' + type][index].slice(11, 16).split(':')[0]) - subtract
+            const min = daily['sun' + type][index].slice(14, 16)
+            return hour + ':' + min
           }
+
           return ({
             sunrise: getSun('rise', index),
             sunset: getSun('set', index, 4),
