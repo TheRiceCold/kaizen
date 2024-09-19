@@ -1,6 +1,8 @@
 // import GtkSource from 'gi://GtkSource?version=3.0'
 import md2pango from 'misc/md2pango'
 
+import { ButtonLabel, VBox } from 'widgets'
+
 import options from 'options'
 import { sh, bash } from 'lib/utils'
 
@@ -20,7 +22,7 @@ function loadCustomColorScheme(filePath) {
   const schemeManager = GtkSource.StyleSchemeManager.get_default()
   schemeManager.append_search_path(file.get_parent().get_path())
 }
-loadCustomColorScheme(App.configDir+'/assets/themes/sourceviewtheme.xml')
+loadCustomColorScheme(App.configDir + '/assets/themes/sourceviewtheme.xml')
 
 function substituteLang(str) {
   const subs = [
@@ -123,44 +125,34 @@ function CodeBlock(content = '', lang = 'txt') {
 
   const SourceView = HighlightedCode(content, lang)
 
-  const TopBar = Widget.Box(
-    { className: 'topbar' },
-    Widget.Label({
-      xalign: 0,
-      label: lang,
-      hexpand: true,
-    }),
-    Widget.Button({
-      cursor: 'pointer',
-      child: Widget.Label({ vpack: 'center', label: '󰆏' }),
-      onClicked() {
-        const buffer = SourceView.get_buffer()
-        const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false)
-        sh('wl-copy '+copyContent)
-      },
-    })
+  const Topbar = Widget.Box({ className: 'topbar' },
+    Widget.Label({ xalign: 0, label: lang, hexpand: true }),
+    ButtonLabel('󰆏', () => {
+      const buffer = SourceView.get_buffer()
+      const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false)
+      sh('wl-copy ' + copyContent)
+    }, { vpack: 'center' })
   )
 
-  return Widget.Box({
-    vertical: true,
+  return VBox({
     className: 'chat-codeblock',
+    attribute: {
+      updateText(text: string) {
+        SourceView.get_buffer().set_text(text, -1)
+      }
+    },
     children: [
-      TopBar,
+      Topbar,
       Widget.Box(
         { className: 'code', homogeneous: true },
-        Widget.Scrollable({ vscroll: 'never', child: SourceView })
+        Widget.Scrollable({ vscroll: 'never' }, SourceView)
       )
-    ],
-    attribute: {
-      updateText(text) { SourceView.get_buffer().set_text(text, -1) }
-    },
+    ]
   })
 }
 
-
 const MessageContent = (content) => {
-  const contentBox = Widget.Box({
-    vertical: true,
+  const contentBox = VBox({
     attribute: {
       fullUpdate(self, content, useCursor = false) {
         // Clear and add first text widget
@@ -226,13 +218,11 @@ const MessageContent = (content) => {
 
 export const ChatMessage = (message, modelName = 'Model') => {
   const TextSkeleton = (extraClassName = '') => Widget.Box({
-    className: `chat-message-skeletonline ${extraClassName}`,
+    classNames: ['chat-message-skeletonline', extraClassName]
   })
+
   const messageContentBox = MessageContent(message.content)
-  const messageLoadingSkeleton = Widget.Box({
-    vertical: true,
-    children: Array.from({ length: 3 }, (_, id) => TextSkeleton(`chat-message-skeletonline-offset${id}`)),
-  })
+  const messageLoadingSkeleton = VBox(Array.from({ length: 3 }, (_, id) => TextSkeleton(`chat-message-skeletonline-offset${id}`)))
 
   const messageArea = Widget.Stack({
     homogeneous: message.role !== 'user',
@@ -245,10 +235,8 @@ export const ChatMessage = (message, modelName = 'Model') => {
     shown: message.thinking ? 'thinking' : 'message',
   })
 
-  return Widget.Box(
-    { className: 'chat-message' },
-    Widget.Box(
-      { vertical: true },
+  return Widget.Box({ className: 'chat-message' },
+    VBox([
       Widget.Label({
         xalign: 0,
         wrap: true,
@@ -256,25 +244,22 @@ export const ChatMessage = (message, modelName = 'Model') => {
         useMarkup: true,
         label: (message.role == 'user' ? USERNAME : modelName),
         className: `chat-name chat-name-${message.role == 'user' ? 'user' : 'bot'}`,
-      }),
-      messageArea
-    )
+      }), messageArea
+    ])
       .hook(message, () => messageArea.shown = message.thinking ? 'thinking' : 'message', 'notify::thinking')
       .hook(message, () => messageContentBox.attribute.fullUpdate(messageContentBox, message.content, message.role != 'user'), 'notify::content')
       .hook(message, () => messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false), 'notify::done')
   )
 }
 
-export const SystemMessage = (content, commandName) => Widget.Box(
+export const SystemMessage = (content, commandName: string) => Widget.Box(
   { className: 'chat-message' },
-  Widget.Box(
-    { vertical: true },
+  VBox([
     Widget.Label({
       xalign: 0,
       wrap: true,
       hpack: 'start',
       label: `System  •  ${commandName}`,
-    }),
-    MessageContent(content)
-  )
+    }), MessageContent(content)
+  ])
 )

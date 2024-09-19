@@ -1,8 +1,10 @@
 import { type Application } from 'types/service/applications'
-import { launchApp, icon } from 'lib/utils'
+
+import { VBox } from 'widgets'
 
 import options from 'options'
 import icons from 'data/icons'
+import { launchApp, icon } from 'lib/utils'
 
 const apps = await Service.import('applications')
 const { query } = apps
@@ -31,8 +33,7 @@ function AppItem(app: Application) {
 
   const appicon = Widget.Icon(icon(app.icon_name, icons.fallback.executable)).bind('size', iconSize)
 
-  const textBox = Widget.Box({
-    vertical: true,
+  const textBox = VBox({
     vpack: 'center',
     children: app.description ? [title, description] : [title],
   })
@@ -51,11 +52,10 @@ export function Launcher() {
 
   const SeparatedAppItem = (app: Application) => Widget.Revealer(
     { attribute: { app } },
-    Widget.Box({vertical: true}, Widget.Separator(), AppItem(app)),
+    VBox([ Widget.Separator(), AppItem(app) ]),
   )
 
-  const list = Widget.Box({
-    vertical: true,
+  const list = VBox({
     children: applist.bind().as((list: Application[]) => list.map(SeparatedAppItem))
   }).hook(apps, () => applist.value = query(''), 'notify::frequents')
 

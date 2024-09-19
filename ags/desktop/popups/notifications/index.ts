@@ -1,5 +1,7 @@
-import options from 'options'
+import { VBox } from 'widgets'
 import Animated from './Animated'
+
+import options from 'options'
 
 const notifications = await Service.import('notifications')
 
@@ -10,10 +12,9 @@ export default () => {
     map.delete(id)
   }
 
-  return Widget.Box({
+  return VBox({
     hpack: 'end',
-    vertical: true,
-    css: options.notifications.width.bind().as(w => `min-width: ${w}px;`),
+    css: options.notifications.width.bind().as((w: number) => `min-width: ${w}px;`),
   }).hook(notifications, (self: typeof Widget.Box, id: number) => {
     if (id !== undefined) {
       if (map.has(id))

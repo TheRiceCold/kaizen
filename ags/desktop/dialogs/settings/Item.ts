@@ -1,5 +1,8 @@
-import {Opt} from 'lib/option'
+import { Opt } from 'lib/option'
 import Setter from './Setter'
+
+import { VBox } from 'widgets'
+
 import icons from 'data/icons'
 
 export type RowProps<T> = {
@@ -7,41 +10,39 @@ export type RowProps<T> = {
   title: string
   note?: string
   type?:
-    | 'number'
-    | 'color'
-    | 'float'
-    | 'object'
-    | 'string'
-    | 'enum'
-    | 'boolean'
-    | 'img'
-    | 'font'
+  | 'number'
+  | 'color'
+  | 'float'
+  | 'object'
+  | 'string'
+  | 'enum'
+  | 'boolean'
+  | 'img'
+  | 'font'
   enums?: string[]
   max?: number
   min?: number
 }
 
-export default <T>(props: RowProps<T>) => Widget.Box({
+const { Box, Button, Icon, Label } = Widget
+
+export default <T>(props: RowProps<T>) => Box({
   className: 'item',
   attribute: { opt: props.opt },
   tooltipText: props.note ? `note: ${props.note}` : '',
   children: [
-    Widget.Box(
-      { vertical: true, vpack: 'center' },
-      Widget.Label({ xalign: 0, label: props.title }),
-      Widget.Label({
-        xalign: 0,
-        className: 'id',
-        label: props.opt.id,
-      }),
+    VBox(
+      { vpack: 'center' },
+      Label({ xalign: 0, label: props.title }),
+      Label({ xalign: 0, className: 'id', label: props.opt.id }),
     ),
-    Widget.Box({hexpand: true}),
-    Widget.Box({vpack: 'center'}, Setter(props)),
-    Widget.Button({
+    Box({ hexpand: true }),
+    Box({ vpack: 'center' }, Setter(props)),
+    Button({
       vpack: 'center',
       className: 'reset',
       onClicked() { props.opt.reset() },
       sensitive: props.opt.bind().as((v: boolean) => v !== props.opt.initial),
-    }, Widget.Icon(icons.ui.refresh))
+    }, Icon(icons.ui.refresh))
   ]
 })

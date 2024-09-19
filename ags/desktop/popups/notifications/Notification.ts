@@ -1,5 +1,5 @@
 import { type Notification } from 'types/service/notifications'
-import { ButtonLabel, ButtonIcon } from 'widgets'
+import { ButtonLabel, ButtonIcon, VBox } from 'widgets'
 import icons from 'data/icons'
 
 const time = (time: number, format = '%H:%M') => imports.gi.GLib.DateTime.new_from_unix_local(time).format(format)
@@ -44,32 +44,29 @@ export default (notification: Notification) => {
     className: 'content',
     children: [
       NotificationIcon(notification),
-      Widget.Box(
-        { hexpand: true, vertical: true },
-        Widget.Box({
-          children: [
-            Widget.Label({
-              xalign: 0,
-              wrap: true,
-              hexpand: true,
-              truncate: 'end',
-              use_markup: true,
-              maxWidthChars: 24,
-              className: 'title',
-              justification: 'left',
-              label: notification.summary.trim(),
-            }),
-            Widget.Label({
-              vpack: 'start',
-              className: 'time',
-              label: time(notification.time),
-            }),
-            ButtonIcon(
-              'window-close-symbolic',
-              notification.close,
-              { vpack: 'start', className: 'close-button' }),
-          ],
-        }),
+      VBox({ hexpand: true },
+        Widget.Box([
+          Widget.Label({
+            xalign: 0,
+            wrap: true,
+            hexpand: true,
+            truncate: 'end',
+            use_markup: true,
+            maxWidthChars: 24,
+            className: 'title',
+            justification: 'left',
+            label: notification.summary.trim(),
+          }),
+          Widget.Label({
+            vpack: 'start',
+            className: 'time',
+            label: time(notification.time),
+          }),
+          ButtonIcon(
+            'window-close-symbolic',
+            notification.close,
+            { vpack: 'start', className: 'close-button' }),
+        ]),
         Widget.Label({
           xalign: 0,
           wrap: true,
@@ -96,24 +93,20 @@ export default (notification: Notification) => {
       }),
     })) : null
 
-  const eventbox = Widget.EventBox({
-    vexpand: false,
-    onPrimaryClick: notification.dismiss,
-    onHover() {
-      if (actionsbox)
-        actionsbox.revealChild = true
-    },
-    onHoverLost() {
-      if (actionsbox)
-        actionsbox.revealChild = true
-
-      notification.dismiss()
-    },
-    child: Widget.Box({
-      vertical: true,
-      children: actionsbox ? [content, actionsbox] : [content],
-    }),
-  })
-
-  return Widget.Box({ className: `notification ${notification.urgency}` }, eventbox)
+  return Widget.Box(
+    { className: `notification ${notification.urgency}` },
+    Widget.EventBox({
+      vexpand: false,
+      onPrimaryClick: notification.dismiss,
+      onHover() {
+        if (actionsbox)
+          actionsbox.revealChild = true
+      },
+      onHoverLost() {
+        if (actionsbox)
+          actionsbox.revealChild = true
+        notification.dismiss()
+      },
+    }, VBox(actionsbox ? [content, actionsbox] : [content]))
+  )
 }

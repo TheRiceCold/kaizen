@@ -1,5 +1,6 @@
 import GeminiService from 'service/api/gemini'
 
+import { VBox } from 'widgets'
 import { ConfigToggle, ConfigSegmentedSelection } from 'misc/configwidgets'
 import MarginRevealer from 'misc/marginrevealer'
 
@@ -13,15 +14,14 @@ const Instructions = Widget.Revealer({
   transitionDuration: options.transition.value,
 }, Widget.Button({
   cursor: 'pointer',
-  child: Widget.Label({
-    wrap: true,
-    useMarkup: true,
-    className: 'chat-welcome-txt',
-    justify: Gtk.Justification.CENTER,
-    label: 'A Google AI API key is required\nYou can grab one <u>here</u>, then enter it below',
-  }),
   onClicked() { bash`xdg-open https://makersuite.google.com/app/apikey &` },
-})).hook(GeminiService, self => self.revealChild = GeminiService.key.length === 0, 'hasKey')
+}, Widget.Label({
+  wrap: true,
+  useMarkup: true,
+  className: 'chat-welcome-txt',
+  justify: Gtk.Justification.CENTER,
+  label: 'A Google AI API key is required\nYou can grab one <u>here</u>, then enter it below',
+}))).hook(GeminiService, (self: typeof Widget.Revealer) => self.revealChild = GeminiService.key.length === 0, 'hasKey')
 
 const Settings = MarginRevealer({
   revealChild: true,
@@ -30,8 +30,8 @@ const Settings = MarginRevealer({
     self.hook(GeminiService, () => Utils.timeout(200, self.attribute.hide), 'newMsg')
     self.hook(GeminiService, () => Utils.timeout(200, self.attribute.show), 'clear')
   },
-  child: Widget.Box(
-    { vertical: true, className: 'chat-settings' },
+  child: VBox(
+    { className: 'chat-settings' },
     ConfigSegmentedSelection({
       initIndex: 2,
       hpack: 'center',
@@ -44,8 +44,8 @@ const Settings = MarginRevealer({
       ],
       onChange(value) { GeminiService.temperature = value },
     }),
-    Widget.Box(
-      { hpack: 'fill', vertical: true, className: 'toggles' },
+    VBox(
+      { hpack: 'fill', className: 'toggles' },
       ConfigToggle({
         icon: '',
         name: 'Enhancements',
@@ -71,8 +71,8 @@ const Settings = MarginRevealer({
   )
 })
 
-export default Widget.Box(
-  { vpack: 'center', vertical: true },
+export default VBox(
+  { vpack: 'center' },
   Widget.Icon({
     hpack: 'center',
     icon: 'gemini-logo',

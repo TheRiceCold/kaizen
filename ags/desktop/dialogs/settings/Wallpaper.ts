@@ -1,10 +1,10 @@
 import wallpaper from 'service/wallpaper'
-import { ButtonLabel } from 'widgets'
+import { ButtonLabel, VBox } from 'widgets'
 
 export default Widget.Box(
   { className: 'wallpaper', homogeneous: true },
-  Widget.Box(
-    { vertical: true, hpack: 'start' },
+  VBox(
+    { hpack: 'start' },
     Widget.Label({
       xalign: 0,
       vpack: 'start',
@@ -13,14 +13,14 @@ export default Widget.Box(
     }),
     Widget.Box([
       Widget.FileChooserButton({
-        onFileSet({uri}) {
+        onFileSet({ uri }) {
           wallpaper.set(uri!.replace('file://', ''))
         },
       }),
       ButtonLabel('Random', wallpaper.random),
     ])
   ),
-  Widget.Box({hpack: 'end', className: 'preview'})
+  Widget.Box({ hpack: 'end', className: 'preview' })
     .bind('css', wallpaper, 'wallpaper', (wp: string) => `
       min-height: 80px;
       min-width: 140px;

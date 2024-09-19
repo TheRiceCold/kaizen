@@ -1,4 +1,4 @@
-import { ButtonLabel } from 'widgets'
+import { ButtonLabel, VBox } from 'widgets'
 import Header from '../Header'
 import Device from './Device'
 
@@ -33,8 +33,6 @@ const list = Widget.Scrollable({
   vexpand: true,
   hscroll: 'never',
   vscroll: 'automatic',
-}, Widget.Box({ vertical: true }).bind(
-  'children', bluetooth, 'devices',
-  (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device)))
+}, VBox().bind('children', bluetooth, 'devices', (ds: TDevice[]) => ds.filter((d: TDevice) => d.name).map(Device)))
 
-export default Widget.Box({ vertical: true, className: 'bluetooth-list' }, header, list)
+export default VBox({ className: 'bluetooth-list' }, header, list)

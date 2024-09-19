@@ -23,12 +23,16 @@ export default event => Widget.Menu({
     Item(' Color', () => toggleWidget('color')),
     Item('  Keyboard', () => toggleWidget('keyboard')),
     Item(' Pomodoro', () => { }), // TODO:
+
+    // Recorder
     Item('  Recorder', [
       Item('󰆐 Region', () => screenTools.recorder()),
       Item(' Fullscreen', () => screenTools.recorder('fullscreen')),
       Item('󰆐 Region | Audio', () => screenTools.recorder()), // TODO:
       Item(' Fullscreen | Audio', () => screenTools.recorder('fullscreen')), // TODO:
     ]),
+
+    // Screenshot
     Item('󰆟 Screenshot', [
       Item('󰆐 Region', () => screenTools.screenshot()),
       Item(' Fullscreen', () => screenTools.screenshot(true)),

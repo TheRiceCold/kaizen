@@ -51,9 +51,14 @@ const calendarMonthYear = Widget.Button({
   }
 })
 
-const Button = (
+const ShiftButton = (
   icon: string,
   shiftValue: number
 ) => ButtonLabel(icon, () => shiftCalendarXMonths(shiftValue), { className: 'monthshift-btn' })
 
-export default Widget.Box({className: 'header', hpack: 'center'}, Button('', -1), calendarMonthYear, Button('', 1))
+export default Widget.Box(
+  { className: 'header', hpack: 'center'},
+  ShiftButton('', -1),
+  calendarMonthYear,
+  ShiftButton('', 1)
+)

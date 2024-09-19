@@ -1,5 +1,6 @@
 import { type Stream } from 'types/service/audio'
 import ListRevealer from '../ListRevealer'
+import { VBox } from 'widgets'
 
 const audio = await Service.import('audio')
 
@@ -13,8 +14,7 @@ const MixerItem = (stream: Stream) => Widget.Box(
   Widget.Icon()
     .bind('tooltipText', stream, 'name', (name: string) => name || '')
     .bind('icon', stream, 'icon_name', () => streamIconSubstitute(stream)),
-  Widget.Box({
-    vertical: true,
+  VBox({
     vpack: 'center',
     className: 'slider-box'
   }, Widget.Box([
@@ -23,7 +23,7 @@ const MixerItem = (stream: Stream) => Widget.Box(
       hexpand: true,
       truncate: 'end',
     }).bind('label', stream, 'description', (desc: string) => desc || ''),
-    Widget.Label({xalign: 0}).bind('label', stream, 'volume', (vol: number) => Math.floor(vol * 100)+'%'),
+    Widget.Label({ xalign: 0 }).bind('label', stream, 'volume', (vol: number) => Math.floor(vol * 100) + '%'),
   ]),
   Widget.Slider({
     hexpand: true,
@@ -33,8 +33,7 @@ const MixerItem = (stream: Stream) => Widget.Box(
   }))
 )
 
-export default ListRevealer('App Mixer',
-  Widget.Box({vertical: true}).bind(
-    'children', audio, 'apps',
-    ((a: Stream[]) => a.map(MixerItem))
-  )).bind('visible', audio, 'apps', (a: Stream[]) => a.length > 0)
+export default ListRevealer('App Mixer', VBox().bind(
+  'children', audio, 'apps',
+  ((a: Stream[]) => a.map(MixerItem))
+)).bind('visible', audio, 'apps', (a: Stream[]) => a.length > 0)

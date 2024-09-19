@@ -3,6 +3,7 @@ import RevealerWindow, { Padding } from 'desktop/RevealerWindow'
 
 import options from 'options'
 import icons from 'data/icons'
+import { VBox } from 'widgets'
 
 const { width, margin } = options.run
 const applauncher = AppLauncher.Launcher()
@@ -17,13 +18,13 @@ const entry = Widget.Entry({
       entry.grab_focus()
     }
   },
-  onAccept(self) {
+  onAccept(self: typeof Widget.Entry) {
     applauncher.launchFirst()
 
     App.toggleWindow('run')
     self.text = ''
   },
-  onChange({text}) {
+  onChange({ text }) {
     text ||= ''
 
     if (!text?.startsWith(':'))
@@ -31,26 +32,24 @@ const entry = Widget.Entry({
   },
 })
 
-const Run =  Widget.Box(
-  { vertical: true, css: 'padding: 1px;' },
+const Run = VBox(
+  { css: 'padding: 1px;' },
   Padding('applauncher', {
     vexpand: false,
     css: margin.bind().as((v: number) => `min-height: ${v}pt;`),
   }),
 
-  Widget.Box({
+  VBox({
     vpack: 'start',
-    vertical: true,
     className: 'layout',
     css: width.bind().as((v: number) => `min-width: ${v}pt;`),
-  }, entry, applauncher)
-    .hook(App, (_, win: string, visible: boolean) => {
-      if (win !== 'run') return
+  }, entry, applauncher).hook(App, (_, win: string, visible: boolean) => {
+    if (win !== 'run') return
 
-      entry.text = ''
-      if (visible)
-        entry.attribute.focus()
-    })
+    entry.text = ''
+    if (visible)
+      entry.attribute.focus()
+  })
 )
 
 export default RevealerWindow({

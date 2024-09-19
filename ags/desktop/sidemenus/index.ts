@@ -1,3 +1,5 @@
+import { VBox } from 'widgets'
+
 import Ask from './ask'
 import Calendar from './calendar'
 import QuickSettings from './quicksettings'
@@ -9,8 +11,8 @@ const Sidemenu = (dir: TDirection, ...children) => Widget.Window({
   name: `side${dir}`,
   anchor: ['top', dir],
   className: `side${dir}`,
-  keymode: (dir === 'left') ? 'on-demand' : 'none',
-  child: Widget.Box({ children, vertical: true, css: 'padding: 2px;' })
+  keymode: dir === 'left' ? 'on-demand' : 'none',
+  child: VBox({ children, css: 'padding: 2px;' }),
 })
 
 export default [

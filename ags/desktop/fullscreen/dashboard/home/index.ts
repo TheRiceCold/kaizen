@@ -1,3 +1,5 @@
+import { VBox } from 'widgets'
+
 import Apps from './apps'
 import Time from './time'
 import GitHub from './github'
@@ -10,8 +12,8 @@ import { capitalize } from 'lib/utils'
 
 const { bio } = options.dashboard
 
-const greetTime = Variable('morning', { // every 10 min
-  poll: [600_000, () => {
+const greetTime = Variable('morning', { // every 15 min
+  poll: [900_000, () => {
     const date = new Date()
     const hour = date.getHours()
     return hour < 12 ? 'morning' :
@@ -21,22 +23,21 @@ const greetTime = Variable('morning', { // every 10 min
 
 const Section = (...children) => Widget.Box({ children, className: 'section' })
 const Content = Widget.Scrollable({ vexpand: true },
-  Widget.Box({ hpack: 'center', vertical: true },
+  VBox({ hpack: 'center' },
     Section(Weather, Player, Apps),
     Section(Time, Knowledge),
     Section(GitHub),
   ))
 
-export default Widget.Box({
+export default VBox({
   hexpand: true,
-  vertical: true,
   className: 'home',
   children: [
     Widget.Label({
       xalign: 0, className: 'greeter',
       label: greetTime.bind().as((g: string) => `Good ${g}, ${capitalize(Utils.USER)}`)
     }),
-    Widget.Label({ xalign: 0, className: 'bio', label: bio.bind() }),
+    Widget.Label({ xalign: 0, className: 'bio' }).bind('label', bio),
     Content
   ]
 })

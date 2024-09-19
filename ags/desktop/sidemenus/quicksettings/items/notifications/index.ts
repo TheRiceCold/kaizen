@@ -1,14 +1,13 @@
 import Header from '../Header'
 import Content from './Content'
-import { ButtonLabel } from 'widgets'
+import { ButtonLabel, VBox } from 'widgets'
 
 import options from 'options'
 
 const notifications = await Service.import('notifications')
 const notifs = notifications.bind('notifications')
 
-export default Widget.Box({
-  vertical: true,
+export default VBox({
   className: 'notifications',
   css: options.notifications.width.bind().as((w: number) => `min-width: ${w}px`),
 }, Header('Notifications', [

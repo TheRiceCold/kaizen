@@ -1,3 +1,5 @@
+import { VBox } from 'widgets'
+
 const Icon = (icon: string) =>
   (icon !== null) && Widget.Label({
     label: icon,
@@ -9,13 +11,16 @@ export default (
   icon: string,
   label: string,
   ...children
-) => Widget.Box(
-  { vertical: true, classNames: ['content', className] },
-  Icon(icon), Widget.Label({
+) => VBox(
+  { classNames: ['content', className] },
+  Icon(icon),
+  Widget.Label({
     label,
     wrap: true,
     vpack: 'center',
     className: 'text',
     maxWidthChars: 48,
     justification: 'center',
-  }), ...children)
+  }),
+  ...children
+)

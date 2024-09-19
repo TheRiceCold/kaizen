@@ -1,5 +1,6 @@
 import { type Notification as Notif } from 'types/service/notifications'
 
+import { VBox } from 'widgets'
 import Notification from 'desktop/popups/notifications/Notification'
 
 import options from 'options'
@@ -20,8 +21,7 @@ const Animated = (n: Notif) => Widget.Revealer({
 
 const NotificationList = () => {
   const map: Map<number, ReturnType<typeof Animated>> = new Map
-  const box = Widget.Box({
-    vertical: true,
+  const box = VBox({
     children: notifications.notifications.map(n => {
       const w = Animated(n)
       map.set(n.id, w)
@@ -56,10 +56,9 @@ const NotificationList = () => {
   )
 }
 
-const Placeholder = Widget.Box({
+const Placeholder = VBox({
   vexpand: true,
   hexpand: true,
-  vertical: true,
   vpack: 'center',
   hpack: 'center',
   className: 'placeholder',
@@ -71,7 +70,4 @@ export default Widget.Scrollable({
   hscroll: 'never',
   vscroll: 'automatic',
   className: 'notification-scrollable',
-}, Widget.Box({
-  vertical: true,
-  className: 'notification-list vertical'
-}, NotificationList(), Placeholder))
+}, VBox({ className: 'notification-list' }, NotificationList(), Placeholder))

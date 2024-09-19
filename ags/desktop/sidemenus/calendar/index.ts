@@ -1,3 +1,4 @@
+import { VBox } from 'widgets'
 import MenuRevealer from '../MenuRevealer'
 
 import Header, { calendarJson } from './Header'
@@ -25,9 +26,8 @@ export function addCalendarChildren(box, calendarJson) {
   }))
 }
 
-export const CalendarDays = Widget.Box({
+export const CalendarDays = VBox({
   hexpand: true,
-  vertical: true,
   hpack: 'center',
   className: 'body',
   setup(self: typeof Widget.Box) {

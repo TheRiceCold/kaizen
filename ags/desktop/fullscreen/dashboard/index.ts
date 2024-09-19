@@ -1,7 +1,7 @@
 import { type ButtonProps } from 'types/widgets/button'
 import wallpaper from 'service/wallpaper'
 
-import { ButtonLabel } from 'widgets'
+import { ButtonLabel, VBox } from 'widgets'
 
 import Home from './home'
 import Tasks from './tasks'
@@ -45,14 +45,13 @@ const Sidebar = Widget.Revealer({
   className: 'sidebar',
   transition: 'slide_right',
   transitionDuration: options.transition,
-  child: Widget.Box({vertical: true},
-    Widget.Label({
-      className: 'user',
-      label: ` ${capitalize(Utils.USER)}'s Dashboard `
-    }),
-    ...Array.from({ length: pages.length }, (_, i) => i).map(TabButton)
-  )
-})
+}, VBox([
+  Widget.Label({
+    className: 'user',
+    label: ` ${capitalize(Utils.USER)}'s Dashboard `
+  }),
+  ...Array.from({ length: pages.length }, (_, i) => i).map(TabButton)
+]))
 
 const SidebarButton = ButtonLabel('󰍜', () => {
   Sidebar.revealChild = !Sidebar.revealChild
@@ -60,24 +59,23 @@ const SidebarButton = ButtonLabel('󰍜', () => {
 
 const Dashboard = Widget.Box(
   { className: 'dashboard' }, Sidebar,
-  Widget.Box(
-    { vertical: true, className: 'main' },
+  VBox(
+    { className: 'main' },
     Widget.Overlay({
       passThrough: true,
       className: 'header',
       overlays: [ SidebarButton, Avatar ],
-      child: Widget.Box(
-        { className: 'cover', vertical: true },
-        Widget.Box({
-          className: 'cover-img',
-          css: wallpaper.bind('wallpaper').as(
-            (wp: string) => `
-            min-height: 200px;
-            background-size: cover;
-            background-image: url('${wp}');`)
-        }),
-      )
-    }), Stack)
+    }, VBox(
+      { className: 'cover' },
+      Widget.Box({
+        className: 'cover-img',
+        css: wallpaper.bind('wallpaper').as(
+          (wp: string) => `
+          min-height: 200px;
+          background-size: cover;
+          background-image: url('${wp}');`)
+      }),
+    )), Stack)
 )
 
 export default Widget.Window({

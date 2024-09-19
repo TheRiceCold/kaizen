@@ -5,22 +5,25 @@ import ListRevealer from '../ListRevealer'
 
 import icons from 'data/icons'
 import { audioIconSub } from 'lib/utils'
+import { VBox } from 'widgets'
 
 type Type = 'microphone' | 'speaker'
 const audio = await Service.import('audio')
 
+const { Box, Button, Icon, Label } = Widget
+
 const SinkItem = (type: Type) =>
-  (stream: Stream) => Widget.Button({
+  (stream: Stream) => Button({
     cursor: 'pointer',
     className: 'sink-button',
     onClicked() { audio[type] = stream },
-  }, Widget.Box([
-    Widget.Icon({
+  }, Box([
+    Icon({
       tooltipText: stream.icon_name,
       icon: audioIconSub(stream.icon_name, type),
     }),
-    Widget.Label(stream.description?.split(' ').slice(0, 4).join(' ')),
-    Widget.Icon({
+    Label(stream.description?.split(' ').slice(0, 4).join(' ')),
+    Icon({
       hpack: 'end',
       hexpand: true,
       icon: icons.ui.tick,
@@ -28,20 +31,17 @@ const SinkItem = (type: Type) =>
   ]))
 
 const SinkSelector = (type: Type) =>
-  Widget.Box({vertical: true})
-    .hook(audio, (self: typeof Widget.Box) => {
-      self.children = Array.from(audio[`${type}s`].values()).map(SinkItem(type))
-    }, 'stream-added').hook(audio, (self: Widget.Box) => {
-      self.children = Array.from(audio[`${type}s`].values()).map(SinkItem(type))
-    }, 'stream-removed')
+  VBox().hook(audio, (self: typeof Widget.Box) => {
+    self.children = Array.from(audio[`${type}s`].values()).map(SinkItem(type))
+  }, 'stream-added').hook(audio, (self: Widget.Box) => {
+    self.children = Array.from(audio[`${type}s`].values()).map(SinkItem(type))
+  }, 'stream-removed')
 
-const SubTitle = (label: string) =>
-  Widget.Label({ label, xalign: 0, className: 'sub-title' })
+const SubTitle = (label: string) => Label({ label, xalign: 0, className: 'sub-title' })
 
-export default ListRevealer('Sink Selector', Widget.Box(
-  { vertical: true },
+export default ListRevealer('Sink Selector', VBox([
   SubTitle('Speakers'),
   SinkSelector('speaker'),
   SubTitle('Microphones'),
   SinkSelector('microphone'),
-))
+]))

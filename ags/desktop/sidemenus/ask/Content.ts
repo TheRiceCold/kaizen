@@ -1,5 +1,6 @@
 import { type ButtonProps } from 'types/widgets/button'
 
+import { VBox } from 'widgets'
 import GeminiView from './gemini/View'
 import { ChatPlaceholder } from './Textbox'
 
@@ -46,13 +47,12 @@ const Button = ({ icon, name, ...props }) => Widget.Button({
 
 const TabButtons = Widget.Box(
   { className: 'tab-buttons' },
-  Widget.Box({
-    hexpand: true,
-    hpack: 'center',
-    children: stackItems.map(({
+  Widget.Box(
+    { hexpand: true, hpack: 'center' },
+    ...stackItems.map(({
       content: _1, placeholderText: _2, ...props
     }) => Button(props))
-  })
+  )
 )
 
-export default Widget.Box({ vertical: true }, TabButtons, Stack)
+export default VBox([TabButtons, Stack])

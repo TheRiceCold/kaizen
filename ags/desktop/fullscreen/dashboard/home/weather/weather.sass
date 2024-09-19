@@ -1,16 +1,15 @@
 window#dashboard .weather .forecast
   button:hover label
     color: $primary-bg
-  .daily, .hourly > .content
-    button
-      .day, .hour
-        font-size: 1.5rem
-      image
-        font-size: 3rem
-        padding: 1rem 0
-      label
-        font-size: 1.15rem
-        padding: 0.25rem 0.75rem
+  .daily button
+    .day
+      font-size: 1.5rem
+    image
+      font-size: 3rem
+      padding: 1rem 0
+    label
+      font-size: 1.15rem
+      padding: 0.25rem 0.75rem
 
   .hourly
     .current-date, .back-btn label
@@ -19,13 +18,15 @@ window#dashboard .weather .forecast
       font-size: 1.15rem
     .current-date
       font-size: 1.25rem
-    > .content button
+    > .content
       padding: 2rem 0
       margin-top: 2rem
-      &:last-child
-        border-right: 0
+      label
+        font-size: 1.15rem
+        padding: 0.5rem 0.75rem
+      .hour
+        font-size: 1.5rem
       image
         font-size: 3.25rem
-      &:hover
-        color: $fg
-        background-color: transparent
+      &:last-child
+        border-right: 0

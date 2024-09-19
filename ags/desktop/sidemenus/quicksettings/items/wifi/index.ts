@@ -1,5 +1,5 @@
 import Header from '../Header'
-import { ButtonLabel } from 'widgets'
+import { ButtonLabel, VBox } from 'widgets'
 
 import icons from 'data/icons'
 import { dependencies, sh } from 'lib/utils'
@@ -52,9 +52,9 @@ const list = Widget.Scrollable({
   vexpand: true,
   hscroll: 'never',
   vscroll: 'automatic',
-}, Widget.Box({
-  vertical: true,
-  children: wifi.access_points.sort((a, b) => b.strength - a.strength).slice(0, 10).map(item)
-}))
+  child: VBox({
+    children: wifi.access_points.sort((a, b) => b.strength - a.strength).slice(0, 10).map(item)
+  })
+})
 
-export default Widget.Box({ vertical: true, className: 'wifi-list' }, header, list)
+export default VBox({ className: 'wifi-list' }, header, list)

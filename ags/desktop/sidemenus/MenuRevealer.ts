@@ -1,4 +1,5 @@
 import { showWidget } from 'lib/variables'
+import { VBox } from 'widgets'
 
 type menuNames = 'ask' | 'calendar' | 'quicksettings'
 
@@ -8,4 +9,4 @@ export default (name: menuNames, ...children) => Widget.Revealer({
     const show = showWidget[name]
     self.hook(show, () => self.revealChild = show.value)
   }
-}, Widget.Box({ children, vertical: true, classNames: ['menu-revealer', name] }))
+}, VBox({ children, classNames: ['menu-revealer', name] }))

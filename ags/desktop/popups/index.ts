@@ -1,3 +1,5 @@
+import { VBox } from 'widgets'
+
 import Media from './media'
 import Keyboard from './keyboard'
 import ColorTool from './color-tool'
@@ -12,13 +14,8 @@ const popupWindow = (position: 'top' | 'bottom', ...children) => Widget.Window({
   exclusivity: 'ignore',
   name: `${position}-popups`,
   className: `${position}-popups`,
-  child: Widget.Box({
-    children,
-    vertical: true,
-    css: 'padding: 2px;',
-  }),
-  margins: showWidget.indicator.bind()
-    .as((shown: boolean) => shown && (position === 'top') ? [36] : [0]),
+  child: VBox({ children, css: 'padding: 2px;' }),
+  margins: showWidget.indicator.bind().as((shown: boolean) => shown && (position === 'top') ? [36] : [0]),
 })
 
 export default [

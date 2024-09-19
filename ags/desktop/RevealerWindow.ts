@@ -2,6 +2,9 @@ import { type WindowProps } from 'types/widgets/window'
 import { type RevealerProps } from 'types/widgets/revealer'
 import { type EventBoxProps } from 'types/widgets/eventbox'
 import type Gtk from 'gi://Gtk?version=3.0'
+
+import { VBox } from 'widgets'
+
 import options from 'options'
 
 type Transition = RevealerProps['transition']
@@ -21,11 +24,10 @@ export const Padding = (name: string, {
   hexpand,
   vexpand,
   can_focus: false,
-  child: Widget.Box({ css }),
-  setup(self) {
+  setup(self: typeof Widget.EventBox) {
     self.on('button-press-event', () => App.toggleWindow(name))
   }
-})
+}, Widget.Box({ css }))
 
 const Revealer = (
   name: string,
@@ -35,14 +37,13 @@ const Revealer = (
   Widget.Revealer({
     transition,
     transitionDuration: options.transition.bind(),
-    child: Widget.Box({ child, className: 'window-content' }),
-    setup (self) {
+    setup(self: typeof Widget.Revealer) {
       self.hook(App, (_, wname: string, visible: boolean) => {
         if (wname === name)
           self.revealChild = visible
       })
     },
-  }),
+  }, Widget.Box({ child, className: 'window-content' })),
 )
 
 const Layout = (name: string, child: Child, transition?: Transition) => ({
@@ -58,63 +59,35 @@ const Layout = (name: string, child: Child, transition?: Transition) => ({
   ),
   top: () => Widget.CenterBox({},
     Padding(name),
-    Widget.Box(
-      { vertical: true },
-      Revealer(name, child, transition),
-      Padding(name),
-    ),
+    VBox([Revealer(name, child, transition), Padding(name)]),
     Padding(name),
   ),
-  'top-right': () => Widget.Box({},
+  'top-right': () => Widget.Box([
     Padding(name),
-    Widget.Box(
-      { hexpand: false, vertical: true },
-      Revealer(name, child, transition),
-      Padding(name),
-    ),
-  ),
-  'top-center': () => Widget.Box({},
+    VBox({ hexpand: false }, Revealer(name, child, transition), Padding(name)),
+  ]),
+  'top-center': () => Widget.Box([
     Padding(name),
-    Widget.Box(
-      { hexpand: false, vertical: true },
-      Revealer(name, child, transition),
-      Padding(name),
-    ),
+    VBox({ hexpand: false }, Revealer(name, child, transition), Padding(name)),
     Padding(name),
-  ),
-  'top-left': () => Widget.Box({},
-    Widget.Box(
-      { hexpand: false, vertical: true },
-      Revealer(name, child, transition),
-      Padding(name),
-    ),
+  ]),
+  'top-left': () => Widget.Box([
+    VBox({ hexpand: false }, Revealer(name, child, transition), Padding(name)),
     Padding(name),
-  ),
-  'bottom-left': () => Widget.Box({},
-    Widget.Box(
-      { hexpand: false, vertical: true },
-      Padding(name),
-      Revealer(name, child, transition),
-    ),
+  ]),
+  'bottom-left': () => Widget.Box([
+    VBox({ hexpand: false }, Padding(name), Revealer(name, child, transition)),
     Padding(name),
-  ),
-  'bottom-center': () => Widget.Box({},
+  ]),
+  'bottom-center': () => Widget.Box([
     Padding(name),
-    Widget.Box(
-      { hexpand: false, vertical: true },
-      Padding(name),
-      Revealer(name, child, transition),
-    ),
+    VBox({ hexpand: false }, Padding(name), Revealer(name, child, transition)),
     Padding(name),
-  ),
-  'bottom-right': () => Widget.Box({},
+  ]),
+  'bottom-right': () => Widget.Box([
     Padding(name),
-    Widget.Box(
-      { hexpand: false, vertical: true },
-      Padding(name),
-      Revealer(name, child, transition),
-    ),
-  ),
+    VBox({ hexpand: false }, Padding(name), Revealer(name, child, transition)),
+  ]),
 })
 
 export default ({

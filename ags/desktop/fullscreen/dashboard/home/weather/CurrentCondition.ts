@@ -1,4 +1,5 @@
 import Weather from 'service/api/weather'
+import { VBox } from 'widgets'
 
 const getDescription = c => c.weatherDesc ? c.weatherDesc[0].value : ''
 const CurrentConditionLabel = (
@@ -6,8 +7,7 @@ const CurrentConditionLabel = (
   props: typeof Widget.Label = {},
 ) => Widget.Label(props).bind('label', Weather, 'current_condition', cb)
 
-export default Widget.Box({
-  vertical: true,
+export default VBox({
   hpack: 'center',
   homogeneous: true,
   className: 'current-condition',
@@ -34,8 +34,8 @@ CurrentConditionLabel(getDescription, {
 }),
 
 // Details
-Widget.Box(
-  { vpack: 'end', vertical: true, className: 'details' },
+VBox(
+  { vpack: 'end', className: 'details' },
   // Sunris and Sunset
   Widget.Box({ hpack: 'center' },
     Widget.Label({ tooltipText: 'Sunrise' })

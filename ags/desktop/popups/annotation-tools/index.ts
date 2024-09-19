@@ -2,7 +2,7 @@ import { type ButtonProps } from 'types/widgets/button'
 
 import Annotation from 'service/annotation'
 
-import { ButtonLabel } from 'widgets'
+import { ButtonLabel, VBox } from 'widgets'
 import PopupRevealer from '../PopupRevealer'
 
 const { undo, redo, pin, clear, quit } = Annotation
@@ -26,8 +26,8 @@ const ActionButtons = Widget.Box({
 })
 
 const ToolsInfo = Widget.Revealer({
-  child: Widget.Box(
-    { vertical: true, className: 'info' },
+  child: VBox(
+    { className: 'info' },
     Widget.Label('Line: Hold Shift'),
     Widget.Label('Arrow: Hold Ctrl'),
     Widget.Label('Secondary Color: Hold Alt'),
@@ -41,9 +41,9 @@ export default PopupRevealer({
   hpack: 'center',
   className: 'annotation-tool',
   reveal: hyprland.active.client.bind('class').as((c: string) => c === 'Gromit-mpx'),
-}, ActionButtons, Widget.Box({vertical: true},
+}, ActionButtons, VBox([
   ToolsInfo, ButtonLabel('View brushes ', (self: ButtonProps) => {
     ToolsInfo.revealChild = !ToolsInfo.revealChild
     self.label = ToolsInfo.revealChild ? 'Hide Tools ' : 'View Tools '
-  }, {hexpand: true})
-))
+  }, { hexpand: true })
+]))

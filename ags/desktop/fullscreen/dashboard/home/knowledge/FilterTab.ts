@@ -1,9 +1,11 @@
-import { ButtonLabel } from 'widgets'
+import { ButtonLabel, VBox } from 'widgets'
 import { randomize } from './RandomizeButton'
 
 import items from './items'
 import options from 'options'
 import { uniqueArray } from 'lib/utils'
+
+const { Box, Scrollable, ToggleButton } = Widget
 
 let hiddenList = []
 const opts = options.dashboard.knowledge
@@ -16,17 +18,18 @@ export const ApplyButton = (tab, lastTab) => ButtonLabel(
   }, { className: 'apply-btn', visible: tab.bind().as((t: string) => t === 'filter') }
 )
 
-const Checkbox = (label, lastTab) => Widget.ToggleButton({
+const Checkbox = (label, lastTab) => ToggleButton({
   xalign: 0,
   cursor: 'pointer',
   className: 'checkbox',
   attribute: {
     hiddenItems: opts[lastTab.value].hidden,
     item: `${lastTab.value.slice(0, -1)}:${label}`,
-    getLabel: ({active}) => active ? ` ${label}` : ` ${label}`
+    getLabel: ({ active }) => active ? ` ${label}` : ` ${label}`
   },
-  onToggled(self) {
+  onToggled(self: typeof ToggleButton) {
     const { item, getLabel, hiddenItems } = self.attribute
+
     hiddenList = [...hiddenItems.value]
     self.label = getLabel(self)
 
@@ -35,7 +38,7 @@ const Checkbox = (label, lastTab) => Widget.ToggleButton({
       hiddenList.splice(index, 1)
     } else hiddenList.push(item)
   },
-  setup(self) {
+  setup(self: typeof ToggleButton) {
     const { item, getLabel, hiddenItems } = self.attribute
     self.hook(hiddenItems, () => {
       self.active = !hiddenItems.value.includes(item)
@@ -44,26 +47,26 @@ const Checkbox = (label, lastTab) => Widget.ToggleButton({
   }
 })
 
-const List = (data, lastTab) => Widget.Scrollable(
+const List = (data, lastTab) => Scrollable(
   { hscroll: 'never', className: 'list' },
-  Widget.Box({
-    vpack: 'start', vertical: true,
-    setup(self) {
+  VBox({
+    vpack: 'start',
+    setup(self: typeof Scrollable) {
       self.children = uniqueArray(data).map(label => Checkbox(label, lastTab))
     }
   }),
 )
 
-export default lastTab => Widget.Box({
+export default lastTab => Box({
   homogeneous: true,
-  className: 'filter',
-}).hook(lastTab, self => {
+  className: 'filter'
+}).hook(lastTab, (self: typeof Box) => {
   const data = opts[lastTab.value].data.value
   const currentItem = items.find(v => v.title === lastTab.value)
 
-  const children = [ List(data.map(i => i.tags).flat(), lastTab) ]
+  const children = [List(data.map(i => i.tags).flat(), lastTab)]
 
-  if ('filterItem' in currentItem) {
+  if (!!currentItem && 'filterItem' in currentItem) {
     const filterItemList = data.map(v => v[currentItem.filterItem])
 
     children.push(List(filterItemList, lastTab))

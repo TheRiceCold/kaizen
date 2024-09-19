@@ -1,11 +1,13 @@
 import GeminiService from 'service/api/gemini'
+
+import { VBox } from 'widgets'
+import Welcome from './Welcome'
 import { ChatEntry } from '../Textbox'
 import { ChatMessage } from '../Message'
-import Welcome from './Welcome'
 
 const { Gtk } = imports.gi
 
-export const ChatContent = Widget.Box({vertical: true}).hook(
+export const ChatContent = VBox().hook(
   GeminiService, (self: typeof Widget.Box, id: number) => {
     const message = GeminiService.messages[id]
     if (!message) return
@@ -15,6 +17,7 @@ export const ChatContent = Widget.Box({vertical: true}).hook(
 export default Widget.Scrollable({
   vexpand: true,
   className: 'chat-viewport',
+  child: VBox([ Welcome, ChatContent ]),
   setup(self: typeof Widget.Scrollable) {
     // Show scrollbar
     self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -34,4 +37,4 @@ export default Widget.Scrollable({
       adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
     }))
   }
-}, Widget.Box({vertical: true}, Welcome, ChatContent))
+})

@@ -1,38 +1,24 @@
 import Weather from 'service/api/weather'
 import ForecastStack from './Forecast'
+import { VBox } from 'widgets'
 
+const { Box, Button, Icon, Label } = Widget
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-export default currentDay => Widget.Box({ className: 'daily' })
+export default currentDay => Box({ className: 'daily' })
   .bind('children', Weather, 'daily_forecast', days => days.map(
-    (day, index) => Widget.Button({
+    (day, index) => Button({
       cursor: 'pointer',
       onClicked() {
         currentDay.value = index
         ForecastStack.shown = 'hourly'
       },
-    }, Widget.Box(
-      { vertical: true, vpack: 'center' },
-      Widget.Label({
-        className: 'day',
-        label: weekdays[day.day].substr(0, 3)
-      }),
-      Widget.Icon({
-        icon: day.icon,
-        tooltipText: day.description
-      }),
-      Widget.Label(`min: ${Math.round(day.min)}°`),
-      Widget.Label(`max: ${Math.round(day.max)}°`),
-      Widget.Label({
-        tooltipText: 'Sunrise',
-        label: ` ${day.sunrise} AM`
-      }),
-      Widget.Label({
-        tooltipText: 'Sunset',
-        label: ` ${day.sunset} PM`
-      }),
-      Widget.Label({
-        tooltipText: 'Wind Speed',
-        label: `: ${day.windSpeed} km/h`
-      }),
+    }, VBox({ vpack: 'center' },
+      Label({ className: 'day', label: weekdays[day.day].substring(0, 3) }),
+      Icon({ icon: day.icon, tooltipText: day.description }),
+      Label(`min: ${Math.round(day.min)}°`),
+      Label(`max: ${Math.round(day.max)}°`),
+      Label({ tooltipText: 'Sunrise', label: ` ${day.sunrise} AM` }),
+      Label({ tooltipText: 'Sunset', label: ` ${day.sunset} PM` }),
+      Label({ tooltipText: 'Wind Speed', label: `: ${day.windSpeed} km/h` }),
     ))))

@@ -43,7 +43,7 @@ export default Widget.Window({
   keymode: 'none',
   className: 'topbar',
   exclusivity: 'exclusive',
-  anchor: [ 'top', 'right', 'left' ],
+  anchor: ['top', 'right', 'left'],
   child: Widget.EventBox({
     onSecondaryClick(_, event) { DropdownMenu(event) },
   }, Content),
