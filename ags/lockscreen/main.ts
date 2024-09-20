@@ -15,14 +15,14 @@ export const fontColor = options.theme[scheme].fg
 
 function createWindow(monitor) {
   const window = new Gtk.Window({ child: Container })
-  const win = {window, monitor}
+  const win = { window, monitor }
   windows.push(win)
   return win
 }
 
 function lockscreen() {
   const display = Gdk.Display.get_default()
-  for (let m = 0;  m < display?.get_n_monitors();  m++) {
+  for (let m = 0; m < display?.get_n_monitors(); m++) {
     const monitor = display?.get_monitor(m)
     createWindow(monitor)
   }

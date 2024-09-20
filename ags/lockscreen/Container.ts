@@ -1,46 +1,55 @@
+import { VBox } from 'widgets'
+
 import PasswordEntry from './PasswordEntry'
 
-import { capitalize } from 'lib/utils'
 import options from 'options'
 
+import { capitalize } from 'lib/utils'
+import { greetTime } from 'lib/variables'
+
+const { Box, Label, Revealer } = Widget
+
 const bgImage = `${Utils.HOME}/.config/background`
+
 const time = Variable('', { poll: [10000, ['time', '+%I:%M']] })
-const date = Variable('', { poll: [900000, ['date', '+%A, %b %d']] })
+const date = Variable('', { poll: [900000, ['time', '+%A, %b %d']] })
 
-const Clock = Widget.Box(
-  { vertical: true, className: 'clock-content' },
-  Widget.Label().bind('label', date),
-  Widget.Label().bind('label', time)
-)
-
-const Avatar = Widget.Box({
-  hpack: 'center',
-  className: 'avatar',
-  css: `background-image: url('${options.avatar}');`,
-})
-
-const Welcome = Widget.Label({
-  className: 'welcome-text',
-  label: `Hello, ${capitalize(Utils.USER)}`,
-})
-
-const Content = Widget.Box({
-  hexpand: true,
-  vertical: true,
-  hpack: 'center',
-  vpack: 'center',
-  children: [ Clock, Avatar, Welcome, PasswordEntry ]
-})
-
-export default Widget.Box([
-  Widget.Revealer({
+export default Box([
+  Revealer({
     revealChild: false,
     transition: 'crossfade',
     transitionDuration: 500,
-  }, Widget.Box({
+  }, Box({
     hexpand: true,
     child: Content,
     className: 'lockscreen',
     css: `background-image: url('${bgImage}');`
-  })).on('realize', self => Utils.idle(() => self.revealChild = true))
+  }, VBox({
+    hexpand: true,
+    hpack: 'center',
+    vpack: 'center',
+    chlidren: [
+      // Time
+      VBox(
+        { className: 'clock-content' },
+        Label().bind('label', date),
+        Label().bind('label', time)
+      ),
+
+      // Avatar
+      Box({
+        hpack: 'center',
+        className: 'avatar',
+        css: `background-image: url('${options.avatar}');`,
+      }),
+
+      // Welcome
+      Label({
+        className: 'welcome-text',
+        label: greetTime.bind().as((g: string) => `Good ${g}, ${capitalize(Utils.USER)}`)
+      }),
+
+      PasswordEntry
+    ]
+  }))).on('realize', (self: typeof Box) => Utils.idle(() => self.revealChild = true))
 ])

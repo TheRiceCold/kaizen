@@ -7,6 +7,15 @@ const clock = (interval: number = 5000) => Variable(
   { poll: [interval, () => GLib.DateTime.new_now_local()] }
 )
 
+const greetTime = Variable('morning', { // every 15 min
+  poll: [900_000, () => {
+    const date = new Date()
+    const hour = date.getHours()
+    return hour < 12 ? 'morning' :
+      hour <= 18 && hour >= 12 ? 'afternoon' : 'evening'
+  }]
+})
+
 const temp = Variable(0, {
   poll: [5000, 'cat /sys/class/thermal/thermal_zone0/temp', n => Number.parseInt(n) / 100_000],
 })
@@ -48,7 +57,7 @@ const showWidget = {
 }
 
 export {
-  clock,
+  clock, greetTime,
   showWidget,
   temp, cpu, ram,
 }

@@ -9,22 +9,14 @@ import Knowledge from './knowledge'
 
 import options from 'options'
 import { capitalize } from 'lib/utils'
+import { greetTime } from 'lib/variables'
 
 const { bio } = options.dashboard
-
-const greetTime = Variable('morning', { // every 15 min
-  poll: [900_000, () => {
-    const date = new Date()
-    const hour = date.getHours()
-    return hour < 12 ? 'morning' :
-      hour <= 18 && hour >= 12 ? 'afternoon' : 'evening'
-  }]
-})
 
 const Section = (...children) => Widget.Box({ children, className: 'section' })
 const Content = Widget.Scrollable({ vexpand: true },
   VBox({ hpack: 'center' },
-    Section(Weather, Player, Apps),
+    Section(Player, Weather, Apps),
     Section(Time, Knowledge),
     Section(GitHub),
   ))
