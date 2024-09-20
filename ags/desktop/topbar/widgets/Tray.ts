@@ -1,6 +1,7 @@
 import { type ButtonProps } from 'types/widgets/button'
 import { type TrayItem } from 'types/service/systemtray'
 import BarButton from '../BarButton'
+import options from 'options'
 
 const { Gdk } = imports.gi
 const systemtray = await Service.import('systemtray')
