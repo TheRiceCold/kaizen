@@ -10,6 +10,16 @@
 
   .side-items
     padding: 0 calc($padding * 2)
+    .bar-button
+      margin: 0 0.5rem
+      &:hover, &:active, &.on, &.active, &:checked
+        label, image
+          color: $primary-bg
+
+    .dashboard
+      padding: 0 0.5rem 0 0.25rem
+      label
+        font-size: 1.5rem
     .workspaces
       padding-left: 0.25rem
       > button
@@ -19,32 +29,22 @@
           margin: 0
         button
           margin-left: 0.5rem
-
-  .bar-button
-    border-radius: $radius
-    margin: 0 calc($spacing * 0.5)
-    &:hover, &:active, &.on, &.active, &:checked
-      label, image
+    .tray-item
+      padding: 0 0.5rem
+    .control-button
+      padding: 0 0.5rem
+      image:nth-child(2)
+        padding: 0 0.75rem
+      image.active, label
         color: $primary-bg
-    &.launcher-button
-      margin-right: 0.75rem
+      .battery
+        &.error
+          color: #C76598
+        &.charging
+          color: #58D9BD
+    .datemenu
+      padding: 0 0.5rem
+    .session-button
+      padding: 0 0.25rem 0 0.5rem
       label
-        font-size: 1.5rem
-    &:first-child
-      margin-right: 0.75rem
-    &:last-child
-      margin-left: 0.75rem
-    .battery
-      &.error
-        color: #C76598
-      &.charging
-        color: #58D9BD
-
-  .datemenu
-    padding: 0 0.25rem
-  .control-button
-    padding: 0 0.25rem
-    image:nth-child(2)
-      padding: 0 0.75rem
-    image.active, label
-      color: $primary-bg
+        font-size: 1.15rem

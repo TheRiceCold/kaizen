@@ -5,22 +5,19 @@ import options from 'options'
 
 const { Gdk } = imports.gi
 const systemtray = await Service.import('systemtray')
+const { Box, Icon } = Widget
 
 const Item = (item: TrayItem) => BarButton({
   className: 'tray-item',
   tooltipMarkup: item.bind('tooltip_markup'),
-  child: Widget.Icon().bind('icon', item, 'icon'),
+  child: Icon().bind('icon', item, 'icon'),
   attribute: {
     openMenu(self: ButtonProps) {
       item.menu?.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
     }
   },
-  onPrimaryClick(self: ButtonProps) {
-    self.attribute.openMenu(self)
-  },
-  onSecondaryClick(self: ButtonProps) {
-    self.attribute.openMenu(self)
-  },
+  onPrimaryClick(self: ButtonProps) { self.attribute.openMenu(self) },
+  onSecondaryClick(self: ButtonProps) { self.attribute.openMenu(self) },
   setup(self: ButtonProps) {
     const menu = item.menu
     if (!menu) return
@@ -35,7 +32,6 @@ const Item = (item: TrayItem) => BarButton({
   },
 })
 
-export default Widget.Box().bind(
+export default Box().bind(
   'children', systemtray, 'items',
-  items => items.filter(({ id }) => !options.topbar.tray.ignore.value.includes(id)).map(Item)
-)
+  items => items.filter(({ id }) => !options.topbar.tray.ignore.value.includes(id)).map(Item))

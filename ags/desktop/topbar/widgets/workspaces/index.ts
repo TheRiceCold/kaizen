@@ -1,18 +1,20 @@
+import { type StackProps } from 'types/widgets/stack'
+
 import Client from './Client'
 import BarButton from '../../BarButton'
 
 import options from 'options'
 
+const numOfWorkspaces = options.workspaces.num
 const hyprland = await Service.import('hyprland')
 
 const Workspace = Widget.Stack({
   transition: 'slide_left_right',
-  children: options.workspaces.num.bind().as(
-    (num: number) => Array(num)
-      .fill(null).map((_, i) => i+1)
-      .reduce((acc, i) => (acc[i] = Client(i), acc), {})
-  ),
   shown: hyprland.active.workspace.bind('id').as((id: number) => id.toString())
+}).hook(numOfWorkspaces, (self: StackProps) => {
+  self.children = Array(numOfWorkspaces.value)
+    .fill(null).map((_, i) => i + 1)
+    .reduce((acc, i) => (acc[i] = Client(i), acc), {})
 })
 
 export default Widget.Box(

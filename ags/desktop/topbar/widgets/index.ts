@@ -1,4 +1,6 @@
 import BarButton from '../BarButton'
+import ToolsMenu from 'desktop/dropdowns/tools'
+import SessionMenu from 'desktop/dropdowns/session'
 
 import options from 'options'
 
@@ -20,19 +22,11 @@ export const LogoButton = BarButton({
   onClicked() { App.toggleWindow('dashboard') },
 })
 
-export const AiButton: Button = BarButton({
+export const AiButton = BarButton({
   label: 'Ask',
   onClicked(self: typeof BarButton) {
     toggleWidget('ask')
-    self.toggleClassName('active', showWidget['ask'].value)
-  },
-})
-
-export const SettingsButton = BarButton({
-  label: 'Settings',
-  onClicked() {
-    App.closeWindow('dashboard')
-    App.openWindow('settings-dialog')
+    self.toggleClassName('active', showWidget.ask.value)
   },
 })
 
@@ -40,23 +34,30 @@ export const RunButton = BarButton({
   label: 'Run', window: 'run',
   onClicked() {
     const cmd = options.run.execCmd.value
-    if (cmd.length > 0)
-      sh(cmd)
-    else
-      App.toggleWindow('run')
+    if (cmd.length > 0) sh(cmd)
+    else App.toggleWindow('run')
   },
 })
 
-export const ShortcutsButton = BarButton({
-  label: 'Shortcuts',
-  window: 'shortcuts',
-  tooltipText: 'Toggle keybind shortcuts',
-  onClicked() { App.toggleWindow('shortcuts') }
+export const ToolsButton = BarButton({ label: 'Tools', onClicked: ToolsMenu })
+
+export const SettingsButton = BarButton({
+  label: 'Settings',
+  window: 'settings-dialog',
+  onClicked() {
+    App.closeWindow('dashboard')
+    App.openWindow('settings-dialog')
+  },
+})
+
+export const SessionButton = BarButton({
+  label: '',
+  onClicked: SessionMenu,
+  className: 'session-button',
 })
 
 export { default as Tray } from './Tray'
 export { default as Indicator } from './indicator'
 export { default as Workspaces } from './workspaces'
 export { default as DateButton } from './DateButton'
-export { default as SessionButton } from './SessionButton'
 export { default as QuickSettingsButton } from './QuickSettingsButton'

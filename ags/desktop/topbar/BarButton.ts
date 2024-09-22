@@ -6,12 +6,11 @@ type TProps = ButtonProps & {
 
 export default ({ window = '', setup, ...props }: TProps) => Widget.Button({
   cursor: 'pointer',
+  className: 'bar-button',
   setup(self: TProps) {
     let open = false
 
-    self.toggleClassName('bar-button')
     self.toggleClassName(window)
-    self.toggleClassName('flat')
 
     self.hook(App, (_, win: string, visible: boolean) => {
       if (win !== window) return

@@ -1,35 +1,37 @@
-import DropdownMenu from 'desktop/dropdowns/background'
-import { RoundedCorner } from 'misc/roundedcorner'
+import ToolsMenu from 'desktop/dropdowns/tools'
+import { RoundedCorner } from 'widgets'
 import options from 'options'
 
+const { EventBox, Window } = Widget
 const { radius } = options.theme
 
 export default [
-  Widget.Window({
+  // TopLeft Rounded Corner
+  Window({
     layer: 'top',
     name: 'cornertl',
     exclusivity: 'normal',
     anchor: ['top', 'left'],
     visible: radius.bind().as((r: number) => r > 0),
-    child: RoundedCorner('topleft', { className: 'corner' }),
-  }),
+  }, RoundedCorner('topleft', { className: 'corner' })),
 
-  Widget.Window({
+  // Actions Menu
+  Window({
     popup: false,
     visible: true,
     layer: 'bottom',
     focusable: false,
     name: 'bgoverlay',
     anchor: ['top', 'bottom', 'left', 'right'],
-    child: Widget.EventBox({ onSecondaryClick: (_, event) => DropdownMenu(event) }),
+    child: EventBox({ onSecondaryClick: (_, e) => ToolsMenu(e) }),
   }),
 
-  Widget.Window({
+  // TopRight Rounded Corner
+  Window({
     layer: 'top',
     name: 'cornertr',
     exclusivity: 'normal',
     anchor: ['top', 'right'],
     visible: radius.bind().as((r: number) => r > 0),
-    child: RoundedCorner('topright', { className: 'corner' }),
-  }),
+  }, RoundedCorner('topright', { className: 'corner' })),
 ]

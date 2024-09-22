@@ -3,40 +3,16 @@ import {
   Workspaces,
   AiButton,
   RunButton,
-  SessionButton,
+  ToolsButton,
   SettingsButton,
   Indicator,
   Tray, TraySeparator,
   QuickSettingsButton,
   DateButton,
+  SessionButton,
 } from './widgets'
-import DropdownMenu from 'desktop/dropdowns/background'
 
-const startWidget = Widget.Box(
-  { hpack: 'start', className: 'side-items' },
-  LogoButton,
-  Widget.Separator({ vertical: true }),
-  Workspaces,
-  Widget.Separator({ vertical: true }),
-  AiButton,
-  RunButton,
-  SettingsButton,
-)
-
-const endWidget = Widget.Box(
-  { hpack: 'end', className: 'side-items' },
-  Tray, TraySeparator,
-  QuickSettingsButton,
-  Widget.Separator({ vertical: true }),
-  DateButton,
-  Widget.Separator({ vertical: true }),
-  SessionButton
-)
-
-const Content = Widget.CenterBox({
-  css: 'min-width: 2px; min-height: 2.5rem;',
-  startWidget, centerWidget: Indicator, endWidget
-})
+const { Box, CenterBox, Separator } = Widget
 
 export default Widget.Window({
   name: 'topbar',
@@ -44,7 +20,30 @@ export default Widget.Window({
   className: 'topbar',
   exclusivity: 'exclusive',
   anchor: ['top', 'right', 'left'],
-  child: Widget.EventBox({
-    onSecondaryClick(_, event) { DropdownMenu(event) },
-  }, Content),
-})
+}, CenterBox( // Content
+  { css: 'min-width: 2px; min-height: 2.5rem;' },
+  Box( // Start
+    { hpack: 'start', className: 'side-items' },
+    LogoButton,
+    Separator({ vertical: true }),
+    Workspaces,
+    Separator({ vertical: true }),
+    AiButton,
+    RunButton,
+    ToolsButton,
+    SettingsButton,
+  ),
+
+  // Center
+  Box({ vpack: 'start', homogeneous: true }, Indicator),
+
+  Box( // End
+    { hpack: 'end', className: 'side-items' },
+    Tray, TraySeparator,
+    QuickSettingsButton,
+    Separator({ vertical: true }),
+    DateButton,
+    Separator({ vertical: true }),
+    SessionButton
+  )
+))
