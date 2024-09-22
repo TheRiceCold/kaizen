@@ -35,12 +35,12 @@ const replaceCategory = (text, replaces) => {
   return text
 }
 
-export default (text) => {
-  const lines = text.split('\n')
+export default (text: string) => {
+  const lines: string[] = text.split('\n')
   let output = []
   // Replace
   for (const line of lines) {
-    let result = line
+    let result: string = line
     result = replaceCategory(result, replacements.indents)
     result = replaceCategory(result, replacements.escapes)
     result = replaceCategory(result, replacements.sections)
@@ -48,8 +48,7 @@ export default (text) => {
     output.push(result)
   }
 
-  // Remove trailing whitespaces
-  output = output.map(line => line.replace(/ +$/, ''))
+  output = output.map((line: string[]) => line.replace(/ +$/, ''))
   return output.join('\n')
 }
 

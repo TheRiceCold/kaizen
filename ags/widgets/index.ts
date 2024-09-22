@@ -1,37 +1,35 @@
-import { type ButtonProps } from 'types/widgets/button'
+// Boxes
+export {
+  VBox,
+  Padding,
+  IconLabel,
+} from './Boxes'
 
-const { Box, Button, Icon, Label } = Widget
+// Buttons
+export {
+  ButtonIcon,
+  ButtonLabel,
+  ButtonIconLabel
+} from './Buttons'
 
-export const VBox = (
-  props: typeof Box | Widget[] = {},
-  ...children: Widget
-) => {
-  if (Array.isArray(props))
-    return Box({ vertical: true }, ...props)
-  return Box({ vertical: true, ...props }, ...children)
-}
+// Windows
+export {
+  RegularWindow,
+  RevealerWindow,
+} from './windows'
 
-export const ButtonLabel = (
-  label: string,
-  onClicked: (self: ButtonProps) => void = () => { },
-  { ...props }: ButtonProps = {}
-) => Button({ label, onClicked, cursor: 'pointer', ...props })
+// Progress
+export {
+  CircularProgressIcon
+} from './Progress'
 
-export const ButtonIcon = (
-  icon: string,
-  onClicked: (self: ButtonProps) => void = () => { },
-  { ...props }: ButtonProps = {}
-) => Button({ onClicked, cursor: 'pointer', ...props }, Icon(icon))
+export {
+  Menu,
+  MenuItemLabel,
+  MenuItemIconLabel,
+} from './Menu'
 
-export const ButtonIconLabel = (
-  icon: string,
-  label: string,
-  onClicked: (self: ButtonProps) => void = () => { },
-  { ...props }: ButtonProps = {}
-) => Button({ cursor: 'pointer', onClicked, ...props }, Box([Icon(icon), Label(label)]))
-
-export const IconLabel = (
-  icon: string,
-  label: string,
-  { ...props } = {}
-) => Box({ ...props }, Icon(icon), Label(label))
+export {
+  Cava,
+  RoundedCorner
+} from './drawing_area'

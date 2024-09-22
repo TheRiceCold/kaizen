@@ -1,3 +1,5 @@
+import { type DrawingAreaProps } from 'types/widgets/drawingarea'
+
 const { Gtk } = imports.gi
 
 export default ({
@@ -33,7 +35,7 @@ export default ({
       ]
     })
   },
-  setup(self) {
+  setup(self: DrawingAreaProps) {
     if (vertical)
       self.set_size_request(height, bars)
     else
@@ -44,19 +46,19 @@ export default ({
       self.attribute.cavaVar.disconnect(varHandler)
     })
   },
-}).on('draw', (self, cr) => {
-  const context = self.get_style_context()
+}).on('draw', (self: DrawingAreaProps, cr) => {
+  const ctx = self.get_style_context()
   const w = self.get_allocated_width() * width
   const h = self.get_allocated_height()
 
-  const bg = context.get_property('background-color', Gtk.StateFlags.NORMAL)
-  const fg = context.get_property('color', Gtk.StateFlags.NORMAL)
-  const radius = context.get_property('border-radius', Gtk.StateFlags.NORMAL)
+  const bg = ctx.get_property('background-color', Gtk.StateFlags.NORMAL)
+  const fg = ctx.get_property('color', Gtk.StateFlags.NORMAL)
+  const radius = ctx.get_property('border-radius', Gtk.StateFlags.NORMAL)
 
-  cr.arc(radius,     radius,     radius, Math.PI,        3 * Math.PI/2)
-  cr.arc(w - radius, radius,     radius, 3 * Math.PI /2, 0            )
-  cr.arc(w - radius, h - radius, radius, 0,              Math.PI/2    )
-  cr.arc(radius,     h - radius, radius, Math.PI/2,      Math.PI      )
+  cr.arc(radius, radius, radius, Math.PI, 3 * Math.PI / 2)
+  cr.arc(w - radius, radius, radius, 3 * Math.PI / 2, 0)
+  cr.arc(w - radius, h - radius, radius, 0, Math.PI / 2)
+  cr.arc(radius, h - radius, radius, Math.PI / 2, Math.PI)
   cr.closePath()
   cr.clip()
 
