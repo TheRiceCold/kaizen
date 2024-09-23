@@ -1,4 +1,4 @@
-import RevealerWindow from '../RevealerWindow'
+import { RevealerWindow } from 'widgets'
 import Workspace from './Workspace'
 
 import options from 'options'
@@ -33,6 +33,6 @@ const Overview = (ws: number) => Widget.Box({
 export default RevealerWindow({
   name: 'overview',
   exclusivity: 'exclusive',
-  anchor: [ 'top', 'right', 'left' ],
+  anchor: ['top', 'right', 'left'],
   child: options.workspaces.num.bind().as(Overview)
 })

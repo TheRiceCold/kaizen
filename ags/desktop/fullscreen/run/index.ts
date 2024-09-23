@@ -1,12 +1,13 @@
-import * as AppLauncher from './AppLauncher'
-import RevealerWindow, { Padding } from 'desktop/RevealerWindow'
+import { type EntryProps } from 'types/widgets/entry'
+
+import { VBox, Padding, RevealerWindow } from 'widgets'
+import AppLauncher from './AppLauncher'
 
 import options from 'options'
 import icons from 'data/icons'
-import { VBox } from 'widgets'
 
+const launcher = AppLauncher()
 const { width, margin } = options.run
-const applauncher = AppLauncher.Launcher()
 
 const entry = Widget.Entry({
   hexpand: true,
@@ -18,8 +19,8 @@ const entry = Widget.Entry({
       entry.grab_focus()
     }
   },
-  onAccept(self: typeof Widget.Entry) {
-    applauncher.launchFirst()
+  onAccept(self: EntryProps) {
+    launcher.launchFirst()
 
     App.toggleWindow('run')
     self.text = ''
@@ -28,7 +29,7 @@ const entry = Widget.Entry({
     text ||= ''
 
     if (!text?.startsWith(':'))
-      applauncher.filter(text)
+      launcher.filter(text)
   },
 })
 
@@ -43,7 +44,7 @@ const Run = VBox(
     vpack: 'start',
     className: 'layout',
     css: width.bind().as((v: number) => `min-width: ${v}pt;`),
-  }, entry, applauncher).hook(App, (_, win: string, visible: boolean) => {
+  }, entry, launcher).hook(App, (_, win: string, visible: boolean) => {
     if (win !== 'run') return
 
     entry.text = ''

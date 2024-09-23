@@ -1,17 +1,22 @@
-import { DialogWindow } from '..'
+import {
+  RegularWindow, VBox,
+  ButtonLabel, ButtonIcon, ButtonIconLabel
+} from 'widgets'
 
 import options from 'options'
 import pages from './pages'
 import icons from 'data/icons'
 import { sh } from 'lib/utils'
-import { ButtonLabel, ButtonIcon, ButtonIconLabel, VBox } from 'widgets'
 
 const { Box, CenterBox, Stack } = Widget
 const current = Variable(pages[0].attribute.name)
 
-const Header = CenterBox({
-  className: 'header',
-  startWidget: Box(
+const WINDOW_NAME = 'settings-dialog'
+const closeWindow = () => App.closeWindow(WINDOW_NAME)
+
+const Header = CenterBox(
+  { className: 'header' },
+  Box(
     { hpack: 'start' },
     ButtonLabel('󰓾', () => sh('kaizen -i')),
     ButtonIcon(icons.ui.refresh, options.reset, {
@@ -19,7 +24,7 @@ const Header = CenterBox({
       tooltipText: 'Reset',
     })),
 
-  centerWidget: Box(
+  Box(
     { className: 'pager horizontal' },
     ...pages.map(({ attribute: { name, icon } }) => ButtonIconLabel(
       icon, name, () => { current.value = name }, {
@@ -29,15 +34,15 @@ const Header = CenterBox({
       })
     )),
 
-  endWidget: ButtonIcon(
+  ButtonIcon(
     icons.ui.close,
     () => { App.closeWindow('settings-dialog') },
     { hpack: 'end', className: 'close' }),
-})
+)
 
-export default () => DialogWindow({
+export default () => RegularWindow({
+  name: WINDOW_NAME,
   title: 'Settings',
-  name: 'settings-dialog',
   className: 'settings-dialog',
   setup(win) {
     win.on('delete-event', () => {
@@ -53,4 +58,4 @@ export default () => DialogWindow({
       children: pages.reduce((obj, page) => ({ ...obj, [page.attribute.name]: page }), {}),
     })
   ]),
-}).keybind('Escape', () => App.closeWindow('settings-dialog'))
+}).keybind('q', closeWindow).keybind('Escape', closeWindow)

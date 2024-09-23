@@ -1,5 +1,4 @@
-import RevealerWindow from 'desktop/RevealerWindow'
-import { VBox } from 'widgets'
+import { VBox, RevealerWindow } from 'widgets'
 
 import Header from './Header'
 

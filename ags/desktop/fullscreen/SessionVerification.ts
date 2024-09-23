@@ -2,16 +2,17 @@ import { type ButtonProps } from 'types/widgets/button'
 
 import powermenu from 'service/powermenu'
 
-import RevealerWindow from 'desktop/RevealerWindow'
-import { ButtonLabel, VBox } from 'widgets'
+import { ButtonLabel, VBox, RevealerWindow } from 'widgets'
+
+const { Box, Label } = Widget
 
 export default RevealerWindow({
   name: 'verification',
   transition: 'crossfade',
   child: VBox(
     { className: 'verification' },
-    Widget.Label({ className: 'title' }).bind('label', powermenu, 'title'),
-    Widget.Box({
+    Label({ className: 'title' }).bind('label', powermenu, 'title'),
+    Box({
       vpack: 'end',
       vexpand: true,
       homogeneous: true,
