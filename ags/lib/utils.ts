@@ -1,9 +1,7 @@
 import { type Application } from 'ts/types/service/applications'
 import { substitutes } from 'data/icons'
-import options from 'options'
 
 const { GLib, Gio } = imports.gi
-const mpris = await Service.import('mpris')
 
 /** @returns substitute icon || name || fallback icon */
 function icon(name: string | null, fallback = name) {
@@ -189,11 +187,6 @@ function searchIcons(appClass, files) {
   return path
 }
 
-function getPlayer() {
-  const pref = options.player.preferred.value
-  return mpris.getPlayer(pref) || null
-}
-
 function findCommonElement(array1, array2) {
   for (let i = 0; i < array1.length; i++)
     for (let j = 0; j < array2.length; j++)
@@ -223,8 +216,6 @@ export {
   copy,
   enableClickThrough,
   audioIconSub,
-
-  getPlayer,
 
   // DOCK
   getAllFiles,
