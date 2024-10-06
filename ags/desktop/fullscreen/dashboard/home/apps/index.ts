@@ -4,38 +4,48 @@ import options from 'options'
 import icons from 'data/icons'
 import { launchApp, icon, capitalize } from 'lib/utils'
 
-const { Box, Button, Icon, Label, Scrollable } = Widget
 const applications = await Service.import('applications')
 
-function AppButton(a) {
-  const isObj = typeof a === 'object'
-  const app = applications.query(isObj ? a.name : a)?.[0]
-  const iconName = isObj && ('icon' in a) ? a.icon : app.icon_name
+const { apps } = options.dashboard
+const { Box, Button, Icon, Label, Scrollable } = Widget
+
+function AppButton(app: string) {
+  const appName = app.includes(':') ? app.split(':') : app
+
+  const iconName = Array.isArray(appName) ? appName[1] : appName
+  const appQuery = applications.query(
+    Array.isArray(appName) ? appName[0] : appName,
+  )?.[0]
 
   return Button({
     cursor: 'pointer',
     onClicked() {
       App.closeWindow('dashboard')
-      launchApp(app)
+      launchApp(appQuery)
     },
-  }, VBox([
-    Icon(icon(iconName, icons.fallback.executable)),
-    Label({
-      wrap: true,
-      maxWidthChars: 8,
-      justification: 'center',
-      label: capitalize(isObj ? a.label : a)
-    })
-  ]))
+    child: VBox([
+      Icon(icon(iconName, icons.fallback.executable)),
+      Label({
+        wrap: true,
+        maxWidthChars: 8,
+        justification: 'center',
+        label: capitalize(Array.isArray(appName) ? appName[0] : appName),
+      }),
+    ]),
+  })
 }
-
-const Column = apps => Scrollable({
-  hscroll: 'never',
-  className: 'column',
-  vscroll: 'automatic',
-}, VBox(apps.map(AppButton)))
 
 export default Box({
   className: 'apps',
-  children: options.dashboard.apps.bind().as(apps => apps.map(Column)),
+  visible: apps.bind().as((a: string[][]) => a.length < 0),
+  children: apps.bind().as((a: string[][]) =>
+    a.map((column: string[]) =>
+      Scrollable({
+        hscroll: 'never',
+        className: 'column',
+        vscroll: 'automatic',
+        child: VBox(column.map(AppButton)),
+      }),
+    ),
+  ),
 })

@@ -9,30 +9,32 @@ export default {
   bio: opt('~ What we do in life, echoes in eternity ~'),
 
   apps: opt([
-    // Write a list of applications you want to show
-    // this applications MUST be installed
+    // Write a list of applications
+    // NOTE: add ':' if you want to the label to be different from the application name
     // Example:
     //[ // Column 1
-    //  'firefox', 'spotify',
-    //  { label: 'discord', icon: 'discord', name: 'vesktop' },
-    //  { label: 'chrome', name: 'google-chrome-stable' },
+    //  'firefox',
+    //  'spotify',
+    //  'discord:vesktop',
     //  'obs',
     //],
-    //
     //[ // Column 2
-    //  'zed', 'neovide',
-    //  { label: 'godot', name: 'godot4' },
-    //  { label: 'Android Studio', name: 'android-studio' },
+    //  'zed',
+    //  'neovide',
+    //  'Android Studio:android-studio'
     //],
     //
     //[ // Column 3
-    //  'krita', 'gimp', 'blender', 'inkscape',
-    //  { label: 'Libre Sprite', name: 'libresprite' }
+    //  'krita',
+    //  'gimp',
+    //  'blender',
+    //  'inkscape',
+    //  'libresprite'
     //],
     //
     //[ // Column 4
-    //  { label: 'shell', name: 'foot' },
-    //  { label: 'Virtual Machine Manager', name: 'virt-manager' },
+    //  'shell:foot',
+    //  'Virtual Machine Manager:virt-manager',
     //]
   ]),
 
@@ -53,6 +55,5 @@ export default {
       hidden: opt([]),
       data: opt(questions),
     },
-  }
-
+  },
 }
