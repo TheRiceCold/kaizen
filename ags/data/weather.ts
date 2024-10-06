@@ -1,4 +1,5 @@
-// DOCS: https://gist.github.com/dawnvoh/a1f513123f7b6a42577d
+// TODO: Complete data
+// see at https://gist.github.com/dawnvoh/a1f513123f7b6a42577d
 
 export default {
   0: {
@@ -17,35 +18,35 @@ export default {
     icon: 'cloudy',
     description: 'Clouds generally forming or developing'
   },
-  40:{
+  40: {
     icon: 'foggy',
     description: 'Fog or ice fog at a distance at the time of observation, but not at the station during the preceding hour, the fog or ice fog extending to a level above that of the observer',
   },
-  41:{
+  41: {
     icon: 'foggy',
     description: 'Fog or ice fog in patches',
   },
-  42:{
+  42: {
     icon: 'foggy',
     description: 'Fog or ice fog, sky visible has become thinner during the preceding hour',
   },
-  43:{
+  43: {
     icon: 'foggy_cloud',
     description: 'Fog or ice fog, sky invisible has become thinner during the preceding hour',
   },
-  44:{
+  44: {
     icon: 'foggy',
     description: 'Fog or ice fog, sky visible no appreciable change during the preceding hour',
   },
-  45:{
+  45: {
     icon: 'foggy_cloud',
     description: 'Fog or ice fog, sky invisible no appreciable change during the preceding hour',
   },
-  46:{
+  46: {
     icon: 'foggy',
     description: 'Fog or ice fog, sky visible has begun or has become thicker during the preceding hour',
   },
-  47:{
+  47: {
     icon: 'foggy_cloud',
     description: 'Fog or ice fog, sky invisible has begun or has become thicker during the preceding hour',
   },
@@ -265,10 +266,11 @@ export default {
   116: { icon: 'partly_cloudy', description: 'Partly Cloudy' },
   119: { icon: 'cloudy', description: 'Cloudy' },
   122: { icon: 'foggy', description: 'Overcast' },
-  143:{
+  143: {
     icon: 'foggy',
     description: '',
   },
+  176: { icon: 'drizzle_slight', description: 'Patchy rain nearby' },
   179: { icon: 'snow', description: 'Patchy snow nearby' },
   182: { icon: '', description: 'Patchy sleet nearby' },
   185: { icon: 'drizzle_freeze', description: 'Patchy freezing drizzle nearby' },
@@ -296,16 +298,7 @@ export default {
   302: { icon: 'showers', description: 'Moderate rain' },
   305: { icon: 'rain', description: 'Heavy rain at times' },
   308: { icon: 'rain', description: 'Heavy rain' },
-  353: {
-    icon: 'showers',
-    description: ''
-  },
-  356: {
-    icon: 'heavy_showers',
-    description: ''
-  },
-  386: {
-    icon: 'thunderstorm',
-    description: ''
-  },
+  353: { icon: 'showers', description: '' },
+  356: { icon: 'heavy_showers', description: '' },
+  386: { icon: 'thunderstorm', description: '' },
 }

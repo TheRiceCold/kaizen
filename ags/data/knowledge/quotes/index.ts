@@ -55,4 +55,9 @@ export default [
     tags: [ 'motivation' ],
     quote: 'Be the person who musters up the courage to believe that a new attempt can manifest a new outcome. Be the person who still tries',
   },
+  {
+    name: 'Friedrich Nietzche',
+    tags: [ 'wisdom' ],
+    quote: "Just because you think you're done with your past, doesn't mean your past is done with you.",
+  }
 ]
