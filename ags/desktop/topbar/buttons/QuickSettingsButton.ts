@@ -31,18 +31,21 @@ export default BarButton({
     Icon().bind('icon', wifi, 'icon_name'),
 
     // DND
-    Box({ className: 'notifications' }).hook(notifications, (self: typeof Widget.Box) => {
-      const { dnd, notifications: notifs } = notifications
-      const hasNotifs = notifs.length > 0
+    Box({ className: 'notifications' }).hook(
+      notifications,
+      (self: typeof Widget.Box) => {
+        const { dnd, notifications: notifs } = notifications
+        const hasNotifs = notifs.length > 0
 
-      const label = Label(notifs.length + '')
-      const icon = Icon(icons.notifications[dnd ? 'silent' : 'default'])
+        const label = Label(notifs.length + '')
+        const icon = Icon(icons.notifications[dnd ? 'silent' : 'default'])
 
-      self.children = [icon, label]
-      self.tooltipText = notifs[notifs.length - 1].summary.trim()
+        self.children = [icon, label]
+        self.tooltipText = notifs[notifs.length - 1].summary.trim()
 
-      label.visible = hasNotifs
-      icon.toggleClassName('active', hasNotifs)
-    })
-  ])
+        label.visible = hasNotifs // TODO: Should not be visible if 0 notifs
+        icon.toggleClassName('active', hasNotifs)
+      },
+    ),
+  ]),
 })

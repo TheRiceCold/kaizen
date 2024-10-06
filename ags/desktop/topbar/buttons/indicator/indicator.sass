@@ -1,8 +1,7 @@
 .topbar .indicator
-  revealer
-    padding: $padding calc($padding * 1.5)
-    .record-time label
-      font-size: 1.25em
+  padding: 0.25rem
+  .record-time label
+    font-size: 1.25em
 
   .recorder
     label
@@ -24,7 +23,12 @@
     image
       font-size: 1.1rem
     + label
-      margin-left: $spacing
+      margin-left: 0.75rem
+    &.error
+      color: $error-bg
+      image, label
+        color: $error-bg
+
 
   .visualizer .cava
     min-width: 100px

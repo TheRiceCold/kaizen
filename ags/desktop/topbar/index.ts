@@ -10,7 +10,7 @@ import {
   QuickSettingsButton,
   DateButton,
   SessionButton,
-} from './widgets'
+} from './buttons'
 
 const { Box, CenterBox, Separator } = Widget
 

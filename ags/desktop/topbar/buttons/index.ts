@@ -31,7 +31,8 @@ export const AiButton = BarButton({
 })
 
 export const RunButton = BarButton({
-  label: 'Run', window: 'run',
+  label: 'Run',
+  window: 'run',
   onClicked() {
     const cmd = options.run.execCmd.value
     if (cmd.length > 0) sh(cmd)
