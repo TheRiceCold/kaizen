@@ -1,12 +1,11 @@
-###### *<div align=right><sub>Last nix update: Sept 07, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: Oct 06, 2024</sub></div>*
 
 <div align=center>
 
-![https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-dark.png#gh-dark-mode-only]
+![dark mode logo](https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-dark.png#gh-dark-mode-only)
+![light mode logo](https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-light.png#gh-light-mode-only)
 
-![https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-light.png#gh-light-mode-only]
-
-## ☦Kaizen☦
+## Kaizen
 A desktop environment for [Hyprland](https://github.com/hyprwm/Hyprland) configured using [Aylur's Gtk Shell](https://github.com/aylur/ags).<br/>
 The japanese word **kaizen (改善)** is a philosophy to improve continuously and change for the better.<br/>
 This configuration is developed to improve daily workflow and productivity with an intuitive minimal design.
@@ -28,12 +27,60 @@ This configuration is developed to improve daily workflow and productivity with 
 - Status Bar Indicator: Indicates volume, brightness, song title, song visualizer, recorder time and pomodoro.
 - Settings: A window dialog for customization
 - ...and more!
+
 ---
 #### Showcase
 > [!INFO] This is an old showcase of most of the features<br>
 > I will be updating the video maybe around november
 
 https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
+
+---
+
+<details>
+  <summary><h4 style='display: inline'>Todo list</h4></summary>
+
+##### Windows/Widgets
+- [x] Status bar(topbar)
+- [x] Workspace and window clients overview
+- [x] App Launcher
+- [x] Quicksettings
+- [x] Calendar
+- [ ] Lockscreen (available but will be updated)
+- [ ] Greeter
+
+##### Ask (chatbot)
+- [x] Gemini
+- [ ] ChatGPT
+- [ ] llama
+
+##### Dashboard
+- [x] spotify player
+- [x] weather widget
+- [x] github contributions widget
+- [x] date and time progress widget
+- [ ] random knowledge widget
+- [x] quotes
+- [x] facts
+- [x] verses
+- [ ] questions
+- [ ] task warrior (WIP)
+- [ ] calculator
+
+##### Popups
+- [x] Music Player
+- [x] Notifications
+- [x] On-screen Keyboard
+- [x] Color wheel and picker tool
+- [x] Annotation tool (screen drawing)
+
+##### Settings dialog
+- [x] colors
+- [x] UI and Hyprland
+- [ ] dashboard
+
+</details>
+
 
 ---
 #### Acknowledgements
