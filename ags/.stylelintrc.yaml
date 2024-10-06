@@ -1,0 +1,4 @@
+# https://stylelint.io/user-guide/configure/
+
+rules:
+  block-no-empty: true

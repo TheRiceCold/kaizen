@@ -1,12 +1,11 @@
-const main = '/tmp/ags/main.js'
-
 try {
+  const main = '/tmp/ags/main.js'
   await Utils.execAsync(`
     esbuild --bundle ${App.configDir}/desktop/main.ts \
     --format=esm \
     --outfile=${main} \
-    --external:resource://\* \
-    --external:gi://\* \
+    --external:resource://* \
+    --external:gi://* \
   `)
   await import(`file://${main}`)
 } catch (err) {

@@ -14,19 +14,26 @@ ignorePatterns:
   - types/
 plugins:
   - "@typescript-eslint"
+globals:
+  pkg: readonly
+  ags: readonly
+  ARGV: readonly
+  imports: readonly
+  print: readonly
+  console: readonly
+  logError: readonly
+  App: writable
+  Utils: writable
+  Widget: writable
+  Service: writable
+  Variable: writable
 rules:
-  "@typescript-eslint/ban-ts-comment":
-    - "off"
   "@typescript-eslint/no-non-null-assertion":
     - "off"
-  # "@typescript-eslint/no-explicit-any":
-  #   - "off"
   "@typescript-eslint/no-unused-vars":
     - error
     - varsIgnorePattern: (^unused|_$)
       argsIgnorePattern: ^(unused|_)
-  "@typescript-eslint/no-empty-interface":
-    - "off"
   indent:
     - error
     - 2
@@ -43,17 +50,3 @@ rules:
     - never
   no-trailing-spaces:
     - error
-globals:
-  pkg: readonly
-  ags: readonly
-  ARGV: readonly
-  imports: readonly
-  print: readonly
-  console: readonly
-  logError: readonly
-
-  App: writable
-  Utils: writable
-  Widget: writable
-  Service: writable
-  Variable: writable

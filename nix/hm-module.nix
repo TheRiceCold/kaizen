@@ -1,4 +1,4 @@
-self: { config, pkgs, lib, ...}:
+self: { config, pkgs, lib, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) system;
   inherit (lib.options) mkOption mkEnableOption;
@@ -39,23 +39,23 @@ in {
           theme.dark.error.fg = "#690005";
           theme.dark.widget = "#e5e1e9";
           theme.dark.border = "#928f9a";
-          autotheme = true; 
+          autotheme = true;
         };
       '';
-      # TODO: make documentation
+      # TODO: write documentation
       description = ''
         Configuration written to {file}`$XDG_DATA_HOME/ags/config.json`.
         See
         # TODO: make documentation
         for the documentation.
       '';
-    }; 
+    };
   };
 
   config = lib.mkIf cfg.enable {
 
     home.packages = [ cfg.package ];
-    
+
     xdg.dataFile = lib.mkIf (cfg.settings != {}) {
       "ags/config.json".source =
         jsonFormat.generate "config.json" cfg.settings;
@@ -74,7 +74,7 @@ in {
 
       Service = {
         ExecStart = cmd;
-        ExecReload = "${cmd}; ${cmd} quit"; 
+        ExecReload = "${cmd}; ${cmd} quit";
         ExecStop = "${cmd} quit";
         Restart = "on-failure";
         KillMode = "mixed";
