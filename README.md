@@ -13,11 +13,11 @@ This configuration is developed to improve daily workflow and productivity with 
 
 ---
 
-> [!Warning] Kaizen is heavy in development<br>
-> If something doesn't work, feel free to open up an issue or message me.
+> [!WARNING]
+> Kaizen is heavy in development. If something doesn't work, feel free to open up an issue or message me.
 
 ---
-#### Features
+### Features
 - Dashboard: A notion-like informative dashboard for productive boost.
 - Ask: an multi ai chatbot widget that integrates Gemini, llama3, ChatGPT
 - Actions Menu: Useful tools like zoom, recorder, screenshots, annotation, color wheel and pomodoro.
@@ -27,17 +27,8 @@ This configuration is developed to improve daily workflow and productivity with 
 - Settings: A window dialog for customization
 - ...and more!
 
----
-#### Showcase
-> [!INFO] This is an old showcase of most of the features<br>
-> I will be updating the video maybe around november
-
-https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
-
----
-
 <details>
-  <summary><h4 style='display: inline'>Todo list</h4></summary>
+  <summary><b>Todo list</b></summary>
 
 ##### Windows/Widgets
 - [x] Status bar(topbar)
@@ -82,7 +73,15 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 
 
 ---
-#### Acknowledgements
+### Showcase
+
+> [!NOTE]
+> This is an old showcase which has most of the features. I will update the video maybe around november
+
+https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
+
+---
+### Acknowledgements
 - [Joey Mckur](https://github.com/aylur/ags)
 - [Alexis Garado](https://github.com/garado)
 - [Kotontrion](https://github.com/kotontrion/dotfiles)
