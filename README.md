@@ -36,7 +36,6 @@ This configuration is developed to improve daily workflow and productivity with 
 - [x] App Launcher
 - [x] Quicksettings
 - [x] Calendar
-- [ ] Lockscreen (available but will be updated)
 - [ ] Greeter
 
 ##### Ask (chatbot)
@@ -50,12 +49,27 @@ This configuration is developed to improve daily workflow and productivity with 
 - [x] github contributions widget
 - [x] date and time progress widget
 - [ ] random knowledge widget
-- [x] quotes
-- [x] facts
-- [x] verses
-- [ ] questions
-- [ ] task warrior (WIP)
+    - [x] quotes
+    - [x] facts
+    - [x] verses
+    - [x] filtering
+    - [ ] questions
 - [ ] calculator
+- [ ] task warrior (WIP)
+
+##### Lockscreen
+- [x] time and date
+- [ ] weather widget
+- [ ] spotify player
+- [ ] system info
+
+##### Indicators
+- [x] volume
+- [x] brightness
+- [x] zoomed
+- [x] recorder
+- [ ] pomodoro
+- [ ] microphone
 
 ##### Popups
 - [x] Music Player
@@ -68,9 +82,10 @@ This configuration is developed to improve daily workflow and productivity with 
 - [x] colors
 - [x] UI and Hyprland
 - [ ] dashboard
+- [ ] widgets
+- [ ] tools
 
 </details>
-
 
 ---
 ### Showcase
