@@ -4,7 +4,6 @@
 
 ![dark mode logo](https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-dark.png#gh-dark-mode-only)
 ![light mode logo](https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-light.png#gh-light-mode-only)
-
 ## Kaizen
 A desktop environment for [Hyprland](https://github.com/hyprwm/Hyprland) configured using [Aylur's Gtk Shell](https://github.com/aylur/ags).<br/>
 The japanese word **kaizen (改善)** is a philosophy to improve continuously and change for the better.<br/>
