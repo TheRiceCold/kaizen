@@ -12,24 +12,25 @@ import { capitalize } from 'lib/utils'
 import { greetTime } from 'lib/variables'
 
 const { bio } = options.dashboard
+const { Box, Label, Scrollable } = Widget
 
-const Section = (...children) => Widget.Box({ children, className: 'section' })
-const Content = Widget.Scrollable({ vexpand: true },
-  VBox({ hpack: 'center' },
-    Section(Player, Weather, Apps),
-    Section(Time, Knowledge),
-    Section(GitHub),
+const Content = Scrollable({ vexpand: true },
+  VBox({ hpack: 'center', className: 'sections' },
+    Box([Player, Weather, Apps]),
+    Box([Time, Knowledge]),
+    Box([GitHub]),
+    // TODO: Calculator
   ))
 
 export default VBox({
   hexpand: true,
   className: 'home',
   children: [
-    Widget.Label({
+    Label({
       xalign: 0, className: 'greeter',
       label: greetTime.bind().as((g: string) => `Good ${g}, ${capitalize(Utils.USER)}`)
     }),
-    Widget.Label({ xalign: 0, className: 'bio' }).bind('label', bio),
+    Label({ xalign: 0, className: 'bio' }).bind('label', bio),
     Content
   ]
 })

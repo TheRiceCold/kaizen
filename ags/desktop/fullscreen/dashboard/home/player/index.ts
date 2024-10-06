@@ -1,18 +1,22 @@
+import { type BoxProps } from 'types/widgets/box'
 import { type ButtonProps } from 'types/widgets/button'
+import { type EventBoxProps } from 'types/widgets/eventbox'
 
 import { ButtonIcon, ButtonLabel, VBox } from 'widgets'
 
 import options from 'options'
 import icons from 'data/icons'
-import { getPlayer } from 'lib/utils'
 import { toggleWidget } from 'lib/globals'
 
 const audio = await Service.import('audio')
 const mpris = await Service.import('mpris')
 
-const { coverSize } = options.dashboard.player
-const { Box, Button, EventBox, Icon ,Label, Revealer, Slider, Overlay } = Widget
+const {
+  Box, Button, EventBox, Icon,
+  Label, Revealer, Slider, Overlay
+} = Widget
 const showVolume = Variable(false)
+const getPlayer = () => mpris.getPlayer('spotify') || null
 
 export default EventBox({
   cursor: 'pointer',
@@ -28,19 +32,19 @@ export default EventBox({
           onClicked() { showVolume.value = !showVolume.value }
         }, Icon(icons.audio.type.speaker)),
       }, Box({
-        attribute: { update(self: typeof Box) {
-          const player = getPlayer()
-          if (!player) return
-          const url = player['cover-path'] || player['track-cover-url']
-          self.setCss(`
-            background-image: url('${url}');
-            min-width: ${coverSize.value}px;
-            min-height: ${coverSize.value}px;
-          `)
-        }}
-      })
-        .hook(mpris, (self: typeof Box) => self.attribute.update(self))
-        .hook(coverSize, (self: typeof Box) => self.attribute.update(self))),
+        attribute: {
+          update(self: BoxProps) {
+            const player = getPlayer()
+            if (!player) return
+            const url = player['cover-path'] || player['track-cover-url']
+            self.setCss(`
+              background-image: url('${url}');
+              min-width: 200px;
+              min-height: 200px;
+            `)
+          }
+        }
+      }).hook(mpris, (self: typeof Box) => self.attribute.update(self))),
 
       // Controls
       Box(
@@ -56,12 +60,11 @@ export default EventBox({
           if (!player) return
           self.onClicked = player.previous
         }),
-        Button({cursor: 'pointer'}, Icon()).hook(mpris, (self: ButtonProps) => {
+        Button({ cursor: 'pointer' }, Icon()).hook(mpris, (self: ButtonProps) => {
           const player = getPlayer()
           if (!player) return
-          const status = player['play-back-status'].toLowerCase()
-          self.child.icon = icons.mpris[status]
           self.onClicked = player.playPause
+          self.child.icon = icons.mpris[player['play-back-status'].toLowerCase()]
         }),
         ButtonIcon(icons.mpris.next).hook(mpris, (self: ButtonProps) => {
           const player = getPlayer()
@@ -101,9 +104,9 @@ export default EventBox({
             value: spotify.bind('volume'),
             onChange({ value }) { spotify.volume = value },
           }),
-          Label().bind('label', spotify, 'volume', (vol: number) => Math.floor(vol * 100)+'%')
+          Label().bind('label', spotify, 'volume', (vol: number) => Math.floor(vol * 100) + '%')
         ])
       })
     }).bind('revealChild', showVolume)
-  ]).hook(mpris, (self: typeof EventBox) => self.visible = getPlayer())
+  ]).hook(mpris, (self: EventBoxProps) => self.visible = getPlayer())
 })

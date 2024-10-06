@@ -1,3 +1,4 @@
+import { type RevealerProps } from 'types/widgets/revealer'
 import { type Application } from 'types/service/applications'
 
 import { VBox } from 'widgets'
@@ -7,11 +8,13 @@ import icons from 'data/icons'
 import { launchApp, icon } from 'lib/utils'
 
 const apps = await Service.import('applications')
+const { Box, Button, Icon, Label, Revealer } = Widget
+
 const { query } = apps
 const { iconSize, max: appsMax } = options.run.apps
 
 function AppItem(app: Application) {
-  const title = Widget.Label({
+  const title = Label({
     xalign: 0,
     hexpand: true,
     vpack: 'center',
@@ -20,7 +23,7 @@ function AppItem(app: Application) {
     className: 'title',
   })
 
-  const description = Widget.Label({
+  const description = Label({
     xalign: 0,
     wrap: true,
     hexpand: true,
@@ -31,28 +34,28 @@ function AppItem(app: Application) {
     label: app.description || '',
   })
 
-  const appicon = Widget.Icon(icon(app.icon_name, icons.fallback.executable)).bind('size', iconSize)
+  const appicon = Icon(icon(app.icon_name, icons.fallback.executable)).bind('size', iconSize)
 
   const textBox = VBox({
     vpack: 'center',
     children: app.description ? [title, description] : [title],
   })
 
-  return Widget.Button({
+  return Button({
     cursor: 'pointer',
     attribute: { app },
     className: 'app-item',
     onClicked() { App.closeWindow('run'); launchApp(app) },
-  }, Widget.Box([appicon, textBox]))
+  }, Box([appicon, textBox]))
 }
 
-export function Launcher() {
+export default () => {
   const applist = Variable(query(''))
   let first = applist.value[0]
 
-  const SeparatedAppItem = (app: Application) => Widget.Revealer(
+  const SeparatedAppItem = (app: Application) => Revealer(
     { attribute: { app } },
-    VBox([ Widget.Separator(), AppItem(app) ]),
+    VBox([Widget.Separator(), AppItem(app)]),
   )
 
   const list = VBox({
@@ -62,7 +65,7 @@ export function Launcher() {
   return Object.assign(list, {
     filter(text: string | null) {
       first = query(text || '')[0]
-      list.children.reduce((i: number, item: typeof Widget.Revealer) => {
+      list.children.reduce((i: number, item: RevealerProps) => {
         if (!text || i >= appsMax.value) {
           item.revealChild = false
           return i
