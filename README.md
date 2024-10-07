@@ -11,13 +11,14 @@ This configuration is developed to improve daily workflow and productivity with 
 
 </div>
 
----
+#
+
+### Features
 
 > [!WARNING]
-> Kaizen is heavy in development. If something doesn't work, feel free to open up an issue or message me.
+> Kaizen is heavy in development. If something doesn't work, feel free to open an [issue](https://github.com/TheRiceCold/kaizen/issues/new).
 
----
-### Features
+
 - Dashboard: A notion-like informative dashboard for productive boost.
 - Ask: an multi ai chatbot widget that integrates Gemini, llama3, ChatGPT
 - Actions Menu: Useful tools like zoom, recorder, screenshots, annotation, color wheel and pomodoro.
@@ -87,15 +88,19 @@ This configuration is developed to improve daily workflow and productivity with 
 
 </details>
 
----
+#
 ### Showcase
-
 > [!NOTE]
-> This is an old showcase which has most of the features. I will update the video maybe around november
+> This is an old video which has most of the features. I will update the video maybe around november.
 
 https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
 
----
+#
+### Documentation
+- **[Installation](https://github.com/TheRiceCold/kaizen/wiki/Installation)**
+- **[Setup keybinds](https://github.com/TheRiceCold/kaizen/wiki/Setup-keybinds)**
+
+#
 ### Acknowledgements
 - [Joey Mckur](https://github.com/aylur/ags)
 - [Alexis Garado](https://github.com/garado)
