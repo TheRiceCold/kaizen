@@ -1,18 +1,19 @@
+import { type BoxProps } from 'types/widgets/box'
+
 import { VBox } from 'widgets'
 import MenuRevealer from '../MenuRevealer'
 
 import Header, { calendarJson } from './Header'
 
-const weekDays = [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun' ]
+const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
 const CalendarDay = (day, today) => Widget.Button({
   hpack: 'center',
   label: String(day),
-  className: `calendar-btn ${
-    (today === 1)
-      ? 'calendar-btn-today'
-      : (today === -1)
-        ? 'calendar-btn-othermonth' : '' }`,
+  className: `calendar-btn ${(today === 1)
+    ? 'calendar-btn-today'
+    : (today === -1)
+      ? 'calendar-btn-othermonth' : ''}`,
 })
 
 export function addCalendarChildren(box, calendarJson) {
@@ -30,7 +31,7 @@ export const CalendarDays = VBox({
   hexpand: true,
   hpack: 'center',
   className: 'body',
-  setup(self: typeof Widget.Box) {
+  setup(self: BoxProps) {
     addCalendarChildren(self, calendarJson)
   }
 })

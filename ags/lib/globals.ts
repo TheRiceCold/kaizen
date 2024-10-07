@@ -7,9 +7,9 @@ export const toggleWidget = async (
     | 'player' | 'color' | 'annotation' | 'keyboard'
     | 'ask' | 'calendar' | 'quicksettings'
 ) => {
-  const widgetShown =  showWidget[name]
+  const widgetShown = showWidget[name]
 
-  switch(name) {
+  switch (name) {
     case 'player':
       widgetShown.value = (!mpris.getPlayer()) ? false : !widgetShown.value
       break

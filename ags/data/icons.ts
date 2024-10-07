@@ -1,7 +1,7 @@
 export const substitutes = {
   'transmission-gtk': 'transmission',
   'blueberry.py': 'blueberry',
-  'Caprine': 'facebook-messenger',
+  Caprine: 'facebook-messenger',
   'com.raggesilver.BlackBox-symbolic': 'terminal-symbolic',
   'audio-headset-bluetooth': 'audio-headphones-symbolic',
   'audio-card-analog-usb': 'audio-speakers-symbolic',
@@ -48,7 +48,7 @@ export default {
       right: 'pan-end-symbolic',
       left: 'pan-start-symbolic',
       down: 'pan-down-symbolic',
-      up: 'pan-up-symbolic'
+      up: 'pan-up-symbolic',
     },
   },
   audio: {
@@ -56,7 +56,7 @@ export default {
       muted: 'microphone-disabled-symbolic',
       low: 'microphone-sensitivity-low-symbolic',
       medium: 'microphone-sensitivity-medium-symbolic',
-      high: 'microphone-sensitivity-high-symbolic'
+      high: 'microphone-sensitivity-high-symbolic',
     },
     volume: {
       muted: 'audio-volume-muted-symbolic',
@@ -78,12 +78,12 @@ export default {
   },
   bluetooth: {
     enabled: 'bluetooth-active-symbolic',
-    disabled: 'bluetooth-disabled-symbolic'
+    disabled: 'bluetooth-disabled-symbolic',
   },
   brightness: {
     indicator: 'display-brightness-symbolic',
     keyboard: 'keyboard-brightness-symbolic',
-    screen: 'display-brightness-symbolic'
+    screen: 'display-brightness-symbolic',
   },
   powermenu: {
     lock: 'system-lock-screen-symbolic',
@@ -93,7 +93,7 @@ export default {
     shutdown: 'system-shutdown-symbolic',
   },
   recorder: {
-    recording: 'media-record-symbolic'
+    recording: 'media-record-symbolic',
   },
   notifications: {
     default: 'notification-symbolic',
@@ -103,7 +103,7 @@ export default {
   },
   trash: {
     empty: 'user-trash-symbolic',
-    full: 'user-trash-full-symbolic'
+    full: 'user-trash-full-symbolic',
   },
   mpris: {
     shuffle: {
@@ -129,6 +129,6 @@ export default {
   },
   color: {
     dark: 'dark-mode-symbolic',
-    light: 'light-mode-symbolic'
+    light: 'light-mode-symbolic',
   },
 }

@@ -47,21 +47,18 @@ const Settings = MarginRevealer({
     VBox(
       { hpack: 'fill', className: 'toggles' },
       ConfigToggle({
-        icon: '',
         name: 'Enhancements',
         initValue: GeminiService.assistantPrompt,
         onChange(_, newValue) { GeminiService.assistantPrompt = newValue },
         desc: "Tells Gemini:\n- It's a Linux sidebar assistant\n- Be brief and use bullet points",
       }),
       ConfigToggle({
-        icon: '󰒘',
         name: 'Safety',
         initValue: GeminiService.safe,
         onChange(_, newValue) { GeminiService.safe = newValue },
         desc: 'When turned off, tells the API (not the model) \nto not block harmful/explicit content',
       }),
       ConfigToggle({
-        icon: '',
         name: 'History',
         initValue: GeminiService.useHistory,
         onChange(_, newValue) { GeminiService.useHistory = newValue },

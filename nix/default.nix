@@ -70,6 +70,9 @@
     slurp             # Region Selector
     swappy            # Annotation gui made in gtk
     wl-screenrec      # High Performance Screen Recorder
+
+    # DASHBOARD
+    taskwarrior
   ];
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);

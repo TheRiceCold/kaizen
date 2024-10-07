@@ -1,4 +1,5 @@
-// import GtkSource from 'gi://GtkSource?version=3.0'
+import { type BoxProps } from 'types/widgets/box'
+
 import md2pango from 'misc/md2pango'
 
 import { ButtonLabel, VBox } from 'widgets'
@@ -6,11 +7,12 @@ import { ButtonLabel, VBox } from 'widgets'
 import options from 'options'
 import { sh, bash } from 'lib/utils'
 
+const { Box, Label, Scrollable, Stack } = Widget
 const { Gio, GLib, Gtk, GtkSource } = imports.gi
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`
 const USERNAME = GLib.get_user_name()
 
-function loadCustomColorScheme(filePath) {
+function loadCustomColorScheme(filePath: string) {
   const file = Gio.File.new_for_path(filePath)
   const [success] = file.load_contents(null)
 
@@ -24,7 +26,7 @@ function loadCustomColorScheme(filePath) {
 }
 loadCustomColorScheme(App.configDir + '/assets/themes/sourceviewtheme.xml')
 
-function substituteLang(str) {
+function substituteLang(str: string) {
   const subs = [
     { from: 'bash', to: 'sh' },
     { from: 'javascript', to: 'js' },
@@ -34,7 +36,7 @@ function substituteLang(str) {
   return str
 }
 
-function HighlightedCode(content, lang) {
+function HighlightedCode(content: string, lang: string) {
   const buffer = new GtkSource.Buffer()
   const langManager = GtkSource.LanguageManager.get_default()
   const displayLang = langManager.get_language(substituteLang(lang))
@@ -50,7 +52,7 @@ function HighlightedCode(content, lang) {
   return new GtkSource.View({ buffer, wrap_mode: Gtk.WrapMode.NONE })
 }
 
-const TextBlock = (content = '') => Widget.Label({
+const TextBlock = (content = '') => Label({
   xalign: 0,
   wrap: true,
   hpack: 'fill',
@@ -63,9 +65,9 @@ const TextBlock = (content = '') => Widget.Label({
 bash`rm -rf ${LATEX_DIR}/*`.then(() => bash`mkdir -p ${LATEX_DIR}`).catch(logError)
 
 const Latex = (content = '') => {
-  const latexViewArea = Widget.Box({
+  const latexViewArea = Box({
     attribute: {
-      async render(self, text) {
+      async render(self: BoxProps, text: string) {
         if (text.length == 0) return
         const styleContext = self.get_style_context()
         const fontSize = styleContext.get_property('font-size', Gtk.StateFlags.NORMAL)
@@ -101,22 +103,23 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="#ffffff"/g' ${outFilePath}
         })
       }
     },
-    setup(self) { self.attribute.render(self, content).catch(print) }
+    setup(self: BoxProps) {
+      self.attribute.render(self, content).catch(print)
+    }
   })
 
-  return Widget.Box({
+  return Box({
     className: 'chat-latex',
     attribute: {
-      updateText(text) {
+      updateText(text: string) {
         latexViewArea.attribute.render(latexViewArea, text).catch(logError)
       }
     },
-    child: Widget.Scrollable({
-      vscroll: 'never',
-      hscroll: 'automatic',
-      child: latexViewArea
-    })
-  })
+  }, Scrollable({
+    vscroll: 'never',
+    hscroll: 'automatic',
+    child: latexViewArea
+  }))
 }
 
 function CodeBlock(content = '', lang = 'txt') {
@@ -125,8 +128,8 @@ function CodeBlock(content = '', lang = 'txt') {
 
   const SourceView = HighlightedCode(content, lang)
 
-  const Topbar = Widget.Box({ className: 'topbar' },
-    Widget.Label({ xalign: 0, label: lang, hexpand: true }),
+  const Topbar = Box({ className: 'topbar' },
+    Label({ xalign: 0, label: lang, hexpand: true }),
     ButtonLabel('󰆏', () => {
       const buffer = SourceView.get_buffer()
       const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false)
@@ -143,18 +146,18 @@ function CodeBlock(content = '', lang = 'txt') {
     },
     children: [
       Topbar,
-      Widget.Box(
+      Box(
         { className: 'code', homogeneous: true },
-        Widget.Scrollable({ vscroll: 'never' }, SourceView)
+        Scrollable({ vscroll: 'never' }, SourceView)
       )
     ]
   })
 }
 
-const MessageContent = (content) => {
+const MessageContent = (content: string) => {
   const contentBox = VBox({
     attribute: {
-      fullUpdate(self, content, useCursor = false) {
+      fullUpdate(self: BoxProps, content: string, useCursor = false) {
         // Clear and add first text widget
         const children = contentBox.get_children()
         for (let i = 0; i < children.length; i++) {
@@ -217,14 +220,14 @@ const MessageContent = (content) => {
 }
 
 export const ChatMessage = (message, modelName = 'Model') => {
-  const TextSkeleton = (extraClassName = '') => Widget.Box({
+  const TextSkeleton = (extraClassName = '') => Box({
     classNames: ['chat-message-skeletonline', extraClassName]
   })
 
   const messageContentBox = MessageContent(message.content)
   const messageLoadingSkeleton = VBox(Array.from({ length: 3 }, (_, id) => TextSkeleton(`chat-message-skeletonline-offset${id}`)))
 
-  const messageArea = Widget.Stack({
+  const messageArea = Stack({
     homogeneous: message.role !== 'user',
     transition: 'crossfade',
     transitionDuration: options.transition,
@@ -235,9 +238,9 @@ export const ChatMessage = (message, modelName = 'Model') => {
     shown: message.thinking ? 'thinking' : 'message',
   })
 
-  return Widget.Box({ className: 'chat-message' },
+  return Box({ className: 'chat-message' },
     VBox([
-      Widget.Label({
+      Label({
         xalign: 0,
         wrap: true,
         hpack: 'start',
@@ -252,10 +255,10 @@ export const ChatMessage = (message, modelName = 'Model') => {
   )
 }
 
-export const SystemMessage = (content, commandName: string) => Widget.Box(
+export const SystemMessage = (content, commandName: string) => Box(
   { className: 'chat-message' },
   VBox([
-    Widget.Label({
+    Label({
       xalign: 0,
       wrap: true,
       hpack: 'start',

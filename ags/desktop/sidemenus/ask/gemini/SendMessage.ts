@@ -3,7 +3,7 @@ import GeminiService from 'service/api/gemini'
 import { ChatContent } from './View'
 import { SystemMessage } from '../Message'
 
-import {markdownTest} from 'misc/md2pango'
+import { markdownTest } from 'misc/md2pango'
 
 function clear() {
   GeminiService.clear()

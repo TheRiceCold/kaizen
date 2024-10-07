@@ -13,7 +13,8 @@ export default [
     exclusivity: 'normal',
     anchor: ['top', 'left'],
     visible: radius.bind().as((r: number) => r > 0),
-  }, RoundedCorner('topleft', { className: 'corner' })),
+    child: RoundedCorner('topleft', { className: 'corner' }),
+  }),
 
   // Actions Menu
   Window({
@@ -33,5 +34,6 @@ export default [
     exclusivity: 'normal',
     anchor: ['top', 'right'],
     visible: radius.bind().as((r: number) => r > 0),
-  }, RoundedCorner('topright', { className: 'corner' })),
+    child: RoundedCorner('topright', { className: 'corner' }),
+  }),
 ]

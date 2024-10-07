@@ -7,67 +7,70 @@ import Home from './home'
 import Tasks from './tasks'
 
 import Avatar from './Avatar'
-import options from 'options'
 import { capitalize } from 'lib/utils'
 
+const {
+  Box, Label, Revealer,
+  Stack, Overlay, Window
+} = Widget
+
+const showSidebar = Variable(true)
 const activePage = Variable('home')
 
 const pages = [
   { name: 'home', icon: '', content: Home },
   { name: 'tasks', icon: '', content: Tasks },
-  { name: 'journal', icon: '', content: Widget.Box() },
-  { name: 'budget', icon: '', content: Widget.Box() },
-  { name: 'events', icon: '', content: Widget.Box() },
-  { name: 'goals', icon: '', content: Widget.Box() },
-  { name: 'life', icon: '', content: Widget.Box() },
+  { name: 'journal', icon: '', content: Box() },
+  { name: 'budget', icon: '', content: Box() },
+  { name: 'events', icon: '', content: Box() },
+  { name: 'goals', icon: '', content: Box() },
+  { name: 'life', icon: '', content: Box() },
 ]
 
-const Stack = Widget.Stack({
-  className: 'page',
-  shown: activePage.bind(),
-  transition: 'slide_up_down',
-  children: pages.reduce((acc, item) => {
-    acc[item.name] = item.content
-    return acc
-  }, {}),
-})
+const Dashboard = Box(
+  { className: 'dashboard' },
+  // Sidebar
+  Revealer({
+    className: 'sidebar',
+    transition: 'slide_right',
+    revealChild: showSidebar.bind(),
+  }, VBox([
+    Label({
+      className: 'user',
+      label: ` ${capitalize(Utils.USER)}'s Dashboard `
+    }),
+    // Sidebar Items
+    ...Array.from({ length: pages.length }, (_, i) => i)
+      .map((i: number) => ButtonLabel(
+        `${pages[i].icon}  ${capitalize(pages[i].name)}`,
+        () => activePage.value = pages[i].name,
+        { xalign: 0 },
+      ).hook(activePage, (self: ButtonProps) => {
+        self.toggleClassName('active', pages[i].name === activePage.value)
+      }))
+  ])),
 
-const TabButton = (i: number) => ButtonLabel(
-  `${pages[i].icon}  ${capitalize(pages[i].name)}`,
-  () => activePage.value = pages[i].name,
-  { xalign: 0 },
-).hook(activePage, (self: ButtonProps) => {
-  self.toggleClassName('active', pages[i].name === activePage.value)
-})
-
-const Sidebar = Widget.Revealer({
-  revealChild: true,
-  className: 'sidebar',
-  transition: 'slide_right',
-  transitionDuration: options.transition,
-}, VBox([
-  Widget.Label({
-    className: 'user',
-    label: ` ${capitalize(Utils.USER)}'s Dashboard `
-  }),
-  ...Array.from({ length: pages.length }, (_, i) => i).map(TabButton)
-]))
-
-const SidebarButton = ButtonLabel('󰍜', () => {
-  Sidebar.revealChild = !Sidebar.revealChild
-}, { hpack: 'start', vpack: 'start', className: 'sidebar-button' })
-
-const Dashboard = Widget.Box(
-  { className: 'dashboard' }, Sidebar,
+  // Main Content
   VBox(
     { className: 'main' },
-    Widget.Overlay({
+    // Header
+    Overlay({
       passThrough: true,
       className: 'header',
-      overlays: [ SidebarButton, Avatar ],
-    }, VBox(
+      overlays: [
+        // Sidebar Button
+        ButtonLabel('󰍜', () => {
+          showSidebar.value = !showSidebar.value
+        }, { hpack: 'start', vpack: 'start', className: 'sidebar-button' }),
+
+        Avatar
+      ],
+    },
+
+    // Cover Image
+    VBox(
       { className: 'cover' },
-      Widget.Box({
+      Box({
         className: 'cover-img',
         css: wallpaper.bind('wallpaper').as(
           (wp: string) => `
@@ -75,10 +78,22 @@ const Dashboard = Widget.Box(
           background-size: cover;
           background-image: url('${wp}');`)
       }),
-    )), Stack)
+    )),
+
+    // Pages
+    Stack({
+      className: 'page',
+      shown: activePage.bind(),
+      transition: 'slide_up_down',
+      children: pages.reduce((acc, item) => {
+        acc[item.name] = item.content
+        return acc
+      }, {}),
+    })
+  )
 )
 
-export default Widget.Window({
+export default Window({
   visible: false,
   child: Dashboard,
   name: 'dashboard',

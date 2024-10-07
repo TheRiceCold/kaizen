@@ -1,3 +1,5 @@
+import { type EntryProps } from 'types/widgets/entry'
+
 import { windows, lock } from './main'
 
 function unlock() {
@@ -13,7 +15,7 @@ function unlock() {
 }
 
 export default Widget.Entry({
-  onAccept(self) {
+  onAccept(self: EntryProps) {
     self.sensitive = false
     Utils.authenticate(self.text ?? '')
       .then(() => unlock())
@@ -26,5 +28,5 @@ export default Widget.Entry({
   xalign: 0.5,
   hpack: 'center',
   visibility: false,
-  placeholderText: 'password',
-}).on('realize', entry => entry.grab_focus())
+  placeholderText: 'Click Tab',
+}).on('realize', (self: EntryProps) => self.grab_focus())

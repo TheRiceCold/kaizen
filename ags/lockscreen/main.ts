@@ -11,7 +11,7 @@ const { Gdk, Gtk } = imports.gi
 const { scheme } = options.theme
 export const windows = []
 export const lock = Lock.prepare_lock()
-export const fontColor = options.theme[scheme].fg
+export const fontColor = options.theme[scheme.value].fg
 
 function createWindow(monitor) {
   const window = new Gtk.Window({ child: Container })
@@ -26,7 +26,7 @@ function lockscreen() {
     const monitor = display?.get_monitor(m)
     createWindow(monitor)
   }
-  display?.connect('monitor-added', (disp, monitor) => {
+  display?.connect('monitor-added', (_display, monitor) => {
     const w = createWindow(monitor)
     lock.new_surface(w.window, w.monitor)
     w.window.show()

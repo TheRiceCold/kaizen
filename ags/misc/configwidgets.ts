@@ -1,9 +1,12 @@
+import { type BoxProps } from 'types/widgets/box'
+import { type LabelProps } from 'types/widgets/label'
+import { type ButtonProps } from 'types/widgets/button'
 import options from 'options'
 
 const { transition } = options
+const { Box, Button, Label, Revealer } = Widget
 
 export const ConfigToggle = ({
-  icon,
   name,
   desc = '',
   initValue,
@@ -13,9 +16,9 @@ export const ConfigToggle = ({
   ...props
 }) => {
   const enabled = Variable(initValue)
-  const toggleIcon = Widget.Label({
+  const toggleIcon = Label({
     label: `${enabled.value ? '' : ''}`,
-  }).hook(enabled, self => {
+  }).hook(enabled, (self: LabelProps) => {
     self.toggleClassName('switch-fg-toggling-false', false)
     if (!enabled.value) {
       self.label = ''
@@ -27,32 +30,31 @@ export const ConfigToggle = ({
     })
   })
 
-  const toggleButtonIndicator = Widget.Box({
+  const toggleButtonIndicator = Box({
     vpack: 'center',
     hpack: 'start',
     homogeneous: true,
-    child: toggleIcon,
     className: `switch-fg ${enabled.value ? 'switch-fg-true' : ''}`,
-  }).hook(enabled, self => self.toggleClassName('switch-fg-true', enabled.value))
+  }, toggleIcon)
+    .hook(enabled, (self: BoxProps) => self.toggleClassName('switch-fg-true', enabled.value))
 
-  const toggleButton = Widget.Box({
+  const toggleButton = Box({
     hpack: 'end',
     homogeneous: true,
-    children: [toggleButtonIndicator],
     className: `switch-bg ${enabled.value ? 'switch-bg-true' : ''}`,
-  }).hook(enabled, self => self.toggleClassName('switch-bg-true', enabled.value))
+  }, toggleButtonIndicator)
+    .hook(enabled, (self: BoxProps) => self.toggleClassName('switch-bg-true', enabled.value))
 
-  const widgetContent = Widget.Box({
+  const widgetContent = Box({
     tooltipText: desc,
     className: 'configtoggle-box',
     children: [
-      (icon !== undefined ? Widget.Label(icon) : null),
-      (name !== undefined ? Widget.Label(name) : null),
-      expandWidget ? Widget.Box({ hexpand: true }) : null,
+      Label(name),
+      expandWidget ? Box({ hexpand: true }) : null,
       toggleButton,
     ]
   })
-  const interactionWrapper = Widget.Button({
+  const interactionWrapper = Button({
     attribute: {
       enabled: enabled,
       toggle() {
@@ -61,9 +63,9 @@ export const ConfigToggle = ({
       }
     },
     child: widgetContent,
-    onClicked: (self) => self.attribute.toggle(self),
+    onClicked(self: ButtonProps) { self.attribute.toggle(self) },
     cursor: 'pointer',
-    setup(self) {
+    setup(self: ButtonProps) {
       self.connect('pressed', () => { // mouse down
         toggleIcon.toggleClassName('txt-poof', true)
         toggleIcon.toggleClassName('switch-fg-true', false)
@@ -89,26 +91,20 @@ export const ConfigSegmentedSelection = ({
 }) => {
   let lastSelected = initIndex
 
-  const widget = Widget.Box({
+  const widget = Box({
     tooltipText: desc,
     className: 'segment-container',
     children: options.map((option, id) => {
-      const selectedIcon = Widget.Revealer({
-        child: Widget.Label(''),
+      const selectedIcon = Revealer({
         transition: 'slide_right',
         revealChild: id == initIndex,
         transitionDuration: transition,
-      })
+      }, Label(''))
 
-      return Widget.Button({
+      return Button({
         cursor: 'pointer',
         className: `segment-btn ${id == initIndex ? 'segment-btn-enabled' : ''}`,
-        child: Widget.Box(
-          { hpack: 'center' },
-          selectedIcon,
-          Widget.Label(option.name)
-        ),
-        onClicked(self) {
+        onClicked(self: ButtonProps) {
           const kids = widget.get_children()
           kids[lastSelected].toggleClassName('segment-btn-enabled', false)
           kids[lastSelected].get_children()[0].get_children()[0].revealChild = false
@@ -117,7 +113,7 @@ export const ConfigSegmentedSelection = ({
           selectedIcon.revealChild = true
           onChange(option.value, option.name)
         }
-      })
+      }, Box({ hpack: 'center' }, selectedIcon, Label(option.name)))
     }),
     ...props,
   })

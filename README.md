@@ -29,7 +29,7 @@ This configuration is developed to improve daily workflow and productivity with 
 - ...and more!
 
 <details>
-  <summary><b>Todo list</b></summary>
+  <summary><b>Roadmap</b></summary>
 
 ##### Windows/Widgets
 - [x] Status bar(topbar)
@@ -91,7 +91,7 @@ This configuration is developed to improve daily workflow and productivity with 
 #
 ### Showcase
 > [!NOTE]
-> This is an old video which has most of the features. I will update the video maybe around november.
+> This is an old video which shows most of the features. I will update the video maybe around november.
 
 https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
 
