@@ -8,41 +8,47 @@ const now = GLib.DateTime.new_now_local().format(dateFormat)
 class ScreenTools extends Service {
   static {
     Service.register(this, {}, {
-      timer: [ 'int' ],
-      isZoomed: [ 'boolean' ],
-      isRecording: [ 'boolean' ],
+      timer: ['int'],
+      isZoomed: ['boolean'],
+      isRecording: ['boolean'],
     })
   }
 
-  #recordings = Utils.HOME + '/Videos/Records'
-  #screenshots = Utils.HOME + '/Fotos/Captura'
-  #file = ''
-  #interval = 0
+  _recordings = Utils.HOME + '/Videos/Records'
+  _screenshots = Utils.HOME + '/Fotos/Captura'
+  _file = ''
+  _interval = 0
 
   timer = 0
   _isZoomed = false
   _isRecording = false
 
-  get isRecording() { return this._isRecording }
+  get isZoomed() {
+    return this._isZoomed
+  }
+  get isRecording() {
+    return this._isRecording
+  }
 
   async recorder(option: 'region' | 'fullscreen' | 'stop' = 'region') {
     if (!dependencies('slurp', 'wl-screenrec')) return
 
-    if (this._isRecording && option === 'stop')
-      this.recorderStop()
+    if (this._isRecording && option === 'stop') this.recorderStop()
     else if (!this._isRecording) {
-      Utils.ensureDirectory(this.#recordings)
-      this.#file = `${this.#recordings}/${now}.mp4`
-      if (option === 'fullscreen')
-        sh(`wl-screenrec -f ${this.#file}`)
+      Utils.ensureDirectory(this._recordings)
+      this._file = `${this._recordings}/${now}.mp4`
+      if (option === 'fullscreen') sh(`wl-screenrec -f ${this._file}`)
       if (option === 'region')
-        sh(`wl-screenrec -g "${await sh('slurp')}" -f ${this.#file}`)
+        sh(`wl-screenrec -g "${await sh('slurp')}" -f ${this._file}`)
 
       this._isRecording = true
       this.changed('_isRecording')
 
       this.timer = 0
-      this.#interval = Utils.interval(1000, () => { this.changed('timer'); this.timer++ })
+      this._interval = Utils.interval(1000, () => {
+        this.changed('timer')
+        this.timer++
+      })
     }
   }
 
@@ -50,15 +56,15 @@ class ScreenTools extends Service {
     sh('pkill wl-screenrec')
     this._isRecording = false
     this.changed('_isRecording')
-    GLib.source_remove(this.#interval)
+    GLib.source_remove(this._interval)
 
     Utils.notify({
       summary: 'Screenrecord',
-      body: this.#file,
+      body: this._file,
       iconName: icons.fallback.video,
       actions: {
-        'Show in Files': () => sh(`xdg-open ${this.#recordings}`),
-        View: () => sh(`xdg-open ${this.#file}`),
+        'Show in Files': () => sh(`xdg-open ${this._recordings}`),
+        View: () => sh(`xdg-open ${this._file}`),
       },
     })
   }
@@ -66,8 +72,8 @@ class ScreenTools extends Service {
   async screenshot(full: boolean = false) {
     if (!dependencies('slurp', 'grim')) return
 
-    const file = `${this.#screenshots}/${now}.png`
-    Utils.ensureDirectory(this.#screenshots)
+    const file = `${this._screenshots}/${now}.png`
+    Utils.ensureDirectory(this._screenshots)
 
     if (full) await sh(`grim ${file}`)
     else {
@@ -83,19 +89,22 @@ class ScreenTools extends Service {
       summary: 'Screenshot',
       body: file,
       actions: {
-        'Show in Files': () => sh(`xdg-open ${this.#screenshots}`),
+        'Show in Files': () => sh(`xdg-open ${this._screenshots}`),
         View() { sh(`xdg-open ${file}`) },
         Edit() { if (dependencies('swappy')) sh(`swappy -f ${file}`) },
       },
     })
   }
 
-  async zoom(amount: string | number = '') {
+  async zoom() {
     if (!dependencies('pypr')) return
-    sh(`pypr zoom ${amount}`)
-    this._isZoomed = !this._isZoomed
-    this.changed('_isZoomed')
+    sh('pypr zoom')
+      .then(() => {
+        this._isZoomed = !this._isZoomed
+        this.changed('_isZoomed')
+      })
+      .catch(logError)
   }
 }
 
-export default new ScreenTools
+export default new ScreenTools()
