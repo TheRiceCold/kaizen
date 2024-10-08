@@ -11,7 +11,7 @@ window#greeter
     padding: 0
     min-width: 400px
     border-radius: $radius
-    @include floating_widget
+    @include floating-widget
 
     .wallpaper
       min-height: 220px
@@ -27,19 +27,12 @@ window#greeter
       min-height: 140px
       border-radius: 99px
       background-size: cover
-      margin-bottom: $spacing
       box-shadow: 3px 3px 6px 0 $shadow-color
-
 
     .password
       entry
         @include button
-        margin-left: calc($spacing * 0.5)
-        padding: calc($padding * 0.7) $padding
 
-      margin-top: $spacing
-      margin: 0 calc($padding * 4)
 
     .response-box
       color: $error-bg
-      margin: $spacing 0

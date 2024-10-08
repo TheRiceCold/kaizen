@@ -1,11 +1,11 @@
 window.top-popups, window.bottom-popups
   .popup-revealer
     @include floating-widget
-    border: 0
-    margin: 0
-    margin: $spacing 0
 
 window.top-popups
+  .popup-revealer
+    margin-top: 3rem
+  margin-top: 2rem
   .notification
     @include notification
     @include floating-widget
@@ -14,19 +14,19 @@ window.top-popups
       min-width: 350px
 
   .media-player, .color-wheel
-    padding: calc($padding * 3)
+    padding: 1.5rem
   .media-player
     background-color: transparentize($bg, 0.25)
 
 window.bottom-popups
   .keyboard
     border: 0
+    padding: 1.5rem
     border-radius: $radius
-    padding: calc($padding * 2.5) 
     background-color: transparentize($bg, 0.25)
 
   .indicator
     min-height: 5em
-    padding: calc($padding * 2.5)
+    padding: 1.5rem
     border-radius: calc($radius * 0.5)
     background-color: transparentize($primary-fg, 0.5)

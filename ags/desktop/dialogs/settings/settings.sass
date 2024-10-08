@@ -3,20 +3,19 @@ window.settings-dialog
   background-color: $bg
 
   .wallpaper
-    padding: $padding
-    margin: calc($spacing * 0.25) $spacing
+    padding: 1.25rem 1.5rem
     label
       font-weight: 500
-      font-size: 1.05em
+      font-size: 1.25rem
     button
       @include button
-      margin-top: $spacing
-      margin-right: $spacing
-      padding: calc($padding * 1.5)
+      margin-right: 1rem
+      margin-top: 0.75rem
+      padding: 0.75rem 1rem
       label
-        font-weight: 500
+        font-size: 1rem
     .preview
-      border-radius: calc($radius * 0.75)
+      border-radius: calc($radius * 0.5)
 
   .header
     border-bottom: 1px solid transparentize($fg, 0.75)
@@ -44,33 +43,22 @@ window.settings-dialog
           font-size: 1.15rem
           margin-right: 0.25rem
 
-  .page
-    .page-content
-      padding-top: 0
-      padding: calc($padding * 2)
-
   .group
-    margin-bottom: 1rem
+    margin-top: 1rem
     .group-title
+      margin-left: 1rem
+      font-weight: 500
+      font-size: 1.25rem
       color: $primary-bg
-      margin-bottom: calc($spacing * 0.5)
-
-      .group-reset
-        @include button($flat: true)
-        margin: calc($spacing * 0.5)
-        padding: calc($padding * 0.5)
-
-        &:disabled
-          color: transparent
-
-      &:not(:first-child)
-        margin-top: $spacing
+    button
+      margin-right: 1rem
+      image
+        font-size: 1.15rem
 
   .item
+    padding: 1rem
     border: $border
     border-top: none
-    padding: $padding
-    background-color: $widget-bg
 
     &:first-child
       border: $border
@@ -84,14 +72,14 @@ window.settings-dialog
       border-radius: $radius
 
     button.reset
-      margin-left: $spacing
+      margin-left: 0.5rem
 
     label.id, label.note
       color: transparentize($fg, 0.4)
 
     entry, button
       @include button
-      padding: $padding
+      padding: 0.5rem
 
     switch
       @include switch
@@ -111,7 +99,7 @@ window.settings-dialog
     .enum-setter
       label
         border: $border
-        padding: 0 $padding
+        padding: 0 0.5rem
         background-color: $widget-bg
         border-radius: $radius 0 0 $radius
 

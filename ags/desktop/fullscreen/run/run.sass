@@ -2,16 +2,16 @@
 @use 'sass:color'
 
 window#run .layout
-  margin-top: $spacing
+  margin-top: 1rem
   border-radius: calc($radius * 0.75)
   background-color: transparentize($bg, 0.25)
   border: 1px solid transparentize($primary-bg, 0.5)
 
   entry
     font-size: 1rem
-    padding: calc($padding * 3)
+    padding: 1.15rem
     image
-      margin-right: $spacing
+      margin-right: 0.5rem
 
     selection
       background-color: transparent
@@ -20,30 +20,26 @@ window#run .layout
     label, image
       color: $fg
 
-  image.spinner
-    color: $primary-bg
-    margin-right: $spacing
-
   separator
     padding: 1px
     background-color: transparentize($fg, 0.9)
 
   button.app-item
+    padding: 0.5rem
     transition: $transition
-    padding: calc($padding * 1.5)
 
     label
       transition: $transition
       &.title
         color: $fg
         font-size: 1.15rem
-        margin-bottom: calc($spacing * 0.25)
+        margin-bottom: 0.25rem
       &.description
         color: transparentize($fg, 0.3)
 
     image
       font-size: 4rem
-      margin-right: $spacing
+      margin-right: 0.5rem
       transition: $transition
 
     &:hover, &:focus

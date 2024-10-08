@@ -3,10 +3,11 @@ window.sideright .quicksettings .notifications
     @include scrollable($top: true, $bottom: true)
 
   .notification
-    @include widget
     @include notification
-    padding: $padding
-    margin-bottom: $spacing
+    border: $border
+    border-radius: $radius
+    padding: 0.5rem
+    margin-top: 0.5rem
 
   .placeholder
     image

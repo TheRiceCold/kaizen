@@ -1,14 +1,13 @@
-window#verification .verification
-  @include floating-widget
-  min-width: 300px
-  min-height: 100px
-  padding: calc($popover-padding * 1.5)
-  .title
-    font-size: 1.6em
-  .buttons
-    @include spacing
-    margin-top: $padding
-    button
-      @include button
-      font-size: 1.5em
-      padding: $padding
+window#verification
+  background-color: transparentize($bg, 0.5)
+  .verification
+    .title
+      font-size: 2rem
+      margin-bottom: 4rem
+    .buttons button
+      margin: 0 1rem
+      padding: 0.5rem
+      label
+        font-size: 1.5rem
+      &:hover
+        color: $primary-bg

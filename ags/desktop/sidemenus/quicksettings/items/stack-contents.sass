@@ -1,16 +1,16 @@
 window.sideright .quicksettings .stack-list
-  padding: $padding
+  padding: 0.5rem
   .header
-    margin: $spacing calc($spacing * 0.5)
+    margin: 0.75rem 0.25rem
 
     > label
       font-weight: 500
       font-size: 1.25rem
-      margin-left: calc($radius * 0.5)
+      margin-left: 0.5rem
 
     button
       @include button
-      padding: calc($padding * 0.7) $padding
+      padding: 0.5rem
       label
         font-weight: 500
       + button
@@ -25,7 +25,7 @@ window.sideright .quicksettings .stack-list
       all: unset
       padding: 0.5rem
     .list-button
-      padding: $padding
+      padding: 0.5rem
       background-color: transparent
       border-bottom: 1px solid transparentize($fg, 0.75)
       label
@@ -36,16 +36,17 @@ window.sideright .quicksettings .stack-list
           color: $primary-bg
 
   .slider-box
-    padding: $padding
+    padding: 0.5rem
     label
-      font-size: 1.05rem
+      font-size: 1rem
+      &:last-child
+        margin-left: 1rem
     button
       @include button($flat: true)
-      padding: calc($padding * 0.5)
+      margin-right: 1rem
 
     scale
       @include slider
-      margin: 0 calc($spacing * 0.5)
 
       &.muted highlight
         background-image: none

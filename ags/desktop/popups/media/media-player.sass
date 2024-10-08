@@ -1,18 +1,7 @@
 window.top-popups .media-player
   .player
-    .cover
-      @if $shadows
-        box-shadow: 2px 2px 2px 0 $shadow-color
-      border-radius: $radius
-      background-size: cover
-      background-position: center
-      border: 2px solid $primary-bg
-      margin-right: calc($spacing * 1.5)
     button
-      @include button($flat: true)
-      padding: $padding
-      &.play-pause
-        margin: 0 $spacing
+      padding: 0 1rem
       image
         font-size: 1.25rem
     .title

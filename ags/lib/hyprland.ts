@@ -3,7 +3,6 @@ const { messageAsync } = await Service.import('hyprland')
 
 const { hyprland } = options
 const {
-  spacing,
   radius,
   border: { width },
   blur,
@@ -15,7 +14,6 @@ const {
 
 const deps = [
   'hyprland',
-  spacing.id,
   radius.id,
   blur.id,
   width.id,
@@ -42,7 +40,8 @@ function sendBatch(batch: string[]) {
 }
 
 async function setupHyprland() {
-  const gaps = Math.floor(hyprland.gaps.value * spacing.value)
+  const gaps = hyprland.gaps.value
+  const gapsWhenOnly = hyprland.gapsWhenOnly.value ? 0 : 1
 
   sendBatch([
     `general:border_size ${width}`,
@@ -52,8 +51,8 @@ async function setupHyprland() {
     `general:col.inactive_border rgba(${hyprland.inactiveBorder.value})`,
     `decoration:rounding ${radius}`,
     `decoration:drop_shadow ${shadows.value ? 'yes' : 'no'}`,
-    `dwindle:no_gaps_when_only ${hyprland.gapsWhenOnly.value ? 0 : 1}`,
-    `master:no_gaps_when_only ${hyprland.gapsWhenOnly.value ? 0 : 1}`,
+    `dwindle:no_gaps_when_only ${gapsWhenOnly}`,
+    `master:no_gaps_when_only ${gapsWhenOnly}`,
   ])
 
   await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`))

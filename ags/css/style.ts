@@ -9,16 +9,12 @@ const {
   light,
   blur,
   scheme,
-  padding,
-  spacing,
   radius,
   shadows,
   widget,
   border,
   colors,
 } = options.theme
-
-const popoverPaddingMultiplier = 1.6
 
 const t = (dark: Opt | string, light: Opt | string) =>
   scheme.value === 'dark' ? `${dark}` : `${light}`
@@ -40,8 +36,6 @@ const variables = () => [
   $('error-bg', t(dark.error.bg, light.error.bg)),
   $('error-fg', t(dark.error.fg, light.error.fg)),
   $('scheme', scheme),
-  $('padding', `${padding}pt`),
-  $('spacing', `${spacing}pt`),
   $('radius', `${radius}px`),
   $('transition', `${options.transition}ms`),
   $('shadows', `${shadows}`),
@@ -73,16 +67,8 @@ const variables = () => [
       'none',
     ),
   ),
-  $(
-    'popover-border-color',
-    `transparentize(${t(dark.border, light.border)}, ${Math.max((border.opacity.value - 1) / 100, 0)})`,
-  ),
-  $('popover-padding', `$padding * ${popoverPaddingMultiplier}`),
-  $('popover-radius', radius.value === 0 ? '0' : '$radius + $popover-padding'),
   $('font-name', options.font.default.name),
   $('font-size', `${options.font.default.size}pt`),
-
-  $('hyprland-gaps-multiplier', options.hyprland.gaps),
 ]
 
 async function resetCss() {

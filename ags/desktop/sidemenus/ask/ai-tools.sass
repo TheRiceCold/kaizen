@@ -1,80 +1,76 @@
 window.sideleft .ask
   min-width: 400px
   min-height: 600px
-  padding: $padding
   .tab-buttons
     font-size: 1.15em
     image
-      margin: 0 calc($spacing * 0.5)
+      margin: 0 0.25rem
 
   .chat-message
-    padding: $padding calc($padding * 4)
+    padding: 0 1rem
     border-bottom: 1px solid transparentize($fg, 0.75)
     &:last-child
       border-bottom: 0
     label
       font-size: 1.15em
-      margin-bottom: $spacing
+      margin-bottom: 1rem
     .chat-name
+      margin: 1rem 0
       font-size: 1.25em
-      margin: $spacing 0
+      padding: 0.5rem 1rem
       border-radius: $radius
       background-color: $primary-fg
-      padding: $padding calc($padding * 2)
 
   .chat-codeblock
-    background-color: $bg
     border-radius: $radius
-    border: 1px solid transparentize($fg, 0.75)
+    background-color: transparentize($bg, 0.5)
     .topbar
-      margin-bottom: $spacing
+      padding: 0.5rem
       border-top-left-radius: $radius
       border-top-right-radius: $radius
-      padding: $padding calc($padding * 2)
       border-bottom: 1px solid transparentize($fg, 0.75)
       label
         all: unset
         font-weight: 600
         font-size: 1.25em
-        margin-left: $spacing
+        margin-left: 0.5rem
       button
-        @include button
-        margin-right: calc($spacing * 0.5)
+        margin: 0
+        padding: 0.5rem 0.75rem
         border-radius: calc($radius * 0.5)
-        padding: $padding calc($padding * 1.5)
         label
           all: unset
     .code
-      padding: calc($padding * 2)
+      padding: 1rem
 
   .chat-textarea
-    margin-top: $spacing
-    margin-bottom: $spacing
-    margin-left: calc($spacing * 1.25)
-    *
-      background-color: transparent
+    margin: 0.5rem
     .chat-entry
       color: $fg
-      border-radius: $radius
-      padding: calc($padding * 3)
-      background-color: transparentize($bg, 0.5)
+      padding: 0.75rem 1.25rem
+      border-radius: calc($radius * 0.75)
+      background-color: transparentize($primary-fg, 0.25)
     .chat-send
-      border-radius: calc($radius * 0.5)
+      margin: 0
+      padding: 0
+      margin-left: 0.5rem
+      border-radius: calc($radius * 0.75)
       image
-        padding: $padding
-        font-size: 1.25em
+        font-size: 1.5rem
+        padding: 0.75rem 1rem
     .chat-placeholder
       color: $fg
-      margin-left: calc($spacing * 1.5)
+      margin-left: 1.15rem
 
   .welcome-logo
     margin: 1.5rem
     font-size: 4rem
 
   button
-    @include button
-    padding: $padding
-    margin: calc($spacing * 0.5)
+    margin: 0.5rem
+    border-radius: $radius
+    padding: 0.5rem 0.75rem
+    background-color: transparentize($primary-bg, 0.8)
     label
       font-size: 1rem
       font-weight: 500
