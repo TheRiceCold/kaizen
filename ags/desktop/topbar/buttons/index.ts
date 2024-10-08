@@ -2,9 +2,6 @@ import BarButton from '../BarButton'
 import ToolsMenu from 'desktop/dropdowns/tools'
 import SessionMenu from 'desktop/dropdowns/session'
 
-import options from 'options'
-
-import { sh } from 'lib/utils'
 import { showWidget } from 'lib/variables'
 import { toggleWidget } from 'lib/globals'
 
@@ -33,11 +30,7 @@ export const AiButton = BarButton({
 export const RunButton = BarButton({
   label: 'Run',
   window: 'run',
-  onClicked() {
-    const cmd = options.run.execCmd.value
-    if (cmd.length > 0) sh(cmd)
-    else App.toggleWindow('run')
-  },
+  onClicked() { App.toggleWindow('run') },
 })
 
 export const ToolsButton = BarButton({ label: 'Tools', onClicked: ToolsMenu })

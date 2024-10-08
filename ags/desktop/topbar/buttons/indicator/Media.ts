@@ -10,6 +10,7 @@ import icons from 'data/icons'
 import options from 'options'
 import { sh } from 'lib/utils'
 
+const { Gdk } = imports.gi
 const { Box, EventBox, Label } = Widget
 
 const mpris = await Service.import('mpris')
@@ -37,21 +38,24 @@ export const playing = EventBox({
 
   self.tooltipText = label
   self.onPrimaryClick = player.playPause
-  self.onSecondaryClick = (_, event) => PlayerMenu(event, player)
-  self.onScrollDown = status !== 'playing' ? () => { }
-    : () => self.parent.shown = 'visualizer'
+  self.onSecondaryClick = (_, event: Gdk.Event) => PlayerMenu(event, player)
+  self.onScrollDown =
+    status !== 'playing' ? () => {} : () => (self.parent.shown = 'visualizer')
 
   self.child.children = [
-    CircularProgressIcon({ className: 'progress' }, icons.mpris[status])
-      .poll(1000, (self: IconProps) => self.value = player.position / player.length),
-    Label(label)
+    CircularProgressIcon({ className: 'progress' }, icons.mpris[status]).poll(
+      1000,
+      (self: IconProps) => (self.value = player.position / player.length),
+    ),
+    Label(label),
   ]
 })
 
 export const visualizer = EventBox({
   attribute: {
     update(self: BoxProps) {
-      const width = 8, height = 24
+      const width = 8,
+        height = 24
       const player = getPlayer()
       if (!player) return
 
@@ -60,13 +64,16 @@ export const visualizer = EventBox({
       const label = getLabel(player)
       const size = Math.round(label.length * 0.9)
       const bars = {
-        long: 256, normal: 128, short: 64,
-        auto: (size < TITLE_LENGTH ? size : TITLE_LENGTH) * width
+        long: 256,
+        normal: 128,
+        short: 64,
+        auto: (size < TITLE_LENGTH ? size : TITLE_LENGTH) * width,
       }
 
       self.tooltipText = label
       self.child.child = Cava({
-        width, height,
+        width,
+        height,
         smooth: smooth.value,
         bars: bars[length.value],
       })
@@ -74,11 +81,14 @@ export const visualizer = EventBox({
         player.playPause()
         self.parent.shown = 'playing'
       }
-      self.onSecondaryClick = (_, event) => PlayerMenu(event, player)
-    }
+      self.onSecondaryClick = (_, event: Gdk.Event) =>
+        PlayerMenu(event, player)
+    },
   },
   child: Box({ hpack: 'center', className: 'visualizer' }),
-  onScrollUp(self: EventBoxProps) { self.parent.shown = 'playing' },
+  onScrollUp(self: EventBoxProps) {
+    self.parent.shown = 'playing'
+  },
 })
   .hook(mpris, (self: BoxProps) => self.attribute.update(self))
   .hook(length, (self: BoxProps) => self.attribute.update(self))
