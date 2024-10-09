@@ -1,4 +1,3 @@
-export const grayscale = `
 precision mediump float;
 varying vec2 v_texcoord;
 uniform sampler2D tex;
@@ -13,4 +12,3 @@ void main() {
     pixColor[3]
   );
 }
-`

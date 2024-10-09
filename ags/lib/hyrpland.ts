@@ -1,5 +1,4 @@
 import options from 'options'
-import writeShaders from './shaders/writeShaders'
 const { messageAsync } = await Service.import('hyprland')
 
 const { hyprland } = options
@@ -31,7 +30,6 @@ const deps = [
 ]
 
 export default function init() {
-  writeShaders()
   options.handler(deps, setupHyprland)
   setupHyprland()
 }
@@ -54,8 +52,8 @@ async function setupHyprland() {
   const gapsWhenOnly = hyprland.gapsWhenOnly.value ? 0 : 1
   const shader =
     hyprland.shader.value === 'CRT'
-      ? `${TMP}/CRT.frag`
-      : `${TMP}/${hyprland.shader.value}.glsl`
+      ? `${TMP}/shaders/CRT.frag`
+      : `${TMP}/shaders/${hyprland.shader.value}.glsl`
 
   const gaps = Math.floor(hyprland.gaps.value * spacing.value)
 

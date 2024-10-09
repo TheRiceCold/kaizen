@@ -1,4 +1,3 @@
-export const crtFrag = /*frag*/ `
 #version 100
 precision highp float;
 varying highp vec2 v_texcoord;
@@ -509,5 +508,3 @@ void main() {
   gl_FragColor = color;
   gl_FragColor.a = 1.0;
 }
-`
-
