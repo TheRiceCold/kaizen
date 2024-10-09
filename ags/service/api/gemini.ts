@@ -5,17 +5,17 @@ import options from 'options'
 
 const { Gio, GLib, Soup } = imports.gi
 
+const { key, model } = options.chatbot.gemini
 const HISTORY_DIR = `${GLib.get_user_cache_dir()}/ags/user/ai/chats/`
 const HISTORY_FILENAME = 'gemini.txt'
 const HISTORY_PATH = HISTORY_DIR + HISTORY_FILENAME
 
-if (!fileExists(`${GLib.get_user_config_dir()}/gemini_history.json`)) {
-  bash`touch ${GLib.get_user_config_dir()}/gemini_history.json`
-  Utils.writeFile('[ ]', `${GLib.get_user_config_dir()}/gemini_history.json`).catch(print)
+if (!fileExists(`${TMP}/gemini_history.json`)) {
+  bash`touch ${TMP}/gemini_history.json`
+  Utils.writeFile('[ ]', `${TMP}/gemini_history.json`).catch(print)
 }
 
 Utils.exec(`mkdir -p ${GLib.get_user_cache_dir()}/ags/user/ai`)
-const KEY_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/ai/google_key.txt`
 const APIDOM_FILE_LOCATION = `${GLib.get_user_cache_dir()}/ags/user/ai/google_api_dom.txt`
 
 function replaceapidom(URL) {
@@ -26,27 +26,26 @@ function replaceapidom(URL) {
   return URL
 }
 
-const CHAT_MODELS = [ 'gemini-1.5-flash' ]
-const ONE_CYCLE_COUNT = 3
-
 class GeminiMessage extends Service {
   static {
-    Service.register(this,
+    Service.register(
+      this,
       { delta: ['string'] },
       {
         content: ['string'],
         thinking: ['boolean'],
         done: ['boolean'],
-      })
+      },
+    )
   }
 
   _role = ''
   _parts = [{ text: '' }]
-  _thinking
+  _thinking = false
   _done = false
   _rawData = ''
 
-  constructor(role, content, thinking = true, done = false) {
+  constructor(role: string, content, thinking = true, done = false) {
     super()
     this._role = role
     this._parts = [{ text: content }]
@@ -54,17 +53,31 @@ class GeminiMessage extends Service {
     this._done = done
   }
 
-  get rawData() { return this._rawData }
-  set rawData(value) { this._rawData = value }
+  get rawData() {
+    return this._rawData
+  }
+  set rawData(value) {
+    this._rawData = value
+  }
 
-  get done() { return this._done }
-  set done(isDone) { this._done = isDone; this.notify('done') }
+  get done() {
+    return this._done
+  }
+  set done(isDone) {
+    this._done = isDone
+    this.notify('done')
+  }
 
-  get role() { return this._role }
-  set role(role) { this._role = role; this.emit('changed') }
+  get role() {
+    return this._role
+  }
+  set role(role) {
+    this._role = role
+    this.emit('changed')
+  }
 
   get content() {
-    return this._parts.map(part => part.text).join()
+    return this._parts.map((part) => part.text).join()
   }
 
   set content(content) {
@@ -73,25 +86,24 @@ class GeminiMessage extends Service {
     this.emit('changed')
   }
 
-  get parts() { return this._parts }
-
-  get label() {
-    return this._parserState.parsed + this._parserState.stack.join('')
+  get parts() {
+    return this._parts
   }
 
-  get thinking() { return this._thinking }
+  get thinking() {
+    return this._thinking
+  }
   set thinking(value) {
     this._thinking = value
     this.notify('thinking')
     this.emit('changed')
   }
 
-  addDelta(delta) {
+  addDelta(delta: string) {
     if (this.thinking) {
       this.thinking = false
       this.content = delta
-    }
-    else this.content += delta
+    } else this.content += delta
     this.emit('delta', delta)
   }
 
@@ -118,28 +130,19 @@ class GeminiService extends Service {
       initialized: [],
       clear: [],
       newMsg: ['int'],
-      hasKey: ['boolean'],
     })
   }
 
-  _assistantPrompt = options.ai.enhancements.value
-  _cycleModels = true
-  _usingHistory = options.ai.useHistory.value
-  _key = ''
+  _assistantPrompt = options.chatbot.enhancements.value
+  _usingHistory = options.chatbot.useHistory.value
   _requestCount = 0
   _safe = true
-  _temperature = options.ai.defaultTemperature.value
+  _temperature = options.chatbot.temperature.value
   _messages = []
-  _modelIndex = 0
   _decoder = new TextDecoder()
 
   constructor() {
     super()
-
-    if (fileExists(KEY_FILE_LOCATION))
-      this._key = Utils.readFile(KEY_FILE_LOCATION).trim()
-    else
-      this.emit('hasKey', false)
 
     if (this._usingHistory) this.loadHistory()
     else this._messages = this._assistantPrompt ? [...initMessages] : []
@@ -147,48 +150,46 @@ class GeminiService extends Service {
     this.emit('initialized')
   }
 
-  get modelName() { return CHAT_MODELS[this._modelIndex] }
-
-  get keyPath() { return KEY_FILE_LOCATION }
-  get key() { return this._key }
-  set key(keyValue) {
-    this._key = keyValue
-    Utils.writeFile(this._key, KEY_FILE_LOCATION)
-      .then(this.emit('hasKey', true))
-      .catch(logError)
+  get useHistory() {
+    return this._usingHistory
   }
-
-  get cycleModels() { return this._cycleModels }
-  set cycleModels(value) {
-    this._cycleModels = value
-    if (!value)
-      this._modelIndex = 0
-    else
-      this._modelIndex = (this._requestCount - (this._requestCount % ONE_CYCLE_COUNT)) % CHAT_MODELS.length
-  }
-
-  get useHistory() { return this._usingHistory }
   set useHistory(value) {
-    if (value && !this._usingHistory)
-      this.loadHistory()
+    if (value && !this._usingHistory) this.loadHistory()
     this._usingHistory = value
   }
 
-  get safe() { return this._safe }
-  set safe(value) { this._safe = value }
+  get safe() {
+    return this._safe
+  }
+  set safe(value) {
+    this._safe = value
+  }
 
-  get temperature() { return this._temperature }
-  set temperature(value) { this._temperature = value }
+  get temperature() {
+    return this._temperature
+  }
+  set temperature(value) {
+    this._temperature = value
+  }
 
-  get messages() { return this._messages }
-  get lastMessage() { return this._messages[this._messages.length - 1] }
+  get messages() {
+    return this._messages
+  }
+  get lastMessage() {
+    return this._messages[this._messages.length - 1]
+  }
 
   saveHistory() {
     bash`mkdir -p ${HISTORY_DIR} && touch ${HISTORY_PATH}`
-    Utils.writeFile(JSON.stringify(this._messages.map(msg => {
-      const m = { role: msg.role, parts: msg.parts }
-      return m
-    })), HISTORY_PATH)
+    Utils.writeFile(
+      JSON.stringify(
+        this._messages.map((msg) => {
+          const m = { role: msg.role, parts: msg.parts }
+          return m
+        }),
+      ),
+      HISTORY_PATH,
+    )
   }
 
   loadHistory() {
@@ -200,9 +201,10 @@ class GeminiService extends Service {
   appendHistory() {
     if (fileExists(HISTORY_PATH)) {
       const readfile = Utils.readFile(HISTORY_PATH)
-      JSON.parse(readfile).forEach(element => this.addMessage(element.role, element.parts[0].text))
-    }
-    else this._messages = this._assistantPrompt ? [...initMessages] : []
+      JSON.parse(readfile).forEach((element) =>
+        this.addMessage(element.role, element.parts[0].text),
+      )
+    } else this._messages = this._assistantPrompt ? [...initMessages] : []
   }
 
   clear() {
@@ -211,12 +213,13 @@ class GeminiService extends Service {
     this.emit('clear')
   }
 
-  get assistantPrompt() { return this._assistantPrompt }
+  get assistantPrompt() {
+    return this._assistantPrompt
+  }
 
   set assistantPrompt(value) {
     this._assistantPrompt = value
-    if (value)
-      this._messages = [...initMessages]
+    if (value) this._messages = [...initMessages]
     else this._messages = []
   }
 
@@ -229,10 +232,8 @@ class GeminiService extends Service {
         if (line == '[{') {
           aiResponse._rawData += '{'
           this.thinking = false
-        } else if (line == ',\u000d' || line == ']')
-          aiResponse.parseSection()
-        else
-          aiResponse._rawData += line
+        } else if (line == ',\u000d' || line == ']') aiResponse.parseSection()
+        else aiResponse._rawData += line
 
         this.readResponse(stream, aiResponse)
       } catch {
@@ -254,38 +255,51 @@ class GeminiService extends Service {
     const aiResponse = new GeminiMessage('model', 'thinking...', true, false)
 
     const body = {
-      contents: this._messages.map(msg => ({ role: msg.role, parts: msg.parts })),
+      contents: this._messages.map((msg) => ({
+        role: msg.role,
+        parts: msg.parts,
+      })),
       safetySettings: this._safe ? [] : [
         // { category: 'HARM_CATEGORY_DEROGATORY', threshold: 'BLOCK_NONE', },
         // { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_NONE', },
         // { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_NONE', },
-        { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_NONE', },
+        {
+          category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+          threshold: 'BLOCK_NONE',
+        },
         // { category: 'HARM_CATEGORY_UNSPECIFIED', threshold: 'BLOCK_NONE', },
       ],
-      generationConfig: { temperature: this._temperature }
+      generationConfig: { temperature: this._temperature },
     }
-    const proxyResolver = new Gio.SimpleProxyResolver({ 'default-proxy': options.ai.proxyUrl.value })
-    const session = new Soup.Session({ 'proxy-resolver': proxyResolver })
+    const session = new Soup.Session()
     const message = new Soup.Message({
       method: 'POST',
-      uri: GLib.Uri.parse(replaceapidom(`https://generativelanguage.googleapis.com/v1/models/${this.modelName}:streamGenerateContent?key=${this._key}`), GLib.UriFlags.NONE),
+      uri: GLib.Uri.parse(
+        replaceapidom(
+          `https://generativelanguage.googleapis.com/v1/models/${model}:streamGenerateContent?key=${key}`,
+        ),
+        GLib.UriFlags.NONE,
+      ),
     })
     message.request_headers.append('Content-Type', 'application/json')
-    message.set_request_body_from_bytes('application/json', new GLib.Bytes(JSON.stringify(body)))
+    message.set_request_body_from_bytes(
+      'application/json',
+      new GLib.Bytes(JSON.stringify(body)),
+    )
 
     session.send_async(message, GLib.DEFAULT_PRIORITY, null, (_, result) => {
       const stream = session.send_finish(result)
-      this.readResponse(new Gio.DataInputStream({ close_base_stream: true, base_stream: stream }), aiResponse)
+      this.readResponse(
+        new Gio.DataInputStream({
+          close_base_stream: true,
+          base_stream: stream,
+        }),
+        aiResponse,
+      )
     })
 
     this._messages.push(aiResponse)
     this.emit('newMsg', this._messages.length - 1)
-
-    if (this._cycleModels) {
-      this._requestCount++
-      if (this._cycleModels)
-        this._modelIndex = (this._requestCount - (this._requestCount % ONE_CYCLE_COUNT)) % CHAT_MODELS.length
-    }
   }
 }
 

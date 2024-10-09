@@ -5,6 +5,11 @@ function forMonitors(widget: (monitor: number) => Gtk.Window) {
   return range(n, 0).flatMap(widget)
 }
 
+function enableClickThrough(self) {
+  const dummyRegion = new imports.gi.cairo.Region()
+  self.input_shape_combine_region(dummyRegion)
+}
+
 function dependencies(...bins: string[]) {
   const missing = bins.filter((bin) =>
     Utils.exec({ cmd: `which ${bin}`, out: () => false, err: () => true }),
@@ -24,12 +29,19 @@ const fileExists = (path: string) =>
 const expandTilde = (path: string) =>
   path.startsWith('~') ? imports.gi.GLib.get_home_dir() + path.slice(1) : path
 
-export { forMonitors, dependencies, fileExists, expandTilde }
+export {
+  forMonitors,
+  dependencies,
+  fileExists,
+  expandTilde,
+  enableClickThrough,
+}
 
 export { clamp } from './math'
 export { capitalize } from './string'
 export { getCalendarLayout } from './calendar'
 export { setIcon, audioIconSub } from './icon'
 export { sh, bash, copy, launchApp } from './cmd'
+export { markdownTest, md2pango } from './markdown'
 export { range, findCommonElement, uniqueArray } from './array'
 export { createSurfaceFromWidget } from './createSurfaceFromWidget'

@@ -1,16 +1,13 @@
 import { type BoxProps } from 'types/widgets/box'
 
-import md2pango from 'misc/md2pango'
-
 import { ButtonLabel, VBox } from 'widgets'
 
 import options from 'options'
-import { sh, bash } from 'lib/utils'
+import { sh, bash, capitalize, md2pango } from 'lib/utils'
 
 const { Box, Label, Scrollable, Stack } = Widget
 const { Gio, GLib, Gtk, GtkSource } = imports.gi
 const LATEX_DIR = `${GLib.get_user_cache_dir()}/ags/media/latex`
-const USERNAME = GLib.get_user_name()
 
 function loadCustomColorScheme(filePath: string) {
   const file = Gio.File.new_for_path(filePath)
@@ -31,8 +28,7 @@ function substituteLang(str: string) {
     { from: 'bash', to: 'sh' },
     { from: 'javascript', to: 'js' },
   ]
-  for (const { from, to } of subs)
-    if (from === str) return to
+  for (const { from, to } of subs) if (from === str) return to
   return str
 }
 
@@ -41,8 +37,7 @@ function HighlightedCode(content: string, lang: string) {
   const langManager = GtkSource.LanguageManager.get_default()
   const displayLang = langManager.get_language(substituteLang(lang))
 
-  if (displayLang)
-    buffer.set_language(displayLang)
+  if (displayLang) buffer.set_language(displayLang)
 
   buffer.set_text(content, -1)
 
@@ -52,17 +47,20 @@ function HighlightedCode(content: string, lang: string) {
   return new GtkSource.View({ buffer, wrap_mode: Gtk.WrapMode.NONE })
 }
 
-const TextBlock = (content = '') => Label({
-  xalign: 0,
-  wrap: true,
-  hpack: 'fill',
-  label: content,
-  useMarkup: true,
-  selectable: true,
-  className: 'chat-txtblock chat-txt',
-})
+const TextBlock = (content = '') =>
+  Label({
+    xalign: 0,
+    wrap: true,
+    hpack: 'fill',
+    label: content,
+    useMarkup: true,
+    selectable: true,
+    className: 'chat-txtblock chat-txt',
+  })
 
-bash`rm -rf ${LATEX_DIR}/*`.then(() => bash`mkdir -p ${LATEX_DIR}`).catch(logError)
+bash`rm -rf ${LATEX_DIR}/*`
+  .then(() => bash`mkdir -p ${LATEX_DIR}`)
+  .catch(logError)
 
 const Latex = (content = '') => {
   const latexViewArea = Box({
@@ -70,7 +68,10 @@ const Latex = (content = '') => {
       async render(self: BoxProps, text: string) {
         if (text.length == 0) return
         const styleContext = self.get_style_context()
-        const fontSize = styleContext.get_property('font-size', Gtk.StateFlags.NORMAL)
+        const fontSize = styleContext.get_property(
+          'font-size',
+          Gtk.StateFlags.NORMAL,
+        )
 
         const timeSinceEpoch = Date.now()
         const fileName = `${timeSinceEpoch}.tex`
@@ -101,40 +102,51 @@ sed -i 's/stroke="rgb(0%, 0%, 0%)"/stroke="#ffffff"/g' ${outFilePath}
           self.child?.destroy()
           self.child = Gtk.Image.new_from_icon_name(outIconName, 0)
         })
-      }
+      },
     },
     setup(self: BoxProps) {
       self.attribute.render(self, content).catch(print)
-    }
+    },
   })
 
-  return Box({
-    className: 'chat-latex',
-    attribute: {
-      updateText(text: string) {
-        latexViewArea.attribute.render(latexViewArea, text).catch(logError)
-      }
+  return Box(
+    {
+      className: 'chat-latex',
+      attribute: {
+        updateText(text: string) {
+          latexViewArea.attribute.render(latexViewArea, text).catch(logError)
+        },
+      },
     },
-  }, Scrollable({
-    vscroll: 'never',
-    hscroll: 'automatic',
-    child: latexViewArea
-  }))
+    Scrollable({
+      vscroll: 'never',
+      hscroll: 'automatic',
+      child: latexViewArea,
+    }),
+  )
 }
 
 function CodeBlock(content = '', lang = 'txt') {
-  if (lang === 'tex' || lang === 'latex')
-    return Latex(content)
+  if (lang === 'tex' || lang === 'latex') return Latex(content)
 
   const SourceView = HighlightedCode(content, lang)
 
-  const Topbar = Box({ className: 'topbar' },
-    Label({ xalign: 0, label: lang, hexpand: true }),
-    ButtonLabel('󰆏', () => {
-      const buffer = SourceView.get_buffer()
-      const copyContent = buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter(), false)
-      sh('wl-copy ' + copyContent)
-    }, { vpack: 'center' })
+  const Topbar = Box(
+    { className: 'topbar' },
+    Label({ xalign: 0, label: capitalize(lang), hexpand: true }),
+    ButtonLabel(
+      '󰆏',
+      () => {
+        const buffer = SourceView.get_buffer()
+        const copyContent = buffer.get_text(
+          buffer.get_start_iter(),
+          buffer.get_end_iter(),
+          false,
+        )
+        sh('wl-copy ' + copyContent)
+      },
+      { vpack: 'center' },
+    ),
   )
 
   return VBox({
@@ -142,15 +154,15 @@ function CodeBlock(content = '', lang = 'txt') {
     attribute: {
       updateText(text: string) {
         SourceView.get_buffer().set_text(text, -1)
-      }
+      },
     },
     children: [
       Topbar,
       Box(
         { className: 'code', homogeneous: true },
-        Scrollable({ vscroll: 'never' }, SourceView)
-      )
-    ]
+        Scrollable({ vscroll: 'never' }, SourceView),
+      ),
+    ],
   })
 }
 
@@ -181,8 +193,7 @@ const MessageContent = (content: string) => {
             if (!inCode) {
               lastLabel.label = md2pango(blockContent)
               contentBox.add(CodeBlock('', codeBlockRegex.exec(line)[1]))
-            }
-            else {
+            } else {
               lastLabel.attribute.updateText(blockContent)
               contentBox.add(TextBlock())
             }
@@ -204,15 +215,16 @@ const MessageContent = (content: string) => {
         if (lastProcessed < lines.length) {
           const kids = self.get_children()
           const lastLabel = kids[kids.length - 1]
-          const blockContent = lines.slice(lastProcessed, lines.length).join('\n')
+          const blockContent = lines
+            .slice(lastProcessed, lines.length)
+            .join('\n')
           if (!inCode)
-            lastLabel.label = `${md2pango(blockContent)}${useCursor ? options.ai.writingCursor : ''}`
-          else
-            lastLabel.attribute.updateText(blockContent)
+            lastLabel.label = `${md2pango(blockContent)}${useCursor ? options.chatbot.writingCursor : ''}`
+          else lastLabel.attribute.updateText(blockContent)
         }
         contentBox.show_all()
-      }
-    }
+      },
+    },
   })
 
   contentBox.attribute.fullUpdate(contentBox, content, false)
@@ -220,17 +232,21 @@ const MessageContent = (content: string) => {
 }
 
 export const ChatMessage = (message, modelName = 'Model') => {
-  const TextSkeleton = (extraClassName = '') => Box({
-    classNames: ['chat-message-skeletonline', extraClassName]
-  })
+  const TextSkeleton = (extraClassName = '') =>
+    Box({
+      classNames: ['chat-message-skeletonline', extraClassName],
+    })
 
   const messageContentBox = MessageContent(message.content)
-  const messageLoadingSkeleton = VBox(Array.from({ length: 3 }, (_, id) => TextSkeleton(`chat-message-skeletonline-offset${id}`)))
+  const messageLoadingSkeleton = VBox(
+    Array.from({ length: 3 }, (_, id) =>
+      TextSkeleton(`chat-message-skeletonline-offset${id}`),
+    ),
+  )
 
   const messageArea = Stack({
     homogeneous: message.role !== 'user',
     transition: 'crossfade',
-    transitionDuration: options.transition,
     children: {
       thinking: messageLoadingSkeleton,
       message: messageContentBox,
@@ -238,31 +254,57 @@ export const ChatMessage = (message, modelName = 'Model') => {
     shown: message.thinking ? 'thinking' : 'message',
   })
 
-  return Box({ className: 'chat-message' },
+  return Box(
+    { className: 'chat-message' },
     VBox([
       Label({
         xalign: 0,
         wrap: true,
         hpack: 'start',
         useMarkup: true,
-        label: (message.role == 'user' ? USERNAME : modelName),
+        label: message.role == 'user' ? USER : modelName,
         className: `chat-name chat-name-${message.role == 'user' ? 'user' : 'bot'}`,
-      }), messageArea
+      }),
+      messageArea,
     ])
-      .hook(message, () => messageArea.shown = message.thinking ? 'thinking' : 'message', 'notify::thinking')
-      .hook(message, () => messageContentBox.attribute.fullUpdate(messageContentBox, message.content, message.role != 'user'), 'notify::content')
-      .hook(message, () => messageContentBox.attribute.fullUpdate(messageContentBox, message.content, false), 'notify::done')
+      .hook(
+        message,
+        () => (messageArea.shown = message.thinking ? 'thinking' : 'message'),
+        'notify::thinking',
+      )
+      .hook(
+        message,
+        () =>
+          messageContentBox.attribute.fullUpdate(
+            messageContentBox,
+            message.content,
+            message.role != 'user',
+          ),
+        'notify::content',
+      )
+      .hook(
+        message,
+        () =>
+          messageContentBox.attribute.fullUpdate(
+            messageContentBox,
+            message.content,
+            false,
+          ),
+        'notify::done',
+      ),
   )
 }
 
-export const SystemMessage = (content, commandName: string) => Box(
-  { className: 'chat-message' },
-  VBox([
-    Label({
-      xalign: 0,
-      wrap: true,
-      hpack: 'start',
-      label: `System  •  ${commandName}`,
-    }), MessageContent(content)
-  ])
-)
+export const SystemMessage = (content, commandName: string) =>
+  Box(
+    { className: 'chat-message' },
+    VBox([
+      Label({
+        xalign: 0,
+        wrap: true,
+        hpack: 'start',
+        label: `System  •  ${commandName}`,
+      }),
+      MessageContent(content),
+    ]),
+  )

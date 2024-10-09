@@ -1,3 +1,6 @@
+import { type BoxProps } from 'types/widgets/box'
+import { type ScrollableProps } from 'types/widgets/scrollable'
+
 import GeminiService from 'service/api/gemini'
 
 import { VBox } from 'widgets'
@@ -8,17 +11,20 @@ import { ChatMessage } from '../Message'
 const { Gtk } = imports.gi
 
 export const ChatContent = VBox().hook(
-  GeminiService, (self: typeof Widget.Box, id: number) => {
+  GeminiService,
+  (self: BoxProps, id: number) => {
     const message = GeminiService.messages[id]
     if (!message) return
     self.add(ChatMessage(message, 'Gemini'))
-  }, 'newMsg')
+  },
+  'newMsg',
+)
 
 export default Widget.Scrollable({
   vexpand: true,
   className: 'chat-viewport',
-  child: VBox([ Welcome, ChatContent ]),
-  setup(self: typeof Widget.Scrollable) {
+  child: VBox([Welcome, ChatContent]),
+  setup(self: ScrollableProps) {
     // Show scrollbar
     self.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
     const vScrollbar = self.get_vscrollbar()
@@ -32,9 +38,13 @@ export default Widget.Scrollable({
 
     // Always scroll to bottom with new content
     const adjustment = self.get_vadjustment()
-    adjustment.connect('changed', () => Utils.timeout(1, () => {
-      if(!ChatEntry.hasFocus) return
-      adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size())
-    }))
-  }
+    adjustment.connect('changed', () =>
+      Utils.timeout(1, () => {
+        if (!ChatEntry.hasFocus) return
+        adjustment.set_value(
+          adjustment.get_upper() - adjustment.get_page_size(),
+        )
+      }),
+    )
+  },
 })

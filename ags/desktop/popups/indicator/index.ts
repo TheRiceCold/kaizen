@@ -47,7 +47,7 @@ const revealer = PopupRevealer({
   ), 'notify::kbd')
   .hook(audio.speaker, () => show(
     audio.speaker.volume,
-    icon(icons.audio.type.speaker),
+    icons.audio.type.speaker,
   ), 'notify::volume')
   .hook(audio.microphone, () => Utils.idle(() => {
     if (mute !== audio.microphone.stream?.is_muted) {

@@ -1,41 +1,75 @@
-const monospaceFonts = 'JetBrains Mono NF, JetBrains Mono Nerd Font, JetBrains Mono NL, SpaceMono NF, SpaceMono Nerd Font, monospace'
+const monospaceFonts =
+  'JetBrains Mono NF, JetBrains Mono Nerd Font, JetBrains Mono NL, SpaceMono NF, SpaceMono Nerd Font, monospace'
 
 const replacements = {
-  'indents': [
+  indents: [
     { name: 'BULLET', re: /^(\s*)([*-]\s)(.*)(\s*)$/, sub: ' $1- $3' },
     { name: 'NUMBERING', re: /^(\s*[0-9]+\.\s)(.*)(\s*)$/, sub: ' $1 $2' },
   ],
-  'escapes': [
+  escapes: [
     { name: 'COMMENT', re: /<!--.*-->/, sub: '' },
     { name: 'AMPERSTAND', re: /&/g, sub: '&amp;' },
     { name: 'LESSTHAN', re: /</g, sub: '&lt;' },
     { name: 'GREATERTHAN', re: />/g, sub: '&gt;' },
   ],
-  'sections': [
-    { name: 'H1', re: /^(#\s+)(.*)(\s*)$/, sub: '<span font_weight="bold" size="170%">$2</span>' },
-    { name: 'H2', re: /^(##\s+)(.*)(\s*)$/, sub: '<span font_weight="bold" size="150%">$2</span>' },
-    { name: 'H3', re: /^(###\s+)(.*)(\s*)$/, sub: '<span font_weight="bold" size="125%">$2</span>' },
-    { name: 'H4', re: /^(####\s+)(.*)(\s*)$/, sub: '<span font_weight="bold" size="100%">$2</span>' },
-    { name: 'H5', re: /^(#####\s+)(.*)(\s*)$/, sub: '<span font_weight="bold" size="90%">$2</span>' },
+  sections: [
+    {
+      name: 'H1',
+      re: /^(#\s+)(.*)(\s*)$/,
+      sub: '<span font_weight="bold" size="170%">$2</span>',
+    },
+    {
+      name: 'H2',
+      re: /^(##\s+)(.*)(\s*)$/,
+      sub: '<span font_weight="bold" size="150%">$2</span>',
+    },
+    {
+      name: 'H3',
+      re: /^(###\s+)(.*)(\s*)$/,
+      sub: '<span font_weight="bold" size="125%">$2</span>',
+    },
+    {
+      name: 'H4',
+      re: /^(####\s+)(.*)(\s*)$/,
+      sub: '<span font_weight="bold" size="100%">$2</span>',
+    },
+    {
+      name: 'H5',
+      re: /^(#####\s+)(.*)(\s*)$/,
+      sub: '<span font_weight="bold" size="90%">$2</span>',
+    },
   ],
-  'styles': [
+  styles: [
     { name: 'BOLD', re: /(\*\*)(\S[\s\S]*?\S)(\*\*)/g, sub: '<b>$2</b>' },
     { name: 'UND', re: /(__)(\S[\s\S]*?\S)(__)/g, sub: '<u>$2</u>' },
     { name: 'EMPH', re: /\*(\S.*?\S)\*/g, sub: '<i>$1</i>' },
     // { name: 'EMPH', re: /_(\S.*?\S)_/g, sub: '<i>$1</i>' },
-    { name: 'HEXCOLOR', re: /#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/g, sub: '<span bgcolor="#$1" fgcolor="#000000" font_family="' + monospaceFonts + '">#$1</span>' },
-    { name: 'INLCODE', re: /(`)([^`]*)(`)/g, sub: '<span font_weight="bold" font_family="' + monospaceFonts + '">$2</span>' },
+    {
+      name: 'HEXCOLOR',
+      re: /#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/g,
+      sub:
+        '<span bgcolor="#$1" fgcolor="#000000" font_family="' +
+        monospaceFonts +
+        '">#$1</span>',
+    },
+    {
+      name: 'INLCODE',
+      re: /(`)([^`]*)(`)/g,
+      sub:
+        '<span font_weight="bold" font_family="' +
+        monospaceFonts +
+        '">$2</span>',
+    },
     // { name: 'UND', re: /(__|\*\*)(\S[\s\S]*?\S)(__|\*\*)/g, sub: '<u>$2</u>' },
   ],
 }
 
-const replaceCategory = (text, replaces) => {
-  for (const type of replaces)
-    text = text.replace(type.re, type.sub)
+const replaceCategory = (text: string, replaces) => {
+  for (const type of replaces) text = text.replace(type.re, type.sub)
   return text
 }
 
-export default (text: string) => {
+export function md2pango(text: string) {
   const lines: string[] = text.split('\n')
   let output = []
   // Replace

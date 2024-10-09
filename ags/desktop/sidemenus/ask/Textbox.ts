@@ -2,6 +2,7 @@ import { ButtonIcon } from 'widgets'
 import GeminiSendMessage from './gemini/SendMessage'
 
 import icons from 'data/icons'
+import { enableClickThrough } from 'lib/utils'
 
 const { Gtk } = imports.gi
 const TextView = Widget.subclass(Gtk.TextView, 'AgsTextView')
@@ -25,6 +26,7 @@ export const ChatPlaceholder = Label({
 export const ChatPlaceholderRevealer = Revealer({
   revealChild: true,
   transition: 'crossfade',
+  setup: enableClickThrough,
 }, ChatPlaceholder)
 
 export const ChatEntry = TextView({
