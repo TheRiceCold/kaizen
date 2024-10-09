@@ -37,7 +37,7 @@ const Dashboard = Box(
   }, VBox([
     Label({
       className: 'user',
-      label: ` ${capitalize(Utils.USER)}'s Dashboard `
+      label: ` ${capitalize(USER)}'s Dashboard `
     }),
     // Sidebar Items
     ...Array.from({ length: pages.length }, (_, i) => i)

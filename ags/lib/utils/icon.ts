@@ -1,5 +1,7 @@
 import { substitutes } from 'data/icons'
 
+const { GLib } = imports.gi
+
 export function setIcon(name: string | null, fallback = name) {
   if (!name) return fallback || ''
 
