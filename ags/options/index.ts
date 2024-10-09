@@ -1,32 +1,21 @@
 import { create, opt } from 'lib/option'
 
 import theme from './theme'
-import widgets from './widgets'
+import topbar from './topbar'
+import chatbot from './chatbot'
 import dashboard from './dashboard'
+import workspaces from './workspaces'
 
 export default create(OPTIONS, {
   ...theme,
-  ...widgets,
 
+  topbar: { ...topbar },
+  chatbot: { ...chatbot },
   dashboard: { ...dashboard },
+  workspaces: { ...workspaces },
 
-  sideright: { width: opt(380) },
-  topbar: {
-    tray: {
-      ignore: opt(['KDE Connect Indicator', 'gromit-mpx']),
-    },
-    date: {
-      interval: 5000,
-      format: opt('%a %d %b %I:%M %p'),
-    },
-    player: {
-      preferred: opt('spotify'),
-      visualizer: {
-        smooth: opt(true),
-        length: opt<'short' | 'normal' | 'long' | 'auto'>('long'),
-      },
-    },
-    execCmd: opt<null | string>(null),
+  notifications: {
+    blacklist: opt(['Spotify']),
   },
 
   run: {
