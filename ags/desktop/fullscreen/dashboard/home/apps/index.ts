@@ -2,7 +2,7 @@ import { VBox } from 'widgets'
 
 import options from 'options'
 import icons from 'data/icons'
-import { launchApp, icon, capitalize } from 'lib/utils'
+import { launchApp, setIcon, capitalize } from 'lib/utils'
 
 const applications = await Service.import('applications')
 
@@ -24,7 +24,7 @@ function AppButton(app: string) {
       launchApp(appQuery)
     },
     child: VBox([
-      Icon(icon(iconName, icons.fallback.executable)),
+      Icon(setIcon(iconName, icons.fallback.executable)),
       Label({
         wrap: true,
         maxWidthChars: 8,

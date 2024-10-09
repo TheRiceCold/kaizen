@@ -28,7 +28,7 @@ export default VBox({
   children: [
     Label({
       xalign: 0, className: 'greeter',
-      label: greetTime.bind().as((g: string) => `Good ${g}, ${capitalize(Utils.USER)}`)
+      label: greetTime.bind().as((g: string) => `Good ${g}, ${capitalize(USER)}`)
     }),
     Label({ xalign: 0, className: 'bio' }).bind('label', bio),
     Content

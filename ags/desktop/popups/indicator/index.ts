@@ -2,7 +2,6 @@ import PopupRevealer from '../PopupRevealer'
 import brightness from 'service/brightness'
 
 import icons from 'data/icons'
-import { icon } from 'lib/utils'
 
 const DELAY = 1000
 const audio = await Service.import('audio')

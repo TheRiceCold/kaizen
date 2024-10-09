@@ -2,10 +2,12 @@ import { type ButtonProps } from 'types/widgets/button'
 
 import { ButtonLabel } from 'widgets'
 import { addCalendarChildren, CalendarDays } from '.'
-import { getCalendarLayout } from 'misc/calendarlayout'
+import { getCalendarLayout } from 'lib/utils'
+
+const { Box, Button } = Widget
 
 let monthshift = 0
-export let calendarJson = getCalendarLayout(undefined, true)
+export let calendarJson = getCalendarLayout(new Date, true)
 
 function getDateInXMonthsTime(x: number) {
   const currentDate = new Date() // Get the current date
@@ -29,7 +31,7 @@ function shiftCalendarXMonths(x: number) {
   if (x === 0) monthshift = 0
   else monthshift += x
 
-  let newDate
+  let newDate: Date
   if (monthshift === 0) newDate = new Date()
   else newDate = getDateInXMonthsTime(monthshift)
 
@@ -40,7 +42,7 @@ function shiftCalendarXMonths(x: number) {
   addCalendarChildren(CalendarDays, calendarJson)
 }
 
-const calendarMonthYear = Widget.Button({
+const calendarMonthYear = Button({
   cursor: 'pointer',
   className: 'date',
   onClicked() { shiftCalendarXMonths(0) },
@@ -56,7 +58,7 @@ const ShiftButton = (
   shiftValue: number
 ) => ButtonLabel(icon, () => shiftCalendarXMonths(shiftValue), { className: 'monthshift-btn' })
 
-export default Widget.Box(
+export default Box(
   { className: 'header', hpack: 'center'},
   ShiftButton('', -1),
   calendarMonthYear,
