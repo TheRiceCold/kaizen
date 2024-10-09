@@ -10,7 +10,6 @@ import icons from 'data/icons'
 import options from 'options'
 import { sh } from 'lib/utils'
 
-const { Gdk } = imports.gi
 const { Box, EventBox, Label } = Widget
 
 const mpris = await Service.import('mpris')

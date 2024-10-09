@@ -1,17 +1,17 @@
 {
-  inputs, system, stdenv,
+  inputs,
+  system,
+  stdenv,
   writeShellScript,
-
   # UTILITIES
-  fd, which,
-
+  fd,
+  which,
   # BUNDLERS/COMPILERS
-  esbuild, dart-sass,
-
+  esbuild,
+  dart-sass,
   vte,
   gtksourceview4,
   # accountsservice,
-
   # SERVICES
   cage,
   cava,
@@ -26,26 +26,23 @@
   # showmethekey, # TODO:
   wl-clipboard,
   brightnessctl,
-  hyprshade,
-
   # Dashboard
-  ledger,
-  gcalcli,
+  # ledger,
+  # gcalcli,
   taskwarrior,
-
   # ScreenTools
   grim,
   slurp,
   swappy,
   wl-screenrec,
-  version ? "git"
-} : let
+  version ? "git",
+}: let
   name = "kaizen";
 
   matugen = inputs.matugen.packages.${system}.default;
   gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
-    extraPackages = [ vte gtksourceview4 gtk-session-lock ];
+    extraPackages = [vte gtksourceview4 gtk-session-lock];
   };
 
   dependencies = [
@@ -53,23 +50,22 @@
     which
     dart-sass
 
-    cava              # Audio Visualizer
-    gvfs              # Virtual Filesystem support library
-    swww              # Animated Wallpaper Daemon
-    matugen           # Color generation tool
-    ydotool           # Generic command-line automation tool
-    cliphist          # Clipboard History Manager
-    hyprpicker        # Wayland Color Picker
-    gromit-mpx        # Annotation Tool
-    wl-clipboard      # Command-line copy/paste utilities for Wayland
-    brightnessctl     # Read and Control Brightness
-    hyprshade         # Hyprland shade configuration tool
+    cava # Audio Visualizer
+    gvfs # Virtual Filesystem support library
+    swww # Animated Wallpaper Daemon
+    matugen # Color generation tool
+    cliphist # Clipboard History Manager
+    wl-clipboard # Command-line copy/paste utilities for Wayland
+    brightnessctl # Read and Control Brightness
 
     # ScreenTools
-    grim              # Screenshot tool
-    slurp             # Region Selector
-    swappy            # Annotation gui made in gtk
-    wl-screenrec      # High Performance Screen Recorder
+    grim # Screenshot tool
+    slurp # Region Selector
+    gromit-mpx # Annotation Tool
+    hyprpicker # Wayland Color Picker
+    swappy # Annotation gui made in gtk
+    ydotool # Generic command-line automation tool
+    wl-screenrec # High Performance Screen Recorder
 
     # DASHBOARD
     taskwarrior
@@ -135,15 +131,16 @@
       cp -f lockscreen.js $out/lockscreen.js
     '';
   };
-in stdenv.mkDerivation {
-  inherit name version;
-  src = config;
-  
-  installPhase = ''
-    mkdir -p $out/bin
-    cp -r . $out
-    cp ${desktop} $out/bin/${name}
-    cp ${greeter} $out/bin/${name}-dm
-    cp ${lockscreen} $out/bin/${name}-lock
-  '';
-}
+in
+  stdenv.mkDerivation {
+    inherit name version;
+    src = config;
+
+    installPhase = ''
+      mkdir -p $out/bin
+      cp -r . $out
+      cp ${desktop} $out/bin/${name}
+      cp ${greeter} $out/bin/${name}-dm
+      cp ${lockscreen} $out/bin/${name}-lock
+    '';
+  }

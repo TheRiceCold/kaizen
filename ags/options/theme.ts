@@ -2,13 +2,15 @@ import { opt } from 'lib/option'
 
 type TShader =
   | 'default'
-  | 'blue light'
+  | 'vibrance'
+  | 'bluelight'
   | 'grayscale'
   | 'invert'
+  | 'CRT'
 
 export default {
   transition: opt(200),
-  avatar: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
+  avatar: opt(`/var/lib/AccountsService/icons/${USER}`),
 
   theme: {
     auto: opt(true),
@@ -55,10 +57,11 @@ export default {
 
     shadows: opt(true),
     radius: opt(16),
+    spacing: opt(8),
   },
 
   hyprland: {
-    gaps: opt(8),
+    gaps: opt(1.5),
     gapsWhenOnly: opt(true),
     inactiveBorder: opt('333333ff'),
     shader: opt<TShader>('default'),

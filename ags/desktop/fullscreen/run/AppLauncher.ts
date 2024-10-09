@@ -5,7 +5,7 @@ import { VBox } from 'widgets'
 
 import options from 'options'
 import icons from 'data/icons'
-import { launchApp, icon } from 'lib/utils'
+import { launchApp, setIcon } from 'lib/utils'
 
 const apps = await Service.import('applications')
 const { Box, Button, Icon, Label, Revealer } = Widget
@@ -34,7 +34,7 @@ function AppItem(app: Application) {
     label: app.description || '',
   })
 
-  const appicon = Icon(icon(app.icon_name, icons.fallback.executable)).bind('size', iconSize)
+  const appicon = Icon(setIcon(app.icon_name, icons.fallback.executable)).bind('size', iconSize)
 
   const textBox = VBox({
     vpack: 'center',
