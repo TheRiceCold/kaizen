@@ -1,9 +1,13 @@
-self: { config, pkgs, lib, ... }:
-let
+self: {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   inherit (pkgs.stdenv.hostPlatform) system;
   inherit (lib.options) mkOption mkEnableOption;
   cfg = config.programs.kaizen;
-  jsonFormat = pkgs.formats.json { };
+  jsonFormat = pkgs.formats.json {};
 
   defaultPackage = self.packages.${system}.default;
 in {
@@ -26,63 +30,89 @@ in {
       '';
     };
     settings = lib.mkOption {
-      type = jsonFormat.type;
-      default = { };
+      default = {};
+      inherit (jsonFormat) type;
       example = lib.literalExpression ''
         {
-          bar.battery.percentage = false;
-          theme.dark.bg = "#131318";
-          theme.dark.fg = "#e5e1e9";
-          theme.dark.primary.bg =  "#c3c0ff";
-          theme.dark.primary.fg = "#2b2a60";
-          theme.dark.error.bg = "#ffb4ab";
-          theme.dark.error.fg = "#690005";
-          theme.dark.widget = "#e5e1e9";
-          theme.dark.border = "#928f9a";
-          autotheme = true;
+          theme = {
+            auto = true;
+          };
+          widgets = {
+            chatbot = {
+              useHistory = true;
+              default = "gemini";
+              gemini = {
+                key = "api_key";
+                model = "gemini-1.0.-pro";
+              };
+              chatgpt = {
+                key = "api_key";
+                model = "gpt-3.5-turbo";
+              };
+            };
+            status-bar = {
+              date = { interval = 5000; format = "%a %d %b %I:%M %p"; };
+              cava = { smooth = true; length = "long"; };
+              buttons = {
+                left = ["dashboard" "workspace"];
+                middle = ["indicator"];
+                right = ["quicksettings" "date" "power"];
+              };
+            };
+
+            notifications = {
+              enable = true;
+              blacklist = [ "Spotify" ]
+            };
+
+            dashboard = { };
+          };
+          session = {
+            logout = "pkill Hyprland";
+            shutdown = "shutdown now";
+            sleep = "systemctl suspend";
+            reboot = "systemctl reboot";
+          };
         };
       '';
       # TODO: write documentation
       description = ''
-        Configuration written to {file}`$XDG_DATA_HOME/ags/config.json`.
-        See
-        # TODO: make documentation
+        Configuration written to {file}`$XDG_DATA_HOME/kaizen/config.json`.
         for the documentation.
       '';
     };
   };
 
   config = lib.mkIf cfg.enable {
-
-    home.packages = [ cfg.package ];
+    home.packages = [cfg.package];
 
     xdg.dataFile = lib.mkIf (cfg.settings != {}) {
-      "ags/config.json".source =
-        jsonFormat.generate "config.json" cfg.settings;
+      "kaizen/config.json".source = jsonFormat.generate "config.json" cfg.settings;
     };
 
     systemd.user.services.kaizen = let
       cmd = "${cfg.package}/bin/kaizen -b kaizen";
-    in lib.mkIf cfg.systemd {
-      Unit = {
-        Description = "A linux desktop environment configuration using Aylur's Gtk Shell.";
-        Documentation = "https://github.com/TheRiceCold/kaizen";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session.target"];
-        Before = ["xdg-desktop-autostart.target"];
-      };
+    in
+      lib.mkIf cfg.systemd {
+        Unit = {
+          Description = "A linux desktop environment configuration using Aylur's Gtk Shell.";
+          Documentation = "https://github.com/TheRiceCold/kaizen";
+          PartOf = ["graphical-session.target"];
+          After = ["graphical-session.target"];
+          Before = ["xdg-desktop-autostart.target"];
+        };
 
-      Service = {
-        ExecStart = cmd;
-        ExecReload = "${cmd}; ${cmd} quit";
-        ExecStop = "${cmd} quit";
-        Restart = "on-failure";
-        KillMode = "mixed";
-      };
+        Service = {
+          ExecStart = cmd;
+          ExecReload = "${cmd}; ${cmd} quit";
+          ExecStop = "${cmd} quit";
+          Restart = "on-failure";
+          KillMode = "mixed";
+        };
 
-      Install = {
-        WantedBy = ["graphical-session.target"];
+        Install = {
+          WantedBy = ["graphical-session.target"];
+        };
       };
-    };
   };
 }

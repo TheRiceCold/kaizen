@@ -1,40 +1,38 @@
 {
+  lib,
   inputs,
   system,
   stdenv,
   writeShellScript,
-  # UTILITIES
   fd,
   which,
-  # BUNDLERS/COMPILERS
-  esbuild,
+  bun,
   dart-sass,
   vte,
+  libgtop,
   gtksourceview4,
   # accountsservice,
-  # SERVICES
   cage,
   cava,
   swww,
   gvfs,
   # brotab,
   # sptlrx,
-  ydotool,
   cliphist,
-  gromit-mpx,
-  hyprpicker,
   # showmethekey, # TODO:
   wl-clipboard,
   brightnessctl,
-  # Dashboard
+  taskwarrior,
   # ledger,
   # gcalcli,
-  taskwarrior,
-  # ScreenTools
   grim,
   slurp,
   swappy,
+  ydotool,
+  gromit-mpx,
+  hyprpicker,
   wl-screenrec,
+  nerdfonts,
   version ? "git",
 }: let
   name = "kaizen";
@@ -42,7 +40,9 @@
   matugen = inputs.matugen.packages.${system}.default;
   gtk-session-lock = inputs.gtk-session-lock.packages.${system}.default;
   ags = inputs.ags.packages.${system}.default.override {
-    extraPackages = [vte gtksourceview4 gtk-session-lock];
+    extraPackages = [
+      vte libgtop gtksourceview4 gtk-session-lock
+    ];
   };
 
   dependencies = [
@@ -69,7 +69,46 @@
 
     # DASHBOARD
     taskwarrior
+
+    # Fonts
+    nerdfonts
   ];
+
+  config = stdenv.mkDerivation {
+    inherit name;
+    src = ../config;
+    buildPhase = ''
+      ${bun}/bin/bun build ./desktop/main.ts \
+      --outfile desktop.js \
+      --external 'resource://*' \
+      --external 'gi://*' \
+
+      ${bun}/bin/bun build ./lockscreen/main.ts \
+      --outfile lockscreen.js \
+      --external 'resource://*' \
+      --external 'gi://*' \
+
+      ${bun}/bin/bun build ./greeter/main.ts \
+      --outfile greeter.js \
+      --external 'resource://*' \
+      --external 'gi://*' \
+    '';
+
+    installPhase = ''
+      mkdir -p $out
+
+      cp -r css $out
+      cp -r assets $out
+
+      cp -r desktop $out
+      cp -r greeter $out
+      cp -r lockscreen $out
+
+      cp -f main.js $out/desktop.js
+      cp -f greeter.js $out/greeter.js
+      cp -f lockscreen.js $out/lockscreen.js
+    '';
+  };
 
   addBins = list: builtins.concatStringsSep ":" (builtins.map (p: "${p}/bin") list);
 
@@ -80,57 +119,13 @@
 
   lockscreen = writeShellScript "kaizen-lock" ''
     export PATH=$PATH:${addBins dependencies}
-    ${ags}/bin/ags -b kaizen-lock -c ${config}/lockscreen.js
+    ${ags}/bin/ags -b ${name}-lock -c ${config}/lockscreen.js
   '';
 
   desktop = writeShellScript name ''
     export PATH=$PATH:${addBins dependencies}
-    ${ags}/bin/ags -b ${name} -c ${config}/config.js $@
+    ${ags}/bin/ags -b ${name} -c ${config}/desktop.js $@
   '';
-
-  config = stdenv.mkDerivation {
-    inherit name;
-    src = ../ags;
-
-    buildPhase = ''
-      ${esbuild}/bin/esbuild \
-      --bundle ./desktop/main.ts \
-      --outfile=main.js \
-      --format=esm \
-      --external:resource://\* \
-      --external:gi://\* \
-
-      ${esbuild}/bin/esbuild \
-      --bundle ./lockscreen/main.ts \
-      --outfile=lockscreen.js \
-      --format=esm \
-      --external:resource://\* \
-      --external:gi://\* \
-
-      ${esbuild}/bin/esbuild \
-      --bundle ./greeter/main.ts \
-      --outfile=greeter.js \
-      --format=esm \
-      --external:resource://\* \
-      --external:gi://\* \
-    '';
-
-    installPhase = ''
-      mkdir -p $out
-
-      cp -r css $out
-      cp -r misc $out
-      cp -r assets $out
-
-      cp -r desktop $out
-      cp -r greeter $out
-      cp -r lockscreen $out
-
-      cp -f main.js $out/config.js
-      cp -f greeter.js $out/greeter.js
-      cp -f lockscreen.js $out/lockscreen.js
-    '';
-  };
 in
   stdenv.mkDerivation {
     inherit name version;
@@ -143,4 +138,12 @@ in
       cp ${greeter} $out/bin/${name}-dm
       cp ${lockscreen} $out/bin/${name}-lock
     '';
+
+    meta = {
+      mainProgram = "kaizen";
+      license = lib.licenses.mit;
+      platforms = lib.platforms.linux;
+      homepage = "https://github.com/TheRiceCold/kaizen";
+      description = "A linux desktop environment configuration using Aylur's Gtk Shell.";
+    };
   }
