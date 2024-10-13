@@ -1,13 +1,13 @@
 import options from 'options'
 const { messageAsync } = await Service.import('hyprland')
 
-const { hyprland } = options
+const { inactiveBorder, layout, gapsIn, gapsOut, gapsWhenOnly, shader } = options.hyprland
 const {
   radius,
   spacing,
-  border: { width },
   blur,
   shadows,
+  border: { width },
   dark: {
     primary: { bg: darkActive },
   },
@@ -21,8 +21,8 @@ const deps = [
   'hyprland',
   spacing.id,
   radius.id,
-  blur.id,
   width.id,
+  blur.id,
   shadows.id,
   darkActive.id,
   lightActive.id,
@@ -34,12 +34,6 @@ export default function init() {
   setupHyprland()
 }
 
-function activeBorder() {
-  const color = scheme.value === 'dark' ? darkActive.value : lightActive.value
-
-  return color.replace('#', '')
-}
-
 function sendBatch(batch: string[]) {
   const cmd = batch
     .filter((x) => !!x)
@@ -49,27 +43,34 @@ function sendBatch(batch: string[]) {
 }
 
 async function setupHyprland() {
-  const gapsWhenOnly = hyprland.gapsWhenOnly.value ? 0 : 1
-  const shader =
-    hyprland.shader.value === 'CRT'
-      ? `${CONFIG}/shaders/CRT.frag`
-      : `${CONFIG}/shaders/${hyprland.shader.value}.glsl`
+  const activeBorder = () => {
+    const color = scheme.value === 'dark' ? darkActive.value : lightActive.value
 
-  const gaps = Math.floor(hyprland.gaps.value * spacing.value)
+    return color.replace('#', '')
+  }
 
   sendBatch([
     'debug:damage_tracking 0',
+
+    `master:no_gaps_when_only ${gapsWhenOnly.value ? 0 : 1}`,
+    `dwindle:no_gaps_when_only ${gapsWhenOnly.value ? 0 : 1}`,
+
+    `general:layout ${layout.value}`,
     `general:border_size ${width}`,
-    `decoration:gaps_out ${gaps}`,
-    `decoration:gaps_in ${Math.floor(gaps / 2)}`,
-    `general:border_size ${width}`,
-    `decoration:rounding ${radius}`,
-    `master:no_gaps_when_only ${gapsWhenOnly}`,
-    `dwindle:no_gaps_when_only ${gapsWhenOnly}`,
-    `decoration:drop_shadow ${shadows.value ? 'yes' : 'no'}`,
     `general:col.active_border rgba(${activeBorder()}ff)`,
-    `general:col.inactive_border rgba(${hyprland.inactiveBorder.value})`,
-    `decoration:screen_shader ${hyprland.shader.value === 'default' ? '[[EMPTY]]' : shader}`,
+    `general:col.inactive_border rgba(${inactiveBorder.value})`,
+
+    `decoration:rounding ${radius}`,
+    `decoration:gaps_in ${gapsIn.value}`,
+    `decoration:gaps_out ${gapsOut.value}`,
+    `decoration:drop_shadow ${shadows.value ? 'yes' : 'no'}`,
+    `decoration:screen_shader ${
+      shader.value === 'default'
+        ? '[[EMPTY]]'
+        : shader.value === 'CRT'
+          ? `${CONFIG}/shaders/CRT.frag`
+          : `${CONFIG}/shaders/${shader.value}.glsl`
+    }`,
   ])
 
   await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`))

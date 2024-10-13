@@ -1,4 +1,5 @@
-import General from './General'
 import Colors from './Colors'
+import General from './General'
+//import Hyprland from './Hyprland'
 
-export default [ General, Colors ] as const
+export default [ General, /*Hyprland,*/ Colors ] as const

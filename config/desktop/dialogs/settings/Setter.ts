@@ -15,7 +15,7 @@ function EnumSetter(opt: Opt<string>, values: string[]) {
     )
   }
 
-  const next = ButtonIcon(icons.ui.arrow.left, () => step(+1))
+  const next = ButtonIcon(icons.ui.arrow.right, () => step(+1))
   const prev = ButtonIcon(icons.ui.arrow.left, () => step(-1))
 
   return Widget.Box({

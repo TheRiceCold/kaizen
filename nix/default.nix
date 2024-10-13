@@ -104,7 +104,7 @@
       cp -r greeter $out
       cp -r lockscreen $out
 
-      cp -f main.js $out/desktop.js
+      cp -f desktop.js $out/desktop.js
       cp -f greeter.js $out/greeter.js
       cp -f lockscreen.js $out/lockscreen.js
     '';

@@ -5,16 +5,8 @@ import options from 'options'
 const deps = ['font', 'theme']
 
 const {
-  dark,
-  light,
-  blur,
-  scheme,
-  radius,
-  shadows,
-  widget,
-  border,
-  colors,
-} = options.theme
+  theme: { dark, light, scheme, radius, widget, border, blur, shadows, colors },
+} = options
 
 const t = (dark: Opt | string, light: Opt | string) =>
   scheme.value === 'dark' ? `${dark}` : `${light}`

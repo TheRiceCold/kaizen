@@ -3,6 +3,7 @@ import { create, opt } from 'lib/option'
 import theme from './theme'
 import topbar from './topbar'
 import chatbot from './chatbot'
+import hyprland from './hyprland'
 import dashboard from './dashboard'
 import workspaces from './workspaces'
 
@@ -11,6 +12,7 @@ export default create(OPTIONS, {
 
   topbar: { ...topbar },
   chatbot: { ...chatbot },
+  hyprland: { ...hyprland },
   dashboard: { ...dashboard },
   workspaces: { ...workspaces },
 

@@ -1,13 +1,5 @@
 import { opt } from 'lib/option'
 
-type TShader =
-  | 'default'
-  | 'vibrance'
-  | 'bluelight'
-  | 'grayscale'
-  | 'invert'
-  | 'CRT'
-
 export default {
   transition: opt(200),
   avatar: opt(`/var/lib/AccountsService/icons/${USER}`),
@@ -43,28 +35,21 @@ export default {
       border: opt('#080808'),
     },
 
-    blur: opt(4),
     scheme: opt<'dark' | 'light'>('dark'),
     widget: { opacity: opt(94) },
     border: {
       width: opt(1),
       opacity: opt(96),
     },
+    blur: opt(4),
+    shadows: opt(true),
 
     colors: {
       black: opt('#12101E'),
     },
 
-    shadows: opt(true),
     radius: opt(16),
     spacing: opt(8),
-  },
-
-  hyprland: {
-    gaps: opt(1.5),
-    gapsWhenOnly: opt(true),
-    inactiveBorder: opt('333333ff'),
-    shader: opt<TShader>('default'),
   },
 
   wallpaper: {
