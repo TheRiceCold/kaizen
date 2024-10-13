@@ -1,9 +1,9 @@
-###### *<div align=right><sub>Last nix update: Oct 06, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: Oct 13, 2024</sub></div>*
 
 <div align=center>
 
-![dark mode logo](https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-dark.png#gh-dark-mode-only)
-![light mode logo](https://github.com/thericecold/kaizen/blob/main/ags/assets/logo-light.png#gh-light-mode-only)
+![dark mode logo](https://github.com/thericecold/kaizen/blob/main/config/assets/logo-dark.png#gh-dark-mode-only)
+![light mode logo](https://github.com/thericecold/kaizen/blob/main/config/assets/logo-light.png#gh-light-mode-only)
 ## Kaizen
 A desktop environment for [Hyprland](https://github.com/hyprwm/Hyprland) configured using [Aylur's Gtk Shell](https://github.com/aylur/ags).<br/>
 The japanese word **kaizen (改善)** is a philosophy to improve continuously and change for the better.<br/>
@@ -17,7 +17,6 @@ This configuration is developed to improve daily workflow and productivity with 
 
 > [!WARNING]
 > Kaizen is heavy in development. If something doesn't work, feel free to open an [issue](https://github.com/TheRiceCold/kaizen/issues/new).
-
 
 - Dashboard: A notion-like informative dashboard for productive boost.
 - Ask: an multi ai chatbot widget that integrates Gemini, llama3, ChatGPT
@@ -80,8 +79,9 @@ This configuration is developed to improve daily workflow and productivity with 
 - [x] Annotation tool (screen drawing)
 
 ##### Settings dialog
+- [x] UI
 - [x] colors
-- [x] UI and Hyprland
+- [x] hyprland
 - [ ] dashboard
 - [ ] widgets
 - [ ] tools
@@ -98,7 +98,6 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 #
 ### Documentation
 - **[Installation](https://github.com/TheRiceCold/kaizen/wiki/Installation)**
-- **[Setup keybinds](https://github.com/TheRiceCold/kaizen/wiki/Setup-keybinds)**
 
 #
 ### Acknowledgements
