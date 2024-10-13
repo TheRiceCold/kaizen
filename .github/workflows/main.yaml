@@ -11,9 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
-
       - name: Install dependencies
-        run: cd ags; bun install
-
+        run: cd config; bun install
       - name: Lint
-        run: cd ags; bun lint
+        run: cd config; bun lint
