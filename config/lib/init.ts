@@ -1,5 +1,6 @@
 import notifications from './notifications'
 import writeShaders from './writeShaders'
+import addAssets from './addAssets'
 import hyprland from './hyprland'
 import battery from './battery'
 import matugen from './matugen'
@@ -11,6 +12,7 @@ export default () => {
     battery()
     matugen()
     hyprland()
+    addAssets()
     writeShaders()
     notifications()
   } catch (err) { logError(err) }

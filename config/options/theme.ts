@@ -2,7 +2,7 @@ import { opt } from 'lib/option'
 
 export default {
   transition: opt(200),
-  avatar: opt(`/var/lib/AccountsService/icons/${USER}`),
+  avatar: opt(`${CONFIG}/avatars/ibu-cyber.jpg`),
 
   theme: {
     auto: opt(true),
