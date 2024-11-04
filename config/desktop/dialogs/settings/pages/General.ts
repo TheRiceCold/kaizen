@@ -17,6 +17,7 @@ const {
     border,
     shadows,
   },
+  hyprland
 } = options
 
 export default Page(
@@ -32,6 +33,12 @@ export default Page(
       type: 'enum',
       title: 'Color Scheme',
       enums: ['dark', 'light'],
+    }),
+    Item({
+      type: 'enum',
+      title: 'Shader',
+      opt: hyprland.shader,
+      enums: ['default', 'bluelight', 'vibrance', 'grayscale', 'invert',  'CRT'],
     }),
   ),
   Group(
