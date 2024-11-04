@@ -7,7 +7,7 @@ import BarButton from '../BarButton'
 import icons from 'data/icons'
 import { showWidget } from 'lib/variables'
 
-const { Box, Label, Icon } = Widget
+const { Box, Icon } = Widget
 const { wifi } = await Service.import('network')
 const battery = await Service.import('battery')
 const notifications = await Service.import('notifications')
