@@ -4,8 +4,8 @@ import 'css/style'
 
 import init from 'lib/init'
 
-import TopBar from './topbar'
 import Overview from './overview'
+import StatusBar from './statusbar'
 
 import Popups from './popups'
 import Dialogs from './dialogs'
@@ -15,7 +15,7 @@ import Fullscreen from './fullscreen'
 
 App.config({
   onConfigParsed: init,
-  windows: [ TopBar, Overview ].concat(
+  windows: [ StatusBar, Overview ].concat(
     Popups,
     Dialogs,
     SideMenus,

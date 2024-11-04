@@ -7,6 +7,8 @@ import Home from './home'
 import Tasks from './tasks'
 
 import Avatar from './Avatar'
+
+import options from 'options'
 import { capitalize } from 'lib/utils'
 
 const {
@@ -62,7 +64,6 @@ const Dashboard = Box(
         ButtonLabel('󰍜', () => {
           showSidebar.value = !showSidebar.value
         }, { hpack: 'start', vpack: 'start', className: 'sidebar-button' }),
-
         Avatar
       ],
     },
@@ -95,8 +96,8 @@ const Dashboard = Box(
 
 export default Window({
   visible: false,
-  child: Dashboard,
   name: 'dashboard',
   keymode: 'on-demand',
   anchor: ['top', 'bottom', 'right', 'left'],
-}).keybind('Escape', () => App.closeWindow('dashboard'))
+  exclusivity: options.statusbar.style.bind().as(s => s === 'separated' ? 'ignore' : 'normal'),
+}, Dashboard).keybind('Escape', () => App.closeWindow('dashboard'))

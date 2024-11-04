@@ -9,7 +9,7 @@ const { active } = await Service.import('hyprland')
 export default (num: number) => Widget.Box({ className: 'client' },
   Widget.Label().bind(
     'label', active.client, 'class',
-    (c: string) => (c === '') ? `${num}:` : num + ''
+    (c: string) => (c === '') ? num.toString() : `${num}:`
   ), BarButton({
     onClicked: WindowMenu,
     label: active.client.bind('class').as((c: string) => {

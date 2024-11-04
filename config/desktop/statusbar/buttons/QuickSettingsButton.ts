@@ -1,3 +1,7 @@
+import { type BoxProps } from 'types/widgets/box'
+import { type IconProps } from 'types/widgets/icon'
+import { type ButtonProps } from 'types/widgets/button'
+
 import BarButton from '../BarButton'
 
 import icons from 'data/icons'
@@ -10,14 +14,14 @@ const notifications = await Service.import('notifications')
 
 export default BarButton({
   className: 'control-button',
-  onClicked(self: typeof BarButton | typeof Widget.Button) {
+  onClicked(self: typeof BarButton | ButtonProps) {
     const qs = showWidget.quicksettings
     qs.value = !qs.value
     self.toggleClassName('active', qs.value)
   },
   child: Box([
     // Battery
-    Icon({ className: 'battery' }).hook(battery, (self: typeof Widget.Icon) => {
+    Icon({ className: 'battery' }).hook(battery, (self: IconProps) => {
       const { percent: p, charging, available } = battery
 
       self.visible = available
@@ -33,17 +37,16 @@ export default BarButton({
     // DND
     Box({ className: 'notifications' }).hook(
       notifications,
-      (self: typeof Widget.Box) => {
+      (self: BoxProps) => {
         const { dnd, notifications: notifs } = notifications
         const hasNotifs = notifs.length > 0
 
         const label = Label(notifs.length + '')
         const icon = Icon(icons.notifications[dnd ? 'silent' : 'default'])
+        //label.visible = hasNotifs // TODO: Should not be visible if 0 notifs
 
-        self.children = [icon, label]
-        self.tooltipText = notifs[notifs.length - 1].summary.trim()
+        self.children = [icon, /*label*/]
 
-        label.visible = hasNotifs // TODO: Should not be visible if 0 notifs
         icon.toggleClassName('active', hasNotifs)
       },
     ),

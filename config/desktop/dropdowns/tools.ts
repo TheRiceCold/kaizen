@@ -6,7 +6,7 @@ import { Menu, MenuItemLabel as Item } from 'widgets'
 
 export default widget => Menu(widget, [
   //Item('󰑓 Refresh', () => sh('pkill ags & ags')),
-  Item('󰽉 Draw', Annotation.start),
+  Item('󰽉 Draw', () => Annotation.start()),
   Item(' Zoom', () => screenTools.zoom()), // its asynchronous
   Item(' Color', () => toggleWidget('color')),
   Item('  Keyboard', () => toggleWidget('keyboard')),

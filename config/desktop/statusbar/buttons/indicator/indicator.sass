@@ -1,5 +1,15 @@
-.topbar .indicator
-  padding: 0.25rem
+.statusbar .indicator
+  padding-top: 0.25rem
+  &.separated-style
+    stack
+      padding: 0.25rem 0.75rem
+    border-bottom-left-radius: $radius
+    border-bottom-right-radius: $radius
+  &.show-style
+    background-color: transparentize($bg, 0.5)
+    border: 1px solid transparentize($fg, 0.5)
+    border-top: 0
+
   .record-time label
     font-size: 1.25em
 

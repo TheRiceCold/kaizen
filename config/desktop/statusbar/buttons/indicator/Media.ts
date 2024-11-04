@@ -15,7 +15,7 @@ const { Box, EventBox, Label } = Widget
 const mpris = await Service.import('mpris')
 
 const TITLE_LENGTH = 32
-const { smooth, length } = options.topbar.player.visualizer
+const { smooth, length } = options.statusbar.indicator.visualizer
 const getPlayer = () => mpris.getPlayer('spotify') || null
 
 function getLabel(player: MprisPlayer) {

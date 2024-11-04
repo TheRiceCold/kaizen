@@ -3,7 +3,11 @@ import { RoundedCorner } from 'widgets'
 import options from 'options'
 
 const { EventBox, Window } = Widget
-const { radius } = options.theme
+const { theme, statusbar } = options
+
+const showRoundedBorder = Utils.merge(
+  [ theme.radius.bind(), statusbar.style.bind() ],
+  (r: number, s: 'full' | 'separated') => r > 0 && s === 'full')
 
 export default [
   // TopLeft Rounded Corner
@@ -12,7 +16,7 @@ export default [
     name: 'cornertl',
     exclusivity: 'normal',
     anchor: ['top', 'left'],
-    visible: radius.bind().as((r: number) => r > 0),
+    visible: showRoundedBorder,
     child: RoundedCorner('topleft', { className: 'corner' }),
   }),
 
@@ -33,7 +37,7 @@ export default [
     name: 'cornertr',
     exclusivity: 'normal',
     anchor: ['top', 'right'],
-    visible: radius.bind().as((r: number) => r > 0),
+    visible: showRoundedBorder,
     child: RoundedCorner('topright', { className: 'corner' }),
   }),
 ]

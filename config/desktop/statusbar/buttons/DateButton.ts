@@ -6,7 +6,7 @@ import { clock } from 'lib/variables'
 import { showWidget } from 'lib/variables'
 
 const { calendar } = showWidget
-const { interval, format } = options.topbar.date
+const { interval, format } = options.statusbar.date
 
 export default BarButton({
   className: 'datemenu',

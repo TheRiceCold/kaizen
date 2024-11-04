@@ -3,7 +3,7 @@
   "author": "Dale Walter Hicban",
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "lint-and-fix": "eslint . --ext .ts --fix"  
+    "lint-and-fix": "eslint . --ext .ts --fix"
   },
   "repository": {
     "type": "git",

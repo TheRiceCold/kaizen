@@ -1,6 +1,8 @@
 import { opt } from 'lib/option'
 
 export default {
+  position: opt<'top' | 'bottom'>('top'),
+  style: opt<'full' | 'separated'>('full'),
   tray: {
     ignore: opt(['KDE Connect Indicator', 'gromit-mpx']),
   },
@@ -8,8 +10,9 @@ export default {
     interval: 5000,
     format: opt('%a %d %b %I:%M %p'),
   },
-  player: {
-    preferred: opt('spotify'),
+  indicator: {
+    timeoutDuration: opt(300),
+    preferredPlayer: opt('spotify'),
     visualizer: {
       smooth: opt(true),
       length: opt<'short' | 'normal' | 'long' | 'auto'>('long'),

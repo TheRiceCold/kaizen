@@ -1,7 +1,19 @@
-.topbar
+.statusbar
   color: $fg
   font-weight: 500
   background-color: transparentize($bg, 0.5)
+  .rounded-corner
+    border-radius: $radius
+    background-color: black
+
+  &.separated-style
+    background-color: transparent
+    .side-items
+      margin: 0.5rem
+      margin-bottom: 0
+      padding: 0.5rem 1rem
+      border-radius: $radius
+      background-color: transparentize($bg, 0.5)
 
   separator
     padding: 1px
@@ -9,7 +21,6 @@
     background-color: transparentize($fg, 0.75)
 
   .side-items
-    padding: 0 1rem
     .bar-button
       margin: 0 0.5rem
       &:hover, &:active, &.on, &.active, &:checked
