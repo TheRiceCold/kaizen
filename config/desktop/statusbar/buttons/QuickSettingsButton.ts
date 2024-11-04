@@ -41,7 +41,7 @@ export default BarButton({
         const { dnd, notifications: notifs } = notifications
         const hasNotifs = notifs.length > 0
 
-        const label = Label(notifs.length + '')
+        //const label = Label(notifs.length + '')
         const icon = Icon(icons.notifications[dnd ? 'silent' : 'default'])
         //label.visible = hasNotifs // TODO: Should not be visible if 0 notifs
 

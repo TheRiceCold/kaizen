@@ -24,7 +24,7 @@ export default Box(
   showWhenStyleIs(
     'full',
     RoundedCorner('topleft', { className: 'rounded-corner' })
-      //.hook(statusbar.position, (self) => { }),
+    //.hook(statusbar.position, (self) => { }),
   ),
   LogoButton,
   Separator({ vertical: true }),
