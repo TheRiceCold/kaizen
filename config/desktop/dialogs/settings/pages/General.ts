@@ -5,6 +5,7 @@ import Wallpaper from '../Wallpaper'
 
 import options from 'options'
 import icons from 'data/icons'
+import { sh } from 'lib/utils'
 
 const {
   font,
@@ -17,7 +18,7 @@ const {
     border,
     shadows,
   },
-  hyprland
+  hyprland: { shader }
 } = options
 
 export default Page(
@@ -35,11 +36,11 @@ export default Page(
       enums: ['dark', 'light'],
     }),
     Item({
+      opt: shader,
       type: 'enum',
       title: 'Shader',
-      opt: hyprland.shader,
-      enums: ['default', 'bluelight', 'vibrance', 'grayscale', 'invert',  'CRT'],
-    }),
+      enums: ['default', 'bluelight', 'vibrance', 'grayscale', 'invert', 'CRT'],
+    })
   ),
   Group(
     'UI',

@@ -32,6 +32,7 @@
   gromit-mpx,
   hyprpicker,
   wl-screenrec,
+  # wf-recorder,
   nerdfonts,
   version ? "git",
 }: let
@@ -65,7 +66,8 @@
     hyprpicker # Wayland Color Picker
     swappy # Annotation gui made in gtk
     ydotool # Generic command-line automation tool
-    wl-screenrec # High Performance Screen Recorder
+    # wl-screenrec # High Performance Screen Recorder
+    # wf-recorder
 
     # DASHBOARD
     taskwarrior
@@ -99,6 +101,7 @@
 
       cp -r css $out
       cp -r assets $out
+      cp -r shaders $out
 
       cp -r desktop $out
       cp -r greeter $out

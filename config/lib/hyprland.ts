@@ -49,7 +49,7 @@ async function setupHyprland() {
     return color.replace('#', '')
   }
 
-  sendBatch([
+  await sendBatch([
     'debug:damage_tracking 0',
 
     `master:no_gaps_when_only ${gapsWhenOnly.value ? 0 : 1}`,
@@ -68,8 +68,8 @@ async function setupHyprland() {
       shader.value === 'default'
         ? '[[EMPTY]]'
         : shader.value === 'CRT'
-          ? `${CONFIG}/shaders/CRT.frag`
-          : `${CONFIG}/shaders/${shader.value}.glsl`
+          ? `${App.configDir}/shaders/CRT.frag`
+          : `${App.configDir}/shaders/${shader.value}.glsl`
     }`,
   ])
 
