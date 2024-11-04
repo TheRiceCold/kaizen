@@ -5,7 +5,6 @@ import Wallpaper from '../Wallpaper'
 
 import options from 'options'
 import icons from 'data/icons'
-import { sh } from 'lib/utils'
 
 const {
   font,
