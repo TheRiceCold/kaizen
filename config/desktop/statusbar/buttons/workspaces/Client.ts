@@ -22,8 +22,8 @@ export default (num: number) =>
         }
 
         return client.title === 'Settings' ? client.title
-            : client.title === 'com.github.Aylur.ags'
-              ? 'Inspect' : client.class
+          : client.title === 'com.github.Aylur.ags'
+            ? 'Inspect' : client.class
       }),
       visible: active.bind('client').as(({ title, class: c }) => !!title && !!c),
     }),

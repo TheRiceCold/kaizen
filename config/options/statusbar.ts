@@ -27,6 +27,7 @@ export default {
     'vesktop:Discord',
     'org.gnome.Nautilus:files',
     'notion-app-enhanced:notion',
+    'org.qutebrowser.qutebrowser:qtbrowser',
     '.blueman-manager-wrapped:blueman',
     '.blueman-sendto-wrapped:blueman-send',
     '.blueman-adapters-wrapped:blueman-adapters',

@@ -23,7 +23,7 @@ export default Box(
   { hpack: 'start', className: 'side-items' },
   showWhenStyleIs(
     'full',
-    RoundedCorner('topleft', { className: 'rounded-corner' })
+    RoundedCorner('topleft', { className: 'corner-black' })
     //.hook(statusbar.position, (self) => { }),
   ),
   LogoButton,

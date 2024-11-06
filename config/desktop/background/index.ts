@@ -10,16 +10,6 @@ const showRoundedBorder = Utils.merge(
   (r: number, s: 'full' | 'separated') => r > 0 && s === 'full')
 
 export default [
-  // TopLeft Rounded Corner
-  Window({
-    layer: 'top',
-    name: 'cornertl',
-    exclusivity: 'normal',
-    anchor: ['top', 'left'],
-    visible: showRoundedBorder,
-    child: RoundedCorner('topleft', { className: 'corner' }),
-  }),
-
   // Actions Menu
   Window({
     popup: false,
@@ -31,7 +21,18 @@ export default [
     child: EventBox({ onSecondaryClick: (_, e) => ToolsMenu(e) }),
   }),
 
-  // TopRight Rounded Corner
+  // ROUNDED CORNERS
+  // TopLeft
+  Window({
+    layer: 'top',
+    name: 'cornertl',
+    exclusivity: 'normal',
+    anchor: ['top', 'left'],
+    visible: showRoundedBorder,
+    child: RoundedCorner('topleft', { className: 'corner' }),
+  }),
+
+  // TopRight
   Window({
     layer: 'top',
     name: 'cornertr',
@@ -39,5 +40,25 @@ export default [
     anchor: ['top', 'right'],
     visible: showRoundedBorder,
     child: RoundedCorner('topright', { className: 'corner' }),
+  }),
+
+  // BottomLeft
+  Window({
+    layer: 'top',
+    name: 'cornerbl',
+    exclusivity: 'normal',
+    anchor: ['bottom', 'left'],
+    visible: showRoundedBorder,
+    child: RoundedCorner('bottomleft', { className: 'corner-black' }),
+  }),
+
+  // BottomRight
+  Window({
+    layer: 'top',
+    name: 'cornerbr',
+    exclusivity: 'normal',
+    anchor: ['bottom', 'right'],
+    visible: showRoundedBorder,
+    child: RoundedCorner('bottomright', { className: 'corner-black' }),
   }),
 ]

@@ -27,5 +27,5 @@ export default Box(
   DateButton,
   Separator({ vertical: true }),
   SessionButton,
-  showWhenStyleIs('full', RoundedCorner('topright', { className: 'rounded-corner' })),
+  showWhenStyleIs('full', RoundedCorner('topright', { className: 'corner-black' })),
 )
