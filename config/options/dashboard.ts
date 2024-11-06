@@ -10,27 +10,27 @@ export default {
   apps: opt([
     // INFO: The format for adding an app: app_icon_name:app_name
     // Example
-    //[ // Column 1
-    //  'qutebrowser',
-    //  'spotify',
-    //  'discord:vesktop',
-    //],
-    //[ // Column 2
-    //  'emacs',
-    //  'neovide',
-    //  'Android Studio:android-studio'
-    //],
-    //
-    //[ // Column 3
-    //  'krita',
-    //  'blender',
-    //  'inkscape',
-    //],
-    //
-    //[ // Column 4
-    //  'shell:foot',
-    //  'Virtual Machine Manager:virt-manager',
-    //]
+    [ // Column 1
+      'qtbrowser:qutebrowser',
+      'spotify',
+      'discord:vesktop',
+    ],
+    [ // Column 2
+      'emacs',
+      'neovide',
+      'Android Studio:android-studio'
+    ],
+
+    [ // Column 3
+      'krita',
+      'blender',
+      'inkscape',
+    ],
+
+    [ // Column 4
+      'shell:foot',
+      'Virtual Machine Manager:virt-manager',
+    ]
   ]),
 
   knowledge: {

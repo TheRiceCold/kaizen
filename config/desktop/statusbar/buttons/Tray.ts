@@ -34,4 +34,4 @@ const Item = (item: TrayItem) => BarButton({
 
 export default Box().bind(
   'children', systemtray, 'items',
-  items => items.filter(({ id }) => !options.statusbar.tray.ignore.value.includes(id)).map(Item))
+  items => items.filter(({ id }) => !options.statusbar.trayIgnore.value.includes(id)).map(Item))
