@@ -8,30 +8,29 @@ export default {
   bio: opt('~ What we do in life, echoes in eternity ~'),
 
   apps: opt([
-    [ // Column 1
-      'firefox',
-      'spotify',
-      'discord:vesktop',
-      'obs',
-    ],
-    [ // Column 2
-      'zed',
-      'neovide',
-      'Android Studio:android-studio'
-    ],
-
-    [ // Column 3
-      'krita',
-      'gimp',
-      'blender',
-      'inkscape',
-      'libresprite'
-    ],
-
-    [ // Column 4
-      'shell:foot',
-      'Virtual Machine Manager:virt-manager',
-    ]
+    // INFO: The format for adding an app: app_icon_name:app_name
+    // Example
+    //[ // Column 1
+    //  'qutebrowser',
+    //  'spotify',
+    //  'discord:vesktop',
+    //],
+    //[ // Column 2
+    //  'emacs',
+    //  'neovide',
+    //  'Android Studio:android-studio'
+    //],
+    //
+    //[ // Column 3
+    //  'krita',
+    //  'blender',
+    //  'inkscape',
+    //],
+    //
+    //[ // Column 4
+    //  'shell:foot',
+    //  'Virtual Machine Manager:virt-manager',
+    //]
   ]),
 
   knowledge: {

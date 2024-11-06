@@ -37,7 +37,6 @@ function AppButton(app: string) {
 
 export default Box({
   className: 'apps',
-  visible: apps.bind().as((a: string[][]) => a.length < 0),
   children: apps.bind().as((a: string[][]) =>
     a.map((column: string[]) =>
       Scrollable({
@@ -48,4 +47,4 @@ export default Box({
       }),
     ),
   ),
-})
+}).bind('visible', apps, 'value', a => a.length > 0)
