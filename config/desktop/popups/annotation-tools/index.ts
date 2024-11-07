@@ -4,35 +4,36 @@ import Annotation from 'service/annotation'
 
 import { ButtonLabel, VBox } from 'widgets'
 import PopupRevealer from '../PopupRevealer'
+import { hyprland } from 'lib/utils'
 
-const { undo, redo, pin, clear, quit } = Annotation
-const hyprland = await Service.import('hyprland')
+const { Box, Label, Revealer } = Widget
+const { action } = Annotation
 
-const ActionButtons = Widget.Box({
+const ActionButtons = Box({
   className: 'control-buttons',
   children: [
-    { label: 'Undo', onClicked: undo },
-    { label: 'Redo', onClicked: redo },
+    { label: 'Undo', onClicked() { action('undo') } },
+    { label: 'Redo', onClicked() { action('redo') } },
     {
       label: 'Pin',
       onClicked(self: ButtonProps) {
-        pin()
+        hyprland.dispatch('pin')
         self.label = self.label === 'Pin' ? 'Unpin' : 'Pin'
       }
     },
-    { label: 'Clear', onClicked: clear },
-    { label: 'Quit', onClicked: quit },
+    { label: 'Clear', onClicked() { action('clear') } },
+    { label: 'Quit', onClicked() { action('quit') } },
   ].map(props => ButtonLabel(props.label, props.onClicked)),
 })
 
-const ToolsInfo = Widget.Revealer({
+const ToolsInfo = Revealer({
   child: VBox(
     { className: 'info' },
-    Widget.Label('Line: Hold Shift'),
-    Widget.Label('Arrow: Hold Ctrl'),
-    Widget.Label('Secondary Color: Hold Alt'),
-    Widget.Label('Rectangle: Middle Click'),
-    Widget.Label('Eraser: Right Click'),
+    Label('Line: Hold Shift'),
+    Label('Arrow: Hold Ctrl'),
+    Label('Secondary Color: Hold Alt'),
+    Label('Rectangle: Middle Click'),
+    Label('Eraser: Right Click'),
   )
 })
 
@@ -40,7 +41,7 @@ export default PopupRevealer({
   vertical: true,
   hpack: 'center',
   className: 'annotation-tool',
-  reveal: hyprland.active.client.bind('class').as((c: string) => c === 'Gromit-mpx'),
+  reveal: hyprland.bindActiveClient('class', (c: string) => c === 'Gromit-mpx')
 }, ActionButtons, VBox([
   ToolsInfo, ButtonLabel('View brushes ', (self: ButtonProps) => {
     ToolsInfo.revealChild = !ToolsInfo.revealChild

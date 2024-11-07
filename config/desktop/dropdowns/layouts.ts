@@ -1,13 +1,9 @@
 import { Menu, MenuItemLabel as Item } from 'widgets'
-import { sh, capitalize } from 'lib/utils'
+import { hyprland, capitalize } from 'lib/utils'
 
 import options from 'options'
-const getLayouts = async () =>
-  sh('hyprctl layouts')
-    .then((out: string) => out.split(/\n/))
-    .catch(logError)
 
-const layouts = await getLayouts()
+const layouts = await hyprland.getLayouts()
 
 export default (widget) =>
   Menu(

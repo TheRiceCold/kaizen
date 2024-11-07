@@ -34,6 +34,7 @@ export {
 }
 
 export { clamp } from './math'
+export * as hyprland from './hyprland'
 export { capitalize } from './string'
 export { getCalendarLayout } from './calendar'
 export { setIcon, audioIconSub } from './icon'
