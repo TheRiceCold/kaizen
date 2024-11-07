@@ -3,7 +3,7 @@ import { type ButtonProps } from 'types/widgets/button'
 import {
   LogoButton,
   Workspaces,
-  AiButton,
+  AskButton,
   RunButton,
   ToolsButton,
   SettingsButton,
@@ -31,7 +31,7 @@ export default Box(
   Workspaces,
   Separator({ vertical: true }),
 
-  showWhenStyleIs('full', AiButton),
+  showWhenStyleIs('full', AskButton),
   showWhenStyleIs('full', RunButton),
   showWhenStyleIs('full', ToolsButton),
   showWhenStyleIs('full', SettingsButton),

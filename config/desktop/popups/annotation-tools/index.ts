@@ -1,13 +1,12 @@
 import { type ButtonProps } from 'types/widgets/button'
 
-import Annotation from 'service/annotation'
 
 import { ButtonLabel, VBox } from 'widgets'
 import PopupRevealer from '../PopupRevealer'
-import { hyprland } from 'lib/utils'
+import { gromit, hyprland } from 'lib/utils'
 
 const { Box, Label, Revealer } = Widget
-const { action } = Annotation
+const { action } = gromit
 
 const ActionButtons = Box({
   className: 'control-buttons',

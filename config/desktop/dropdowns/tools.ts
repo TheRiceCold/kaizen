@@ -1,12 +1,12 @@
 import screenTools from 'service/screen'
-import Annotation from 'service/annotation'
 
+import { gromit } from 'lib/utils'
 import { toggleWidget } from 'lib/globals'
 import { Menu, MenuItemLabel as Item } from 'widgets'
 
 export default widget => Menu(widget, [
   //Item('󰑓 Refresh', () => sh('pkill ags & ags')),
-  Item('󰽉 Draw', () => Annotation.start()),
+  Item('󰽉 Draw', () => gromit.start()),
   Item(' Zoom', () => screenTools.zoom()), // its asynchronous
   Item(' Color', () => toggleWidget('color')),
   Item('  Keyboard', () => toggleWidget('keyboard')),

@@ -19,7 +19,7 @@ export const LogoButton = BarButton({
   onClicked() { App.toggleWindow('dashboard') },
 })
 
-export const AiButton = BarButton({
+export const AskButton = BarButton({
   label: 'Ask',
   onClicked(self: typeof BarButton) {
     toggleWidget('ask')

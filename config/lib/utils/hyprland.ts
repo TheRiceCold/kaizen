@@ -15,6 +15,7 @@ export const getLayouts = async () =>
 export const getActiveClient = (type: 'class' | 'title' = 'class') =>
   active.client[type]
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const bindActiveClient = (type: 'class' | 'title', as: (t: string) => any) =>
   active.client.bind(type).as(as)
 
