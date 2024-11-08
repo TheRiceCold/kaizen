@@ -27,7 +27,7 @@ const Content = Stack({
         screen.geometry_type = 'region'
         switch(screen.capture_type) {
           case 'screenshot': default:
-            screen.shot();
+            screen.shot()
             popups.hide('capture')
             activeContent.value = 'main'
             break

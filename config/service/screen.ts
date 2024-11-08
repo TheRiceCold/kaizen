@@ -97,12 +97,12 @@ class Screen extends Service {
   async shot() {
     if (!dependencies('slurp', 'grim')) return
 
+    const size = await sh('slurp')
     const file = `${this.#screenshotDir}/${now}.png`
     Utils.ensureDirectory(this.#screenshotDir)
 
     switch(this.#geometryType) {
       case 'region': default:
-        const size = await sh('slurp')
         if (!size) return
         await sh(`grim -g "${size}" ${file}`)
         break

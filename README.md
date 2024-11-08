@@ -1,4 +1,4 @@
-###### *<div align=right><sub>Last nix update: Oct 13, 2024</sub></div>*
+###### *<div align=right><sub>Last nix update: Nov 09, 2024</sub></div>*
 
 <div align=center>
 
@@ -19,11 +19,12 @@ This configuration is developed to improve daily workflow and productivity with 
 > Kaizen is heavy in development. If something doesn't work, feel free to open an [issue](https://github.com/TheRiceCold/kaizen/issues/new).
 
 - Dashboard: A notion-like informative dashboard for productive boost.
+- Knowledge: A dashboard widget that shows random quotes, facts and questions to improve your knowledge.
 - Ask: an multi ai chatbot widget that integrates Gemini, llama3, ChatGPT
-- Actions Menu: Useful tools like zoom, recorder, screenshots, annotation, color wheel and pomodoro.
+- Popup tools: Useful tools like zoom, recorder, screenshots, draw, color wheel and pomodoro.
 - Quicksettings: to interact with notifications, networks, bluetooth and audio.
 - Overview: View your hyprland workspaces and windows.
-- Status Bar Indicator: Indicates volume, brightness, song title, song visualizer, recorder time and pomodoro.
+- Statusbar Indicator: Indicates volume, brightness, song title, song visualizer, and recorder.
 - Settings: A window dialog for customization
 - ...and more!
 
@@ -34,57 +35,68 @@ This configuration is developed to improve daily workflow and productivity with 
 - [x] Status bar(topbar)
 - [x] Workspace and window clients overview
 - [x] App Launcher
-- [x] Quicksettings
 - [x] Calendar
-- [ ] Greeter
+
+##### Quicksettings
+- [x] Notifications
+- [x] Network/Wifi
+- [x] Bluetooth
+- [x] Audio
 
 ##### Ask (chatbot)
 - [x] Gemini
 - [ ] ChatGPT
 - [ ] llama
 
+##### Knowledge widget
+- [x] quotes
+- [x] facts
+- [x] verses
+- [x] randomize
+- [ ] filtering
+- [ ] questions
+
 ##### Dashboard
-- [x] spotify player
+- [x] player widget
 - [x] weather widget
 - [x] github contributions widget
 - [x] date and time progress widget
-- [ ] random knowledge widget
-    - [x] quotes
-    - [x] facts
-    - [x] verses
-    - [x] filtering
-    - [ ] questions
 - [ ] calculator
 - [ ] task warrior (WIP)
+- [ ] ledger
 
-##### Lockscreen
+##### Statusbar Indicators
+- [x] volume
+- [x] brightness
+- [x] record timer
+- [ ] pomodoro timer
+- [ ] microphone
+
+##### Popup and Tools
+- [ ] Music Player
+  - [x] Controls
+  - [ ] Lyrics
+- [x] Notifications
+- [ ] Pomodoro
+- [x] On-screen Keyboard
+- [x] Zoom tool
+- [x] Color tool
+- [x] Capture tool
+- [x] Draw tool (screen annotation)
+
+##### Settings dialog
+- [x] general theme
+- [x] colors
+- [x] hyprland
+- [x] keybinds
+- [x] widgets
+- [x] tools
+
+##### Lockscreen/Greeter
 - [x] time and date
 - [ ] weather widget
 - [ ] spotify player
 - [ ] system info
-
-##### Indicators
-- [x] volume
-- [x] brightness
-- [x] zoomed
-- [x] recorder
-- [ ] pomodoro
-- [ ] microphone
-
-##### Popups
-- [x] Music Player
-- [x] Notifications
-- [x] On-screen Keyboard
-- [x] Color wheel and picker tool
-- [x] Annotation tool (screen drawing)
-
-##### Settings dialog
-- [x] UI
-- [x] colors
-- [x] hyprland
-- [ ] dashboard
-- [ ] widgets
-- [ ] tools
 
 </details>
 
