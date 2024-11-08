@@ -4,7 +4,7 @@ import { type MprisPlayer } from 'types/service/mpris'
 import { type EventBoxProps } from 'types/widgets/eventbox'
 
 import { Cava, CircularProgressIcon } from 'widgets'
-import PlayerMenu from 'desktop/dropdowns/player'
+import { PlayerMenu } from 'desktop/dropdowns'
 
 import icons from 'data/icons'
 import options from 'options'

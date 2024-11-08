@@ -6,7 +6,8 @@ export type Action = 'sleep' | 'reboot' | 'logout' | 'shutdown' | 'lock'
 
 class PowerMenu extends Service {
   static {
-    Service.register(this, {}, { title: [ 'string' ],
+    Service.register(this, {}, {
+      title: [ 'string' ],
       cmd: [ 'string' ],
     })
   }

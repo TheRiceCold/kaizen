@@ -1,110 +1,144 @@
-import icons from 'data/icons'
-import { dependencies, sh, bash } from 'lib/utils'
+import options from 'options'
+import { dependencies, sh, bash, hyprland } from 'lib/utils'
 
 const { GLib } = imports.gi
 const dateFormat = '%Y-%m-%d_%H-%M-%S'
 const now = GLib.DateTime.new_now_local().format(dateFormat)
 
-class ScreenTools extends Service {
+export type CaptureType = 'record' | 'screenshot'
+export type GeometryType = 'region' | 'fullscreen'
+
+class Screen extends Service {
   static {
     Service.register(this, {}, {
       timer: ['int'],
-      isZoomed: ['boolean'],
-      isRecording: ['boolean'],
+      'is-recording': ['boolean'],
+      'zoom-amount': ['int', 'r'],
+      'capture-type': ['string'],
+      'geometry-type': ['string'],
+      'audio-enabled': ['boolean'],
     })
   }
 
-  _recordings = Utils.HOME + '/Videos/Records'
-  _screenshots = Utils.HOME + '/Fotos/Captura'
-  _file = ''
-  _interval = 0
+  #recorderDir = options.tools.recorder.directory.value
+  #screenshotDir = options.tools.screenshots.directory.value
+  #recordFile = ''
+  #interval = 0
 
-  timer = 0
-  _isZoomed = false
-  _isRecording = false
+  #timer = 0
+  #zoomAmount = 1
+  #isRecording = false
+  #audioEnabled = false
+  #captureType: CaptureType = 'record'
+  #geometryType: GeometryType = 'region'
 
-  get isZoomed() {
-    return this._isZoomed
-  }
-  get isRecording() {
-    return this._isRecording
-  }
+  get timer() { return this.#timer }
+  get zoom_amount() { return this.#zoomAmount }
+  get is_recording() { return this.#isRecording }
+  get capture_type() { return this.#captureType }
+  get geometry_type() { return this.#geometryType }
+  get audio_enabled() { return this.#audioEnabled }
 
-  async recorder(option: 'region' | 'fullscreen' | 'stop' = 'region') {
-    if (!dependencies('slurp', 'wl-screenrec')) return
-
-    if (this._isRecording && option === 'stop') this.recorderStop()
-    else if (!this._isRecording) {
-      Utils.ensureDirectory(this._recordings)
-      this._file = `${this._recordings}/${now}.mp4`
-      if (option === 'fullscreen') sh(`wl-screenrec -f ${this._file}`)
-      if (option === 'region')
-        sh(`wl-screenrec -g "${await sh('slurp')}" -f ${this._file}`)
-
-      this._isRecording = true
-      this.changed('_isRecording')
-
-      this.timer = 0
-      this._interval = Utils.interval(1000, () => {
-        this.changed('timer')
-        this.timer++
-      })
-    }
+  set capture_type(type: CaptureType) {
+    this.#captureType = type
+    this.changed('capture-type')
   }
 
-  async recorderStop() {
-    sh('pkill wl-screenrec')
-    this._isRecording = false
-    this.changed('_isRecording')
-    GLib.source_remove(this._interval)
+  set geometry_type(type: GeometryType) {
+    this.#geometryType = type
+    this.changed('geometry-type')
+  }
 
-    Utils.notify({
-      summary: 'Screenrecord',
-      body: this._file,
-      iconName: icons.fallback.video,
-      actions: {
-        'Show in Files': () => sh(`xdg-open ${this._recordings}`),
-        View: () => sh(`xdg-open ${this._file}`),
-      },
+  set audio_enabled(val: boolean) {
+    this.#audioEnabled = val
+    this.changed('audio-enabled')
+  }
+
+  async zoom(amount: number) {
+    hyprland.keyword(`cursor:zoom_factor ${amount}`)
+    this.#zoomAmount = amount
+    this.changed('zoom-amount')
+  }
+
+  async record() {
+    if (!dependencies('slurp', 'wf-recorder')) return
+
+    if (this.#isRecording) return
+    Utils.ensureDirectory(this.#recorderDir)
+    this.#recordFile = `${this.#recorderDir}/${now}.mp4`
+
+    const cmd = `wf-recorder ${
+      (this.#geometryType === 'region')
+        ? `-g "${await sh('slurp')}" ` : ''
+    }-f ${this.#recordFile} ${this.#audioEnabled ? '--audio' : ''}`
+
+    sh(cmd)
+
+    this.#isRecording = true
+    this.changed('is-recording')
+
+    this.#timer = 0
+    this.#interval = Utils.interval(1000, () => {
+      this.changed('timer')
+      this.#timer++
     })
   }
 
-  async screenshot(full: boolean = false) {
+  async recordStop() {
+    if (!this.#isRecording) return
+    sh('pkill wf-recorder')
+    this.#isRecording = false
+    this.changed('#isRecording')
+    GLib.source_remove(this.#interval)
+
+    this.#notify('record', this.#recordFile)
+  }
+
+  async shot() {
     if (!dependencies('slurp', 'grim')) return
 
-    const file = `${this._screenshots}/${now}.png`
-    Utils.ensureDirectory(this._screenshots)
+    const file = `${this.#screenshotDir}/${now}.png`
+    Utils.ensureDirectory(this.#screenshotDir)
 
-    if (full) await sh(`grim ${file}`)
-    else {
-      const size = await sh('slurp')
-      if (!size) return
-      await sh(`grim -g "${size}" ${file}`)
+    switch(this.#geometryType) {
+      case 'region': default:
+        const size = await sh('slurp')
+        if (!size) return
+        await sh(`grim -g "${size}" ${file}`)
+        break
+      case 'fullscreen':
+        await sh(`grim ${file}`)
     }
 
     bash`wl-copy < ${file}`
+    this.#notify('shot', file)
+  }
+
+  #notify(type: 'shot' | 'record', filePath: string) {
+    let actions = {}
+    switch(type) {
+      case 'record':
+        actions = {
+          'Show in Files': () => sh(`xdg-open ${this.#recorderDir}`),
+        }; break
+      case 'shot': default:
+        actions = {
+          'Show in Files': () => sh(`xdg-open ${this.#screenshotDir}`),
+          Edit() { if (dependencies('swappy')) sh(`swappy -f ${filePath}`) },
+        }; break
+    }
 
     Utils.notify({
-      image: file,
-      summary: 'Screenshot',
-      body: file,
+      body: filePath,
+      image: filePath,
+      summary: type === 'shot' ? 'Screenshot' : 'Screen record',
       actions: {
-        'Show in Files': () => sh(`xdg-open ${this._screenshots}`),
-        View() { sh(`xdg-open ${file}`) },
-        Edit() { if (dependencies('swappy')) sh(`swappy -f ${file}`) },
-      },
+        View() { sh(`xdg-open ${filePath}`) },
+        ...actions
+      }
     })
   }
 
-  async zoom() {
-    if (!dependencies('pypr')) return
-    sh('pypr zoom')
-      .then(() => {
-        this._isZoomed = !this._isZoomed
-        this.changed('_isZoomed')
-      })
-      .catch(logError)
-  }
 }
 
-export default new ScreenTools()
+export default new Screen

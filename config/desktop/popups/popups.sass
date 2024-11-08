@@ -1,11 +1,16 @@
-window.top-popups, window.bottom-popups
+window.top-popups, window.bottom-popups,
+window.left-popups, window.right-popups
   .popup-revealer
+    margin-top: 1rem
     @include floating-widget
 
+window.left-popups .popup-revealer
+  margin-left: 0.5rem
+
+window.right-popups .popup-revealer
+  margin-right: 0.5rem
+
 window.top-popups
-  .popup-revealer
-    margin-top: 3rem
-  margin-top: 2rem
   .notification
     @include notification
     @include floating-widget

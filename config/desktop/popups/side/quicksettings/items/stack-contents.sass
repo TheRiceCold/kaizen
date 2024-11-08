@@ -1,0 +1,51 @@
+window.right-popups .quicksettings .stack-list
+  .header
+    margin: 0.75rem 0.25rem
+    > label
+      font-weight: 500
+      font-size: 1.25rem
+      margin-left: 0.5rem
+
+    button
+      @include button
+      padding: 0.5rem
+      label
+        font-weight: 500
+      + button
+        margin-left: 1rem
+
+  .list-revealer
+    margin-top: 0.5rem
+    .sub-title
+      margin: 0.5rem 0
+      font-size: 1.15rem
+    .sink-button
+      all: unset
+      padding: 0.5rem
+    .list-button
+      padding: 0.5rem
+      background-color: transparent
+      border-bottom: 1px solid transparentize($fg, 0.75)
+      label
+        font-size: 1.25rem
+      &:hover
+        background: none
+        label, image
+          color: $primary-bg
+
+  .slider-box
+    padding: 0.5rem
+    label
+      font-size: 1rem
+      &:last-child
+        margin-left: 1rem
+    button
+      @include button($flat: true)
+      margin-right: 1rem
+
+    scale
+      @include slider
+
+      &.muted highlight
+        background-image: none
+        background-color: transparentize($fg, $amount: 0.2)

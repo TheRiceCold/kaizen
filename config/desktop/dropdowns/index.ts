@@ -1,0 +1,6 @@
+export { default as ToolsMenu } from './tools'
+export { default as PlayerMenu } from './player'
+export { default as WindowMenu } from './window'
+export { default as LayoutsMenu } from './layouts'
+export { default as SessionMenu } from './session'
+export { default as DashboardMenu } from './dashboard'

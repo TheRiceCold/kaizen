@@ -1,4 +1,4 @@
-import screenTools from 'service/screen'
+import screen from 'service/screen'
 import brightness from 'service/brightness'
 
 import { CircularProgressIcon } from 'widgets'
@@ -8,23 +8,22 @@ import icons from 'data/icons'
 import options from 'options'
 import { capitalize } from 'lib/utils'
 
-const { indicator } = options.statusbar
-let revealCount = 0
+const audio = await Service.import('audio')
+const mpris = await Service.import('mpris')
 
 type indicatorType =
-| 'zoom'
-| 'pomodoro'
 | 'recorder'
 | 'playing'
+| 'visualizer'
 | 'volume'
 | 'brightness'
 
+let revealCount = 0
+const { indicator } = options.statusbar
 const isRevealed = Variable<boolean>(false)
 const currentStackChildName = Variable<indicatorType>('volume') // Initial value doesn't really matter bc it's hidden
 const contentRevealer = ContentRevealer(isRevealed, currentStackChildName)
 
-const audio = await Service.import('audio')
-const mpris = await Service.import('mpris')
 const getPlayer = (player: string) => mpris.getPlayer(player) || null
 function showStyle(show: boolean) {
   if (options.statusbar.style.value === 'separated')
@@ -41,11 +40,11 @@ function update() {
     revealCount--
     if (revealCount !== 0) return
 
-    // Prioritization order: Zoom, Pomodoro, Recorder, Player
     isRevealed.value = true
-    if (screenTools.isZoomed) currentStackChildName.value = 'zoom'
-    else if (screenTools.isRecording) currentStackChildName.value = 'recorder'
-    else if (player) currentStackChildName.value = 'playing'
+    if (screen.is_recording)
+      currentStackChildName.value = 'recorder'
+    else if (player)
+      currentStackChildName.value = 'playing'
     else {
       isRevealed.value = false
       Utils.timeout(indicator.timeoutDuration.value - 100, () => showStyle(false))
@@ -79,7 +78,7 @@ function indicatorUpdate(type: StackChildType, value: number) {
 
 export default contentRevealer
   .hook(mpris, update)
-  .hook(screenTools, update)
+  .hook(screen, update)
   .hook(audio.microphone, () => {}) // TODO:
   //.hook(brightness, () => indicatorUpdate('brightness', brightness.kbd), 'notify::kbd')
   .hook(

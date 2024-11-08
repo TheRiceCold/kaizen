@@ -2,10 +2,11 @@ import { type BoxProps } from 'types/widgets/box'
 import { type IconProps } from 'types/widgets/icon'
 import { type ButtonProps } from 'types/widgets/button'
 
+import popups from 'service/popups'
+
 import BarButton from '../BarButton'
 
 import icons from 'data/icons'
-import { showWidget } from 'lib/variables'
 
 const { Box, Icon } = Widget
 const { wifi } = await Service.import('network')
@@ -15,9 +16,8 @@ const notifications = await Service.import('notifications')
 export default BarButton({
   className: 'control-button',
   onClicked(self: typeof BarButton | ButtonProps) {
-    const qs = showWidget.quicksettings
-    qs.value = !qs.value
-    self.toggleClassName('active', qs.value)
+    popups.toggle('quicksettings')
+    self.toggleClassName('active', popups['quicksettings-shown'])
   },
   child: Box([
     // Battery

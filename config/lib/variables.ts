@@ -42,27 +42,7 @@ const ram = Variable<number>(0, {
   ],
 })
 
-const showWidget = {
-  // TOP
-  indicator: Variable<boolean>(false),
-  annotation: Variable<boolean>(false),
-  player: Variable<boolean>(false),
-  color: Variable<boolean>(false),
-
-  // BOTTOM
-  //dock: Variable<boolean>(false),
-  keyboard: Variable<boolean>(false),
-
-  // RIGHT
-  quicksettings: Variable<boolean>(false),
-  calendar: Variable<boolean>(false),
-
-  // LEFT
-  ask: Variable<boolean>(false),
-}
-
 export {
   clock, greetTime,
-  showWidget,
   temp, cpu, ram,
 }

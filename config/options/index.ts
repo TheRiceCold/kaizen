@@ -15,13 +15,20 @@ export default create(OPTIONS, {
   statusbar: { ...statusbar },
   dashboard: { ...dashboard },
   workspaces: { ...workspaces },
+  tools: {
+    recorder: {
+      directory: opt(`${Utils.HOME}/Videos/Screen`)
+    },
+    screenshots: {
+      directory: opt(`${Utils.HOME}/Fotos/Captura`)
+    }
+  },
 
   notifications: {
     blacklist: opt(['Spotify']),
   },
 
   run: {
-    position: opt<'left' | 'center' | 'right'>('left'),
     iconSize: opt(48),
     width: opt(0),
     margin: opt(40),

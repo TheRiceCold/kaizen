@@ -1,9 +1,7 @@
-import BarButton from '../BarButton'
-import ToolsMenu from 'desktop/dropdowns/tools'
-import SessionMenu from 'desktop/dropdowns/session'
+import popups from 'service/popups'
 
-import { showWidget } from 'lib/variables'
-import { toggleWidget } from 'lib/globals'
+import { ToolsMenu, SessionMenu } from 'desktop/dropdowns'
+import BarButton from '../BarButton'
 
 const systemtray = await Service.import('systemtray')
 
@@ -22,8 +20,8 @@ export const LogoButton = BarButton({
 export const AskButton = BarButton({
   label: 'Ask',
   onClicked(self: typeof BarButton) {
-    toggleWidget('ask')
-    self.toggleClassName('active', showWidget.ask.value)
+    popups.toggle('ask')
+    self.toggleClassName('active', popups['ask-shown'])
   },
 })
 

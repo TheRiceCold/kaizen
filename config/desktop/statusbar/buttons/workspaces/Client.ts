@@ -1,4 +1,4 @@
-import WindowMenu from 'desktop/dropdowns/window'
+import { WindowMenu } from 'desktop/dropdowns'
 import BarButton from '../../BarButton'
 
 import options from 'options'

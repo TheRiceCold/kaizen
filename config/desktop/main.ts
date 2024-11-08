@@ -1,4 +1,3 @@
-import 'lib/globals'
 import 'lib/session'
 import 'css/style'
 
@@ -9,7 +8,6 @@ import StatusBar from './statusbar'
 
 import Popups from './popups'
 import Dialogs from './dialogs'
-import SideMenus from './sidemenus'
 import Background from './background'
 import Fullscreen from './fullscreen'
 
@@ -18,7 +16,6 @@ App.config({
   windows: [ StatusBar, Overview ].concat(
     Popups,
     Dialogs,
-    SideMenus,
     Fullscreen,
     Background,
   ),

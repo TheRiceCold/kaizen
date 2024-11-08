@@ -1,5 +1,5 @@
 import { type ButtonProps } from 'types/widgets/button'
-import { IconLabel } from './Boxes'
+import { IconLabel } from './boxes'
 
 const { Button, Icon } = Widget
 type ClickedType = (self: ButtonProps) => void

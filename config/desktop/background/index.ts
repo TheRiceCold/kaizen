@@ -1,4 +1,4 @@
-import ToolsMenu from 'desktop/dropdowns/tools'
+import { ToolsMenu } from 'desktop/dropdowns'
 import { RoundedCorner } from 'widgets'
 import options from 'options'
 

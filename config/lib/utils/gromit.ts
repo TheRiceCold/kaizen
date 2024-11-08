@@ -2,6 +2,7 @@ import options from 'options'
 import { dependencies, sh, bash, hyprland } from 'lib/utils'
 
 const { scheme, dark, light } = options.theme
+const configDir = imports.gi.GLib.get_user_config_dir()
 
 export const action = (arg: string) => sh(`gromit-mpx --${arg}`)
 
@@ -52,16 +53,12 @@ async function setupConfig() {
     '"default"[Button2,ALT] = "line arrow secondary";',
   ]
 
-  try {
-    await Utils.writeFile([
-      '[General]',
-      'ShowIntroOnStartup=false',
-      '[Drawing]',
-      'Opacity=Int16Array',
-    ].join('\n'), `/home/${Utils.USER}/.config/gromit-mpx.ini`)
+  await Utils.writeFile([
+    '[General]',
+    'ShowIntroOnStartup=false',
+    '[Drawing]',
+    'Opacity=Int16Array',
+  ].join('\n'), `${configDir}/gromit-mpx.ini`)
 
-    await Utils.writeFile(config.join(';\n'), `/home/${Utils.USER}/.config/gromit-mpx.cfg`)
-  } catch (err) {
-    logError(err)
-  }
+  await Utils.writeFile(config.join(';\n'), `${configDir}/gromit-mpx.cfg`)
 }

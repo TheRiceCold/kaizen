@@ -1,10 +1,12 @@
 // Boxes
 export {
   VBox,
+  HomoBox,
   Padding,
   IconLabel,
   LabelIcon,
-} from './Boxes'
+  Notification,
+} from './boxes'
 
 // Buttons
 export {

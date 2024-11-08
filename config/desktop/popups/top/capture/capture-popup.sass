@@ -1,0 +1,22 @@
+window.top-popups .capture-popup
+  label
+    padding: 0.75rem
+    font-weight: 500
+    font-size: 1.15rem
+  button
+    @include button
+    border-radius: 0
+
+  box:first-child button
+    &:first-child
+      border-top-left-radius: calc($radius * 0.75)
+    &:last-child
+      border-top-right-radius: calc($radius * 0.75)
+
+  box:last-child button
+    label
+      color: $primary-bg
+    &:first-child
+      border-bottom-left-radius: calc($radius * 0.75)
+    &:last-child
+      border-bottom-right-radius: calc($radius * 0.75)

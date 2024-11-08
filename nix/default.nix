@@ -1,8 +1,7 @@
 {
   lib,
   inputs,
-  system,
-  stdenv,
+  system, stdenv,
   writeShellScript,
   fd,
   which,
@@ -31,8 +30,8 @@
   ydotool,
   gromit-mpx,
   hyprpicker,
-  wl-screenrec,
-  # wf-recorder,
+  # wl-screenrec,
+  wf-recorder,
   nerdfonts,
   version ? "git",
 }: let
@@ -66,8 +65,8 @@
     hyprpicker # Wayland Color Picker
     swappy # Annotation gui made in gtk
     ydotool # Generic command-line automation tool
-    # wl-screenrec # High Performance Screen Recorder
-    # wf-recorder
+    # wl-screenrec # High performance screen recorder
+    wf-recorder # Screen recording of wlroots-based compositors
 
     # DASHBOARD
     taskwarrior

@@ -2,11 +2,12 @@ import { type BoxProps } from 'types/widgets/box'
 import { type ButtonProps } from 'types/widgets/button'
 import { type EventBoxProps } from 'types/widgets/eventbox'
 
+import popups from 'service/popups'
+
 import { ButtonIcon, ButtonLabel, VBox } from 'widgets'
 
 import options from 'options'
 import icons from 'data/icons'
-import { toggleWidget } from 'lib/globals'
 
 const audio = await Service.import('audio')
 const mpris = await Service.import('mpris')
@@ -21,7 +22,7 @@ const getPlayer = () => mpris.getPlayer('spotify') || null
 export default EventBox({
   cursor: 'pointer',
   className: 'player',
-  onPrimaryClick() { toggleWidget('player') },
+  onPrimaryClick() { popups.toggle('player') },
   child: Box([
     VBox([
       // Cover

@@ -1,4 +1,4 @@
-import screenTools from 'service/screen'
+import screen from 'service/screen'
 
 import { ButtonLabel } from 'widgets'
 
@@ -17,16 +17,16 @@ export default EventBox({
     children: {
       recording: Label(''),
       stop: ButtonLabel('',
-        () => screenTools.recorder('stop'),
+        () => screen.recordStop(),
         { tooltipText: 'Click to stop' }
       ),
     }
   }).bind('shown', currentIconLabel),
 
   // Timer
-  Label().bind('label', screenTools, 'timer', (time: number) => {
-    const sec = time % 60
-    const min = Math.floor(time / 60)
+  Label().bind('label', screen, 'timer', (timer: number) => {
+    const sec = timer % 60
+    const min = Math.floor(timer / 60)
     return `${min}:${sec < 10 ? '0' + sec : sec}`
   })
 ]))

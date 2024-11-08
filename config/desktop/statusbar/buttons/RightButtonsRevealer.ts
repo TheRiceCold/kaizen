@@ -1,15 +1,15 @@
-import screenTools from 'service/screen'
+import popups, { PopType } from 'service/popups'
 
 import { gromit } from 'lib/utils'
-import { toggleWidget } from 'lib/globals'
 
 import ButtonRevealer from '../ButtonRevealer'
 
+const toggle = (pop: PopType) => popups.toggle(pop)
+
 export default ButtonRevealer('left', [
+  { label: 'Capture', onClicked() { toggle('capture') } },
   { label: 'Draw', onClicked() { gromit.start() } },
-  { label: 'Zoom', onClicked() { screenTools.zoom() } },
-  { label: 'Color', onClicked() { toggleWidget('color') } },
-  { label: 'Keyboard', onClicked() { toggleWidget('keyboard') } },
-  { label: 'Recorder', onClicked() { } },
-  { label: 'Screenshot', onClicked() { } }
+  { label: 'Zoom', onClicked() { toggle('zoom') } },
+  { label: 'Color', onClicked() { toggle('color') } },
+  { label: 'Keyboard', onClicked() { toggle('keyboard') } },
 ])

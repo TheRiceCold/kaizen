@@ -20,6 +20,7 @@ export const bindActiveClient = (type: 'class' | 'title', as: (t: string) => any
   active.client.bind(type).as(as)
 
 export const dispatch = (args: string) => messageAsync(`dispatch ${args}`)
+export const keyword = (args: string) => messageAsync(`keyword ${args}`)
 
 export function sendBatch(batch: string[]) {
   const cmd = batch
