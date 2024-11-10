@@ -8,6 +8,7 @@ import Recorder from './Recorder'
 
 import options from 'options'
 import { IndicatorType } from '.'
+import icons from 'data/icons'
 
 const { Box, Stack, Revealer } = Widget
 const { style, indicator } = options.statusbar
@@ -26,8 +27,8 @@ export default (
         transition: 'slide_up_down',
         children: {
           ...Media,
-          audio: Recorder(''),
-          recorder: Recorder(''),
+          audio: Recorder(icons.audio.mic.default),
+          recorder: Recorder(icons.recorder.recording),
           mic: Box({ hpack: 'center' }),
           volume: Box({ hpack: 'center' }),
           brightness: Box({ hpack: 'center' }),

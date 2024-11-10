@@ -53,6 +53,7 @@ export default {
   },
   audio: {
     mic: {
+      default: 'microphone-symbolic',
       muted: 'microphone-disabled-symbolic',
       low: 'microphone-sensitivity-low-symbolic',
       medium: 'microphone-sensitivity-medium-symbolic',

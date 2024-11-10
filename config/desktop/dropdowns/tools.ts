@@ -7,8 +7,8 @@ const toggle = (pop: PopType) => popups.toggle(pop)
 
 export default widget => Menu(widget, [
   Item(' Capture', () => toggle('capture')),
-  Item(' Magnify', () => toggle('magnify')),
   Item('󰽉 Draw', screen.draw),
+  Item(' Magnify', () => toggle('magnify')),
   Item(' Color', () => toggle('color')),
   Item(' Pomodoro', () => toggle('pomodoro')),
   Item('  Keyboard', () => toggle('keyboard')),

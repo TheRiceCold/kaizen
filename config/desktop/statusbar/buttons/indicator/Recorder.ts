@@ -1,6 +1,6 @@
 import capture from 'service/capture'
 
-import { ButtonLabel } from 'widgets'
+import { ButtonIcon, ButtonLabel } from 'widgets'
 
 const { Box, EventBox, Label, Stack } = Widget
 
@@ -15,7 +15,7 @@ export default (icon: string) => EventBox({
   Stack({
     transition: 'slide_up_down',
     children: {
-      recording: Label(icon),
+      recording: ButtonIcon(icon),
       stop: ButtonLabel('', () => capture.recordStop(), { tooltipText: 'Click to stop' }),
     }
   }).bind('shown', currentIconLabel),

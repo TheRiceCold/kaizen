@@ -24,10 +24,12 @@ window.top-popups
     background-color: transparentize($bg, 0.25)
   .popup-revealer
     padding: 0
-    label
+    label, image
       padding: 1rem
       font-weight: 500
       font-size: 1.15rem
+      + label
+        padding-left: 0.5rem
       + box button:first-child
         border-radius: 0
     button

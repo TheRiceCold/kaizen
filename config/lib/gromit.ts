@@ -1,19 +1,25 @@
 import options from 'options'
 
-const { scheme, dark, light } = options.theme
+const { scheme,
+  dark: { primary: { bg: darkBg, fg: darkFg } },
+  light: { primary: { bg: lightBg, fg: lightFg } },
+} = options.theme
 const configDir = imports.gi.GLib.get_user_config_dir()
 
 export default function init() {
   options.handler([
-    dark.primary.bg.id,
-    light.primary.bg.id,
+    darkBg.id,
+    darkFg.id,
+    lightBg.id,
+    lightFg.id,
   ], setupGromit)
+  setupGromit()
 }
 
 async function setupGromit() {
-  const isDarkMode = (scheme === 'dark')
-  const primaryColor = isDarkMode ? light.primary.bg : dark.primary.bg
-  const secondaryColor = isDarkMode ? light.primary.fg : dark.primary.fg
+  const isDarkMode = (scheme.value === 'dark')
+  const primaryColor =  isDarkMode ? lightBg : darkBg
+  const secondaryColor = isDarkMode ? lightFg : darkFg
 
   const config = [
     // Tools
@@ -40,9 +46,9 @@ async function setupGromit() {
 
     '"default"[ALT] = "pen secondary"',
     '"default"[SHIFT,ALT] = "line secondary"',
+    '"default"[Button2,ALT] = "rect secondary"',
     '"default"[CONTROL,ALT] = "arrow secondary"',
-    '"default"[SHIFT,CONTROL,ALT] = "line arrow secondary"',
-    '"default"[Button2,ALT] = "line arrow secondary";',
+    '"default"[SHIFT,CONTROL,ALT] = "line arrow secondary";',
   ]
 
   await Utils.writeFile([

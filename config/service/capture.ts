@@ -1,3 +1,4 @@
+import icons from 'data/icons'
 import { dependencies, sh, bash } from 'lib/utils'
 import options from 'options'
 
@@ -62,8 +63,8 @@ class Screen extends Service {
       case 'audio':
         Utils.notify({
           body: this.#audioFile,
-          image: this.#audioFile,
           summary: 'Audio record',
+          iconName: 'microphone-symbolic',
           actions: {
             View: () => sh(`xdg-open ${this.#audioFile}`),
             'Show in Files': () => sh(`xdg-open ${this.#audioDir}`),
@@ -73,8 +74,8 @@ class Screen extends Service {
       case 'record':
         Utils.notify({
           body: this.#recordFile,
-          image: this.#recordFile,
           summary: 'Screen record',
+          iconName: icons.recorder.recording,
           actions: {
             View: () => sh(`xdg-open ${this.#recordFile}`),
             'Show in Files': () => sh(`xdg-open ${this.#recorderDir}`),
@@ -83,12 +84,15 @@ class Screen extends Service {
         break
       case 'screenshot': default:
         Utils.notify({
-          body: this.#recordFile,
-          image: this.#recordFile,
-          summary: 'Screen record',
+          body: this.#screenshotFile,
+          image: this.#screenshotFile,
+          summary: 'Screenshot',
           actions: {
             View: () => sh(`xdg-open ${this.#screenshotFile}`),
-            'Edit': () => { if (dependencies('swappy')) sh(`xdg-open ${this.#screenshotDir}`) },
+            'Edit': () => {
+              if (dependencies('swappy'))
+                sh(`swappy -f ${this.#screenshotFile}`)
+            },
             'Show in Files': () => sh(`xdg-open ${this.#screenshotDir}`),
           }
         })
@@ -120,6 +124,7 @@ class Screen extends Service {
 
   audioRecord() {
     if (!dependencies('pipewire')) return
+    if (this.#audioRecording) return
     Utils.ensureDirectory(this.#audioDir)
     this.#audioFile = `${this.#audioDir}/${now}.mp3`
     sh(`pw-record ${this.#audioDir}/${now}.mp3`)
@@ -129,6 +134,8 @@ class Screen extends Service {
 
   async record() {
     if (!dependencies('slurp', 'wf-recorder')) return
+    if (this.#isRecording) return
+
     Utils.ensureDirectory(this.#recorderDir)
     this.#recordFile = `${this.#recorderDir}/${now}.mp4`
 
@@ -138,6 +145,7 @@ class Screen extends Service {
     }-f ${this.#recordFile} ${this.#audioEnabled ? '--audio' : ''}`
 
     sh(cmd)
+    await sh('slurp')
     this.#startTimer('record')
   }
 
