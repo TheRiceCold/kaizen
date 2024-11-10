@@ -1,8 +1,8 @@
 import popups from 'service/popups'
+import capture from 'service/capture'
 
 import { ButtonLabel, HomoBox } from 'widgets'
-import PopupRevealer from '../../PopupRevealer'
-import screen from 'service/screen'
+import PopupRevealer from '../PopupRevealer'
 
 const { Label, Stack } = Widget
 const activeContent = Variable<'main' | 'capture' | 'record'>('main')
@@ -11,23 +11,26 @@ const Content = Stack({
   transition: 'slide_up',
   children: {
     main: HomoBox([
-      ButtonLabel(' Audio', () => { }),
-      ButtonLabel(' Record', () => {
-        screen.capture_type = 'record'
+      ButtonLabel('󰆟 Shot', () => {
+        capture.capture_type = 'screenshot'
         activeContent.value = 'capture'
       }),
-      ButtonLabel('󰆟 Screenshot', () => {
-        screen.capture_type = 'screenshot'
+      ButtonLabel(' Audio', () => {
+        capture.audioRecord()
+        popups.hide('capture')
+      }),
+      ButtonLabel(' Record', () => {
+        capture.capture_type = 'record'
         activeContent.value = 'capture'
-      })
+      }),
     ]),
     capture: HomoBox([
       ButtonLabel('Cancel', () => activeContent.value = 'main'),
       ButtonLabel('Region', () => {
-        screen.geometry_type = 'region'
-        switch(screen.capture_type) {
+        capture.geometry_type = 'region'
+        switch(capture.capture_type) {
           case 'screenshot': default:
-            screen.shot()
+            capture.screenshot()
             popups.hide('capture')
             activeContent.value = 'main'
             break
@@ -37,10 +40,10 @@ const Content = Stack({
         }
       }),
       ButtonLabel('Fullscreen', () => {
-        screen.geometry_type = 'fullscreen'
-        switch(screen.capture_type) {
+        capture.geometry_type = 'fullscreen'
+        switch(capture.capture_type) {
           case 'screenshot': default:
-            screen.shot()
+            capture.screenshot()
             popups.hide('capture')
             activeContent.value = 'main'
             break
@@ -48,23 +51,25 @@ const Content = Stack({
         }
       }),
     ]),
-    record: HomoBox([
+    record: Widget.Box([
       Label('Enable audio?'),
-      ButtonLabel('Yes', () => {
-        screen.audio_enabled = true
-        screen.record()
-        popups.hide('capture')
-        activeContent.value = 'main'
-      }),
-      ButtonLabel('No', () => {
-        screen.audio_enabled = false
-        screen.record()
-        popups.hide('capture')
-        activeContent.value = 'main'
-      }),
-      ButtonLabel('Cancel', () => {
-        activeContent.value = 'capture'
-      }),
+      HomoBox([
+        ButtonLabel('Yes', () => {
+          capture.audio_enabled = true
+          capture.record()
+          popups.hide('capture')
+          activeContent.value = 'main'
+        }),
+        ButtonLabel('No', () => {
+          capture.audio_enabled = false
+          capture.record()
+          popups.hide('capture')
+          activeContent.value = 'main'
+        }),
+        ButtonLabel('Cancel', () => {
+          activeContent.value = 'capture'
+        }),
+      ])
     ])
   }
 }).bind('shown', activeContent)

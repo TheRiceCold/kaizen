@@ -6,18 +6,16 @@ import { ChatPlaceholder } from './Textbox'
 import GeminiSendMessage from './gemini/SendMessage'
 
 import options from 'options'
-import { items, askItemType } from './items'
+import { items, AskItemType } from './items'
 import { capitalize } from 'lib/utils'
 
 const { Box, Button, Stack } = Widget
-export const currentTab = Variable<askItemType>('gemini')
+export const currentTab = Variable<AskItemType>('gemini')
 
 export default VBox([
   // Tab Buttons
-  Box(
-    { className: 'tab-buttons' },
-    Box(
-      { hexpand: true, hpack: 'center' },
+  Box({ className: 'tab-buttons' },
+    Box({ hexpand: true, hpack: 'center' },
       ...items.map(({ icon, name }) =>
         Button({
           cursor: 'pointer',
@@ -27,13 +25,10 @@ export default VBox([
             ChatPlaceholder.label = stackItem && stackItem.placeholderText
             currentTab.value = name
           },
-        }).hook(currentTab, (self: ButtonProps) => {
-          const isActive = currentTab.value === name
-          self.toggleClassName('active', isActive)
+        }).hook(currentTab, (self: ButtonProps, tabName: AskItemType) => {
+          self.toggleClassName('active', tabName === name)
         }),
-      ),
-    ),
-  ),
+      ))),
 
   Stack({
     className: 'stack-list',

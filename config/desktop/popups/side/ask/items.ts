@@ -1,6 +1,6 @@
 import GeminiView from './gemini/View'
 
-export type askItemType = 'gemini' | 'chatgpt' | 'llama'
+export type AskItemType = 'gemini' | 'chatgpt' | 'llama'
 
 export const items = [
   {

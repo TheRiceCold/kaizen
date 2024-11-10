@@ -1,16 +1,15 @@
 import popups from 'service/popups'
 
 import { VBox } from 'widgets'
-import { Indicator, Keyboard, Zoom } from './bottom'
+import { Indicator, Keyboard, Color } from './bottom'
 import { Ask, Calendar, QuickSettings } from './side'
-import { Draw, Color, Player, Capture, Notifications } from './top'
+import { Draw, Magnify, Player, Capture, Notifications } from './top'
 
 import options from 'options'
 
 const PopupWindow = (position: 'top' | 'bottom', ...children) => Widget.Window({
   layer: 'overlay',
   anchor: [position],
-  exclusivity: 'ignore',
   name: `${position}-popups`,
   className: `${position}-popups`,
   child: VBox({ children, css: 'padding: 2px;' }),
@@ -27,8 +26,8 @@ const SideWindow = (dir: 'left' | 'right', ...children) => Widget.Window({
 })
 
 export default [
-  PopupWindow('top', Capture, Draw, Color, Player, Notifications()),
-  PopupWindow('bottom', Indicator, Zoom, Keyboard),
+  PopupWindow('top', Player, Capture, Draw, Magnify, Notifications()),
+  PopupWindow('bottom', Indicator, Color, Keyboard),
 
   SideWindow('left', Ask),
   SideWindow('right', QuickSettings, Calendar),

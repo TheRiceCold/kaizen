@@ -7,20 +7,14 @@ import * as Media from './Media'
 import Recorder from './Recorder'
 
 import options from 'options'
+import { IndicatorType } from '.'
 
 const { Box, Stack, Revealer } = Widget
 const { style, indicator } = options.statusbar
 
-export type StackChildType =
-  | 'playing'
-  | 'visualizer'
-  | 'mic'
-  | 'volume'
-  | 'brightness'
-
 export default (
   isRevealed: typeof Variable<boolean>,
-  stackShownName: typeof Variable<StackChildType>,
+  stackShownName: typeof Variable<IndicatorType>,
 ) =>
   Box(
     { vpack: 'start', className: 'indicator' },
@@ -32,7 +26,8 @@ export default (
         transition: 'slide_up_down',
         children: {
           ...Media,
-          recorder: Recorder,
+          audio: Recorder(''),
+          recorder: Recorder(''),
           mic: Box({ hpack: 'center' }),
           volume: Box({ hpack: 'center' }),
           brightness: Box({ hpack: 'center' }),

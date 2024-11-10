@@ -1,24 +1,27 @@
 import options from 'options'
-const { messageAsync } = await Service.import('hyprland')
+import { hyprland } from 'lib/utils'
 
-const { inactiveBorder, layout, gapsIn, gapsOut, gapsWhenOnly, shader } = options.hyprland
 const {
-  radius,
-  spacing,
-  blur,
-  shadows,
-  border: { width },
-  dark: {
-    primary: { bg: darkActive },
+  theme: {
+    radius,
+    spacing,
+    blur,
+    shadows,
+    border: { width },
+    dark: {
+      primary: { bg: darkActive },
+    },
+    light: {
+      primary: { bg: lightActive },
+    },
+    scheme,
   },
-  light: {
-    primary: { bg: lightActive },
-  },
-  scheme,
-} = options.theme
+  hyprland: { inactiveBorder, layout, gapsIn, gapsOut, gapsWhenOnly, shader },
+} = options
 
 const deps = [
   'hyprland',
+
   spacing.id,
   radius.id,
   width.id,
@@ -34,14 +37,6 @@ export default function init() {
   setupHyprland()
 }
 
-function sendBatch(batch: string[]) {
-  const cmd = batch
-    .filter((x) => !!x)
-    .map((x) => `keyword ${x}`)
-    .join('; ')
-  return messageAsync(`[[BATCH]]/${cmd}`)
-}
-
 async function setupHyprland() {
   const activeBorder = () => {
     const color = scheme.value === 'dark' ? darkActive.value : lightActive.value
@@ -49,13 +44,13 @@ async function setupHyprland() {
     return color.replace('#', '')
   }
 
-  await sendBatch([
+  await hyprland.sendBatch([
     'debug:damage_tracking 0',
 
     `master:no_gaps_when_only ${gapsWhenOnly.value ? 0 : 1}`,
     `dwindle:no_gaps_when_only ${gapsWhenOnly.value ? 0 : 1}`,
 
-    `general:layout ${layout.value}`,
+    `general:layout ${layout}`,
     `general:border_size ${width}`,
     `general:col.active_border rgba(${activeBorder()}ff)`,
     `general:col.inactive_border rgba(${inactiveBorder.value})`,
@@ -73,10 +68,10 @@ async function setupHyprland() {
     }`,
   ])
 
-  await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`))
+  await hyprland.sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`))
 
   if (blur.value > 0) {
-    sendBatch(
+    hyprland.sendBatch(
       App.windows.flatMap(({ name }) => [
         `layerrule unset, ${name}`,
         `layerrule blur, ${name}`,

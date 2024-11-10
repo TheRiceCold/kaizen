@@ -1,8 +1,8 @@
-import screen from 'service/screen'
+import capture from 'service/capture'
 import brightness from 'service/brightness'
 
 import { CircularProgressIcon } from 'widgets'
-import ContentRevealer, { type StackChildType } from './ContentRevealer'
+import ContentRevealer from './ContentRevealer'
 
 import icons from 'data/icons'
 import options from 'options'
@@ -11,17 +11,19 @@ import { capitalize } from 'lib/utils'
 const audio = await Service.import('audio')
 const mpris = await Service.import('mpris')
 
-type indicatorType =
-| 'recorder'
+export type IndicatorType =
 | 'playing'
 | 'visualizer'
+| 'mic'
 | 'volume'
 | 'brightness'
+| 'recorder'
+| 'audio-recorder'
 
 let revealCount = 0
 const { indicator } = options.statusbar
 const isRevealed = Variable<boolean>(false)
-const currentStackChildName = Variable<indicatorType>('volume') // Initial value doesn't really matter bc it's hidden
+const currentStackChildName = Variable<IndicatorType>('volume') // Initial value doesn't really matter bc it's hidden
 const contentRevealer = ContentRevealer(isRevealed, currentStackChildName)
 
 const getPlayer = (player: string) => mpris.getPlayer(player) || null
@@ -41,7 +43,9 @@ function update() {
     if (revealCount !== 0) return
 
     isRevealed.value = true
-    if (screen.is_recording)
+    if (capture.audio_recording)
+      currentStackChildName.value = 'audio'
+    else if (capture.is_recording)
       currentStackChildName.value = 'recorder'
     else if (player)
       currentStackChildName.value = 'playing'
@@ -52,7 +56,7 @@ function update() {
   })
 }
 
-function indicatorUpdate(type: StackChildType, value: number) {
+function indicatorUpdate(type: IndicatorType, value: number) {
   const stackChild = contentRevealer.child.child.children[type]
   const volumeLimit = type === 'volume' && value > 1
   const icon =
@@ -78,7 +82,7 @@ function indicatorUpdate(type: StackChildType, value: number) {
 
 export default contentRevealer
   .hook(mpris, update)
-  .hook(screen, update)
+  .hook(capture, update)
   .hook(audio.microphone, () => {}) // TODO:
   //.hook(brightness, () => indicatorUpdate('brightness', brightness.kbd), 'notify::kbd')
   .hook(

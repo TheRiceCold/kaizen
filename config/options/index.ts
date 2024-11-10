@@ -16,11 +16,10 @@ export default create(OPTIONS, {
   dashboard: { ...dashboard },
   workspaces: { ...workspaces },
   tools: {
-    recorder: {
-      directory: opt(`${Utils.HOME}/Videos/Screen`)
-    },
-    screenshots: {
-      directory: opt(`${Utils.HOME}/Fotos/Captura`)
+    capture: {
+      audioDir: opt(`${Utils.HOME}/Audio/Capture`),
+      recorderDir: opt(`${Utils.HOME}/Videos/Capture`),
+      screenshotsDir: opt(`${Utils.HOME}/Fotos/Capture`)
     }
   },
 

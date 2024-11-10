@@ -1,24 +1,16 @@
 import options from 'options'
-import { dependencies, sh, bash, hyprland } from 'lib/utils'
 
 const { scheme, dark, light } = options.theme
 const configDir = imports.gi.GLib.get_user_config_dir()
 
-export const action = (arg: string) => sh(`gromit-mpx --${arg}`)
-
-export async function start() {
-  if (!dependencies('gromit-mpx')) return
-  await setupConfig()
-  bash`gromit-mpx -q || gromit-mpx -a`
-
-  hyprland.sendBatch([
-    'windowrule noblur, ^(Gromit-mpx)$',
-    'windowrule noshadow, ^(Gromit-mpx)$',
-    'windowrule opacity 1 override 1, ^(Gromit-mpx)$',
-  ])
+export default function init() {
+  options.handler([
+    dark.primary.bg.id,
+    light.primary.bg.id,
+  ], setupGromit)
 }
 
-async function setupConfig() {
+async function setupGromit() {
   const isDarkMode = (scheme === 'dark')
   const primaryColor = isDarkMode ? light.primary.bg : dark.primary.bg
   const secondaryColor = isDarkMode ? light.primary.fg : dark.primary.fg

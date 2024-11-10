@@ -1,10 +1,10 @@
 export type PopType =
   | 'ask'
-  | 'zoom'
   | 'color'
   | 'draw'
   | 'player'
   | 'capture'
+  | 'magnify'
   | 'pomodoro'
   | 'indicator'
   | 'keyboard'
@@ -20,7 +20,7 @@ class Popup extends Service {
       'capture-shown': ['boolean', 'rw'],
       'indicator-shown': ['boolean', 'rw'],
 
-      'zoom-shown': ['boolean', 'rw'],
+      'magnify-shown': ['boolean', 'rw'],
       'keyboard-shown': ['boolean', 'rw'],
 
       'calendar-shown': ['boolean', 'rw'],

@@ -1,4 +1,8 @@
+import { type BoxProps } from 'types/widgets/box'
+import { type EventBoxProps } from 'types/widgets/eventbox'
+
 import Color from 'service/color'
+
 import { clamp } from 'lib/utils'
 
 const getCursorColor = () =>
@@ -24,14 +28,13 @@ const cursor = Widget.Box({
   hpack: 'start',
   vpack: 'start',
   attribute: {
-    update(self) {
+    update(self: BoxProps) {
       self.setCss(`margin-left: ${8 * Color.xAxis / 100}rem; margin-top: ${8 * (100 - Color.yAxis) / 100}rem;`)
     }
   },
   setup: self => self
     .hook(Color, self.attribute.update, 'sl')
-    .hook(Color, self.attribute.update, 'assigned')
-  ,
+    .hook(Color, self.attribute.update, 'assigned'),
   child: Widget.Box({
     className: 'saturation-cursor',
     attribute: {
@@ -55,7 +58,7 @@ export default Widget.EventBox({
   child: Widget.Overlay({ child: range, overlay: cursor }),
   attribute: {
     clicked: false,
-    setSaturationAndLightness: (self, event) => {
+    setSaturationAndLightness: (_self, event) => {
       const allocation = range.get_allocation()
       const [_, cursorX, cursorY] = event.get_coords()
       const cursorXPercent = clamp(cursorX / allocation.width, 0, 1)
@@ -64,7 +67,7 @@ export default Widget.EventBox({
       Color.yAxis = Math.round(100 - cursorYPercent * 100)
     }
   },
-  setup(self) {
+  setup(self: EventBoxProps) {
     self.on('motion-notify-event', (self, event) => {
       if (!self.attribute.clicked) return
       self.attribute.setSaturationAndLightness(self, event)

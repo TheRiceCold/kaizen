@@ -34,7 +34,6 @@ export {
 }
 
 export { clamp } from './math'
-export * as gromit from './gromit'
 export * as hyprland from './hyprland'
 export { capitalize } from './string'
 export { getCalendarLayout } from './calendar'

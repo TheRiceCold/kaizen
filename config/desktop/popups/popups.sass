@@ -1,8 +1,8 @@
 window.top-popups, window.bottom-popups,
 window.left-popups, window.right-popups
   .popup-revealer
-    margin-top: 1rem
     @include floating-widget
+    margin-top: 0.75rem
 
 window.left-popups .popup-revealer
   margin-left: 0.5rem
@@ -22,6 +22,23 @@ window.top-popups
     padding: 1.5rem
   .media-player
     background-color: transparentize($bg, 0.25)
+  .popup-revealer
+    padding: 0
+    label
+      padding: 1rem
+      font-weight: 500
+      font-size: 1.15rem
+      + box button:first-child
+        border-radius: 0
+    button
+      @include button
+      border-radius: 0
+      &:first-child
+        border-top-left-radius: $radius
+        border-bottom-left-radius: $radius
+      &:last-child
+        border-top-right-radius: $radius
+        border-bottom-right-radius: $radius
 
 window.bottom-popups
   .keyboard
