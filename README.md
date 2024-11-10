@@ -101,11 +101,17 @@ This configuration is developed to improve daily workflow and productivity with 
 </details>
 
 #
-### Showcase
-> [!NOTE]
-> This is an old video which shows most of the features. I will update the video maybe around november.
 
-https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-509b556e1ac2
+<div align=center>
+
+ ### Highlights
+
+| **Popup tools**: Capture, Draw and Magnify  |
+| -------------------------------------------------------------- |
+
+https://github.com/user-attachments/assets/cc984ff9-0491-463c-89f2-b79659f4f371
+
+</div>
 
 #
 ### Documentation
@@ -117,3 +123,4 @@ https://github.com/TheRiceCold/kaizen/assets/44263259/4c3e38e9-320c-4d7a-968a-50
 - [Alexis Garado](https://github.com/garado)
 - [Kotontrion](https://github.com/kotontrion/dotfiles)
 - [end4](https://github.com/end-4/dots-hyprland)
+

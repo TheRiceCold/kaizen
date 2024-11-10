@@ -24,15 +24,15 @@ const RecordButton = (type: 'video' | 'audio', icon: string) =>
         break
     }
   }, {
-  sensitive: capture
-    .bind(`${type === 'video' ? 'is' : 'audio'}-recording`)
-    .as((recording: boolean) => !recording),
-  tooltipText: capture
-    .bind(`${type === 'video' ? 'is' : 'audio'}-recording`)
-    .as((recording: boolean) =>
-      recording ? 'Recorder is currently active' : '',
-    )
-  })
+    sensitive: capture
+      .bind(`${type === 'video' ? 'is' : 'audio'}-recording`)
+      .as((recording: boolean) => !recording),
+    tooltipText: capture
+      .bind(`${type === 'video' ? 'is' : 'audio'}-recording`)
+      .as((recording: boolean) =>
+        recording ? 'Recorder is currently active' : '',
+      )
+    })
 
 const Content = Stack({
   transition: 'slide_up',
