@@ -37,8 +37,8 @@ const Content = Stack({
   children: {
     main: HomoBox([
       ButtonIconLabel(icons.ui.camera, 'Shot', () => {
-        capture.capture_type = 'screenshot'
         activeContent.value = 'capture'
+        capture.capture_type = 'screenshot'
       }),
       RecordButton('audio', icons.audio.mic.default),
       RecordButton('video', icons.recorder.recording),
@@ -49,12 +49,11 @@ const Content = Stack({
         capture.geometry_type = 'region'
         switch (capture.capture_type) {
           case 'screenshot':
-          default:
             capture.screenshot()
             popups.hide('capture')
             activeContent.value = 'main'
             break
-          case 'record':
+          case 'record': default:
             activeContent.value = 'record'
             break
         }
@@ -63,12 +62,11 @@ const Content = Stack({
         capture.geometry_type = 'fullscreen'
         switch (capture.capture_type) {
           case 'screenshot':
-          default:
             capture.screenshot()
             popups.hide('capture')
             activeContent.value = 'main'
             break
-          case 'record':
+          case 'record': default:
             activeContent.value = 'record'
             break
         }

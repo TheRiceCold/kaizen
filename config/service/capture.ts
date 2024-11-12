@@ -27,9 +27,6 @@ class Screen extends Service {
   #audioFile = ''
   #recordFile = ''
   #screenshotFile = ''
-  #audioDir = audioDir.value
-  #recorderDir = recorderDir.value
-  #screenshotDir = screenshotsDir.value
 
   #timer = 0
   #isRecording = false
@@ -39,18 +36,7 @@ class Screen extends Service {
   #geometryType: GeometryType = 'region'
 
   // Private methods
-  #startTimer(type: CaptureType) {
-    switch(type) {
-      case 'record': default:
-        this.#isRecording = true
-        this.changed('is-recording')
-        break
-      case 'audio':
-        this.#audioRecording = true
-        this.changed('audio-recording')
-        break
-    }
-
+  #startTimer() {
     this.#timer = 0
     this.#interval = Utils.interval(1000, () => {
       this.changed('timer')
@@ -58,42 +44,42 @@ class Screen extends Service {
     })
   }
 
-  #notify(type: CaptureType) {
-    switch(type) {
+  #notify() {
+    switch(this.capture_type) {
       case 'audio':
         Utils.notify({
-          body: this.#audioFile,
+          body: this.audio_file,
           summary: 'Audio record',
           iconName: 'microphone-symbolic',
           actions: {
-            View: () => sh(`xdg-open ${this.#audioFile}`),
-            'Show in Files': () => sh(`xdg-open ${this.#audioDir}`),
+            View: () => sh(`xdg-open ${this.audio_file}`),
+            'Show in Files': () => sh(`xdg-open ${this.audio_dir}`),
           }
         })
         break
       case 'record':
         Utils.notify({
-          body: this.#recordFile,
+          body: this.record_file,
           summary: 'Screen record',
           iconName: icons.recorder.recording,
           actions: {
-            View: () => sh(`xdg-open ${this.#recordFile}`),
-            'Show in Files': () => sh(`xdg-open ${this.#recorderDir}`),
+            View: () => sh(`xdg-open ${this.record_file}`),
+            'Show in Files': () => sh(`xdg-open ${this.recorder_dir}`),
           }
         })
         break
       case 'screenshot': default:
         Utils.notify({
-          body: this.#screenshotFile,
-          image: this.#screenshotFile,
+          body: this.screenshot_file,
+          image: this.screenshot_file,
           summary: 'Screenshot',
           actions: {
-            View: () => sh(`xdg-open ${this.#screenshotFile}`),
+            View: () => sh(`xdg-open ${this.screenshot_file}`),
             'Edit': () => {
               if (dependencies('swappy'))
-                sh(`swappy -f ${this.#screenshotFile}`)
+                sh(`swappy -f ${this.screenshot_file}`)
             },
-            'Show in Files': () => sh(`xdg-open ${this.#screenshotDir}`),
+            'Show in Files': () => sh(`xdg-open ${this.screenshot_dir}`),
           }
         })
         break
@@ -104,64 +90,64 @@ class Screen extends Service {
   async screenshot() {
     if (!dependencies('slurp', 'grim')) return
 
-    const size = await sh('slurp')
-    const file = `${this.#screenshotDir}/${now}.png`
-    this.#screenshotFile = file
-    Utils.ensureDirectory(this.#screenshotDir)
+    const file = `${this.screenshot_dir}/${now}.png`
+    this.screenshot_file = file
+    Utils.ensureDirectory(this.screenshot_dir)
 
-    switch(this.#geometryType) {
-      case 'region': default:
-        if (!size) return
-        await sh(`grim -g "${size}" ${file}`)
+    switch(this.geometry_type) {
+      case 'region':
+        await sh(`grim -g "${await sh('slurp')}" ${file}`)
         break
-      case 'fullscreen':
+      case 'fullscreen': default:
         await sh(`grim ${file}`)
     }
 
     bash`wl-copy < ${file}`
-    this.#notify('screenshot')
+    this.#notify()
   }
 
   audioRecord() {
     if (!dependencies('pipewire')) return
-    if (this.#audioRecording) return
-    Utils.ensureDirectory(this.#audioDir)
-    this.#audioFile = `${this.#audioDir}/${now}.mp3`
-    sh(`pw-record ${this.#audioDir}/${now}.mp3`)
+    if (this.audio_recording) return
+    this.capture_type = 'audio'
+    Utils.ensureDirectory(this.audio_dir)
+    this.audio_file = `${this.audio_dir}/${now}.mp3`
+    sh(`pw-record ${this.audio_dir}/${now}.mp3`)
 
-    this.#startTimer('audio')
+    this.audio_recording = true
+    this.#startTimer()
   }
 
   async record() {
     if (!dependencies('slurp', 'wf-recorder')) return
-    if (this.#isRecording) return
+    if (this.is_recording) return
 
-    Utils.ensureDirectory(this.#recorderDir)
-    this.#recordFile = `${this.#recorderDir}/${now}.mp4`
+    Utils.ensureDirectory(this.recorder_dir)
+    this.record_file = `${this.recorder_dir}/${now}.mp4`
 
     const cmd = `wf-recorder ${
-      (this.#geometryType === 'region')
+      (this.geometry_type === 'region')
         ? `-g "${await sh('slurp')}" ` : ''
-    }-f ${this.#recordFile} ${this.#audioEnabled ? '--audio' : ''}`
+    }-f ${this.record_file} ${this.audio_enabled ? '--audio' : ''}`
 
     sh(cmd)
-    await sh('slurp')
-    this.#startTimer('record')
+    this.is_recording = true
+    this.#startTimer()
   }
 
   recordStop() {
-    if (this.#isRecording) {
-      sh('pkill wf-recorder')
-      this.#isRecording = false
-      this.changed('is-recording')
-      this.#notify('record')
-    } else if (this.#audioRecording) {
-      sh('pkill pw-record')
-      this.#audioRecording = false
-      this.changed('audio-recording')
-      this.#notify('audio')
+    switch(this.capture_type) {
+      case 'record': default:
+        sh('pkill wf-recorder')
+        this.is_recording = false
+        break
+      case 'audio':
+        sh('pkill pw-record')
+        this.audio_recording = false
+        break
     }
 
+    this.#notify()
     GLib.source_remove(this.#interval)
   }
 
@@ -169,24 +155,48 @@ class Screen extends Service {
   get timer() { return this.#timer }
   get is_recording() { return this.#isRecording }
   get audio_recording() { return this.#audioRecording }
+  get audio_enabled() { return this.#audioEnabled }
+  get audio_file() { return this.#audioFile }
+  get record_file() { return this.#recordFile }
+  get screenshot_file() { return this.#screenshotFile }
   get capture_type() { return this.#captureType }
   get geometry_type() { return this.#geometryType }
-  get audio_enabled() { return this.#audioEnabled }
+  get audio_dir() { return audioDir.value }
+  get recorder_dir() { return recorderDir.value }
+  get screenshot_dir() { return screenshotsDir.value }
 
   // Setters
+  set screenshot_file(file: string) {
+    this.#screenshotFile = file
+    this.changed('screenshot-file')
+  }
+  set audio_file(file: string) {
+    this.#audioFile = file
+    this.changed('audio-file')
+  }
+  set record_file(file: string) {
+    this.#recordFile = file
+    this.changed('record-file')
+  }
+  set audio_recording(val: boolean) {
+    this.#audioRecording = val
+    this.changed('audio-recording')
+  }
+  set is_recording(val: boolean) {
+    this.#isRecording = val
+    this.changed('is-recording')
+  }
+  set audio_enabled(val: boolean) {
+    this.#audioEnabled = val
+    this.changed('audio-enabled')
+  }
   set capture_type(type: CaptureType) {
     this.#captureType = type
     this.changed('capture-type')
   }
-
   set geometry_type(type: GeometryType) {
     this.#geometryType = type
     this.changed('geometry-type')
-  }
-
-  set audio_enabled(val: boolean) {
-    this.#audioEnabled = val
-    this.changed('audio-enabled')
   }
 }
 
