@@ -61,7 +61,6 @@ This configuration is developed to improve daily workflow and productivity with 
 - [x] weather widget
 - [x] github contributions widget
 - [x] date and time progress widget
-- [ ] calculator
 - [ ] task warrior (WIP)
 - [ ] ledger
 
@@ -106,8 +105,8 @@ This configuration is developed to improve daily workflow and productivity with 
 
  ### Highlights
 
-| **Popup tools**: Capture, Draw and Magnify  |
-| -------------------------------------------------------------- |
+| **Popup tools**: Capture, Draw, Magnify and Colors |
+| -------------------------------------------------- |
 
 https://github.com/user-attachments/assets/cc984ff9-0491-463c-89f2-b79659f4f371
 

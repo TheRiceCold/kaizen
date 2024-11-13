@@ -4,8 +4,8 @@ import color from 'service/color'
 
 function updatePos(self: BoxProps) {
   const borderColor =
-    ( (color.xAxis < 40 || (45 <= color.hue && color.hue <= 195)) && color.yAxis > 60)
-    ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.9)'
+    ((color.xAxis < 40 || (45 <= color.hue && color.hue <= 195)) && color.yAxis > 60)
+      ? 'rgba(0,0,0,0.9)' : 'rgba(255,255,255,0.9)'
 
   self.setCss([
     `border-color: ${borderColor}`,

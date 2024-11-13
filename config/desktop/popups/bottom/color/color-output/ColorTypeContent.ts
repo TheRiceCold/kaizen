@@ -11,11 +11,11 @@ function update(self: ButtonProps) {
   const { type } = self.attribute
   const x = (1 + xAxis / 100)
 
-  const hexLabel = !!picked_hex ? picked_hex : color.hslToHex(hue, xAxis, yAxis / x)
-  const hslLabel = !!picked_hex
+  const hexLabel = picked_hex ? picked_hex : color.hslToHex(hue, xAxis, yAxis / x)
+  const hslLabel = picked_hex
     ? color.hexToHsl(picked_hex)
     : `${hue}, ${xAxis}%, ${Math.round(yAxis / x)}%`
-  const rgbLabel = !!picked_hex
+  const rgbLabel = picked_hex
     ? color.hexToRgb(picked_hex)
     : color.hslToRgb(hue, xAxis, yAxis / x)
 
@@ -30,6 +30,7 @@ export default (type: 'hex' | 'rgb' | 'hsl') => Box(
     cursor: 'pointer',
     attribute: { type },
     className: 'result-label',
+    tooltipText: 'Click to copy',
     onClicked(self: ButtonProps) {
       const label = self.label
       if (self.label === 'Copied!') return

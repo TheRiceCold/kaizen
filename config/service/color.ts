@@ -16,6 +16,7 @@ class Color extends Service {
   #xAxis = 94
   #yAxis = 80
   #picked = ''
+  #isFirstPick = true
 
   constructor() {
     super()
@@ -25,14 +26,25 @@ class Color extends Service {
   async pick() {
     if (!dependencies('hyprpicker')) return
 
-    await sh('hyprpicker -a -r') // NOTE: returns the previous picked color
-    const color = await sh('wl-paste') // INFO: returns the last picked color
+    // INFO: 1st try doesn't return the color
+    // tried to use pkill on 1st try and enter hyprpicker again
+    // but it just moved the issue to the 2nd try
+    if (this.#isFirstPick) {
+      this.#isFirstPick = false
+      Utils.notify({
+        iconName: icons.ui.info,
+        summary: 'Please try again',
+        body: 'This is an issue with the color picker that only happens on first try.'
+      })
+    }
+
+    // NOTE: returns the previous picked color
+    await sh('hyprpicker -a -r')
+
+    // INFO: returns the last picked color
+    const color = await sh('wl-paste')
 
     this.picked_hex = color
-    Utils.notify({
-      summary: color,
-      iconName: icons.ui.colorpicker,
-    })
   }
 
   hexToRgb(hex: string): string {
@@ -105,9 +117,9 @@ class Color extends Service {
     s /= 100
     l /= 100
 
-    let c = (1 - Math.abs(2 * l - 1)) * s
-    let x = c * (1 - Math.abs((h / 60) % 2 - 1))
-    let m = l - c / 2
+    const c = (1 - Math.abs(2 * l - 1)) * s
+    const x = c * (1 - Math.abs((h / 60) % 2 - 1))
+    const m = l - c / 2
     let r: number = 0, g: number = 0, b: number = 0
 
     if (0 <= h && h < 60) {
@@ -154,6 +166,7 @@ class Color extends Service {
   get yAxis(): number { return this.#yAxis }
   get xAxis(): number { return this.#xAxis }
   get picked_hex(): string { return this.#picked }
+  get is_first_pick(): boolean { return this.#isFirstPick }
   get picked_rgb(): string { return this.hexToRgb(this.picked_hex) }
   get picked_hsl(): string { return this.hexToHsl(this.picked_hex) }
 }

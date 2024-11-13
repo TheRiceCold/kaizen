@@ -8,7 +8,7 @@ const colorWheel = [
   '#ff6666',
 ].join(', ')
 
- export default Widget.Box({
-    className: 'range',
-    css: `background: linear-gradient(to bottom, ${colorWheel});`,
-  })
+export default Widget.Box({
+  className: 'range',
+  css: `background: linear-gradient(to bottom, ${colorWheel});`,
+})
