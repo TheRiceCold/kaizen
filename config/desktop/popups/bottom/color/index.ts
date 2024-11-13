@@ -2,12 +2,12 @@ import popups from 'service/popups'
 
 import PopupRevealer from '../../PopupRevealer'
 
-import Output from './Output'
-import HueSelector from './HueSelector'
-import LightnessAndSaturation from './LightnessAndSaturation'
+import Output from './color-output'
+import HueSelector from './hue-selector'
+import LightnessSaturation from './lightness-saturation'
 
 export default PopupRevealer({
   hpack: 'center',
-  className: 'color-wheel',
+  className: 'color-popup',
   reveal: popups.bind('color-shown'),
-}, HueSelector, LightnessAndSaturation, Output)
+}, HueSelector, LightnessSaturation, Output)

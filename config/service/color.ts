@@ -1,157 +1,161 @@
 import { sh, clamp, dependencies } from 'lib/utils'
+import icons from 'data/icons'
 
 class Color extends Service {
   static {
     Service.register(this, {
-      picked: [],
       assigned: ['int'],
       hue: [],
       sl: [],
+    }, {
+      picked: ['string'],
     })
   }
 
-  _hue = 198
-  _xAxis = 94
-  _yAxis = 80
+  #hue = 198
+  #xAxis = 94
+  #yAxis = 80
+  #picked = ''
 
   constructor() {
     super()
     this.emit('changed')
   }
 
-  pick() {
-    if (dependencies('hyprpicker'))
-      sh('hyprpicker -a -r')
+  async pick() {
+    if (!dependencies('hyprpicker')) return
+
+    await sh('hyprpicker -a -r') // NOTE: returns the previous picked color
+    const color = await sh('wl-paste') // INFO: returns the last picked color
+
+    this.picked_hex = color
+    Utils.notify({
+      summary: color,
+      iconName: icons.ui.colorpicker,
+    })
   }
 
-  get hue() { return this._hue }
-  set hue(value) {
-    this._hue = clamp(value, 0, 360)
-    this.emit('hue')
-    this.emit('picked')
-    this.emit('changed')
+  hexToRgb(hex: string): string {
+    hex = hex.replace('#', '')
+    if (hex.length === 3)
+      hex = hex.split('').map(char => char + char).join('')
+
+    const bigint = parseInt(hex, 16)
+    const r = (bigint >> 16) & 255
+    const g = (bigint >> 8) & 255
+    const b = bigint & 255
+    return `rgb(${r}, ${g}, ${b})`
   }
 
-  get xAxis() { return this._xAxis }
-  set xAxis(value) {
-    this._xAxis = clamp(value, 0, 100)
-    this.emit('sl')
-    this.emit('picked')
-    this.emit('changed')
+  hexToHsl(hex: string): string {
+    const rgb = this.hexToRgb(hex)
+      .match(/\d+/g)
+      ?.map(Number) as [number, number, number]
+    return this.rgbToHsl(rgb[0], rgb[1], rgb[2])
   }
 
-  get yAxis() { return this._yAxis }
-  set yAxis(value) {
-    this._yAxis = clamp(value, 0, 100)
-    this.emit('sl')
-    this.emit('picked')
-    this.emit('changed')
-  }
-
-  setColorFromHex(hexString, id) {
-    const hsl = hexToHSL(hexString)
-    this._hue = hsl.hue
-    this._xAxis = hsl.saturation
-    this._yAxis = (100 - hsl.saturation / 2) / 100 * hsl.lightness
-    this.emit('assigned', id)
-    this.emit('changed')
-  }
-
-  hslToRgb(h, s, l) {
-    h /= 360
-    s /= 100
-    l /= 100
-    let r, g, b
-    if (s === 0) {
-      r = g = b = l // achromatic
-    } else {
-      const hue2rgb = (p, q, t) => {
-        if (t < 0) t += 1
-        if (t > 1) t -= 1
-        if (t < 1 / 6) return p + (q - p) * 6 * t
-        if (t < 1 / 2) return q
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
-        return p
-      }
-      const q = l < 0.5 ? l * (1 + s) : l + s - l * s
-      const p = 2 * l - q
-      r = hue2rgb(p, q, h + 1 / 3)
-      g = hue2rgb(p, q, h)
-      b = hue2rgb(p, q, h - 1 / 3)
-    }
-    const to255 = x => Math.round(x * 255)
-    r = to255(r)
-    g = to255(g)
-    b = to255(b)
-    return `${Math.round(r)},${Math.round(g)},${Math.round(b)}`
-  }
-
-  hslToHex(h, s, l) {
-    h /= 360
-    s /= 100
-    l /= 100
-    let r, g, b
-    if (s === 0) {
-      r = g = b = l // achromatic
-    } else {
-      const hue2rgb = (p, q, t) => {
-        if (t < 0) t += 1
-        if (t > 1) t -= 1
-        if (t < 1 / 6) return p + (q - p) * 6 * t
-        if (t < 1 / 2) return q
-        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
-        return p
-      }
-      const q = l < 0.5 ? l * (1 + s) : l + s - l * s
-      const p = 2 * l - q
-      r = hue2rgb(p, q, h + 1 / 3)
-      g = hue2rgb(p, q, h)
-      b = hue2rgb(p, q, h - 1 / 3)
-    }
-    const toHex = x => {
-      const hex = Math.round(x * 255).toString(16)
+  rgbToHex(r: number, g: number, b: number): string {
+    return ('#' + [r, g, b].map(x => {
+      const hex = x.toString(16)
       return hex.length === 1 ? '0' + hex : hex
-    }
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`
+    }).join(''))
   }
 
-  hexToHSL(hex) {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-
-    let r = parseInt(result[1], 16)
-    let g = parseInt(result[2], 16)
-    let b = parseInt(result[3], 16)
-
-    r /= 255, g /= 255, b /= 255
+  rgbToHsl(r: number, g: number, b: number): string {
+    r /= 255
+    g /= 255
+    b /= 255
     const max = Math.max(r, g, b)
     const min = Math.min(r, g, b)
-    let h, s, l = (max + min) / 2
+    let h: number, s: number, l: number = (max + min) / 2
 
-    if (max == min) {
+    if (max === min) {
       h = s = 0 // achromatic
     } else {
       const d = max - min
       s = l > 0.5 ? d / (2 - max - min) : d / (max + min)
       switch (max) {
-        case r: h = (g - b) / d + (g < b ? 6 : 0); break
-        case g: h = (b - r) / d + 2; break
-        case b: h = (r - g) / d + 4; break
+        case r:
+          h = (g - b) / d + (g < b ? 6 : 0)
+          break
+        case g:
+          h = (b - r) / d + 2
+          break
+        case b:
+          h = (r - g) / d + 4
+          break
       }
       h /= 6
     }
 
-    s = s * 100
-    s = Math.round(s)
-    l = l * 100
-    l = Math.round(l)
-    h = Math.round(360 * h)
-
-    return {
-      hue: h,
-      saturation: s,
-      lightness: l
-    }
+    h = Math.round(h * 360)
+    s = Math.round(s * 100)
+    l = Math.round(l * 100)
+    return `hsl(${h}, ${s}%, ${l}%)`
   }
+
+  hslToHex(h: number, s: number, l: number): string {
+    const rgb = this.hslToRgb(h, s, l)
+      .match(/\d+/g)
+      ?.map(Number) as [number, number, number]
+    return this.rgbToHex(rgb[0], rgb[1], rgb[2])
+  }
+
+  hslToRgb(h: number, s: number, l: number): string {
+    s /= 100
+    l /= 100
+
+    let c = (1 - Math.abs(2 * l - 1)) * s
+    let x = c * (1 - Math.abs((h / 60) % 2 - 1))
+    let m = l - c / 2
+    let r: number = 0, g: number = 0, b: number = 0
+
+    if (0 <= h && h < 60) {
+      r = c; g = x; b = 0
+    } else if (60 <= h && h < 120) {
+      r = x; g = c; b = 0
+    } else if (120 <= h && h < 180) {
+      r = 0; g = c; b = x
+    } else if (180 <= h && h < 240) {
+      r = 0; g = x; b = c
+    } else if (240 <= h && h < 300) {
+      r = x; g = 0; b = c
+    } else if (300 <= h && h < 360) {
+      r = c; g = 0; b = x
+    }
+
+    r = Math.round((r + m) * 255)
+    g = Math.round((g + m) * 255)
+    b = Math.round((b + m) * 255)
+    return `rgb(${r}, ${g}, ${b})`
+  }
+
+  set hue(value) {
+    this.#hue = clamp(value, 0, 360)
+    this.emit('hue')
+    this.emit('changed')
+  }
+  set xAxis(value) {
+    this.#xAxis = clamp(value, 0, 100)
+    this.emit('sl')
+    this.emit('changed')
+  }
+  set yAxis(value) {
+    this.#yAxis = clamp(value, 0, 100)
+    this.emit('sl')
+    this.emit('changed')
+  }
+  set picked_hex(color: string) {
+    this.#picked = color
+    this.changed('picked')
+  }
+
+  get hue(): number { return this.#hue }
+  get yAxis(): number { return this.#yAxis }
+  get xAxis(): number { return this.#xAxis }
+  get picked_hex(): string { return this.#picked }
+  get picked_rgb(): string { return this.hexToRgb(this.picked_hex) }
+  get picked_hsl(): string { return this.hexToHsl(this.picked_hex) }
 }
 
 export default new Color
