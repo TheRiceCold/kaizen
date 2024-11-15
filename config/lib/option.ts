@@ -66,7 +66,7 @@ export function create<T extends object>(cacheFile: string, object: T) {
 
   Utils.ensureDirectory(cacheFile.split('/').slice(0, -1).join('/'))
 
-  const configFile = `${CONFIG}/config.json`
+  const configFile = `${CONFIG}/settings.json`
   const values = getOptions(object).reduce((obj, { id, value }) => ({ [id]: value, ...obj }), {})
   Utils.writeFileSync(JSON.stringify(values, null, 2), configFile)
   Utils.monitorFile(configFile, () => {

@@ -9,6 +9,7 @@ class Color extends Service {
       sl: [],
     }, {
       picked: ['string'],
+      'is-first-picked': ['boolean'],
     })
   }
 
@@ -161,6 +162,10 @@ class Color extends Service {
     this.#picked = color
     this.changed('picked')
   }
+  set is_first_pick(val: boolean) {
+    this.#isFirstPick = val
+    this.changed('is-first-pick')
+  }
 
   get hue(): number { return this.#hue }
   get yAxis(): number { return this.#yAxis }
@@ -171,4 +176,10 @@ class Color extends Service {
   get picked_hsl(): string { return this.hexToHsl(this.picked_hex) }
 }
 
-export default new Color
+const color = new Color
+export default color
+
+globalThis['colorPick'] = () => {
+  color.is_first_pick = false
+  color.pick()
+}

@@ -2,7 +2,7 @@ import { type BoxProps } from 'types/widgets/box'
 
 import color from 'service/color'
 
-import { ButtonIcon, VBox } from 'widgets'
+import { ButtonIcon } from 'widgets'
 
 import icons from 'data/icons'
 

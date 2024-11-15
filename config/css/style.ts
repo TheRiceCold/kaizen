@@ -5,7 +5,7 @@ import options from 'options'
 const deps = ['font', 'theme']
 
 const {
-  theme: { dark, light, scheme, radius, widget, border, blur, shadows, colors },
+  theme: { dark, light, scheme, radius, widget, border, blur, shadows },
 } = options
 
 const t = (dark: Opt | string, light: Opt | string) =>
@@ -13,8 +13,6 @@ const t = (dark: Opt | string, light: Opt | string) =>
 const $ = (name: string, value: string | Opt) => `$${name}: ${value}`
 
 const variables = () => [
-  $('black', colors.black),
-
   $(
     'bg',
     blur.value
@@ -52,13 +50,7 @@ const variables = () => [
   ),
   $('shadow-color', t('rgba(0, 0, 0, 0.6)', 'rgba(0, 0, 0, 0.4)')),
   $('text-shadow', t('2pt 2pt 2pt $shadow-color', 'none')),
-  $(
-    'box-shadow',
-    t(
-      '2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color',
-      'none',
-    ),
-  ),
+  $('box-shadow', t('2pt 2pt 2pt 0 $shadow-color, inset 0 0 0 $border-width $border-color', 'none')),
   $('font-name', options.font.default.name),
   $('font-size', `${options.font.default.size}pt`),
 ]

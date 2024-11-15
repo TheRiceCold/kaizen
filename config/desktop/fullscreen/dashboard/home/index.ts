@@ -1,6 +1,5 @@
 import { VBox } from 'widgets'
 
-import Apps from './apps'
 import Time from './time'
 import GitHub from './github'
 import Player from './player'
@@ -16,7 +15,7 @@ const { Box, Label, Scrollable } = Widget
 
 const Content = Scrollable({ vexpand: true },
   VBox({ hpack: 'center', className: 'sections' },
-    Box([Player, Weather, Apps]),
+    Box([Player, Weather]),
     Box([Time, Knowledge]),
     Box([GitHub]),
     // TODO: Calculator

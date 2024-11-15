@@ -1,20 +1,21 @@
 import { type ButtonProps } from 'types/widgets/button'
-import { type RevealerProps } from 'types/widgets/revealer'
 
 import BarButton from './BarButton'
 
 import options from 'options'
 import icons from 'data/icons'
 
-export default (dir: string, buttons: ButtonProps[]) => {
-  const Revealer = Widget.Revealer({
+const { Box, Icon, Revealer } = Widget
+
+export default (dir: 'left' | 'right', buttons: ButtonProps[]) => {
+  const revealer = Revealer({
     transition: `slide_${dir}`,
-    child: Widget.Box(buttons.map(BarButton))
+    child: Box(buttons.map(BarButton))
   })
 
-  function ArrowIcon(dir: 'left' | 'right', revealer: RevealerProps) {
+  function ArrowIcon() {
     let deg = 0
-    const Icon = Widget.Icon({ icon: icons.ui.arrow[dir] })
+    const icon = Icon({ icon: icons.ui.arrow[dir] })
 
     function animate() {
       const t = options.transition.value / 20
@@ -22,12 +23,12 @@ export default (dir: string, buttons: ButtonProps[]) => {
       for (let i = 0; i < 18; ++i)
         Utils.timeout(t * i, () => {
           deg += step
-          Icon.setCss(`-gtk-icon-transform: rotate(${deg}deg);`)
+          icon.setCss(`-gtk-icon-transform: rotate(${deg}deg);`)
         })
     }
 
     return BarButton({
-      child: Icon,
+      child: icon,
       className: 'arrow-button',
       onClicked() {
         animate()
@@ -36,9 +37,9 @@ export default (dir: string, buttons: ButtonProps[]) => {
     })
   }
 
-  return Widget.Box([
-    dir === 'left' && ArrowIcon(dir, Revealer),
-    Revealer,
-    dir === 'right' && ArrowIcon(dir, Revealer)
+  return Box([
+    dir === 'left' && ArrowIcon(),
+    revealer,
+    dir === 'right' && ArrowIcon()
   ])
 }

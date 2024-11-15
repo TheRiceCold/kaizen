@@ -2,12 +2,12 @@ import icons from 'data/icons'
 import { dependencies, sh, bash } from 'lib/utils'
 import options from 'options'
 
+export type GeometryType = 'region' | 'fullscreen'
+export type CaptureType = 'audio' | 'record' | 'screenshot'
+
 const { GLib } = imports.gi
 const dateFormat = '%Y-%m-%d_%H-%M-%S'
 const now = GLib.DateTime.new_now_local().format(dateFormat)
-
-export type GeometryType = 'region' | 'fullscreen'
-export type CaptureType = 'audio' | 'record' | 'screenshot'
 
 const { audioDir, screenshotsDir, recorderDir } = options.tools.capture
 
@@ -151,20 +151,6 @@ class Screen extends Service {
     GLib.source_remove(this.#interval)
   }
 
-  // Getters
-  get timer() { return this.#timer }
-  get is_recording() { return this.#isRecording }
-  get audio_recording() { return this.#audioRecording }
-  get audio_enabled() { return this.#audioEnabled }
-  get audio_file() { return this.#audioFile }
-  get record_file() { return this.#recordFile }
-  get screenshot_file() { return this.#screenshotFile }
-  get capture_type() { return this.#captureType }
-  get geometry_type() { return this.#geometryType }
-  get audio_dir() { return audioDir.value }
-  get recorder_dir() { return recorderDir.value }
-  get screenshot_dir() { return screenshotsDir.value }
-
   // Setters
   set screenshot_file(file: string) {
     this.#screenshotFile = file
@@ -198,6 +184,21 @@ class Screen extends Service {
     this.#geometryType = type
     this.changed('geometry-type')
   }
+
+  // Getters
+  get timer(): number { return this.#timer }
+  get is_recording(): boolean { return this.#isRecording }
+  get audio_enabled(): boolean { return this.#audioEnabled }
+  get audio_recording(): boolean { return this.#audioRecording }
+  get audio_file(): string { return this.#audioFile }
+  get record_file(): string { return this.#recordFile }
+  get screenshot_file(): string { return this.#screenshotFile }
+  get capture_type(): CaptureType { return this.#captureType }
+  get geometry_type(): GeometryType { return this.#geometryType }
+
+  get audio_dir(): string { return audioDir.value }
+  get recorder_dir(): string { return recorderDir.value }
+  get screenshot_dir(): string { return screenshotsDir.value }
 }
 
 export default new Screen
