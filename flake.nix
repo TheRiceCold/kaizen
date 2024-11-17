@@ -3,22 +3,19 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     ags.url = "github:aylur/ags";
-    matugen.url = "github:iniox/matugen";
-    gtk-session-lock.url = "github:Cu3PO42/gtk-session-lock";
+    astal.url = "github:aylur/astal";
+    # matugen.url = "github:iniox/matugen";
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
+  outputs = inputs @ { self, nixpkgs, ... }:
     let
-      version = builtins.replaceStrings [ "\n" ] [ "" ] (builtins.readFile ./version);
-      genSystems = nixpkgs.lib.genAttrs [ "aarch64-linux" "x86_64-linux" ];
+      genSystems = nixpkgs.lib.genAttrs ["aarch64-linux" "x86_64-linux"];
       pkgs = genSystems (system: import nixpkgs { inherit system; });
-    in
-    {
-      packages = genSystems (system: rec {
-        default = pkgs.${system}.callPackage ./nix { inherit inputs version; };
+    in {
+      packages = genSystems(system: rec {
+        default = pkgs.${system}.callPackage ./nix { inherit inputs; };
         kaizen = default;
       });
-
-      homeManagerModules.default = import ./nix/hm-module.nix self;
     };
 }
+

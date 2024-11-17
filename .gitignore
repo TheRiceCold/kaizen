@@ -1,10 +1,8 @@
-node_modules/
-types/
+@girs/
+node_modules
 
 result
 
-bun.lockb
-package-lock.json
 # Devenv
 .devenv*
 devenv.local.nix

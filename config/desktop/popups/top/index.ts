@@ -1,5 +1,0 @@
-export { default as Draw } from './draw'
-export { default as Player } from './player'
-export { default as Capture } from './capture'
-export { default as Magnify } from './magnify'
-export { default as Notifications } from './notifications'
