@@ -1,9 +1,11 @@
-import { bind, Variable } from 'astal'
 import { Gtk } from 'astal/gtk3'
-import icons from 'data/icons'
-import { capitalize } from 'utils'
+import { bind, Variable } from 'astal'
+import { CircularProgressProps } from 'astal/gtk3/widget'
 
 import Wp from 'gi://AstalWp'
+
+import icons from 'data/icons'
+import { capitalize } from 'lib/utils'
 
 export default({ type }: { type: 'speaker' | 'microphone' }) => {
   const device = Wp.get_default()[`default${capitalize(type)}`]
@@ -24,9 +26,9 @@ export default({ type }: { type: 'speaker' | 'microphone' }) => {
         className='progress'
         value={volume.as(v => v < 1 ? v : 1)}
         child={<icon className='icon' icon={iconVar()} />}
-        setup={self => self
+        setup={(self: CircularProgressProps) => self
           .hook(device, 'notify::mute', () => self.toggleClassName('limit', device.mute))
-          .hook(device, 'notify::volume', () => self.toggleClassName('limit', device.volume > 1.1 || device.volume <= 0))
+          .hook(device, 'notify::volume', () => self.toggleClassName('limit', device.volume > 1.05))
         }
       />
       <label label={labelVar()} />

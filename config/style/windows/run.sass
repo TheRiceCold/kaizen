@@ -1,0 +1,40 @@
+@use 'sass:color'
+
+window.run
+  background-color: transparentize($bg, 0.75)
+  eventbox
+    border: 0
+    > box
+      padding: 1rem
+      margin-top: 4rem
+      min-width: 400px
+      border-radius: $radius
+      entry
+        padding: 1rem
+        border: $border
+        font-weight: 500
+        font-size: 1.15rem
+        margin-bottom: 0.5rem
+        background-color: $bg
+        border-radius: $radius
+        image
+          margin-right: 0.5rem
+        selection
+          color: color.mix($fg, $bg, 50%)
+      .app-list
+        button
+          border: $border
+          padding: 0.75rem
+          margin-top: 0.5rem
+          background-color: $bg
+          border-radius: $radius
+          .icon
+            font-size: 4rem
+            margin-right: 0.75rem
+          .title
+            font-weight: 500
+            font-size: 1.15rem
+            margin-bottom: 0.25rem
+          &:hover, &:focus
+            .title
+              color: $primary-bg

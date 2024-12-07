@@ -1,11 +1,15 @@
-import { Gtk } from 'astal/gtk3'
+import { Gdk, Gtk } from 'astal/gtk3'
+import { ButtonProps } from 'astal/gtk3/widget'
 import { Variable, timeout } from 'astal'
 
 import { Tray, Battery, Wifi } from './buttons'
 
+import options from 'options'
 import icons from 'data/icons'
+import { sessionMenu } from 'widgets/dropdowns'
 
-const time = Variable<string>('').poll(1000, "date '+%a %d %b %I:%M %p'")
+const { format, interval } = options.bar.date
+const time = Variable<string>('').poll(interval.get(), `date '+${format.get()}'`)
 
 const reveal = Variable<boolean>(false)
 const arrowRotation = Variable<number>(0)
@@ -24,18 +28,21 @@ export default () => {
       transitionType={Gtk.RevealerTransitionType.SLIDE_LEFT}
     >
       <box className='button-revealer'>
-        <button label='Capture' />,
-        <button label='Draw' />,
-        <button label='Magnify' />,
-        <button label='Color' />,
-        <button label='Keyboard' />,
+        {[ 'Capture', 'Draw', 'Magnify', 'Color', 'Keyboard'].map(i => (
+          <button
+            label={i}
+            cursor='pointer'
+            onClick={() => { /* toggle */}}
+          />
+        ))}
       </box>
     </revealer>
   )
 
-  const ExpandButton = () => (
+  const RevealButton = () => (
     <button
-      className='arrow-button'
+      cursor='pointer'
+      className='reveal-button'
       onClicked={() => { animate(); reveal.set(!reveal.get()) }}
       child={
         <icon
@@ -48,15 +55,24 @@ export default () => {
 
   return (
     <box className='side-items' halign={Gtk.Align.END}>
-      <ExpandButton />
+      <RevealButton />
       <HiddenButtons />
       <Tray />
       <Battery />
       <Wifi />
-      <button label={time()} onDestroy={() => time.drop()} />
-      <button>
-        <icon icon={icons.powermenu.shutdown} />
-      </button>
+      <button
+        label={time()}
+        cursor='pointer'
+        onDestroy={() => time.drop()}
+      />
+      <button
+        cursor='pointer'
+        child={<icon icon={icons.powermenu.shutdown} />}
+        onClickRelease={(self: ButtonProps) => {
+          sessionMenu.show_all()
+          sessionMenu.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)
+        }}
+      />
     </box>
   )
 }

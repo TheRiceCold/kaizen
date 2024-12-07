@@ -1,4 +1,5 @@
-import { Widget } from 'astal/gtk3'
+import { Gdk } from 'astal/gtk3'
+import { EventBoxProps } from 'astal/gtk3/widget'
 
 import Cava from 'gi://AstalCava'
 
@@ -10,8 +11,9 @@ const cava = Cava.get_default()
 
 export default () => (
   <eventbox name='cava'
-    onScroll={(self: Widget.EventBox, ) => {
-      //self.parent.visibleChildName = 'player'
+    onScroll={(self: EventBoxProps, event: Gdk.Event) => {
+      if (event.direction === Gdk.ScrollDirection.UP)
+        self.parent.visibleChildName = 'player'
     }}
   />
 )

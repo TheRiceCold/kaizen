@@ -1,43 +1,53 @@
-import { bind } from 'astal'
-import { Gtk } from 'astal/gtk3'
-import Hyprland from 'gi://AstalHyprland'
+import { Gdk, Gtk } from 'astal/gtk3'
+import { ButtonProps } from 'astal/gtk3/widget'
 
-const NUM_OF_WORKSPACES = 8
-const hypr = Hyprland.get_default()
-const focusedClient = bind(hypr, 'focusedClient')
-const focusedWorkspace = bind(hypr, 'focusedWorkspace')
+import options from 'options'
+import { layoutsMenu, windowMenu } from 'widgets'
+import { focusedClient, focusedWorkspace } from 'lib/utils/hyprland'
 
-const WorkspaceClient = () => (
-  <stack
-    visible={focusedClient.as(Boolean)}
-    transitionDuration={250}
-    transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
-    visibleChildName={focusedWorkspace.as(focused => String(focused.id))}
-  >
-    {focusedClient.as(client => Array(NUM_OF_WORKSPACES)
-      .fill(1).map((_, i)=> (
-        <button
-          name={String(i)}
-          className='client-button'
-          label={bind(client, 'class').as(c => `: ${c}`)}
-        />
-      ))
-    )}
-  </stack>
-)
+const substitutes = options.bar.clientClassSubs.get()
 
 export default () => (
   <box>
+    {/* Layout */}
     <button
       label='dwindle'
-      onClicked={() => {
-        // TODO: Layouts Menu
-      }}
+      cursor='pointer'
+      onClickRelease={(self: ButtonProps) => {
+        layoutsMenu.show_all()
+        layoutsMenu.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)}
+      }
     />
+
+    {/* Workspace */}
     <button
       className='workspace-button'
       label={focusedWorkspace.as(ws => `Workspace ${ws.id}`)}
     />
-    <WorkspaceClient />
+
+    {/* Window Client */}
+    <stack
+      visible={focusedClient.as(Boolean)}
+      transitionDuration={250}
+      transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
+      visibleChildName={focusedWorkspace.as(focused => String(focused.id))}
+    >
+      {new Array(options.numberOfWorkspace.get()).fill(null).map((_, i) => (
+        <button
+          name={String(i)}
+          className='client-button'
+          label={focusedClient.as((client) => {
+            if (client === null) return ''
+            if (client.class === null) return ''
+            const sub = substitutes.find(s => s.startsWith(`${client.class}:`))
+            return sub ? sub.split(':')[1] : client.class
+          })}
+          onClickRelease={(self: ButtonProps) => {
+            windowMenu.show_all()
+            windowMenu.popup_at_widget(self, Gdk.Gravity.SOUTH, Gdk.Gravity.NORTH, null)}
+          }
+        />
+      ))}
+    </stack>
   </box>
 )

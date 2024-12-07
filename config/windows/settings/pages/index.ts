@@ -1,0 +1,7 @@
+export { default as About } from './About'
+export { default as Tools } from './Tools'
+export { default as Colors } from './Colors'
+export { default as General } from './General'
+export { default as Widgets } from './Widgets'
+export { default as Keybinds } from './Keybinds'
+export { default as Hyprland } from './Hyprland'

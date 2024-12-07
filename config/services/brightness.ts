@@ -1,6 +1,6 @@
 import { exec, monitorFile, readFile } from 'astal'
 import GObject, { property, register } from 'astal/gobject'
-import { sh, bash } from 'utils'
+import { bash } from 'lib/utils'
 
 const get = (args: string) => Number(exec(`brightnessctl ${args}`))
 const kbd = await bash`ls -w1 /sys/class/leds | head -1`
@@ -14,27 +14,28 @@ export default class Brightness extends GObject.Object {
     return this.instance
   }
 
-  #kbdMax = get(`--device ${kbd} max`)
-  #kbd = get(`--device ${kbd} get`)
-  #screenMax = get('max')
-  #screen = get('get') / get('max')
+  private _screen = get('get') / get('max')
+  private _screenMax = get('max')
+
+  private _kbd =  get(`--device ${kbd} get`)  
+  private _kbdMax = get(`--device ${kbd} max`)
 
   @property(Number)
-  get kbd() { return this.#kbd }
+  get kbd() { return this._kbd }
   set kbd(value: number) {
-    if (value < 0 || value > this.#kbdMax) return
+    if (value < 0 || value > this._kbdMax) return
 
-    this.#kbd = get(`-d ${kbd} s ${value} -q`)
-    this.changed('kbd')
+    this._kbd = get(`-d ${kbd} s ${value} -q`)
+    this.notify('kbd')
   }
 
   @property(Number)
-  get screen() { return this.#screen }
+  get screen() { return this._screen }
   set screen(percent: number) {
     if (percent < 0) percent = 0
     if (percent > 1) percent = 1
 
-    this.#screen = get(`set ${percent * 100}% -q`)
+    this._screen = get(`set ${percent * 100}% -q`)
     this.notify('screen')
   }
 
@@ -45,12 +46,12 @@ export default class Brightness extends GObject.Object {
     const screenPath = `/sys/class/backlight/${screen}/brightness`
 
     monitorFile(kbdPath, (f: string) => {
-      this.#kbd = Number(readFile(f)) / this.#kbdMax
+      this._kbd = Number(readFile(f)) / this._kbdMax
       this.notify('kbd')
     })
 
     monitorFile(screenPath, (f: string) => {
-      this.#screen = Number(readFile(f)) / this.#screenMax
+      this._screen = Number(readFile(f)) / this._screenMax
       this.notify('screen')
     })
   }

@@ -7,10 +7,14 @@ import RightButtons from './RightButtons'
 const Bar = (gdkmonitor: Gdk.Monitor) => (
   <window
     className='bar'
+    application={App}
     gdkmonitor={gdkmonitor}
     exclusivity={Astal.Exclusivity.EXCLUSIVE}
-    anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.LEFT | Astal.WindowAnchor.RIGHT}
-    application={App}>
+    anchor={
+      Astal.WindowAnchor.TOP |
+      Astal.WindowAnchor.LEFT |
+      Astal.WindowAnchor.RIGHT
+    } >
     <centerbox>
       <LeftButtons />
       <Indicator />

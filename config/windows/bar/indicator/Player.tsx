@@ -1,9 +1,11 @@
-import { Gtk } from 'astal/gtk3'
+import { Gdk, Gtk } from 'astal/gtk3'
 import { bind, Variable } from 'astal'
+import { EventBoxProps } from 'astal/gtk3/widget'
 
 import Wp from 'gi://AstalWp'
 import Mpris from 'gi://AstalMpris'
 
+import options from 'options'
 import icons from 'data/icons'
 
 const LABEL_LENGTH = 64
@@ -11,7 +13,7 @@ const LABEL_LENGTH = 64
 const wp = Wp.get_default()
 const mic = wp.defaultSpeaker
 const speaker = wp.defaultSpeaker
-const player = Mpris.Player.new('spotify')
+const player = Mpris.Player.new(options.indicator.preferredPlayer.get())
 
 const labelVar: Variable<string> = Variable.derive(
   [ bind(player, 'artist'), bind(player, 'title') ],
@@ -39,8 +41,12 @@ export default () => {
       name='player'
       halign={Gtk.Align.CENTER}
       onClick={() => player.play_pause()}
-      onScroll={self => self.parent.visibleChildName = 'cava'}
-      child={showVar(show => show ? (
+      onScroll={(self: EventBoxProps, event: Gdk.Event) => {
+        if (event.direction === Gdk.ScrollDirection.DOWN)
+          self.parent.visibleChildName = 'cava'
+      }}
+    >
+      {showVar(show => show ? (
         <box>
           <circularprogress
             child={<Icon />}
@@ -50,6 +56,6 @@ export default () => {
           <label label={labelVar()} />
         </box>) : <box /> )
       }
-    />
+    </eventbox>
   )
 }

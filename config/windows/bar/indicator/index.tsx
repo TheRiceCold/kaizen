@@ -1,5 +1,6 @@
 import { Variable, timeout } from 'astal'
 import { Gtk } from 'astal/gtk3'
+import { RevealerProps } from 'astal/gtk3/widget'
 
 import Wp from 'gi://AstalWp'
 import Mpris from 'gi://AstalMpris'
@@ -7,14 +8,16 @@ import BrightnessService from 'services/brightness'
 
 import IndicatorStack from './Stack'
 
+import options from 'options'
+
 export type IndicatorType =
+| 'brightness'
+| 'speaker' | 'microphone'
 | 'player' | 'cava'
 | 'recorder' | 'audio-recorder'
-| 'speaker' | 'microphone'
-| 'brightness'
 
 let revealCount = 0
-const player = Mpris.Player.new('spotify')
+const player = Mpris.Player.new(options.indicator.preferredPlayer.get())
 const mic = Wp.get_default().defaultMicrophone
 const speaker = Wp.get_default().defaultSpeaker
 const brightness = BrightnessService.get_default()
@@ -22,9 +25,9 @@ const brightness = BrightnessService.get_default()
 const visibleStackChild = Variable<IndicatorType>('player')
 
 function Indicator() {
-  const setup = self => self
+  const setup = (self: RevealerProps) => self
     .hook(player, 'notify::available', update)
-    .hook(mic, 'notify::mute', (self) => {
+    .hook(mic, 'notify::mute', () => {
       visibleStackChild.set('microphone')
       update(self)
     })
@@ -33,13 +36,13 @@ function Indicator() {
       mic.mute = false
       update(self)
     })
-    .hook(speaker, 'notify::mute', (self) => {
+    .hook(speaker, 'notify::mute', () => {
       visibleStackChild.set('speaker')
       update(self)
     })
     .hook(speaker, 'notify::volume', () => {
       visibleStackChild.set('speaker')
-      speaker.mute = false
+      speaker.mute = speaker.volume <= 0
       update(self)
     })
     .hook(brightness, 'notify::screen', () => {
@@ -47,7 +50,7 @@ function Indicator() {
       update(self)
     })
 
-  function update(self) {
+  function update(self: RevealerProps) {
     self.revealChild = true
     self.toggleClassName('hidden', false)
 

@@ -1,0 +1,86 @@
+$label-bg: transparentize($bg, 0.5)
+
+window.settings
+  color: $fg
+  background-color: transparentize($bg, 0.15)
+  .section-title
+    padding: 1rem
+    font-weight: 500
+    font-size: 1.15rem
+    color: $primary-bg
+  .item
+    border: $border
+    padding: 0.5rem 1rem
+
+    .title
+      font-size: 1rem
+      font-weight: 500
+    .description, .note
+      color: transparentize($fg, 0.4)
+    .description
+      margin-top: 0.25rem
+
+    entry
+      border: $border
+      border-radius: $radius
+      padding: 0.5rem 0.75rem
+      background-color: $label-bg
+
+    spinbutton
+      entry
+        background-color: $label-bg
+        border-radius: $radius 0 0 $radius
+      button
+        border-radius: 0
+        &:last-child
+          border-radius: 0 $radius $radius 0
+
+    .enum-setter
+      label
+        border: $border
+        padding: 0 0.5rem
+        background-color: $label-bg
+        border-radius: $radius 0 0 $radius
+      button
+        border-radius: 0
+      button:last-child
+        border-radius: 0 $radius $radius 0
+
+  button
+    @include button
+    padding: 0.5rem 0.75rem
+    label
+      font-size: 1rem
+      font-weight: 500
+
+  .header
+    padding: 0.25rem
+    border-bottom: 1px solid $border-color
+    button
+      border: 0
+      background-color: transparent
+
+  .sidebar
+    padding: 1rem 0.5rem
+    button 
+      border: 0
+      margin-bottom: 0.25rem
+      background-color: transparent
+      &.active
+        border: 0
+        color: $primary-bg
+      label
+        font-size: 1.15rem
+
+  .reset-button
+    margin-left: 0.5rem
+    background-color: transparent
+
+  .wallpaper-button
+    button
+      border-radius: $radius 0 0 $radius
+    + button
+      border-radius: 0 $radius $radius 0
+
+  .page.about
+    padding: 2rem

@@ -1,4 +1,4 @@
-import { Gtk } from 'astal/gtk3'
+import { App, Gtk } from 'astal/gtk3'
 import { Variable, timeout } from 'astal'
 
 import { Workspaces } from './buttons'
@@ -22,17 +22,21 @@ export default () => {
       transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
     >
       <box className='button-revealer'>
-        <button label='Ask' />,
-        <button label='Run' />,
-        <button label='Tools' />,
-        <button label='Settings' />,
+        <button cursor='pointer' label='Ask' />
+        <button
+          label='Run'
+          cursor='pointer'
+          onClickRelease={() => App.toggle_window('run')} />
+        <button cursor='pointer' label='Tools' />
+        <button cursor='pointer' label='Settings' onClickRelease={() => App.toggle_window('settings') } />
       </box>
     </revealer>
   )
 
-  const ExpandButton = () => (
+  const RevealButton = () => (
     <button
-      className='arrow-button'
+      cursor='pointer'
+      className='reveal-button'
       onClicked={() => { animate(); reveal.set(!reveal.get()) }}
       child={
         <icon
@@ -45,10 +49,10 @@ export default () => {
 
   return (
     <box halign={Gtk.Align.START} className='side-items'>
-      <button label='󰚀' />
+      <button cursor='pointer' label='󰚀' />
       <Workspaces />
       <HiddenButtons />
-      <ExpandButton />
+      <RevealButton />
     </box>
   )
 }

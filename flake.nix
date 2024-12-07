@@ -1,10 +1,10 @@
 {
+  description = "A desktop environment for Hyprland that implements the Kaizen philosophy of continuous improvement";
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-
-    ags.url = "github:aylur/ags";
     astal.url = "github:aylur/astal";
-    # matugen.url = "github:iniox/matugen";
+    ags.url = "github:aylur/ags";
   };
 
   outputs = inputs @ { self, nixpkgs, ... }:
@@ -18,4 +18,3 @@
       });
     };
 }
-
