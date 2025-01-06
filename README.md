@@ -13,11 +13,6 @@ This configuration is developed to improve daily workflow and productivity with 
 
 #
 
-> [!NOTE]
-> Working to update this configuration to use [AGSv2](https://github.com/aylur/ags/releases/tag/v2.0.1),
-> which is currently in the [ags-v2](https://github.com/thericecold/kaizen/tree/ags-v2) branch.<br/>
-> It will eventually be merged into the main branch, possibly prior to or in december. 
-
 ### Features
 
 - Dashboard: A notion-like informative dashboard for productive boost.
